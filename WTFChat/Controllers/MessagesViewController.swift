@@ -49,6 +49,8 @@ class MessagesViewController: JSQMessagesViewController {
     }
     
     override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
         if (!talk.isSingleMode) {
             if let updateTimer = timer {
                 updateTimer.invalidate()
@@ -57,6 +59,8 @@ class MessagesViewController: JSQMessagesViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
         if (!talk.isSingleMode) {
             timer = NSTimer.scheduledTimerWithTimeInterval(TALKS_UPDATE_TIMER_INTERVAL, target: self,
                 selector: "updateMessages", userInfo: nil, repeats: true)
@@ -213,6 +217,8 @@ class MessagesViewController: JSQMessagesViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.collectionView!.reloadData()
     }
     
