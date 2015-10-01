@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "WTFChat.TalkService.getTalkByUsers (WTFChat.TalkService)(Swift.String, user2 : Swift.String) -&gt; Swift.Optional&lt;WTFChat.Talk&gt;:TalkService.swift">
+      </ContextState>
+      <ContextState
+         contextName = "FriendsViewController.(updateTalks(FriendsViewController) -&gt; () -&gt; ()).(closure #1).(closure #1).(closure #1):FriendsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "FriendsViewController.updateOrCreateTalkInArray(Talk) -&gt; ():FriendsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Message.getJson() -&gt; JSON:Message.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "json.rawString()">
+            </PersistentString>
+            <PersistentString
+               value = "json[&quot;words&quot;].rawString()">
+            </PersistentString>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WTFChat.HalfWordRoundDownCipher.getTextForDecipher (WTFChat.HalfWordRoundDownCipher)(WTFChat.Word) -&gt; Swift.String:HalfWordRoundDownDecipher.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "count(word.text) / 2">
+            </PersistentString>
+            <PersistentString
+               value = "count(word.text)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WTFChat.FriendsViewController.prepareForSegue (WTFChat.FriendsViewController)(ObjectiveC.UIStoryboardSegue, sender : Swift.Optional&lt;Swift.AnyObject&gt;) -&gt; ():FriendsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "WTFChat.DecipherViewController.addWordToLastRow (WTFChat.DecipherViewController)(WTFChat.Word) -&gt; ():DecipherViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "rows.last!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NetworkService.post(JSON, relativeUrl : String, completion : (json : JSON?, error : NSError?) -&gt; ()) -&gt; ():NetworkService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "postJSON.rawString()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MessageService.saveMessage(Message, completion : (message : Message?, error : NSError?) -&gt; ()) -&gt; ():MessageService.swift">
+      </ContextState>
+      <ContextState
+         contextName = "WTFChat.UserService.getAllFriends (WTFChat.UserService)(Swift.String) -&gt; Swift.Optional&lt;Swift.Array&lt;WTFChat.User&gt;&gt;:UserService.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
