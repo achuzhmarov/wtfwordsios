@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DecipherViewController: UIViewController, SuggestionComputer {
+class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldDelegate {
     @IBOutlet weak var topTimerLabel: UILabel!
     
     @IBOutlet weak var startLabel: UILabel!
@@ -35,6 +35,9 @@ class DecipherViewController: UIViewController, SuggestionComputer {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let nav = self.navigationController?.navigationBar
+        nav?.translucent = false
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
@@ -61,6 +64,11 @@ class DecipherViewController: UIViewController, SuggestionComputer {
         if (self.isSingleMode) {
             suggestionsForSingleMode = (message.countNew() - 1) / suggestionsToWordsForSingleMode + 1
         }
+        
+        self.wordsView.setNeedsLayout()
+        self.wordsView.layoutIfNeeded()
+        
+        guessTextField.delegate = self
     }
     
     deinit {
@@ -88,6 +96,12 @@ class DecipherViewController: UIViewController, SuggestionComputer {
         }))
         
         presentViewController(refreshAlert, animated: true, completion: nil)
+    }
+    
+    //delegate enterPressed for guessField
+    func textFieldShouldReturn(textField: UITextField) -> Bool {   //delegate method
+        tryButtonPressed(tryButton)
+        return true
     }
     
     @IBAction func tryButtonPressed(sender: AnyObject) {
@@ -265,6 +279,7 @@ class DecipherViewController: UIViewController, SuggestionComputer {
     func setViewOnlyStage() {
         startLabel.removeFromSuperview()
         wordsView.updateMessage(message!)
+        
         self.hideTopTimer()
         
         isStarted = true
@@ -280,10 +295,24 @@ class DecipherViewController: UIViewController, SuggestionComputer {
         topTimerLabel.text = timer.getTimeString()
         
         if (timer.isFinished()) {
-            gameOver()
+            dispatch_async(dispatch_get_main_queue(), {
+                self.gameOver()
+            })
         } else {
             NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
                 selector: "tick", userInfo: nil, repeats: false)
+            
+            if (timer.isRunningOfTime()) {
+                topTimerLabel.textColor = UIColor.redColor()
+
+                UIView.animateWithDuration(0.5, delay: 0,
+                    options: [.Autoreverse, .Repeat], animations: {
+                        self.topTimerLabel.alpha = 0.1
+                    }, completion: nil)
+            } else if (timer.isLastSecond()) {
+                topTimerLabel.layer.removeAllAnimations()
+                topTimerLabel.alpha = 1
+            }
         }
     }
     

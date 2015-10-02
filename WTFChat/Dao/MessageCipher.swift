@@ -18,7 +18,9 @@ class MessageCipher {
         
         for guessWord in guessWords {
             for word in words! {
-                if (word.text.uppercaseString == guessWord.uppercaseString) {
+                if (word.wordType == WordType.New
+                    && word.text.uppercaseString == guessWord.uppercaseString) {
+                            
                     word.wordType = WordType.Success
                 }
             }
@@ -49,25 +51,37 @@ class MessageCipher {
     }
     
     func createMessage(talk: Talk, text: String, cipherType: CipherType = CipherType.FirstLetterCipher) -> Message {
-        let textWords = text.characters.split {$0 == " "}.map { String($0) }
+        let strings = text.characters.split {$0 == "\n"}.map { String($0) }
+        
+        var firstSentence = true
         
         var words = [Word]()
         
-        var first = true
-        
-        for textWord in textWords {
-            if (first) {
-                first = false
+        for curString in strings {
+            if (firstSentence) {
+                firstSentence = false
             } else {
-                words.append(Word.delimiterWord())
+                words.append(Word.lineBreakWord())
             }
             
-            words.appendContentsOf(createWords(textWord))
+            let textWords = curString.characters.split {$0 == " "}.map { String($0) }
+            
+            var firstWord = true
+            
+            for textWord in textWords {
+                if (firstWord) {
+                    firstWord = false
+                } else {
+                    words.append(Word.delimiterWord())
+                }
+                
+                words.appendContentsOf(createWords(textWord))
+            }
         }
         
         var author: String
         
-        if (talk.users[0] == "Single Mode") {
+        if (talk.isSingleMode) {
             author = talk.users[0]
         } else {
             author = userService.getCurrentUser().login
@@ -79,6 +93,8 @@ class MessageCipher {
             words: words,
             cipherType: cipherType
         )
+        
+        newMessage.cipherWords()
         
         checkDeciphered(newMessage)
         
@@ -123,7 +139,7 @@ class MessageCipher {
     }
     
     private func getWordType(newWordText: String) -> WordType {
-        if (newWordText.characters.count == 1) {
+        if (newWordText.characters.count <= 1) {
             return WordType.Ignore
         } else {
             return WordType.New

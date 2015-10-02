@@ -20,7 +20,7 @@ class FriendsViewController: UITableViewController {
 
         let singleModeTalk = Talk(id: "0")
         singleModeTalk.isSingleMode = true
-        let singleModeUser = User(login: "Single Mode", suggestions: 0, rating: 0)
+        let singleModeUser = User(login: "Pass and Play", suggestions: 0, rating: 0)
         
         singleModeTalk.users.append(singleModeUser.login)
         singleModeTalk.users.append(userService.getCurrentUser().login)
@@ -94,7 +94,7 @@ class FriendsViewController: UITableViewController {
 
         let talk = talks[indexPath.row]
         
-        cell.friendName.text = talk.getFriendLogin()
+        cell.friendName.text = talk.getFriendLogin().capitalizedString
         
         if let message = talk.lastMessage {
             let formatter = NSDateFormatter()

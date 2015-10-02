@@ -36,10 +36,6 @@ class Message : BaseEntity, JSQMessageData {
         self.deciphered = false
         self.cipherType = cipherType
         
-        for word in words! {
-            word.cipheredText = CipherFactory.getCipher(cipherType).getTextForDecipher(word)
-        }
-        
         self.words = words
         
         super.init(id: id)
@@ -74,22 +70,37 @@ class Message : BaseEntity, JSQMessageData {
         self.author = author
         self.deciphered = deciphered
         self.cipherType = cipherType
-        
-        for word in words! {
-            word.cipheredText = CipherFactory.getCipher(cipherType).getTextForDecipher(word)
-        }
-        
         self.words = words
         
         super.init(id: id)
     }
-
     
-    func getWordsWithoutDelimiters() -> [Word] {
+    func cipherWords() {
+        for word in words! {
+            if (word.wordType == WordType.New) {
+                word.cipheredText = CipherFactory.getCipher(cipherType).getTextForDecipher(word)
+            }
+        }
+    }
+    
+    func getWordsWithoutSpaces() -> [Word] {
         var result = [Word]()
         
         for word in words! {
             if (word.wordType != WordType.Delimiter) {
+                result.append(word)
+            }
+        }
+        
+        return result
+    }
+    
+    func getWordsOnly() -> [Word] {
+        var result = [Word]()
+        
+        for word in words! {
+            if (word.wordType != WordType.Delimiter &&
+                word.wordType != WordType.LineBreak) {
                 result.append(word)
             }
         }

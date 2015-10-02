@@ -15,15 +15,30 @@ class MessagesViewController: JSQMessagesViewController {
     
     var currentUser = userService.getCurrentUser()
     var talk: Talk!
-    var messages = [Message]()
-    var cipherType: CipherType = CipherType.FirstLetterCipher
+    //var messages = [Message]()
+    var cipherType: CipherType = CipherType.HalfWordRoundDownCipher
     
-    let incomingUndecipheredBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(
+    let inCipheredBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(
         UIColor.jsq_messageBubbleBlueColor())
-    let incomingDecipheredBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(
+    let outCipheredBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(
+        UIColor.jsq_messageBubbleBlueColor())
+    
+    let inSuccessBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(
         UIColor.jsq_messageBubbleGreenColor())
-    let outgoingBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(
-        UIColor.lightGrayColor())
+    let outSuccessBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(
+        UIColor.jsq_messageBubbleGreenColor())
+    
+    let inFailedBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(
+        UIColor.jsq_messageBubbleRedColor())
+    let outFailedBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(
+        UIColor.jsq_messageBubbleRedColor())
+    
+    /*let grayBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(
+        UIColor.lightGrayColor())*/
+    /*let yellowBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(
+        UIColor(netHex:0xFFDD33))*/
+    
+    var avatars = Dictionary<String, JSQMessagesAvatarImage>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,7 +113,6 @@ class MessagesViewController: JSQMessagesViewController {
     }
     
     func updateView() {
-        self.messages = talk.messages
         self.collectionView!.reloadData()
     }
 
@@ -109,7 +123,7 @@ class MessagesViewController: JSQMessagesViewController {
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
         
-        let message = self.messages[indexPath.row]
+        let message = self.talk.messages[indexPath.row]
         
         var text = ""
         
@@ -130,22 +144,36 @@ class MessagesViewController: JSQMessagesViewController {
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource! {
         
-        let message = self.messages[indexPath.row]
+        let message = self.talk.messages[indexPath.row]
         
         if (message.senderId() == self.senderId) {
-            return self.outgoingBubble
-        } else if (message.deciphered) {
-            return self.incomingDecipheredBubble
+            if (message.deciphered) {
+                if (message.countFailed() > 0) {
+                    return self.outFailedBubble
+                } else {
+                    return self.outSuccessBubble
+                }
+            } else {
+                return self.outCipheredBubble
+            }
         } else {
-            return self.incomingUndecipheredBubble
+            if (message.deciphered) {
+                if (message.countFailed() > 0) {
+                    return self.inFailedBubble
+                } else {
+                    return self.inSuccessBubble
+                }
+            } else {
+                return self.inCipheredBubble
+            }
         }
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAtIndexPath indexPath: NSIndexPath!) {
         
-        let message = self.messages[indexPath.row]
+        let message = self.talk.messages[indexPath.row]
         
-        if (message.senderId() != self.senderId) {
+        if (message.senderId() != self.senderId || message.deciphered) {
             dismissKeyboard()
             performSegueWithIdentifier("showDecipher", sender: message)
         }
@@ -153,17 +181,24 @@ class MessagesViewController: JSQMessagesViewController {
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
         
-        return nil
+        let message = self.talk.messages[indexPath.row]
+        
+        if let avatar = avatars[message.author] {
+            return avatar
+        } else {
+            let incoming = (message.senderId() == self.senderId)
+            avatars[message.author] = setupAvatarImage(message.author, imageUrl: nil, incoming: incoming)
+            return avatars[message.author]
+        }
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.messages.count;
+        return self.talk.messages.count;
     }
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
         
-        var newMessage = messageCipher.createMessage(self.talk!, text: text, cipherType: cipherType)
-        messages.append(newMessage)
+        let newMessage = messageCipher.createMessage(self.talk!, text: text, cipherType: cipherType)
         dismissKeyboard()
         
         if (!talk.isSingleMode) {
@@ -174,7 +209,7 @@ class MessagesViewController: JSQMessagesViewController {
                         print(requestError)
                     } else {
                         if let responseMessage = message {
-                            newMessage = responseMessage
+                            self.talk.messages[self.talk.messages.count - 1] = responseMessage
                             self.updateView()
                         }
                     }
@@ -224,5 +259,40 @@ class MessagesViewController: JSQMessagesViewController {
     
     func dismissKeyboard(){
         self.keyboardController.textView!.endEditing(true)
+    }
+    
+    func setupAvatarImage(name: String, imageUrl: String?, incoming: Bool) -> JSQMessagesAvatarImage {
+        //TODO How to get avatar image?
+        
+        /*if let stringUrl = imageUrl {
+            if let url = NSURL(string: stringUrl) {
+                if let data = NSData(contentsOfURL: url) {
+                    let image = UIImage(data: data)
+                    let diameter = incoming ? UInt(collectionView!.collectionViewLayout.incomingAvatarViewSize.width) : UInt(collectionView!.collectionViewLayout.outgoingAvatarViewSize.width)
+                    let avatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(image, diameter: diameter)
+                    avatars[name] = avatarImage
+                    return
+                }
+            }
+        }*/
+        
+        // At some point, we failed at getting the image (probably broken URL), so default to avatarColor
+        return setupAvatarColor(name, incoming: incoming)
+    }
+    
+    func setupAvatarColor(name: String, incoming: Bool) -> JSQMessagesAvatarImage {
+        let diameter = incoming ? UInt(collectionView!.collectionViewLayout.incomingAvatarViewSize.width) : UInt(collectionView!.collectionViewLayout.outgoingAvatarViewSize.width)
+        
+        let rgbValue = name.hash
+        let r = CGFloat(Float((rgbValue & 0xFF0000) >> 16)/255.0)
+        let g = CGFloat(Float((rgbValue & 0xFF00) >> 8)/255.0)
+        let b = CGFloat(Float(rgbValue & 0xFF)/255.0)
+        let color = UIColor(red: r, green: g, blue: b, alpha: 0.5)
+        
+        let nameLength = name.characters.count
+        
+        let initials : String? = name[0...min(2, nameLength)].capitalizedString
+        
+        return JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(initials, backgroundColor: color, textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(CGFloat(13)), diameter: diameter)
     }
 }

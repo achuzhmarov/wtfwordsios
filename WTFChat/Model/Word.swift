@@ -9,7 +9,7 @@
 import Foundation
 
 enum WordType: Int {
-    case New = 1, Success, Failed, Delimiter, Ignore
+    case New = 1, Success, Failed, Delimiter, Ignore, LineBreak
 }
 
 class Word : NSObject {
@@ -66,6 +66,10 @@ class Word : NSObject {
     
     class func delimiterWord() -> Word {
         return Word(text: " ", wordType: WordType.Delimiter)
+    }
+    
+    class func lineBreakWord() -> Word {
+        return Word(text: "\n", wordType: WordType.LineBreak)
     }
     
     func getJson() -> JSON {

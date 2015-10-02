@@ -18,7 +18,7 @@ class Timer {
     }
     
     func tick() -> Bool {
-        if (self.seconds > 0) {
+        if (self.seconds >= 0) {
             self.seconds -= 1
         }
         
@@ -26,7 +26,23 @@ class Timer {
     }
     
     func isFinished() -> Bool {
-        if (self.seconds <= 0) {
+        if (self.seconds < 0) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func isLastSecond() -> Bool {
+        if (self.seconds == 0) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func isRunningOfTime() -> Bool {
+        if (self.seconds == 10) {
             return true
         } else {
             return false

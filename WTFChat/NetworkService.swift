@@ -8,6 +8,7 @@
 
 import Foundation
 
+//let networkService = NetworkService(baseUrl: "http://127.0.0.1:5000/")
 let networkService = NetworkService(baseUrl: "http://46.101.198.165:42042/")
 
 class NetworkService {

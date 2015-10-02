@@ -41,7 +41,7 @@ class WordsView: UIView {
     }
     
     func needUpdate() -> Bool {
-        var newWords = message!.getWordsWithoutDelimiters()
+        var newWords = message!.getWordsOnly()
         var wordContainers = rows.getAllWordContainers()
         
         for i in 0..<wordContainers.count {
@@ -89,19 +89,15 @@ class WordsView: UIView {
     }
     
     func createView() {
-        for word in message!.getWordsWithoutDelimiters() {
-            addWord(word, targetRows: rows)
-        }
+        updateViewHelper(rows)
         
         rows.showContainers()
     }
-    
+
     func updateView() {
         tempRows = WordsField()
-            
-        for word in message!.getWordsWithoutDelimiters() {
-            addWord(word, targetRows: tempRows)
-        }
+        
+        updateViewHelper(tempRows)
             
         rows.clearFromView()
         rows = tempRows
@@ -109,8 +105,21 @@ class WordsView: UIView {
         rows.showContainers()
     }
     
-    func addWord(word: Word, targetRows: WordsField) {
-        if (targetRows.isEmpty()) {
+    private func updateViewHelper(targetRows: WordsField) {
+        var isNewRow = false
+        
+        for word in message!.getWordsWithoutSpaces() {
+            if (word.wordType == WordType.LineBreak) {
+                isNewRow = true
+            } else {
+                addWord(word, targetRows: targetRows, isNewRow: isNewRow)
+                isNewRow = false
+            }
+        }
+    }
+    
+    func addWord(word: Word, targetRows: WordsField, isNewRow: Bool = false) {
+        if (targetRows.isEmpty() || isNewRow) {
             return addWordToNewRow(word, targetRows: targetRows)
         }
         

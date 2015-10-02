@@ -59,8 +59,9 @@
       "scale" : "1x"
     },
     {
-      "idiom" : "ipad",
       "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "chat152x152.png",
       "scale" : "2x"
     }
   ],
