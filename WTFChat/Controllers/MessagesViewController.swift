@@ -10,6 +10,13 @@ import UIKit
 
 let MESSAGES_UPDATE_TIMER_INTERVAL = 5.0
 
+let SUCCESS_COLOR = UIColor(netHex:0x3EC303)
+let CIPHERED_COLOR = UIColor(netHex:0x0092D7)
+let FAILED_COLOR = UIColor(netHex:0xF26964)
+let TRY_COLOR = UIColor(netHex:0xEE8D09)
+//let TRY_COLOR = UIColor(netHex:0xFFDD33)
+let FONT_COLOR = UIColor.whiteColor()
+
 class MessagesViewController: JSQMessagesViewController {
     var timer: NSTimer?
     
@@ -18,20 +25,14 @@ class MessagesViewController: JSQMessagesViewController {
     //var messages = [Message]()
     var cipherType: CipherType = CipherType.HalfWordRoundDownCipher
     
-    let inCipheredBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(
-        UIColor.jsq_messageBubbleBlueColor())
-    let outCipheredBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(
-        UIColor.jsq_messageBubbleBlueColor())
+    let inCipheredBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(CIPHERED_COLOR)
+    let outCipheredBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(CIPHERED_COLOR)
     
-    let inSuccessBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(
-        UIColor.jsq_messageBubbleGreenColor())
-    let outSuccessBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(
-        UIColor.jsq_messageBubbleGreenColor())
+    let inSuccessBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(SUCCESS_COLOR)
+    let outSuccessBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(SUCCESS_COLOR)
     
-    let inFailedBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(
-        UIColor.jsq_messageBubbleRedColor())
-    let outFailedBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(
-        UIColor.jsq_messageBubbleRedColor())
+    let inFailedBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(FAILED_COLOR)
+    let outFailedBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(FAILED_COLOR)
     
     /*let grayBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(
         UIColor.lightGrayColor())*/
@@ -119,6 +120,23 @@ class MessagesViewController: JSQMessagesViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
+        
+        cell.textView!.textColor = FONT_COLOR
+        
+        /*let message = self.talk.messages[indexPath.row]
+        
+        if message.senderId() == self.senderId {
+            cell.textView!.textColor = UIColor.blackColor()
+        } else {
+            cell.textView!.textColor = UIColor.whiteColor()
+        }*/
+    
+        return cell
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
