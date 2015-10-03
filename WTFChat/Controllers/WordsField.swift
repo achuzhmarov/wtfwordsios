@@ -77,6 +77,10 @@ class WordsField {
         return nil
     }
     
+    func getRowsCount() -> Int {
+        return rows.count
+    }
+    
     func getContainerCount() -> Int {
         var i = 0
         
@@ -85,5 +89,9 @@ class WordsField {
         }
         
         return i
+    }
+    
+    func getRow(i: Int) -> [WordLabelContainer] {
+        return rows[i]
     }
 }

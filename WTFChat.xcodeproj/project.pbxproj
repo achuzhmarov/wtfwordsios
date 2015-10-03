@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		0915DD89306A197739C98209 /* libPods-WTFChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 905623BA880926CAEDEC04AB /* libPods-WTFChat.a */; };
+		4829B1801BBFE0C3009AC43F /* DecipherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4829B17F1BBFE0C3009AC43F /* DecipherViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		4829B1821BBFE2EB009AC43F /* WordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4829B1811BBFE2EB009AC43F /* WordsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		482C241A1BA433D500288BB1 /* CipherFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482C24191BA433D500288BB1 /* CipherFactory.swift */; };
 		482C241E1BA433F800288BB1 /* FirstLetterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482C241D1BA433F800288BB1 /* FirstLetterCipher.swift */; };
 		482C24201BA4340A00288BB1 /* HalfWordRoundDownDecipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482C241F1BA4340A00288BB1 /* HalfWordRoundDownDecipher.swift */; };
 		482C24221BA4341800288BB1 /* HalfWordRoundUpDecipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482C24211BA4341800288BB1 /* HalfWordRoundUpDecipher.swift */; };
 		482C24241BA43CE500288BB1 /* ShuffleCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482C24231BA43CE500288BB1 /* ShuffleCipher.swift */; };
-		487D77171BA0507000AF333C /* WordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487D77161BA0507000AF333C /* WordsView.swift */; };
 		487D771B1BA0749800AF333C /* RoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487D771A1BA0749800AF333C /* RoundedLabel.swift */; };
 		487D771D1BA0878400AF333C /* WordLabelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487D771C1BA0878400AF333C /* WordLabelContainer.swift */; };
 		488DF80D1BB2B1560085E31A /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488DF80C1BB2B1560085E31A /* SwiftyJSON.swift */; settings = {ASSET_TAGS = (); }; };
@@ -32,7 +33,6 @@
 		489666DA1B9B656A00F769D1 /* Talk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489666D51B9B656A00F769D1 /* Talk.swift */; };
 		489666DB1B9B656A00F769D1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489666D61B9B656A00F769D1 /* User.swift */; };
 		489666DC1B9B656A00F769D1 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489666D71B9B656A00F769D1 /* Word.swift */; };
-		48A2F9A41B9DD6D9009E5434 /* DecipherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A2F9A31B9DD6D9009E5434 /* DecipherViewController.swift */; };
 		48A2F9A81B9DF42C009E5434 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A2F9A71B9DF42C009E5434 /* Extensions.swift */; };
 		48E9D61F1BB3F5FB00BA0F2A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9D61E1BB3F5FB00BA0F2A /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		48E9D6211BB46DAB00BA0F2A /* MessageCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9D6201BB46DAB00BA0F2A /* MessageCipher.swift */; settings = {ASSET_TAGS = (); }; };
@@ -71,12 +71,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4829B17F1BBFE0C3009AC43F /* DecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecipherViewController.swift; sourceTree = "<group>"; };
+		4829B1811BBFE2EB009AC43F /* WordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsViewController.swift; sourceTree = "<group>"; };
 		482C24191BA433D500288BB1 /* CipherFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherFactory.swift; sourceTree = "<group>"; };
 		482C241D1BA433F800288BB1 /* FirstLetterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstLetterCipher.swift; sourceTree = "<group>"; };
 		482C241F1BA4340A00288BB1 /* HalfWordRoundDownDecipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfWordRoundDownDecipher.swift; sourceTree = "<group>"; };
 		482C24211BA4341800288BB1 /* HalfWordRoundUpDecipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfWordRoundUpDecipher.swift; sourceTree = "<group>"; };
 		482C24231BA43CE500288BB1 /* ShuffleCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShuffleCipher.swift; sourceTree = "<group>"; };
-		487D77161BA0507000AF333C /* WordsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsView.swift; sourceTree = "<group>"; };
 		487D771A1BA0749800AF333C /* RoundedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedLabel.swift; sourceTree = "<group>"; };
 		487D771C1BA0878400AF333C /* WordLabelContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordLabelContainer.swift; sourceTree = "<group>"; };
 		488DF80C1BB2B1560085E31A /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -99,7 +100,6 @@
 		489666D51B9B656A00F769D1 /* Talk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Talk.swift; sourceTree = "<group>"; };
 		489666D61B9B656A00F769D1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		489666D71B9B656A00F769D1 /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
-		48A2F9A31B9DD6D9009E5434 /* DecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecipherViewController.swift; sourceTree = "<group>"; };
 		48A2F9A71B9DF42C009E5434 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		48E9D61E1BB3F5FB00BA0F2A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		48E9D6201BB46DAB00BA0F2A /* MessageCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCipher.swift; sourceTree = "<group>"; };
@@ -249,7 +249,7 @@
 				489666B91B9B650400F769D1 /* FriendsViewController.swift */,
 				48EE657C1BB6F1C300A0DB07 /* AddFriendViewController.swift */,
 				48ECC8F51B9DA8E400A15B47 /* MessagesViewController.swift */,
-				48A2F9A31B9DD6D9009E5434 /* DecipherViewController.swift */,
+				4829B17F1BBFE0C3009AC43F /* DecipherViewController.swift */,
 			);
 			name = Controller;
 			path = Controllers;
@@ -283,7 +283,7 @@
 			children = (
 				489666B81B9B650400F769D1 /* FriendCell.swift */,
 				48EE657E1BB6F2FE00A0DB07 /* AddFriendCell.swift */,
-				487D77161BA0507000AF333C /* WordsView.swift */,
+				4829B1811BBFE2EB009AC43F /* WordsViewController.swift */,
 				487D771C1BA0878400AF333C /* WordLabelContainer.swift */,
 				487D771A1BA0749800AF333C /* RoundedLabel.swift */,
 				48F2F5441BA1CAB2005CCAC8 /* WordsField.swift */,
@@ -488,7 +488,6 @@
 				489666BB1B9B650400F769D1 /* FriendsViewController.swift in Sources */,
 				489666D81B9B656A00F769D1 /* BaseEntity.swift in Sources */,
 				487D771B1BA0749800AF333C /* RoundedLabel.swift in Sources */,
-				487D77171BA0507000AF333C /* WordsView.swift in Sources */,
 				482C241E1BA433F800288BB1 /* FirstLetterCipher.swift in Sources */,
 				489666DA1B9B656A00F769D1 /* Talk.swift in Sources */,
 				489666C51B9B651800F769D1 /* UserService.swift in Sources */,
@@ -508,10 +507,11 @@
 				48EE657D1BB6F1C300A0DB07 /* AddFriendViewController.swift in Sources */,
 				489666C31B9B651800F769D1 /* MessageService.swift in Sources */,
 				48F1373C1BB5C2CD00E5FFA7 /* RegistrationViewController.swift in Sources */,
+				4829B1801BBFE0C3009AC43F /* DecipherViewController.swift in Sources */,
 				482C24201BA4340A00288BB1 /* HalfWordRoundDownDecipher.swift in Sources */,
 				482C24221BA4341800288BB1 /* HalfWordRoundUpDecipher.swift in Sources */,
 				48ECC8F61B9DA8E400A15B47 /* MessagesViewController.swift in Sources */,
-				48A2F9A41B9DD6D9009E5434 /* DecipherViewController.swift in Sources */,
+				4829B1821BBFE2EB009AC43F /* WordsViewController.swift in Sources */,
 				489666981B9B640400F769D1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

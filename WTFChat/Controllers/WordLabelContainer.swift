@@ -19,6 +19,8 @@ class WordLabelContainer {
         }
     }
     
+    var wasAddedToCell = false
+    
     init (word: Word) {
         self.originalWord = word
         self.word = Word(word: word)
@@ -80,13 +82,13 @@ class WordLabelContainer {
     func animateWarning() {
         UIView.animateWithDuration(0.3, delay: 0,
             options: [], animations: {
-                self.label.center.y -= 5
+                self.label.center.y -= 3
                 self.label.layer.backgroundColor = UIColor(netHex:0xFFDD33).CGColor
             }, completion: nil)
         
         UIView.animateWithDuration(0.4, delay: 0.3,
             options: [], animations: {
-                self.label.center.y += 5
+                self.label.center.y += 3
                 self.label.layer.backgroundColor = UIColor.jsq_messageBubbleBlueColor().CGColor
             }, completion: nil)
     }
@@ -94,13 +96,13 @@ class WordLabelContainer {
     func animateError() {
         UIView.animateWithDuration(0.3, delay: 0,
             options: [], animations: {
-                self.label.center.y -= 5
+                self.label.center.y -= 3
                 self.label.layer.backgroundColor = UIColor.jsq_messageBubbleRedColor().CGColor
             }, completion: nil)
         
         UIView.animateWithDuration(0.4, delay: 0.3,
             options: [], animations: {
-                self.label.center.y += 5
+                self.label.center.y += 3
                 self.label.layer.backgroundColor = UIColor.jsq_messageBubbleBlueColor().CGColor
             }, completion: nil)
     }
@@ -141,24 +143,16 @@ class WordLabelContainer {
     let labelHorizontalMargin = CGFloat(2)
     let labelVerticalMargin = CGFloat(2)
     
-    func getNextLabelHorizontalConstraint(wordContainer: WordLabelContainer) -> NSLayoutConstraint {
+    func getNextHorizontalConstraint(wordContainer: WordLabelContainer) -> NSLayoutConstraint {
         return NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.Leading, relatedBy: NSLayoutRelation.Equal, toItem: wordContainer.label, attribute: NSLayoutAttribute.Trailing, multiplier: 1, constant: labelHorizontalMargin)
     }
     
-    func getNextLabelVerticalConstraint(wordContainer: WordLabelContainer) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: wordContainer.label, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
-    }
-
-    func getNextRowVerticalConstraint(wordContainer: WordLabelContainer) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: wordContainer.label, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: labelVerticalMargin)
-    }
-    
-    func getFirstRowHorizontalConstraint(parentView: UIView) -> NSLayoutConstraint {
+    func getFirstHorizontalConstraint(parentView: UIView) -> NSLayoutConstraint {
         return NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.Leading, relatedBy: NSLayoutRelation.Equal, toItem: parentView, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: 0)
     }
     
-    func getFirstRowVerticalConstraint(parentView: UIView) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: parentView, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
+    func getVerticalConstraint(parentView: UIView) -> NSLayoutConstraint {
+        return NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: parentView, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0)
     }
     
     func getFullRowHorizontalConstraint(parentView: UIView) -> NSLayoutConstraint {

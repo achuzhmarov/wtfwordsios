@@ -1,9 +1,9 @@
 //
-//  WordsView.swift
+//  WordsViewController.swift
 //  WTFChat
 //
-//  Created by Artem Chuzhmarov on 09/09/15.
-//  Copyright (c) 2015 Artem Chuzhmarov. All rights reserved.
+//  Created by Artem Chuzhmarov on 03/10/15.
+//  Copyright © 2015 Artem Chuzhmarov. All rights reserved.
 //
 
 import UIKit
@@ -12,12 +12,60 @@ protocol SuggestionComputer {
     func suggestionTapped(word: Word)
 }
 
-class WordsView: UIView {
+class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelegate {
+    
     var message: Message?
     var rows = WordsField()
     var tempRows = WordsField()
     
     var suggestionComputer: SuggestionComputer?
+    
+    @objc func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return rows.getRowsCount()
+    }
+    
+    @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("WordsRowCell", forIndexPath: indexPath) as UITableViewCell
+        
+        let row = rows.getRow(indexPath.row)
+        
+        var first = true
+        var previousContainer: WordLabelContainer!
+        
+        for view in cell.contentView.subviews{
+            view.removeFromSuperview()
+        }
+        
+        for wordContainer in row {
+            cell.contentView.addSubview(wordContainer.label)
+            
+            if (first) {
+                first = false
+                
+                let horizontalConstraint = wordContainer.getFirstHorizontalConstraint(cell.contentView)
+                self.addConstraint(horizontalConstraint)
+                
+                if (wordContainer.getWidth() > getMaxWidth()) {
+                    let rightHorizontalConstraint = wordContainer.getFullRowHorizontalConstraint(cell.contentView)
+                    self.addConstraint(rightHorizontalConstraint)
+                }
+            } else {
+                let horizontalConstraint = wordContainer.getNextHorizontalConstraint(previousContainer)
+                self.addConstraint(horizontalConstraint)
+            }
+            
+            let verticalConstraint = wordContainer.getVerticalConstraint(cell.contentView)
+            self.addConstraint(verticalConstraint)
+            
+            previousContainer = wordContainer
+        }
+        
+        return cell
+    }
     
     func updateMessage(message: Message) {
         updateMessage(message, tries: nil)
@@ -38,6 +86,8 @@ class WordsView: UIView {
             self.message = message
             createView()
         }
+        
+        self.reloadData()
     }
     
     func needUpdate() -> Bool {
@@ -93,16 +143,17 @@ class WordsView: UIView {
         
         rows.showContainers()
     }
-
+    
     func updateView() {
         tempRows = WordsField()
         
         updateViewHelper(tempRows)
-            
         rows.clearFromView()
         rows = tempRows
         tempRows = WordsField()
         rows.showContainers()
+        
+        self.reloadData()
     }
     
     private func updateViewHelper(targetRows: WordsField) {
@@ -119,25 +170,31 @@ class WordsView: UIView {
     }
     
     func addWord(word: Word, targetRows: WordsField, isNewRow: Bool = false) {
+        let wordContainer = createLabelForWord(word)
+        
         if (targetRows.isEmpty() || isNewRow) {
-            return addWordToNewRow(word, targetRows: targetRows)
+            var row = [WordLabelContainer]()
+            row.append(wordContainer)
+            targetRows.append(row)
+            return
         }
         
         let row = targetRows.getLastRow()
-
+        
         let rowWidth = getRowWidth(row)
         let wordWidth = WordLabelContainer.getWordWidth(word)
         
         if (rowWidth + wordWidth <= getMaxWidth()) {
-            addWordToLastRow(word, targetRows: targetRows)
+            targetRows.append(wordContainer)
         } else {
-            addWordToNewRow(word, targetRows: targetRows)
+            var row = [WordLabelContainer]()
+            row.append(wordContainer)
+            targetRows.append(row)
         }
     }
     
     func createLabelForWord(word: Word) -> WordLabelContainer {
         let wordContainer = WordLabelContainer(word: word)
-        self.addSubview(wordContainer.label)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "useSuggestion:")
         wordContainer.label.addGestureRecognizer(tap)
@@ -152,47 +209,11 @@ class WordsView: UIView {
         self.suggestionComputer?.suggestionTapped(wordContainer.originalWord)
     }
     
-    func addWordToNewRow(word: Word, targetRows: WordsField) {
-        let wordContainer = createLabelForWord(word)
-        
-        let horizontalConstraint = wordContainer.getFirstRowHorizontalConstraint(self)
-        self.addConstraint(horizontalConstraint)
-        
-        if (targetRows.isEmpty()) {
-            let verticalConstraint = wordContainer.getFirstRowVerticalConstraint(self)
-            self.addConstraint(verticalConstraint)
-        } else {
-            let verticalConstraint = wordContainer.getNextRowVerticalConstraint(targetRows.getLastContainer())
-            self.addConstraint(verticalConstraint)
-        }
-        
-        if (wordContainer.getWidth() > getMaxWidth()) {
-            let rightHorizontalConstraint = wordContainer.getFullRowHorizontalConstraint(self)
-            self.addConstraint(rightHorizontalConstraint)
-        }
-        
-        var row = [WordLabelContainer]()
-        row.append(wordContainer)
-        targetRows.append(row)
-    }
-    
-    func addWordToLastRow(word: Word, targetRows: WordsField) {
-        let wordContainer = createLabelForWord(word)
-        
-        let horizontalConstraint = wordContainer.getNextLabelHorizontalConstraint(targetRows.getLastContainer())
-        self.addConstraint(horizontalConstraint)
-        
-        let verticalConstraint = wordContainer.getNextLabelVerticalConstraint(targetRows.getLastContainer())
-        self.addConstraint(verticalConstraint)
-        
-        targetRows.append(wordContainer)
-    }
-    
     func getRowWidth(row: [WordLabelContainer]) -> CGFloat {
         var width = CGFloat(0)
         
         for wordContainer in row {
-            width += wordContainer.getWidth()
+            width += wordContainer.getWidth() + wordContainer.labelHorizontalMargin
         }
         
         return width
@@ -201,5 +222,4 @@ class WordsView: UIView {
     func getMaxWidth() -> CGFloat {
         return self.bounds.width - CGFloat(16)
     }
-
 }
