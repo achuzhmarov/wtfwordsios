@@ -12,18 +12,23 @@ class AddFriendViewController: UITableViewController, UISearchResultsUpdating {
     var friends = [String]()
     var lastRequest = ""
     
-    let searchController = UISearchController(searchResultsController: nil)
+    var searchController: AnyObject?
     
     var createdTalk: Talk?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchController.searchResultsUpdater = self
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.sizeToFit()
-        self.tableView.tableHeaderView = searchController.searchBar
+        if #available(iOS 8.0, *) {
+            let searchController = UISearchController(searchResultsController: nil)
+            searchController.searchResultsUpdater = self
+            searchController.hidesNavigationBarDuringPresentation = false
+            searchController.dimsBackgroundDuringPresentation = false
+            searchController.searchBar.sizeToFit()
+            self.tableView.tableHeaderView = searchController.searchBar
+        } else {
+            // Fallback on earlier versions
+        }
         
         loadFriends("")
     }
@@ -60,8 +65,32 @@ class AddFriendViewController: UITableViewController, UISearchResultsUpdating {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let friend = friends[indexPath.row]
+  
+        var viewPresenter: UIViewController
         
-        let refreshAlert = UIAlertController(title: "Add Friend",
+        if #available(iOS 8.0, *) {
+            let uiSearchController = searchController as! UISearchController
+            
+            if (uiSearchController.active) {
+                viewPresenter = uiSearchController
+            } else {
+                viewPresenter = self
+            }
+        } else {
+            viewPresenter = self
+        }
+        
+        let alert = WTFTwoButtonsAlert(title: "Add Friend",
+            message: "Are you sure you want to add \(friend) to your friends?",
+            firstButtonTitle: "Ok",
+            secondButtonTitle: "Cancel",
+            viewPresenter: viewPresenter) { () -> Void in
+                self.makeFriends(friend)
+        }
+        
+        alert.show()
+        
+        /*let refreshAlert = UIAlertController(title: "Add Friend",
             message: "Are you sure you want to add \(friend) to your friends?",
             preferredStyle: UIAlertControllerStyle.Alert)
         
@@ -77,9 +106,10 @@ class AddFriendViewController: UITableViewController, UISearchResultsUpdating {
             searchController.presentViewController(refreshAlert, animated: true, completion: nil)
         } else {
             presentViewController(refreshAlert, animated: true, completion: nil)
-        }
+        }*/
     }
     
+    @available(iOS 8.0, *)
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         loadFriends(searchController.searchBar.text!)
     }

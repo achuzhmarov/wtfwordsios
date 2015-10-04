@@ -15,6 +15,7 @@
 		482C24201BA4340A00288BB1 /* HalfWordRoundDownDecipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482C241F1BA4340A00288BB1 /* HalfWordRoundDownDecipher.swift */; };
 		482C24221BA4341800288BB1 /* HalfWordRoundUpDecipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482C24211BA4341800288BB1 /* HalfWordRoundUpDecipher.swift */; };
 		482C24241BA43CE500288BB1 /* ShuffleCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482C24231BA43CE500288BB1 /* ShuffleCipher.swift */; };
+		482E9ED21BC1825D00803CDE /* WTFAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482E9ED11BC1825D00803CDE /* WTFAlert.swift */; settings = {ASSET_TAGS = (); }; };
 		487D771B1BA0749800AF333C /* RoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487D771A1BA0749800AF333C /* RoundedLabel.swift */; };
 		487D771D1BA0878400AF333C /* WordLabelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487D771C1BA0878400AF333C /* WordLabelContainer.swift */; };
 		488DF80D1BB2B1560085E31A /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488DF80C1BB2B1560085E31A /* SwiftyJSON.swift */; settings = {ASSET_TAGS = (); }; };
@@ -78,6 +79,7 @@
 		482C241F1BA4340A00288BB1 /* HalfWordRoundDownDecipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfWordRoundDownDecipher.swift; sourceTree = "<group>"; };
 		482C24211BA4341800288BB1 /* HalfWordRoundUpDecipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfWordRoundUpDecipher.swift; sourceTree = "<group>"; };
 		482C24231BA43CE500288BB1 /* ShuffleCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShuffleCipher.swift; sourceTree = "<group>"; };
+		482E9ED11BC1825D00803CDE /* WTFAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTFAlert.swift; sourceTree = "<group>"; };
 		487D771A1BA0749800AF333C /* RoundedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedLabel.swift; sourceTree = "<group>"; };
 		487D771C1BA0878400AF333C /* WordLabelContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordLabelContainer.swift; sourceTree = "<group>"; };
 		488DF80C1BB2B1560085E31A /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				487D771A1BA0749800AF333C /* RoundedLabel.swift */,
 				48F2F5441BA1CAB2005CCAC8 /* WordsField.swift */,
 				48F2F5481BA1FF5A005CCAC8 /* Timer.swift */,
+				482E9ED11BC1825D00803CDE /* WTFAlert.swift */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 				489666DA1B9B656A00F769D1 /* Talk.swift in Sources */,
 				489666C51B9B651800F769D1 /* UserService.swift in Sources */,
 				48F2F5491BA1FF5A005CCAC8 /* Timer.swift in Sources */,
+				482E9ED21BC1825D00803CDE /* WTFAlert.swift in Sources */,
 				48E9D61F1BB3F5FB00BA0F2A /* LoginViewController.swift in Sources */,
 				48EE657B1BB694E300A0DB07 /* KeychainWrapper.m in Sources */,
 				482C241A1BA433D500288BB1 /* CipherFactory.swift in Sources */,
@@ -648,6 +652,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WTFChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.artem.wtfchat.alpha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -667,6 +672,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WTFChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.artem.wtfchat.alpha;
 				PRODUCT_NAME = "$(TARGET_NAME)";

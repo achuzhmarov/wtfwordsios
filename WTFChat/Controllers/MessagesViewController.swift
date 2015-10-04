@@ -243,7 +243,17 @@ class MessagesViewController: JSQMessagesViewController {
     override func didPressAccessoryButton(sender: UIButton!) {
         let newCipherType = CipherFactory.getNextCipherType(cipherType)
         
-        let refreshAlert = UIAlertController(title: "Change cipher", message: "Are you sure you want to change cipher type to " + newCipherType.description + "?", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = WTFTwoButtonsAlert(title: "Change cipher",
+            message: "Are you sure you want to change cipher type to " + newCipherType.description + "?",
+            firstButtonTitle: "Ok",
+            secondButtonTitle: "Cancel",
+            viewPresenter: self) { () -> Void in
+                self.cipherType = newCipherType
+        }
+        
+        alert.show()
+        
+        /*let refreshAlert = UIAlertController(title: "Change cipher", message: "Are you sure you want to change cipher type to " + newCipherType.description + "?", preferredStyle: UIAlertControllerStyle.Alert)
         
         refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction) in
             self.cipherType = newCipherType
@@ -252,8 +262,8 @@ class MessagesViewController: JSQMessagesViewController {
         refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction) in
             //do nothing
         }))
-        
-        presentViewController(refreshAlert, animated: true, completion: nil)
+
+        presentViewController(refreshAlert, animated: true, completion: nil)*/
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
