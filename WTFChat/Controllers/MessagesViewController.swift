@@ -23,7 +23,7 @@ class MessagesViewController: JSQMessagesViewController {
     var currentUser = userService.getCurrentUser()
     var talk: Talk!
 
-    var cipherType: CipherType = CipherType.HalfWordRoundDownCipher
+    var cipherType: CipherType = CipherType.HalfWordRoundDown
     
     let inCipheredBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(CIPHERED_COLOR)
     let outCipheredBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(CIPHERED_COLOR)
@@ -203,7 +203,9 @@ class MessagesViewController: JSQMessagesViewController {
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
         
-        let newMessage = messageCipher.createMessage(self.talk!, text: text, cipherType: cipherType)
+        performSegueWithIdentifier("showMessagePreview", sender: text)
+        
+        /*let newMessage = messageCipher.createMessage(self.talk!, text: text, cipherType: cipherType)
         dismissKeyboard()
         
         if (!talk.isSingleMode) {
@@ -224,10 +226,10 @@ class MessagesViewController: JSQMessagesViewController {
             self.updateView()
         }
         
-        self.finishSendingMessage()
+        self.finishSendingMessage()*/
     }
     
-    override func didPressAccessoryButton(sender: UIButton!) {
+    /*override func didPressAccessoryButton(sender: UIButton!) {
         let newCipherType = CipherFactory.getNextCipherType(cipherType)
         
         WTFTwoButtonsAlert.show("Change cipher",
@@ -237,7 +239,7 @@ class MessagesViewController: JSQMessagesViewController {
             viewPresenter: self) { () -> Void in
                 self.cipherType = newCipherType
         }
-    }
+    }*/
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDecipher" {
@@ -249,6 +251,13 @@ class MessagesViewController: JSQMessagesViewController {
             
             //single mode
             targetController.isSingleMode = talk.isSingleMode
+        } else if segue.identifier == "showMessagePreview" {
+            let targetController = segue.destinationViewController as! SendMessageViewController
+            
+            let text = sender as! String
+            
+            targetController.text = text
+            targetController.cipherType = self.cipherType
         }
     }
     

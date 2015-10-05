@@ -15,7 +15,7 @@ class Message : BaseEntity, JSQMessageData {
     var author: String
     var words: [Word]?
     var deciphered: Bool
-    var cipherType: CipherType
+    var cipherType = CipherType.HalfWordRoundDown
     
     init(id: String, talkId: String, author: String) {
         
@@ -23,12 +23,11 @@ class Message : BaseEntity, JSQMessageData {
         self.talkId = talkId
         self.author = author
         self.deciphered = false
-        cipherType = CipherType.FirstLetterCipher
         
         super.init(id: id)
     }
     
-    init(id: String, talkId: String, author: String, words: [Word]?, cipherType: CipherType = CipherType.FirstLetterCipher) {
+    init(id: String, talkId: String, author: String, words: [Word]?, cipherType: CipherType) {
         
         self.timestamp = NSDate()
         self.talkId = talkId
@@ -48,7 +47,6 @@ class Message : BaseEntity, JSQMessageData {
         self.author = author
         self.deciphered = deciphered
         self.words = words
-        self.cipherType = CipherType.FirstLetterCipher
         
         super.init(id: id)
     }
@@ -58,12 +56,11 @@ class Message : BaseEntity, JSQMessageData {
         self.talkId = talkId
         self.author = author
         self.deciphered = deciphered
-        self.cipherType = CipherType.FirstLetterCipher
             
         super.init(id: id)
     }
     
-    init(id: String, talkId: String, author: String, words: [Word]?, deciphered: Bool, cipherType: CipherType = CipherType.FirstLetterCipher, timestamp: NSDate) {
+    init(id: String, talkId: String, author: String, words: [Word]?, deciphered: Bool, cipherType: CipherType, timestamp: NSDate) {
         
         self.timestamp = timestamp
         self.talkId = talkId
@@ -78,7 +75,7 @@ class Message : BaseEntity, JSQMessageData {
     func cipherWords() {
         for word in words! {
             if (word.wordType == WordType.New) {
-                word.cipheredText = CipherFactory.getCipher(cipherType).getTextForDecipher(word)
+                word.cipheredText = CipherFactory.cipherText(cipherType, word: word)
             }
         }
     }
@@ -140,8 +137,26 @@ class Message : BaseEntity, JSQMessageData {
         } else if (self.deciphered) {
             return clearText()
         } else {
-            return "???"
+            return questionMarks()
         }
+    }
+    
+    func questionMarks() -> String! {
+        var result = ""
+        
+        if (words != nil) {
+            for word in words! {
+                if (word.wordType == WordType.Delimiter) {
+                    result += " "
+                } else if (word.wordType == WordType.LineBreak) {
+                    result += "\n"
+                } else {
+                    result += "???"
+                }
+            }
+        }
+        
+        return result
     }
     
     func clearText() -> String! {

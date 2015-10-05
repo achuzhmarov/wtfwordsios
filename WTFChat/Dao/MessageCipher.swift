@@ -50,7 +50,7 @@ class MessageCipher {
         message.deciphered = true
     }
     
-    func createMessage(talk: Talk, text: String, cipherType: CipherType = CipherType.FirstLetterCipher) -> Message {
+    func createMessage(talk: Talk, text: String, cipherType: CipherType) -> Message {
         let strings = text.characters.split {$0 == "\n"}.map { String($0) }
         
         var firstSentence = true

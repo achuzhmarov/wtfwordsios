@@ -64,6 +64,18 @@ class Word : NSObject {
         }
     }
     
+    func getCharCount() -> Int {
+        return text.characters.count
+    }
+    
+    func getCapitalized() -> String {
+        return text.capitalizedString
+    }
+    
+    func getUpperCase() -> String {
+        return text.uppercaseString
+    }
+    
     class func delimiterWord() -> Word {
         return Word(text: " ", wordType: WordType.Delimiter)
     }
