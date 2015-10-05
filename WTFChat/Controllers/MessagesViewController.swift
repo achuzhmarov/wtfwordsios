@@ -22,7 +22,7 @@ class MessagesViewController: JSQMessagesViewController {
     
     var currentUser = userService.getCurrentUser()
     var talk: Talk!
-    //var messages = [Message]()
+
     var cipherType: CipherType = CipherType.HalfWordRoundDownCipher
     
     let inCipheredBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(CIPHERED_COLOR)
@@ -33,11 +33,6 @@ class MessagesViewController: JSQMessagesViewController {
     
     let inFailedBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(FAILED_COLOR)
     let outFailedBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(FAILED_COLOR)
-    
-    /*let grayBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(
-        UIColor.lightGrayColor())*/
-    /*let yellowBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(
-        UIColor(netHex:0xFFDD33))*/
     
     var avatars = Dictionary<String, JSQMessagesAvatarImage>()
     
@@ -127,14 +122,6 @@ class MessagesViewController: JSQMessagesViewController {
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
         
         cell.textView!.textColor = FONT_COLOR
-        
-        /*let message = self.talk.messages[indexPath.row]
-        
-        if message.senderId() == self.senderId {
-            cell.textView!.textColor = UIColor.blackColor()
-        } else {
-            cell.textView!.textColor = UIColor.whiteColor()
-        }*/
     
         return cell
     }
@@ -243,27 +230,13 @@ class MessagesViewController: JSQMessagesViewController {
     override func didPressAccessoryButton(sender: UIButton!) {
         let newCipherType = CipherFactory.getNextCipherType(cipherType)
         
-        let alert = WTFTwoButtonsAlert(title: "Change cipher",
+        WTFTwoButtonsAlert.show("Change cipher",
             message: "Are you sure you want to change cipher type to " + newCipherType.description + "?",
             firstButtonTitle: "Ok",
             secondButtonTitle: "Cancel",
             viewPresenter: self) { () -> Void in
                 self.cipherType = newCipherType
         }
-        
-        alert.show()
-        
-        /*let refreshAlert = UIAlertController(title: "Change cipher", message: "Are you sure you want to change cipher type to " + newCipherType.description + "?", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction) in
-            self.cipherType = newCipherType
-        }))
-        
-        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction) in
-            //do nothing
-        }))
-
-        presentViewController(refreshAlert, animated: true, completion: nil)*/
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

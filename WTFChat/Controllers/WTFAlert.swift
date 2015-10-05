@@ -8,78 +8,35 @@
 
 import Foundation
 
-class WTFOneButtonAlert {
-    var title = ""
-    var message = ""
-    var firstButtonTitle = ""
-    var viewPresenter: UIViewController?
-    
-    var alertObject: AnyObject
-    
-    init(title: String, message: String, firstButtonTitle: String, viewPresenter: UIViewController?) {
-        
-        self.title = title
-        self.message = message
-        self.firstButtonTitle = firstButtonTitle
-        self.viewPresenter = viewPresenter
-        
+class WTFOneButtonAlert: NSObject, UIAlertViewDelegate  {
+    class func show(title: String, message: String, firstButtonTitle: String, viewPresenter: UIViewController?) {
         if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
                 message: message,
                 preferredStyle: UIAlertControllerStyle.Alert)
             
-            alertObject = alert
-            
             alert.addAction(UIAlertAction(title: firstButtonTitle, style: .Default, handler: { (action: UIAlertAction) in
                 //do nothing
             }))
-            
-            alertObject = alert
+
+            viewPresenter?.presentViewController(alert, animated: true, completion: nil)
         } else {
             let alert = UIAlertView()
             alert.title = title
             alert.message = message
             alert.addButtonWithTitle(firstButtonTitle)
-            alertObject = alert
-        }
-    }
-    
-    func show() {
-        if #available(iOS 8.0, *) {
-            let alert = alertObject as! UIAlertController
-            viewPresenter?.presentViewController(alert, animated: true, completion: nil)
-        } else {
-            let alert = alertObject as! UIAlertView
             alert.show()
         }
     }
 }
 
-class WTFTwoButtonsAlert {
-    var title = ""
-    var message = ""
-    var firstButtonTitle = ""
-    var secondButtonTitle = ""
-    var viewPresenter: UIViewController?
-    var alertButtonAction: () -> Void
-    
-    var alertObject: AnyObject
-    
-    init(title: String, message: String, firstButtonTitle: String, secondButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:() -> Void) {
-        
-        self.title = title
-        self.message = message
-        self.firstButtonTitle = firstButtonTitle
-        self.secondButtonTitle = secondButtonTitle
-        self.viewPresenter = viewPresenter
-        self.alertButtonAction = alertButtonAction
+class WTFTwoButtonsAlert: NSObject, UIAlertViewDelegate {
+    class func show(title: String, message: String, firstButtonTitle: String, secondButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:() -> Void) {
         
         if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
                 message: message,
                 preferredStyle: UIAlertControllerStyle.Alert)
-            
-            alertObject = alert
             
             alert.addAction(UIAlertAction(title: firstButtonTitle, style: .Default, handler: { (action: UIAlertAction) in
                 alertButtonAction()
@@ -88,33 +45,32 @@ class WTFTwoButtonsAlert {
             alert.addAction(UIAlertAction(title: secondButtonTitle, style: .Default, handler: { (action: UIAlertAction) in
                 //do nothing
             }))
-            
-            alertObject = alert
+
+            viewPresenter?.presentViewController(alert, animated: true, completion: nil)
         } else {
-            let alert = UIAlertView()
+            let alert = AlertWithDelegate()
             alert.title = title
             alert.message = message
             alert.addButtonWithTitle(firstButtonTitle)
             alert.addButtonWithTitle(secondButtonTitle)
-            alertObject = alert
-            alert.delegate = self
-        }
-    }
-    
-    func show() {
-        if #available(iOS 8.0, *) {
-            let alert = alertObject as! UIAlertController
-            viewPresenter?.presentViewController(alert, animated: true, completion: nil)
-        } else {
-            let alert = alertObject as! UIAlertView
+            alert.setAlertFunction(alertButtonAction)
             alert.show()
         }
     }
+}
+
+class AlertWithDelegate: UIAlertView, UIAlertViewDelegate {
+    var alertButtonAction: (() -> Void)?
     
-    func alertView(View: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
+    func setAlertFunction(alertButtonAction: () -> Void) {
+        self.alertButtonAction = alertButtonAction
+        self.delegate = self
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
         switch buttonIndex{
         case 0:
-            alertButtonAction()
+            self.alertButtonAction!()
             break;
         case 1:
             //Do nothing

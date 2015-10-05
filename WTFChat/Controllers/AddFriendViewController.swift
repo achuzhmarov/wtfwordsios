@@ -80,33 +80,13 @@ class AddFriendViewController: UITableViewController, UISearchResultsUpdating {
             viewPresenter = self
         }
         
-        let alert = WTFTwoButtonsAlert(title: "Add Friend",
+        WTFTwoButtonsAlert.show("Add Friend",
             message: "Are you sure you want to add \(friend) to your friends?",
             firstButtonTitle: "Ok",
             secondButtonTitle: "Cancel",
             viewPresenter: viewPresenter) { () -> Void in
                 self.makeFriends(friend)
         }
-        
-        alert.show()
-        
-        /*let refreshAlert = UIAlertController(title: "Add Friend",
-            message: "Are you sure you want to add \(friend) to your friends?",
-            preferredStyle: UIAlertControllerStyle.Alert)
-        
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction) in
-            self.makeFriends(friend)
-        }))
-        
-        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction) in
-            //do nothing
-        }))
-        
-        if (searchController.active) {
-            searchController.presentViewController(refreshAlert, animated: true, completion: nil)
-        } else {
-            presentViewController(refreshAlert, animated: true, completion: nil)
-        }*/
     }
     
     @available(iOS 8.0, *)
