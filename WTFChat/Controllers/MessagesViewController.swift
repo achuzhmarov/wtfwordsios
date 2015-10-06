@@ -42,6 +42,8 @@ class MessagesViewController: JSQMessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.inputToolbar!.contentView!.leftBarButtonItem = nil
+        
         self.senderDisplayName = currentUser.login
         self.senderId = currentUser.login
         
