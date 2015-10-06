@@ -149,7 +149,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     func wasCloseTry(word: Word, tries: [String]?) -> Bool {
         if (tries != nil) {
             for curTry in tries! {
-                if Tools.calcStringDistance(word.text.uppercaseString, bStr: curTry.uppercaseString) == 1 {
+                if Tools.calcStringDistance(word.getCompareString(), bStr: curTry.uppercaseString.removeChars(WORD_SPECIAL_SYMBOLS)) == 1 {
                     return true
                 }
             }

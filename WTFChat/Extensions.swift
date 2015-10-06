@@ -29,6 +29,15 @@ extension NSError {
 }
 
 extension String {
+    func removeChars(chars: [String]) -> String {
+        var result = self
+        
+        for char in chars {
+            result = result.stringByReplacingOccurrencesOfString(char, withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        }
+        
+        return result
+    }
     
     subscript (i: Int) -> Character {
         return self[self.startIndex.advancedBy(i)]

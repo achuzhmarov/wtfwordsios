@@ -10,6 +10,8 @@ import Foundation
 
 let messageCipher = MessageCipher()
 
+let WORD_SPECIAL_SYMBOLS = ["'", "-"]
+
 class MessageCipher {
     func decipher(message: Message, guessText: String) {
         let guessWords = guessText.characters.split {$0 == " "}.map { String($0) }
@@ -19,7 +21,7 @@ class MessageCipher {
         for guessWord in guessWords {
             for word in words! {
                 if (word.wordType == WordType.New
-                    && word.text.uppercaseString == guessWord.uppercaseString) {
+                    && word.getCompareString() == guessWord.uppercaseString.removeChars(WORD_SPECIAL_SYMBOLS)) {
                             
                     word.wordType = WordType.Success
                 }
@@ -167,9 +169,17 @@ class MessageCipher {
     
     private let letters = NSCharacterSet.letterCharacterSet()
     private func isLetter(unicodeChar: UnicodeScalar) -> Bool {
-        return letters.longCharacterIsMember(unicodeChar.value)
-        //|| String(unicodeChar) == "'"
-        //|| String(unicodeChar) == "-"
+        if letters.longCharacterIsMember(unicodeChar.value) {
+            return true
+        } else {
+            for wordSymbol in WORD_SPECIAL_SYMBOLS {
+                if String(unicodeChar) == wordSymbol {
+                    return true
+                }
+            }
+        }
+        
+        return false
     }
     
     //let digits = NSCharacterSet.decimalDigitCharacterSet()
