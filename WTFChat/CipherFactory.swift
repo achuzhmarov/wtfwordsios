@@ -10,7 +10,6 @@ import Foundation
 
 protocol Cipher {
     func getTextForDecipher(word: Word) -> String
-    func getDescription() -> String
 }
 
 enum CipherType : Int {
@@ -28,7 +27,7 @@ enum CipherType : Int {
 }
 
 enum CipherCategory : Int, CustomStringConvertible {
-    case RightCutter = 1
+    case RightCutter = 0
     case LeftCutter
     case Shuffle
     
@@ -47,7 +46,7 @@ enum CipherCategory : Int, CustomStringConvertible {
 }
 
 enum CipherMode : Int, CustomStringConvertible {
-    case Easy = 1
+    case Easy = 0
     case Normal
     case Hard
     
@@ -97,10 +96,6 @@ class CipherFactory {
         
     ]
     
-    class func getDescription(cipherType: CipherType) -> String {
-        return ciphers[cipherType]!.getDescription()
-    }
-    
     class func cipherText(cipherType: CipherType, word: Word) -> String {
         return ciphers[cipherType]!.getTextForDecipher(word)
     }
@@ -119,6 +114,14 @@ class CipherFactory {
         }
         
         return (.RightCutter, .Normal)
+    }
+    
+    class func getAllCategories() -> [CipherCategory] {
+        return [.RightCutter, .LeftCutter, .Shuffle]
+    }
+    
+    class func getAllModes() -> [CipherMode] {
+        return [.Easy, .Normal, .Hard]
     }
 }
 

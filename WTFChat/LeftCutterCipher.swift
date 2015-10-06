@@ -11,34 +11,22 @@ import Foundation
 class ExceptFirstLetterFromEndCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         let wordLength = word.getCharCount() - 1
-        return word.getCapitalized()[1...wordLength] + word.additional
-    }
-    
-    func getDescription() -> String {
-        return "ExceptFirstLetterFromEndCipher"
+        return "..." + word.getCapitalized()[1...wordLength] + word.additional
     }
 }
 
 class HalfWordRoundDownFromEndCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         let wordLength = word.getCharCount() - 1
-        let letterCount = (word.getCharCount() / 2 - 1) - 1
-        return word.getCapitalized()[letterCount...wordLength] + word.additional
-    }
-    
-    func getDescription() -> String {
-        return "HalfWordRoundDownFromEndCipher"
+        let letterCount = word.getCharCount() / 2
+        return "..." + word.getCapitalized()[letterCount...wordLength] + word.additional
     }
 }
 
 class HalfWordRoundUpFromEndCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         let wordLength = word.getCharCount() - 1
-        let letterCount = (word.getCharCount() / 2 + word.getCharCount() % 2 - 1) - 1
-        return word.getCapitalized()[letterCount...wordLength] + word.additional
-    }
-    
-    func getDescription() -> String {
-        return "HalfWordRoundUpFromEndCipher"
+        let letterCount = word.getCharCount() / 2 + word.getCharCount() % 2
+        return "..." + word.getCapitalized()[letterCount...wordLength] + word.additional
     }
 }

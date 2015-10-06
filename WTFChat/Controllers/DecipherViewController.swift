@@ -12,13 +12,17 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     @IBOutlet weak var topTimerLabel: UILabel!
     
     @IBOutlet weak var startLabel: UILabel!
+    @IBOutlet weak var exampleLabel: RoundedLabel!
     @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var wordsView: WordsView!
+    
+    @IBOutlet weak var wordsTableView: WordsViewController!
+    @IBOutlet weak var exampleLeadingConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var guessTextField: UITextField!
     @IBOutlet weak var tryButton: UIButton!
     
-    @IBOutlet weak var guessBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var tryBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var topViewHeightContraint: NSLayoutConstraint!
     
@@ -38,7 +42,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         let nav = self.navigationController?.navigationBar
         nav?.translucent = false
-
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
         /*NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotated:", name: UIDeviceOrientationDidChangeNotification, object: nil)*/
@@ -51,6 +55,8 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
+        
+        setExampleLabel()
         
         if (message.deciphered) {
             setViewOnlyStage()
@@ -65,8 +71,8 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             suggestionsForSingleMode = (message.countNew() - 1) / suggestionsToWordsForSingleMode + 1
         }
         
-        self.wordsView.setNeedsLayout()
-        self.wordsView.layoutIfNeeded()
+        self.wordsTableView.delegate = self.wordsTableView
+        self.wordsTableView.dataSource = self.wordsTableView
         
         guessTextField.delegate = self
     }
@@ -74,7 +80,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self);
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -85,17 +91,13 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             return
         }
         
-        let refreshAlert = UIAlertController(title: "Give Up", message: "Are you sure you want to give up?", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction) in
-            self.gameOver()
-        }))
-        
-        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction) in
-            //do nothing
-        }))
-        
-        presentViewController(refreshAlert, animated: true, completion: nil)
+        WTFTwoButtonsAlert.show("Give Up",
+            message: "Are you sure you want to give up?",
+            firstButtonTitle: "Ok",
+            secondButtonTitle: "Cancel",
+            viewPresenter: self) { () -> Void in
+                self.gameOver()
+        }
     }
     
     //delegate enterPressed for guessField
@@ -104,13 +106,22 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         return true
     }
     
+    @IBAction func guessTextChanged(sender: AnyObject) {
+        if (guessTextField.text?.characters.count > 0) {
+            tryButton.enabled = true
+        } else {
+            tryButton.enabled = false
+        }
+    }
+    
     @IBAction func tryButtonPressed(sender: AnyObject) {
         messageCipher.decipher(message!, guessText: guessTextField.text!)
         
         let guessWords = guessTextField.text!.characters.split {$0 == " "}.map { String($0) }
         
-        wordsView.updateMessage(message!, tries: guessWords)
+        wordsTableView.updateMessage(message!, tries: guessWords)
         guessTextField.text = ""
+        tryButton.enabled = false
         
         if (message!.deciphered) {
             gameOver()
@@ -119,7 +130,9 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     
     func suggestionTapped(word: Word) {
         if (word.wordType == WordType.New) {
-            if (self.getSuggestions() > 0) {
+            if (word.wasCloseTry) {
+                showCloseTrySuggestionsConfirm(word)
+            } else if (self.getSuggestions() > 0) {
                 showSuggestionConfirm(word)
             } else {
                 showNoSuggestionsDialog()
@@ -130,40 +143,41 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     func showNoSuggestionsDialog() {
-        let refreshAlert = UIAlertController(title: "Use Suggestion: 0",
+        WTFOneButtonAlert.show("Use Suggestion: 0",
             message: "You have used all suggestions",
-            preferredStyle: UIAlertControllerStyle.Alert)
-        
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction) in
-            //do nothing
-        }))
-        
-        presentViewController(refreshAlert, animated: true, completion: nil)
+            firstButtonTitle: "Ok",
+            viewPresenter: self)
     }
     
     func showSuggestionConfirm(word: Word) {
-        let refreshAlert = UIAlertController(title: "Use Suggestion: " + String(self.getSuggestions()),
+        WTFTwoButtonsAlert.show("Use Suggestion: " + String(self.getSuggestions()),
             message: "Are you sure you want to use a suggestion?",
-            preferredStyle: UIAlertControllerStyle.Alert)
-        
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction) in
-            self.useSuggestion(word)
-        }))
-        
-        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction) in
-            //do nothing
-        }))
-        
-        presentViewController(refreshAlert, animated: true, completion: nil)
+            firstButtonTitle: "Ok",
+            secondButtonTitle: "Cancel",
+            viewPresenter: self) { () -> Void in
+                self.useSuggestion(word)
+        }
+    }
+    
+    func showCloseTrySuggestionsConfirm(word: Word) {
+        WTFTwoButtonsAlert.show("Descipher",
+            message: "Are you sure you want to decipher it?",
+            firstButtonTitle: "Ok",
+            secondButtonTitle: "Cancel",
+            viewPresenter: self) { () -> Void in
+                self.useSuggestion(word)
+        }
     }
     
     func useSuggestion(word: Word) {
         audioHelper.playSound("success")
         
         messageCipher.decipher(message!, suggestedWord: word)
-        wordsView.updateMessage(message!)
+        wordsTableView.updateMessage(message!)
         
-        if (isSingleMode) {
+        if (word.wasCloseTry) {
+            //do nothing
+        } else if (isSingleMode) {
             self.suggestionsForSingleMode--
         } else {
             userService.useSuggestion()
@@ -179,8 +193,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
         
         UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.guessBottomConstraint.constant = keyboardFrame.size.height + 20
-            self.tryBottomConstraint.constant = keyboardFrame.size.height + 20
+            self.bottomViewConstraint.constant = keyboardFrame.size.height
         })
     }
     
@@ -189,19 +202,18 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         //var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
         
         UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.guessBottomConstraint.constant = 8
-            self.tryBottomConstraint.constant = 8
+            self.bottomViewConstraint.constant = 0
         })
     }
     
     /*func rotated() {
-        println("asdA")
+    println("asdA")
     }*/
     
     func dismissKeyboard(){
         view.endEditing(true)
     }
-
+    
     func start() {
         if (isStarted) {
             return
@@ -214,29 +226,53 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
             selector: "tick", userInfo: nil, repeats: false)
-
-        tryButton.hidden = false
-        guessTextField.hidden = false
+        
+        //tryButton.hidden = false
+        //guessTextField.hidden = false
+        bottomView.hidden = false
         topTimerLabel.hidden = false
+        wordsTableView.hidden = false
+        exampleLabel.hidden = false
         
         startLabel.removeFromSuperview()
         
-        wordsView.suggestionComputer = self
-        wordsView.updateMessage(message!)
+        wordsTableView.suggestionComputer = self
+        wordsTableView.updateMessage(message!)
         
         guessTextField.becomeFirstResponder()
-        
+
         isStarted = true
+    }
+    
+    func setExampleLabel() {
+        exampleLabel.text = CipherFactory.cipherText(
+            message.cipherType,
+            word: EXAMPLE_CIPHER_WORD
+        )
+        
+        exampleLabel.textColor = UIColor.whiteColor()
+        exampleLabel.font = UIFont(name: exampleLabel.font.fontName, size: 12)
+        exampleLabel.layer.backgroundColor = CIPHERED_COLOR.CGColor
+        
+        //to make cornerRadius work
+        exampleLabel.layer.masksToBounds = true;
+        exampleLabel.layer.cornerRadius = 8.0;
+        
+        exampleLabel.translatesAutoresizingMaskIntoConstraints = false
+        exampleLabel.userInteractionEnabled = true
+        exampleLabel.sizeToFit()
     }
     
     func gameOver() {
         messageCipher.failed(message!)
         
-        guessTextField.hidden = true
-        guessTextField.text = ""
-        tryButton.hidden = true
+        bottomView.hidden = true
+        //guessTextField.hidden = true
+        //guessTextField.text = ""
+        //tryButton.hidden = true
+        self.hideTopLayer()
         
-        wordsView.updateMessage(message!)
+        wordsTableView.updateMessage(message!)
         
         dismissKeyboard()
         
@@ -247,7 +283,6 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         }
         
         self.navigationItem.setHidesBackButton(false, animated:true)
-        self.hideTopTimer()
         
         isOvered = true
         
@@ -267,20 +302,30 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         }
     }
     
-    func hideTopTimer() {
+    func hideTopLayer() {
         timer.seconds = 0
         topTimerLabel.text = ""
+        //exampleLabel.hidden = true
+        topView.removeConstraint(exampleLeadingConstraint)
+        topView.addConstraint(NSLayoutConstraint(
+            item: exampleLabel, attribute: NSLayoutAttribute.CenterX,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: topView, attribute: NSLayoutAttribute.CenterX,
+            multiplier: 1, constant: 0))
         
-        topViewHeightContraint.constant = 0
+        //topViewHeightContraint.constant = 0
+        
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
     }
     
     func setViewOnlyStage() {
         startLabel.removeFromSuperview()
-        wordsView.updateMessage(message!)
+        wordsTableView.updateMessage(message!)
+        wordsTableView.hidden = false
+        exampleLabel.hidden = false
         
-        self.hideTopTimer()
+        self.hideTopLayer()
         
         isStarted = true
         isOvered = true
@@ -304,9 +349,9 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             
             if (timer.isRunningOfTime()) {
                 topTimerLabel.textColor = UIColor.redColor()
-
+                
                 UIView.animateWithDuration(0.5, delay: 0,
-                    options: [.Autoreverse, .Repeat], animations: {
+                    options: [.Autoreverse, .Repeat, .AllowUserInteraction], animations: {
                         self.topTimerLabel.alpha = 0.1
                     }, completion: nil)
             } else if (timer.isLastSecond()) {
@@ -325,10 +370,10 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     /*override func shouldAutorotate() -> Bool {
-        return false
+    return false
     }
     
     override func supportedInterfaceOrientations() -> Int {
-        return UIInterfaceOrientation.Portrait.rawValue
+    return UIInterfaceOrientation.Portrait.rawValue
     }*/
 }

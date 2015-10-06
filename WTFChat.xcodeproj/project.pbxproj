@@ -59,6 +59,7 @@
 		48F2F5451BA1CAB2005CCAC8 /* WordsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2F5441BA1CAB2005CCAC8 /* WordsField.swift */; };
 		48F2F5471BA1DA71005CCAC8 /* StringDistanceCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2F5461BA1DA71005CCAC8 /* StringDistanceCalculator.swift */; };
 		48F2F5491BA1FF5A005CCAC8 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2F5481BA1FF5A005CCAC8 /* Timer.swift */; };
+		48F44A621BC3F35900C1915F /* CipherPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F44A611BC3F35900C1915F /* CipherPickerViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +130,7 @@
 		48F2F5441BA1CAB2005CCAC8 /* WordsField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsField.swift; sourceTree = "<group>"; };
 		48F2F5461BA1DA71005CCAC8 /* StringDistanceCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringDistanceCalculator.swift; sourceTree = "<group>"; };
 		48F2F5481BA1FF5A005CCAC8 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		48F44A611BC3F35900C1915F /* CipherPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherPickerViewController.swift; sourceTree = "<group>"; };
 		85BDBDD3C303D2C8FE03A6D1 /* Pods-WTFChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WTFChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-WTFChat/Pods-WTFChat.release.xcconfig"; sourceTree = "<group>"; };
 		905623BA880926CAEDEC04AB /* libPods-WTFChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WTFChat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6B0BAA5F642DB9106564046 /* Pods-WTFChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WTFChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WTFChat/Pods-WTFChat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				48F2F5441BA1CAB2005CCAC8 /* WordsField.swift */,
 				48F2F5481BA1FF5A005CCAC8 /* Timer.swift */,
 				482E9ED11BC1825D00803CDE /* WTFAlert.swift */,
+				48F44A611BC3F35900C1915F /* CipherPickerViewController.swift */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				482AA4F71BC2E19100F101F8 /* LeftCutterCipher.swift in Sources */,
 				48F1373C1BB5C2CD00E5FFA7 /* RegistrationViewController.swift in Sources */,
 				4829B1801BBFE0C3009AC43F /* DecipherViewController.swift in Sources */,
+				48F44A621BC3F35900C1915F /* CipherPickerViewController.swift in Sources */,
 				48ECC8F61B9DA8E400A15B47 /* MessagesViewController.swift in Sources */,
 				4829B1821BBFE2EB009AC43F /* WordsViewController.swift in Sources */,
 				489666981B9B640400F769D1 /* AppDelegate.swift in Sources */,

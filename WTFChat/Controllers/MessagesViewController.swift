@@ -36,6 +36,9 @@ class MessagesViewController: JSQMessagesViewController {
     
     var avatars = Dictionary<String, JSQMessagesAvatarImage>()
     
+    //flag to show when we return from SendPreview. Used in viewDidAppear to finish message sending
+    var messageSended = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -59,6 +62,12 @@ class MessagesViewController: JSQMessagesViewController {
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.collectionView!.reloadData()
+    }
+    
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -71,13 +80,42 @@ class MessagesViewController: JSQMessagesViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         if (!talk.isSingleMode) {
             timer = NSTimer.scheduledTimerWithTimeInterval(TALKS_UPDATE_TIMER_INTERVAL, target: self,
                 selector: "updateMessages", userInfo: nil, repeats: true)
         }
+        
+        //send message
+        if (messageSended) {
+            messageSended = false
+            let text = self.inputToolbar?.contentView?.textView?.text
+            
+            let newMessage = messageCipher.createMessage(self.talk!, text: text!, cipherType: cipherType)
+            dismissKeyboard()
+            
+            if (!talk.isSingleMode) {
+                messageService.saveMessage(newMessage) { (message, error) -> Void in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        if let requestError = error {
+                            //TODO - show error to user
+                            print(requestError)
+                        } else {
+                            if let responseMessage = message {
+                                self.talk.messages[self.talk.messages.count - 1] = responseMessage
+                                self.updateView()
+                            }
+                        }
+                    })
+                }
+            } else {
+                self.updateView()
+            }
+            
+            self.finishSendingMessage()
+        }
     }
-    
+
     func updateMessages() {
         messageService.getUnreadMessagesByTalk(talk) { (messages, error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
@@ -241,6 +279,13 @@ class MessagesViewController: JSQMessagesViewController {
         }
     }*/
     
+    @IBAction func sendMessage(segue:UIStoryboardSegue) {
+        if let sendMessageController = segue.sourceViewController as? SendMessageViewController {
+            self.cipherType = sendMessageController.cipherType
+            messageSended = true
+        }
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDecipher" {
             let targetController = segue.destinationViewController as! DecipherViewController
@@ -255,16 +300,19 @@ class MessagesViewController: JSQMessagesViewController {
             let targetController = segue.destinationViewController as! SendMessageViewController
             
             let text = sender as! String
+            updateLastCipherType()
             
             targetController.text = text
             targetController.cipherType = self.cipherType
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.collectionView!.reloadData()
+    func updateLastCipherType() {
+        for message in talk.messages {
+            if (message.senderId() == self.senderId || talk.isSingleMode) {
+                self.cipherType = message.cipherType
+            }
+        }
     }
     
     func dismissKeyboard(){

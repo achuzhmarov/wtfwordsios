@@ -11,31 +11,19 @@ import Foundation
 class HalfWordRoundUpCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         let letterCount = word.getCharCount() / 2 + word.getCharCount() % 2 - 1
-        return word.getCapitalized()[0...letterCount] + word.additional
-    }
-    
-    func getDescription() -> String {
-        return "HalfWordRoundUpCipher"
+        return word.getCapitalized()[0...letterCount] + "..." + word.additional
     }
 }
 
 class HalfWordRoundDownCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         let letterCount = word.getCharCount() / 2 - 1
-        return word.getCapitalized()[0...letterCount] + word.additional
-    }
-    
-    func getDescription() -> String {
-        return "HalfWordRoundDownCipher"
+        return word.getCapitalized()[0...letterCount] + "..." + word.additional
     }
 }
 
 class FirstLetterCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
-        return word.getCapitalized()[0] + word.additional
-    }
-    
-    func getDescription() -> String {
-        return "FirstLetterCipher"
+        return word.getCapitalized()[0] + "..." + word.additional
     }
 }

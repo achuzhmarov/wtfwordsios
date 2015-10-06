@@ -17,12 +17,14 @@ class Word : NSObject {
     var wordType = WordType.New
     var additional = ""
     var cipheredText = ""
+    var wasCloseTry = false
     
     init (word: Word) {
         self.text = word.text
         self.additional = word.additional
         self.wordType = word.wordType
         self.cipheredText = word.cipheredText
+        self.wasCloseTry = word.wasCloseTry
     }
     
     init(text: String) {
@@ -74,6 +76,10 @@ class Word : NSObject {
     
     func getUpperCase() -> String {
         return text.uppercaseString
+    }
+    
+    func getLowerCase() -> String {
+        return text.lowercaseString
     }
     
     class func delimiterWord() -> Word {

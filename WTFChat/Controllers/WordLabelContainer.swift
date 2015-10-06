@@ -34,7 +34,11 @@ class WordLabelContainer {
         
         switch word.wordType {
         case .New:
-            label.layer.backgroundColor = CIPHERED_COLOR.CGColor
+            if (word.wasCloseTry) {
+                label.layer.backgroundColor = TRY_COLOR.CGColor
+            } else {
+                label.layer.backgroundColor = CIPHERED_COLOR.CGColor
+            }
         case .Ignore:
             label.layer.backgroundColor = UIColor.jsq_messageBubbleLightGrayColor().CGColor
             label.textColor = UIColor.blackColor()
@@ -89,7 +93,7 @@ class WordLabelContainer {
         UIView.animateWithDuration(0.4, delay: 0.3,
             options: [], animations: {
                 self.label.center.y += 3
-                self.label.layer.backgroundColor = CIPHERED_COLOR.CGColor
+                //self.label.layer.backgroundColor = CIPHERED_COLOR.CGColor
             }, completion: nil)
     }
     
@@ -103,7 +107,12 @@ class WordLabelContainer {
         UIView.animateWithDuration(0.4, delay: 0.3,
             options: [], animations: {
                 self.label.center.y += 3
-                self.label.layer.backgroundColor = CIPHERED_COLOR.CGColor
+                
+                if (self.word.wasCloseTry) {
+                    self.label.layer.backgroundColor = TRY_COLOR.CGColor
+                } else {
+                    self.label.layer.backgroundColor = CIPHERED_COLOR.CGColor
+                }
             }, completion: nil)
     }
     

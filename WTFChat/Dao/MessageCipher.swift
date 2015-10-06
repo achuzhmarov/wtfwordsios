@@ -43,7 +43,11 @@ class MessageCipher {
     func failed(message: Message) {
         for word in message.words! {
             if (word.wordType == WordType.New) {
-                word.wordType = WordType.Failed
+                if (word.wasCloseTry) {
+                    word.wordType = WordType.Success
+                } else {
+                    word.wordType = WordType.Failed
+                }
             }
         }
         
@@ -51,6 +55,32 @@ class MessageCipher {
     }
     
     func createMessage(talk: Talk, text: String, cipherType: CipherType) -> Message {
+        let generatedMessage = createMessage(text, cipherType: cipherType)
+        
+        var author: String
+        
+        if (talk.isSingleMode) {
+            author = talk.users[0]
+        } else {
+            author = userService.getCurrentUser().login
+        }
+        
+        let newMessage = Message(id: "",
+            talkId: talk.id,
+            author: author,
+            words: generatedMessage.words,
+            cipherType: cipherType
+        )
+        
+        newMessage.cipherWords()
+        checkDeciphered(newMessage)
+        
+        talk.appendMessage(newMessage)
+        
+        return newMessage
+    }
+    
+    func createMessage(text: String, cipherType: CipherType) -> Message {
         let strings = text.characters.split {$0 == "\n"}.map { String($0) }
         
         var firstSentence = true
@@ -79,26 +109,15 @@ class MessageCipher {
             }
         }
         
-        var author: String
-        
-        if (talk.isSingleMode) {
-            author = talk.users[0]
-        } else {
-            author = userService.getCurrentUser().login
-        }
-        
         let newMessage = Message(id: "",
-            talkId: talk.id,
-            author: author,
+            talkId: "",
+            author: "",
             words: words,
             cipherType: cipherType
         )
         
         newMessage.cipherWords()
-        
         checkDeciphered(newMessage)
-        
-        talk.appendMessage(newMessage)
         
         return newMessage
     }

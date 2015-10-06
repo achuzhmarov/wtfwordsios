@@ -67,6 +67,11 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
+    func setNewMessage(message: Message) {
+        self.message = message
+        createView()
+    }
+    
     func updateMessage(message: Message) {
         updateMessage(message, tries: nil)
     }
@@ -78,6 +83,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
             if (needUpdate()) {
                 updateView()
                 audioHelper.playSound("success")
+                animateWarning(tries)
             } else {
                 animateError(tries)
             }
@@ -103,6 +109,18 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         return false
     }
     
+    func animateWarning(tries: [String]?) {
+        for wordContainer in rows.getAllWordContainers() {
+            if (wordContainer.word.wordType == WordType.New) {
+                if (wasCloseTry(wordContainer.word, tries: tries)) {
+                    wordContainer.animateWarning()
+                    wordContainer.word.wasCloseTry = true
+                    wordContainer.originalWord.wasCloseTry = true
+                }
+            }
+        }
+    }
+    
     func animateError(tries: [String]?) {
         var wasWarning = false
         var wasError = false
@@ -111,6 +129,8 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
             if (wordContainer.word.wordType == WordType.New) {
                 if (wasCloseTry(wordContainer.word, tries: tries)) {
                     wordContainer.animateWarning()
+                    wordContainer.word.wasCloseTry = true
+                    wordContainer.originalWord.wasCloseTry = true
                     wasWarning = true
                 } else {
                     wordContainer.animateError()
@@ -139,9 +159,11 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     }
     
     func createView() {
+        rows = WordsField()
         updateViewHelper(rows)
-        
         rows.showContainers()
+        
+        self.reloadData()
     }
     
     func updateView() {
