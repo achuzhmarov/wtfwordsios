@@ -12,11 +12,9 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     @IBOutlet weak var topTimerLabel: UILabel!
     
     @IBOutlet weak var startLabel: UILabel!
-    @IBOutlet weak var exampleLabel: RoundedLabel!
     @IBOutlet weak var topView: UIView!
     
     @IBOutlet weak var wordsTableView: WordsViewController!
-    @IBOutlet weak var exampleLeadingConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var guessTextField: UITextField!
@@ -34,8 +32,12 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     var isSingleMode = false
     var suggestionsForSingleMode = 0
     
-    let secondsPerWord = 20
-    let suggestionsToWordsForSingleMode = 3
+    //for viewOnly mode
+    var useCipherText = false
+    
+    let SECONDS_PER_MODE = 20
+    let HARD_MODE_MULTIPLIER = 2
+    let SUGGESTIONS_SINGLE_MODE = 3
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +58,6 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
         
-        setExampleLabel()
-        
         if (message.deciphered) {
             setViewOnlyStage()
         } else {
@@ -68,7 +68,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         }
         
         if (self.isSingleMode) {
-            suggestionsForSingleMode = (message.countNew() - 1) / suggestionsToWordsForSingleMode + 1
+            suggestionsForSingleMode = (message.countNew() - 1) / SUGGESTIONS_SINGLE_MODE + 1
         }
         
         self.wordsTableView.delegate = self.wordsTableView
@@ -215,13 +215,25 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     func start() {
+        if (isOvered) {
+            useCipherText = !useCipherText
+            self.wordsTableView.setNewMessage(message, useCipherText: useCipherText)
+        }
+        
         if (isStarted) {
             return
         }
         
         self.navigationItem.setHidesBackButton(true, animated:true)
         
-        timer.seconds = message!.countNew() * secondsPerWord
+        timer.seconds = message!.countNew() * SECONDS_PER_MODE
+        
+        let (_, mode) = CipherFactory.getCategoryAndMode(message!.cipherType)
+        
+        if (mode == CipherMode.Hard) {
+            timer.seconds = timer.seconds * HARD_MODE_MULTIPLIER
+        }
+        
         topTimerLabel.text = timer.getTimeString()
         
         NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
@@ -232,7 +244,6 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         bottomView.hidden = false
         topTimerLabel.hidden = false
         wordsTableView.hidden = false
-        exampleLabel.hidden = false
         
         startLabel.removeFromSuperview()
         
@@ -242,25 +253,6 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         guessTextField.becomeFirstResponder()
 
         isStarted = true
-    }
-    
-    func setExampleLabel() {
-        exampleLabel.text = CipherFactory.cipherText(
-            message.cipherType,
-            word: EXAMPLE_CIPHER_WORD
-        )
-        
-        exampleLabel.textColor = UIColor.whiteColor()
-        exampleLabel.font = UIFont(name: exampleLabel.font.fontName, size: 12)
-        exampleLabel.layer.backgroundColor = CIPHERED_COLOR.CGColor
-        
-        //to make cornerRadius work
-        exampleLabel.layer.masksToBounds = true;
-        exampleLabel.layer.cornerRadius = 8.0;
-        
-        exampleLabel.translatesAutoresizingMaskIntoConstraints = false
-        exampleLabel.userInteractionEnabled = true
-        exampleLabel.sizeToFit()
     }
     
     func gameOver() {
@@ -305,15 +297,8 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     func hideTopLayer() {
         timer.seconds = 0
         topTimerLabel.text = ""
-        //exampleLabel.hidden = true
-        topView.removeConstraint(exampleLeadingConstraint)
-        topView.addConstraint(NSLayoutConstraint(
-            item: exampleLabel, attribute: NSLayoutAttribute.CenterX,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: topView, attribute: NSLayoutAttribute.CenterX,
-            multiplier: 1, constant: 0))
         
-        //topViewHeightContraint.constant = 0
+        topViewHeightContraint.constant = 0
         
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
@@ -323,7 +308,6 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         startLabel.removeFromSuperview()
         wordsTableView.updateMessage(message!)
         wordsTableView.hidden = false
-        exampleLabel.hidden = false
         
         self.hideTopLayer()
         

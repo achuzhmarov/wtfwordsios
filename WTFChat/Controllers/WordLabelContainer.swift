@@ -12,23 +12,31 @@ class WordLabelContainer {
     var label = RoundedLabel()
     
     var originalWord: Word
-    
+
     var word: Word {
         didSet {
             updateLabel()
         }
     }
     
+    var useCipherText = false
+    
     var wasAddedToCell = false
     
-    init (word: Word) {
+    init (word: Word, useCipherText: Bool = false) {
         self.originalWord = word
         self.word = Word(word: word)
+        self.useCipherText = useCipherText
         updateLabel()
     }
     
     func updateLabel() {
-        label.text = word.getTextForDecipher()
+        if (useCipherText) {
+            label.text = word.getCipheredText()
+        } else {
+            label.text = word.getTextForDecipher()
+        }
+        
         label.textColor = UIColor.whiteColor()
         label.font = UIFont(name: label.font.fontName, size: 17)
         

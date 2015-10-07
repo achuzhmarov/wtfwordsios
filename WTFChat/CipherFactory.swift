@@ -17,9 +17,9 @@ enum CipherType : Int {
     case HalfWordRoundDown
     case FirstLetter
 
-    case ExceptFirstLetterFromEnd
+    case ExceptTwoLettersFromEnd
     case HalfWordRoundDownFromEnd
-    case HalfWordRoundUpFromEnd
+    case HalfWordPlusOneFromEnd
     
     case ShuffleExceptFirstLetter
     case ShuffleFullWord
@@ -69,9 +69,9 @@ class CipherFactory {
         .HalfWordRoundUp: HalfWordRoundUpCipher(),
         .HalfWordRoundDown: HalfWordRoundDownCipher(),
         .FirstLetter: FirstLetterCipher(),
-        .ExceptFirstLetterFromEnd: ExceptFirstLetterFromEndCipher(),
+        .ExceptTwoLettersFromEnd: ExceptTwoLettersFromEndCipher(),
         .HalfWordRoundDownFromEnd: HalfWordRoundDownFromEndCipher(),
-        .HalfWordRoundUpFromEnd: HalfWordRoundUpFromEndCipher(),
+        .HalfWordPlusOneFromEnd: HalfWordPlusOneFromEndCipher(),
         .ShuffleExceptFirstLetter: ShuffleExceptFirstLetterCipher(),
         .ShuffleFullWord: ShuffleFullWordCipher(),
         .ShuffleWithExtraLetter: ShuffleWithExtraLetterCipher()
@@ -84,9 +84,9 @@ class CipherFactory {
             .Hard: .FirstLetter
         ],
         .LeftCutter: [
-            .Easy: .ExceptFirstLetterFromEnd,
+            .Easy: .ExceptTwoLettersFromEnd,
             .Normal: .HalfWordRoundDownFromEnd,
-            .Hard: .HalfWordRoundUpFromEnd
+            .Hard: .HalfWordPlusOneFromEnd
         ],
         .Shuffle: [
             .Easy: .ShuffleExceptFirstLetter,

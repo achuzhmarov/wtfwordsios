@@ -58,6 +58,10 @@ class Word : NSObject {
         return self.text + self.additional
     }
     
+    func getCipheredText() -> String {
+        return cipheredText
+    }
+    
     func getTextForDecipher() -> String {
         if (self.wordType == WordType.New) {
             return cipheredText

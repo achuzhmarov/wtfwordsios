@@ -18,7 +18,11 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     var rows = WordsField()
     var tempRows = WordsField()
     
+    //for use in viewOnly
+    var useCipherText = false
+    
     var suggestionComputer: SuggestionComputer?
+    var isFirstUpdate = true
     
     @objc func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -67,9 +71,11 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-    func setNewMessage(message: Message) {
+    func setNewMessage(message: Message, useCipherText: Bool = false) {
         self.message = message
+        self.useCipherText = useCipherText
         createView()
+        isFirstUpdate = false
     }
     
     func updateMessage(message: Message) {
@@ -94,6 +100,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         }
         
         self.reloadData()
+        isFirstUpdate = false
     }
     
     func needUpdate() -> Bool {
@@ -216,7 +223,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     }
     
     func createLabelForWord(word: Word) -> WordLabelContainer {
-        let wordContainer = WordLabelContainer(word: word)
+        let wordContainer = WordLabelContainer(word: word, useCipherText: useCipherText)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "useSuggestion:")
         wordContainer.label.addGestureRecognizer(tap)
@@ -242,6 +249,10 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     }
     
     func getMaxWidth() -> CGFloat {
-        return self.bounds.width - CGFloat(16)
+        if (isFirstUpdate) {
+            return self.bounds.width - CGFloat(16)
+        } else {
+            return self.bounds.width
+        }
     }
 }

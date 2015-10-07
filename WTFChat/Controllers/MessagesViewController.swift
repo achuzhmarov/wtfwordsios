@@ -56,6 +56,7 @@ class MessagesViewController: JSQMessagesViewController {
                     } else {
                         self.talk.messages = messages!
                         self.updateView()
+                        self.finishSendingMessageAnimated(false)
                     }
                 })
             }

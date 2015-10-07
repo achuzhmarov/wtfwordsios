@@ -15,8 +15,6 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
     
     @IBOutlet weak var cipherPicker: CipherPickerViewController!
     
-    @IBOutlet weak var exampleLabel: RoundedLabel!
-    
     var text = ""
     var cipherType = CipherType.HalfWordRoundDown
     
@@ -36,8 +34,6 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
         messageWordsView.dataSource = messageWordsView
         messageWordsView.delegate = messageWordsView
         messageWordsView.setNewMessage(message)
-        
-        setExampleLabel()
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,25 +47,5 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
         let message = messageCipher.createMessage(text, cipherType: cipherType)
         
         messageWordsView.setNewMessage(message)
-        setExampleLabel()
-    }
-    
-    func setExampleLabel() {
-        exampleLabel.text = CipherFactory.cipherText(
-            self.cipherType,
-            word: EXAMPLE_CIPHER_WORD
-        )
-        
-        exampleLabel.textColor = UIColor.whiteColor()
-        exampleLabel.font = UIFont(name: exampleLabel.font.fontName, size: 12)
-        exampleLabel.layer.backgroundColor = CIPHERED_COLOR.CGColor
-        
-        //to make cornerRadius work
-        exampleLabel.layer.masksToBounds = true;
-        exampleLabel.layer.cornerRadius = 8.0;
-        
-        exampleLabel.translatesAutoresizingMaskIntoConstraints = false
-        exampleLabel.userInteractionEnabled = true
-        exampleLabel.sizeToFit()
     }
 }

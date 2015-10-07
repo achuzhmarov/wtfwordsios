@@ -8,10 +8,12 @@
 
 import Foundation
 
-class ExceptFirstLetterFromEndCipher: Cipher {
+class ExceptTwoLettersFromEndCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         let wordLength = word.getCharCount() - 1
-        return "..." + word.getCapitalized()[1...wordLength] + word.additional
+        let letterCount = word.getCharCount() / 5 + 1
+        
+        return "..." + word.getLowerCase()[letterCount...wordLength] + word.additional
     }
 }
 
@@ -19,14 +21,27 @@ class HalfWordRoundDownFromEndCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         let wordLength = word.getCharCount() - 1
         let letterCount = word.getCharCount() / 2
-        return "..." + word.getCapitalized()[letterCount...wordLength] + word.additional
+        return "..." + word.getLowerCase()[letterCount...wordLength] + word.additional
     }
 }
 
-class HalfWordRoundUpFromEndCipher: Cipher {
+class HalfWordPlusOneFromEndCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         let wordLength = word.getCharCount() - 1
-        let letterCount = word.getCharCount() / 2 + word.getCharCount() % 2
-        return "..." + word.getCapitalized()[letterCount...wordLength] + word.additional
+        var letterCount = word.getCharCount() / 2 //+ word.getCharCount() % 2
+        
+        if (wordLength > letterCount) {
+            letterCount += 1
+        }
+        
+        return "..." + word.getLowerCase()[letterCount...wordLength] + word.additional
     }
 }
+
+/*class OneQuaterWordFromEndCipher: Cipher {
+    func getTextForDecipher(word: Word) -> String {
+        let wordLength = word.getCharCount() - 1
+        let letterCount = (word.getCharCount() * 3) / 4
+        return "..." + word.getLowerCase()[letterCount...wordLength] + word.additional
+    }
+}*/

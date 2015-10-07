@@ -169,7 +169,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="37" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bSn-oB-tla" customClass="WordsViewController" customModule="WTFChat" customModuleProvider="target">
-                                <rect key="frame" x="16" y="103" width="572" height="388"/>
+                                <rect key="frame" x="16" y="72" width="572" height="419"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WordsRowCell" id="khY-e4-cD4">
@@ -188,27 +188,16 @@
                                     <constraint firstAttribute="height" constant="81" id="cex-UZ-Rn5"/>
                                 </constraints>
                             </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Example" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FT5-qX-Afj" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
-                                <rect key="frame" x="268" y="72" width="65" height="23"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="23" id="q3i-Le-U2D"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="bSn-oB-tla" firstAttribute="leading" secondItem="FNy-hO-6ac" secondAttribute="leadingMargin" constant="-4" id="52L-Ar-bmg"/>
                             <constraint firstItem="63E-kw-JJE" firstAttribute="top" secondItem="URP-ue-1VC" secondAttribute="bottom" constant="20" id="7TP-qr-gP1"/>
-                            <constraint firstItem="bSn-oB-tla" firstAttribute="top" secondItem="FT5-qX-Afj" secondAttribute="bottom" constant="8" id="CYK-mV-dkI"/>
-                            <constraint firstItem="FT5-qX-Afj" firstAttribute="top" secondItem="9um-Jo-hIU" secondAttribute="bottom" constant="8" id="HTP-GD-3hz"/>
                             <constraint firstItem="bSn-oB-tla" firstAttribute="trailing" secondItem="FNy-hO-6ac" secondAttribute="trailingMargin" constant="8" id="K1K-LE-P9Y"/>
                             <constraint firstItem="URP-ue-1VC" firstAttribute="leading" secondItem="FNy-hO-6ac" secondAttribute="leadingMargin" id="SI9-X0-icx"/>
                             <constraint firstItem="URP-ue-1VC" firstAttribute="top" secondItem="bSn-oB-tla" secondAttribute="bottom" constant="8" id="UGO-z3-Ck4"/>
-                            <constraint firstItem="FT5-qX-Afj" firstAttribute="centerX" secondItem="FNy-hO-6ac" secondAttribute="centerX" id="gS6-78-woM"/>
                             <constraint firstItem="URP-ue-1VC" firstAttribute="trailing" secondItem="FNy-hO-6ac" secondAttribute="trailingMargin" id="hq3-ln-mls"/>
+                            <constraint firstItem="bSn-oB-tla" firstAttribute="top" secondItem="9um-Jo-hIU" secondAttribute="bottom" constant="8" id="oxZ-lS-P5j"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Preview" id="18t-tn-tUg">
@@ -220,7 +209,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cipherPicker" destination="URP-ue-1VC" id="jTu-Kz-NQz"/>
-                        <outlet property="exampleLabel" destination="FT5-qX-Afj" id="aUJ-3I-Cwo"/>
                         <outlet property="messageWordsView" destination="bSn-oB-tla" id="9uQ-Hu-N6B"/>
                     </connections>
                 </viewController>
@@ -488,20 +476,12 @@
                                             <outletCollection property="gestureRecognizers" destination="Es1-rX-J3l" appends="YES" id="0RL-YU-BPo"/>
                                         </connections>
                                     </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Example" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y0D-3u-ipg" userLabel="Example Label" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="-4" y="6" width="65" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="1oZ-Fc-IoR" secondAttribute="centerX" id="8Jm-ym-5rM"/>
                                     <constraint firstAttribute="height" constant="34" id="FNu-Lq-gkG"/>
-                                    <constraint firstItem="y0D-3u-ipg" firstAttribute="centerY" secondItem="yfX-Gd-0yC" secondAttribute="centerY" id="VLI-bR-zOp"/>
                                     <constraint firstAttribute="centerY" secondItem="1oZ-Fc-IoR" secondAttribute="centerY" id="tXA-rd-zHD"/>
-                                    <constraint firstItem="y0D-3u-ipg" firstAttribute="leading" secondItem="yfX-Gd-0yC" secondAttribute="leading" constant="-4" id="ybx-PO-PTM"/>
                                 </constraints>
                             </view>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="37" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aUL-Mo-gkS" customClass="WordsViewController" customModule="WTFChat" customModuleProvider="target">
@@ -587,8 +567,6 @@
                     <connections>
                         <outlet property="bottomView" destination="pKN-KW-DTL" id="vJH-hh-kAC"/>
                         <outlet property="bottomViewConstraint" destination="qcJ-Ka-FK3" id="IOL-d1-kcY"/>
-                        <outlet property="exampleLabel" destination="y0D-3u-ipg" id="Q0Q-7P-H9H"/>
-                        <outlet property="exampleLeadingConstraint" destination="ybx-PO-PTM" id="LdX-5S-mGf"/>
                         <outlet property="guessTextField" destination="68o-gh-skU" id="CwF-dm-eeU"/>
                         <outlet property="startLabel" destination="9u0-NL-WUc" id="7ao-LD-TYs"/>
                         <outlet property="topTimerLabel" destination="1oZ-Fc-IoR" id="Icj-II-PSG"/>
