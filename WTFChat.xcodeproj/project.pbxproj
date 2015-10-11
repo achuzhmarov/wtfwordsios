@@ -658,7 +658,7 @@
 				INFOPLIST_FILE = WTFChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.artem.wtfchat.alpha;
+				PRODUCT_BUNDLE_IDENTIFIER = wtf.wtfchat.wtfchatdev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8e2f384c-aed8-4bfe-ae63-821c958a8eb5";
 				SWIFT_OBJC_BRIDGING_HEADER = "WTFChat/WTFChat-Bridging-Header.h";
@@ -678,7 +678,7 @@
 				INFOPLIST_FILE = WTFChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.artem.wtfchat.alpha;
+				PRODUCT_BUNDLE_IDENTIFIER = wtf.wtfchat.wtfchatdev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8e2f384c-aed8-4bfe-ae63-821c958a8eb5";
 				SWIFT_OBJC_BRIDGING_HEADER = "WTFChat/WTFChat-Bridging-Header.h";

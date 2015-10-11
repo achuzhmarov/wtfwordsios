@@ -15,7 +15,7 @@ class RoundedLabel: UILabel {
         return bounds.width // + edgeInsets.left + edgeInsets.right
     }
     
-    let edgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 7, right: 10)
+    var edgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 7, right: 10)
     
     override func textRectForBounds(bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
         var rect = super.textRectForBounds(bounds, limitedToNumberOfLines: numberOfLines)
@@ -39,5 +39,9 @@ class RoundedLabel: UILabel {
     override func drawTextInRect(rect: CGRect) {
         let textRect = UIEdgeInsetsInsetRect(rect, edgeInsets)
         super.drawTextInRect(textRect)
+    }
+    
+    func setMargins(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
+        edgeInsets = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
     }
 }

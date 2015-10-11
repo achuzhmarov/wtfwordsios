@@ -8,9 +8,14 @@
 
 import Foundation
 
+enum DecipherStatus: Int {
+    case No = 1, Success, Failed
+}
+
 class Talk : BaseEntity {
     var users = [String]()
     var hasUnread: Bool
+    var decipherStatus: DecipherStatus
     var cipheredNum: Int
     
     var messages = [Message]() {
@@ -25,6 +30,7 @@ class Talk : BaseEntity {
     override init(id: String) {
         self.hasUnread = false
         self.cipheredNum = 0
+        self.decipherStatus = DecipherStatus.No
         
         super.init(id: id)
     }
@@ -32,15 +38,18 @@ class Talk : BaseEntity {
     init(id: String, hasUnread: Bool, cipheredNum: Int) {
         self.hasUnread = hasUnread
         self.cipheredNum = cipheredNum
+        self.decipherStatus = DecipherStatus.No
         
         super.init(id: id)
     }
     
-    init(id: String, hasUnread: Bool, cipheredNum: Int, lastMessage: Message?, users: [String]) {
+    init(id: String, hasUnread: Bool, cipheredNum: Int, lastMessage: Message?, users: [String], decipherStatus: DecipherStatus) {
+        
         self.hasUnread = hasUnread
         self.cipheredNum = cipheredNum
         self.lastMessage = lastMessage
         self.users = users
+        self.decipherStatus = decipherStatus
         
         super.init(id: id)
     }
@@ -82,6 +91,7 @@ class Talk : BaseEntity {
         var cipheredNum: Int
         var lastMessage: Message?
         var users = [String]()
+        var decipherStatus: DecipherStatus
         
         if let value = json["id"].string {
             id = value
@@ -107,6 +117,17 @@ class Talk : BaseEntity {
             throw json["has_unread"].error!
         }
         
+        if let value = json["has_deciphered"].int {
+            if (value == 0) {
+                decipherStatus = DecipherStatus.No
+            } else {
+                decipherStatus = DecipherStatus(rawValue: value)!
+            }
+        } else {
+            decipherStatus = DecipherStatus.No
+            //throw json["has_deciphered"].error!
+        }
+        
         if let value = json["ciphered_num"].int {
             cipheredNum = value
         } else {
@@ -122,7 +143,8 @@ class Talk : BaseEntity {
             hasUnread: hasUnread,
             cipheredNum: cipheredNum,
             lastMessage: lastMessage,
-            users: users
+            users: users,
+            decipherStatus: decipherStatus
         )
     }
 }

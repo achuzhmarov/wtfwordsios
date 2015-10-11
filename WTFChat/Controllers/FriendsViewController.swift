@@ -10,6 +10,15 @@ import UIKit
 
 let TALKS_UPDATE_TIMER_INTERVAL = 5.0
 
+//let BACKGROUND_COLOR = UIColor(netHex:0xEEEEEE)
+//let HIGHLIGHT_BACKGROUND_COLOR = UIColor(netHex:0xFFFFFF)
+
+let SUCCESS_COLOR = UIColor(netHex:0x3EC303)
+let CIPHERED_COLOR = UIColor(netHex:0x0092D7)
+let FAILED_COLOR = UIColor(netHex:0xF26964)
+let TRY_COLOR = UIColor(netHex:0xEE8D09)
+let FONT_COLOR = UIColor.whiteColor()
+
 class FriendsViewController: UITableViewController {
     var timer: NSTimer?
     
@@ -17,6 +26,8 @@ class FriendsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //self.view.backgroundColor = BACKGROUND_COLOR
 
         let singleModeTalk = Talk(id: "0")
         singleModeTalk.isSingleMode = true
@@ -41,7 +52,7 @@ class FriendsViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.tableView.reloadData()
+        self.updateView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,7 +72,7 @@ class FriendsViewController: UITableViewController {
                             self.updateOrCreateTalkInArray(talk)
                         }
                             
-                        self.tableView.reloadData()
+                        self.updateView()
                     }
                 }
             })
@@ -77,6 +88,10 @@ class FriendsViewController: UITableViewController {
         }
         
         self.talks.append(talk)
+    }
+    
+    func updateView() {
+        self.tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -94,21 +109,7 @@ class FriendsViewController: UITableViewController {
 
         let talk = talks[indexPath.row]
         
-        cell.friendName.text = talk.getFriendLogin().capitalizedString
-        
-        if let message = talk.lastMessage {
-            let formatter = NSDateFormatter()
-            formatter.dateFormat = "dd.MM.yyyy HH:mm"
-            
-            cell.lastMessageTime.text = formatter.stringFromDate(message.timestamp)
-            cell.lastMessage.text = message.text()
-        } else {
-            cell.lastMessage.text = ""
-            cell.lastMessageTime.text = ""
-        }
-
-        //TODO - add images
-        //cell.friendImage =
+        cell.updateTalk(talk)
         
         return cell
     }
@@ -128,7 +129,7 @@ class FriendsViewController: UITableViewController {
     @IBAction func addFriend(segue:UIStoryboardSegue) {
         if let addFriendController = segue.sourceViewController as? AddFriendViewController {
             self.talks.append(addFriendController.createdTalk!)
-            self.tableView.reloadData()
+            self.updateView()
         }
     }
 }

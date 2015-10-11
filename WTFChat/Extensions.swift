@@ -20,6 +20,21 @@ extension NSDate {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
         return dateFormatter.stringFromDate(date)
     }
+    
+    func getYear() -> Int {
+        let calendar = NSCalendar.currentCalendar()
+        return calendar.components(.Year, fromDate: self).year
+    }
+    
+    func getMonth() -> Int {
+        let calendar = NSCalendar.currentCalendar()
+        return calendar.components(.Month, fromDate: self).month
+    }
+    
+    func getDay() -> Int {
+        let calendar = NSCalendar.currentCalendar()
+        return calendar.components(.Day, fromDate: self).day
+    }
 }
 
 extension NSError {

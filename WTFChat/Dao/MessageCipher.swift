@@ -39,6 +39,7 @@ class MessageCipher {
     private func checkDeciphered(message: Message) {
         if (message.countNew() == 0) {
             message.deciphered = true
+            message.lastUpdate = NSDate()
         }
     }
     

@@ -12,6 +12,7 @@ class Message : BaseEntity, JSQMessageData {
     let timestamp: NSDate
     let talkId: String
     
+    var lastUpdate: NSDate
     var author: String
     var words: [Word]?
     var deciphered: Bool
@@ -20,6 +21,7 @@ class Message : BaseEntity, JSQMessageData {
     init(id: String, talkId: String, author: String) {
         
         self.timestamp = NSDate()
+        self.lastUpdate = self.timestamp
         self.talkId = talkId
         self.author = author
         self.deciphered = false
@@ -30,6 +32,7 @@ class Message : BaseEntity, JSQMessageData {
     init(id: String, talkId: String, author: String, words: [Word]?, cipherType: CipherType) {
         
         self.timestamp = NSDate()
+        self.lastUpdate = self.timestamp
         self.talkId = talkId
         self.author = author
         self.deciphered = false
@@ -43,6 +46,7 @@ class Message : BaseEntity, JSQMessageData {
     init(id: String, talkId: String, author: String, words: [Word]?, deciphered: Bool) {
         
         self.timestamp = NSDate()
+        self.lastUpdate = self.timestamp
         self.talkId = talkId
         self.author = author
         self.deciphered = deciphered
@@ -53,6 +57,7 @@ class Message : BaseEntity, JSQMessageData {
     
     init(id: String, timestamp: NSDate, talkId: String, author: String, deciphered: Bool) {
         self.timestamp = timestamp
+        self.lastUpdate = self.timestamp
         self.talkId = talkId
         self.author = author
         self.deciphered = deciphered
@@ -60,9 +65,10 @@ class Message : BaseEntity, JSQMessageData {
         super.init(id: id)
     }
     
-    init(id: String, talkId: String, author: String, words: [Word]?, deciphered: Bool, cipherType: CipherType, timestamp: NSDate) {
+    init(id: String, talkId: String, author: String, words: [Word]?, deciphered: Bool, cipherType: CipherType, timestamp: NSDate, lastUpdate: NSDate) {
         
         self.timestamp = timestamp
+        self.lastUpdate = lastUpdate
         self.talkId = talkId
         self.author = author
         self.deciphered = deciphered
@@ -212,6 +218,7 @@ class Message : BaseEntity, JSQMessageData {
             "deciphered": self.deciphered,
             "cipher_type": self.cipherType.rawValue,
             "timestamp": NSDate.parseStringJSONFromDate(self.timestamp)!,
+            "last_update": NSDate.parseStringJSONFromDate(self.lastUpdate)!,
         ]
         
         json["words"].arrayObject = getWordsJson()
@@ -248,6 +255,7 @@ class Message : BaseEntity, JSQMessageData {
         var deciphered: Bool
         var cipherType: CipherType
         var timestamp: NSDate
+        var lastUpdate: NSDate
         
         if let value = json["id"].string {
             id = value
@@ -283,10 +291,22 @@ class Message : BaseEntity, JSQMessageData {
             if let parsedTimestamp = NSDate.parseDateFromStringJSON(value) {
                 timestamp = parsedTimestamp
             } else {
-                throw NSError(code: 1, message: "Could not parse date")
+                throw NSError(code: 1, message: "Could not parse timestamp")
             }
         } else {
             throw json["timestamp"].error!
+        }
+        
+        if let value = json["last_update"].string {
+            if let parsedTimestamp = NSDate.parseDateFromStringJSON(value) {
+                lastUpdate = parsedTimestamp
+            } else {
+                lastUpdate = timestamp
+                //throw NSError(code: 1, message: "Could not parse lastUpdate")
+            }
+        } else {
+            lastUpdate = timestamp
+            //throw json["last_update"].error!
         }
         
         if let value = json["words"].array {
@@ -304,7 +324,8 @@ class Message : BaseEntity, JSQMessageData {
             words: words,
             deciphered: deciphered,
             cipherType: cipherType,
-            timestamp: timestamp
+            timestamp: timestamp,
+            lastUpdate: lastUpdate
         )
     }
 }

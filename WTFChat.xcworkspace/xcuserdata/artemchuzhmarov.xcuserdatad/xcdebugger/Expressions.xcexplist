@@ -37,6 +37,14 @@
          contextName = "WordsViewController.addWord(Word, targetRows : WordsField, isNewRow : Bool) -&gt; ():WordsViewController.swift">
       </ContextState>
       <ContextState
+         contextName = "FriendCell.updateMessage(Message) -&gt; ():FriendCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "message.timestamp.getMonth()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "MessageService.saveMessage(Message, completion : (message : Message?, error : NSError?) -&gt; ()) -&gt; ():MessageService.swift">
       </ContextState>
       <ContextState

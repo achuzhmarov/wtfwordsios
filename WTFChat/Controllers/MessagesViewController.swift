@@ -10,13 +10,6 @@ import UIKit
 
 let MESSAGES_UPDATE_TIMER_INTERVAL = 5.0
 
-let SUCCESS_COLOR = UIColor(netHex:0x3EC303)
-let CIPHERED_COLOR = UIColor(netHex:0x0092D7)
-let FAILED_COLOR = UIColor(netHex:0xF26964)
-let TRY_COLOR = UIColor(netHex:0xEE8D09)
-//let TRY_COLOR = UIColor(netHex:0xFFDD33)
-let FONT_COLOR = UIColor.whiteColor()
-
 class MessagesViewController: JSQMessagesViewController {
     var timer: NSTimer?
     
@@ -55,6 +48,7 @@ class MessagesViewController: JSQMessagesViewController {
                         print(requestError)
                     } else {
                         self.talk.messages = messages!
+                        self.talk.decipherStatus = DecipherStatus.No
                         self.updateView()
                         self.finishSendingMessageAnimated(false)
                     }
@@ -245,42 +239,7 @@ class MessagesViewController: JSQMessagesViewController {
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
         
         performSegueWithIdentifier("showMessagePreview", sender: text)
-        
-        /*let newMessage = messageCipher.createMessage(self.talk!, text: text, cipherType: cipherType)
-        dismissKeyboard()
-        
-        if (!talk.isSingleMode) {
-            messageService.saveMessage(newMessage) { (message, error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if let requestError = error {
-                        //TODO - show error to user
-                        print(requestError)
-                    } else {
-                        if let responseMessage = message {
-                            self.talk.messages[self.talk.messages.count - 1] = responseMessage
-                            self.updateView()
-                        }
-                    }
-                })
-            }
-        } else {
-            self.updateView()
-        }
-        
-        self.finishSendingMessage()*/
     }
-    
-    /*override func didPressAccessoryButton(sender: UIButton!) {
-        let newCipherType = CipherFactory.getNextCipherType(cipherType)
-        
-        WTFTwoButtonsAlert.show("Change cipher",
-            message: "Are you sure you want to change cipher type to " + newCipherType.description + "?",
-            firstButtonTitle: "Ok",
-            secondButtonTitle: "Cancel",
-            viewPresenter: self) { () -> Void in
-                self.cipherType = newCipherType
-        }
-    }*/
     
     @IBAction func sendMessage(segue:UIStoryboardSegue) {
         if let sendMessageController = segue.sourceViewController as? SendMessageViewController {
@@ -296,6 +255,7 @@ class MessagesViewController: JSQMessagesViewController {
             let message = sender as! Message
             
             targetController.message = message
+            targetController.talk = talk
             
             //single mode
             targetController.isSingleMode = talk.isSingleMode
@@ -338,22 +298,7 @@ class MessagesViewController: JSQMessagesViewController {
         }*/
         
         // At some point, we failed at getting the image (probably broken URL), so default to avatarColor
-        return setupAvatarColor(name, incoming: incoming)
-    }
-    
-    func setupAvatarColor(name: String, incoming: Bool) -> JSQMessagesAvatarImage {
         let diameter = incoming ? UInt(collectionView!.collectionViewLayout.incomingAvatarViewSize.width) : UInt(collectionView!.collectionViewLayout.outgoingAvatarViewSize.width)
-        
-        let rgbValue = name.hash
-        let r = CGFloat(Float((rgbValue & 0xFF0000) >> 16)/255.0)
-        let g = CGFloat(Float((rgbValue & 0xFF00) >> 8)/255.0)
-        let b = CGFloat(Float(rgbValue & 0xFF)/255.0)
-        let color = UIColor(red: r, green: g, blue: b, alpha: 0.5)
-        
-        let nameLength = name.characters.count
-        
-        let initials : String? = name[0...min(2, nameLength)].capitalizedString
-        
-        return JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(initials, backgroundColor: color, textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(CGFloat(13)), diameter: diameter)
+        return userService.getAvatarImage(name, diameter: diameter)
     }
 }

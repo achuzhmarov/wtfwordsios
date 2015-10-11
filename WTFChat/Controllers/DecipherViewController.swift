@@ -24,6 +24,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     
     @IBOutlet weak var topViewHeightContraint: NSLayoutConstraint!
     
+    var talk: Talk!
     var message: Message!
     var isStarted = false
     var isOvered = false
@@ -256,6 +257,10 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     func gameOver() {
+        if (!talk.isSingleMode) {
+            talk.cipheredNum--
+        }
+        
         messageCipher.failed(message!)
         
         bottomView.hidden = true
