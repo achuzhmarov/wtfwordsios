@@ -59,7 +59,10 @@ class MessageCipher {
     
     func createMessage(talk: Talk, text: String, cipherType: CipherType) -> Message {
         let generatedMessage = createMessage(text, cipherType: cipherType)
-        
+        return addNewMessageToTalk(generatedMessage, talk: talk)
+    }
+    
+    func addNewMessageToTalk(generatedMessage: Message, talk: Talk) -> Message {
         var author: String
         
         if (talk.isSingleMode) {
@@ -72,11 +75,8 @@ class MessageCipher {
             talkId: talk.id,
             author: author,
             words: generatedMessage.words,
-            cipherType: cipherType
+            cipherType: generatedMessage.cipherType
         )
-        
-        newMessage.cipherWords()
-        checkDeciphered(newMessage)
         
         talk.appendMessage(newMessage)
         
@@ -139,7 +139,13 @@ class MessageCipher {
                     newWordText += String(uniChar)
                 } else {
                     isLastLetter = false
-                    newWordAdditional += String(uniChar)
+                    
+                    words.append(Word(text: newWordText, additional: newWordAdditional, wordType: getWordType(newWordText)))
+                    
+                    newWordText = ""
+                    newWordAdditional = String(uniChar)
+                    
+                    //newWordAdditional += String(uniChar)
                 }
             } else {
                 if (isLetter(uniChar)) {

@@ -17,11 +17,12 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
     
     var text = ""
     var cipherType = CipherType.HalfWordRoundDown
+    var message: Message!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let message = messageCipher.createMessage(text, cipherType: cipherType)
+        message = messageCipher.createMessage(text, cipherType: cipherType)
         
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
@@ -44,7 +45,7 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
     func cipherPicked(cipherType: CipherType) {
         self.cipherType = cipherType
         
-        let message = messageCipher.createMessage(text, cipherType: cipherType)
+        message = messageCipher.createMessage(text, cipherType: cipherType)
         
         messageWordsView.setNewMessage(message)
     }

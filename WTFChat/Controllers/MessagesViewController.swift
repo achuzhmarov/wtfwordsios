@@ -31,6 +31,7 @@ class MessagesViewController: JSQMessagesViewController {
     
     //flag to show when we return from SendPreview. Used in viewDidAppear to finish message sending
     var messageSended = false
+    var messageToSend: Message?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,9 +87,10 @@ class MessagesViewController: JSQMessagesViewController {
         //send message
         if (messageSended) {
             messageSended = false
-            let text = self.inputToolbar?.contentView?.textView?.text
+            let newMessage = messageCipher.addNewMessageToTalk(self.messageToSend!, talk: self.talk!)
             
-            let newMessage = messageCipher.createMessage(self.talk!, text: text!, cipherType: cipherType)
+            //let text = self.inputToolbar?.contentView?.textView?.text
+            //let newMessage = messageCipher.createMessage(self.talk!, text: text!, cipherType: cipherType)
             dismissKeyboard()
             
             if (!talk.isSingleMode) {
@@ -244,7 +246,8 @@ class MessagesViewController: JSQMessagesViewController {
     @IBAction func sendMessage(segue:UIStoryboardSegue) {
         if let sendMessageController = segue.sourceViewController as? SendMessageViewController {
             self.cipherType = sendMessageController.cipherType
-            messageSended = true
+            self.messageToSend = sendMessageController.message
+            self.messageSended = true
         }
     }
     

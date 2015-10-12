@@ -38,6 +38,8 @@ class FriendsViewController: UITableViewController {
         
         talks.append(singleModeTalk)
         talks.appendContentsOf(userService.getCurrentUser().talks)
+        
+        self.updateView()
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -61,7 +63,7 @@ class FriendsViewController: UITableViewController {
     }
     
     func updateTalks() {
-        userService.getUnreadTalks() {talks, error -> Void in
+        userService.getUnreadTalks(getTalksLastUpdate()) {talks, error -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if let requestError = error {
                     //TODO - show error to user
@@ -79,6 +81,26 @@ class FriendsViewController: UITableViewController {
         }
     }
     
+    func getTalksLastUpdate() -> NSDate {
+        var lastUpdate: NSDate?
+        
+        for talk in talks {
+            if (talk.isSingleMode) {
+                continue
+            }
+            
+            if (lastUpdate == nil || talk.lastUpdate.isGreater(lastUpdate!)) {
+                lastUpdate = talk.lastUpdate
+            }
+        }
+        
+        if (lastUpdate != nil) {
+            return lastUpdate!
+        } else {
+            return NSDate.distantPast()
+        }
+    }
+    
     func updateOrCreateTalkInArray(talk: Talk) {
         for i in 0..<self.talks.count {
             if (talk.id == self.talks[i].id) {
@@ -91,6 +113,22 @@ class FriendsViewController: UITableViewController {
     }
     
     func updateView() {
+        self.talks.sortInPlace { (talk1, talk2) -> Bool in
+            if (talk1.isSingleMode) {
+                return true
+            } else if (talk2.isSingleMode) {
+                return false
+            } else if (talk1.lastMessage != nil && talk2.lastMessage != nil) {
+                return talk1.lastMessage!.lastUpdate.isGreater(talk2.lastMessage!.lastUpdate)
+            } else if (talk1.lastMessage != nil) {
+                return true
+            } else if (talk2.lastMessage != nil) {
+                return false
+            } else {
+                return talk1.getFriendLogin().isGreater(talk2.getFriendLogin())
+            }
+        }
+        
         self.tableView.reloadData()
     }
 

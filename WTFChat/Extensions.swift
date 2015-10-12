@@ -8,6 +8,32 @@
 
 import Foundation
 
+extension String
+{
+    func isGreater(stringToCompare : String) -> Bool
+    {
+        return self.compare(stringToCompare) == NSComparisonResult.OrderedDescending
+    }
+    
+    func isLess(stringToCompare : String) -> Bool
+    {
+        return self.compare(stringToCompare) == NSComparisonResult.OrderedAscending
+    }
+}
+
+extension NSDate
+{
+    func isGreater(dateToCompare : NSDate) -> Bool
+    {
+        return self.compare(dateToCompare) == NSComparisonResult.OrderedDescending
+    }
+    
+    func isLess(dateToCompare : NSDate) -> Bool
+    {
+        return self.compare(dateToCompare) == NSComparisonResult.OrderedAscending
+    }
+}
+
 extension NSDate {
     class func parseDateFromStringJSON(string: String) -> NSDate? {
         let dateFormatter = NSDateFormatter()

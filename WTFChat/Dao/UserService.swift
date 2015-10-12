@@ -69,8 +69,14 @@ class UserService {
         }
     }
     
-    func getUnreadTalks(completion:(talks: [Talk]?, error: NSError?) -> Void) {
-        networkService.get("user/new_talks") { (json, error) -> Void in
+    func getUnreadTalks(lastUpdate: NSDate, completion:(talks: [Talk]?, error: NSError?) -> Void) {
+        let lastUpdateData = [
+            "last_update": NSDate.parseStringJSONFromDate(lastUpdate)!
+        ]
+        
+        let postJSON = JSON(lastUpdateData)
+        
+        networkService.post(postJSON, relativeUrl: "user/new_talks_by_time") { (json, error) -> Void in
             if let requestError = error {
                 completion(talks: nil, error: requestError)
             } else {

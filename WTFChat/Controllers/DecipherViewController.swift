@@ -36,8 +36,8 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     //for viewOnly mode
     var useCipherText = false
     
-    let SECONDS_PER_MODE = 20
-    let HARD_MODE_MULTIPLIER = 2
+    let SECONDS_PER_WORD = 20
+    let HARD_SECONDS_PER_WORD = 30
     let SUGGESTIONS_SINGLE_MODE = 3
     
     override func viewDidLoad() {
@@ -226,13 +226,13 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         }
         
         self.navigationItem.setHidesBackButton(true, animated:true)
-        
-        timer.seconds = message!.countNew() * SECONDS_PER_MODE
-        
+
         let (_, mode) = CipherFactory.getCategoryAndMode(message!.cipherType)
         
         if (mode == CipherMode.Hard) {
-            timer.seconds = timer.seconds * HARD_MODE_MULTIPLIER
+            timer.seconds = timer.seconds * HARD_SECONDS_PER_WORD
+        } else {
+            timer.seconds = message!.countNew() * SECONDS_PER_WORD
         }
         
         topTimerLabel.text = timer.getTimeString()

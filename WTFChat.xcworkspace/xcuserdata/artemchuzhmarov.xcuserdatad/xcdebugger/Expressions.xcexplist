@@ -79,6 +79,14 @@
          contextName = "WordsViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:WordsViewController.swift">
       </ContextState>
       <ContextState
+         contextName = "FriendsViewController.(updateTalks(FriendsViewController) -&gt; () -&gt; ()).(closure #1).(closure #1):FriendsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "getTalksLastUpdate()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "WTFChat.TalkService.getTalkByUsers (WTFChat.TalkService)(Swift.String, user2 : Swift.String) -&gt; Swift.Optional&lt;WTFChat.Talk&gt;:TalkService.swift">
       </ContextState>
       <ContextState

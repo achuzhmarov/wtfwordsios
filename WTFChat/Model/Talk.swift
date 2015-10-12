@@ -17,6 +17,7 @@ class Talk : BaseEntity {
     var hasUnread: Bool
     var decipherStatus: DecipherStatus
     var cipheredNum: Int
+    var lastUpdate: NSDate
     
     var messages = [Message]() {
         didSet {
@@ -31,6 +32,7 @@ class Talk : BaseEntity {
         self.hasUnread = false
         self.cipheredNum = 0
         self.decipherStatus = DecipherStatus.No
+        self.lastUpdate = NSDate()
         
         super.init(id: id)
     }
@@ -39,17 +41,19 @@ class Talk : BaseEntity {
         self.hasUnread = hasUnread
         self.cipheredNum = cipheredNum
         self.decipherStatus = DecipherStatus.No
+        self.lastUpdate = NSDate()
         
         super.init(id: id)
     }
     
-    init(id: String, hasUnread: Bool, cipheredNum: Int, lastMessage: Message?, users: [String], decipherStatus: DecipherStatus) {
+    init(id: String, hasUnread: Bool, cipheredNum: Int, lastMessage: Message?, users: [String], decipherStatus: DecipherStatus, lastUpdate: NSDate) {
         
         self.hasUnread = hasUnread
         self.cipheredNum = cipheredNum
         self.lastMessage = lastMessage
         self.users = users
         self.decipherStatus = decipherStatus
+        self.lastUpdate = lastUpdate
         
         super.init(id: id)
     }
@@ -92,6 +96,7 @@ class Talk : BaseEntity {
         var lastMessage: Message?
         var users = [String]()
         var decipherStatus: DecipherStatus
+        var lastUpdate: NSDate
         
         if let value = json["id"].string {
             id = value
@@ -138,13 +143,26 @@ class Talk : BaseEntity {
             lastMessage = try Message.parseFromJson(json["last_message"])
         }
         
+        if let value = json["last_update"].string {
+            if let parsedTimestamp = NSDate.parseDateFromStringJSON(value) {
+                lastUpdate = parsedTimestamp
+            } else {
+                lastUpdate = NSDate()
+                //throw NSError(code: 1, message: "Could not parse lastUpdate")
+            }
+        } else {
+            lastUpdate = NSDate()
+            //throw json["last_update"].error!
+        }
+        
         return Talk(
             id: id,
             hasUnread: hasUnread,
             cipheredNum: cipheredNum,
             lastMessage: lastMessage,
             users: users,
-            decipherStatus: decipherStatus
+            decipherStatus: decipherStatus,
+            lastUpdate: lastUpdate
         )
     }
 }
