@@ -230,7 +230,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         let (_, mode) = CipherFactory.getCategoryAndMode(message!.cipherType)
         
         if (mode == CipherMode.Hard) {
-            timer.seconds = timer.seconds * HARD_SECONDS_PER_WORD
+            timer.seconds = message!.countNew() * HARD_SECONDS_PER_WORD
         } else {
             timer.seconds = message!.countNew() * SECONDS_PER_WORD
         }
