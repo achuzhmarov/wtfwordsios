@@ -24,11 +24,21 @@ enum CipherType : Int {
     case ShuffleExceptFirstLetter
     case ShuffleFullWord
     case ShuffleWithExtraLetter
+    
+    case OneLetterFromBothEnds
+    case TwoLettersFromBothEnds
+    case ThreeLettersFromBothEnds
+    
+    case EasyRandomCutter
+    case NormalRandomCutter
+    case HardRandomCutter
 }
 
 enum CipherCategory : Int, CustomStringConvertible {
     case RightCutter = 0
     case LeftCutter
+    case DoubleCutter
+    case RandomCutter
     case Shuffle
     
     var description : String {
@@ -38,6 +48,10 @@ enum CipherCategory : Int, CustomStringConvertible {
                 return "Right Cutter"
             case CipherCategory.LeftCutter:
                 return "Left Cutter"
+            case CipherCategory.DoubleCutter:
+                return "Double Cutter"
+            case CipherCategory.RandomCutter:
+                return "Random Cutter"
             case CipherCategory.Shuffle:
                 return "Shuffle"
             }
@@ -66,12 +80,23 @@ enum CipherMode : Int, CustomStringConvertible {
 
 class CipherFactory {
     static let ciphers: [CipherType: Cipher] = [
+        
         .HalfWordRoundUp: HalfWordRoundUpCipher(),
         .HalfWordRoundDown: HalfWordRoundDownCipher(),
         .FirstLetter: FirstLetterCipher(),
+        
         .ExceptTwoLettersFromEnd: ExceptTwoLettersFromEndCipher(),
         .HalfWordRoundDownFromEnd: HalfWordRoundDownFromEndCipher(),
         .HalfWordPlusOneFromEnd: HalfWordPlusOneFromEndCipher(),
+        
+        .OneLetterFromBothEnds: OneLetterFromBothEndsCipher(),
+        .TwoLettersFromBothEnds: TwoLettersFromBothEndsCipher(),
+        .ThreeLettersFromBothEnds: ThreeLettersFromBothEndsCipher(),
+    
+        .EasyRandomCutter: EasyRandomCutterCipher(),
+        .NormalRandomCutter: NormalRandomCutterCipher(),
+        .HardRandomCutter: HardRandomCutterCipher(),
+    
         .ShuffleExceptFirstLetter: ShuffleExceptFirstLetterCipher(),
         .ShuffleFullWord: ShuffleFullWordCipher(),
         .ShuffleWithExtraLetter: ShuffleWithExtraLetterCipher()
@@ -87,6 +112,16 @@ class CipherFactory {
             .Easy: .ExceptTwoLettersFromEnd,
             .Normal: .HalfWordRoundDownFromEnd,
             .Hard: .HalfWordPlusOneFromEnd
+        ],
+        .DoubleCutter: [
+            .Easy: .OneLetterFromBothEnds,
+            .Normal: .TwoLettersFromBothEnds,
+            .Hard: .ThreeLettersFromBothEnds
+        ],
+        .RandomCutter: [
+            .Easy: .EasyRandomCutter,
+            .Normal: .NormalRandomCutter,
+            .Hard: .HardRandomCutter
         ],
         .Shuffle: [
             .Easy: .ShuffleExceptFirstLetter,
@@ -117,7 +152,7 @@ class CipherFactory {
     }
     
     class func getAllCategories() -> [CipherCategory] {
-        return [.RightCutter, .LeftCutter, .Shuffle]
+        return [.RightCutter, .LeftCutter, .DoubleCutter, .RandomCutter, .Shuffle]
     }
     
     class func getAllModes() -> [CipherMode] {

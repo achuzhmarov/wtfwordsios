@@ -48,6 +48,10 @@ class Tools {
     }
     
     private class func levenshtein(aStr: String, bStr: String) -> Int {
+        if (aStr.characters.count == 0 || bStr.characters.count == 0) {
+            return 0
+        }
+        
         let a = Array(aStr.utf16)
         let b = Array(bStr.utf16)
         

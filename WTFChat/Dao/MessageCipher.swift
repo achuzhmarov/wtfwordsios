@@ -140,12 +140,12 @@ class MessageCipher {
                 } else {
                     isLastLetter = false
                     
-                    words.append(Word(text: newWordText, additional: newWordAdditional, wordType: getWordType(newWordText)))
+                    /*words.append(Word(text: newWordText, additional: newWordAdditional, wordType: getWordType(newWordText)))
                     
                     newWordText = ""
-                    newWordAdditional = String(uniChar)
+                    newWordAdditional = String(uniChar)*/
                     
-                    //newWordAdditional += String(uniChar)
+                    newWordAdditional += String(uniChar)
                 }
             } else {
                 if (isLetter(uniChar)) {
@@ -167,7 +167,7 @@ class MessageCipher {
     }
     
     private func getWordType(newWordText: String) -> WordType {
-        if (newWordText.characters.count <= 1) {
+        if (countLettersOnly(newWordText) <= 1) {
             return WordType.Ignore
         } else {
             return WordType.New
@@ -176,7 +176,7 @@ class MessageCipher {
     
     private let letters = NSCharacterSet.letterCharacterSet()
     private func isLetter(unicodeChar: UnicodeScalar) -> Bool {
-        if letters.longCharacterIsMember(unicodeChar.value) {
+        if isLetterOnly(unicodeChar) {
             return true
         } else {
             for wordSymbol in WORD_SPECIAL_SYMBOLS {
@@ -187,6 +187,26 @@ class MessageCipher {
         }
         
         return false
+    }
+    
+    private func isLetterOnly(unicodeChar: UnicodeScalar) -> Bool {
+        if letters.longCharacterIsMember(unicodeChar.value) {
+            return true
+        }
+        
+        return false
+    }
+    
+    private func countLettersOnly(string: String) -> Int {
+        var result = 0
+        
+        for char in string.unicodeScalars {
+            if isLetterOnly(char) {
+                result++
+            }
+        }
+        
+        return result
     }
     
     //let digits = NSCharacterSet.decimalDigitCharacterSet()

@@ -27,9 +27,14 @@ class ShuffleFullWordCipher: Cipher {
 
 class ShuffleWithExtraLetterCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
-        let wordLength = word.getCharCount() - 1
+        var wordLength = word.getCharCount() - 1
+
+        //cut last letter
+        if (word.getCharCount() > 2) {
+            wordLength--
+        }
         
-        let shuffled = "..." + word.getUpperCase()[1...wordLength].shuffle
+        let shuffled = "..." + word.getUpperCase()[1...wordLength].shuffle + "..."
         return shuffled + word.additional
     }
 }

@@ -20,7 +20,13 @@ class ExceptTwoLettersFromEndCipher: Cipher {
 class HalfWordRoundDownFromEndCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         let wordLength = word.getCharCount() - 1
-        let letterCount = word.getCharCount() / 2
+        var letterCount = word.getCharCount() / 2
+        
+        //4 letters max
+        if (wordLength - letterCount > 3) {
+            letterCount = wordLength - 3
+        }
+        
         return "..." + word.getLowerCase()[letterCount...wordLength] + word.additional
     }
 }
@@ -32,6 +38,11 @@ class HalfWordPlusOneFromEndCipher: Cipher {
         
         if (wordLength > letterCount) {
             letterCount += 1
+        }
+        
+        //3 letters max
+        if (wordLength - letterCount > 2) {
+            letterCount = wordLength - 2
         }
         
         return "..." + word.getLowerCase()[letterCount...wordLength] + word.additional

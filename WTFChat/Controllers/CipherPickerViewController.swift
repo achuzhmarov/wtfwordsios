@@ -31,12 +31,31 @@ class CipherPickerViewController: UIPickerView, UIPickerViewDataSource, UIPicker
         }
     }
 
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    /*func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if (component == 0) {
             return cipherCategories[row].description
         } else {
             return cipherModes[row].description
         }
+    }*/
+    
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+        
+        var titleData = ""
+        
+        if (component == 0) {
+            titleData = cipherCategories[row].description
+        } else {
+            titleData = cipherModes[row].description
+        }
+        
+        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Verdana", size: 18.0)!])
+        
+        let pickerLabel = UILabel()
+        pickerLabel.textAlignment = NSTextAlignment.Center
+        pickerLabel.attributedText = myTitle
+        
+        return pickerLabel
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -55,13 +74,7 @@ class CipherPickerViewController: UIPickerView, UIPickerViewDataSource, UIPicker
         self.selectRow(category.rawValue, inComponent: 0, animated: true)
         self.selectRow(mode.rawValue, inComponent: 1, animated: true)
     }
-    
-    /*func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let titleData = pickerData[row]
-        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 15.0)!,NSForegroundColorAttributeName:UIColor.blueColor()])
-        return myTitle
-    }*/
-    
+
     /*func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         let titleData = pickerData[row]

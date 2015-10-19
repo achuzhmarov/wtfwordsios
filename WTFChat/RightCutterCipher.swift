@@ -17,7 +17,13 @@ class HalfWordRoundUpCipher: Cipher {
 
 class HalfWordRoundDownCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
-        let letterCount = word.getCharCount() / 2 - 1
+        var letterCount = word.getCharCount() / 2 - 1
+        
+        //3 letters max
+        if (letterCount > 2) {
+            letterCount = 2
+        }
+        
         return word.getCapitalized()[0...letterCount] + "..." + word.additional
     }
 }

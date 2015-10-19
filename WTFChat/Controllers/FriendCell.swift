@@ -45,11 +45,13 @@ class FriendCell: UITableViewCell {
         cipheredNum.layer.masksToBounds = true;
         cipheredNum.textColor = UIColor.whiteColor()
         cipheredNum.font = UIFont(name: lastMessage.font.fontName, size: 10)
+        cipheredNum.numberOfLines = 1
         
         lastMessage.layer.masksToBounds = true;
         lastMessage.layer.cornerRadius = 8.0;
         lastMessage.textColor = UIColor.whiteColor()
         lastMessage.font = UIFont(name: lastMessage.font.fontName, size: 13)
+        lastMessage.numberOfLines = 1
     }
 
     func updateTalk(talk: Talk) {
