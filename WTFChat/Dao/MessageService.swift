@@ -27,8 +27,41 @@ class MessageService {
         }
     }
     
-    func getUnreadMessagesByTalk(talk: Talk, completion:(messages: [Message]?, error: NSError?) -> Void) {
-        networkService.get("messages/new/" + talk.id) { (json, error) -> Void in
+    func getUnreadMessagesByTalk(
+        talk: Talk,
+        lastUpdate: NSDate,
+        completion:(messages: [Message]?, error: NSError?) -> Void)
+    {
+        let lastUpdateData = [
+            "last_update": NSDate.parseStringJSONFromDate(lastUpdate)!
+        ]
+        
+        let postJSON = JSON(lastUpdateData)
+        
+        networkService.post(postJSON, relativeUrl: "messages/new/" + talk.id) { (json, error) -> Void in
+            if let requestError = error {
+                completion(messages: nil, error: requestError)
+            } else {
+                if let messagesJson = json {
+                    do {
+                        let messages = try Message.parseArrayFromJson(messagesJson)
+                        completion(messages: messages, error: nil)
+                    } catch let error as NSError {
+                        completion(messages: nil, error: error)
+                    }
+                } else {
+                    completion(messages: nil, error: nil)
+                }
+            }
+        }
+    }
+    
+    func getEarlierMessagesByTalk(
+        talk: Talk,
+        skip: Int,
+        completion:(messages: [Message]?, error: NSError?) -> Void)
+    {
+        networkService.get("messages/earlier/" + talk.id + "/" + String(skip)) { (json, error) -> Void in
             if let requestError = error {
                 completion(messages: nil, error: requestError)
             } else {

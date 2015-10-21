@@ -18,6 +18,7 @@ class Talk : BaseEntity {
     var decipherStatus: DecipherStatus
     var cipheredNum: Int
     var lastUpdate: NSDate
+    var messageCount: Int
     
     var messages = [Message]() {
         didSet {
@@ -33,6 +34,7 @@ class Talk : BaseEntity {
         self.cipheredNum = 0
         self.decipherStatus = DecipherStatus.No
         self.lastUpdate = NSDate()
+        self.messageCount = 0
         
         super.init(id: id)
     }
@@ -42,11 +44,12 @@ class Talk : BaseEntity {
         self.cipheredNum = cipheredNum
         self.decipherStatus = DecipherStatus.No
         self.lastUpdate = NSDate()
+        self.messageCount = 0
         
         super.init(id: id)
     }
     
-    init(id: String, hasUnread: Bool, cipheredNum: Int, lastMessage: Message?, users: [String], decipherStatus: DecipherStatus, lastUpdate: NSDate) {
+    init(id: String, hasUnread: Bool, cipheredNum: Int, lastMessage: Message?, users: [String], decipherStatus: DecipherStatus, lastUpdate: NSDate, messageCount: Int) {
         
         self.hasUnread = hasUnread
         self.cipheredNum = cipheredNum
@@ -54,6 +57,7 @@ class Talk : BaseEntity {
         self.users = users
         self.decipherStatus = decipherStatus
         self.lastUpdate = lastUpdate
+        self.messageCount = messageCount
         
         super.init(id: id)
     }
@@ -97,6 +101,7 @@ class Talk : BaseEntity {
         var users = [String]()
         var decipherStatus: DecipherStatus
         var lastUpdate: NSDate
+        var messageCount: Int
         
         if let value = json["id"].string {
             id = value
@@ -139,6 +144,12 @@ class Talk : BaseEntity {
             throw json["ciphered_num"].error!
         }
         
+        if let value = json["message_count"].int {
+            messageCount = value
+        } else {
+            throw json["message_count"].error!
+        }
+        
         if json["last_message"].null == nil {
             lastMessage = try Message.parseFromJson(json["last_message"])
         }
@@ -162,7 +173,8 @@ class Talk : BaseEntity {
             lastMessage: lastMessage,
             users: users,
             decipherStatus: decipherStatus,
-            lastUpdate: lastUpdate
+            lastUpdate: lastUpdate,
+            messageCount: messageCount
         )
     }
 }

@@ -20,6 +20,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     
     //for use in viewOnly
     var useCipherText = false
+    var selfAuthor = false
     
     var suggestionComputer: SuggestionComputer?
     var isFirstUpdate = true
@@ -71,9 +72,10 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-    func setNewMessage(message: Message, useCipherText: Bool = false) {
+    func setNewMessage(message: Message, useCipherText: Bool = false, selfAuthor: Bool = false) {
         self.message = message
         self.useCipherText = useCipherText
+        self.selfAuthor = selfAuthor
         createView()
         isFirstUpdate = false
     }
@@ -223,7 +225,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     }
     
     func createLabelForWord(word: Word) -> WordLabelContainer {
-        let wordContainer = WordLabelContainer(word: word, useCipherText: useCipherText)
+        let wordContainer = WordLabelContainer(word: word, useCipherText: useCipherText, selfAuthor: selfAuthor)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "useSuggestion:")
         wordContainer.label.addGestureRecognizer(tap)

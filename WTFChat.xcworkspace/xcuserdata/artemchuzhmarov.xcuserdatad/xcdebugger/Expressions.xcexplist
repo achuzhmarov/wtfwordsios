@@ -48,6 +48,14 @@
          contextName = "MessageService.saveMessage(Message, completion : (message : Message?, error : NSError?) -&gt; ()) -&gt; ():MessageService.swift">
       </ContextState>
       <ContextState
+         contextName = "FriendsViewController.updateTalks() -&gt; ():FriendsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "getTalksLastUpdate()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "MessagesViewController.collectionView(JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath : NSIndexPath!) -&gt; JSQMessageBubbleImageDataSource!:MessagesViewController.swift">
       </ContextState>
       <ContextState

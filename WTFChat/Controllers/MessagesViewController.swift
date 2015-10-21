@@ -9,6 +9,7 @@
 import UIKit
 
 let MESSAGES_UPDATE_TIMER_INTERVAL = 5.0
+let INTERVAL_BETWEEN_MESSAGES_TO_SHOW_TOP_TIMESTAMP_IN_SECONDS = 10 * 60
 
 class MessagesViewController: JSQMessagesViewController {
     var timer: NSTimer?
@@ -35,6 +36,8 @@ class MessagesViewController: JSQMessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = talk.getFriendLogin().capitalizedString
 
         self.inputToolbar!.contentView!.leftBarButtonItem = nil
         
@@ -51,7 +54,6 @@ class MessagesViewController: JSQMessagesViewController {
                         self.talk.messages = messages!
                         self.talk.decipherStatus = DecipherStatus.No
                         self.updateView()
-                        self.finishSendingMessageAnimated(false)
                     }
                 })
             }
@@ -111,12 +113,30 @@ class MessagesViewController: JSQMessagesViewController {
                 self.updateView()
             }
             
-            self.finishSendingMessage()
+            //self.finishSendingMessage()
         }
     }
 
+    func getMessagesLastUpdate() -> NSDate {
+        var lastUpdate: NSDate?
+        
+        for message in talk.messages {
+            if (lastUpdate == nil || message.lastUpdate.isGreater(lastUpdate!)) {
+                lastUpdate = message.lastUpdate
+            }
+        }
+        
+        if (lastUpdate != nil) {
+            return lastUpdate!
+        } else {
+            return NSDate.distantPast()
+        }
+    }
+    
     func updateMessages() {
-        messageService.getUnreadMessagesByTalk(talk) { (messages, error) -> Void in
+        let lastUpdate = getMessagesLastUpdate()
+        
+        messageService.getUnreadMessagesByTalk(talk, lastUpdate: lastUpdate) { (messages, error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if let requestError = error {
                     //TODO - show error to user
@@ -145,8 +165,25 @@ class MessagesViewController: JSQMessagesViewController {
         self.talk.messages.append(message)
     }
     
-    func updateView() {
+    func updateView(earlierLoaded: Int = 0) {
+        talk.messages.sortInPlace { (message1, message2) -> Bool in
+            return message1.timestamp.isLess(message2.timestamp)
+        }
+        
+        if (talk.messageCount > talk.messages.count) {
+            showLoadEarlierMessagesHeader = true
+        } else {
+            showLoadEarlierMessagesHeader = false
+        }
+        
         self.collectionView!.reloadData()
+        
+        if (earlierLoaded == 0) {
+            finishSendingMessageAnimated(false)
+        } else {
+            let indexPath = NSIndexPath(forItem: earlierLoaded - 1, inSection: 0)
+            collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Top, animated: false)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -154,7 +191,10 @@ class MessagesViewController: JSQMessagesViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(
+        collectionView: UICollectionView,
+        cellForItemAtIndexPath indexPath: NSIndexPath)
+        -> UICollectionViewCell {
         
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
         
@@ -163,8 +203,11 @@ class MessagesViewController: JSQMessagesViewController {
         return cell
     }
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
-        
+    override func collectionView(
+        collectionView: JSQMessagesCollectionView!,
+        messageDataForItemAtIndexPath indexPath: NSIndexPath!)
+        -> JSQMessageData!
+    {
         let message = self.talk.messages[indexPath.row]
         
         var text = ""
@@ -184,8 +227,11 @@ class MessagesViewController: JSQMessagesViewController {
         return jsqMessage
     }
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource! {
-        
+    override func collectionView(
+        collectionView: JSQMessagesCollectionView!,
+        messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!)
+        -> JSQMessageBubbleImageDataSource!
+    {
         let message = self.talk.messages[indexPath.row]
         
         if (message.senderId() == self.senderId) {
@@ -211,18 +257,21 @@ class MessagesViewController: JSQMessagesViewController {
         }
     }
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAtIndexPath indexPath: NSIndexPath!) {
-        
+    override func collectionView(
+        collectionView: JSQMessagesCollectionView!,
+        didTapMessageBubbleAtIndexPath indexPath: NSIndexPath!)
+    {
         let message = self.talk.messages[indexPath.row]
         
-        if (message.senderId() != self.senderId || message.deciphered) {
-            dismissKeyboard()
-            performSegueWithIdentifier("showDecipher", sender: message)
-        }
+        dismissKeyboard()
+        performSegueWithIdentifier("showDecipher", sender: message)
     }
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
-        
+    override func collectionView(
+        collectionView: JSQMessagesCollectionView!,
+        avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!)
+        -> JSQMessageAvatarImageDataSource!
+    {
         let message = self.talk.messages[indexPath.row]
         
         if let avatar = avatars[message.author] {
@@ -234,12 +283,21 @@ class MessagesViewController: JSQMessagesViewController {
         }
     }
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(
+        collectionView: UICollectionView,
+        numberOfItemsInSection section: Int)
+        -> Int {
+            
         return self.talk.messages.count;
     }
     
-    override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
-        
+    override func didPressSendButton(
+        button: UIButton!,
+        withMessageText text: String!,
+        senderId: String!,
+        senderDisplayName: String!,
+        date: NSDate!)
+    {
         performSegueWithIdentifier("showMessagePreview", sender: text)
     }
     
@@ -262,6 +320,15 @@ class MessagesViewController: JSQMessagesViewController {
             
             //single mode
             targetController.isSingleMode = talk.isSingleMode
+            
+            //self message - view only
+            if (message.senderId() == self.senderId) {
+                targetController.selfAuthor = true
+                
+                if (!message.deciphered) {
+                    targetController.useCipherText = true
+                }
+            }
         } else if segue.identifier == "showMessagePreview" {
             let targetController = segue.destinationViewController as! SendMessageViewController
             
@@ -304,4 +371,144 @@ class MessagesViewController: JSQMessagesViewController {
         let diameter = incoming ? UInt(collectionView!.collectionViewLayout.incomingAvatarViewSize.width) : UInt(collectionView!.collectionViewLayout.outgoingAvatarViewSize.width)
         return userService.getAvatarImage(name, diameter: diameter)
     }
+    
+    //Top Cell Label
+    
+    override func collectionView(
+        collectionView: JSQMessagesCollectionView!,
+        attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!)
+        -> NSAttributedString?
+    {
+        let message = self.talk.messages[indexPath.row]
+        
+        if (indexPath.row == 0) {
+            return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.timestamp)
+        } else {
+            let prevMessage = self.talk.messages[indexPath.row - 1]
+            let diffSeconds = Int(message.timestamp.timeIntervalSinceDate(prevMessage.timestamp))
+            
+            if (diffSeconds > INTERVAL_BETWEEN_MESSAGES_TO_SHOW_TOP_TIMESTAMP_IN_SECONDS) {
+                return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.timestamp)
+            }
+        }
+        
+        return nil;
+    }
+
+    override func collectionView(
+        collectionView: JSQMessagesCollectionView!,
+        layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout,
+        heightForCellTopLabelAtIndexPath indexPath: NSIndexPath!)
+        -> CGFloat
+    {
+        let message = self.talk.messages[indexPath.row]
+        
+        if (indexPath.row == 0) {
+            return kJSQMessagesCollectionViewCellLabelHeightDefault
+        } else {
+            let prevMessage = self.talk.messages[indexPath.row - 1]
+            let diffSeconds = Int(message.timestamp.timeIntervalSinceDate(prevMessage.timestamp))
+            
+            if (diffSeconds > INTERVAL_BETWEEN_MESSAGES_TO_SHOW_TOP_TIMESTAMP_IN_SECONDS) {
+                return kJSQMessagesCollectionViewCellLabelHeightDefault
+            }
+        }
+            
+        return 0.0;
+    }
+    
+    override func collectionView(
+        collectionView: JSQMessagesCollectionView!,
+        header headerView: JSQMessagesLoadEarlierHeaderView!,
+        didTapLoadEarlierMessagesButton sender: UIButton)
+    {
+        messageService.getEarlierMessagesByTalk(talk, skip: talk.messages.count) { (messages, error) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
+                if let requestError = error {
+                    //TODO - show error to user
+                    print(requestError)
+                } else {
+                    if let newMessages = messages {
+                        for message in newMessages {
+                            self.updateOrCreateMessageInArray(message)
+                        }
+                        
+                        self.updateView(newMessages.count)
+                    }
+                }
+            })
+        }
+    }
+    
+    //Bottom Cell Label
+    
+    /*override func collectionView(
+        collectionView: JSQMessagesCollectionView!,
+        attributedTextForCellBottomLabelAtIndexPath indexPath: NSIndexPath!)
+        -> NSAttributedString?
+    {
+        let message = self.talk.messages[indexPath.row]
+        
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "HH:mm"
+        let formattedTime = formatter.stringFromDate(message.timestamp)
+        
+        let result = NSAttributedString(string: formattedTime)
+        return result
+    }
+    
+    override func collectionView(
+        collectionView: JSQMessagesCollectionView!,
+        layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout,
+        heightForCellBottomLabelAtIndexPath indexPath: NSIndexPath!)
+        -> CGFloat
+    {
+        return 10.0
+    }*/
+    
+    //Top Bubble Label
+    
+    /*override func collectionView(
+        collectionView: JSQMessagesCollectionView!,
+        attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!)
+        -> NSAttributedString?
+    {
+        /*JSQMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
+            
+        if ([message.senderId isEqualToString:self.senderId]) {
+            return nil;
+        }
+            
+        if (indexPath.item - 1 > 0) {
+            JSQMessage *previousMessage = [self.demoData.messages objectAtIndex:indexPath.item - 1];
+            if ([[previousMessage senderId] isEqualToString:message.senderId]) {
+                return nil;
+            }
+        }*/
+            
+        //return NSAttributedString.init(string: message.senderDisplayName)
+        return NSAttributedString.init(string: "")
+    }
+    
+    override func collectionView(
+        collectionView: JSQMessagesCollectionView!,
+        layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout,
+        heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!)
+        -> CGFloat
+    {
+        /*JSQMessage *currentMessage = [self.demoData.messages objectAtIndex:indexPath.item];
+        if ([[currentMessage senderId] isEqualToString:self.senderId]) {
+            return 0.0f;
+        }
+            
+        if (indexPath.item - 1 > 0) {
+            JSQMessage *previousMessage = [self.demoData.messages objectAtIndex:indexPath.item - 1];
+            if ([[previousMessage senderId] isEqualToString:[currentMessage senderId]]) {
+                return 0.0f;
+            }
+        }*/
+            
+        //return kJSQMessagesCollectionViewCellLabelHeightDefault;
+        return 0.0
+    }*/
 }

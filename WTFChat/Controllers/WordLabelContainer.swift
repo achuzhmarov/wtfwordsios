@@ -20,19 +20,27 @@ class WordLabelContainer {
     }
     
     var useCipherText = false
+    var selfAuthor = false
     
     var wasAddedToCell = false
     
-    init (word: Word, useCipherText: Bool = false) {
+    init (word: Word, useCipherText: Bool = false, selfAuthor: Bool = false) {
         self.originalWord = word
         self.word = Word(word: word)
         self.useCipherText = useCipherText
+        self.selfAuthor = selfAuthor
         updateLabel()
     }
     
     func updateLabel() {
         if (useCipherText) {
-            label.text = word.getCipheredText()
+            if (word.wordType != WordType.Ignore) {
+                label.text = word.getCipheredText()
+            } else {
+                label.text = word.getTextForDecipher()
+            }
+        } else if (selfAuthor) {
+            label.text = word.getClearText()
         } else {
             label.text = word.getTextForDecipher()
         }

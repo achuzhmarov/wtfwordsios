@@ -156,8 +156,14 @@ class Message : BaseEntity, JSQMessageData {
                     result += " "
                 } else if (word.wordType == WordType.LineBreak) {
                     result += "\n"
+                } else if (word.wordType == WordType.Ignore) {
+                    if (word.text.characters.count > 0) {
+                        result += "???" + word.additional
+                    } else {
+                        result += word.additional
+                    }
                 } else {
-                    result += "???"
+                    result += "???" + word.additional
                 }
             }
         }

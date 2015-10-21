@@ -35,6 +35,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     
     //for viewOnly mode
     var useCipherText = false
+    var selfAuthor = false
     
     let SECONDS_PER_WORD = 20
     let HARD_SECONDS_PER_WORD = 30
@@ -59,7 +60,9 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
         
-        if (message.deciphered) {
+        wordsTableView.suggestionComputer = self
+        
+        if (message.deciphered || selfAuthor) {
             setViewOnlyStage()
         } else {
             UIView.animateWithDuration(1, delay: 0,
@@ -130,6 +133,11 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     func suggestionTapped(word: Word) {
+        if (isOvered) {
+            changeCipherStateForViewOnly()
+            return
+        }
+        
         if (word.wordType == WordType.New) {
             if (word.wasCloseTry) {
                 showCloseTrySuggestionsConfirm(word)
@@ -215,10 +223,14 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         view.endEditing(true)
     }
     
+    func changeCipherStateForViewOnly() {
+        useCipherText = !useCipherText
+        self.wordsTableView.setNewMessage(message, useCipherText: useCipherText, selfAuthor: selfAuthor)
+    }
+    
     func start() {
         if (isOvered) {
-            useCipherText = !useCipherText
-            self.wordsTableView.setNewMessage(message, useCipherText: useCipherText)
+            changeCipherStateForViewOnly()
         }
         
         if (isStarted) {
@@ -248,7 +260,6 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         startLabel.removeFromSuperview()
         
-        wordsTableView.suggestionComputer = self
         wordsTableView.updateMessage(message!)
         
         guessTextField.becomeFirstResponder()

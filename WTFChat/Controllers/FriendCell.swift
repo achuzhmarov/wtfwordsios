@@ -142,7 +142,7 @@ class FriendCell: UITableViewCell {
     }
     
     func updateMessage(message: Message) {
-        let formatter = NSDateFormatter()
+        /*let formatter = NSDateFormatter()
         let now = NSDate()
         
         if (now.getYear() == message.timestamp.getYear()) {
@@ -157,7 +157,10 @@ class FriendCell: UITableViewCell {
             formatter.dateFormat = "dd.MM.yy HH:mm"
         }
         
-        lastMessageTime.text = formatter.stringFromDate(message.timestamp)
+        lastMessageTime.text = formatter.stringFromDate(message.timestamp)*/
+        
+        let timeString = JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.timestamp)
+        lastMessageTime.text = timeString.string
         
         lastMessage.text = message.text()
         
