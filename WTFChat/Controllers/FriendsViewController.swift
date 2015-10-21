@@ -97,7 +97,7 @@ class FriendsViewController: UITableViewController {
         if (lastUpdate != nil) {
             return lastUpdate!
         } else {
-            return NSDate.distantPast()
+            return NSDate().addYears(-1)
         }
     }
     

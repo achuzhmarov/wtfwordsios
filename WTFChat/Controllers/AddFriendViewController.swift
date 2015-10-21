@@ -18,7 +18,14 @@ class AddFriendViewController: UITableViewController, UISearchResultsUpdating {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.definesPresentationContext = true
         
+        addSearchController()
+        
+        loadFriends("")
+    }
+
+    func addSearchController() {
         if #available(iOS 8.0, *) {
             let searchController = UISearchController(searchResultsController: nil)
             searchController.searchResultsUpdater = self
@@ -26,13 +33,12 @@ class AddFriendViewController: UITableViewController, UISearchResultsUpdating {
             searchController.dimsBackgroundDuringPresentation = false
             searchController.searchBar.sizeToFit()
             self.tableView.tableHeaderView = searchController.searchBar
+            self.searchController = searchController
         } else {
             // Fallback on earlier versions
         }
-        
-        loadFriends("")
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -55,8 +61,10 @@ class AddFriendViewController: UITableViewController, UISearchResultsUpdating {
         
         cell.friendName.text = friend
 
-        //TODO - add images
-        //cell.friendImage = 
+        let jsqFriendImage = userService.getAvatarImage(friend,
+            diameter: UInt(cell.friendImage.bounds.height))
+        
+        cell.friendImage.image = jsqFriendImage.avatarImage
         
         return cell
     }

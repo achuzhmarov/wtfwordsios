@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     var user: User?
     
     @IBOutlet weak var loginButton: UIButton!
@@ -33,6 +33,9 @@ class LoginViewController: UIViewController {
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
+        
+        usernameField.delegate = self
+        passwordField.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -61,6 +64,11 @@ class LoginViewController: UIViewController {
         if (valid) {
             self.login(usernameField.text!, password: passwordField.text!)
         }
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {   //delegate method
+        loginButtonPressed(loginButton)
+        return true
     }
     
     func login(login: String, password: String) {
