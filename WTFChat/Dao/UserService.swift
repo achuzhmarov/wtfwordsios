@@ -40,7 +40,17 @@ class UserService {
     }
     
     func logout() {
-        networkService.post(nil, relativeUrl: "logout") { (json, error) -> Void in
+        var postJSON: JSON? = nil
+        
+        if let deviceToken = DEVICE_TOKEN {
+            let userData = [
+                "device_token": deviceToken
+            ]
+            
+            postJSON = JSON(userData)
+        }
+        
+        networkService.post(postJSON, relativeUrl: "logout") { (json, error) -> Void in
             if let requestError = error {
                 print(requestError)
             } else {
@@ -166,10 +176,20 @@ class UserService {
     }
     
     private func authorize(login: String, password: String, completion:(error: NSError?) -> Void) {
-        let userData = [
-            "login": login,
-            "password": password
-        ]
+        var userData: [String: NSString]
+        
+        if let deviceToken = DEVICE_TOKEN {
+            userData = [
+                "login": login,
+                "password": password,
+                "device_token": deviceToken
+            ]
+        } else {
+            userData = [
+                "login": login,
+                "password": password
+            ]
+        }
         
         let postJSON = JSON(userData)
         
