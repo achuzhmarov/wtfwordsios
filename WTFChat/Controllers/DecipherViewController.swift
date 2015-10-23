@@ -270,6 +270,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     func gameOver() {
         if (!talk.isSingleMode) {
             talk.cipheredNum--
+            userService.updatePushBadge()
         }
         
         messageCipher.failed(message!)

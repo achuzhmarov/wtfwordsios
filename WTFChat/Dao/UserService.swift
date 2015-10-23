@@ -23,6 +23,63 @@ class UserService {
         return currentUser!
     }
     
+    func setNewUser(user: User) {
+        self.currentUser = user
+        
+        //add singleModeTalk to user.talks
+        let singleModeTalk = Talk(id: "0")
+        singleModeTalk.isSingleMode = true
+        let singleModeUser = User(login: "Pass and Play", suggestions: 0, rating: 0)
+        
+        singleModeTalk.users.append(singleModeUser.login)
+        singleModeTalk.users.append(user.login)
+        
+        user.talks.append(singleModeTalk)
+        
+        self.updatePushBadge()
+    }
+    
+    func updateOrCreateTalkInArray(talk: Talk, withMessages: Bool = false) {
+        for i in 0..<currentUser!.talks.count {
+            if (talk.id == currentUser!.talks[i].id) {
+                
+                if (withMessages) {
+                    //update with messages
+                } else {
+                    //save early downloaded messages before update
+                    talk.messages = currentUser!.talks[i].messages
+                }
+                
+                currentUser!.talks[i] = talk
+                self.updatePushBadge()
+                return
+            }
+        }
+        
+        currentUser!.talks.append(talk)
+        self.updatePushBadge()
+    }
+    
+    private func getTalksLastUpdate() -> NSDate {
+        var lastUpdate: NSDate?
+        
+        for talk in currentUser!.talks {
+            if (talk.isSingleMode) {
+                continue
+            }
+            
+            if (lastUpdate == nil || talk.lastUpdate.isGreater(lastUpdate!)) {
+                lastUpdate = talk.lastUpdate
+            }
+        }
+        
+        if (lastUpdate != nil) {
+            return lastUpdate!
+        } else {
+            return NSDate().addYears(-1)
+        }
+    }
+    
     func login(login: String, password: String, completion: (user: User?, error: NSError?) -> Void) {
         self.authorize(login, password: password) { error -> Void in
             if let requestError = error {
@@ -79,7 +136,9 @@ class UserService {
         }
     }
     
-    func getUnreadTalks(lastUpdate: NSDate, completion:(talks: [Talk]?, error: NSError?) -> Void) {
+    func getUnreadTalks(completion:(talks: [Talk]?, error: NSError?) -> Void) {
+        let lastUpdate = self.getTalksLastUpdate()
+        
         let lastUpdateData = [
             "last_update": NSDate.parseStringJSONFromDate(lastUpdate)!
         ]
@@ -93,7 +152,12 @@ class UserService {
                 if let talksJson = json {
                     do {
                         let talks = try Talk.parseArrayFromJson(talksJson)
-                        completion(talks: talks, error: nil)
+                        
+                        for talk in talks {
+                            self.updateOrCreateTalkInArray(talk)
+                        }
+                        
+                        completion(talks: self.currentUser!.talks, error: nil)
                     } catch let error as NSError {
                         completion(talks: nil, error: error)
                     }
@@ -161,6 +225,26 @@ class UserService {
         }
     }
     
+    func updateDeviceToken() {
+        var postJSON: JSON? = nil
+        
+        if let deviceToken = DEVICE_TOKEN {
+            let userData = [
+                "device_token": deviceToken
+            ]
+            
+            postJSON = JSON(userData)
+        }
+        
+        networkService.post(postJSON, relativeUrl: "user/ios_token") { (json, error) -> Void in
+            if let requestError = error {
+                print(requestError)
+            } else {
+                //ok - do nothing
+            }
+        }
+    }
+    
     func getAvatarImage(name: String, diameter: UInt) -> JSQMessagesAvatarImage {
         let rgbValue = name.hash
         let r = CGFloat(Float((rgbValue & 0xFF0000) >> 16)/255.0)
@@ -173,6 +257,25 @@ class UserService {
         let initials : String? = name[0...min(2, nameLength)].capitalizedString
         
         return JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(initials, backgroundColor: color, textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(CGFloat(13)), diameter: diameter)
+    }
+    
+    func updatePushBadge() {
+        //can only change badge from main_queue
+        dispatch_async(dispatch_get_main_queue(), {
+            var badge = 0
+            
+            if (self.currentUser != nil) {
+                for talk in self.currentUser!.talks {
+                    badge += talk.cipheredNum
+                    
+                    if (talk.decipherStatus != .No) {
+                        badge++
+                    }
+                }
+                
+                UIApplication.sharedApplication().applicationIconBadgeNumber = badge
+            }
+        })
     }
     
     private func authorize(login: String, password: String, completion:(error: NSError?) -> Void) {

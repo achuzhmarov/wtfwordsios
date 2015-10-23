@@ -27,17 +27,7 @@ class FriendsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.view.backgroundColor = BACKGROUND_COLOR
-
-        let singleModeTalk = Talk(id: "0")
-        singleModeTalk.isSingleMode = true
-        let singleModeUser = User(login: "Pass and Play", suggestions: 0, rating: 0)
-        
-        singleModeTalk.users.append(singleModeUser.login)
-        singleModeTalk.users.append(userService.getCurrentUser().login)
-        
-        talks.append(singleModeTalk)
-        talks.appendContentsOf(userService.getCurrentUser().talks)
+        talks = userService.getCurrentUser().talks
         
         self.updateView()
     }
@@ -54,7 +44,10 @@ class FriendsViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        self.talks = userService.getCurrentUser().talks
         self.updateView()
+        
+        updateTalks()
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,53 +56,19 @@ class FriendsViewController: UITableViewController {
     }
     
     func updateTalks() {
-        userService.getUnreadTalks(getTalksLastUpdate()) {talks, error -> Void in
+        userService.getUnreadTalks() {talks, error -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if let requestError = error {
                     //TODO - show error to user
                     print(requestError)
                 } else {
                     if let newTalks = talks {
-                        for talk in newTalks {
-                            self.updateOrCreateTalkInArray(talk)
-                        }
-                            
+                        self.talks = newTalks
                         self.updateView()
                     }
                 }
             })
         }
-    }
-    
-    func getTalksLastUpdate() -> NSDate {
-        var lastUpdate: NSDate?
-        
-        for talk in talks {
-            if (talk.isSingleMode) {
-                continue
-            }
-            
-            if (lastUpdate == nil || talk.lastUpdate.isGreater(lastUpdate!)) {
-                lastUpdate = talk.lastUpdate
-            }
-        }
-        
-        if (lastUpdate != nil) {
-            return lastUpdate!
-        } else {
-            return NSDate().addYears(-1)
-        }
-    }
-    
-    func updateOrCreateTalkInArray(talk: Talk) {
-        for i in 0..<self.talks.count {
-            if (talk.id == self.talks[i].id) {
-                self.talks[i] = talk
-                return
-            }
-        }
-        
-        self.talks.append(talk)
     }
     
     func updateView() {

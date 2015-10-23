@@ -20,11 +20,7 @@ class Talk : BaseEntity {
     var lastUpdate: NSDate
     var messageCount: Int
     
-    var messages = [Message]() {
-        didSet {
-            lastMessage = messages.last
-        }
-    }
+    var messages = [Message]()
     
     var lastMessage: Message?
     var isSingleMode = false

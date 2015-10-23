@@ -78,6 +78,8 @@ class MessageCipher {
             cipherType: generatedMessage.cipherType
         )
         
+        newMessage.isLocal = true
+        
         talk.appendMessage(newMessage)
         
         return newMessage

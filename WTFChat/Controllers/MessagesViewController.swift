@@ -43,7 +43,7 @@ class MessagesViewController: JSQMessagesViewController {
         
         self.senderDisplayName = currentUser.login
         self.senderId = currentUser.login
-        
+
         if talk.messages.count == 0 && !talk.isSingleMode {
             messageService.getMessagesByTalk(talk) { (messages, error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
@@ -52,20 +52,26 @@ class MessagesViewController: JSQMessagesViewController {
                         print(requestError)
                     } else {
                         self.talk.messages = messages!
+                        self.talk.lastMessage = messages!.last
                         self.talk.decipherStatus = DecipherStatus.No
+                        userService.updateOrCreateTalkInArray(self.talk, withMessages: true)
+                        
                         self.updateView()
+                        
+                        self.setUpdateTimer()
                     }
                 })
             }
-        } else {
-            self.updateView()
         }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.updateView()
         
-        self.collectionView!.reloadData()
+        if (talk.messages.count != 0) {
+            updateMessages()
+        }
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -78,18 +84,27 @@ class MessagesViewController: JSQMessagesViewController {
         }
     }
     
+    func setUpdateTimer() {
+        if let updateTimer = timer {
+            updateTimer.invalidate()
+        }
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(TALKS_UPDATE_TIMER_INTERVAL, target: self,
+            selector: "updateMessages", userInfo: nil, repeats: true)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        if (!talk.isSingleMode) {
-            timer = NSTimer.scheduledTimerWithTimeInterval(TALKS_UPDATE_TIMER_INTERVAL, target: self,
-                selector: "updateMessages", userInfo: nil, repeats: true)
+        if (!talk.isSingleMode && talk.messages.count != 0) {
+            setUpdateTimer()
         }
         
         //send message
         if (messageSended) {
             messageSended = false
             let newMessage = messageCipher.addNewMessageToTalk(self.messageToSend!, talk: self.talk!)
+            userService.updateOrCreateTalkInArray(self.talk, withMessages: true)
             
             //let text = self.inputToolbar?.contentView?.textView?.text
             //let newMessage = messageCipher.createMessage(self.talk!, text: text!, cipherType: cipherType)
@@ -104,16 +119,16 @@ class MessagesViewController: JSQMessagesViewController {
                         } else {
                             if let responseMessage = message {
                                 self.talk.messages[self.talk.messages.count - 1] = responseMessage
-                                self.updateView()
+                                userService.updateOrCreateTalkInArray(self.talk, withMessages: true)
+                                
+                                self.updateView(true)
                             }
                         }
                     })
                 }
             } else {
-                self.updateView()
+                self.updateView(true)
             }
-            
-            //self.finishSendingMessage()
         }
     }
 
@@ -121,6 +136,11 @@ class MessagesViewController: JSQMessagesViewController {
         var lastUpdate: NSDate?
         
         for message in talk.messages {
+            //ignore local messages
+            if (message.isLocal) {
+                continue
+            }
+            
             if (lastUpdate == nil || message.lastUpdate.isGreater(lastUpdate!)) {
                 lastUpdate = message.lastUpdate
             }
@@ -146,7 +166,7 @@ class MessagesViewController: JSQMessagesViewController {
                         for message in newMessages {
                             self.updateOrCreateMessageInArray(message)
                         }
-                            
+                        
                         self.updateView()
                     }
                 }
@@ -165,12 +185,12 @@ class MessagesViewController: JSQMessagesViewController {
         self.talk.messages.append(message)
     }
     
-    func updateView(earlierLoaded: Int = 0) {
+    func updateView(withSend: Bool = false, earlierLoaded: Int = 0) {
         talk.messages.sortInPlace { (message1, message2) -> Bool in
             return message1.timestamp.isLess(message2.timestamp)
         }
         
-        if (talk.messageCount > talk.messages.count) {
+        if (talk.messages.count != 0 && talk.messageCount > talk.messages.count) {
             showLoadEarlierMessagesHeader = true
         } else {
             showLoadEarlierMessagesHeader = false
@@ -178,12 +198,22 @@ class MessagesViewController: JSQMessagesViewController {
         
         self.collectionView!.reloadData()
         
-        if (earlierLoaded == 0) {
+        /*if (withoutSend && self.keyboardController.textView!.text.characters.count > 0) {
+            self.keyboardController.textView!.becomeFirstResponder()
+        }*/
+        
+        if (withSend) {
             finishSendingMessageAnimated(false)
-        } else {
+        } else if (earlierLoaded == 0) {
+            finishReceivingMessageAnimated(false)
+        } else if (earlierLoaded > 0) {
             let indexPath = NSIndexPath(forItem: earlierLoaded - 1, inSection: 0)
             collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Top, animated: false)
         }
+        
+        self.talk.decipherStatus = DecipherStatus.No
+        self.talk.lastMessage = self.talk.messages.last
+        userService.updateOrCreateTalkInArray(self.talk, withMessages: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -298,6 +328,7 @@ class MessagesViewController: JSQMessagesViewController {
         senderDisplayName: String!,
         date: NSDate!)
     {
+        dismissKeyboard()
         performSegueWithIdentifier("showMessagePreview", sender: text)
     }
     
@@ -433,7 +464,7 @@ class MessagesViewController: JSQMessagesViewController {
                             self.updateOrCreateMessageInArray(message)
                         }
                         
-                        self.updateView(newMessages.count)
+                        self.updateView(false, earlierLoaded: newMessages.count)
                     }
                 }
             })

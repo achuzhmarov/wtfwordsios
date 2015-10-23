@@ -18,6 +18,8 @@ class Message : BaseEntity, JSQMessageData {
     var deciphered: Bool
     var cipherType = CipherType.HalfWordRoundDown
     
+    var isLocal: Bool = false
+    
     init(id: String, talkId: String, author: String) {
         
         self.timestamp = NSDate()

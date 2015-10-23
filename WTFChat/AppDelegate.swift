@@ -40,6 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         DEVICE_TOKEN = tokenString
+        
+        if (userService.currentUser != nil) {
+            userService.updateDeviceToken()
+        }
     }
     
     //Called if unable to register for APNS.
@@ -59,23 +63,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let alertMsg = info["alert"] as! String
             print(alertMsg)
             
-            var myViewController : UIViewController!
-            
             if let viewControllers = self.window?.rootViewController?.childViewControllers {
                 for viewController in viewControllers {
                     if viewController.isKindOfClass(UIViewController) {
-                        myViewController = viewController as UIViewController
+                        let uiViewController = viewController as UIViewController
                         print("Found the view controller")
-                        print(myViewController)
+                        print(uiViewController)
                         
-                        WTFOneButtonAlert.show("Push", message: alertMsg, firstButtonTitle: "Ok", viewPresenter: myViewController)
+                        if let friendsViewController = uiViewController as? FriendsViewController {
+                            friendsViewController.updateTalks()
+                        } else if let messageViewController = uiViewController as? MessagesViewController {
+                            messageViewController.updateMessages()
+                        }
+                        
+                        WTFOneButtonAlert.show("Push", message: alertMsg, firstButtonTitle: "Ok", viewPresenter: uiViewController)
                     }
                 }
             }
-            
-            //var alert: UIAlertView!
-            //alert = UIAlertView(title: "", message: alertMsg, delegate: nil, cancelButtonTitle: "OK")
-            //alert.show()
         }
     }
     

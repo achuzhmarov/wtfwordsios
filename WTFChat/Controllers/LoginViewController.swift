@@ -81,7 +81,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     print(requestError)
                 } else {
                     self.user = user
-                    userService.currentUser = self.user
+                    userService.setNewUser(user!)
                     
                     self.keychain.mySetObject(login, forKey:kSecAttrAccount)
                     self.keychain.mySetObject(password, forKey:kSecValueData)
