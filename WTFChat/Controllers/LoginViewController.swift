@@ -9,27 +9,14 @@
 import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
-    var user: User?
-    
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
-    
-    let keychain = KeychainWrapper()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         loginButton.layer.cornerRadius = 10
-        
-        let username = keychain.myObjectForKey(kSecAttrAccount) as? String
-        let password = keychain.myObjectForKey(kSecValueData) as? String
-        
-        if (username != nil && password != nil && username != "Not set") {
-            usernameField.text = username
-            passwordField.text = password
-            login(username!, password: password!)
-        }
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
@@ -75,19 +62,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         userService.login(login, password: password) { user, error -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if let requestError = error {
-                    self.keychain.resetKeychainItem()
-                    
                     //TODO - show error to user
                     print(requestError)
                 } else {
-                    self.user = user
-                    userService.setNewUser(user!)
-                    
-                    self.keychain.mySetObject(login, forKey:kSecAttrAccount)
-                    self.keychain.mySetObject(password, forKey:kSecValueData)
-                    self.keychain.writeToKeychain()
-                    
-                    self.performSegueWithIdentifier("showFriends", sender: self)
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    appDelegate.showMainScreen()
                 }
             })
         }
@@ -95,7 +74,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Navigation
     
-    @IBAction func logout(segue:UIStoryboardSegue) {
+    /*@IBAction func logout(segue:UIStoryboardSegue) {
         userService.logout()
         
         usernameField.text = ""
@@ -105,12 +84,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         usernameField.resignFirstResponder()
         passwordField.resignFirstResponder()
-        
-        self.keychain.mySetObject("Not set", forKey:kSecAttrAccount)
-        self.keychain.mySetObject("Not set", forKey:kSecValueData)
-        self.keychain.writeToKeychain()
-
-    }
+    }*/
     
     @IBAction func register(segue:UIStoryboardSegue) {
         if let registrationController = segue.sourceViewController as? RegistrationViewController {

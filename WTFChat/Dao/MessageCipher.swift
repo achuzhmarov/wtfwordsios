@@ -19,16 +19,73 @@ class MessageCipher {
         let words = message.words
         
         for guessWord in guessWords {
-            for word in words! {
-                if (word.wordType == WordType.New
-                    && word.getCompareString() == guessWord.uppercaseString.removeChars(WORD_SPECIAL_SYMBOLS)) {
-                            
-                    word.wordType = WordType.Success
+            let guesses = parseGuessForCompare(guessWord)
+            
+            for guess in guesses {
+                for word in words! {
+                    if (word.wordType == WordType.New && word.getCompareString() == guess) {
+                        word.wordType = WordType.Success
+                    }
                 }
             }
         }
         
         checkDeciphered(message)
+    }
+    
+    func wasCloseTry(word: Word, guessWords: [String]?) -> Bool {
+        if (guessWords == nil) {
+            return false
+        }
+        
+        for guessWord in guessWords! {
+            let guesses = parseGuessForCompare(guessWord)
+            
+            for guess in guesses {
+                if Tools.calcStringDistance(word.getCompareString(), bStr: guess) == 1 {
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
+    
+    func parseGuessForCompare(guessWord: String) -> [String] {
+        var result = [String]()
+        var newWordText = ""
+        var isLastLetter = true
+        
+        for uniChar in guessWord.unicodeScalars {
+            if (isLastLetter) {
+                if (isLetter(uniChar)) {
+                    newWordText += String(uniChar)
+                } else {
+                    isLastLetter = false
+                    
+                    //add word to result
+                    result.append(newWordText.uppercaseString.removeChars(WORD_SPECIAL_SYMBOLS))
+                    newWordText = ""
+                    
+                    //skip current symbol
+                }
+            } else {
+                if (isLetter(uniChar)) {
+                    isLastLetter = true
+                    
+                    //save letter to new word
+                    newWordText = String(uniChar)
+                } else {
+                    //skip current symbol
+                }
+            }
+        }
+        
+        if (isLastLetter) {
+            result.append(newWordText.uppercaseString.removeChars(WORD_SPECIAL_SYMBOLS))
+        }
+        
+        return result
     }
     
     func decipher(message: Message, suggestedWord: Word) {
@@ -68,7 +125,7 @@ class MessageCipher {
         if (talk.isSingleMode) {
             author = talk.users[0]
         } else {
-            author = userService.getCurrentUser().login
+            author = userService.getUserLogin()
         }
         
         let newMessage = Message(id: "",

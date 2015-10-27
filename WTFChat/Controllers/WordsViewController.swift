@@ -118,10 +118,10 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         return false
     }
     
-    func animateWarning(tries: [String]?) {
+    func animateWarning(guesses: [String]?) {
         for wordContainer in rows.getAllWordContainers() {
             if (wordContainer.word.wordType == WordType.New) {
-                if (wasCloseTry(wordContainer.word, tries: tries)) {
+                if (messageCipher.wasCloseTry(wordContainer.word, guessWords: guesses)) {
                     wordContainer.animateWarning()
                     wordContainer.word.wasCloseTry = true
                     wordContainer.originalWord.wasCloseTry = true
@@ -130,13 +130,13 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    func animateError(tries: [String]?) {
+    func animateError(guesses: [String]?) {
         var wasWarning = false
         var wasError = false
         
         for wordContainer in rows.getAllWordContainers() {
             if (wordContainer.word.wordType == WordType.New) {
-                if (wasCloseTry(wordContainer.word, tries: tries)) {
+                if (messageCipher.wasCloseTry(wordContainer.word, guessWords: guesses)) {
                     wordContainer.animateWarning()
                     wordContainer.word.wasCloseTry = true
                     wordContainer.originalWord.wasCloseTry = true
@@ -153,18 +153,6 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         } else if (wasError) {
             audioHelper.playSound("error")
         }
-    }
-    
-    func wasCloseTry(word: Word, tries: [String]?) -> Bool {
-        if (tries != nil) {
-            for curTry in tries! {
-                if Tools.calcStringDistance(word.getCompareString(), bStr: curTry.uppercaseString.removeChars(WORD_SPECIAL_SYMBOLS)) == 1 {
-                    return true
-                }
-            }
-        }
-        
-        return false
     }
     
     func createView() {

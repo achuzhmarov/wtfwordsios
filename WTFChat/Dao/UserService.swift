@@ -10,73 +10,44 @@ import Foundation
 
 let userService = UserService()
 
+protocol UserListener {
+    func updateUserInfo(user: User)
+}
+
 class UserService {
-    var currentUser: User?
-    var suggestionsUsed : Int = 0
+    private var currentUser: User?
+    private var suggestionsUsed : Int = 0
+    
+    func isLoggedIn() -> Bool {
+        if currentUser != nil {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func getUserSuggestions() -> Int {
+        return currentUser!.suggestions
+    }
+    
+    func getUserLogin() -> String {
+        return currentUser!.login
+    }
     
     func useSuggestion() {
         currentUser!.suggestions--
         suggestionsUsed++
     }
     
-    func getCurrentUser() -> User {
-        return currentUser!
-    }
-    
-    func setNewUser(user: User) {
+    func setNewUser(user: User, password: String) {
         self.currentUser = user
-        
-        //add singleModeTalk to user.talks
-        let singleModeTalk = Talk(id: "0")
-        singleModeTalk.isSingleMode = true
-        let singleModeUser = User(login: "Pass and Play", suggestions: 0, rating: 0)
-        
-        singleModeTalk.users.append(singleModeUser.login)
-        singleModeTalk.users.append(user.login)
-        
-        user.talks.append(singleModeTalk)
-        
-        self.updatePushBadge()
+        talkService.setTalksByNewUser(user)
+        iosService.updateUserCredentials(user.login, password: password)
     }
     
-    func updateOrCreateTalkInArray(talk: Talk, withMessages: Bool = false) {
-        for i in 0..<currentUser!.talks.count {
-            if (talk.id == currentUser!.talks[i].id) {
-                
-                if (withMessages) {
-                    //update with messages
-                } else {
-                    //save early downloaded messages before update
-                    talk.messages = currentUser!.talks[i].messages
-                }
-                
-                currentUser!.talks[i] = talk
-                self.updatePushBadge()
-                return
-            }
-        }
-        
-        currentUser!.talks.append(talk)
-        self.updatePushBadge()
-    }
-    
-    private func getTalksLastUpdate() -> NSDate {
-        var lastUpdate: NSDate?
-        
-        for talk in currentUser!.talks {
-            if (talk.isSingleMode) {
-                continue
-            }
-            
-            if (lastUpdate == nil || talk.lastUpdate.isGreater(lastUpdate!)) {
-                lastUpdate = talk.lastUpdate
-            }
-        }
-        
-        if (lastUpdate != nil) {
-            return lastUpdate!
-        } else {
-            return NSDate().addYears(-1)
+    func loginWithKeychain(completion: (user: User?, error: NSError?) -> Void) {
+        login(iosService.getKeychainUser()!, password: iosService.getKeychainPassword()!) { (user, error) -> Void in
+            completion(user: user, error: error)
         }
     }
     
@@ -89,6 +60,7 @@ class UserService {
                     if let requestError = error {
                         completion(user: nil, error: requestError)
                     } else {
+                        self.setNewUser(user!, password: password)
                         completion(user: user, error: nil)
                     }
                 }
@@ -116,7 +88,9 @@ class UserService {
         }
         
         currentUser = nil
+        talkService.clearTalks()
         networkService.session = NSURLSession.sharedSession()
+        iosService.resetUserCredentials()
     }
     
     func register(login: String, password: String, completion:(error: NSError?) -> Void) {
@@ -132,38 +106,6 @@ class UserService {
                 completion(error: requestError)
             } else {
                 completion(error: nil)
-            }
-        }
-    }
-    
-    func getUnreadTalks(completion:(talks: [Talk]?, error: NSError?) -> Void) {
-        let lastUpdate = self.getTalksLastUpdate()
-        
-        let lastUpdateData = [
-            "last_update": NSDate.parseStringJSONFromDate(lastUpdate)!
-        ]
-        
-        let postJSON = JSON(lastUpdateData)
-        
-        networkService.post(postJSON, relativeUrl: "user/new_talks_by_time") { (json, error) -> Void in
-            if let requestError = error {
-                completion(talks: nil, error: requestError)
-            } else {
-                if let talksJson = json {
-                    do {
-                        let talks = try Talk.parseArrayFromJson(talksJson)
-                        
-                        for talk in talks {
-                            self.updateOrCreateTalkInArray(talk)
-                        }
-                        
-                        completion(talks: self.currentUser!.talks, error: nil)
-                    } catch let error as NSError {
-                        completion(talks: nil, error: error)
-                    }
-                } else {
-                    completion(talks: nil, error: nil)
-                }
             }
         }
     }
@@ -225,26 +167,6 @@ class UserService {
         }
     }
     
-    func updateDeviceToken() {
-        var postJSON: JSON? = nil
-        
-        if let deviceToken = DEVICE_TOKEN {
-            let userData = [
-                "device_token": deviceToken
-            ]
-            
-            postJSON = JSON(userData)
-        }
-        
-        networkService.post(postJSON, relativeUrl: "user/ios_token") { (json, error) -> Void in
-            if let requestError = error {
-                print(requestError)
-            } else {
-                //ok - do nothing
-            }
-        }
-    }
-    
     func getAvatarImage(name: String, diameter: UInt) -> JSQMessagesAvatarImage {
         let rgbValue = name.hash
         let r = CGFloat(Float((rgbValue & 0xFF0000) >> 16)/255.0)
@@ -257,25 +179,6 @@ class UserService {
         let initials : String? = name[0...min(2, nameLength)].capitalizedString
         
         return JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(initials, backgroundColor: color, textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(CGFloat(13)), diameter: diameter)
-    }
-    
-    func updatePushBadge() {
-        //can only change badge from main_queue
-        dispatch_async(dispatch_get_main_queue(), {
-            var badge = 0
-            
-            if (self.currentUser != nil) {
-                for talk in self.currentUser!.talks {
-                    badge += talk.cipheredNum
-                    
-                    if (talk.decipherStatus != .No) {
-                        badge++
-                    }
-                }
-                
-                UIApplication.sharedApplication().applicationIconBadgeNumber = badge
-            }
-        })
     }
     
     private func authorize(login: String, password: String, completion:(error: NSError?) -> Void) {

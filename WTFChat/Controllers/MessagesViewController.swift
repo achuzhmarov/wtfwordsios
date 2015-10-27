@@ -14,7 +14,6 @@ let INTERVAL_BETWEEN_MESSAGES_TO_SHOW_TOP_TIMESTAMP_IN_SECONDS = 10 * 60
 class MessagesViewController: JSQMessagesViewController {
     var timer: NSTimer?
     
-    var currentUser = userService.getCurrentUser()
     var talk: Talk!
 
     var cipherType: CipherType = CipherType.HalfWordRoundDown
@@ -41,10 +40,10 @@ class MessagesViewController: JSQMessagesViewController {
 
         self.inputToolbar!.contentView!.leftBarButtonItem = nil
         
-        self.senderDisplayName = currentUser.login
-        self.senderId = currentUser.login
+        self.senderDisplayName = userService.getUserLogin()
+        self.senderId = userService.getUserLogin()
 
-        if talk.messages.count == 0 && !talk.isSingleMode {
+        if (talk.messages.count == 0 && !talk.isSingleMode) {
             messageService.getMessagesByTalk(talk) { (messages, error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     if let requestError = error {
@@ -54,7 +53,7 @@ class MessagesViewController: JSQMessagesViewController {
                         self.talk.messages = messages!
                         self.talk.lastMessage = messages!.last
                         self.talk.decipherStatus = DecipherStatus.No
-                        userService.updateOrCreateTalkInArray(self.talk, withMessages: true)
+                        talkService.updateTalkInArray(self.talk, withMessages: true)
                         
                         self.updateView()
                         
@@ -62,6 +61,8 @@ class MessagesViewController: JSQMessagesViewController {
                     }
                 })
             }
+        } else if (!talk.isSingleMode) {
+            updateMessages()
         }
     }
     
@@ -104,7 +105,7 @@ class MessagesViewController: JSQMessagesViewController {
         if (messageSended) {
             messageSended = false
             let newMessage = messageCipher.addNewMessageToTalk(self.messageToSend!, talk: self.talk!)
-            userService.updateOrCreateTalkInArray(self.talk, withMessages: true)
+            talkService.updateTalkInArray(self.talk, withMessages: true)
             
             //let text = self.inputToolbar?.contentView?.textView?.text
             //let newMessage = messageCipher.createMessage(self.talk!, text: text!, cipherType: cipherType)
@@ -119,7 +120,7 @@ class MessagesViewController: JSQMessagesViewController {
                         } else {
                             if let responseMessage = message {
                                 self.talk.messages[self.talk.messages.count - 1] = responseMessage
-                                userService.updateOrCreateTalkInArray(self.talk, withMessages: true)
+                                talkService.updateTalkInArray(self.talk, withMessages: true)
                                 
                                 self.updateView(true)
                             }
@@ -213,7 +214,7 @@ class MessagesViewController: JSQMessagesViewController {
         
         self.talk.decipherStatus = DecipherStatus.No
         self.talk.lastMessage = self.talk.messages.last
-        userService.updateOrCreateTalkInArray(self.talk, withMessages: true)
+        talkService.updateTalkInArray(self.talk, withMessages: true)
     }
 
     override func didReceiveMemoryWarning() {

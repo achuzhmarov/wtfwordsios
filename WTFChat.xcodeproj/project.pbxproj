@@ -35,6 +35,8 @@
 		489666DB1B9B656A00F769D1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489666D61B9B656A00F769D1 /* User.swift */; };
 		489666DC1B9B656A00F769D1 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489666D71B9B656A00F769D1 /* Word.swift */; };
 		48A2F9A81B9DF42C009E5434 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A2F9A71B9DF42C009E5434 /* Extensions.swift */; };
+		48D3A53E1BDF814800B2A1AD /* TalkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D3A53D1BDF814800B2A1AD /* TalkService.swift */; settings = {ASSET_TAGS = (); }; };
+		48D3A5401BDF81F900B2A1AD /* IosService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D3A53F1BDF81F900B2A1AD /* IosService.swift */; settings = {ASSET_TAGS = (); }; };
 		48DBD96D1BD505AA00680ED3 /* DoubleCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBD96C1BD505AA00680ED3 /* DoubleCutterCipher.swift */; settings = {ASSET_TAGS = (); }; };
 		48DBD96F1BD505B900680ED3 /* RandomCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBD96E1BD505B900680ED3 /* RandomCutterCipher.swift */; settings = {ASSET_TAGS = (); }; };
 		48E9D61F1BB3F5FB00BA0F2A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9D61E1BB3F5FB00BA0F2A /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -106,6 +108,8 @@
 		489666D61B9B656A00F769D1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		489666D71B9B656A00F769D1 /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		48A2F9A71B9DF42C009E5434 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		48D3A53D1BDF814800B2A1AD /* TalkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkService.swift; sourceTree = "<group>"; };
+		48D3A53F1BDF81F900B2A1AD /* IosService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IosService.swift; sourceTree = "<group>"; };
 		48DBD96C1BD505AA00680ED3 /* DoubleCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleCutterCipher.swift; sourceTree = "<group>"; };
 		48DBD96E1BD505B900680ED3 /* RandomCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomCutterCipher.swift; sourceTree = "<group>"; };
 		48E9D61E1BB3F5FB00BA0F2A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -272,6 +276,8 @@
 				489666BE1B9B651800F769D1 /* MessageService.swift */,
 				48E9D6201BB46DAB00BA0F2A /* MessageCipher.swift */,
 				489666C01B9B651800F769D1 /* UserService.swift */,
+				48D3A53D1BDF814800B2A1AD /* TalkService.swift */,
+				48D3A53F1BDF81F900B2A1AD /* IosService.swift */,
 			);
 			path = Dao;
 			sourceTree = "<group>";
@@ -500,6 +506,7 @@
 				489666BB1B9B650400F769D1 /* FriendsViewController.swift in Sources */,
 				482AA4F51BC2C41500F101F8 /* SendMessageViewController.swift in Sources */,
 				489666D81B9B656A00F769D1 /* BaseEntity.swift in Sources */,
+				48D3A5401BDF81F900B2A1AD /* IosService.swift in Sources */,
 				487D771B1BA0749800AF333C /* RoundedLabel.swift in Sources */,
 				482C241E1BA433F800288BB1 /* RightCutterCipher.swift in Sources */,
 				489666DA1B9B656A00F769D1 /* Talk.swift in Sources */,
@@ -517,6 +524,7 @@
 				489666DB1B9B656A00F769D1 /* User.swift in Sources */,
 				489666D91B9B656A00F769D1 /* Message.swift in Sources */,
 				48E9D6211BB46DAB00BA0F2A /* MessageCipher.swift in Sources */,
+				48D3A53E1BDF814800B2A1AD /* TalkService.swift in Sources */,
 				48F2F5451BA1CAB2005CCAC8 /* WordsField.swift in Sources */,
 				48A2F9A81B9DF42C009E5434 /* Extensions.swift in Sources */,
 				48EE657D1BB6F1C300A0DB07 /* AddFriendViewController.swift in Sources */,

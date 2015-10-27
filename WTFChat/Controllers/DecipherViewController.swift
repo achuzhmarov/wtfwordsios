@@ -179,6 +179,10 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     func useSuggestion(word: Word) {
+        if (isOvered) {
+            return
+        }
+        
         audioHelper.playSound("success")
         
         messageCipher.decipher(message!, suggestedWord: word)
@@ -270,7 +274,6 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     func gameOver() {
         if (!talk.isSingleMode) {
             talk.cipheredNum--
-            userService.updatePushBadge()
         }
         
         messageCipher.failed(message!)
@@ -309,6 +312,8 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             
             userService.sendUsedSugegstions()
         }
+        
+        talkService.updateTalkInArray(talk)
     }
     
     func hideTopLayer() {
@@ -366,7 +371,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         if (isSingleMode) {
             return suggestionsForSingleMode
         } else {
-            return userService.currentUser!.suggestions
+            return userService.getUserSuggestions()
         }
     }
     

@@ -20,7 +20,8 @@ class NetworkService {
     }
     
     func post(postJSON: JSON?, relativeUrl: String, completion:(json: JSON?, error: NSError?) -> Void) {
-    
+        //print(relativeUrl)
+        
         let url = NSURL(string: baseUrl + relativeUrl)!
         
         let request = NSMutableURLRequest(URL: url)
@@ -59,6 +60,8 @@ class NetworkService {
     }
     
     func get(relativeUrl: String, completion:(json: JSON?, error: NSError?) -> Void) {
+        //print(relativeUrl)
+        
         let url = NSURL(string: baseUrl + relativeUrl)!
         
         let loadDataTask = session.dataTaskWithURL(url) { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in

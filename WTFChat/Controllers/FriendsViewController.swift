@@ -8,8 +8,6 @@
 
 import UIKit
 
-let TALKS_UPDATE_TIMER_INTERVAL = 10.0
-
 //let BACKGROUND_COLOR = UIColor(netHex:0xEEEEEE)
 //let HIGHLIGHT_BACKGROUND_COLOR = UIColor(netHex:0xFFFFFF)
 
@@ -19,35 +17,29 @@ let FAILED_COLOR = UIColor(netHex:0xF26964)
 let TRY_COLOR = UIColor(netHex:0xEE8D09)
 let FONT_COLOR = UIColor.whiteColor()
 
-class FriendsViewController: UITableViewController {
-    var timer: NSTimer?
-    
+class FriendsViewController: UITableViewController, TalkListener {
     var talks = [Talk]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        talks = userService.getCurrentUser().talks
-        
-        self.updateView()
+        talkService.friendsTalkListener = self
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    /*override func viewDidDisappear(animated: Bool) {
         if let updateTimer = timer {
             updateTimer.invalidate()
         }
-    }
+    }*/
     
-    override func viewDidAppear(animated: Bool) {
+    /*override func viewDidAppear(animated: Bool) {
         timer = NSTimer.scheduledTimerWithTimeInterval(TALKS_UPDATE_TIMER_INTERVAL, target: self,
             selector: "updateTalks", userInfo: nil, repeats: true)
-    }
+    }*/
     
     override func viewWillAppear(animated: Bool) {
-        self.talks = userService.getCurrentUser().talks
+        self.talks = talkService.talks
         self.updateView()
-        
-        updateTalks()
+        talkService.getNewUnreadTalks()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,20 +47,19 @@ class FriendsViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func updateTalks() {
-        userService.getUnreadTalks() {talks, error -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
-                if let requestError = error {
-                    //TODO - show error to user
-                    print(requestError)
-                } else {
-                    if let newTalks = talks {
-                        self.talks = newTalks
-                        self.updateView()
-                    }
+    //delegate for TalkListener
+    func updateTalks(talks: [Talk]?, error: NSError?) {
+        dispatch_async(dispatch_get_main_queue(), {
+            if let requestError = error {
+                //TODO - show error to user
+                print(requestError)
+            } else {
+                if let newTalks = talks {
+                    self.talks = newTalks
+                    self.updateView()
                 }
-            })
-        }
+            }
+        })
     }
     
     func updateView() {
@@ -125,8 +116,14 @@ class FriendsViewController: UITableViewController {
     
     @IBAction func addFriend(segue:UIStoryboardSegue) {
         if let addFriendController = segue.sourceViewController as? AddFriendViewController {
-            self.talks.append(addFriendController.createdTalk!)
-            self.updateView()
+            //self.talks.append(addFriendController.createdTalk!)
+            talkService.addNewTalk(addFriendController.createdTalk!)
+            //self.updateView()
         }
+    }
+    
+    @IBAction func logoutPressed(sender: AnyObject) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.logout()
     }
 }

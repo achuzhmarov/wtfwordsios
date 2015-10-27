@@ -140,7 +140,7 @@ class Message : BaseEntity, JSQMessageData {
     // MARK: JSQMessageData realization
     
     func text() -> String! {
-        if (userService.getCurrentUser().login == self.author) {
+        if (userService.getUserLogin() == self.author) {
             return clearText()
         } else if (self.deciphered) {
             return clearText()

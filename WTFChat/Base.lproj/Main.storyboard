@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="IRF-Uq-X95">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4GE-8z-ZXW">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -48,7 +48,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pH-K1-H7T" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="2" width="12" height="12"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -75,7 +75,7 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35P-rb-i8x">
-                                            <rect key="frame" x="482" y="14" width="110" height="12"/>
+                                            <rect key="frame" x="482" y="13" width="110" height="12"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="110" id="8ek-SZ-H15"/>
                                             </constraints>
@@ -91,7 +91,7 @@
                                         <constraint firstItem="ju0-jF-4Hd" firstAttribute="leading" secondItem="vLT-BG-wmh" secondAttribute="trailing" constant="4" id="9iy-9S-Nas"/>
                                         <constraint firstItem="ffE-3Q-De2" firstAttribute="top" secondItem="V0B-ov-bMg" secondAttribute="topMargin" constant="1" id="C8r-1U-nny"/>
                                         <constraint firstAttribute="bottom" secondItem="WT0-u3-eSU" secondAttribute="bottom" id="Dwe-3P-qVz"/>
-                                        <constraint firstItem="ju0-jF-4Hd" firstAttribute="top" secondItem="35P-rb-i8x" secondAttribute="bottom" constant="3" id="FUm-KW-4kG"/>
+                                        <constraint firstItem="ju0-jF-4Hd" firstAttribute="top" secondItem="35P-rb-i8x" secondAttribute="bottom" constant="4" id="FUm-KW-4kG"/>
                                         <constraint firstItem="vLT-BG-wmh" firstAttribute="leading" secondItem="rMq-1j-Yjm" secondAttribute="trailing" constant="3" id="FtA-p0-YOb"/>
                                         <constraint firstItem="rMq-1j-Yjm" firstAttribute="leading" secondItem="V0B-ov-bMg" secondAttribute="leadingMargin" constant="-3" id="Nh3-Qb-Nrp"/>
                                         <constraint firstItem="0GV-dn-lgG" firstAttribute="top" secondItem="V0B-ov-bMg" secondAttribute="topMargin" constant="1" id="d6l-bq-nXa"/>
@@ -127,7 +127,7 @@
                     <navigationItem key="navigationItem" title="Friends" id="WGX-bP-gTt">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="eJR-NE-abV">
                             <connections>
-                                <segue destination="8CM-ZT-lCV" kind="unwind" unwindAction="logout:" id="iMm-wY-WYV"/>
+                                <action selector="logoutPressed:" destination="8oV-wV-ahY" id="c1r-V5-mfy"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8vu-nl-ooU">
@@ -138,9 +138,8 @@
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XSr-iI-HyS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="8CM-ZT-lCV" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1935" y="339"/>
+            <point key="canvasLocation" x="1121" y="327"/>
         </scene>
         <!--Add Friend-->
         <scene sceneID="6Qo-Ah-GYs">
@@ -199,7 +198,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W1c-IC-xpN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="UdC-fW-ZHg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1935" y="1037"/>
+            <point key="canvasLocation" x="1121" y="1045"/>
         </scene>
         <!--Preview-->
         <scene sceneID="CeE-jA-y2e">
@@ -264,7 +263,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t5V-xq-zqT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="iY0-hB-6OE" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2639" y="1037"/>
+            <point key="canvasLocation" x="1917" y="1045"/>
         </scene>
         <!--Login-->
         <scene sceneID="RIR-lG-WW2">
@@ -352,12 +351,11 @@
                         <outlet property="loginButton" destination="fL0-o3-Fez" id="syf-nL-FBr"/>
                         <outlet property="passwordField" destination="BYg-Gk-bhQ" id="T1Q-uj-P0D"/>
                         <outlet property="usernameField" destination="rW3-Yv-nJX" id="Sz2-D6-SS9"/>
-                        <segue destination="8oV-wV-ahY" kind="show" identifier="showFriends" id="6OG-gl-HYq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1bL-LT-TkB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1217" y="339"/>
+            <point key="canvasLocation" x="1121" y="-429"/>
         </scene>
         <!--Registration-->
         <scene sceneID="d7X-NT-XyF">
@@ -451,12 +449,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="INQ-ll-ylF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="hqX-7c-QrK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1217" y="1037"/>
+            <point key="canvasLocation" x="1917" y="-429"/>
         </scene>
         <!--Messages-->
         <scene sceneID="7in-E6-mBe">
             <objects>
-                <viewController id="jYa-w0-EFD" customClass="MessagesViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="messagesController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jYa-w0-EFD" customClass="MessagesViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8iG-jX-RAw"/>
                         <viewControllerLayoutGuide type="bottom" id="kar-Jw-ZY2"/>
@@ -474,12 +472,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UqY-fg-vJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2639" y="339"/>
+            <point key="canvasLocation" x="1917" y="327"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="C3l-GF-yrz">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IRF-Uq-X95" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="loginNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IRF-Uq-X95" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QOK-dO-tds">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -492,7 +490,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lbx-yz-hyQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="467" y="339"/>
+            <point key="canvasLocation" x="371" y="-429"/>
         </scene>
         <!--Decipher-->
         <scene sceneID="F8Z-hj-r0t">
@@ -632,7 +630,25 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3379" y="339"/>
+            <point key="canvasLocation" x="2731" y="327"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MAi-wm-bOx">
+            <objects>
+                <navigationController storyboardIdentifier="friendsNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4GE-8z-ZXW" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tj2-4Y-tI4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8oV-wV-ahY" kind="relationship" relationship="rootViewController" id="f64-OY-Tmc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GWl-i4-IRr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="371" y="327"/>
         </scene>
     </scenes>
 </document>

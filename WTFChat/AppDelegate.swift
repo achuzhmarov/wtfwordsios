@@ -10,13 +10,31 @@ import UIKit
 
 var DEVICE_TOKEN: NSString?
 
+let WAIT_FOR_USER_LOADING_IN_SECONDS = UInt32(2)
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+
+        if (iosService.haveUserCredentials()) {
+            userService.loginWithKeychain() { user, error -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    if let requestError = error {
+                        print(requestError)
+                        self.showLoginScreen()
+                    } else {
+                        //do nothing - default main screen: FriendsViewController
+                    }
+                })
+            }
+        } else {
+            showLoginScreen()
+        }
         
+        //subscribe for pushNotifications
         if #available(iOS 8.0, *) {
             let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
             UIApplication.sharedApplication().registerUserNotificationSettings(settings)
@@ -25,8 +43,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerForRemoteNotificationTypes([.Alert, .Badge, .Sound])
         }
         
+        sleep(WAIT_FOR_USER_LOADING_IN_SECONDS)
+        
+        if let notification = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject : AnyObject]
+        {
+            if (userService.isLoggedIn()) {
+                computeInactiveNotification(notification)
+            }
+        }
+        
         // Override point for customization after application launch.
         return true
+    }
+    
+    func showMainScreen() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewControllerWithIdentifier("friendsNavController")
+        showWindowAnimated(viewController)
+    }
+    
+    func showFriendScreen(author: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let friendsNavigationController = storyboard.instantiateViewControllerWithIdentifier("friendsNavController")
+            as! UINavigationController
+        
+        let messagesController = storyboard.instantiateViewControllerWithIdentifier("messagesController") as! MessagesViewController
+
+        messagesController.talk = talkService.getTalkByLogin(author)
+        
+        friendsNavigationController.pushViewController(messagesController, animated: false)
+        showWindowAnimated(friendsNavigationController)
+    }
+    
+    func showLoginScreen() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewControllerWithIdentifier("loginNavController")
+        showWindowAnimated(viewController)
+    }
+    
+    private func showWindowAnimated(viewController: UIViewController) {
+        UIView.transitionWithView(window!,
+            duration: 0.5,
+            options: UIViewAnimationOptions.TransitionCrossDissolve,
+            animations: { () -> Void in
+                let oldState = UIView.areAnimationsEnabled()
+                UIView.setAnimationsEnabled(false)
+                self.window!.rootViewController = viewController
+                UIView.setAnimationsEnabled(oldState)
+            },
+            completion: nil)
+    }
+    
+    func logout() {
+        userService.logout()
+        showLoginScreen()
     }
     
     func application(application: UIApplication,didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
@@ -41,8 +111,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         DEVICE_TOKEN = tokenString
         
-        if (userService.currentUser != nil) {
-            userService.updateDeviceToken()
+        if (userService.isLoggedIn()) {
+            iosService.updateDeviceToken()
         }
     }
     
@@ -53,34 +123,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        print("Recived: \(userInfo)")
-        //Parsing userinfo:
-        let temp : NSDictionary = userInfo
-        print(temp)
+        if (application.applicationState == .Inactive || application.applicationState == .Background)
+        {
+            //opened from a push notification when the app was closed
+            computeInactiveNotification(userInfo)
+        } else {
+            //was in front
+            computeActiveNotification(userInfo)
+        }
+    }
+    
+    func computeActiveNotification(userInfo: [NSObject : AnyObject]) {
+        talkService.getNewUnreadTalks()
         
+        let currentController = getCurrentController()
+        if let messageViewController = currentController as? MessagesViewController {
+            messageViewController.updateMessages()
+        }
+        
+        //show localNotification (added to ios notifications window)
         if let info = userInfo["aps"] as? Dictionary<String, AnyObject>
         {
-            let alertMsg = info["alert"] as! String
-            print(alertMsg)
+            let notification = UILocalNotification()
+            notification.alertBody = info["alert"] as? String
+            notification.fireDate = NSDate()
             
-            if let viewControllers = self.window?.rootViewController?.childViewControllers {
-                for viewController in viewControllers {
-                    if viewController.isKindOfClass(UIViewController) {
-                        let uiViewController = viewController as UIViewController
-                        print("Found the view controller")
-                        print(uiViewController)
-                        
-                        if let friendsViewController = uiViewController as? FriendsViewController {
-                            friendsViewController.updateTalks()
-                        } else if let messageViewController = uiViewController as? MessagesViewController {
-                            messageViewController.updateMessages()
-                        }
-                        
-                        WTFOneButtonAlert.show("Push", message: alertMsg, firstButtonTitle: "Ok", viewPresenter: uiViewController)
-                    }
+            UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        }
+    }
+    
+    func computeInactiveNotification(userInfo: [NSObject : AnyObject]) {
+        if let author = userInfo["author"] as? String
+        {
+            showFriendScreen(author)
+        }
+        
+        /*if let info = userInfo["aps"] as? Dictionary<String, AnyObject>
+        {
+            let alertMsg = info["alert"] as! String
+        }*/
+    }
+    
+    private func getCurrentController() -> UIViewController? {
+        if let viewControllers = self.window?.rootViewController?.childViewControllers {
+            for viewController in viewControllers {
+                if viewController.isKindOfClass(UIViewController) {
+                    return viewController as UIViewController
                 }
             }
         }
+        
+        return nil
     }
     
 
