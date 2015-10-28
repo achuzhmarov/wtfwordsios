@@ -132,11 +132,6 @@ class WordLabelContainer {
             }, completion: nil)
     }
     
-    static func getWordWidth(word: Word) -> CGFloat {
-        let wordContainer = WordLabelContainer(word: word)
-        return wordContainer.getWidth()
-    }
-    
     let labelHorizontalMargin = CGFloat(2)
     let labelVerticalMargin = CGFloat(2)
     

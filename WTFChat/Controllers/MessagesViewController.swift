@@ -150,7 +150,7 @@ class MessagesViewController: JSQMessagesViewController {
         if (lastUpdate != nil) {
             return lastUpdate!
         } else {
-            return NSDate().addYears(-1)
+            return NSDate.defaultPast()
         }
     }
     

@@ -39,6 +39,7 @@
 		48D3A5401BDF81F900B2A1AD /* IosService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D3A53F1BDF81F900B2A1AD /* IosService.swift */; settings = {ASSET_TAGS = (); }; };
 		48DBD96D1BD505AA00680ED3 /* DoubleCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBD96C1BD505AA00680ED3 /* DoubleCutterCipher.swift */; settings = {ASSET_TAGS = (); }; };
 		48DBD96F1BD505B900680ED3 /* RandomCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBD96E1BD505B900680ED3 /* RandomCutterCipher.swift */; settings = {ASSET_TAGS = (); }; };
+		48E4E3AD1BE0ED9600E45D65 /* FriendLvl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E4E3AC1BE0ED9600E45D65 /* FriendLvl.swift */; settings = {ASSET_TAGS = (); }; };
 		48E9D61F1BB3F5FB00BA0F2A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9D61E1BB3F5FB00BA0F2A /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		48E9D6211BB46DAB00BA0F2A /* MessageCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9D6201BB46DAB00BA0F2A /* MessageCipher.swift */; settings = {ASSET_TAGS = (); }; };
 		48ECC8F61B9DA8E400A15B47 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48ECC8F51B9DA8E400A15B47 /* MessagesViewController.swift */; };
@@ -112,6 +113,7 @@
 		48D3A53F1BDF81F900B2A1AD /* IosService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IosService.swift; sourceTree = "<group>"; };
 		48DBD96C1BD505AA00680ED3 /* DoubleCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleCutterCipher.swift; sourceTree = "<group>"; };
 		48DBD96E1BD505B900680ED3 /* RandomCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomCutterCipher.swift; sourceTree = "<group>"; };
+		48E4E3AC1BE0ED9600E45D65 /* FriendLvl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendLvl.swift; sourceTree = "<group>"; };
 		48E9D61E1BB3F5FB00BA0F2A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		48E9D6201BB46DAB00BA0F2A /* MessageCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCipher.swift; sourceTree = "<group>"; };
 		48ECC8EE1B9DA0F900A15B47 /* WTFChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WTFChat-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				489666D51B9B656A00F769D1 /* Talk.swift */,
 				489666D61B9B656A00F769D1 /* User.swift */,
 				489666D71B9B656A00F769D1 /* Word.swift */,
+				48E4E3AC1BE0ED9600E45D65 /* FriendLvl.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				48DBD96D1BD505AA00680ED3 /* DoubleCutterCipher.swift in Sources */,
 				48F2F5491BA1FF5A005CCAC8 /* Timer.swift in Sources */,
 				482E9ED21BC1825D00803CDE /* WTFAlert.swift in Sources */,
+				48E4E3AD1BE0ED9600E45D65 /* FriendLvl.swift in Sources */,
 				48E9D61F1BB3F5FB00BA0F2A /* LoginViewController.swift in Sources */,
 				48EE657B1BB694E300A0DB07 /* KeychainWrapper.m in Sources */,
 				482C241A1BA433D500288BB1 /* CipherFactory.swift in Sources */,

@@ -23,7 +23,6 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     var selfAuthor = false
     
     var suggestionComputer: SuggestionComputer?
-    var isFirstUpdate = true
     
     @objc func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -77,7 +76,6 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         self.useCipherText = useCipherText
         self.selfAuthor = selfAuthor
         createView()
-        isFirstUpdate = false
     }
     
     func updateMessage(message: Message) {
@@ -102,7 +100,6 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         }
         
         self.reloadData()
-        isFirstUpdate = false
     }
     
     func needUpdate() -> Bool {
@@ -201,7 +198,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         let row = targetRows.getLastRow()
         
         let rowWidth = getRowWidth(row)
-        let wordWidth = WordLabelContainer.getWordWidth(word)
+        let wordWidth = wordContainer.getWidth()
         
         if (rowWidth + wordWidth <= getMaxWidth()) {
             targetRows.append(wordContainer)
@@ -238,11 +235,13 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         return width
     }
     
+    var maxWidth = CGFloat(0)
+    
     func getMaxWidth() -> CGFloat {
-        if (isFirstUpdate) {
-            return self.bounds.width - CGFloat(16)
-        } else {
-            return self.bounds.width
+        if (maxWidth == 0) {
+            maxWidth = self.bounds.width - CGFloat(16)
         }
+        
+        return maxWidth
     }
 }

@@ -36,6 +36,10 @@ extension NSDate
 
 extension NSDate
 {
+    class func defaultPast() -> NSDate {
+        return NSDate().addYears(-1)
+    }
+    
     func addYears(yearsToAdd : Int) -> NSDate
     {
         let calendar = NSCalendar.currentCalendar()

@@ -17,7 +17,7 @@ class OneLetterFromBothEndsCipher: Cipher {
         let odd = ((word.getCharCount() % 2) == 1)
         let easyCiphered = DoubleCutterHelper.cutWord(word.getLowerCase(), odd: odd)
             
-        let cuttedEasyCiphered = DoubleCutterHelper.cutIfTooManyLetters(easyCiphered, odd: odd, maxChars: 5)
+        let cuttedEasyCiphered = DoubleCutterHelper.cutIfTooManyLetters(easyCiphered, odd: odd, maxChars: 6)
             
         return "..." + cuttedEasyCiphered + "..." + word.additional
     }
@@ -30,10 +30,14 @@ class TwoLettersFromBothEndsCipher: Cipher {
         }
         
         let odd = ((word.getCharCount() % 2) == 1)
-        let easyCiphered = DoubleCutterHelper.cutWord(word.getLowerCase(), odd: odd)
-        let normalCiphered = DoubleCutterHelper.cutWord(easyCiphered, odd: odd)
+        var ciphered = DoubleCutterHelper.cutWord(word.getLowerCase(), odd: odd)
         
-        let cuttedNormalCiphered = DoubleCutterHelper.cutIfTooManyLetters(normalCiphered, odd: odd, maxChars: 4)
+        let cipheredLength = ciphered.characters.count
+        if (cipheredLength > 1) {
+            ciphered = ciphered[1...cipheredLength-1]
+        }
+
+        let cuttedNormalCiphered = DoubleCutterHelper.cutIfTooManyLetters(ciphered, odd: odd, maxChars: 5)
         
         return "..." + cuttedNormalCiphered + "..." + word.additional
     }
@@ -47,15 +51,9 @@ class ThreeLettersFromBothEndsCipher: Cipher {
         
         let odd = ((word.getCharCount() % 2) == 1)
         let easyCiphered = DoubleCutterHelper.cutWord(word.getLowerCase(), odd: odd)
-        let normalCiphered = DoubleCutterHelper.cutWord(easyCiphered, odd: odd)
-        let hardCiphered = DoubleCutterHelper.cutWord(normalCiphered, odd: odd)
+        let hardCiphered = DoubleCutterHelper.cutWord(easyCiphered, odd: odd)
         
-        var maxChars = 3
-        if (word.getCharCount() <= 5) {
-            maxChars = 1
-        }
-        
-        let cuttedHardCiphered = DoubleCutterHelper.cutIfTooManyLetters(hardCiphered, odd: odd, maxChars: maxChars)
+        let cuttedHardCiphered = DoubleCutterHelper.cutIfTooManyLetters(hardCiphered, odd: odd, maxChars: 4)
         
         return "..." + cuttedHardCiphered + "..." + word.additional
     }
