@@ -164,6 +164,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }*/
     }
     
+    func showNewSuggestionsAlert() {
+        let currentController = getCurrentController()
+        
+        if let _ = currentController as? DecipherViewController {
+            //don't show alert if deciphering
+            return
+        }
+        
+        if (userService.getUserNewSuggestions() != 0) {
+            WTFOneButtonAlert.show("Free hints!",
+                message: "You have just received " + String(userService.getUserNewSuggestions()),
+                firstButtonTitle: "Ok",
+                viewPresenter: currentController)
+            
+            userService.clearUserNewSuggestions()
+        }
+    }
+    
     private func getCurrentController() -> UIViewController? {
         if let viewControllers = self.window?.rootViewController?.childViewControllers {
             for viewController in viewControllers {

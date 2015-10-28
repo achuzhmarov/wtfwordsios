@@ -10,13 +10,13 @@ import Foundation
 
 let userService = UserService()
 
-protocol UserListener {
-    func updateUserInfo(user: User)
-}
+let USER_UPDATE_TIMER_INTERVAL = 10.0
 
-class UserService {
+class UserService: NSObject {
     private var currentUser: User?
     private var suggestionsUsed : Int = 0
+    
+    var updateTimer: NSTimer?
     
     func isLoggedIn() -> Bool {
         if currentUser != nil {
@@ -28,6 +28,14 @@ class UserService {
     
     func getUserSuggestions() -> Int {
         return currentUser!.suggestions
+    }
+    
+    func getUserNewSuggestions() -> Int {
+        return currentUser!.newSuggestions
+    }
+    
+    func clearUserNewSuggestions() {
+        currentUser!.newSuggestions = 0
     }
     
     func getUserLogin() -> String {
@@ -43,6 +51,13 @@ class UserService {
         self.currentUser = user
         talkService.setTalksByNewUser(user)
         iosService.updateUserCredentials(user.login, password: password)
+        
+        //timer worked only on main
+        dispatch_async(dispatch_get_main_queue(), {
+            self.updateTimer?.invalidate()
+            self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(USER_UPDATE_TIMER_INTERVAL, target: self,
+                selector: "getNewInfo", userInfo: nil, repeats: true)
+        })
     }
     
     func loginWithKeychain(completion: (user: User?, error: NSError?) -> Void) {
@@ -91,6 +106,8 @@ class UserService {
         talkService.clearTalks()
         networkService.session = NSURLSession.sharedSession()
         iosService.resetUserCredentials()
+        
+        self.updateTimer?.invalidate()
     }
     
     func register(login: String, password: String, completion:(error: NSError?) -> Void) {
@@ -106,6 +123,36 @@ class UserService {
                 completion(error: requestError)
             } else {
                 completion(error: nil)
+            }
+        }
+    }
+    
+    func getNewInfo() {
+        let lastUpdateData = [
+            "last_update": NSDate.parseStringJSONFromDate(currentUser!.lastUpdate)!
+        ]
+        
+        let postJSON = JSON(lastUpdateData)
+        
+        networkService.post(postJSON, relativeUrl: "user/new_info") { (json, error) -> Void in
+            if let requestError = error {
+                print(requestError)
+            } else {
+                if let userJson = json {
+                    do {
+                        let user = try User.parseFromJson(userJson)
+                        self.currentUser!.updateInfo(user)
+                        
+                        if (user.newSuggestions != 0) {
+                            dispatch_async(dispatch_get_main_queue(), {
+                                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                                appDelegate.showNewSuggestionsAlert()
+                            })
+                        }
+                    } catch let error as NSError {
+                        print(error)
+                    }
+                }
             }
         }
     }

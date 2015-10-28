@@ -25,16 +25,12 @@ class FriendsViewController: UITableViewController, TalkListener {
         talkService.friendsTalkListener = self
     }
     
-    /*override func viewDidDisappear(animated: Bool) {
-        if let updateTimer = timer {
-            updateTimer.invalidate()
+    override func viewDidAppear(animated: Bool) {
+        if (userService.getUserNewSuggestions() != 0) {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.showNewSuggestionsAlert()
         }
-    }*/
-    
-    /*override func viewDidAppear(animated: Bool) {
-        timer = NSTimer.scheduledTimerWithTimeInterval(TALKS_UPDATE_TIMER_INTERVAL, target: self,
-            selector: "updateTalks", userInfo: nil, repeats: true)
-    }*/
+    }
     
     override func viewWillAppear(animated: Bool) {
         self.talks = talkService.talks

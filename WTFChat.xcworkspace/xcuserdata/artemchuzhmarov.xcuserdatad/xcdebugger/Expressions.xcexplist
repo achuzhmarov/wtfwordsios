@@ -3,13 +3,16 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "MessagesViewController.prepareForSegue(UIStoryboardSegue, sender : AnyObject?) -&gt; ():MessagesViewController.swift">
+         contextName = "WordsViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:WordsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "static User.parseFromJson(JSON) throws -&gt; User:User.swift">
          <PersistentStrings>
             <PersistentString
-               value = "targetController.isSingleMode">
+               value = "json[&quot;talks&quot;].isEmpty">
             </PersistentString>
             <PersistentString
-               value = "talk.isSingleMode">
+               value = "json[&quot;talks&quot;]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -87,9 +90,6 @@
          contextName = "WordsViewController.addWord(Word, targetRows : WordsField, isNewRow : Bool) -&gt; ():WordsViewController.swift">
       </ContextState>
       <ContextState
-         contextName = "TalkService.setTalksByNewUser(User) -&gt; ():TalkService.swift">
-      </ContextState>
-      <ContextState
          contextName = "WTFChat.HalfWordRoundDownCipher.getTextForDecipher (WTFChat.HalfWordRoundDownCipher)(WTFChat.Word) -&gt; Swift.String:HalfWordRoundDownDecipher.swift">
          <PersistentStrings>
             <PersistentString
@@ -109,10 +109,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "WordsViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:WordsViewController.swift">
+         contextName = "WTFChat.TalkService.getTalkByUsers (WTFChat.TalkService)(Swift.String, user2 : Swift.String) -&gt; Swift.Optional&lt;WTFChat.Talk&gt;:TalkService.swift">
       </ContextState>
       <ContextState
-         contextName = "WTFChat.TalkService.getTalkByUsers (WTFChat.TalkService)(Swift.String, user2 : Swift.String) -&gt; Swift.Optional&lt;WTFChat.Talk&gt;:TalkService.swift">
+         contextName = "TalkService.setTalksByNewUser(User) -&gt; ():TalkService.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MessagesViewController.prepareForSegue(UIStoryboardSegue, sender : AnyObject?) -&gt; ():MessagesViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "targetController.isSingleMode">
+            </PersistentString>
+            <PersistentString
+               value = "talk.isSingleMode">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

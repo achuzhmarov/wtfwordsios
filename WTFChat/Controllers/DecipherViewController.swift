@@ -152,15 +152,15 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     func showNoSuggestionsDialog() {
-        WTFOneButtonAlert.show("Use Suggestion: 0",
-            message: "You have used all suggestions",
+        WTFOneButtonAlert.show("Use Hint: 0",
+            message: "You have used all hints",
             firstButtonTitle: "Ok",
             viewPresenter: self)
     }
     
     func showSuggestionConfirm(word: Word) {
-        WTFTwoButtonsAlert.show("Use Suggestion: " + String(self.getSuggestions()),
-            message: "Are you sure you want to use a suggestion?",
+        WTFTwoButtonsAlert.show("Use Hint: " + String(self.getSuggestions()),
+            message: "Are you sure you want to use a hint?",
             firstButtonTitle: "Ok",
             secondButtonTitle: "Cancel",
             viewPresenter: self) { () -> Void in
