@@ -15,7 +15,7 @@ class User {
     
     var lastUpdate: NSDate = NSDate.defaultPast()
     var exp: Int = 0
-    var lvl: Int = 1
+    var lvl: Int = 0
     var newSuggestions: Int = 0
     var friendsLvls = [FriendLvl]()
     

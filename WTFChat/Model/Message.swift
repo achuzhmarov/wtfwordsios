@@ -17,6 +17,7 @@ class Message : BaseEntity, JSQMessageData {
     var words: [Word]?
     var deciphered: Bool
     var cipherType = CipherType.HalfWordRoundDown
+    var exp: Int = 0
     
     var isLocal: Bool = false
     

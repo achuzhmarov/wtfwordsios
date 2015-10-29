@@ -42,6 +42,14 @@ class UserService: NSObject {
         return currentUser!.login
     }
     
+    func getUserExp() -> Int {
+        return currentUser!.exp
+    }
+    
+    func getUserLvl() -> Int {
+        return currentUser!.lvl
+    }
+    
     func useSuggestion() {
         currentUser!.suggestions--
         suggestionsUsed++
