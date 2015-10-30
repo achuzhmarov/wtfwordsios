@@ -335,6 +335,13 @@ class MessagesViewController: JSQMessagesViewController {
     
     @IBAction func sendMessage(segue:UIStoryboardSegue) {
         if let sendMessageController = segue.sourceViewController as? SendMessageViewController {
+            //check for duplicates
+            if (messageToSend != nil) {
+                if (messageToSend!.checkEquals(sendMessageController.message)) {
+                    return
+                }
+            }
+            
             self.cipherType = sendMessageController.cipherType
             self.messageToSend = sendMessageController.message
             self.messageSended = true

@@ -9,7 +9,7 @@
 import Foundation
 
 enum WordType: Int {
-    case New = 1, Success, Failed, Delimiter, Ignore, LineBreak
+    case New = 1, Success, Failed, Delimiter, Ignore, LineBreak, CloseTry
 }
 
 class Word : NSObject {
@@ -96,6 +96,19 @@ class Word : NSObject {
     
     class func lineBreakWord() -> Word {
         return Word(text: "\n", wordType: WordType.LineBreak)
+    }
+    
+    func checkEquals(word: Word) -> Bool {
+        if (self.wordType != word.wordType ||
+            self.cipheredText != word.cipheredText ||
+            self.text != word.text ||
+            self.additional != word.additional
+            )
+        {
+            return false
+        } else {
+            return true
+        }
     }
     
     func getJson() -> JSON {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class OneLetterFromBothEndsCipher: Cipher {
+class EasyDoubleCutterCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         if (word.getCharCount() == 2) {
             return "..." + word.getLowerCase()[1] + "..." + word.additional
@@ -23,7 +23,7 @@ class OneLetterFromBothEndsCipher: Cipher {
     }
 }
 
-class TwoLettersFromBothEndsCipher: Cipher {
+class NormalDoubleCutterCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         if (word.getCharCount() == 2) {
             return "..." + word.getLowerCase()[1] + "..." + word.additional
@@ -43,7 +43,7 @@ class TwoLettersFromBothEndsCipher: Cipher {
     }
 }
 
-class ThreeLettersFromBothEndsCipher: Cipher {
+class HardDoubleCutterCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         if (word.getCharCount() == 2) {
             return "..." + word.getLowerCase()[1] + "..." + word.additional

@@ -88,8 +88,13 @@ class MessageCipher {
         return result
     }
     
-    func decipher(message: Message, suggestedWord: Word) {
-        suggestedWord.wordType = WordType.Success
+    func decipher(message: Message, suggestedWord: Word, closeTry: Bool = false) {
+        if (closeTry) {
+            suggestedWord.wordType = WordType.CloseTry
+        } else {
+            suggestedWord.wordType = WordType.Success
+        }
+        
         checkDeciphered(message)
     }
     
@@ -104,7 +109,7 @@ class MessageCipher {
         for word in message.words! {
             if (word.wordType == WordType.New) {
                 if (word.wasCloseTry) {
-                    word.wordType = WordType.Success
+                    word.wordType = WordType.CloseTry
                 } else {
                     word.wordType = WordType.Failed
                 }

@@ -42,8 +42,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     let SUGGESTIONS_SINGLE_MODE = 3
     
     var initialViewFrame: CGRect!
-    var isExpViewShown = false
-    var expView: UIView?
+    var expGainView = ExpGainView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,11 +85,6 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         self.initialViewFrame = self.view.frame
     }
-    
-    //TODO - for testing
-    /*override func viewDidAppear(animated: Bool) {
-        showExpGain(100)
-    }*/
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self);
@@ -196,16 +190,19 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         audioHelper.playSound("success")
         
-        messageCipher.decipher(message!, suggestedWord: word)
-        wordsTableView.updateMessage(message!)
-        
         if (word.wasCloseTry) {
-            //do nothing
-        } else if (isSingleMode) {
-            self.suggestionsForSingleMode--
+            messageCipher.decipher(message!, suggestedWord: word, closeTry: true)
         } else {
-            userService.useSuggestion()
+            messageCipher.decipher(message!, suggestedWord: word)
+            
+            if (isSingleMode) {
+                self.suggestionsForSingleMode--
+            } else {
+                userService.useSuggestion()
+            }
         }
+        
+        wordsTableView.updateMessage(message!)
         
         if (message!.deciphered) {
             gameOver()
@@ -244,9 +241,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     func viewTapped() {
-        if (isExpViewShown) {
-            removeExpView()
-        } else if (isOvered) {
+        if (isOvered) {
             changeCipherStateForViewOnly()
         } else if (!isStarted) {
             start()
@@ -292,11 +287,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         messageCipher.failed(message!)
         
         bottomView.hidden = true
-        //guessTextField.hidden = true
-        //guessTextField.text = ""
-        //tryButton.hidden = true
-        self.hideTopLayer()
-        
+
         wordsTableView.updateMessage(message!)
         
         dismissKeyboard()
@@ -311,6 +302,14 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         isOvered = true
         
+        if (message.countSuccess() > 0) {
+            timer.seconds = 0
+            topTimerLabel.text = ""
+            self.expGainView.myInit(self.topView)
+        } else {
+            self.hideTopLayer()
+        }
+        
         if (!isSingleMode) {
             messageService.decipherMessage(message) { (message, error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
@@ -318,7 +317,9 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
                         //TODO - show error to user
                         print(requestError)
                     } else {
-                        self.showExpGain(message!.exp)
+                        if (message!.exp > 0) {
+                            self.expGainView.runProgress(message!.exp)
+                        }
                     }
                 })
             }
@@ -327,86 +328,6 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         }
         
         talkService.updateTalkInArray(talk)
-    }
-    
-    func showExpGain(earnedExp: Int) {
-        let userLvl = lvlService.getUserLvl()
-        let userExp = lvlService.getCurrentLvlExp()
-        
-        let expView = createExpView()
-        showExpView(expView)
-    }
-    
-    func createExpView() -> UIView {
-        //create dimView
-        let dimView = UIView(frame: self.initialViewFrame)
-        dimView.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
-        dimView.alpha = 0
-        self.view.addSubview(dimView)
-        
-        //create expView
-        let expView = UIView(frame: self.initialViewFrame)
-        expView.translatesAutoresizingMaskIntoConstraints = false
-        expView.backgroundColor = UIColor.whiteColor()
-        dimView.addSubview(expView)
-        
-        //add constraints
-        let widthConstraint = NSLayoutConstraint(item: expView, attribute: .Width, relatedBy: .Equal,
-            toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 200)
-        expView.addConstraint(widthConstraint)
-        
-        let heightConstraint = NSLayoutConstraint(item: expView, attribute: .Height, relatedBy: .Equal,
-            toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 100)
-        expView.addConstraint(heightConstraint)
-        
-        let xConstraint = NSLayoutConstraint(item: expView, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1, constant: 0)
-        self.view.addConstraint(xConstraint)
-        
-        let yConstraint = NSLayoutConstraint(item: expView, attribute: .CenterY, relatedBy: .Equal, toItem: self.view, attribute: .CenterY, multiplier: 1, constant: 0)
-        self.view.addConstraint(yConstraint)
-        
-        //create avatar view
-        let avatarView = UIImageView(frame: self.initialViewFrame)
-        avatarView.translatesAutoresizingMaskIntoConstraints = false
-        expView.addSubview(avatarView)
-        
-        //add constraints
-        
-        //exp gauge
-        
-        return dimView
-    }
-    
-    func showExpView(expView: UIView) {
-        //save view to clear it later
-        self.expView = expView
-        isExpViewShown = true
-        
-        UIView.animateWithDuration(
-            0.5,
-            delay: 0,
-            options: [],
-            animations: {
-                expView.alpha = 0.5
-            },
-            completion: nil
-        )
-    }
-    
-    func removeExpView() {
-        isExpViewShown = false
-        
-        UIView.animateWithDuration(
-            0.5,
-            delay: 0,
-            options: [],
-            animations: {
-                self.expView?.alpha = 0
-            },
-            completion: { _ -> Void in
-                self.expView?.removeFromSuperview()
-            }
-        )
     }
     
     func hideTopLayer() {

@@ -14,7 +14,7 @@ class Message : BaseEntity, JSQMessageData {
     
     var lastUpdate: NSDate
     var author: String
-    var words: [Word]?
+    var words: [Word]!
     var deciphered: Bool
     var cipherType = CipherType.HalfWordRoundDown
     var exp: Int = 0
@@ -32,7 +32,7 @@ class Message : BaseEntity, JSQMessageData {
         super.init(id: id)
     }
     
-    init(id: String, talkId: String, author: String, words: [Word]?, cipherType: CipherType) {
+    init(id: String, talkId: String, author: String, words: [Word], cipherType: CipherType) {
         
         self.timestamp = NSDate()
         self.lastUpdate = self.timestamp
@@ -46,7 +46,7 @@ class Message : BaseEntity, JSQMessageData {
         super.init(id: id)
     }
     
-    init(id: String, talkId: String, author: String, words: [Word]?, deciphered: Bool) {
+    init(id: String, talkId: String, author: String, words: [Word], deciphered: Bool) {
         
         self.timestamp = NSDate()
         self.lastUpdate = self.timestamp
@@ -68,7 +68,7 @@ class Message : BaseEntity, JSQMessageData {
         super.init(id: id)
     }
     
-    init(id: String, talkId: String, author: String, words: [Word]?, deciphered: Bool, cipherType: CipherType, timestamp: NSDate, lastUpdate: NSDate) {
+    init(id: String, talkId: String, author: String, words: [Word], deciphered: Bool, cipherType: CipherType, timestamp: NSDate, lastUpdate: NSDate, exp: Int) {
         
         self.timestamp = timestamp
         self.lastUpdate = lastUpdate
@@ -77,6 +77,7 @@ class Message : BaseEntity, JSQMessageData {
         self.deciphered = deciphered
         self.cipherType = cipherType
         self.words = words
+        self.exp = exp
         
         super.init(id: id)
     }
@@ -92,7 +93,7 @@ class Message : BaseEntity, JSQMessageData {
     func getWordsWithoutSpaces() -> [Word] {
         var result = [Word]()
         
-        for word in words! {
+        for word in words {
             if (word.wordType != WordType.Delimiter) {
                 result.append(word)
             }
@@ -104,7 +105,7 @@ class Message : BaseEntity, JSQMessageData {
     func getWordsOnly() -> [Word] {
         var result = [Word]()
         
-        for word in words! {
+        for word in words {
             if (word.wordType != WordType.Delimiter &&
                 word.wordType != WordType.LineBreak) {
                 result.append(word)
@@ -129,7 +130,7 @@ class Message : BaseEntity, JSQMessageData {
     func countWordsByStatus(wordType: WordType) -> Int {
         var result = 0
         
-        for word in words! {
+        for word in words {
             if (word.wordType == wordType) {
                 result++
             }
@@ -153,21 +154,19 @@ class Message : BaseEntity, JSQMessageData {
     func questionMarks() -> String! {
         var result = ""
         
-        if (words != nil) {
-            for word in words! {
-                if (word.wordType == WordType.Delimiter) {
-                    result += " "
-                } else if (word.wordType == WordType.LineBreak) {
-                    result += "\n"
-                } else if (word.wordType == WordType.Ignore) {
-                    if (word.text.characters.count > 0) {
-                        result += "???" + word.additional
-                    } else {
-                        result += word.additional
-                    }
-                } else {
+        for word in words {
+            if (word.wordType == WordType.Delimiter) {
+                result += " "
+            } else if (word.wordType == WordType.LineBreak) {
+                result += "\n"
+            } else if (word.wordType == WordType.Ignore) {
+                if (word.text.characters.count > 0) {
                     result += "???" + word.additional
+                } else {
+                    result += word.additional
                 }
+            } else {
+                result += "???" + word.additional
             }
         }
         
@@ -176,11 +175,9 @@ class Message : BaseEntity, JSQMessageData {
     
     func clearText() -> String! {
         var result = ""
-            
-        if (words != nil) {
-            for word in words! {
-                result += word.getClearText()
-            }
+        
+        for word in words! {
+            result += word.getClearText()
         }
             
         return result
@@ -204,6 +201,20 @@ class Message : BaseEntity, JSQMessageData {
     
     func messageHash() -> UInt {
         return UInt(id.hash);
+    }
+    
+    func checkEquals(message: Message) -> Bool {
+        if (self.words.count != message.words.count) {
+            return false
+        }
+        
+        for i in 0..<self.words.count {
+            if (!self.words[i].checkEquals(message.words[i])) {
+                return false
+            }
+        }
+        
+        return true
     }
     
     class func parseArrayFromJson(json: JSON) throws -> [Message] {
@@ -265,6 +276,7 @@ class Message : BaseEntity, JSQMessageData {
         var cipherType: CipherType
         var timestamp: NSDate
         var lastUpdate: NSDate
+        var exp: Int = 0
         
         if let value = json["id"].string {
             id = value
@@ -325,6 +337,12 @@ class Message : BaseEntity, JSQMessageData {
         } else {
             throw json["words"].error!
         }
+        
+        if let value = json["exp"].int {
+            exp = value
+        } else if let error = json["exp"].error {
+            throw error
+        }
 
         return Message(
             id: id,
@@ -334,7 +352,8 @@ class Message : BaseEntity, JSQMessageData {
             deciphered: deciphered,
             cipherType: cipherType,
             timestamp: timestamp,
-            lastUpdate: lastUpdate
+            lastUpdate: lastUpdate,
+            exp: exp
         )
     }
 }

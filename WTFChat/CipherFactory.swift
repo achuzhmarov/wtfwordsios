@@ -25,9 +25,9 @@ enum CipherType : Int {
     case ShuffleFullWord
     case ShuffleWithExtraLetter
     
-    case OneLetterFromBothEnds
-    case TwoLettersFromBothEnds
-    case ThreeLettersFromBothEnds
+    case EasyDoubleCutter
+    case NormalDoubleCutter
+    case HardDoubleCutter
     
     case EasyRandomCutter
     case NormalRandomCutter
@@ -80,7 +80,6 @@ enum CipherMode : Int, CustomStringConvertible {
 
 class CipherFactory {
     static let ciphers: [CipherType: Cipher] = [
-        
         .HalfWordRoundUp: HalfWordRoundUpCipher(),
         .HalfWordRoundDown: HalfWordRoundDownCipher(),
         .FirstLetter: FirstLetterCipher(),
@@ -89,9 +88,9 @@ class CipherFactory {
         .HalfWordRoundDownFromEnd: HalfWordRoundDownFromEndCipher(),
         .HalfWordPlusOneFromEnd: HalfWordPlusOneFromEndCipher(),
         
-        .OneLetterFromBothEnds: OneLetterFromBothEndsCipher(),
-        .TwoLettersFromBothEnds: TwoLettersFromBothEndsCipher(),
-        .ThreeLettersFromBothEnds: ThreeLettersFromBothEndsCipher(),
+        .EasyDoubleCutter: EasyDoubleCutterCipher(),
+        .NormalDoubleCutter: NormalDoubleCutterCipher(),
+        .HardDoubleCutter: HardDoubleCutterCipher(),
     
         .EasyRandomCutter: EasyRandomCutterCipher(),
         .NormalRandomCutter: NormalRandomCutterCipher(),
@@ -114,9 +113,9 @@ class CipherFactory {
             .Hard: .HalfWordPlusOneFromEnd
         ],
         .DoubleCutter: [
-            .Easy: .OneLetterFromBothEnds,
-            .Normal: .TwoLettersFromBothEnds,
-            .Hard: .ThreeLettersFromBothEnds
+            .Easy: .EasyDoubleCutter,
+            .Normal: .NormalDoubleCutter,
+            .Hard: .HardDoubleCutter
         ],
         .RandomCutter: [
             .Easy: .EasyRandomCutter,

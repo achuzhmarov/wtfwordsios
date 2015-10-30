@@ -20,14 +20,10 @@ class LvlService {
     }
     
     func getNextLvlExp() -> Int {
-        return getExpByLvl(userService.getUserLvl() + 1)
-    }
-    
-    func earnExp(exp: Int) {
-        
+        return getExpByLvl(userService.getUserLvl() + 1) - getExpByLvl(userService.getUserLvl())
     }
     
     private func getExpByLvl(lvl: Int) -> Int {
-        return (2 ^^ (lvl / 5) - 1) * 1000 + (2 ^^ (lvl / 5 + 1)) * (lvl % 5) * 100
+        return (2 ^^ (lvl / 5) - 1) * 10000 + (2 ^^ (lvl / 5 + 1)) * (lvl % 5) * 1000
     }
 }

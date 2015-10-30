@@ -17,6 +17,7 @@
 		482C24241BA43CE500288BB1 /* ShuffleCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482C24231BA43CE500288BB1 /* ShuffleCipher.swift */; };
 		482E9ED21BC1825D00803CDE /* WTFAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482E9ED11BC1825D00803CDE /* WTFAlert.swift */; };
 		486506581BE2477B008555AD /* LvlService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486506571BE2477B008555AD /* LvlService.swift */; };
+		4865065A1BE2A492008555AD /* ExpGainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486506591BE2A492008555AD /* ExpGainView.swift */; };
 		487D771B1BA0749800AF333C /* RoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487D771A1BA0749800AF333C /* RoundedLabel.swift */; };
 		487D771D1BA0878400AF333C /* WordLabelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487D771C1BA0878400AF333C /* WordLabelContainer.swift */; };
 		488DF80D1BB2B1560085E31A /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488DF80C1BB2B1560085E31A /* SwiftyJSON.swift */; };
@@ -88,6 +89,7 @@
 		482C24231BA43CE500288BB1 /* ShuffleCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShuffleCipher.swift; sourceTree = "<group>"; };
 		482E9ED11BC1825D00803CDE /* WTFAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTFAlert.swift; sourceTree = "<group>"; };
 		486506571BE2477B008555AD /* LvlService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LvlService.swift; sourceTree = "<group>"; };
+		486506591BE2A492008555AD /* ExpGainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpGainView.swift; sourceTree = "<group>"; };
 		487D771A1BA0749800AF333C /* RoundedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedLabel.swift; sourceTree = "<group>"; };
 		487D771C1BA0878400AF333C /* WordLabelContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordLabelContainer.swift; sourceTree = "<group>"; };
 		488DF80C1BB2B1560085E31A /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				48F2F5481BA1FF5A005CCAC8 /* Timer.swift */,
 				482E9ED11BC1825D00803CDE /* WTFAlert.swift */,
 				48F44A611BC3F35900C1915F /* CipherPickerViewController.swift */,
+				486506591BE2A492008555AD /* ExpGainView.swift */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				4829B1821BBFE2EB009AC43F /* WordsViewController.swift in Sources */,
 				489666981B9B640400F769D1 /* AppDelegate.swift in Sources */,
 				48DBD96F1BD505B900680ED3 /* RandomCutterCipher.swift in Sources */,
+				4865065A1BE2A492008555AD /* ExpGainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

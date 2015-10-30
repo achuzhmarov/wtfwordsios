@@ -119,7 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //Called if unable to register for APNS.
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         //TODO logging?
-        print(error)
+        //print(error)
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {

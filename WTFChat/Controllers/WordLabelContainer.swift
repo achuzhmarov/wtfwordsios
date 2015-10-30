@@ -65,8 +65,8 @@ class WordLabelContainer {
         }
         
         //to make cornerRadius work
-        label.layer.masksToBounds = true;
-        label.layer.cornerRadius = 8.0;
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 8.0
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
