@@ -8,9 +8,11 @@
 
 import UIKit
 
-class MessagesViewController: UIViewController, MessageTappedComputer {
+class MessagesViewController: UIViewController, MessageTappedComputer, UITextFieldDelegate {
     @IBOutlet weak var messageText: UITextField!
     @IBOutlet weak var messageTableView: MessageTableView!
+    @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sendButton: UIButton!
     
     var timer: NSTimer?
     var talk: Talk!
@@ -20,6 +22,9 @@ class MessagesViewController: UIViewController, MessageTappedComputer {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+        
         self.title = talk.getFriendLogin().capitalizedString
 
         self.messageTableView.delegate = self.messageTableView
@@ -48,8 +53,14 @@ class MessagesViewController: UIViewController, MessageTappedComputer {
         } else if (!talk.isSingleMode) {
             updateMessages()
         }
+        
+        self.messageText.delegate = self
     }
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self);
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -123,6 +134,24 @@ class MessagesViewController: UIViewController, MessageTappedComputer {
     
     func messageTapped(message: Message) {
         performSegueWithIdentifier("showDecipher", sender: message)
+    }
+    
+    //delegate enterPressed for messageText
+    func textFieldShouldReturn(textField: UITextField) -> Bool {   //delegate method
+        self.performSegueWithIdentifier("showMessagePreview", sender: messageText.text)
+        return true
+    }
+    
+    @IBAction func sendButtonPressed(sender: AnyObject) {
+        self.performSegueWithIdentifier("showMessagePreview", sender: messageText.text)
+    }
+    
+    @IBAction func messageTextChanged(sender: AnyObject) {
+        if (messageText.text?.characters.count > 0) {
+            sendButton.enabled = true
+        } else {
+            sendButton.enabled = false
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -242,6 +271,21 @@ class MessagesViewController: UIViewController, MessageTappedComputer {
         }
         
         self.talk.messages.append(message)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        var info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.bottomViewConstraint.constant = keyboardFrame.size.height
+        })
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.bottomViewConstraint.constant = 0
+        })
     }
     
     private func updateView(withSend: Bool = false, earlierLoaded: Int = 0) {

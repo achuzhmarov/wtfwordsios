@@ -12,36 +12,31 @@ class RoundedLabel: UILabel {
     var container: WordLabelContainer?
     
     func getWidth() -> CGFloat {
-        return bounds.width // + edgeInsets.left + edgeInsets.right
+        return bounds.width
     }
     
     var edgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 7, right: 10)
     
     override func textRectForBounds(bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
-        var rect = super.textRectForBounds(bounds, limitedToNumberOfLines: numberOfLines)
-        
-        if let text = text {
-            let estimatedWidth = CGRectGetWidth(rect)
-            let estimatedHeight = CGFloat.max
-            let calculatedFrame = NSString(string: text).boundingRectWithSize(CGSize(width: estimatedWidth, height: estimatedHeight), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
-            
-            //let calculatedWidth = ceil(CGRectGetWidth(calculatedFrame))
-            let calculatedHeight = ceil(CGRectGetHeight(calculatedFrame))
-            let finalHeight = (calculatedHeight + edgeInsets.top + edgeInsets.bottom)
-            let finalWidth = (estimatedWidth + edgeInsets.left + edgeInsets.right)
-            
-            rect.size = CGSize(width: finalWidth, height: finalHeight)
-        }
-        
-        return rect
+        var rect = edgeInsets.apply(bounds)
+        rect = super.textRectForBounds(rect, limitedToNumberOfLines: numberOfLines)
+        return edgeInsets.inverse.apply(rect)
     }
     
     override func drawTextInRect(rect: CGRect) {
-        let textRect = UIEdgeInsetsInsetRect(rect, edgeInsets)
-        super.drawTextInRect(textRect)
+        super.drawTextInRect(edgeInsets.apply(rect))
     }
     
     func setMargins(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
         edgeInsets = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
+    }
+}
+
+extension UIEdgeInsets {
+    var inverse : UIEdgeInsets {
+        return UIEdgeInsets(top: -top, left: -left, bottom: -bottom, right: -right)
+    }
+    func apply(rect: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(rect, self)
     }
 }

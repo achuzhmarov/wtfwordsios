@@ -21,12 +21,6 @@ class MessageCell: UITableViewCell {
         friendImage?.clipsToBounds = true
         
         self.selectionStyle = .None;
-        
-        messageText.layer.masksToBounds = true
-        messageText.layer.cornerRadius = 10.0
-        messageText.textColor = UIColor.whiteColor()
-        messageText.font = UIFont(name: messageText.font.fontName, size: 17)
-        messageText.numberOfLines = 0
     }
     
     func updateMessage(message: Message) {
@@ -40,8 +34,28 @@ class MessageCell: UITableViewCell {
         } else {
             text = message.text()
         }
+
+        /*let style = NSMutableParagraphStyle()
+        style.alignment = .Left
+        style.firstLineHeadIndent = 10.0
+        style.headIndent = 10.0;
+        style.tailIndent = -10.0;
+        
+        let attributeText = NSAttributedString(string: text,
+            attributes: [
+                NSParagraphStyleAttributeName: style
+            ]
+        )
+        
+        messageText.attributedText = attributeText*/
         
         messageText.text = text
+        
+        messageText.layer.masksToBounds = true
+        messageText.layer.cornerRadius = 10.0
+        messageText.font = UIFont(name: messageText.font.fontName, size: 16)
+        //messageText.setMargins(5, left: 12, bottom: 7, right: 12)
+        
         messageText.sizeToFit()
         
         if (message.deciphered) {
@@ -59,6 +73,6 @@ class MessageCell: UITableViewCell {
                 diameter: UInt(friendImage.bounds.height)).avatarImage
         }
         
-        timeText?.text = timeService.parseTime(message.timestamp).string
+        timeText?.attributedText = timeService.parseTime(message.timestamp)
     }
 }
