@@ -27,30 +27,58 @@ class UserService: NSObject {
     }
     
     func getUserSuggestions() -> Int {
+        if (!isLoggedIn()) {
+            return 0
+        }
+        
         return currentUser!.suggestions
     }
     
     func getUserNewSuggestions() -> Int {
+        if (!isLoggedIn()) {
+            return 0
+        }
+        
         return currentUser!.newSuggestions
     }
     
     func clearUserNewSuggestions() {
+        if (!isLoggedIn()) {
+            return
+        }
+        
         currentUser!.newSuggestions = 0
     }
     
     func getUserLogin() -> String {
+        if (!isLoggedIn()) {
+            return ""
+        }
+        
         return currentUser!.login
     }
     
     func getUserExp() -> Int {
+        if (!isLoggedIn()) {
+            return 0
+        }
+        
         return currentUser!.exp
     }
     
     func getUserLvl() -> Int {
+        if (!isLoggedIn()) {
+            return 0
+        }
+        
         return currentUser!.lvl
     }
     
     func useSuggestion() {
+        if (!isLoggedIn()) {
+            return
+        }
+        
         currentUser!.suggestions--
         suggestionsUsed++
     }
@@ -221,21 +249,7 @@ class UserService: NSObject {
             }
         }
     }
-    
-    func getAvatarImage(name: String, diameter: UInt) -> JSQMessagesAvatarImage {
-        let rgbValue = name.hash
-        let r = CGFloat(Float((rgbValue & 0xFF0000) >> 16)/255.0)
-        let g = CGFloat(Float((rgbValue & 0xFF00) >> 8)/255.0)
-        let b = CGFloat(Float(rgbValue & 0xFF)/255.0)
-        let color = UIColor(red: r, green: g, blue: b, alpha: 0.5)
-        
-        let nameLength = name.characters.count
-        
-        let initials : String? = name[0...min(2, nameLength)].capitalizedString
-        
-        return JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(initials, backgroundColor: color, textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(CGFloat(13)), diameter: diameter)
-    }
-    
+
     private func authorize(login: String, password: String, completion:(error: NSError?) -> Void) {
         var userData: [String: NSString]
         

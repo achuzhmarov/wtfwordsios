@@ -26,11 +26,6 @@ class FriendCell: UITableViewCell {
     @IBOutlet weak var cipheredNumWidthConstraint: NSLayoutConstraint!
     
     var message: Message?
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -55,18 +50,6 @@ class FriendCell: UITableViewCell {
     }
 
     func updateTalk(talk: Talk) {
-        /*if (talk.hasUnread || talk.getFriendLogin() == "Nadin") {
-            cipheredView.backgroundColor = HIGHLIGHT_BACKGROUND_COLOR
-            self.backgroundColor = HIGHLIGHT_BACKGROUND_COLOR
-            cipheredNum.layer.backgroundColor = HIGHLIGHT_BACKGROUND_COLOR.CGColor
-            lastMessage.layer.backgroundColor = HIGHLIGHT_BACKGROUND_COLOR.CGColor
-        } else {
-            cipheredView.backgroundColor = BACKGROUND_COLOR
-            self.backgroundColor = BACKGROUND_COLOR
-            cipheredNum.layer.backgroundColor = BACKGROUND_COLOR.CGColor
-            lastMessage.layer.backgroundColor = BACKGROUND_COLOR.CGColor
-        }*/
-        
         friendName.text = talk.getFriendLogin().capitalizedString
         
         if let message = talk.lastMessage {
@@ -84,7 +67,7 @@ class FriendCell: UITableViewCell {
             hideLastAuthorImage()
         }
         
-        let jsqFriendImage = userService.getAvatarImage(talk.getFriendLogin(),
+        let jsqFriendImage = avatarService.getAvatarImage(talk.getFriendLogin(),
             diameter: UInt(friendImage.bounds.height))
         
         friendImage.image = jsqFriendImage.avatarImage
@@ -96,7 +79,7 @@ class FriendCell: UITableViewCell {
     }
     
     func updateLastAuthorImage(name: String) {
-        let jsqAuthorImage = userService.getAvatarImage(name,
+        let jsqAuthorImage = avatarService.getAvatarImage(name,
             diameter: UInt(lastMessageAuthorImage.bounds.height))
         
         lastMessageAuthorImage.image = jsqAuthorImage.avatarImage
@@ -142,25 +125,7 @@ class FriendCell: UITableViewCell {
     }
     
     func updateMessage(message: Message) {
-        /*let formatter = NSDateFormatter()
-        let now = NSDate()
-        
-        if (now.getYear() == message.timestamp.getYear()) {
-            if (now.getMonth() == message.timestamp.getMonth() &&
-                now.getDay() == message.timestamp.getDay()) {
-                    
-                formatter.dateFormat = "HH:mm"
-            } else {
-                formatter.dateFormat = "dd.MM HH:mm"
-            }
-        } else {
-            formatter.dateFormat = "dd.MM.yy HH:mm"
-        }
-        
-        lastMessageTime.text = formatter.stringFromDate(message.timestamp)*/
-        
-        let timeString = JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.timestamp)
-        lastMessageTime.text = timeString.string
+        lastMessageTime.text = timeService.parseTime(message.timestamp).string
         
         lastMessage.text = message.text()
         
