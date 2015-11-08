@@ -1,18 +1,19 @@
 //
-//  UserDao.swift
-//  wttc
+//  UserService.swift
+//  WTFChat
 //
-//  Created by Artem Chuzhmarov on 05/09/15.
-//  Copyright (c) 2015 Artem Chuzhmarov. All rights reserved.
+//  Created by Artem Chuzhmarov on 08/11/15.
+//  Copyright © 2015 Artem Chuzhmarov. All rights reserved.
 //
 
 import Foundation
 
 let userService = UserService()
 
-let USER_UPDATE_TIMER_INTERVAL = 10.0
-
 class UserService: NSObject {
+    let USER_UPDATE_TIMER_INTERVAL = 10.0
+    let userNetworkService = UserNetworkService()
+    
     private var currentUser: User?
     private var suggestionsUsed : Int = 0
     
@@ -91,9 +92,38 @@ class UserService: NSObject {
         //timer worked only on main
         dispatch_async(dispatch_get_main_queue(), {
             self.updateTimer?.invalidate()
-            self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(USER_UPDATE_TIMER_INTERVAL, target: self,
+            self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(self.USER_UPDATE_TIMER_INTERVAL, target: self,
                 selector: "getNewInfo", userInfo: nil, repeats: true)
         })
+    }
+    
+    func sendUsedHints() {
+        if suggestionsUsed > 0 {
+            userNetworkService.sendUsedHints(suggestionsUsed) { error in
+                if let requestError = error {
+                    print(requestError)
+                } else {
+                    self.suggestionsUsed = 0
+                }
+            }
+        }
+    }
+    
+    func getNewInfo() {
+        userNetworkService.getNewInfo(currentUser!.lastUpdate) {userInfo, error in
+            if let requestError = error {
+                print(requestError)
+            } else {
+                self.currentUser!.updateInfo(userInfo!)
+                        
+                if (userInfo!.newSuggestions != 0) {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                        appDelegate.showNewSuggestionsAlert()
+                    })
+                }
+            }
+        }
     }
     
     func loginWithKeychain(completion: (user: User?, error: NSError?) -> Void) {
@@ -103,34 +133,18 @@ class UserService: NSObject {
     }
     
     func login(login: String, password: String, completion: (user: User?, error: NSError?) -> Void) {
-        self.authorize(login, password: password) { error -> Void in
+        userNetworkService.login(login, password: password) {user, error in
             if let requestError = error {
                 completion(user: nil, error: requestError)
             } else {
-                self.getUserInfo() { user, error -> Void in
-                    if let requestError = error {
-                        completion(user: nil, error: requestError)
-                    } else {
-                        self.setNewUser(user!, password: password)
-                        completion(user: user, error: nil)
-                    }
-                }
+                self.setNewUser(user!, password: password)
+                completion(user: user, error: nil)
             }
         }
     }
     
     func logout() {
-        var postJSON: JSON? = nil
-        
-        if let deviceToken = DEVICE_TOKEN {
-            let userData = [
-                "device_token": deviceToken
-            ]
-            
-            postJSON = JSON(userData)
-        }
-        
-        networkService.post(postJSON, relativeUrl: "logout") { (json, error) -> Void in
+        userNetworkService.logout(DEVICE_TOKEN) {error in
             if let requestError = error {
                 print(requestError)
             } else {
@@ -146,157 +160,15 @@ class UserService: NSObject {
         self.updateTimer?.invalidate()
     }
     
-    func register(login: String, password: String, completion:(error: NSError?) -> Void) {
-        let userData = [
-            "login": login,
-            "password": password
-        ]
-        
-        let postJSON = JSON(userData)
-        
-        networkService.post(postJSON, relativeUrl: "user/add") {json, error -> Void in
-            if let requestError = error {
-                completion(error: requestError)
-            } else {
-                completion(error: nil)
-            }
-        }
-    }
-    
-    func getNewInfo() {
-        let lastUpdateData = [
-            "last_update": NSDate.parseStringJSONFromDate(currentUser!.lastUpdate)!
-        ]
-        
-        let postJSON = JSON(lastUpdateData)
-        
-        networkService.post(postJSON, relativeUrl: "user/new_info") { (json, error) -> Void in
-            if let requestError = error {
-                print(requestError)
-            } else {
-                if let userJson = json {
-                    do {
-                        let user = try User.parseFromJson(userJson)
-                        self.currentUser!.updateInfo(user)
-                        
-                        if (user.newSuggestions != 0) {
-                            dispatch_async(dispatch_get_main_queue(), {
-                                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                                appDelegate.showNewSuggestionsAlert()
-                            })
-                        }
-                    } catch let error as NSError {
-                        print(error)
-                    }
-                }
-            }
-        }
-    }
-    
-    func sendUsedSugegstions() {
-        if suggestionsUsed > 0 {
-            let url = "user/use_suggestions/" + String(suggestionsUsed)
-            networkService.post(nil, relativeUrl: url) { (json, error) -> Void in
-                if let requestError = error {
-                    print(requestError)
-                } else {
-                    self.suggestionsUsed = 0
-                }
-            }
-        }
-    }
-    
     func getNewFriends(searchString: String, completion:(friends: [String]?, error: NSError?) -> Void) {
-        var url = "user/friends"
-        
-        if (searchString != "") {
-            url += "/" + searchString
-        }
-        
-        networkService.get(url) { (json, error) -> Void in
-            if let requestError = error {
-                completion(friends: nil, error: requestError)
-            } else {
-                if let friendsJson = json {
-                    do {
-                        let friends = try User.parseFriendsFromJson(friendsJson)
-                        completion(friends: friends, error: nil)
-                    } catch let error as NSError {
-                        completion(friends: nil, error: error)
-                    }
-                } else {
-                    completion(friends: nil, error: nil)
-                }
-            }
-        }
+        userNetworkService.getNewFriends(searchString, completion: completion)
     }
     
     func makeFriends(friendLogin: String, completion:(talk: Talk?, error: NSError?) -> Void) {
-        networkService.post(nil, relativeUrl:"user/friend/" + friendLogin) { (json, error) -> Void in
-            if let requestError = error {
-                completion(talk: nil, error: requestError)
-            } else {
-                if let talkJson = json {
-                    do {
-                        let talk = try Talk.parseFromJson(talkJson)
-                        completion(talk: talk, error: nil)
-                    } catch let error as NSError {
-                        completion(talk: nil, error: error)
-                    }
-                } else {
-                    completion(talk: nil, error: nil)
-                }
-            }
-        }
-    }
-
-    private func authorize(login: String, password: String, completion:(error: NSError?) -> Void) {
-        var userData: [String: NSString]
-        
-        if let deviceToken = DEVICE_TOKEN {
-            userData = [
-                "login": login,
-                "password": password,
-                "device_token": deviceToken
-            ]
-        } else {
-            userData = [
-                "login": login,
-                "password": password
-            ]
-        }
-        
-        let postJSON = JSON(userData)
-        
-        networkService.post(postJSON, relativeUrl: "login") {json, error -> Void in
-            if let requestError = error {
-                completion(error: requestError)
-            } else if let token = json!["token"].string {
-                let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-                let authString = "Bearer \(token)"
-                config.HTTPAdditionalHeaders = ["Authorization" : authString]
-                
-                networkService.session = NSURLSession(configuration: config)
-                
-                completion(error: nil)
-            } else {
-                completion(error: json!["token"].error)
-            }
-        }
+        userNetworkService.makeFriends(friendLogin, completion: completion)
     }
     
-    private func getUserInfo(completion:(user: User?, error: NSError?) -> Void) {
-        networkService.get("user") { (json, error) -> Void in
-            if let requestError = error {
-                completion(user: nil, error: requestError)
-            } else if let userJson = json {
-                do {
-                    let user = try User.parseFromJson(userJson)
-                    completion(user: user, error: nil)
-                } catch let error as NSError {
-                    completion(user: nil, error: error)
-                }
-            }
-        }
+    func register(login: String, password: String, completion:(error: NSError?) -> Void) {
+        userNetworkService.register(login, password: password, completion: completion)
     }
 }

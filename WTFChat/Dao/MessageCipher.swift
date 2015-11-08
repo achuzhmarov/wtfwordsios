@@ -141,6 +141,8 @@ class MessageCipher {
         )
         
         newMessage.isLocal = true
+        newMessage.extId = NSUUID().UUIDString
+        checkDeciphered(newMessage)
         
         talk.appendMessage(newMessage)
         

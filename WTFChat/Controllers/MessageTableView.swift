@@ -8,13 +8,15 @@
 
 import Foundation
 
-protocol MessageTappedComputer {
+protocol MessageTappedComputer: class {
     func messageTapped(message: Message)
 }
 
+let INTERVAL_BETWEEN_MESSAGES_TO_SHOW_TOP_TIMESTAMP_IN_SECONDS = 10 * 60
+
 class MessageTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     var talk: Talk!
-    var messageTappedComputer: MessageTappedComputer?
+    weak var messageTappedComputer: MessageTappedComputer?
     
     func updateTalk(talk: Talk) {
         self.talk = talk
@@ -26,42 +28,47 @@ class MessageTableView: UITableView, UITableViewDataSource, UITableViewDelegate 
     }
     
     @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return talk.messages.count
+        if (talk == nil) {
+            return 0
+        }
+        
+        return talk!.messages.count
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 50.0
+        let message = talk.messages[indexPath.row]
+        
+        var height = 35.5
+        /*let cellIdentifier = getCellIdentifier(indexPath.row, message: message)
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MessageCell
+        cell.updateMessage(message)
+        
+        var height = cell.messageText.bounds.height + 4.0*/
+        
+        if (needShowTime(indexPath.row, message: message)) {
+            height += 20
+        }
+        
+        return CGFloat(height)
     }
     
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellIdentifier = getCellIdentifier(indexPath.row)
+        let message = talk.messages[indexPath.row]
+        
+        let cellIdentifier = getCellIdentifier(indexPath.row, message: message)
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MessageCell
         
-        let message = talk.messages[indexPath.row]
         cell.updateMessage(message)
         
-        //cellTapped
-        //dismissKeyboard()
-        //performSegueWithIdentifier("showDecipher", sender: message)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "messageTapped:")
+        cell.messageText.addGestureRecognizer(tap)
         
         return cell
     }
     
-    private func getCellIdentifier(index: Int) -> String {
-        let message = talk.messages[index]
+    private func getCellIdentifier(index: Int, message: Message) -> String {
         let isOutcoming = (message.author == userService.getUserLogin())
-        var showTime = false
-        
-        if (index == 0) {
-            showTime = true
-        } else {
-            let prevMessage = self.talk.messages[index - 1]
-            let diffSeconds = Int(message.timestamp.timeIntervalSinceDate(prevMessage.timestamp))
-            
-            if (diffSeconds > INTERVAL_BETWEEN_MESSAGES_TO_SHOW_TOP_TIMESTAMP_IN_SECONDS) {
-                showTime = true
-            }
-        }
+        let showTime = needShowTime(index, message: message)
         
         if (isOutcoming && showTime) {
             return "OutcomingTimeCell"
@@ -74,7 +81,37 @@ class MessageTableView: UITableView, UITableViewDataSource, UITableViewDelegate 
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        messageTappedComputer?.messageTapped(talk.messages[indexPath.row])
+    private func needShowTime(index: Int, message: Message) -> Bool {
+        if (index == 0) {
+            return true
+        } else {
+            let prevMessage = self.talk.messages[index - 1]
+            let diffSeconds = Int(message.timestamp.timeIntervalSinceDate(prevMessage.timestamp))
+            
+            if (diffSeconds > INTERVAL_BETWEEN_MESSAGES_TO_SHOW_TOP_TIMESTAMP_IN_SECONDS) {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    func messageTapped(sender: UITapGestureRecognizer) {
+        let label = sender.view as! RoundedLabel
+        let message = label.tagObject as! Message
+        
+        self.messageTappedComputer?.messageTapped(message)
+    }
+    
+    func scrollTableToEarlier(index: Int) {
+        let indexPath = NSIndexPath(forItem: index, inSection: 0)
+        self.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: false)
+    }
+    
+    func scrollTableToBottom() {
+        if (self.talk.messages.count != 0) {
+            let indexPath = NSIndexPath(forItem: self.talk.messages.count - 1, inSection: 0)
+            self.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: false)
+        }
     }
 }

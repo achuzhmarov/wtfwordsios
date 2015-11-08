@@ -12,19 +12,23 @@ class MessageCell: UITableViewCell {
     @IBOutlet weak var friendImage: UIImageView!
     @IBOutlet weak var messageText: RoundedLabel!
     @IBOutlet weak var timeText: UILabel!
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
+    
+    func initStyle() {
         friendImage?.layer.borderColor = UIColor.whiteColor().CGColor
         friendImage?.layer.cornerRadius = friendImage.frame.size.width/2
         friendImage?.clipsToBounds = true
         
         self.selectionStyle = .None;
+        
+        messageText.textColor = FONT_COLOR
+        messageText.layer.masksToBounds = true
+        messageText.layer.cornerRadius = 10.0
+        messageText.font = UIFont(name: messageText.font.fontName, size: 16)
     }
     
     func updateMessage(message: Message) {
-        messageText.textColor = FONT_COLOR
+        initStyle()
+
         let isOutcoming = (message.author == userService.getUserLogin())
         
         var text = ""
@@ -34,28 +38,9 @@ class MessageCell: UITableViewCell {
         } else {
             text = message.text()
         }
-
-        /*let style = NSMutableParagraphStyle()
-        style.alignment = .Left
-        style.firstLineHeadIndent = 10.0
-        style.headIndent = 10.0;
-        style.tailIndent = -10.0;
-        
-        let attributeText = NSAttributedString(string: text,
-            attributes: [
-                NSParagraphStyleAttributeName: style
-            ]
-        )
-        
-        messageText.attributedText = attributeText*/
         
         messageText.text = text
-        
-        messageText.layer.masksToBounds = true
-        messageText.layer.cornerRadius = 10.0
-        messageText.font = UIFont(name: messageText.font.fontName, size: 16)
-        //messageText.setMargins(5, left: 12, bottom: 7, right: 12)
-        
+        messageText.tagObject = message
         messageText.sizeToFit()
         
         if (message.deciphered) {

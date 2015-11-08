@@ -25,6 +25,10 @@ class FriendsViewController: UITableViewController, TalkListener {
         talkService.friendsTalkListener = self
     }
     
+    deinit {
+        talkService.friendsTalkListener = nil
+    }
+    
     override func viewDidAppear(animated: Bool) {
         if (userService.getUserNewSuggestions() != 0) {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -59,7 +63,7 @@ class FriendsViewController: UITableViewController, TalkListener {
     }
     
     func updateView() {
-        self.talks.sortInPlace { (talk1, talk2) -> Bool in
+        self.talks = self.talks.sort { (talk1, talk2) -> Bool in
             if (talk1.isSingleMode) {
                 return true
             } else if (talk2.isSingleMode) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SuggestionComputer {
+protocol SuggestionComputer: class {
     func suggestionTapped(word: Word)
 }
 
@@ -22,7 +22,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     var useCipherText = false
     var selfAuthor = false
     
-    var suggestionComputer: SuggestionComputer?
+    weak var suggestionComputer: SuggestionComputer?
     
     @objc func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -220,7 +220,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     
     func useSuggestion(sender: UITapGestureRecognizer) {
         let label = sender.view as! RoundedLabel
-        let wordContainer = label.container!
+        let wordContainer = label.tagObject as! WordLabelContainer
         
         self.suggestionComputer?.suggestionTapped(wordContainer.originalWord)
     }

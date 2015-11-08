@@ -20,6 +20,7 @@ class Message : BaseEntity, JSQMessageData {
     var exp: Int = 0
     
     var isLocal: Bool = false
+    var extId: String = ""
     
     init(id: String, talkId: String, author: String) {
         
@@ -68,7 +69,7 @@ class Message : BaseEntity, JSQMessageData {
         super.init(id: id)
     }
     
-    init(id: String, talkId: String, author: String, words: [Word], deciphered: Bool, cipherType: CipherType, timestamp: NSDate, lastUpdate: NSDate, exp: Int) {
+    init(id: String, talkId: String, author: String, words: [Word], deciphered: Bool, cipherType: CipherType, timestamp: NSDate, lastUpdate: NSDate, exp: Int, extId: String) {
         
         self.timestamp = timestamp
         self.lastUpdate = lastUpdate
@@ -78,6 +79,7 @@ class Message : BaseEntity, JSQMessageData {
         self.cipherType = cipherType
         self.words = words
         self.exp = exp
+        self.extId = extId
         
         super.init(id: id)
     }
@@ -239,6 +241,7 @@ class Message : BaseEntity, JSQMessageData {
             "cipher_type": self.cipherType.rawValue,
             "timestamp": NSDate.parseStringJSONFromDate(self.timestamp)!,
             "last_update": NSDate.parseStringJSONFromDate(self.lastUpdate)!,
+            "ext_id": self.extId,
         ]
         
         json["words"].arrayObject = getWordsJson()
@@ -277,11 +280,18 @@ class Message : BaseEntity, JSQMessageData {
         var timestamp: NSDate
         var lastUpdate: NSDate
         var exp: Int = 0
+        var extId: String
         
         if let value = json["id"].string {
             id = value
         } else {
             throw json["id"].error!
+        }
+        
+        if let value = json["ext_id"].string {
+            extId = value
+        } else {
+            throw json["ext_id"].error!
         }
         
         if let value = json["talk_id"].string {
@@ -353,7 +363,8 @@ class Message : BaseEntity, JSQMessageData {
             cipherType: cipherType,
             timestamp: timestamp,
             lastUpdate: lastUpdate,
-            exp: exp
+            exp: exp,
+            extId: extId
         )
     }
 }

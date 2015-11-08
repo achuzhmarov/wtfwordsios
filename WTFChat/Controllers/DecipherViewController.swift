@@ -324,10 +324,10 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
                 })
             }
             
-            userService.sendUsedSugegstions()
+            userService.sendUsedHints()
         }
         
-        talkService.updateTalkInArray(talk)
+        messageService.updateMessageInTalk(message)
     }
     
     func hideTopLayer() {

@@ -9,7 +9,7 @@
 import UIKit
 
 class RoundedLabel: UILabel {
-    var container: WordLabelContainer?
+    var tagObject: AnyObject?
     
     func getWidth() -> CGFloat {
         return bounds.width

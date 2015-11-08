@@ -138,7 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let currentController = getCurrentController()
         if let messageViewController = currentController as? MessagesViewController {
-            messageViewController.updateMessages()
+            messageService.updateMessages(messageViewController.talk.id)
         }
         
         //show localNotification (added to ios notifications window)

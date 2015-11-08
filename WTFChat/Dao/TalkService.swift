@@ -8,20 +8,20 @@
 
 import Foundation
 
-let TALKS_UPDATE_TIMER_INTERVAL = 10.0
-
 let talkService = TalkService()
 
-protocol TalkListener {
+protocol TalkListener: class {
     func updateTalks(talks: [Talk]?, error: NSError?)
 }
 
 class TalkService: NSObject {
+    let TALKS_UPDATE_TIMER_INTERVAL = 10.0
+    
     var updateTimer: NSTimer?
     
     var talks = [Talk]()
     
-    var friendsTalkListener: TalkListener?
+    weak var friendsTalkListener: TalkListener?
     
     func getTalkByLogin(friend: String) -> Talk? {
         for talk in talks {
@@ -37,6 +37,7 @@ class TalkService: NSObject {
         self.talks = [Talk]()
         iosService.updatePushBadge(talks)
         updateTimer?.invalidate()
+        messageService.clear()
     }
     
     func setTalksByNewUser(user: User) {
@@ -57,10 +58,12 @@ class TalkService: NSObject {
         dispatch_async(dispatch_get_main_queue(), {
             self.updateTimer?.invalidate()
 
-            self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(TALKS_UPDATE_TIMER_INTERVAL, target: self,
+            self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(self.TALKS_UPDATE_TIMER_INTERVAL, target: self,
                 selector: "getNewUnreadTalks", userInfo: nil, repeats: true)
         })
 
+        messageService.startUpdateTimer()
+        
         fireUpdateTalksEvent()
     }
     
@@ -87,6 +90,7 @@ class TalkService: NSObject {
                         
                         for talk in talks {
                             self.updateOrCreateTalkInArray(talk)
+                            messageService.fireMessagesUpdate(talk.id)
                         }
                         
                         self.fireUpdateTalksEvent()
@@ -110,6 +114,26 @@ class TalkService: NSObject {
         fireUpdateTalksEvent()
     }
     
+    func talkViewed(talkId: String) {
+        let talk = getByTalkId(talkId)!
+        
+        if (talk.decipherStatus != DecipherStatus.No) {
+            talk.decipherStatus = DecipherStatus.No
+            updateTalkInArray(talk)
+            messageService.markTalkAsReaded(talk)
+        }
+    }
+    
+    func getByTalkId(talkId: String) -> Talk? {
+        for talk in talks {
+            if (talkId == talk.id) {
+                return talk
+            }
+        }
+        
+        return nil
+    }
+    
     private func fireUpdateTalksEvent() {
         iosService.updatePushBadge(talks)
         self.friendsTalkListener?.updateTalks(talks, error: nil)
@@ -121,6 +145,10 @@ class TalkService: NSObject {
                 
                 if (withMessages) {
                     //update with messages
+                    talk.messages = talk.messages.sort { (message1, message2) -> Bool in
+                        return message1.timestamp.isLess(message2.timestamp)
+                    }
+                    talk.lastMessage = talk.messages.last
                 } else {
                     //save early downloaded messages before update
                     talk.messages = talks[i].messages

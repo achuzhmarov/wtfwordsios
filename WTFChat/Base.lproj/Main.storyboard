@@ -482,7 +482,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SFE-eo-ibm" userLabel="Bottom view">
-                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="557" width="600" height="43"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEN-Ug-XdU">
                                         <rect key="frame" x="534" y="4" width="54" height="36"/>
@@ -505,37 +505,38 @@
                                             <constraint firstAttribute="height" constant="1" id="KHO-6R-fuv"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your message here" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4cE-qI-FXa">
-                                        <rect key="frame" x="15" y="7" width="511" height="30"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gB0-uX-MRL">
+                                        <rect key="frame" x="8" y="9" width="518" height="26"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="L3T-jd-NWe"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <action selector="messageTextChanged:" destination="Z03-F3-5eb" eventType="editingChanged" id="FZc-GH-GGp"/>
-                                        </connections>
-                                    </textField>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="kLP-YN-GCt" firstAttribute="top" secondItem="SFE-eo-ibm" secondAttribute="top" id="1LG-cn-ch0"/>
+                                    <constraint firstItem="KEN-Ug-XdU" firstAttribute="leading" secondItem="gB0-uX-MRL" secondAttribute="trailing" constant="8" id="8i8-0Z-NIK"/>
                                     <constraint firstAttribute="trailing" secondItem="kLP-YN-GCt" secondAttribute="trailing" id="CSD-as-b9t"/>
                                     <constraint firstItem="kLP-YN-GCt" firstAttribute="leading" secondItem="SFE-eo-ibm" secondAttribute="leading" id="LYg-NI-Swd"/>
                                     <constraint firstItem="KEN-Ug-XdU" firstAttribute="centerY" secondItem="SFE-eo-ibm" secondAttribute="centerY" id="OTW-KR-3wt"/>
-                                    <constraint firstItem="4cE-qI-FXa" firstAttribute="leading" secondItem="SFE-eo-ibm" secondAttribute="leading" constant="15" id="Thy-95-e8j"/>
-                                    <constraint firstItem="4cE-qI-FXa" firstAttribute="centerY" secondItem="SFE-eo-ibm" secondAttribute="centerY" id="W9K-hl-wSw"/>
-                                    <constraint firstItem="KEN-Ug-XdU" firstAttribute="leading" secondItem="4cE-qI-FXa" secondAttribute="trailing" constant="8" id="bxv-ZV-DPR"/>
+                                    <constraint firstItem="gB0-uX-MRL" firstAttribute="top" secondItem="kLP-YN-GCt" secondAttribute="bottom" constant="8" id="T0r-bz-hUB"/>
+                                    <constraint firstItem="gB0-uX-MRL" firstAttribute="leading" secondItem="SFE-eo-ibm" secondAttribute="leadingMargin" id="hTW-8l-rmo"/>
                                     <constraint firstAttribute="trailing" secondItem="KEN-Ug-XdU" secondAttribute="trailing" constant="12" id="isJ-0X-2e6"/>
-                                    <constraint firstAttribute="height" constant="44" id="kp3-I7-hal"/>
+                                    <constraint firstAttribute="bottom" secondItem="gB0-uX-MRL" secondAttribute="bottom" constant="8" id="odB-9l-B2i"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YAM-5d-aDo" customClass="MessageTableView" customModule="WTFChat" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="600" height="484"/>
+                                <rect key="frame" x="0.0" y="72" width="600" height="485"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IncomingTimeCell" rowHeight="54" id="Vnw-CX-pRp" customClass="MessageCell" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="54"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IncomingTimeCell" rowHeight="55" id="Vnw-CX-pRp" customClass="MessageCell" customModule="WTFChat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vnw-CX-pRp" id="XaV-e6-vpg">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="54"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IlI-EV-Qrr">
@@ -548,14 +549,14 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EIx-0W-s3c">
-                                                    <rect key="frame" x="8" y="20" width="33" height="33"/>
+                                                    <rect key="frame" x="8" y="20" width="32" height="32"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="33" id="3Ng-EK-mdQ"/>
-                                                        <constraint firstAttribute="height" constant="33" id="cOS-YE-Zij"/>
+                                                        <constraint firstAttribute="width" constant="32" id="3Ng-EK-mdQ"/>
+                                                        <constraint firstAttribute="height" constant="32" id="cOS-YE-Zij"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APd-En-XEf" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
-                                                    <rect key="frame" x="45" y="20" width="42" height="30"/>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APd-En-XEf" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
+                                                    <rect key="frame" x="44" y="20" width="42" height="32"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -565,11 +566,10 @@
                                                 <constraint firstItem="APd-En-XEf" firstAttribute="leading" secondItem="EIx-0W-s3c" secondAttribute="trailing" constant="4" id="7Ny-wf-whX"/>
                                                 <constraint firstItem="EIx-0W-s3c" firstAttribute="top" secondItem="IlI-EV-Qrr" secondAttribute="bottom" id="7yp-vH-9OR"/>
                                                 <constraint firstAttribute="bottom" secondItem="APd-En-XEf" secondAttribute="bottom" constant="4" id="R2b-Ei-GDl"/>
-                                                <constraint firstItem="IlI-EV-Qrr" firstAttribute="top" secondItem="XaV-e6-vpg" secondAttribute="topMargin" constant="-8" id="Tve-2a-pPS"/>
                                                 <constraint firstItem="APd-En-XEf" firstAttribute="top" secondItem="IlI-EV-Qrr" secondAttribute="bottom" id="aMx-qD-DHu"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="APd-En-XEf" secondAttribute="trailing" constant="40" id="bxj-2w-1au"/>
                                                 <constraint firstItem="IlI-EV-Qrr" firstAttribute="centerX" secondItem="XaV-e6-vpg" secondAttribute="centerX" id="iH8-tJ-JGU"/>
-                                                <constraint firstItem="IlI-EV-Qrr" firstAttribute="top" secondItem="XaV-e6-vpg" secondAttribute="topMargin" constant="-8" id="ubg-1d-CUt"/>
+                                                <constraint firstItem="IlI-EV-Qrr" firstAttribute="top" secondItem="XaV-e6-vpg" secondAttribute="top" id="ubg-1d-CUt"/>
                                                 <constraint firstItem="EIx-0W-s3c" firstAttribute="leading" secondItem="XaV-e6-vpg" secondAttribute="leadingMargin" id="yf7-rZ-sxQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -579,11 +579,11 @@
                                             <outlet property="timeText" destination="IlI-EV-Qrr" id="2SS-8N-gSN"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OutcomingTimeCell" rowHeight="45" id="4Gh-2Y-thI" customClass="MessageCell" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="82" width="600" height="45"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OutcomingTimeCell" rowHeight="55" id="4Gh-2Y-thI" customClass="MessageCell" customModule="WTFChat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="83" width="600" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Gh-2Y-thI" id="fds-cq-d5v">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="45"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Qs-wK-XRG">
@@ -595,20 +595,20 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6s-JR-7vO" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
-                                                    <rect key="frame" x="546" y="20" width="42" height="21"/>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6s-JR-7vO" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
+                                                    <rect key="frame" x="546" y="20" width="42" height="32"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="g6s-JR-7vO" firstAttribute="trailing" secondItem="fds-cq-d5v" secondAttribute="trailingMargin" constant="-4" id="AIT-Hl-AqP"/>
                                                 <constraint firstItem="3Qs-wK-XRG" firstAttribute="centerX" secondItem="fds-cq-d5v" secondAttribute="centerX" id="Bfx-ej-kfw"/>
                                                 <constraint firstAttribute="bottom" secondItem="g6s-JR-7vO" secondAttribute="bottom" constant="4" id="BqN-wL-2Rc"/>
                                                 <constraint firstItem="g6s-JR-7vO" firstAttribute="top" secondItem="3Qs-wK-XRG" secondAttribute="bottom" id="Uip-DM-RT6"/>
                                                 <constraint firstItem="g6s-JR-7vO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fds-cq-d5v" secondAttribute="leading" constant="67" id="kte-09-m7M"/>
-                                                <constraint firstItem="3Qs-wK-XRG" firstAttribute="top" secondItem="fds-cq-d5v" secondAttribute="topMargin" constant="-8" id="xQc-tO-Pm6"/>
+                                                <constraint firstAttribute="trailing" secondItem="g6s-JR-7vO" secondAttribute="trailing" constant="12" id="o7u-yd-nk1"/>
+                                                <constraint firstItem="3Qs-wK-XRG" firstAttribute="top" secondItem="fds-cq-d5v" secondAttribute="top" id="xQc-tO-Pm6"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -616,47 +616,47 @@
                                             <outlet property="timeText" destination="3Qs-wK-XRG" id="vFO-ei-050"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OutcomingCell" rowHeight="25" id="zSF-v6-ad5" customClass="MessageCell" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="127" width="600" height="25"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OutcomingCell" rowHeight="35" id="zSF-v6-ad5" customClass="MessageCell" customModule="WTFChat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="138" width="600" height="35"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zSF-v6-ad5" id="SAn-CJ-fWY">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="25"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="35"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGE-NO-D4s" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
-                                                    <rect key="frame" x="546" y="0.0" width="42" height="21"/>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGE-NO-D4s" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
+                                                    <rect key="frame" x="546" y="0.0" width="42" height="32"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="cGE-NO-D4s" firstAttribute="trailing" secondItem="SAn-CJ-fWY" secondAttribute="trailingMargin" constant="-4" id="4tf-Ya-3cX"/>
                                                 <constraint firstItem="cGE-NO-D4s" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SAn-CJ-fWY" secondAttribute="leading" constant="67" id="Fde-m0-qse"/>
                                                 <constraint firstAttribute="bottom" secondItem="cGE-NO-D4s" secondAttribute="bottom" constant="4" id="Obz-zB-6t5"/>
-                                                <constraint firstItem="cGE-NO-D4s" firstAttribute="top" secondItem="SAn-CJ-fWY" secondAttribute="topMargin" constant="-8" id="xIZ-eB-GYv"/>
+                                                <constraint firstAttribute="trailing" secondItem="cGE-NO-D4s" secondAttribute="trailing" constant="12" id="wJO-5e-1Lf"/>
+                                                <constraint firstItem="cGE-NO-D4s" firstAttribute="top" secondItem="SAn-CJ-fWY" secondAttribute="top" id="xIZ-eB-GYv"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="messageText" destination="cGE-NO-D4s" id="yfT-WX-9kU"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IncomingCell" rowHeight="34" id="iYF-wT-FmA" customClass="MessageCell" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="152" width="600" height="34"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IncomingCell" rowHeight="35" id="iYF-wT-FmA" customClass="MessageCell" customModule="WTFChat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="173" width="600" height="35"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iYF-wT-FmA" id="CE9-ZO-xAz">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="34"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="35"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mla-9U-CJJ">
-                                                    <rect key="frame" x="8" y="0.0" width="33" height="33"/>
+                                                    <rect key="frame" x="8" y="0.0" width="32" height="32"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="33" id="4Dh-d9-ens"/>
-                                                        <constraint firstAttribute="width" constant="33" id="i8c-KR-CH6"/>
+                                                        <constraint firstAttribute="height" constant="32" id="4Dh-d9-ens"/>
+                                                        <constraint firstAttribute="width" constant="32" id="i8c-KR-CH6"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6j-BZ-MS3" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
-                                                    <rect key="frame" x="45" y="0.0" width="42" height="30"/>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6j-BZ-MS3" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
+                                                    <rect key="frame" x="44" y="0.0" width="42" height="32"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -680,6 +680,7 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="YAM-5d-aDo" firstAttribute="top" secondItem="ZTd-Xc-2Q4" secondAttribute="bottom" constant="8" id="0bl-Ta-kFh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YAM-5d-aDo" secondAttribute="trailing" constant="-20" id="5I4-3X-vVI"/>
@@ -694,7 +695,8 @@
                     <connections>
                         <outlet property="bottomViewConstraint" destination="pOT-5O-gcc" id="NLr-yS-BhF"/>
                         <outlet property="messageTableView" destination="YAM-5d-aDo" id="9ih-8q-jjM"/>
-                        <outlet property="messageText" destination="4cE-qI-FXa" id="bIl-EK-IoJ"/>
+                        <outlet property="messageText" destination="gB0-uX-MRL" id="5Jo-X1-9np"/>
+                        <outlet property="messageTextHeightConstraint" destination="L3T-jd-NWe" id="r87-ty-qHZ"/>
                         <outlet property="sendButton" destination="KEN-Ug-XdU" id="uAH-Cz-Rz4"/>
                         <segue destination="g37-im-742" kind="show" identifier="showDecipher" id="aO1-aD-3uJ"/>
                         <segue destination="tE0-XD-KQv" kind="show" identifier="showMessagePreview" id="k5U-lP-cbD"/>

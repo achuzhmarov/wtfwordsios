@@ -78,7 +78,7 @@ class WordLabelContainer {
         
         label.sizeToFit()
         
-        label.container = self
+        label.tagObject = self
     }
     
     func getWidth() -> CGFloat {
