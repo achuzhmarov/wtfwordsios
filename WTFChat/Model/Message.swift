@@ -118,7 +118,7 @@ class Message : BaseEntity, JSQMessageData {
     }
 
     func countSuccess() -> Int {
-        return countWordsByStatus(WordType.Success)
+        return countWordsByStatus(WordType.Success) + countWordsByStatus(WordType.CloseTry)
     }
     
     func countNew() -> Int {

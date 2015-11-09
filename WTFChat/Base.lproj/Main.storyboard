@@ -472,7 +472,7 @@
         <!--Messages-->
         <scene sceneID="bPu-ca-lZV">
             <objects>
-                <viewController id="Z03-F3-5eb" customClass="MessagesViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="messagesController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Z03-F3-5eb" customClass="MessagesViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZTd-Xc-2Q4"/>
                         <viewControllerLayoutGuide type="bottom" id="QfU-X1-J5r"/>
@@ -545,7 +545,7 @@
                                                         <constraint firstAttribute="height" constant="20" id="gAA-yc-bJg"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EIx-0W-s3c">
@@ -592,7 +592,7 @@
                                                         <constraint firstAttribute="height" constant="20" id="aA3-ff-Oef"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6s-JR-7vO" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">

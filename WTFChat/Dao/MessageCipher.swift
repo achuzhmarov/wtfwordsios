@@ -10,9 +10,13 @@ import Foundation
 
 let messageCipher = MessageCipher()
 
-let WORD_SPECIAL_SYMBOLS = ["'", "-"]
-
 class MessageCipher {
+    let WORD_SPECIAL_SYMBOLS = ["'", "-"]
+    
+    func getCompareString(string: String) -> String {
+        return string.uppercaseString.removeChars(WORD_SPECIAL_SYMBOLS).replace("Ё", with: "Е")
+    }
+    
     func decipher(message: Message, guessText: String) {
         let guessWords = guessText.characters.split {$0 == " "}.map { String($0) }
         
@@ -23,7 +27,7 @@ class MessageCipher {
             
             for guess in guesses {
                 for word in words! {
-                    if (word.wordType == WordType.New && word.getCompareString() == guess) {
+                    if (word.wordType == WordType.New && getCompareString(word.text) == guess) {
                         word.wordType = WordType.Success
                     }
                 }
@@ -42,7 +46,7 @@ class MessageCipher {
             let guesses = parseGuessForCompare(guessWord)
             
             for guess in guesses {
-                if Tools.calcStringDistance(word.getCompareString(), bStr: guess) == 1 {
+                if Tools.calcStringDistance(getCompareString(word.text), bStr: guess) == 1 {
                     return true
                 }
             }
@@ -64,7 +68,7 @@ class MessageCipher {
                     isLastLetter = false
                     
                     //add word to result
-                    result.append(newWordText.uppercaseString.removeChars(WORD_SPECIAL_SYMBOLS))
+                    result.append(getCompareString(newWordText))
                     newWordText = ""
                     
                     //skip current symbol
@@ -82,7 +86,7 @@ class MessageCipher {
         }
         
         if (isLastLetter) {
-            result.append(newWordText.uppercaseString.removeChars(WORD_SPECIAL_SYMBOLS))
+            result.append(getCompareString(newWordText))
         }
         
         return result

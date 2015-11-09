@@ -86,10 +86,6 @@ class Word : NSObject {
         return text.lowercaseString
     }
     
-    func getCompareString() -> String {
-        return text.uppercaseString.removeChars(WORD_SPECIAL_SYMBOLS)
-    }
-    
     class func delimiterWord() -> Word {
         return Word(text: " ", wordType: WordType.Delimiter)
     }

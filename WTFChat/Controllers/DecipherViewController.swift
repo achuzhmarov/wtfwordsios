@@ -302,7 +302,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         isOvered = true
         
-        if (message.countSuccess() > 0) {
+        if (message.countSuccess() > 0 && !isSingleMode) {
             timer.seconds = 0
             topTimerLabel.text = ""
             self.expGainView.myInit(self.topView)

@@ -19,9 +19,9 @@ class HalfWordRoundDownCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         var letterCount = word.getCharCount() / 2 - 1
         
-        //3 letters max
-        if (letterCount > 2) {
-            letterCount = 2
+        //5 letters max
+        if (letterCount > 4) {
+            letterCount = 4
         }
         
         return word.getCapitalized()[0...letterCount] + "..." + word.additional

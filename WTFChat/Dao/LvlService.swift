@@ -24,6 +24,6 @@ class LvlService {
     }
     
     private func getExpByLvl(lvl: Int) -> Int {
-        return (2 ^^ (lvl / 5) - 1) * 10000 + (2 ^^ (lvl / 5 + 1)) * (lvl % 5) * 1000
+        return (2 ^^ (lvl / 5) - 1) * 5000 + (2 ^^ (lvl / 5 + 1)) * (lvl % 5) * 500
     }
 }

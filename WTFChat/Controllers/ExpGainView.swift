@@ -12,8 +12,9 @@ class ExpGainView: NSObject {
     var progressView: UIProgressView?
     var expLabel: UILabel?
     var lvlLabel: UILabel?
-    var earnedExp: Int?
     var progressBarTimer: NSTimer?
+    var userExp: Int = 0
+    var nextLvlExp: Int = 0
     
     let lvlTopMargin = CGFloat(8)
     let progressUpdateInterval = 0.1
@@ -23,6 +24,9 @@ class ExpGainView: NSObject {
         self.lvlLabel = createLvlLabel(superView, userLvl: lvlService.getUserLvl())
         self.expLabel = createExpLabel(superView)
         self.progressView = createProgressBar(superView)
+        
+        userExp = lvlService.getCurrentLvlExp()
+        nextLvlExp = lvlService.getNextLvlExp()
     }
     
     func createLvlLabel(rootView: UIView, userLvl: Int) -> UILabel {
@@ -85,7 +89,12 @@ class ExpGainView: NSObject {
     }
     
     func runProgress(earnedExp: Int) {
-        self.earnedExp = earnedExp
+        if (progressView == nil) {
+            NSLog("call to runProgress while no myInit")
+            return
+        }
+        
+        self.userExp += earnedExp
         
         dispatch_async(dispatch_get_main_queue(), {
             self.progressBarTimer?.invalidate()
@@ -98,9 +107,11 @@ class ExpGainView: NSObject {
     }
     
     func updateProgress() {
-        let userExp = lvlService.getCurrentLvlExp() + self.earnedExp!
-        let nextLvlExp = lvlService.getNextLvlExp()
-        
+        if (progressView == nil) {
+            NSLog("call to updateProgress while no myInit")
+            return
+        }
+
         var targetProgress = Float(userExp) / Float(nextLvlExp)
         if (targetProgress > 1) {
             targetProgress = 1.0

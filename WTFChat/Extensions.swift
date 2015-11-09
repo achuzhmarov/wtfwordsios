@@ -105,6 +105,10 @@ extension String {
         return result
     }
     
+    func replace(what: String, with: String) -> String {
+        return self.stringByReplacingOccurrencesOfString(what, withString: with, options: NSStringCompareOptions.LiteralSearch, range: nil)
+    }
+    
     subscript (i: Int) -> Character {
         return self[self.startIndex.advancedBy(i)]
     }
