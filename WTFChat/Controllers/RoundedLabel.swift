@@ -30,6 +30,12 @@ class RoundedLabel: UILabel {
     func setMargins(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
         edgeInsets = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
     }
+    
+    func initStyle() {
+        layer.masksToBounds = false
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.mainScreen().scale
+    }
 }
 
 extension UIEdgeInsets {

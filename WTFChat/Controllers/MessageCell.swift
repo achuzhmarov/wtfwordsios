@@ -21,9 +21,9 @@ class MessageCell: UITableViewCell {
         self.selectionStyle = .None;
         
         messageText.textColor = FONT_COLOR
-        messageText.layer.masksToBounds = true
-        messageText.layer.cornerRadius = 10.0
         messageText.font = UIFont(name: messageText.font.fontName, size: 16)
+        messageText.layer.cornerRadius = 10.0
+        messageText.initStyle()
     }
     
     func updateMessage(message: Message) {

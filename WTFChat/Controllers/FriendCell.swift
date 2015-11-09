@@ -61,17 +61,17 @@ class FriendCell: UITableViewCell {
         self.selectionStyle = .None;
         
         cipheredNum.setMargins(0, left: 4, bottom: 0, right: 4)
-        cipheredNum.layer.masksToBounds = true;
         cipheredNum.layer.cornerRadius = 6.0;
         cipheredNum.textColor = UIColor.whiteColor()
         cipheredNum.font = UIFont(name: lastMessage.font.fontName, size: 10)
         cipheredNum.numberOfLines = 1
+        cipheredNum.initStyle()
         
-        lastMessage.layer.masksToBounds = true;
         lastMessage.layer.cornerRadius = 8.0;
         lastMessage.textColor = UIColor.whiteColor()
         lastMessage.font = UIFont(name: lastMessage.font.fontName, size: 13)
         lastMessage.numberOfLines = 1
+        lastMessage.initStyle()
     }
     
     private func hideLastAuthorImage() {

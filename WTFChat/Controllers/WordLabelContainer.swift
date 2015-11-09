@@ -33,6 +33,8 @@ class WordLabelContainer {
     }
     
     func updateLabel() {
+        label.initStyle()
+        
         if (useCipherText) {
             if (word.wordType != WordType.Ignore) {
                 label.text = word.getCipheredText()
@@ -64,8 +66,6 @@ class WordLabelContainer {
             label.layer.backgroundColor = SUCCESS_COLOR.CGColor
         }
         
-        //to make cornerRadius work
-        label.layer.masksToBounds = true
         label.layer.cornerRadius = 8.0
         
         label.translatesAutoresizingMaskIntoConstraints = false
