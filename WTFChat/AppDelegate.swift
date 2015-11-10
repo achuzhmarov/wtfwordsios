@@ -58,14 +58,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func showMainScreen() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewControllerWithIdentifier("friendsNavController")
+        let viewController = storyboard.instantiateViewControllerWithIdentifier("mainTabController")
         showWindowAnimated(viewController)
     }
     
     func showFriendScreen(author: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let friendsNavigationController = storyboard.instantiateViewControllerWithIdentifier("friendsNavController")
-            as! UINavigationController
+        
+        let mainTabController = storyboard.instantiateViewControllerWithIdentifier("mainTabController")
+            as! UITabBarController
+        
+        let friendsNavigationController = mainTabController.viewControllers![0] as! UINavigationController
+        //let friendsNavigationController = storyboard.instantiateViewControllerWithIdentifier("friendsNavController") as! UINavigationController
+        
         
         let messagesController = storyboard.instantiateViewControllerWithIdentifier("messagesController") as! MessagesViewController
 

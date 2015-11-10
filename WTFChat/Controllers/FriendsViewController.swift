@@ -23,6 +23,12 @@ class FriendsViewController: UITableViewController, TalkListener {
     override func viewDidLoad() {
         super.viewDidLoad()
         talkService.friendsTalkListener = self
+        
+        let nav = self.navigationController?.navigationBar
+        nav?.translucent = false
+        
+        let tab = self.tabBarController?.tabBar
+        tab?.translucent = false
     }
     
     deinit {
