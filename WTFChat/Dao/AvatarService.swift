@@ -11,9 +11,9 @@ import Foundation
 let avatarService = AvatarService()
 
 class AvatarService {
-    var avatarImageCache = [String: [UInt: JSQMessagesAvatarImage]]()
+    var avatarImageCache = [String: [UInt: UIImage]]()
     
-    func getAvatarImage(name: String, diameter: UInt) -> JSQMessagesAvatarImage {
+    func getAvatarImage(name: String, diameter: UInt) -> UIImage {
         if let userAvatars = avatarImageCache[name] {
             if let image = userAvatars[diameter] {
                 return image
@@ -30,15 +30,15 @@ class AvatarService {
         
         let initials : String? = name[0...min(2, nameLength)].capitalizedString
         
-        let image = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(initials, backgroundColor: color, textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(CGFloat(13)), diameter: diameter)
+        let jsqImage = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(initials, backgroundColor: color, textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(CGFloat(13)), diameter: diameter)
         
         if avatarImageCache[name] != nil {
-            avatarImageCache[name]![diameter] = image
+            avatarImageCache[name]![diameter] = jsqImage.avatarImage
         } else {
-            avatarImageCache[name] = [UInt: JSQMessagesAvatarImage]()
-            avatarImageCache[name]![diameter] = image
+            avatarImageCache[name] = [UInt: UIImage]()
+            avatarImageCache[name]![diameter] = jsqImage.avatarImage
         }
         
-        return image
+        return jsqImage.avatarImage
     }
 }

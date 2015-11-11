@@ -21,7 +21,7 @@ class AddFriendCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         friendImage.layer.borderColor = UIColor.whiteColor().CGColor
-        friendImage.layer.cornerRadius = friendImage.frame.size.width/2
+        friendImage.layer.cornerRadius = friendImage.bounds.width/2
         friendImage.clipsToBounds = true
     }
 }

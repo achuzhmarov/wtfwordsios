@@ -15,7 +15,7 @@ class MessageCell: UITableViewCell {
     
     func initStyle() {
         friendImage?.layer.borderColor = UIColor.whiteColor().CGColor
-        friendImage?.layer.cornerRadius = friendImage.frame.size.width/2
+        friendImage?.layer.cornerRadius = friendImage.bounds.width/2
         friendImage?.clipsToBounds = true
         
         self.selectionStyle = .None;
@@ -55,7 +55,7 @@ class MessageCell: UITableViewCell {
         
         if (!isOutcoming) {
             friendImage.image = avatarService.getAvatarImage(message.author,
-                diameter: UInt(friendImage.bounds.height)).avatarImage
+                diameter: UInt(friendImage.bounds.height))
         }
         
         timeText?.attributedText = timeService.parseTime(message.timestamp)

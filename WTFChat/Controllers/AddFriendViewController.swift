@@ -61,10 +61,8 @@ class AddFriendViewController: UITableViewController, UISearchResultsUpdating {
         
         cell.friendName.text = friend
 
-        let jsqFriendImage = avatarService.getAvatarImage(friend,
+        cell.friendImage.image = avatarService.getAvatarImage(friend,
             diameter: UInt(cell.friendImage.bounds.height))
-        
-        cell.friendImage.image = jsqFriendImage.avatarImage
         
         return cell
     }

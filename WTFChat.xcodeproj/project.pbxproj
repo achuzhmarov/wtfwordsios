@@ -46,6 +46,7 @@
 		48D3A5401BDF81F900B2A1AD /* IosService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D3A53F1BDF81F900B2A1AD /* IosService.swift */; };
 		48DBD96D1BD505AA00680ED3 /* DoubleCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBD96C1BD505AA00680ED3 /* DoubleCutterCipher.swift */; };
 		48DBD96F1BD505B900680ED3 /* RandomCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBD96E1BD505B900680ED3 /* RandomCutterCipher.swift */; };
+		48DCFC5A1BF3927E004D4300 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCFC591BF3927E004D4300 /* SettingsViewController.swift */; };
 		48E4E3AD1BE0ED9600E45D65 /* FriendLvl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E4E3AC1BE0ED9600E45D65 /* FriendLvl.swift */; };
 		48E9A9AA1BEB7E9D00508847 /* AvatarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9A9A91BEB7E9D00508847 /* AvatarService.swift */; };
 		48E9A9AC1BEB7FC900508847 /* TimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9A9AB1BEB7FC900508847 /* TimeService.swift */; };
@@ -128,6 +129,7 @@
 		48D3A53F1BDF81F900B2A1AD /* IosService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IosService.swift; sourceTree = "<group>"; };
 		48DBD96C1BD505AA00680ED3 /* DoubleCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleCutterCipher.swift; sourceTree = "<group>"; };
 		48DBD96E1BD505B900680ED3 /* RandomCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomCutterCipher.swift; sourceTree = "<group>"; };
+		48DCFC591BF3927E004D4300 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		48E4E3AC1BE0ED9600E45D65 /* FriendLvl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendLvl.swift; sourceTree = "<group>"; };
 		48E9A9A91BEB7E9D00508847 /* AvatarService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarService.swift; sourceTree = "<group>"; };
 		48E9A9AB1BEB7FC900508847 /* TimeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeService.swift; sourceTree = "<group>"; };
@@ -274,16 +276,10 @@
 		489666B71B9B650400F769D1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				48C661C71BECE7BC003AF4F5 /* Table */,
-				48C661C61BECE474003AF4F5 /* Cell */,
-				48E9D61D1BB3F59000BA0F2A /* Control */,
-				48E9D61E1BB3F5FB00BA0F2A /* LoginViewController.swift */,
-				48F1373B1BB5C2CD00E5FFA7 /* RegistrationViewController.swift */,
-				489666B91B9B650400F769D1 /* FriendsViewController.swift */,
-				48EE657C1BB6F1C300A0DB07 /* AddFriendViewController.swift */,
-				48C661C21BECCE1D003AF4F5 /* MessagesViewController.swift */,
-				4829B17F1BBFE0C3009AC43F /* DecipherViewController.swift */,
-				482AA4F41BC2C41500F101F8 /* SendMessageViewController.swift */,
+				48DCFC561BF39174004D4300 /* Login */,
+				48DCFC571BF391C6004D4300 /* Messages */,
+				48DCFC581BF39253004D4300 /* Settings */,
+				48E9D61D1BB3F59000BA0F2A /* Helpers */,
 			);
 			name = Controller;
 			path = Controllers;
@@ -312,25 +308,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		48C661C61BECE474003AF4F5 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				489666B81B9B650400F769D1 /* FriendCell.swift */,
-				48EE657E1BB6F2FE00A0DB07 /* AddFriendCell.swift */,
-				48C661C41BECCF38003AF4F5 /* MessageCell.swift */,
-			);
-			name = Cell;
-			sourceTree = "<group>";
-		};
-		48C661C71BECE7BC003AF4F5 /* Table */ = {
-			isa = PBXGroup;
-			children = (
-				4829B1811BBFE2EB009AC43F /* WordsViewController.swift */,
-				48C661C81BECE7FB003AF4F5 /* MessageTableView.swift */,
-			);
-			name = Table;
-			sourceTree = "<group>";
-		};
 		48C661CA1BEF6B8C003AF4F5 /* Logical */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +323,44 @@
 			name = Logical;
 			sourceTree = "<group>";
 		};
+		48DCFC561BF39174004D4300 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				48E9D61E1BB3F5FB00BA0F2A /* LoginViewController.swift */,
+				48F1373B1BB5C2CD00E5FFA7 /* RegistrationViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		48DCFC571BF391C6004D4300 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				489666B91B9B650400F769D1 /* FriendsViewController.swift */,
+				489666B81B9B650400F769D1 /* FriendCell.swift */,
+				48EE657C1BB6F1C300A0DB07 /* AddFriendViewController.swift */,
+				48EE657E1BB6F2FE00A0DB07 /* AddFriendCell.swift */,
+				48C661C21BECCE1D003AF4F5 /* MessagesViewController.swift */,
+				48C661C81BECE7FB003AF4F5 /* MessageTableView.swift */,
+				48C661C41BECCF38003AF4F5 /* MessageCell.swift */,
+				482AA4F41BC2C41500F101F8 /* SendMessageViewController.swift */,
+				48F44A611BC3F35900C1915F /* CipherPickerViewController.swift */,
+				4829B17F1BBFE0C3009AC43F /* DecipherViewController.swift */,
+				486506591BE2A492008555AD /* ExpGainView.swift */,
+				4829B1811BBFE2EB009AC43F /* WordsViewController.swift */,
+				48F2F5441BA1CAB2005CCAC8 /* WordsField.swift */,
+				487D771C1BA0878400AF333C /* WordLabelContainer.swift */,
+			);
+			name = Messages;
+			sourceTree = "<group>";
+		};
+		48DCFC581BF39253004D4300 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				48DCFC591BF3927E004D4300 /* SettingsViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		48E9A9AD1BEB811E00508847 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -356,18 +371,14 @@
 			name = Network;
 			sourceTree = "<group>";
 		};
-		48E9D61D1BB3F59000BA0F2A /* Control */ = {
+		48E9D61D1BB3F59000BA0F2A /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				487D771C1BA0878400AF333C /* WordLabelContainer.swift */,
 				487D771A1BA0749800AF333C /* RoundedLabel.swift */,
-				48F2F5441BA1CAB2005CCAC8 /* WordsField.swift */,
 				48F2F5481BA1FF5A005CCAC8 /* Timer.swift */,
 				482E9ED11BC1825D00803CDE /* WTFAlert.swift */,
-				48F44A611BC3F35900C1915F /* CipherPickerViewController.swift */,
-				486506591BE2A492008555AD /* ExpGainView.swift */,
 			);
-			name = Control;
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		48EEB6271BA2FB3C007C5B5F /* Sounds */ = {
@@ -588,6 +599,7 @@
 				488DF80D1BB2B1560085E31A /* SwiftyJSON.swift in Sources */,
 				489666DB1B9B656A00F769D1 /* User.swift in Sources */,
 				489666D91B9B656A00F769D1 /* Message.swift in Sources */,
+				48DCFC5A1BF3927E004D4300 /* SettingsViewController.swift in Sources */,
 				48E9D6211BB46DAB00BA0F2A /* MessageCipher.swift in Sources */,
 				48C661C51BECCF38003AF4F5 /* MessageCell.swift in Sources */,
 				48D3A53E1BDF814800B2A1AD /* TalkService.swift in Sources */,

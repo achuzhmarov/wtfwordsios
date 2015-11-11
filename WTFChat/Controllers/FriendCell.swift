@@ -47,15 +47,13 @@ class FriendCell: UITableViewCell {
             hideLastAuthorImage()
         }
         
-        let jsqFriendImage = avatarService.getAvatarImage(talk.getFriendLogin(),
+        friendImage.image = avatarService.getAvatarImage(talk.getFriendLogin(),
             diameter: UInt(friendImage.bounds.height))
-        
-        friendImage.image = jsqFriendImage.avatarImage
     }
     
     private func initStyle() {
         friendImage.layer.borderColor = UIColor.whiteColor().CGColor
-        friendImage.layer.cornerRadius = friendImage.frame.size.width/2
+        friendImage.layer.cornerRadius = friendImage.bounds.width/2
         friendImage.clipsToBounds = true
         
         self.selectionStyle = .None;
@@ -80,10 +78,8 @@ class FriendCell: UITableViewCell {
     }
     
     private func updateLastAuthorImage(name: String) {
-        let jsqAuthorImage = avatarService.getAvatarImage(name,
+        lastMessageAuthorImage.image = avatarService.getAvatarImage(name,
             diameter: UInt(lastMessageAuthorImage.bounds.height))
-        
-        lastMessageAuthorImage.image = jsqAuthorImage.avatarImage
         
         lastMessageAuthorImageWidth.constant = 30
         lastMessageAuthorImageMargin.constant = 4
