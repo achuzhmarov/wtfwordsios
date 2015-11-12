@@ -19,13 +19,19 @@ class User {
     var newSuggestions: Int = 0
     var friendsLvls = [FriendLvl]()
     
+    var email: String = ""
+    var name: String = ""
+    var pushNew: Bool = true
+    var pushDeciphered: Bool = true
+    
     init(login: String, suggestions: Int) {
         self.login = login
         self.suggestions = suggestions
     }
     
     init(login: String, suggestions: Int, talks: [Talk], lastUpdate: NSDate,
-        exp: Int, lvl: Int, newSuggestions: Int, friendsLvls: [FriendLvl])
+        exp: Int, lvl: Int, newSuggestions: Int, friendsLvls: [FriendLvl],
+        email: String, name: String, pushNew: Bool, pushDeciphered: Bool)
     {
         self.login = login
         self.suggestions = suggestions
@@ -35,6 +41,11 @@ class User {
         self.lvl = lvl
         self.newSuggestions = newSuggestions
         self.friendsLvls = friendsLvls
+        
+        self.email = email
+        self.name = name
+        self.pushNew = pushNew
+        self.pushDeciphered = pushDeciphered
     }
     
     func updateInfo(user: User) {
@@ -43,6 +54,11 @@ class User {
         self.newSuggestions = user.newSuggestions
         self.exp = user.exp
         self.lvl = user.lvl
+        
+        self.email = user.email
+        self.name = user.name
+        self.pushNew = user.pushNew
+        self.pushDeciphered = user.pushDeciphered
         
         for friendLvl in user.friendsLvls {
             updateFriendLvlInArray(friendLvl)
@@ -88,6 +104,11 @@ class User {
         var lvl: Int = 0
         var newSuggestions: Int = 0
         var friendsLvls = [FriendLvl]()
+        
+        var email: String
+        var name: String
+        var pushNew: Bool = true
+        var pushDeciphered: Bool = true
         
         if let value = json["login"].string {
             login = value
@@ -147,6 +168,32 @@ class User {
             throw error
         }
         
+        if let value = json["email"].string {
+            email = value
+        } else {
+            throw json["email"].error!
+        }
+        
+        if let value = json["name"].string {
+            name = value
+        } else {
+            throw json["name"].error!
+        }
+        
+        if let value = json["push_new"].bool {
+            pushNew = value
+        } else {
+            //do nothing
+            //throw json["has_unread"].error!
+        }
+        
+        if let value = json["push_deciphered"].bool {
+            pushDeciphered = value
+        } else {
+            //do nothing
+            //throw json["has_unread"].error!
+        }
+        
         return User(
             login: login,
             suggestions: suggestions,
@@ -155,7 +202,11 @@ class User {
             exp: exp,
             lvl: lvl,
             newSuggestions: newSuggestions,
-            friendsLvls: friendsLvls
+            friendsLvls: friendsLvls,
+            email: email,
+            name: name,
+            pushNew: pushNew,
+            pushDeciphered: pushDeciphered
         )
     }
 }

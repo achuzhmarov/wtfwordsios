@@ -27,58 +27,58 @@ class UserService: NSObject {
         }
     }
     
+    func getUserName() -> String {
+        if (!isLoggedIn()) { return "" }
+        return currentUser!.name
+    }
+    
+    func getUserEmail() -> String {
+        if (!isLoggedIn()) { return "" }
+        return currentUser!.email
+    }
+    
+    func getUserPushNew() -> Bool {
+        if (!isLoggedIn()) { return true }
+        return currentUser!.pushNew
+    }
+    
+    func getUserPushDeciphered() -> Bool {
+        if (!isLoggedIn()) { return true }
+        return currentUser!.pushDeciphered
+    }
+    
     func getUserSuggestions() -> Int {
-        if (!isLoggedIn()) {
-            return 0
-        }
-        
+        if (!isLoggedIn()) { return 0 }
         return currentUser!.suggestions
     }
     
     func getUserNewSuggestions() -> Int {
-        if (!isLoggedIn()) {
-            return 0
-        }
-        
+        if (!isLoggedIn()) { return 0 }
         return currentUser!.newSuggestions
     }
     
     func clearUserNewSuggestions() {
-        if (!isLoggedIn()) {
-            return
-        }
-        
+        if (!isLoggedIn()) { return }
         currentUser!.newSuggestions = 0
     }
     
     func getUserLogin() -> String {
-        if (!isLoggedIn()) {
-            return ""
-        }
-        
+        if (!isLoggedIn()) { return "" }
         return currentUser!.login
     }
     
     func getUserExp() -> Int {
-        if (!isLoggedIn()) {
-            return 0
-        }
-        
+        if (!isLoggedIn()) { return 0 }
         return currentUser!.exp
     }
     
     func getUserLvl() -> Int {
-        if (!isLoggedIn()) {
-            return 0
-        }
-        
+        if (!isLoggedIn()) { return 0 }
         return currentUser!.lvl
     }
     
     func useSuggestion() {
-        if (!isLoggedIn()) {
-            return
-        }
+        if (!isLoggedIn()) { return }
         
         currentUser!.suggestions--
         suggestionsUsed++

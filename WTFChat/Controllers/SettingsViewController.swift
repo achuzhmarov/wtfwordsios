@@ -51,6 +51,12 @@ class SettingsViewController: UITableViewController {
         
         hintsText.text = String(userService.getUserSuggestions())
         
+        nameText.text = userService.getUserName()
+        emailText.text = userService.getUserEmail()
+        
+        pushNewSwitch.setOn(userService.getUserPushNew(), animated: false)
+        pushDecipherSwitch.setOn(userService.getUserPushDeciphered(), animated: false)
+        
         userImage.image = avatarService.getAvatarImage(
             userService.getUserLogin(),
             diameter: UInt(userImage.bounds.height))
