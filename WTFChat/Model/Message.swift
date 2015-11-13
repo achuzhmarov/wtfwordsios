@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Message : BaseEntity, JSQMessageData {
+class Message : BaseEntity {
     let timestamp: NSDate
     let talkId: String
     
@@ -141,8 +141,6 @@ class Message : BaseEntity, JSQMessageData {
         return result
     }
     
-    // MARK: JSQMessageData realization
-    
     func text() -> String! {
         if (userService.getUserLogin() == self.author) {
             return clearText()
@@ -183,26 +181,6 @@ class Message : BaseEntity, JSQMessageData {
         }
             
         return result
-    }
-    
-    func senderId() -> String! {
-        return author
-    }
-    
-    func senderDisplayName() -> String! {
-        return author
-    }
-    
-    func date() -> NSDate! {
-        return timestamp
-    }
-    
-    func isMediaMessage() -> Bool {
-        return false;
-    }
-    
-    func messageHash() -> UInt {
-        return UInt(id.hash);
     }
     
     func checkEquals(message: Message) -> Bool {

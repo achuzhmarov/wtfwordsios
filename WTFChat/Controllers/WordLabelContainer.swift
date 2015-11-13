@@ -58,7 +58,7 @@ class WordLabelContainer {
                 label.layer.backgroundColor = CIPHERED_COLOR.CGColor
             }
         case .Ignore:
-            label.layer.backgroundColor = UIColor.jsq_messageBubbleLightGrayColor().CGColor
+            label.layer.backgroundColor = IGNORE_COLOR.CGColor
             label.textColor = UIColor.blackColor()
         case .Failed:
             label.layer.backgroundColor = FAILED_COLOR.CGColor

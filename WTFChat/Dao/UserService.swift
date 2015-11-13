@@ -10,6 +10,11 @@ import Foundation
 
 let userService = UserService()
 
+let HTTP_UNAUTHORIZED = 401
+let HTTP_LOGIN_EXISTS = 490
+let HTTP_EMAIL_EXISTS = 491
+let HTTP_INCORRECT_PASSWORD = 492
+
 class UserService: NSObject {
     let USER_UPDATE_TIMER_INTERVAL = 10.0
     let userNetworkService = UserNetworkService()
@@ -24,6 +29,16 @@ class UserService: NSObject {
             return true
         } else {
             return false
+        }
+    }
+    
+    func getDisplayName() -> String {
+        if (!isLoggedIn()) { return "" }
+        
+        if (currentUser!.name != "") {
+            return currentUser!.name
+        } else {
+            return currentUser!.login
         }
     }
     
@@ -168,7 +183,51 @@ class UserService: NSObject {
         userNetworkService.makeFriends(friendLogin, completion: completion)
     }
     
-    func register(login: String, password: String, completion:(error: NSError?) -> Void) {
-        userNetworkService.register(login, password: password, completion: completion)
+    func register(login: String, password: String, email: String, completion:(error: NSError?) -> Void) {
+        userNetworkService.register(login, password: password, email: email, completion: completion)
+    }
+    
+    func updatePassword(oldPassword: String, newPassword: String, completion:(error: NSError?) -> Void) {
+        userNetworkService.updatePassword(oldPassword, newPassword: newPassword, completion: completion)
+    }
+    
+    func updateName(name: String, completion:(error: NSError?) -> Void) {
+        userNetworkService.updateName(name) { error in
+            if (error == nil) {
+                self.currentUser!.name = name
+            }
+            
+            completion(error: error)
+        }
+    }
+    
+    func updateEmail(email: String, completion:(error: NSError?) -> Void) {
+        userNetworkService.updateEmail(email) { error in
+            if (error == nil) {
+                self.currentUser!.email = email
+            }
+            
+            completion(error: error)
+        }
+    }
+    
+    func updatePushNew(pushNew: Bool, completion:(error: NSError?) -> Void) {
+        userNetworkService.updatePushNew(pushNew) { error in
+            if (error == nil) {
+                self.currentUser!.pushNew = pushNew
+            }
+            
+            completion(error: error)
+        }
+    }
+    
+    func updatePushDeciphered(pushDeciphered: Bool, completion:(error: NSError?) -> Void) {
+        userNetworkService.updatePushDeciphered(pushDeciphered) { error in
+            if (error == nil) {
+                self.currentUser!.pushDeciphered = pushDeciphered
+            }
+            
+            completion(error: error)
+        }
     }
 }

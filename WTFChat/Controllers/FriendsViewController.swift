@@ -16,6 +16,7 @@ let CIPHERED_COLOR = UIColor(netHex:0x0092D7)
 let FAILED_COLOR = UIColor(netHex:0xF26964)
 let TRY_COLOR = UIColor(netHex:0xEE8D09)
 let FONT_COLOR = UIColor.whiteColor()
+let IGNORE_COLOR = UIColor(hue: 240.0 / 360.0, saturation: 0.02, brightness: 0.92, alpha: 1.0)
 
 class FriendsViewController: UITableViewController, TalkListener {
     var talks = [Talk]()
@@ -126,10 +127,5 @@ class FriendsViewController: UITableViewController, TalkListener {
             talkService.addNewTalk(addFriendController.createdTalk!)
             //self.updateView()
         }
-    }
-    
-    @IBAction func logoutPressed(sender: AnyObject) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.logout()
     }
 }

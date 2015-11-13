@@ -39,12 +39,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         var valid = true
         
         if (usernameField.text == nil || usernameField.text == "") {
-            usernameField.placeholder = "Should not be empty"
+            usernameField.placeholder = "Login or email required"
             valid = false
         }
         
         if (passwordField.text == nil || passwordField.text == "") {
-            passwordField.placeholder = "Should not be empty"
+            passwordField.placeholder = "Password required"
             valid = false
         }
         
@@ -53,7 +53,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {   //delegate method
+    //text fields delegate method
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
         loginButtonPressed(loginButton)
         return true
     }
@@ -62,8 +63,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         userService.login(login, password: password) { user, error -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if let requestError = error {
-                    //TODO - show error to user
-                    print(requestError)
+                    if (requestError.code == HTTP_UNAUTHORIZED) {
+                        WTFOneButtonAlert.show("Error", message: "Invalid credentials", firstButtonTitle: "Ok", viewPresenter: self)
+                    } else {
+                        WTFOneButtonAlert.show("Error", message: "Internet connection problem", firstButtonTitle: "Ok", viewPresenter: self)
+                    }
                 } else {
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     appDelegate.showMainScreen()
@@ -71,20 +75,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             })
         }
     }
-    
-    // MARK: - Navigation
-    
-    /*@IBAction func logout(segue:UIStoryboardSegue) {
-        userService.logout()
-        
-        usernameField.text = ""
-        usernameField.placeholder = "Username"
-        passwordField.text = ""
-        passwordField.placeholder = "Password"
-        
-        usernameField.resignFirstResponder()
-        passwordField.resignFirstResponder()
-    }*/
     
     @IBAction func register(segue:UIStoryboardSegue) {
         if let registrationController = segue.sourceViewController as? RegistrationViewController {

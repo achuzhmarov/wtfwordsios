@@ -42,10 +42,11 @@ class UserNetworkService: NSObject {
         }
     }
     
-    func register(login: String, password: String, completion:(error: NSError?) -> Void) {
+    func register(login: String, password: String, email: String, completion:(error: NSError?) -> Void) {
         let userData = [
             "login": login,
-            "password": password
+            "password": password,
+            "email": email
         ]
         
         let postJSON = JSON(userData)
@@ -129,6 +130,87 @@ class UserNetworkService: NSObject {
                 } else {
                     completion(talk: nil, error: nil)
                 }
+            }
+        }
+    }
+    
+    func updatePassword(oldPassword: String, newPassword: String, completion:(error: NSError?) -> Void) {
+        let requestData = [
+            "old_password": oldPassword,
+            "new_password": newPassword
+        ]
+        
+        let postJSON = JSON(requestData)
+        
+        networkService.post(postJSON, relativeUrl: "user/password") { (json, error) -> Void in
+            if let requestError = error {
+                completion(error: requestError)
+            } else {
+                completion(error: nil)
+            }
+        }
+    }
+    
+    func updateName(name: String, completion:(error: NSError?) -> Void) {
+        let requestData = [
+            "name": name
+        ]
+        
+        let postJSON = JSON(requestData)
+        
+        networkService.post(postJSON, relativeUrl: "user/name") { (json, error) -> Void in
+            if let requestError = error {
+                completion(error: requestError)
+            } else {
+                completion(error: nil)
+            }
+        }
+    }
+    
+    func updateEmail(email: String, completion:(error: NSError?) -> Void) {
+        let requestData = [
+            "email": email
+        ]
+        
+        let postJSON = JSON(requestData)
+        
+        networkService.post(postJSON, relativeUrl: "user/email") { (json, error) -> Void in
+            if let requestError = error {
+                completion(error: requestError)
+            } else {
+                completion(error: nil)
+            }
+        }
+    }
+    
+    func updatePushNew(pushNew: Bool, completion:(error: NSError?) -> Void) {
+        let requestData = [
+            "push_new": pushNew
+        ]
+        
+        let postJSON = JSON(requestData)
+        
+        networkService.post(postJSON, relativeUrl: "user/push_new") { (json, error) -> Void in
+            if let requestError = error {
+                completion(error: requestError)
+            } else {
+                completion(error: nil)
+            }
+        }
+    }
+    
+    func updatePushDeciphered(pushDeciphered: Bool, completion:(error: NSError?) -> Void) {
+        let requestData = [
+            "push_deciphered": pushDeciphered
+        ]
+        
+        let postJSON = JSON(requestData)
+        
+        networkService.post(postJSON, relativeUrl: "user/push_deciphered") { (json, error) -> Void in
+            if let requestError = error {
+                completion(error: requestError)
+            } else {
+                completion(error: nil)
             }
         }
     }

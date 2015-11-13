@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0915DD89306A197739C98209 /* libPods-WTFChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 905623BA880926CAEDEC04AB /* libPods-WTFChat.a */; };
 		4829B1801BBFE0C3009AC43F /* DecipherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4829B17F1BBFE0C3009AC43F /* DecipherViewController.swift */; };
 		4829B1821BBFE2EB009AC43F /* WordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4829B1811BBFE2EB009AC43F /* WordsViewController.swift */; };
 		482AA4F51BC2C41500F101F8 /* SendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482AA4F41BC2C41500F101F8 /* SendMessageViewController.swift */; };
@@ -16,6 +15,11 @@
 		482C241E1BA433F800288BB1 /* RightCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482C241D1BA433F800288BB1 /* RightCutterCipher.swift */; };
 		482C24241BA43CE500288BB1 /* ShuffleCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482C24231BA43CE500288BB1 /* ShuffleCipher.swift */; };
 		482E9ED21BC1825D00803CDE /* WTFAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482E9ED11BC1825D00803CDE /* WTFAlert.swift */; };
+		48411F441BF61293009B86FD /* UIColor+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 48411F431BF61293009B86FD /* UIColor+JSQMessages.m */; };
+		48411F461BF61931009B86FD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48411F451BF61931009B86FD /* Login.storyboard */; };
+		48411F481BF626A5009B86FD /* NameEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48411F471BF626A5009B86FD /* NameEditViewController.swift */; };
+		48411F4A1BF629B4009B86FD /* EmailEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48411F491BF629B4009B86FD /* EmailEditViewController.swift */; };
+		48411F4C1BF62F18009B86FD /* PasswordEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48411F4B1BF62F18009B86FD /* PasswordEditViewController.swift */; };
 		486506581BE2477B008555AD /* LvlService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486506571BE2477B008555AD /* LvlService.swift */; };
 		4865065A1BE2A492008555AD /* ExpGainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486506591BE2A492008555AD /* ExpGainView.swift */; };
 		487D771B1BA0749800AF333C /* RoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487D771A1BA0749800AF333C /* RoundedLabel.swift */; };
@@ -74,6 +78,9 @@
 		48F2F5471BA1DA71005CCAC8 /* StringDistanceCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2F5461BA1DA71005CCAC8 /* StringDistanceCalculator.swift */; };
 		48F2F5491BA1FF5A005CCAC8 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2F5481BA1FF5A005CCAC8 /* Timer.swift */; };
 		48F44A621BC3F35900C1915F /* CipherPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F44A611BC3F35900C1915F /* CipherPickerViewController.swift */; };
+		48F48B891BF609FB00918C83 /* JSQMessagesAvatarImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F48B861BF609FB00918C83 /* JSQMessagesAvatarImage.m */; };
+		48F48B8A1BF609FB00918C83 /* JSQMessagesAvatarImageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F48B881BF609FB00918C83 /* JSQMessagesAvatarImageFactory.m */; };
+		48F48B8F1BF60A5300918C83 /* JSQMessagesTimestampFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F48B8E1BF60A5300918C83 /* JSQMessagesTimestampFormatter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +102,12 @@
 		482C241D1BA433F800288BB1 /* RightCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightCutterCipher.swift; sourceTree = "<group>"; };
 		482C24231BA43CE500288BB1 /* ShuffleCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShuffleCipher.swift; sourceTree = "<group>"; };
 		482E9ED11BC1825D00803CDE /* WTFAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTFAlert.swift; sourceTree = "<group>"; };
+		48411F421BF6128D009B86FD /* UIColor+JSQMessages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+JSQMessages.h"; sourceTree = "<group>"; };
+		48411F431BF61293009B86FD /* UIColor+JSQMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+JSQMessages.m"; sourceTree = "<group>"; };
+		48411F451BF61931009B86FD /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		48411F471BF626A5009B86FD /* NameEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameEditViewController.swift; sourceTree = "<group>"; };
+		48411F491BF629B4009B86FD /* EmailEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailEditViewController.swift; sourceTree = "<group>"; };
+		48411F4B1BF62F18009B86FD /* PasswordEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordEditViewController.swift; sourceTree = "<group>"; };
 		486506571BE2477B008555AD /* LvlService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LvlService.swift; sourceTree = "<group>"; };
 		486506591BE2A492008555AD /* ExpGainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpGainView.swift; sourceTree = "<group>"; };
 		487D771A1BA0749800AF333C /* RoundedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedLabel.swift; sourceTree = "<group>"; };
@@ -159,9 +172,13 @@
 		48F2F5461BA1DA71005CCAC8 /* StringDistanceCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringDistanceCalculator.swift; sourceTree = "<group>"; };
 		48F2F5481BA1FF5A005CCAC8 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		48F44A611BC3F35900C1915F /* CipherPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherPickerViewController.swift; sourceTree = "<group>"; };
-		85BDBDD3C303D2C8FE03A6D1 /* Pods-WTFChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WTFChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-WTFChat/Pods-WTFChat.release.xcconfig"; sourceTree = "<group>"; };
-		905623BA880926CAEDEC04AB /* libPods-WTFChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WTFChat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6B0BAA5F642DB9106564046 /* Pods-WTFChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WTFChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WTFChat/Pods-WTFChat.debug.xcconfig"; sourceTree = "<group>"; };
+		48F48B851BF609FB00918C83 /* JSQMessagesAvatarImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesAvatarImage.h; sourceTree = "<group>"; };
+		48F48B861BF609FB00918C83 /* JSQMessagesAvatarImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesAvatarImage.m; sourceTree = "<group>"; };
+		48F48B871BF609FB00918C83 /* JSQMessagesAvatarImageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesAvatarImageFactory.h; sourceTree = "<group>"; };
+		48F48B881BF609FB00918C83 /* JSQMessagesAvatarImageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesAvatarImageFactory.m; sourceTree = "<group>"; };
+		48F48B8C1BF60A2C00918C83 /* JSQMessageAvatarImageDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSQMessageAvatarImageDataSource.h; sourceTree = "<group>"; };
+		48F48B8D1BF60A5300918C83 /* JSQMessagesTimestampFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesTimestampFormatter.h; sourceTree = "<group>"; };
+		48F48B8E1BF60A5300918C83 /* JSQMessagesTimestampFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesTimestampFormatter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,7 +186,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0915DD89306A197739C98209 /* libPods-WTFChat.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +215,7 @@
 		488DF80B1BB2B0FB0085E31A /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				48F48B8B1BF609FF00918C83 /* JSQMessages */,
 				48EE65791BB694E300A0DB07 /* KeychainWrapper.h */,
 				48EE657A1BB694E300A0DB07 /* KeychainWrapper.m */,
 				488DF80C1BB2B1560085E31A /* SwiftyJSON.swift */,
@@ -212,7 +229,6 @@
 				489666941B9B640400F769D1 /* WTFChat */,
 				489666AA1B9B640400F769D1 /* WTFChatTests */,
 				489666931B9B640400F769D1 /* Products */,
-				9F89143259A9E4AF7B3EA9BD /* Pods */,
 				49D7C70BCF12E2F6E166B7B5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -236,7 +252,6 @@
 				489666BC1B9B651800F769D1 /* Service */,
 				489666B71B9B650400F769D1 /* Controller */,
 				489666971B9B640400F769D1 /* AppDelegate.swift */,
-				4896669B1B9B640400F769D1 /* Main.storyboard */,
 				4896669E1B9B640400F769D1 /* Images.xcassets */,
 				489666A01B9B640400F769D1 /* LaunchScreen.xib */,
 				489666951B9B640400F769D1 /* Supporting Files */,
@@ -244,6 +259,8 @@
 				48A2F9A71B9DF42C009E5434 /* Extensions.swift */,
 				48F2F5461BA1DA71005CCAC8 /* StringDistanceCalculator.swift */,
 				48EEB6251BA2F368007C5B5F /* AudioHelper.swift */,
+				48411F451BF61931009B86FD /* Login.storyboard */,
+				4896669B1B9B640400F769D1 /* Main.storyboard */,
 			);
 			path = WTFChat;
 			sourceTree = "<group>";
@@ -357,6 +374,9 @@
 			isa = PBXGroup;
 			children = (
 				48DCFC591BF3927E004D4300 /* SettingsViewController.swift */,
+				48411F471BF626A5009B86FD /* NameEditViewController.swift */,
+				48411F491BF629B4009B86FD /* EmailEditViewController.swift */,
+				48411F4B1BF62F18009B86FD /* PasswordEditViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -401,21 +421,27 @@
 			name = Sounds;
 			sourceTree = "<group>";
 		};
+		48F48B8B1BF609FF00918C83 /* JSQMessages */ = {
+			isa = PBXGroup;
+			children = (
+				48411F431BF61293009B86FD /* UIColor+JSQMessages.m */,
+				48411F421BF6128D009B86FD /* UIColor+JSQMessages.h */,
+				48F48B8D1BF60A5300918C83 /* JSQMessagesTimestampFormatter.h */,
+				48F48B8E1BF60A5300918C83 /* JSQMessagesTimestampFormatter.m */,
+				48F48B8C1BF60A2C00918C83 /* JSQMessageAvatarImageDataSource.h */,
+				48F48B851BF609FB00918C83 /* JSQMessagesAvatarImage.h */,
+				48F48B861BF609FB00918C83 /* JSQMessagesAvatarImage.m */,
+				48F48B871BF609FB00918C83 /* JSQMessagesAvatarImageFactory.h */,
+				48F48B881BF609FB00918C83 /* JSQMessagesAvatarImageFactory.m */,
+			);
+			name = JSQMessages;
+			sourceTree = "<group>";
+		};
 		49D7C70BCF12E2F6E166B7B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				905623BA880926CAEDEC04AB /* libPods-WTFChat.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9F89143259A9E4AF7B3EA9BD /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				D6B0BAA5F642DB9106564046 /* Pods-WTFChat.debug.xcconfig */,
-				85BDBDD3C303D2C8FE03A6D1 /* Pods-WTFChat.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -425,11 +451,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 489666B11B9B640400F769D1 /* Build configuration list for PBXNativeTarget "WTFChat" */;
 			buildPhases = (
-				A69B44AA7648B4BE523163ED /* Check Pods Manifest.lock */,
 				4896668E1B9B640400F769D1 /* Sources */,
 				4896668F1B9B640400F769D1 /* Frameworks */,
 				489666901B9B640400F769D1 /* Resources */,
-				B7C7FAC9600CC6155BDE07C8 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -511,6 +535,7 @@
 				489666A21B9B640400F769D1 /* LaunchScreen.xib in Resources */,
 				48EEB6421BA31F0D007C5B5F /* lose.wav in Resources */,
 				48EEB6441BA31F0D007C5B5F /* game-sound-wrong.wav in Resources */,
+				48411F461BF61931009B86FD /* Login.storyboard in Resources */,
 				4896669F1B9B640400F769D1 /* Images.xcassets in Resources */,
 				48EEB64C1BA31F0D007C5B5F /* ui-completed-status-alert-notification-sfx002.wav in Resources */,
 				48EEB6471BA31F0D007C5B5F /* warning.wav in Resources */,
@@ -531,39 +556,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		A69B44AA7648B4BE523163ED /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		B7C7FAC9600CC6155BDE07C8 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WTFChat/Pods-WTFChat-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		4896668E1B9B640400F769D1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -572,6 +564,9 @@
 				48C661C91BECE7FB003AF4F5 /* MessageTableView.swift in Sources */,
 				48EE657F1BB6F2FE00A0DB07 /* AddFriendCell.swift in Sources */,
 				48EEB6261BA2F368007C5B5F /* AudioHelper.swift in Sources */,
+				48F48B891BF609FB00918C83 /* JSQMessagesAvatarImage.m in Sources */,
+				48F48B8F1BF60A5300918C83 /* JSQMessagesTimestampFormatter.m in Sources */,
+				48F48B8A1BF609FB00918C83 /* JSQMessagesAvatarImageFactory.m in Sources */,
 				489666DC1B9B656A00F769D1 /* Word.swift in Sources */,
 				48F2F5471BA1DA71005CCAC8 /* StringDistanceCalculator.swift in Sources */,
 				482C24241BA43CE500288BB1 /* ShuffleCipher.swift in Sources */,
@@ -579,6 +574,7 @@
 				482AA4F51BC2C41500F101F8 /* SendMessageViewController.swift in Sources */,
 				489666D81B9B656A00F769D1 /* BaseEntity.swift in Sources */,
 				48D3A5401BDF81F900B2A1AD /* IosService.swift in Sources */,
+				48411F481BF626A5009B86FD /* NameEditViewController.swift in Sources */,
 				487D771B1BA0749800AF333C /* RoundedLabel.swift in Sources */,
 				482C241E1BA433F800288BB1 /* RightCutterCipher.swift in Sources */,
 				489666DA1B9B656A00F769D1 /* Talk.swift in Sources */,
@@ -596,11 +592,13 @@
 				489666BA1B9B650400F769D1 /* FriendCell.swift in Sources */,
 				48C661CC1BEF6C7B003AF4F5 /* MessageService.swift in Sources */,
 				48E9A9AC1BEB7FC900508847 /* TimeService.swift in Sources */,
+				48411F4A1BF629B4009B86FD /* EmailEditViewController.swift in Sources */,
 				488DF80D1BB2B1560085E31A /* SwiftyJSON.swift in Sources */,
 				489666DB1B9B656A00F769D1 /* User.swift in Sources */,
 				489666D91B9B656A00F769D1 /* Message.swift in Sources */,
 				48DCFC5A1BF3927E004D4300 /* SettingsViewController.swift in Sources */,
 				48E9D6211BB46DAB00BA0F2A /* MessageCipher.swift in Sources */,
+				48411F441BF61293009B86FD /* UIColor+JSQMessages.m in Sources */,
 				48C661C51BECCF38003AF4F5 /* MessageCell.swift in Sources */,
 				48D3A53E1BDF814800B2A1AD /* TalkService.swift in Sources */,
 				48C661C31BECCE1D003AF4F5 /* MessagesViewController.swift in Sources */,
@@ -609,6 +607,7 @@
 				48EE657D1BB6F1C300A0DB07 /* AddFriendViewController.swift in Sources */,
 				489666C31B9B651800F769D1 /* MessageNetworkService.swift in Sources */,
 				482AA4F71BC2E19100F101F8 /* LeftCutterCipher.swift in Sources */,
+				48411F4C1BF62F18009B86FD /* PasswordEditViewController.swift in Sources */,
 				48F1373C1BB5C2CD00E5FFA7 /* RegistrationViewController.swift in Sources */,
 				486506581BE2477B008555AD /* LvlService.swift in Sources */,
 				4829B1801BBFE0C3009AC43F /* DecipherViewController.swift in Sources */,
@@ -676,7 +675,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Artem Chuzhmarov (LX6JEDUDGP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Artem Chuzhmarov (LX6JEDUDGP)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -696,9 +696,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "ba8e5e71-586f-494b-8ce5-8cb1e09c9ae3";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -722,7 +723,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Artem Chuzhmarov (LX6JEDUDGP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Artem Chuzhmarov (LX6JEDUDGP)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -735,8 +737,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "ba8e5e71-586f-494b-8ce5-8cb1e09c9ae3";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -745,7 +748,6 @@
 		};
 		489666B21B9B640400F769D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6B0BAA5F642DB9106564046 /* Pods-WTFChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -765,7 +767,6 @@
 		};
 		489666B31B9B640400F769D1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 85BDBDD3C303D2C8FE03A6D1 /* Pods-WTFChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

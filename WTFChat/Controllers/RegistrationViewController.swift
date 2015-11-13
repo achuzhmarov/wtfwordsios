@@ -8,14 +8,17 @@
 
 import UIKit
 
-class RegistrationViewController: UIViewController {
+class RegistrationViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var passwordConfirmField: UITextField!
+    
     @IBOutlet weak var signUpButton: UIButton!
     
     var username = ""
     var password = ""
+    var email = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +27,11 @@ class RegistrationViewController: UIViewController {
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
+        
+        usernameField.delegate = self
+        emailField.delegate = self
+        passwordField.delegate = self
+        passwordConfirmField.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,22 +43,77 @@ class RegistrationViewController: UIViewController {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
+
+    func register() {
+        if (!checkData()) {
+            return
+        }
+        
+        self.username = usernameField.text!
+        self.password = passwordField.text!
+        self.email = emailField.text!
+        
+        userService.register(username, password: password, email: email) { error -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
+                if let requestError = error {
+                    //conflict
+                    if (requestError.code == HTTP_LOGIN_EXISTS) {
+                        self.usernameField.text = ""
+                        self.usernameField.placeholder = self.username + " already exists"
+                        
+                        WTFOneButtonAlert.show("Error",
+                            message: "Login " + self.username + " already exists",
+                            firstButtonTitle: "Ok",
+                            viewPresenter: self)
+                        
+                    } else if (requestError.code == HTTP_EMAIL_EXISTS) {
+                        self.emailField.text = ""
+                        self.emailField.placeholder = self.email + " already exists"
+                        
+                        WTFOneButtonAlert.show("Error",
+                            message: "Email " + self.email + " already exists",
+                            firstButtonTitle: "Ok",
+                            viewPresenter: self)
+                        
+                    } else {
+                        WTFOneButtonAlert.show("Error",
+                            message: "Internet connection problem",
+                            firstButtonTitle: "Ok",
+                            viewPresenter: self)
+                    }
+                } else {
+                    self.performSegueWithIdentifier("register", sender: self)
+                }
+            })
+        }
+    }
     
-    @IBAction func signButtonPressed(sender: AnyObject) {
+    func checkData() -> Bool {
         var valid = true
         
         if (usernameField.text == nil || usernameField.text == "") {
-            usernameField.placeholder = "Should not be empty"
+            usernameField.placeholder = "Login required"
             valid = false
         }
         
+        if (emailField.text == nil || emailField.text == "") {
+            emailField.placeholder = "Email required"
+            valid = false
+        } else if (!isValidEmail(emailField.text!)) {
+            emailField.textColor = UIColor.redColor()
+            emailField.placeholder = "Invalid email address"
+            valid = false
+        } else {
+            emailField.textColor = UIColor.blackColor()
+        }
+        
         if (passwordField.text == nil || passwordField.text == "") {
-            passwordField.placeholder = "Should not be empty"
+            passwordField.placeholder = "Password required"
             valid = false
         }
         
         if (passwordConfirmField.text == nil || passwordConfirmField.text == "") {
-            passwordConfirmField.placeholder = "Should not be empty"
+            passwordConfirmField.placeholder = "Confirm password required"
             valid = false
         }
         
@@ -60,29 +123,16 @@ class RegistrationViewController: UIViewController {
             valid = false
         }
         
-        if (valid) {
-            self.register(usernameField.text!, password: passwordField.text!)
-        }
+        return valid
     }
     
-    func register(username: String, password: String) {
-        self.username = username
-        self.password = password
-        
-        userService.register(username, password: password) { error -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
-                if let requestError = error {
-                    //conflict
-                    if (requestError.code == 409) {
-                        self.usernameField.text = ""
-                        self.usernameField.placeholder = self.username + " already exists"
-                    } else {
-                        print(requestError)
-                    }
-                } else {
-                    self.performSegueWithIdentifier("register", sender: self)
-                }
-            })
-        }
+    //text fields delegate method
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        register()
+        return true
+    }
+    
+    @IBAction func signButtonPressed(sender: AnyObject) {
+        register()
     }
 }

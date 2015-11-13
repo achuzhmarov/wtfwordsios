@@ -1,3 +1,3 @@
-#import <JSQMessagesViewController/JSQMessages.h>
-#import <JSQMessagesViewController/UIColor+JSQMessages.h>
+#import "JSQMessagesAvatarImageFactory.h"
+#import "JSQMessagesTimestampFormatter.h"
 #import "KeychainWrapper.h"
