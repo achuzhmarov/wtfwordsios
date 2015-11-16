@@ -11,12 +11,16 @@ import Foundation
 class FriendInfo {
     var login: String
     var lvl: Int
+    var exp: Int
     var name: String
+    var rating: Int
     
-    init(login: String, lvl: Int, name: String) {
+    init(login: String, lvl: Int, name: String, exp: Int, rating: Int) {
         self.login = login
         self.lvl = lvl
         self.name = name
+        self.exp = exp
+        self.rating = rating
     }
 
     func getDisplayName() -> String {
@@ -31,6 +35,8 @@ class FriendInfo {
         var login: String
         var lvl: Int
         var name: String
+        var exp: Int = 0
+        var rating: Int = 0
         
         if let value = json["login"].string {
             login = value
@@ -50,10 +56,46 @@ class FriendInfo {
             throw json["name"].error!
         }
         
+        if let value = json["exp"].int {
+            exp = value
+        } else {
+            //do nothing
+            //throw json["exp"].error!
+        }
+        
+        if let value = json["rating"].int {
+            rating = value
+        } else {
+            //do nothing
+            //throw json["rating"].error!
+        }
+        
         return FriendInfo(
             login: login,
             lvl: lvl,
-            name: name
+            name: name,
+            exp: exp,
+            rating: rating
         )
+    }
+    
+    class func compareByLvl(user1: FriendInfo, user2: FriendInfo) -> Bool {
+        if (user1.lvl > user2.lvl) {
+            return true
+        } else if (user1.lvl < user2.lvl) {
+            return false
+        } else {
+            return user1.login.isGreater(user2.login)
+        }
+    }
+    
+    class func compareByExp(user1: FriendInfo, user2: FriendInfo) -> Bool {
+        if (user1.exp > user2.exp) {
+            return true
+        } else if (user1.exp < user2.exp) {
+            return false
+        } else {
+            return user1.login.isGreater(user2.login)
+        }
     }
 }

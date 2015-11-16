@@ -28,7 +28,7 @@ class NameEditViewController: UITableViewController, UITextFieldDelegate {
         userService.updateName(nameText.text!) { (error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if (error != nil) {
-                    WTFOneButtonAlert.show("Error", message: "Can't update user info. Internet connection problem", firstButtonTitle: "Ok", viewPresenter: self)
+                    WTFOneButtonAlert.show("Error", message: "Can't update user info. " + connectionErrorDescription(), firstButtonTitle: "Ok", viewPresenter: self)
                 } else {
                     self.navigationController?.popViewControllerAnimated(true)
                 }

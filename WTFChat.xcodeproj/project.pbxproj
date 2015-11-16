@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4828CFA81BF9E1C4005DCCAB /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4828CFA71BF9E1C4005DCCAB /* RatingViewController.swift */; };
+		4828CFAA1BF9E1D2005DCCAB /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4828CFA91BF9E1D2005DCCAB /* RatingCell.swift */; };
 		4829B1801BBFE0C3009AC43F /* DecipherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4829B17F1BBFE0C3009AC43F /* DecipherViewController.swift */; };
 		4829B1821BBFE2EB009AC43F /* WordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4829B1811BBFE2EB009AC43F /* WordsViewController.swift */; };
 		482AA4F51BC2C41500F101F8 /* SendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482AA4F41BC2C41500F101F8 /* SendMessageViewController.swift */; };
@@ -94,6 +96,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4828CFA71BF9E1C4005DCCAB /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
+		4828CFA91BF9E1D2005DCCAB /* RatingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
 		4829B17F1BBFE0C3009AC43F /* DecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecipherViewController.swift; sourceTree = "<group>"; };
 		4829B1811BBFE2EB009AC43F /* WordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsViewController.swift; sourceTree = "<group>"; };
 		482AA4F41BC2C41500F101F8 /* SendMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMessageViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +203,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4828CFA61BF9E12D005DCCAB /* Rating */ = {
+			isa = PBXGroup;
+			children = (
+				4828CFA71BF9E1C4005DCCAB /* RatingViewController.swift */,
+				4828CFA91BF9E1D2005DCCAB /* RatingCell.swift */,
+			);
+			name = Rating;
+			sourceTree = "<group>";
+		};
 		482C24181BA433C500288BB1 /* Cipher */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,6 +308,7 @@
 			children = (
 				48DCFC561BF39174004D4300 /* Login */,
 				48DCFC571BF391C6004D4300 /* Messages */,
+				4828CFA61BF9E12D005DCCAB /* Rating */,
 				48DCFC581BF39253004D4300 /* Settings */,
 				48E9D61D1BB3F59000BA0F2A /* Helpers */,
 			);
@@ -576,8 +590,10 @@
 				48D3A5401BDF81F900B2A1AD /* IosService.swift in Sources */,
 				48411F481BF626A5009B86FD /* NameEditViewController.swift in Sources */,
 				487D771B1BA0749800AF333C /* RoundedLabel.swift in Sources */,
+				4828CFA81BF9E1C4005DCCAB /* RatingViewController.swift in Sources */,
 				482C241E1BA433F800288BB1 /* RightCutterCipher.swift in Sources */,
 				489666DA1B9B656A00F769D1 /* Talk.swift in Sources */,
+				4828CFAA1BF9E1D2005DCCAB /* RatingCell.swift in Sources */,
 				489666C51B9B651800F769D1 /* UserNetworkService.swift in Sources */,
 				48DBD96D1BD505AA00680ED3 /* DoubleCutterCipher.swift in Sources */,
 				48F2F5491BA1FF5A005CCAC8 /* Timer.swift in Sources */,
@@ -797,7 +813,7 @@
 				);
 				INFOPLIST_FILE = WTFChatTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.artem.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = wtf.wtfchat.wtfchatdev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WTFChat.app/WTFChat";
 			};
@@ -813,7 +829,7 @@
 				);
 				INFOPLIST_FILE = WTFChatTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.artem.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = wtf.wtfchat.wtfchatdev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WTFChat.app/WTFChat";
 			};

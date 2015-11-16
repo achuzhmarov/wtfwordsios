@@ -100,8 +100,9 @@ class AddFriendViewController: UITableViewController, UISearchResultsUpdating {
         userService.makeFriends(friend) { (talk, error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if let requestError = error {
-                    //TODO - show error to user
-                    print(requestError)
+                    WTFOneButtonAlert.show("Error", message: connectionErrorDescription(), firstButtonTitle: "Ok", viewPresenter: self)
+                    
+                    NSLog(requestError.localizedDescription)
                 } else {
                     self.createdTalk = talk
                     self.performSegueWithIdentifier("addFriend", sender: self)
@@ -116,8 +117,9 @@ class AddFriendViewController: UITableViewController, UISearchResultsUpdating {
         userService.getNewFriends(request) { (friends, error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if let requestError = error {
-                    //TODO - show error to user
-                    print(requestError)
+                    WTFOneButtonAlert.show("Error", message: connectionErrorDescription(), firstButtonTitle: "Ok", viewPresenter: self)
+                    
+                    NSLog(requestError.localizedDescription)
                 } else {
                     if let newFriends = friends {
                         self.updateFriends(request, friends: newFriends)
@@ -129,7 +131,7 @@ class AddFriendViewController: UITableViewController, UISearchResultsUpdating {
     
     private func updateFriends(request: String, friends: [FriendInfo]) {
         if (self.lastRequest == request) {
-            self.friends = friends
+            self.friends = friends.sort(FriendInfo.compareByLvl)
             self.tableView.reloadData()
         }
     }

@@ -66,7 +66,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     if (requestError.code == HTTP_UNAUTHORIZED) {
                         WTFOneButtonAlert.show("Error", message: "Invalid credentials", firstButtonTitle: "Ok", viewPresenter: self)
                     } else {
-                        WTFOneButtonAlert.show("Error", message: "Internet connection problem", firstButtonTitle: "Ok", viewPresenter: self)
+                        WTFOneButtonAlert.show("Error", message: connectionErrorDescription(), firstButtonTitle: "Ok", viewPresenter: self)
                     }
                 } else {
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

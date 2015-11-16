@@ -77,7 +77,7 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
                         
                     } else {
                         WTFOneButtonAlert.show("Error",
-                            message: "Internet connection problem",
+                            message: connectionErrorDescription(),
                             firstButtonTitle: "Ok",
                             viewPresenter: self)
                     }

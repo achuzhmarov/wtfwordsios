@@ -115,6 +115,44 @@ class UserNetworkService: NSObject {
         }
     }
     
+    func getTopRatings(completion:(friends: [FriendInfo]?, error: NSError?) -> Void) {
+        networkService.get("user/top") { (json, error) -> Void in
+            if let requestError = error {
+                completion(friends: nil, error: requestError)
+            } else {
+                if let friendsJson = json {
+                    do {
+                        let friends = try User.parseFriendsFromJson(friendsJson)
+                        completion(friends: friends, error: nil)
+                    } catch let error as NSError {
+                        completion(friends: nil, error: error)
+                    }
+                } else {
+                    completion(friends: nil, error: nil)
+                }
+            }
+        }
+    }
+    
+    func getFriendsRating(completion:(friends: [FriendInfo]?, error: NSError?) -> Void) {
+        networkService.get("user/friendsRating") { (json, error) -> Void in
+            if let requestError = error {
+                completion(friends: nil, error: requestError)
+            } else {
+                if let friendsJson = json {
+                    do {
+                        let friends = try User.parseFriendsFromJson(friendsJson)
+                        completion(friends: friends, error: nil)
+                    } catch let error as NSError {
+                        completion(friends: nil, error: error)
+                    }
+                } else {
+                    completion(friends: nil, error: nil)
+                }
+            }
+        }
+    }
+    
     func makeFriends(friendLogin: String, completion:(talk: Talk?, error: NSError?) -> Void) {
         networkService.post(nil, relativeUrl:"user/friend/" + friendLogin.escapeForUrl()!) { (json, error) -> Void in
             if let requestError = error {

@@ -24,6 +24,8 @@ class User {
     var pushNew: Bool = true
     var pushDeciphered: Bool = true
     
+    var rating: Int = 0
+    
     init(login: String, suggestions: Int) {
         self.login = login
         self.suggestions = suggestions
@@ -31,7 +33,7 @@ class User {
     
     init(login: String, suggestions: Int, talks: [Talk], lastUpdate: NSDate,
         exp: Int, lvl: Int, newSuggestions: Int, friends: [FriendInfo],
-        email: String, name: String, pushNew: Bool, pushDeciphered: Bool)
+        email: String, name: String, pushNew: Bool, pushDeciphered: Bool, rating: Int)
     {
         self.login = login
         self.suggestions = suggestions
@@ -46,6 +48,8 @@ class User {
         self.name = name
         self.pushNew = pushNew
         self.pushDeciphered = pushDeciphered
+        
+        self.rating = rating
     }
     
     func updateInfo(user: User) {
@@ -59,6 +63,7 @@ class User {
         self.name = user.name
         self.pushNew = user.pushNew
         self.pushDeciphered = user.pushDeciphered
+        self.rating = user.rating
         
         for friendLvl in user.friends {
             updateFriendLvlInArray(friendLvl)
@@ -104,6 +109,8 @@ class User {
         var name: String
         var pushNew: Bool = true
         var pushDeciphered: Bool = true
+        
+        var rating: Int = 0
         
         if let value = json["login"].string {
             login = value
@@ -189,6 +196,12 @@ class User {
             //throw json["has_unread"].error!
         }
         
+        if let value = json["rating"].int {
+            rating = value
+        } else if let error = json["rating"].error {
+            throw error
+        }
+        
         return User(
             login: login,
             suggestions: suggestions,
@@ -201,7 +214,8 @@ class User {
             email: email,
             name: name,
             pushNew: pushNew,
-            pushDeciphered: pushDeciphered
+            pushDeciphered: pushDeciphered,
+            rating: rating
         )
     }
 }

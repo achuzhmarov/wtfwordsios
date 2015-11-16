@@ -101,6 +101,23 @@ class UserService: NSObject {
         return nil
     }
     
+    func getFriends() -> [FriendInfo] {
+        if (!isLoggedIn()) { return [FriendInfo]() }
+        return currentUser!.friends
+    }
+    
+    func getSelfUserInfo() -> FriendInfo? {
+        if (!isLoggedIn()) { return nil }
+        
+        return FriendInfo(
+            login: currentUser!.login,
+            lvl: currentUser!.lvl,
+            name: currentUser!.name,
+            exp: currentUser!.exp,
+            rating: currentUser!.rating
+        )
+    }
+    
     func setNewUser(user: User, password: String) {
         self.currentUser = user
         talkService.setTalksByNewUser(user)
@@ -179,6 +196,14 @@ class UserService: NSObject {
     
     func getNewFriends(searchString: String, completion:(friends: [FriendInfo]?, error: NSError?) -> Void) {
         userNetworkService.getNewFriends(searchString, completion: completion)
+    }
+    
+    func getTopRatings(completion:(friends: [FriendInfo]?, error: NSError?) -> Void) {
+        userNetworkService.getTopRatings(completion)
+    }
+    
+    func getFriendsRating(completion:(friends: [FriendInfo]?, error: NSError?) -> Void) {
+        userNetworkService.getFriendsRating(completion)
     }
     
     func makeFriends(friend: FriendInfo, completion:(talk: Talk?, error: NSError?) -> Void) {
