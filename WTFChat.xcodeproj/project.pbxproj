@@ -51,7 +51,7 @@
 		48DBD96D1BD505AA00680ED3 /* DoubleCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBD96C1BD505AA00680ED3 /* DoubleCutterCipher.swift */; };
 		48DBD96F1BD505B900680ED3 /* RandomCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBD96E1BD505B900680ED3 /* RandomCutterCipher.swift */; };
 		48DCFC5A1BF3927E004D4300 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCFC591BF3927E004D4300 /* SettingsViewController.swift */; };
-		48E4E3AD1BE0ED9600E45D65 /* FriendLvl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E4E3AC1BE0ED9600E45D65 /* FriendLvl.swift */; };
+		48E4E3AD1BE0ED9600E45D65 /* FriendInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E4E3AC1BE0ED9600E45D65 /* FriendInfo.swift */; };
 		48E9A9AA1BEB7E9D00508847 /* AvatarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9A9A91BEB7E9D00508847 /* AvatarService.swift */; };
 		48E9A9AC1BEB7FC900508847 /* TimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9A9AB1BEB7FC900508847 /* TimeService.swift */; };
 		48E9D61F1BB3F5FB00BA0F2A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9D61E1BB3F5FB00BA0F2A /* LoginViewController.swift */; };
@@ -143,7 +143,7 @@
 		48DBD96C1BD505AA00680ED3 /* DoubleCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleCutterCipher.swift; sourceTree = "<group>"; };
 		48DBD96E1BD505B900680ED3 /* RandomCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomCutterCipher.swift; sourceTree = "<group>"; };
 		48DCFC591BF3927E004D4300 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		48E4E3AC1BE0ED9600E45D65 /* FriendLvl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendLvl.swift; sourceTree = "<group>"; };
+		48E4E3AC1BE0ED9600E45D65 /* FriendInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendInfo.swift; sourceTree = "<group>"; };
 		48E9A9A91BEB7E9D00508847 /* AvatarService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarService.swift; sourceTree = "<group>"; };
 		48E9A9AB1BEB7FC900508847 /* TimeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeService.swift; sourceTree = "<group>"; };
 		48E9D61E1BB3F5FB00BA0F2A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -320,7 +320,7 @@
 				489666D51B9B656A00F769D1 /* Talk.swift */,
 				489666D61B9B656A00F769D1 /* User.swift */,
 				489666D71B9B656A00F769D1 /* Word.swift */,
-				48E4E3AC1BE0ED9600E45D65 /* FriendLvl.swift */,
+				48E4E3AC1BE0ED9600E45D65 /* FriendInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -582,7 +582,7 @@
 				48DBD96D1BD505AA00680ED3 /* DoubleCutterCipher.swift in Sources */,
 				48F2F5491BA1FF5A005CCAC8 /* Timer.swift in Sources */,
 				482E9ED21BC1825D00803CDE /* WTFAlert.swift in Sources */,
-				48E4E3AD1BE0ED9600E45D65 /* FriendLvl.swift in Sources */,
+				48E4E3AD1BE0ED9600E45D65 /* FriendInfo.swift in Sources */,
 				48E9D61F1BB3F5FB00BA0F2A /* LoginViewController.swift in Sources */,
 				48EE657B1BB694E300A0DB07 /* KeychainWrapper.m in Sources */,
 				482C241A1BA433D500288BB1 /* CipherFactory.swift in Sources */,

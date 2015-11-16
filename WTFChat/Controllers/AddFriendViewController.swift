@@ -9,7 +9,7 @@
 import UIKit
 
 class AddFriendViewController: UITableViewController, UISearchResultsUpdating {
-    var friends = [String]()
+    var friends = [FriendInfo]()
     var lastRequest = ""
     
     var searchController: AnyObject?
@@ -58,11 +58,7 @@ class AddFriendViewController: UITableViewController, UISearchResultsUpdating {
         let cell = tableView.dequeueReusableCellWithIdentifier("AddFriendCell", forIndexPath: indexPath) as! AddFriendCell
         
         let friend = friends[indexPath.row]
-        
-        cell.friendName.text = friend
-
-        cell.friendImage.image = avatarService.getAvatarImage(friend,
-            diameter: UInt(cell.friendImage.bounds.height))
+        cell.updateFriend(friend)
         
         return cell
     }
@@ -87,7 +83,7 @@ class AddFriendViewController: UITableViewController, UISearchResultsUpdating {
         }
         
         WTFTwoButtonsAlert.show("Add Friend",
-            message: "Are you sure you want to add \(friend) to your friends?",
+            message: "Are you sure you want to add \(friend.getDisplayName()) to your friends?",
             firstButtonTitle: "Ok",
             secondButtonTitle: "Cancel",
             viewPresenter: viewPresenter) { () -> Void in
@@ -100,7 +96,7 @@ class AddFriendViewController: UITableViewController, UISearchResultsUpdating {
         loadFriends(searchController.searchBar.text!)
     }
     
-    private func makeFriends(friend: String) {
+    private func makeFriends(friend: FriendInfo) {
         userService.makeFriends(friend) { (talk, error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if let requestError = error {
@@ -131,7 +127,7 @@ class AddFriendViewController: UITableViewController, UISearchResultsUpdating {
         }
     }
     
-    private func updateFriends(request: String, friends: [String]) {
+    private func updateFriends(request: String, friends: [FriendInfo]) {
         if (self.lastRequest == request) {
             self.friends = friends
             self.tableView.reloadData()

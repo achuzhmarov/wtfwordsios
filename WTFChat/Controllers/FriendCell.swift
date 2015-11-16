@@ -30,7 +30,12 @@ class FriendCell: UITableViewCell {
     func updateTalk(talk: Talk) {
         initStyle()
         
-        friendName.text = talk.getFriendLogin().capitalizedString
+        if (talk.isSingleMode) {
+            friendName.text = talk.getFriendLogin().capitalizedString
+        } else {
+            let friendInfo = userService.getFriendInfoByLogin(talk.getFriendLogin())
+            friendName.text = friendInfo!.getDisplayName()
+        }
         
         if let message = talk.lastMessage {
             updateCiphered(talk)
@@ -70,6 +75,8 @@ class FriendCell: UITableViewCell {
         lastMessage.font = UIFont(name: lastMessage.font.fontName, size: 13)
         lastMessage.numberOfLines = 1
         lastMessage.initStyle()
+        
+        friendName.adjustsFontSizeToFitWidth = true
     }
     
     private func hideLastAuthorImage() {

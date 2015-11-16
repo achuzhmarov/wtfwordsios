@@ -32,16 +32,6 @@ class UserService: NSObject {
         }
     }
     
-    func getDisplayName() -> String {
-        if (!isLoggedIn()) { return "" }
-        
-        if (currentUser!.name != "") {
-            return currentUser!.name
-        } else {
-            return currentUser!.login
-        }
-    }
-    
     func getUserName() -> String {
         if (!isLoggedIn()) { return "" }
         return currentUser!.name
@@ -97,6 +87,18 @@ class UserService: NSObject {
         
         currentUser!.suggestions--
         suggestionsUsed++
+    }
+    
+    func getFriendInfoByLogin(login: String) -> FriendInfo? {
+        if (!isLoggedIn()) { return nil }
+        
+        for friend in currentUser!.friends {
+            if (friend.login == login) {
+                return friend
+            }
+        }
+        
+        return nil
     }
     
     func setNewUser(user: User, password: String) {
@@ -175,12 +177,13 @@ class UserService: NSObject {
         self.updateTimer?.invalidate()
     }
     
-    func getNewFriends(searchString: String, completion:(friends: [String]?, error: NSError?) -> Void) {
+    func getNewFriends(searchString: String, completion:(friends: [FriendInfo]?, error: NSError?) -> Void) {
         userNetworkService.getNewFriends(searchString, completion: completion)
     }
     
-    func makeFriends(friendLogin: String, completion:(talk: Talk?, error: NSError?) -> Void) {
-        userNetworkService.makeFriends(friendLogin, completion: completion)
+    func makeFriends(friend: FriendInfo, completion:(talk: Talk?, error: NSError?) -> Void) {
+        self.currentUser!.friends.append(friend)
+        userNetworkService.makeFriends(friend.login, completion: completion)
     }
     
     func register(login: String, password: String, email: String, completion:(error: NSError?) -> Void) {

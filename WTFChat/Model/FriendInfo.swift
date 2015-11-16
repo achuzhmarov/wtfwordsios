@@ -8,18 +8,29 @@
 
 import Foundation
 
-class FriendLvl {
+class FriendInfo {
     var login: String
     var lvl: Int
+    var name: String
     
-    init(login: String, lvl: Int) {
+    init(login: String, lvl: Int, name: String) {
         self.login = login
         self.lvl = lvl
+        self.name = name
+    }
+
+    func getDisplayName() -> String {
+        if (name != "") {
+            return name.capitalizedString
+        } else {
+            return login.capitalizedString
+        }
     }
     
-    class func parseFromJson(json: JSON) throws -> FriendLvl {
+    class func parseFromJson(json: JSON) throws -> FriendInfo {
         var login: String
         var lvl: Int
+        var name: String
         
         if let value = json["login"].string {
             login = value
@@ -33,9 +44,16 @@ class FriendLvl {
             throw json["lvl"].error!
         }
         
-        return FriendLvl(
+        if let value = json["name"].string {
+            name = value
+        } else {
+            throw json["name"].error!
+        }
+        
+        return FriendInfo(
             login: login,
-            lvl: lvl
+            lvl: lvl,
+            name: name
         )
     }
 }

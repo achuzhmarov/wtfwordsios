@@ -17,7 +17,7 @@ class User {
     var exp: Int = 0
     var lvl: Int = 0
     var newSuggestions: Int = 0
-    var friendsLvls = [FriendLvl]()
+    var friends = [FriendInfo]()
     
     var email: String = ""
     var name: String = ""
@@ -30,7 +30,7 @@ class User {
     }
     
     init(login: String, suggestions: Int, talks: [Talk], lastUpdate: NSDate,
-        exp: Int, lvl: Int, newSuggestions: Int, friendsLvls: [FriendLvl],
+        exp: Int, lvl: Int, newSuggestions: Int, friends: [FriendInfo],
         email: String, name: String, pushNew: Bool, pushDeciphered: Bool)
     {
         self.login = login
@@ -40,7 +40,7 @@ class User {
         self.exp = exp
         self.lvl = lvl
         self.newSuggestions = newSuggestions
-        self.friendsLvls = friendsLvls
+        self.friends = friends
         
         self.email = email
         self.name = name
@@ -60,33 +60,28 @@ class User {
         self.pushNew = user.pushNew
         self.pushDeciphered = user.pushDeciphered
         
-        for friendLvl in user.friendsLvls {
+        for friendLvl in user.friends {
             updateFriendLvlInArray(friendLvl)
         }
     }
     
-    private func updateFriendLvlInArray(friendLvl: FriendLvl) {
-        for i in 0..<friendsLvls.count {
-            if (friendLvl.login == friendsLvls[i].login) {
-                friendsLvls[i] = friendLvl
+    private func updateFriendLvlInArray(friend: FriendInfo) {
+        for i in 0..<friends.count {
+            if (friend.login == friends[i].login) {
+                friends[i] = friend
                 return
             }
         }
         
-        friendsLvls.append(friendLvl)
+        friends.append(friend)
     }
 
-    
-    class func parseFriendsFromJson(json: JSON) throws -> [String] {
-        var friends = [String]()
+    class func parseFriendsFromJson(json: JSON) throws -> [FriendInfo] {
+        var friends = [FriendInfo]()
         
         if let value = json.array {
             for friendJson in value {
-                if let friend = friendJson.string {
-                    friends.append(friend)
-                } else {
-                    throw friendJson.error!
-                }
+                try friends.append(FriendInfo.parseFromJson(friendJson))
             }
         } else {
             throw json.error!
@@ -103,7 +98,7 @@ class User {
         var exp: Int = 0
         var lvl: Int = 0
         var newSuggestions: Int = 0
-        var friendsLvls = [FriendLvl]()
+        var friends = [FriendInfo]()
         
         var email: String
         var name: String
@@ -162,7 +157,7 @@ class User {
         
         if let value = json["friends_lvls"].array {
             for friendJson in value {
-                try friendsLvls.append(FriendLvl.parseFromJson(friendJson))
+                try friends.append(FriendInfo.parseFromJson(friendJson))
             }
         } else if let error = json["friends_lvls"].error {
             throw error
@@ -202,7 +197,7 @@ class User {
             exp: exp,
             lvl: lvl,
             newSuggestions: newSuggestions,
-            friendsLvls: friendsLvls,
+            friends: friends,
             email: email,
             name: name,
             pushNew: pushNew,

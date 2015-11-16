@@ -24,7 +24,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friend name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffE-3Q-De2">
-                                            <rect key="frame" x="73" y="9" width="401" height="17"/>
+                                            <rect key="frame" x="73" y="9" width="411" height="17"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -75,9 +75,9 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35P-rb-i8x">
-                                            <rect key="frame" x="482" y="13" width="110" height="12"/>
+                                            <rect key="frame" x="492" y="13" width="100" height="12"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="110" id="8ek-SZ-H15"/>
+                                                <constraint firstAttribute="width" constant="100" id="8ek-SZ-H15"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="10"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -710,23 +710,33 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xf-Kj-p5Y">
-                                            <rect key="frame" x="56" y="14" width="536" height="21"/>
+                                            <rect key="frame" x="56" y="5" width="536" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GFF-0P-CIY">
+                                            <rect key="frame" x="56" y="24" width="536" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="1xf-Kj-p5Y" firstAttribute="top" secondItem="sAC-Y5-paN" secondAttribute="top" id="13t-MT-X9a"/>
+                                        <constraint firstItem="GFF-0P-CIY" firstAttribute="trailing" secondItem="BZ4-mK-FFH" secondAttribute="trailingMargin" id="5Sy-EX-9XS"/>
+                                        <constraint firstItem="GFF-0P-CIY" firstAttribute="bottom" secondItem="sAC-Y5-paN" secondAttribute="bottom" id="6wU-aE-unj"/>
                                         <constraint firstItem="sAC-Y5-paN" firstAttribute="centerY" secondItem="BZ4-mK-FFH" secondAttribute="centerY" id="8jz-mw-5WA"/>
                                         <constraint firstItem="1xf-Kj-p5Y" firstAttribute="trailing" secondItem="BZ4-mK-FFH" secondAttribute="trailingMargin" id="AdV-TC-VCk"/>
+                                        <constraint firstItem="GFF-0P-CIY" firstAttribute="leading" secondItem="sAC-Y5-paN" secondAttribute="trailing" constant="8" id="FpH-jM-f0x"/>
                                         <constraint firstItem="1xf-Kj-p5Y" firstAttribute="leading" secondItem="sAC-Y5-paN" secondAttribute="trailing" constant="8" id="OXX-QA-1H9"/>
-                                        <constraint firstItem="1xf-Kj-p5Y" firstAttribute="centerY" secondItem="BZ4-mK-FFH" secondAttribute="centerY" id="VdN-aZ-Wmu"/>
                                         <constraint firstItem="sAC-Y5-paN" firstAttribute="leading" secondItem="BZ4-mK-FFH" secondAttribute="leadingMargin" id="jvL-4X-EKq"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="friendImage" destination="sAC-Y5-paN" id="CfQ-3D-aaB"/>
-                                    <outlet property="friendName" destination="1xf-Kj-p5Y" id="14z-vJ-WDV"/>
+                                    <outlet property="friendLogin" destination="1xf-Kj-p5Y" id="vAM-XW-nHp"/>
+                                    <outlet property="friendName" destination="GFF-0P-CIY" id="RNp-g5-37U"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

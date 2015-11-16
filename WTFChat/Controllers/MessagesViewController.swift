@@ -34,8 +34,14 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
-        self.title = talk.getFriendLogin().capitalizedString
-
+        if (talk.isSingleMode) {
+            self.title = talk.getFriendLogin().capitalizedString
+        } else {
+            let friendInfo = userService.getFriendInfoByLogin(talk.getFriendLogin())
+            let title = friendInfo!.getDisplayName() + ", lvl " + String(friendInfo!.lvl)
+            configureTitleView(title, navigationItem: navigationItem)
+        }
+        
         self.messageTableView.delegate = self.messageTableView
         self.messageTableView.dataSource = self.messageTableView
         self.messageTableView.rowHeight = UITableViewAutomaticDimension

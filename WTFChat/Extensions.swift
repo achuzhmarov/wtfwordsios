@@ -20,8 +20,23 @@ func isValidEmail(testStr:String) -> Bool {
     return emailTest.evaluateWithObject(testStr)
 }
 
+func configureTitleView(title: String, navigationItem: UINavigationItem) {
+    //let titleLabel = UILabel(frame: self.navigationController!.navigationBar.frame)
+    let titleLabel = UILabel()
+    titleLabel.textAlignment = .Center
+    titleLabel.font = UIFont.boldSystemFontOfSize(17.0)
+    titleLabel.text = title
+    navigationItem.titleView = titleLabel
+    titleLabel.sizeToFit()
+    titleLabel.adjustsFontSizeToFitWidth = true
+}
+
 extension String
 {
+    func escapeForUrl() -> String? {
+        return stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
+    }
+    
     func isGreater(stringToCompare : String) -> Bool
     {
         return self.compare(stringToCompare) == NSComparisonResult.OrderedDescending
