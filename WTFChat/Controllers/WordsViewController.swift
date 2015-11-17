@@ -51,19 +51,19 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
                 first = false
                 
                 let horizontalConstraint = wordContainer.getFirstHorizontalConstraint(cell.contentView)
-                self.addConstraint(horizontalConstraint)
+                cell.contentView.addConstraint(horizontalConstraint)
                 
                 if (wordContainer.getWidth() > getMaxWidth()) {
                     let rightHorizontalConstraint = wordContainer.getFullRowHorizontalConstraint(cell.contentView)
-                    self.addConstraint(rightHorizontalConstraint)
+                    cell.contentView.addConstraint(rightHorizontalConstraint)
                 }
             } else {
                 let horizontalConstraint = wordContainer.getNextHorizontalConstraint(previousContainer)
-                self.addConstraint(horizontalConstraint)
+                cell.contentView.addConstraint(horizontalConstraint)
             }
             
             let verticalConstraint = wordContainer.getVerticalConstraint(cell.contentView)
-            self.addConstraint(verticalConstraint)
+            cell.contentView.addConstraint(verticalConstraint)
             
             previousContainer = wordContainer
         }
@@ -243,5 +243,9 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         }
         
         return maxWidth
+    }
+    
+    func updateMaxWidth() {
+        maxWidth = self.bounds.width
     }
 }

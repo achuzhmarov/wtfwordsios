@@ -19,7 +19,11 @@ class EasyRandomCutterCipher: Cipher {
 
 class NormalRandomCutterCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
-        let charsLeft = word.getCharCount() / 2
+        var charsLeft = word.getCharCount() / 2
+        
+        if (word.getCharCount() > 5) {
+            charsLeft = 3
+        }
         
         let ciphered = RandomCutterHelper.CutRandomLetters(word.getLowerCase(), charsLeft: charsLeft)
         return ciphered + word.additional
@@ -31,7 +35,7 @@ class HardRandomCutterCipher: Cipher {
         var charsLeft = word.getCharCount() / 2
         
         if (word.getCharCount() > 5) {
-            charsLeft = 3
+            charsLeft = 2
         }
         
         let ciphered = RandomCutterHelper.CutRandomLetters(word.getLowerCase(), charsLeft: charsLeft)

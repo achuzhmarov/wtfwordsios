@@ -21,7 +21,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
     var talk: Talk!
     var cipherType = CipherType.HalfWordRoundDown
     var lastSendedMessage: Message?
-    var firstTimeLoaded = false
+    var firstTimeLoaded = true
     
     var defaultMessageTextHeightConstraint: CGFloat!
     
@@ -55,7 +55,6 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
             self.updateView(false, earlierLoaded: 0, wasNew: true)
         })
         
-        firstTimeLoaded = true
         self.messageTableView.alpha = 0
         
         messageText.layer.cornerRadius = 5
@@ -85,12 +84,10 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
             self.updateView()
             
             if (self.messageTableView.alpha == 0) {
-                let delay = Double(talk.messages.count) / 200.0
+                firstTimeLoaded = false
                 
-                UIView.animateWithDuration(0.5, delay: delay,
-                    options: [], animations: {
-                        self.messageTableView.alpha = 1
-                    }, completion: nil)
+                let delay = Double(talk.messages.count) / 200.0
+                showMessages(0.5, delay: delay)
             }
         }
     }
@@ -101,11 +98,15 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         if (firstTimeLoaded) {
             firstTimeLoaded = false
             
-            UIView.animateWithDuration(0.3, delay: 0,
-                options: [], animations: {
-                    self.messageTableView.alpha = 1
-                }, completion: nil)
+            showMessages(0.3, delay: 0)
         }
+    }
+    
+    func showMessages(duration: NSTimeInterval, delay: NSTimeInterval) {
+        UIView.animateWithDuration(duration, delay: delay,
+            options: [], animations: {
+                self.messageTableView.alpha = 1
+            }, completion: nil)
     }
     
     // MARK: - Navigation
@@ -224,20 +225,25 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
     func keyboardWillShow(notification: NSNotification) {
         var info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let keyboardHeight = keyboardFrame.size.height
         
-        self.bottomViewConstraint.constant = keyboardFrame.size.height
+        messageTableView.contentOffset = CGPointMake(messageTableView.contentOffset.x,
+            messageTableView.contentOffset.y + keyboardHeight)
         
-        UIView.animateWithDuration(5) {
-            self.view.layoutIfNeeded()
-        }
+        self.bottomViewConstraint.constant = keyboardHeight
+        self.view.layoutIfNeeded()
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        self.bottomViewConstraint.constant = 0
+        var info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let keyboardHeight = keyboardFrame.size.height
         
-        UIView.animateWithDuration(5) {
-            self.view.layoutIfNeeded()
-        }
+        messageTableView.contentOffset = CGPointMake(messageTableView.contentOffset.x,
+            messageTableView.contentOffset.y - keyboardHeight)
+        
+        self.bottomViewConstraint.constant = 0
+        self.view.layoutIfNeeded()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -21,6 +21,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     @IBOutlet weak var tryButton: UIButton!
     
     @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var topViewHeightContraint: NSLayoutConstraint!
     
@@ -31,7 +32,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     var timer = Timer()
     
     var isSingleMode = false
-    var suggestionsForSingleMode = 0
+    var suggestions = 0
     
     //for viewOnly mode
     var useCipherText = false
@@ -52,7 +53,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
-        /*NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotated:", name: UIDeviceOrientationDidChangeNotification, object: nil)*/
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("rotated:"), name: UIDeviceOrientationDidChangeNotification, object: nil)
         
         //Looks for single or multiple taps.
         let tapDismiss: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
@@ -75,7 +76,9 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         }
         
         if (self.isSingleMode) {
-            suggestionsForSingleMode = (message.countNew() - 1) / SUGGESTIONS_SINGLE_MODE + 1
+            suggestions = (message.countNew() - 1) / SUGGESTIONS_SINGLE_MODE + 1
+        } else {
+            suggestions = userService.getUserSuggestions()
         }
         
         self.wordsTableView.delegate = self.wordsTableView
@@ -146,7 +149,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         if (word.wordType == WordType.New) {
             if (word.wasCloseTry) {
                 showCloseTrySuggestionsConfirm(word)
-            } else if (self.getSuggestions() > 0) {
+            } else if (suggestions > 0) {
                 showSuggestionConfirm(word)
             } else {
                 showNoSuggestionsDialog()
@@ -164,7 +167,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     func showSuggestionConfirm(word: Word) {
-        WTFTwoButtonsAlert.show("Use Hint: " + String(self.getSuggestions()),
+        WTFTwoButtonsAlert.show("Use Hint: " + String(suggestions),
             message: "Are you sure you want to use a hint?",
             firstButtonTitle: "Ok",
             secondButtonTitle: "Cancel",
@@ -194,10 +197,9 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             messageCipher.decipher(message!, suggestedWord: word, closeTry: true)
         } else {
             messageCipher.decipher(message!, suggestedWord: word)
+            suggestions--
             
-            if (isSingleMode) {
-                self.suggestionsForSingleMode--
-            } else {
+            if (!isSingleMode) {
                 userService.useSuggestion()
             }
         }
@@ -219,17 +221,15 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        //var info = notification.userInfo!
-        //var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
-        
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.bottomViewConstraint.constant = 0
         })
     }
     
-    /*func rotated() {
-    println("asdA")
-    }*/
+    func rotated(notification: NSNotification) {
+        self.wordsTableView.updateMaxWidth()
+        self.wordsTableView.setNewMessage(message, useCipherText: useCipherText, selfAuthor: selfAuthor)
+    }
     
     func dismissKeyboard(){
         view.endEditing(true)
@@ -264,8 +264,6 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
             selector: "tick", userInfo: nil, repeats: false)
         
-        //tryButton.hidden = false
-        //guessTextField.hidden = false
         bottomView.hidden = false
         topTimerLabel.hidden = false
         wordsTableView.hidden = false
@@ -287,6 +285,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         messageCipher.failed(message!)
         
         bottomView.hidden = true
+        bottomViewHeightConstraint.constant = 0
 
         wordsTableView.updateMessage(message!)
         
@@ -345,6 +344,8 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         wordsTableView.updateMessage(message!)
         wordsTableView.hidden = false
         
+        bottomViewHeightConstraint.constant = 0
+        
         self.hideTopLayer()
         
         isStarted = true
@@ -378,14 +379,6 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
                 topTimerLabel.layer.removeAllAnimations()
                 topTimerLabel.alpha = 1
             }
-        }
-    }
-    
-    func getSuggestions() -> Int {
-        if (isSingleMode) {
-            return suggestionsForSingleMode
-        } else {
-            return userService.getUserSuggestions()
         }
     }
     

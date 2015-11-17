@@ -69,15 +69,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             as! UITabBarController
         
         let friendsNavigationController = mainTabController.viewControllers![0] as! UINavigationController
-        //let friendsNavigationController = storyboard.instantiateViewControllerWithIdentifier("friendsNavController") as! UINavigationController
-        
         
         let messagesController = storyboard.instantiateViewControllerWithIdentifier("messagesController") as! MessagesViewController
 
         messagesController.talk = talkService.getTalkByLogin(author)
         
+        showWindowAnimated(mainTabController)
         friendsNavigationController.pushViewController(messagesController, animated: false)
-        showWindowAnimated(friendsNavigationController)
     }
     
     func showLoginScreen() {
