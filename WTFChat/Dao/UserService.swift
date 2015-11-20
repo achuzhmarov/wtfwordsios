@@ -188,7 +188,7 @@ class UserService: NSObject {
         
         currentUser = nil
         talkService.clearTalks()
-        networkService.session = NSURLSession.sharedSession()
+        networkService.clearSession()
         iosService.resetUserCredentials()
         
         self.updateTimer?.invalidate()

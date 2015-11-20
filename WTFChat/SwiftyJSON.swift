@@ -114,7 +114,7 @@ public struct JSON {
     
     /// Private object
     private var rawArray: [AnyObject] = []
-    private var rawDictionary: [String : AnyObject] = [:]
+    var rawDictionary: [String : AnyObject] = [:]
     private var rawString: String = ""
     private var rawNumber: NSNumber = 0
     private var rawNull: NSNull = NSNull()

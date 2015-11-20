@@ -279,7 +279,7 @@ class UserNetworkService: NSObject {
                 let authString = "Bearer \(token)"
                 config.HTTPAdditionalHeaders = ["Authorization" : authString]
                 
-                networkService.session = NSURLSession(configuration: config)
+                networkService.updateSessionConfiguration(config)
                 
                 completion(error: nil)
             } else {
