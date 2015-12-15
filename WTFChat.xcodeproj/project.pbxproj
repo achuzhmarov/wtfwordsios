@@ -18,6 +18,7 @@
 		482C24241BA43CE500288BB1 /* ShuffleCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482C24231BA43CE500288BB1 /* ShuffleCipher.swift */; };
 		482E9ED21BC1825D00803CDE /* WTFAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482E9ED11BC1825D00803CDE /* WTFAlert.swift */; };
 		483676491C2048200092C703 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483676481C2048200092C703 /* StoreKit.framework */; };
+		4836764B1C207B860092C703 /* InAppNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4836764A1C207B860092C703 /* InAppNetworkService.swift */; };
 		48411F441BF61293009B86FD /* UIColor+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 48411F431BF61293009B86FD /* UIColor+JSQMessages.m */; };
 		48411F461BF61931009B86FD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48411F451BF61931009B86FD /* Login.storyboard */; };
 		48411F481BF626A5009B86FD /* NameEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48411F471BF626A5009B86FD /* NameEditViewController.swift */; };
@@ -112,6 +113,7 @@
 		482C24231BA43CE500288BB1 /* ShuffleCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShuffleCipher.swift; sourceTree = "<group>"; };
 		482E9ED11BC1825D00803CDE /* WTFAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTFAlert.swift; sourceTree = "<group>"; };
 		483676481C2048200092C703 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		4836764A1C207B860092C703 /* InAppNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppNetworkService.swift; sourceTree = "<group>"; };
 		48411F421BF6128D009B86FD /* UIColor+JSQMessages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+JSQMessages.h"; sourceTree = "<group>"; };
 		48411F431BF61293009B86FD /* UIColor+JSQMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+JSQMessages.m"; sourceTree = "<group>"; };
 		48411F451BF61931009B86FD /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -424,6 +426,7 @@
 				488DF80F1BB2B8F30085E31A /* NetworkService.swift */,
 				489666BE1B9B651800F769D1 /* MessageNetworkService.swift */,
 				489666C01B9B651800F769D1 /* UserNetworkService.swift */,
+				4836764A1C207B860092C703 /* InAppNetworkService.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -628,6 +631,7 @@
 				482C241E1BA433F800288BB1 /* RightCutterCipher.swift in Sources */,
 				489666DA1B9B656A00F769D1 /* Talk.swift in Sources */,
 				4828CFAA1BF9E1D2005DCCAB /* RatingCell.swift in Sources */,
+				4836764B1C207B860092C703 /* InAppNetworkService.swift in Sources */,
 				489666C51B9B651800F769D1 /* UserNetworkService.swift in Sources */,
 				48DBD96D1BD505AA00680ED3 /* DoubleCutterCipher.swift in Sources */,
 				48F2F5491BA1FF5A005CCAC8 /* Timer.swift in Sources */,

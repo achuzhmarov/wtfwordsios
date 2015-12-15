@@ -160,6 +160,24 @@ extension IAPHelper: SKPaymentTransactionObserver {
     }
     
     private func verify() -> Bool {
+        if let receipt =  NSBundle.mainBundle().appStoreReceiptURL {
+            if let data = NSData(contentsOfURL: receipt) {
+                let requestContents:[String:String] = ["receipt-data":data.base64EncodedStringWithOptions([])]
+                
+                /*let requestData = try! NSJSONSerialization.dataWithJSONObject(requestContents,options: [])
+                let request = NSMutableURLRequest(URL: NSURL(string: "https://sandbox.itunes.apple.com/verifyReceipt")!)
+                request.HTTPMethod = "POST"
+                request.HTTPBody = requestData*/
+                
+                /*let (param, _) = Alamofire.ParameterEncoding.URL.encode(request, parameters: nil)
+                
+                Alamofire.request(param)
+                    .responseJSON(options: [], completionHandler: { (result) -> Void in
+                        print(result)
+                    })*/
+            }
+        }
+        
         return true
     }
   
