@@ -38,13 +38,13 @@ class NetworkService: NSObject, NSURLSessionDelegate {
             delegateQueue: nil)
     }
     
-    /*func URLSession(session: NSURLSession, task: NSURLSessionTask, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void) {
+    func URLSession(session: NSURLSession, task: NSURLSessionTask, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void) {
         
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
             let credential = NSURLCredential(trust: challenge.protectionSpace.serverTrust!)
             completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential, credential)
         }
-    }*/
+    }
     
     /*func get(relativeUrl: String, completion:(json: JSON?, error: NSError?) -> Void) {
         let url = baseUrl + relativeUrl

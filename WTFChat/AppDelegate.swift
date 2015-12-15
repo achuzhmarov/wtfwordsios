@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
+        inAppService.getProductList()
+        
         if (iosService.haveUserCredentials()) {
             userService.loginWithKeychain() { user, error -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
@@ -52,7 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        // Override point for customization after application launch.
         return true
     }
     

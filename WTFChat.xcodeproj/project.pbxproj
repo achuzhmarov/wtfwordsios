@@ -17,11 +17,16 @@
 		482C241E1BA433F800288BB1 /* RightCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482C241D1BA433F800288BB1 /* RightCutterCipher.swift */; };
 		482C24241BA43CE500288BB1 /* ShuffleCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482C24231BA43CE500288BB1 /* ShuffleCipher.swift */; };
 		482E9ED21BC1825D00803CDE /* WTFAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482E9ED11BC1825D00803CDE /* WTFAlert.swift */; };
+		483676491C2048200092C703 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483676481C2048200092C703 /* StoreKit.framework */; };
 		48411F441BF61293009B86FD /* UIColor+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 48411F431BF61293009B86FD /* UIColor+JSQMessages.m */; };
 		48411F461BF61931009B86FD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48411F451BF61931009B86FD /* Login.storyboard */; };
 		48411F481BF626A5009B86FD /* NameEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48411F471BF626A5009B86FD /* NameEditViewController.swift */; };
 		48411F4A1BF629B4009B86FD /* EmailEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48411F491BF629B4009B86FD /* EmailEditViewController.swift */; };
 		48411F4C1BF62F18009B86FD /* PasswordEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48411F4B1BF62F18009B86FD /* PasswordEditViewController.swift */; };
+		4842C00D1C1F0965008153F0 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842C00C1C1F0965008153F0 /* ShopViewController.swift */; };
+		4842C0111C1F1022008153F0 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842C0101C1F1022008153F0 /* IAPHelper.swift */; };
+		4842C0131C1F11B2008153F0 /* IAPProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842C0121C1F11B2008153F0 /* IAPProducts.swift */; };
+		4842C0151C1F1416008153F0 /* InAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842C0141C1F1416008153F0 /* InAppService.swift */; };
 		486506581BE2477B008555AD /* LvlService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486506571BE2477B008555AD /* LvlService.swift */; };
 		4865065A1BE2A492008555AD /* ExpGainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486506591BE2A492008555AD /* ExpGainView.swift */; };
 		487D771B1BA0749800AF333C /* RoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487D771A1BA0749800AF333C /* RoundedLabel.swift */; };
@@ -106,12 +111,17 @@
 		482C241D1BA433F800288BB1 /* RightCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightCutterCipher.swift; sourceTree = "<group>"; };
 		482C24231BA43CE500288BB1 /* ShuffleCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShuffleCipher.swift; sourceTree = "<group>"; };
 		482E9ED11BC1825D00803CDE /* WTFAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTFAlert.swift; sourceTree = "<group>"; };
+		483676481C2048200092C703 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		48411F421BF6128D009B86FD /* UIColor+JSQMessages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+JSQMessages.h"; sourceTree = "<group>"; };
 		48411F431BF61293009B86FD /* UIColor+JSQMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+JSQMessages.m"; sourceTree = "<group>"; };
 		48411F451BF61931009B86FD /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		48411F471BF626A5009B86FD /* NameEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameEditViewController.swift; sourceTree = "<group>"; };
 		48411F491BF629B4009B86FD /* EmailEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailEditViewController.swift; sourceTree = "<group>"; };
 		48411F4B1BF62F18009B86FD /* PasswordEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordEditViewController.swift; sourceTree = "<group>"; };
+		4842C00C1C1F0965008153F0 /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		4842C0101C1F1022008153F0 /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
+		4842C0121C1F11B2008153F0 /* IAPProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPProducts.swift; sourceTree = "<group>"; };
+		4842C0141C1F1416008153F0 /* InAppService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppService.swift; sourceTree = "<group>"; };
 		486506571BE2477B008555AD /* LvlService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LvlService.swift; sourceTree = "<group>"; };
 		486506591BE2A492008555AD /* ExpGainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpGainView.swift; sourceTree = "<group>"; };
 		487D771A1BA0749800AF333C /* RoundedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedLabel.swift; sourceTree = "<group>"; };
@@ -190,6 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				483676491C2048200092C703 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +234,14 @@
 				482C24231BA43CE500288BB1 /* ShuffleCipher.swift */,
 			);
 			name = Cipher;
+			sourceTree = "<group>";
+		};
+		4842C00B1C1F094A008153F0 /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				4842C00C1C1F0965008153F0 /* ShopViewController.swift */,
+			);
+			name = Shop;
 			sourceTree = "<group>";
 		};
 		488DF80B1BB2B0FB0085E31A /* Lib */ = {
@@ -309,6 +328,7 @@
 				48DCFC561BF39174004D4300 /* Login */,
 				48DCFC571BF391C6004D4300 /* Messages */,
 				4828CFA61BF9E12D005DCCAB /* Rating */,
+				4842C00B1C1F094A008153F0 /* Shop */,
 				48DCFC581BF39253004D4300 /* Settings */,
 				48E9D61D1BB3F59000BA0F2A /* Helpers */,
 			);
@@ -342,6 +362,9 @@
 		48C661CA1BEF6B8C003AF4F5 /* Logical */ = {
 			isa = PBXGroup;
 			children = (
+				4842C0101C1F1022008153F0 /* IAPHelper.swift */,
+				4842C0121C1F11B2008153F0 /* IAPProducts.swift */,
+				4842C0141C1F1416008153F0 /* InAppService.swift */,
 				48E9D6201BB46DAB00BA0F2A /* MessageCipher.swift */,
 				48D3A53F1BDF81F900B2A1AD /* IosService.swift */,
 				486506571BE2477B008555AD /* LvlService.swift */,
@@ -454,6 +477,7 @@
 		49D7C70BCF12E2F6E166B7B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				483676481C2048200092C703 /* StoreKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -510,6 +534,14 @@
 					489666911B9B640400F769D1 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 9Z57ENU7SL;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					489666A61B9B640400F769D1 = {
 						CreatedOnToolsVersion = 6.4;
@@ -576,9 +608,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				48C661C91BECE7FB003AF4F5 /* MessageTableView.swift in Sources */,
+				4842C00D1C1F0965008153F0 /* ShopViewController.swift in Sources */,
 				48EE657F1BB6F2FE00A0DB07 /* AddFriendCell.swift in Sources */,
 				48EEB6261BA2F368007C5B5F /* AudioHelper.swift in Sources */,
 				48F48B891BF609FB00918C83 /* JSQMessagesAvatarImage.m in Sources */,
+				4842C0131C1F11B2008153F0 /* IAPProducts.swift in Sources */,
 				48F48B8F1BF60A5300918C83 /* JSQMessagesTimestampFormatter.m in Sources */,
 				48F48B8A1BF609FB00918C83 /* JSQMessagesAvatarImageFactory.m in Sources */,
 				489666DC1B9B656A00F769D1 /* Word.swift in Sources */,
@@ -602,6 +636,7 @@
 				48E9D61F1BB3F5FB00BA0F2A /* LoginViewController.swift in Sources */,
 				48EE657B1BB694E300A0DB07 /* KeychainWrapper.m in Sources */,
 				482C241A1BA433D500288BB1 /* CipherFactory.swift in Sources */,
+				4842C0111C1F1022008153F0 /* IAPHelper.swift in Sources */,
 				488DF8101BB2B8F30085E31A /* NetworkService.swift in Sources */,
 				48E9A9AA1BEB7E9D00508847 /* AvatarService.swift in Sources */,
 				487D771D1BA0878400AF333C /* WordLabelContainer.swift in Sources */,
@@ -622,6 +657,7 @@
 				48A2F9A81B9DF42C009E5434 /* Extensions.swift in Sources */,
 				48EE657D1BB6F1C300A0DB07 /* AddFriendViewController.swift in Sources */,
 				489666C31B9B651800F769D1 /* MessageNetworkService.swift in Sources */,
+				4842C0151C1F1416008153F0 /* InAppService.swift in Sources */,
 				482AA4F71BC2E19100F101F8 /* LeftCutterCipher.swift in Sources */,
 				48411F4C1BF62F18009B86FD /* PasswordEditViewController.swift in Sources */,
 				48F1373C1BB5C2CD00E5FFA7 /* RegistrationViewController.swift in Sources */,
