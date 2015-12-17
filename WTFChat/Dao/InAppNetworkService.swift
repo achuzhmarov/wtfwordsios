@@ -10,25 +10,30 @@ import Foundation
 
 class InAppNetworkService: NSObject {
     
-    func verifyInAppPurchase(receipt: NSData, productId: ProductIdentifier, completion:(error: NSError?) -> Void) {
-        /*let postJSON = message.getNewJson()
+    func verifyInAppPurchase(receipt: String, productId: ProductIdentifier,
+        completion:(userInfo: User?, error: NSError?) -> Void) {
+            
+        let userData: [String: NSString] = [
+            "product_id": productId,
+            "receipt": receipt
+        ]
         
-        networkService.post(postJSON, relativeUrl: "messages/add") {json, error -> Void in
+        let postJSON = JSON(userData)
+        
+        networkService.post(postJSON, relativeUrl: "apple/buy") {json, error -> Void in
             if let requestError = error {
-                completion(message: nil, error: requestError)
+                completion(userInfo: nil, error: requestError)
             } else {
-                if let messageJson = json {
+                if let userJson = json {
                     do {
-                        let message = try Message.parseFromJson(messageJson)
-                        completion(message: message, error: nil)
+                        let user = try User.parseFromJson(userJson)
+                        completion(userInfo: user, error: nil)
                     } catch let error as NSError {
-                        completion(message: nil, error: error)
+                        completion(userInfo: nil, error: error)
                     }
-                } else {
-                    completion(message: nil, error: nil)
                 }
             }
-        }*/
+        }
     }
     
 }

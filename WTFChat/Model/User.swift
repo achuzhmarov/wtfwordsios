@@ -26,6 +26,8 @@ class User {
     
     var rating: Int = 0
     
+    var buyNonConsum = [String]()
+    
     init(login: String, suggestions: Int) {
         self.login = login
         self.suggestions = suggestions
@@ -33,7 +35,8 @@ class User {
     
     init(login: String, suggestions: Int, talks: [Talk], lastUpdate: NSDate,
         exp: Int, lvl: Int, newSuggestions: Int, friends: [FriendInfo],
-        email: String, name: String, pushNew: Bool, pushDeciphered: Bool, rating: Int)
+        email: String, name: String, pushNew: Bool, pushDeciphered: Bool, rating: Int,
+        buyNonConsum: [String])
     {
         self.login = login
         self.suggestions = suggestions
@@ -50,6 +53,8 @@ class User {
         self.pushDeciphered = pushDeciphered
         
         self.rating = rating
+        
+        self.buyNonConsum = buyNonConsum
     }
     
     func updateInfo(user: User) {
@@ -67,6 +72,12 @@ class User {
         
         for friendLvl in user.friends {
             updateFriendLvlInArray(friendLvl)
+        }
+        
+        for item in user.buyNonConsum {
+            if !self.buyNonConsum.contains(item) {
+                self.buyNonConsum.append(item)
+            }
         }
     }
     
@@ -111,6 +122,8 @@ class User {
         var pushDeciphered: Bool = true
         
         var rating: Int = 0
+        
+        var buyNonConsum = [String]()
         
         if let value = json["login"].string {
             login = value
@@ -202,6 +215,18 @@ class User {
             throw error
         }
         
+        if let value = json["buy_non_consum"].array {
+            for buyNonConsumJson in value {
+                if let item = buyNonConsumJson.string {
+                    buyNonConsum.append(item)
+                }
+            }
+        } else if (json["buy_non_consum"].isEmpty) {
+            //do nothing
+        } else if let error = json["buy_non_consum"].error {
+            throw error
+        }
+        
         return User(
             login: login,
             suggestions: suggestions,
@@ -215,7 +240,8 @@ class User {
             name: name,
             pushNew: pushNew,
             pushDeciphered: pushDeciphered,
-            rating: rating
+            rating: rating,
+            buyNonConsum: buyNonConsum
         )
     }
 }

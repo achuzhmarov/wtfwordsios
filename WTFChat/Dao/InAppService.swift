@@ -11,17 +11,9 @@ import StoreKit
 
 let inAppService = InAppService()
 
-/*func initInAppSerivce() -> InAppService {
-    let inAppService = InAppService()
-    
-    inAppService.getProductList()
-    
-    return inAppService
-}*/
-
 class InAppService {
-    let inAppHelper = IAPHelper(productIdentifiers: IAPProducts.NON_CONSUMABLE)
-
+    let inAppHelper = IAPHelper(productIdentifiers: IAPProducts.ALL)
+    
     var products = [SKProduct]()
     
     func getProductList() {
@@ -63,7 +55,7 @@ class InAppService {
     }
     
     func getProductPrice(productId: ProductIdentifier) -> String? {
-        if (!canMakePayments()) {
+        if !canMakePayments() {
             return "Not available"
         }
         
@@ -79,11 +71,27 @@ class InAppService {
     }
     
     func canPurchase(productId: ProductIdentifier) -> Bool {
-        if (!canMakePayments() || isPurchased(productId) || !isProductExists(productId)) {
-            return false
+        if canMakePayments() && isProductExists(productId) {
+            return true
         }
     
-        return true
+        return false
+    }
+    
+    func isPurchased(productId: ProductIdentifier) -> Bool {
+        if (IAPProducts.CONSUMABLE.contains(productId)) {
+            return false
+        }
+        
+        if (IAPProducts.CIPHERS.contains(productId)) {
+            return cipherService.isOwnedCipher(productId)
+        }
+        
+        if (IAPProducts.OTHER.contains(productId)) {
+            return userService.isContainBuyNonConsum(productId)
+        }
+        
+        return false
     }
     
     private func getProduct(productId: ProductIdentifier) -> SKProduct? {
@@ -102,10 +110,6 @@ class InAppService {
         }
         
         return false
-    }
-    
-    private func isPurchased(productId: ProductIdentifier) -> Bool {
-        return inAppHelper.isProductPurchased(productId)
     }
     
     private func canMakePayments() -> Bool {

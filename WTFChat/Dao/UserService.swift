@@ -106,6 +106,16 @@ class UserService: NSObject {
         return currentUser!.friends
     }
     
+    func isContainBuyNonConsum(productId: ProductIdentifier) -> Bool {
+        if (!isLoggedIn()) { return false }
+        
+        if let productRef = IAPProducts.getProductRef(productId) {
+            return currentUser!.buyNonConsum.contains(productRef)
+        }
+        
+        return false
+    }
+    
     func getSelfUserInfo() -> FriendInfo? {
         if (!isLoggedIn()) { return nil }
         
@@ -148,15 +158,23 @@ class UserService: NSObject {
             if let requestError = error {
                 print(requestError)
             } else {
-                self.currentUser!.updateInfo(userInfo!)
-                        
-                if (userInfo!.newSuggestions != 0) {
-                    dispatch_async(dispatch_get_main_queue(), {
-                        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                        appDelegate.showNewSuggestionsAlert()
-                    })
-                }
+                self.updateUserInfo(userInfo)
             }
+        }
+    }
+    
+    func updateUserInfo(userInfo: User?) {
+        if (userInfo == nil) {
+            return
+        }
+        
+        self.currentUser!.updateInfo(userInfo!)
+        
+        if (userInfo!.newSuggestions != 0) {
+            dispatch_async(dispatch_get_main_queue(), {
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                appDelegate.showNewSuggestionsAlert()
+            })
         }
     }
     

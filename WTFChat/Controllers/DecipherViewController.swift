@@ -227,8 +227,8 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     func rotated(notification: NSNotification) {
-        self.wordsTableView.updateMaxWidth()
-        self.wordsTableView.setNewMessage(message, useCipherText: useCipherText, selfAuthor: selfAuthor)
+        //self.wordsTableView.updateMaxWidth()
+        //self.wordsTableView.setNewMessage(message, useCipherText: useCipherText, selfAuthor: selfAuthor)
     }
     
     func dismissKeyboard(){

@@ -101,6 +101,28 @@ class CipherFactory {
         .ShuffleWithExtraLetter: ShuffleWithExtraLetterCipher()
     ]
     
+    static let cipherLvls: [CipherType: Int] = [
+        .HalfWordRoundUp: 0,
+        .HalfWordRoundDown: 0,
+        .FirstLetter: 0,
+        
+        .ExceptTwoLettersFromEnd: 5,
+        .HalfWordRoundDownFromEnd: 8,
+        .HalfWordPlusOneFromEnd: 12,
+        
+        .EasyDoubleCutter: 15,
+        .NormalDoubleCutter: 18,
+        .HardDoubleCutter: 22,
+        
+        .EasyRandomCutter: 25,
+        .NormalRandomCutter: 28,
+        .HardRandomCutter: 32,
+        
+        .ShuffleExceptFirstLetter: 35,
+        .ShuffleFullWord: 38,
+        .ShuffleWithExtraLetter: 42
+    ]
+    
     static let cipherTypes: [CipherCategory: [CipherMode: CipherType]] = [
         .RightCutter: [
             .Easy: .HalfWordRoundUp,
@@ -127,7 +149,14 @@ class CipherFactory {
             .Normal: .ShuffleFullWord,
             .Hard: .ShuffleWithExtraLetter
         ]
-        
+    ]
+    
+    static let cipherCategoryPurchases: [CipherCategory: ProductIdentifier] = [
+        .RightCutter: "",
+        .LeftCutter: IAPProducts.CIPHER_LEFT_CUTTER,
+        .DoubleCutter: IAPProducts.CIPHER_DOUBLE_CUTTER,
+        .RandomCutter: IAPProducts.CIPHER_RANDOM_CUTTER,
+        .Shuffle: IAPProducts.CIPHER_SHUFFLE
     ]
     
     class func cipherText(cipherType: CipherType, word: Word) -> String {
@@ -156,6 +185,25 @@ class CipherFactory {
     
     class func getAllModes() -> [CipherMode] {
         return [.Easy, .Normal, .Hard]
+    }
+    
+    class func getProductId(category: CipherCategory) -> ProductIdentifier? {
+        return cipherCategoryPurchases[category]
+    }
+    
+    class func getCipherCategory(productId: ProductIdentifier) -> CipherCategory? {
+        for category in cipherCategoryPurchases.keys {
+            if (productId == cipherCategoryPurchases[category]!) {
+                return category
+            }
+        }
+        
+        return nil
+    }
+    
+    class func getCipherLvl(category: CipherCategory, mode: CipherMode) -> Int? {
+        let cipherType = getCipherType(category, mode: mode)
+        return cipherLvls[cipherType]
     }
 }
 

@@ -40,8 +40,16 @@ class ShopViewController: UITableViewController {
     @IBOutlet weak var shuffleLabel: UILabel!
     @IBOutlet weak var shuffleBuyLabel: UILabel!
     
+    var detailColor: UIColor!
+    var tintColor: UIColor!
+    
+    var isRestoreInProgress: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        detailColor = x2HintsBuyLabel.textColor
+        tintColor = self.view.tintColor
         
         // Create a Restore Purchases button and hook it up to restoreTapped
         let restoreButton = UIBarButtonItem(title: "Restore", style: .Plain, target: self, action: "restoreTapped:")
@@ -49,6 +57,9 @@ class ShopViewController: UITableViewController {
         
         // Subscribe to a notification that fires when a product is purchased.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "productPurchased:", name: IAPHelperProductPurchasedNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "productPurchasedError:", name: IAPHelperProductPurchasedErrorNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "productRestore:", name: IAPHelperProductRestoreNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "productRestoreError:", name: IAPHelperProductRestoreErrorNotification, object: nil)
         
         updateTable()
     }
@@ -63,39 +74,110 @@ class ShopViewController: UITableViewController {
     
     // Restore purchases to this device.
     func restoreTapped(sender: AnyObject) {
-        inAppService.restorePurchased()
+        WTFTwoButtonsAlert.show("Restore purchased",
+            message: "Are you sure you want to restore purchased content?",
+            firstButtonTitle: "Ok",
+            secondButtonTitle: "Cancel",
+            viewPresenter: self) { () -> Void in
+                self.isRestoreInProgress = true
+                inAppService.restorePurchased()
+        }
     }
     
-    // Purchase the product
-    /*func buyButtonTapped(button: UIButton) {
-        let product = products[button.tag]
-        RageProducts.store.purchaseProduct(product)
-    }*/
-    
     func productPurchased(notification: NSNotification) {
-        updateTable()
+        dispatch_async(dispatch_get_main_queue(), {
+            self.updateTable()
+        })
+    }
+    
+    func productPurchasedError(notification: NSNotification) {
+        if (notification.object != nil) {
+            let productIdentifier = notification.object as! String
+            
+            if let productTitle = inAppService.getProductTitle(productIdentifier) {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.updateTable()
+                    
+                    WTFOneButtonAlert.show("Error",
+                        message: productTitle + " purchase error",
+                        firstButtonTitle: "Ok",
+                        viewPresenter: self)
+                })
+            }
+        } else {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.updateTable()
+                
+                WTFOneButtonAlert.show("Error",
+                    message: "Unknown error occured",
+                    firstButtonTitle: "Ok",
+                    viewPresenter: self)
+            })
+        }
+    }
+    
+    func productRestore(notification: NSNotification) {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.updateTable()
+            
+            if (self.isRestoreInProgress) {
+                self.isRestoreInProgress = false
+                
+                WTFOneButtonAlert.show("Success",
+                    message: "Restored successfully",
+                    firstButtonTitle: "Ok",
+                    viewPresenter: self)
+            }
+        })
+    }
+    
+    func productRestoreError(notification: NSNotification) {
+        let productIdentifier = notification.object as! String
+        
+        if let productTitle = inAppService.getProductTitle(productIdentifier) {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.updateTable()
+                
+                if (self.isRestoreInProgress) {
+                    self.isRestoreInProgress = false
+                    
+                    WTFOneButtonAlert.show("Error",
+                        message: productTitle + " can't be restored",
+                        firstButtonTitle: "Ok",
+                        viewPresenter: self)
+                }
+            })
+        }
     }
     
     func updateTable() {
-        x2HintsLabel.text = inAppService.getProductTitle(IAPProducts.HINTS_X2)
-        x2HintsBuyLabel.text = inAppService.getProductPrice(IAPProducts.HINTS_X2)
+        setBuyLabels(x2HintsLabel, buyTitle: x2HintsBuyLabel, productId: IAPProducts.HINTS_X2)
         
-        allCiphersLabel.text = inAppService.getProductTitle(IAPProducts.CIPHER_ALL)
-        allCiphersBuyLabel.text = inAppService.getProductPrice(IAPProducts.CIPHER_ALL)
+        setBuyLabels(hints1Label, buyTitle: hints1BuyLabel, productId: IAPProducts.HINTS_1)
+        setBuyLabels(hints2Label, buyTitle: hints2BuyLabel, productId: IAPProducts.HINTS_2)
+        setBuyLabels(hints3Label, buyTitle: hints3BuyLabel, productId: IAPProducts.HINTS_3)
+        setBuyLabels(hints4Label, buyTitle: hints4BuyLabel, productId: IAPProducts.HINTS_4)
+        setBuyLabels(hints5Label, buyTitle: hints5BuyLabel, productId: IAPProducts.HINTS_5)
+        setBuyLabels(hints6Label, buyTitle: hints6BuyLabel, productId: IAPProducts.HINTS_6)
         
-        leftCutterLabel.text = inAppService.getProductTitle(IAPProducts.CIPHER_LEFT_CUTTER)
-        leftCutterBuyLabel.text = inAppService.getProductPrice(IAPProducts.CIPHER_LEFT_CUTTER)
-        
-        doubleCutterLabel.text = inAppService.getProductTitle(IAPProducts.CIPHER_DOUBLE_CUTTER)
-        doubleCutterBuyLabel.text = inAppService.getProductPrice(IAPProducts.CIPHER_DOUBLE_CUTTER)
-        
-        randomCutterLabel.text = inAppService.getProductTitle(IAPProducts.CIPHER_RANDOM_CUTTER)
-        randomCutterBuyLabel.text = inAppService.getProductPrice(IAPProducts.CIPHER_RANDOM_CUTTER)
-        
-        shuffleLabel.text = inAppService.getProductTitle(IAPProducts.CIPHER_SHUFFLE)
-        shuffleBuyLabel.text = inAppService.getProductPrice(IAPProducts.CIPHER_SHUFFLE)
+        setBuyLabels(allCiphersLabel, buyTitle: allCiphersBuyLabel, productId: IAPProducts.CIPHER_ALL)
+        setBuyLabels(leftCutterLabel, buyTitle: leftCutterBuyLabel, productId: IAPProducts.CIPHER_LEFT_CUTTER)
+        setBuyLabels(doubleCutterLabel, buyTitle: doubleCutterBuyLabel, productId: IAPProducts.CIPHER_DOUBLE_CUTTER)
+        setBuyLabels(randomCutterLabel, buyTitle: randomCutterBuyLabel, productId: IAPProducts.CIPHER_RANDOM_CUTTER)
+        setBuyLabels(shuffleLabel, buyTitle: shuffleBuyLabel, productId: IAPProducts.CIPHER_SHUFFLE)
         
         self.tableView.reloadData()
+    }
+    
+    private func setBuyLabels(title: UILabel, buyTitle: UILabel, productId: ProductIdentifier) {
+        title.text = inAppService.getProductTitle(productId)
+        buyTitle.text = inAppService.getProductPrice(productId)
+        
+        if inAppService.canPurchase(productId) && !inAppService.isPurchased(productId) {
+            buyTitle.textColor = tintColor
+        } else {
+            buyTitle.textColor = detailColor
+        }
     }
     
     let HINTS_SECTION = 1
@@ -123,17 +205,17 @@ class ShopViewController: UITableViewController {
             } else if (indexPath.row == HINTS_X2) {
                 showPurchaseAlert(IAPProducts.HINTS_X2)
             } else if (indexPath.row == HINTS_1) {
-                
+                showPurchaseAlert(IAPProducts.HINTS_1)
             } else if (indexPath.row == HINTS_2) {
-                
+                showPurchaseAlert(IAPProducts.HINTS_2)
             } else if (indexPath.row == HINTS_3) {
-                
+                showPurchaseAlert(IAPProducts.HINTS_3)
             } else if (indexPath.row == HINTS_4) {
-                
+                showPurchaseAlert(IAPProducts.HINTS_4)
             } else if (indexPath.row == HINTS_5) {
-                
+                showPurchaseAlert(IAPProducts.HINTS_5)
             } else if (indexPath.row == HINTS_6) {
-                
+                showPurchaseAlert(IAPProducts.HINTS_6)
             }
         } else if (indexPath.section == CIPHERS_SECTION) {
             if (indexPath.row == CIPHERS_ALL) {
@@ -151,7 +233,7 @@ class ShopViewController: UITableViewController {
     }
     
     private func showPurchaseAlert(productId: ProductIdentifier) {
-        if !inAppService.canPurchase(productId) {
+        if (!inAppService.canPurchase(productId) || inAppService.isPurchased(productId)) {
             return
         }
         
