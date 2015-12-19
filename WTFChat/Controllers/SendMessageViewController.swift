@@ -15,6 +15,9 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
     
     @IBOutlet weak var cipherPicker: CipherPickerViewController!
     
+    @IBOutlet weak var levelRequiredLabel: UILabel!
+    @IBOutlet weak var unlockCipherButton: UIButton!
+    
     var text = ""
     var cipherType = CipherType.HalfWordRoundDown
     var message: Message!
@@ -35,6 +38,10 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
         messageWordsView.dataSource = messageWordsView
         messageWordsView.delegate = messageWordsView
         messageWordsView.setNewMessage(message)
+        
+        levelRequiredLabel.textColor = FAILED_COLOR
+        
+        cipherPicked(cipherType)
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,5 +55,40 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
         message = messageCipher.createMessage(text, cipherType: cipherType)
         
         messageWordsView.setNewMessage(message)
+        
+        if cipherService.canUseCipher(cipherType) {
+            levelRequiredLabel.hidden = true
+            unlockCipherButton.hidden = true
+            
+            let sendButton = UIBarButtonItem(title: "Send",
+                style: UIBarButtonItemStyle.Plain, target: self, action: "sendTapped:")
+            
+            self.navigationItem.rightBarButtonItem = sendButton
+        } else {
+            if let cipherLvl = CipherFactory.getCipherLvl(cipherType) {
+                levelRequiredLabel.text = "Level " + String(cipherLvl) + " required"
+            }
+            
+            levelRequiredLabel.hidden = false
+            unlockCipherButton.hidden = false
+            
+            let tryButton = UIBarButtonItem(title: "Try it",
+                style: UIBarButtonItemStyle.Plain, target: self, action: "tryTapped:")
+            
+            self.navigationItem.rightBarButtonItem = tryButton
+        }
+    }
+    
+    func sendTapped(sender: AnyObject) {
+        print("send tapped")
+        
+        performSegueWithIdentifier("sendMessage", sender: self)
+    }
+    
+    func tryTapped(sender: AnyObject) {
+        print("try tapped")
+        
+        //TODO - replace with show add
+        performSegueWithIdentifier("sendMessage", sender: self)
     }
 }

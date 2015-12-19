@@ -203,6 +203,10 @@ class CipherFactory {
     
     class func getCipherLvl(category: CipherCategory, mode: CipherMode) -> Int? {
         let cipherType = getCipherType(category, mode: mode)
+        return getCipherLvl(cipherType)
+    }
+    
+    class func getCipherLvl(cipherType: CipherType) -> Int? {
         return cipherLvls[cipherType]
     }
 }

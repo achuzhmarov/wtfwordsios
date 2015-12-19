@@ -48,6 +48,11 @@ class CipherService {
         
         return false
     }
+    
+    func canUseCipher(cipherType: CipherType) -> Bool {
+        let (category, mode) = CipherFactory.getCategoryAndMode(cipherType)
+        return canUseCipher(category, mode: mode)
+    }
 
     private func isAllPurchased() -> Bool {
         return userService.isContainBuyNonConsum(IAPProducts.CIPHER_ALL)

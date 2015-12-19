@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -1348,7 +1349,7 @@
         <!--Preview-->
         <scene sceneID="CeE-jA-y2e">
             <objects>
-                <viewController id="tE0-XD-KQv" customClass="SendMessageViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="tE0-XD-KQv" customClass="SendMessageViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9um-Jo-hIU"/>
                         <viewControllerLayoutGuide type="bottom" id="63E-kw-JJE"/>
@@ -1357,12 +1358,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fgr-19-TRu" userLabel="Cipher View">
-                                <rect key="frame" x="20" y="269" width="560" height="171"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="37" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bSn-oB-tla" customClass="WordsViewController" customModule="WTFChat" customModuleProvider="target">
-                                <rect key="frame" x="16" y="72" width="572" height="420"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="37" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bSn-oB-tla" customClass="WordsViewController" customModule="WTFChat" customModuleProvider="target">
+                                <rect key="frame" x="16" y="72" width="572" height="350"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WordsRowCell" id="khY-e4-cD4">
@@ -1375,34 +1372,53 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="URP-ue-1VC" userLabel="Cipher Picker" customClass="CipherPickerViewController" customModule="WTFChat" customModuleProvider="target">
-                                <rect key="frame" x="20" y="500" width="560" height="100"/>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="URP-ue-1VC" userLabel="Cipher Picker" customClass="CipherPickerViewController" customModule="WTFChat" customModuleProvider="target">
+                                <rect key="frame" x="20" y="451" width="560" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="cex-UZ-Rn5"/>
                                 </constraints>
                             </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 55 required" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2RL-uX-TlP">
+                                <rect key="frame" x="20" y="430" width="280" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ktt-Qd-MfY">
+                                <rect key="frame" x="300" y="430" width="280" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="a0X-JI-bbo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Unlock now"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="2RL-uX-TlP" firstAttribute="leading" secondItem="FNy-hO-6ac" secondAttribute="leadingMargin" id="2eA-I7-EHx"/>
                             <constraint firstItem="bSn-oB-tla" firstAttribute="leading" secondItem="FNy-hO-6ac" secondAttribute="leadingMargin" constant="-4" id="52L-Ar-bmg"/>
+                            <constraint firstItem="URP-ue-1VC" firstAttribute="top" secondItem="2RL-uX-TlP" secondAttribute="bottom" id="5BO-Ru-eIL"/>
                             <constraint firstItem="63E-kw-JJE" firstAttribute="top" secondItem="URP-ue-1VC" secondAttribute="bottom" id="7TP-qr-gP1"/>
+                            <constraint firstItem="URP-ue-1VC" firstAttribute="top" secondItem="Ktt-Qd-MfY" secondAttribute="bottom" id="DQr-3U-eKW"/>
+                            <constraint firstItem="2RL-uX-TlP" firstAttribute="trailing" secondItem="FNy-hO-6ac" secondAttribute="centerX" id="HEF-VJ-Bar"/>
+                            <constraint firstItem="2RL-uX-TlP" firstAttribute="top" secondItem="bSn-oB-tla" secondAttribute="bottom" constant="8" id="Ij0-Zb-bXM"/>
                             <constraint firstItem="bSn-oB-tla" firstAttribute="trailing" secondItem="FNy-hO-6ac" secondAttribute="trailingMargin" constant="8" id="K1K-LE-P9Y"/>
                             <constraint firstItem="URP-ue-1VC" firstAttribute="leading" secondItem="FNy-hO-6ac" secondAttribute="leadingMargin" id="SI9-X0-icx"/>
-                            <constraint firstItem="URP-ue-1VC" firstAttribute="top" secondItem="bSn-oB-tla" secondAttribute="bottom" constant="8" id="UGO-z3-Ck4"/>
+                            <constraint firstItem="Ktt-Qd-MfY" firstAttribute="trailing" secondItem="FNy-hO-6ac" secondAttribute="trailingMargin" id="esM-Nk-0ab"/>
                             <constraint firstItem="URP-ue-1VC" firstAttribute="trailing" secondItem="FNy-hO-6ac" secondAttribute="trailingMargin" id="hq3-ln-mls"/>
                             <constraint firstItem="bSn-oB-tla" firstAttribute="top" secondItem="9um-Jo-hIU" secondAttribute="bottom" constant="8" id="oxZ-lS-P5j"/>
+                            <constraint firstItem="Ktt-Qd-MfY" firstAttribute="leading" secondItem="FNy-hO-6ac" secondAttribute="centerX" id="qMx-3s-o99"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Preview" id="18t-tn-tUg">
-                        <barButtonItem key="rightBarButtonItem" title="Send" id="iWg-ue-lyg">
-                            <connections>
-                                <segue destination="iY0-hB-6OE" kind="unwind" unwindAction="sendMessage:" id="K2G-R3-urS"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Send" id="iWg-ue-lyg"/>
                     </navigationItem>
                     <connections>
                         <outlet property="cipherPicker" destination="URP-ue-1VC" id="jTu-Kz-NQz"/>
+                        <outlet property="levelRequiredLabel" destination="2RL-uX-TlP" id="qqQ-HT-WXI"/>
                         <outlet property="messageWordsView" destination="bSn-oB-tla" id="9uQ-Hu-N6B"/>
+                        <outlet property="unlockCipherButton" destination="Ktt-Qd-MfY" id="UtS-N0-iDF"/>
+                        <segue destination="iY0-hB-6OE" kind="unwind" identifier="sendMessage" unwindAction="sendMessage:" id="goq-e2-h3N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t5V-xq-zqT" userLabel="First Responder" sceneMemberID="firstResponder"/>
