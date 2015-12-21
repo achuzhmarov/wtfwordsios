@@ -1391,6 +1391,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Unlock now"/>
+                                <connections>
+                                    <action selector="unlockCipherTapped:" destination="tE0-XD-KQv" eventType="touchUpInside" id="IHu-9U-Fjl"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -78,7 +78,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         if (self.isSingleMode) {
             suggestions = (message.countNew() - 1) / SUGGESTIONS_SINGLE_MODE + 1
         } else {
-            suggestions = userService.getUserSuggestions()
+            suggestions = userService.getUserSuggestions() - message.hintsUsed
         }
         
         self.wordsTableView.delegate = self.wordsTableView
@@ -137,6 +137,10 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         if (message!.deciphered) {
             gameOver()
+        }
+        
+        if (!isSingleMode) {
+            sendMessageUpdate()
         }
     }
     
@@ -200,7 +204,10 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             suggestions--
             
             if (!isSingleMode) {
-                userService.useSuggestion()
+                message.hintsUsed++
+                suggestions = userService.getUserSuggestions() - message.hintsUsed
+                
+                //userService.useSuggestion()
             }
         }
         
@@ -208,6 +215,8 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         if (message!.deciphered) {
             gameOver()
+        } else if (!isSingleMode) {
+            sendMessageUpdate()
         }
     }
     
@@ -251,12 +260,16 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     func start() {
         self.navigationItem.setHidesBackButton(true, animated:true)
 
-        let (_, mode) = CipherFactory.getCategoryAndMode(message!.cipherType)
-        
-        if (mode == CipherMode.Hard) {
-            timer.seconds = message!.countNew() * HARD_SECONDS_PER_WORD
+        if (message!.timerSecs == 0 && message!.countSuccess() == 0 || isSingleMode) {
+            let (_, mode) = CipherFactory.getCategoryAndMode(message!.cipherType)
+            
+            if (mode == CipherMode.Hard) {
+                timer.seconds = message!.countNew() * HARD_SECONDS_PER_WORD
+            } else {
+                timer.seconds = message!.countNew() * SECONDS_PER_WORD
+            }
         } else {
-            timer.seconds = message!.countNew() * SECONDS_PER_WORD
+            timer.seconds = message!.timerSecs
         }
         
         topTimerLabel.text = timer.getTimeString()
@@ -323,7 +336,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
                 })
             }
             
-            userService.sendUsedHints()
+            //userService.sendUsedHints()
         }
         
         messageService.updateMessageInTalk(message)
@@ -378,6 +391,17 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             } else if (timer.isLastSecond()) {
                 topTimerLabel.layer.removeAllAnimations()
                 topTimerLabel.alpha = 1
+            }
+        }
+    }
+    
+    private func sendMessageUpdate() {
+        //update timer
+        message.timerSecs = timer.seconds
+        
+        messageService.decipherMessage(message) { (message, error) -> Void in
+            if let requestError = error {
+                print(requestError)
             }
         }
     }

@@ -33,6 +33,11 @@ class WTFOneButtonAlert: NSObject, UIAlertViewDelegate  {
 class WTFTwoButtonsAlert: NSObject, UIAlertViewDelegate {
     class func show(title: String, message: String, firstButtonTitle: String, secondButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:() -> Void) {
         
+        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: secondButtonTitle, viewPresenter: viewPresenter, alertButtonAction: alertButtonAction, cancelButtonAction: nil)
+    }
+    
+    class func show(title: String, message: String, firstButtonTitle: String, secondButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:() -> Void, cancelButtonAction:(() -> Void)?) {
+        
         if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
                 message: message,
@@ -43,7 +48,7 @@ class WTFTwoButtonsAlert: NSObject, UIAlertViewDelegate {
             }))
             
             alert.addAction(UIAlertAction(title: secondButtonTitle, style: .Default, handler: { (action: UIAlertAction) in
-                //do nothing
+                cancelButtonAction?()
             }))
 
             viewPresenter?.presentViewController(alert, animated: true, completion: nil)
@@ -54,6 +59,7 @@ class WTFTwoButtonsAlert: NSObject, UIAlertViewDelegate {
             alert.addButtonWithTitle(firstButtonTitle)
             alert.addButtonWithTitle(secondButtonTitle)
             alert.setAlertFunction(alertButtonAction)
+            alert.setCancelFunction(cancelButtonAction)
             alert.show()
         }
     }
@@ -61,19 +67,25 @@ class WTFTwoButtonsAlert: NSObject, UIAlertViewDelegate {
 
 class AlertWithDelegate: UIAlertView, UIAlertViewDelegate {
     var alertButtonAction: (() -> Void)?
+    var cancelButtonAction: (() -> Void)?
     
     func setAlertFunction(alertButtonAction: () -> Void) {
         self.alertButtonAction = alertButtonAction
         self.delegate = self
     }
     
+    func setCancelFunction(cancelButtonAction: (() -> Void)?) {
+        self.cancelButtonAction = cancelButtonAction
+        self.delegate = self
+    }
+    
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
         switch buttonIndex{
         case 0:
-            self.alertButtonAction!()
+            alertButtonAction?()
             break;
         case 1:
-            //Do nothing
+            cancelButtonAction?()
             break;
         default:
             //Do nothing

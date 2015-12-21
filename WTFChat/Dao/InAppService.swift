@@ -94,6 +94,29 @@ class InAppService {
         return false
     }
     
+    func showBuyAlert(productId: ProductIdentifier, viewPresenter: UIViewController,
+            cancelFunc: (() -> Void)? = nil) {
+                
+        if (!inAppService.canPurchase(productId) || inAppService.isPurchased(productId)) {
+            return
+        }
+        
+        let productName = inAppService.getProductTitle(productId)
+        let productPrice = inAppService.getProductPrice(productId)
+        let productDescription = inAppService.getProductDescription(productId)
+        
+        WTFTwoButtonsAlert.show("Buy " + productName! + " for " + productPrice!,
+            message: productDescription!,
+            firstButtonTitle: "Ok",
+            secondButtonTitle: "Cancel",
+            viewPresenter: viewPresenter,
+            alertButtonAction: { () -> Void in
+                inAppService.purchaseProduct(productId)
+            }, cancelButtonAction: { () -> Void in
+                cancelFunc?()
+        })
+    }
+    
     private func getProduct(productId: ProductIdentifier) -> SKProduct? {
         for product in products {
             if (product.productIdentifier == productId) {

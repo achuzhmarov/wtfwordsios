@@ -22,6 +22,10 @@ class Message : BaseEntity {
     var isLocal: Bool = false
     var extId: String = ""
     
+    var timerSecs: Int = 0
+    var hintsUsed: Int = 0
+    var tries = [String]()
+    
     init(id: String, talkId: String, author: String) {
         
         self.timestamp = NSDate()
@@ -69,7 +73,7 @@ class Message : BaseEntity {
         super.init(id: id)
     }
     
-    init(id: String, talkId: String, author: String, words: [Word], deciphered: Bool, cipherType: CipherType, timestamp: NSDate, lastUpdate: NSDate, exp: Int, extId: String) {
+    init(id: String, talkId: String, author: String, words: [Word], deciphered: Bool, cipherType: CipherType, timestamp: NSDate, lastUpdate: NSDate, exp: Int, extId: String, timerSecs: Int, hintsUsed: Int) {
         
         self.timestamp = timestamp
         self.lastUpdate = lastUpdate
@@ -80,6 +84,8 @@ class Message : BaseEntity {
         self.words = words
         self.exp = exp
         self.extId = extId
+        self.timerSecs = timerSecs
+        self.hintsUsed = hintsUsed
         
         super.init(id: id)
     }
@@ -224,17 +230,32 @@ class Message : BaseEntity {
         
         json["words"].arrayObject = getWordsJson()
         
+        
         return json
     }
     
     func getDecipherJson() -> JSON {
         var json: JSON = [
-            "id": self.id
+            "id": self.id,
+            "timer_secs": self.timerSecs,
+            "hints_used": self.hintsUsed
         ]
         
         json["words"].arrayObject = getWordsJson()
+        json["tries"].arrayObject = getTriesJson()
         
         return json
+    }
+    
+    func getTriesJson() -> [AnyObject] {
+        var triesJson = [AnyObject]()
+        
+        for i in 0..<self.tries.count {
+            let tryJson = JSON(tries[i])
+            triesJson.append(tryJson.rawValue)
+        }
+        
+        return triesJson
     }
     
     func getWordsJson() -> [AnyObject] {
@@ -259,6 +280,8 @@ class Message : BaseEntity {
         var lastUpdate: NSDate
         var exp: Int = 0
         var extId: String
+        var timerSecs: Int = 0
+        var hintsUsed: Int = 0
         
         if let value = json["id"].string {
             id = value
@@ -331,6 +354,18 @@ class Message : BaseEntity {
         } else if let error = json["exp"].error {
             throw error
         }
+        
+        if let value = json["timer_secs"].int {
+            timerSecs = value
+        } else if let error = json["timer_secs"].error {
+            throw error
+        }
+        
+        if let value = json["hints_used"].int {
+            hintsUsed = value
+        } else if let error = json["hints_used"].error {
+            throw error
+        }
 
         return Message(
             id: id,
@@ -342,7 +377,9 @@ class Message : BaseEntity {
             timestamp: timestamp,
             lastUpdate: lastUpdate,
             exp: exp,
-            extId: extId
+            extId: extId,
+            timerSecs: timerSecs,
+            hintsUsed: hintsUsed
         )
     }
 }

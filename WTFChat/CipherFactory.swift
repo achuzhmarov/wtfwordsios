@@ -191,6 +191,11 @@ class CipherFactory {
         return cipherCategoryPurchases[category]
     }
     
+    class func getProductId(cipherType: CipherType) -> ProductIdentifier? {
+        let (category, _) = getCategoryAndMode(cipherType)
+        return getProductId(category)
+    }
+    
     class func getCipherCategory(productId: ProductIdentifier) -> CipherCategory? {
         for category in cipherCategoryPurchases.keys {
             if (productId == cipherCategoryPurchases[category]!) {

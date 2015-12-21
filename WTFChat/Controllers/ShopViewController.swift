@@ -233,20 +233,6 @@ class ShopViewController: UITableViewController {
     }
     
     private func showPurchaseAlert(productId: ProductIdentifier) {
-        if (!inAppService.canPurchase(productId) || inAppService.isPurchased(productId)) {
-            return
-        }
-        
-        let productName = inAppService.getProductTitle(productId)
-        let productPrice = inAppService.getProductPrice(productId)
-        let productDescription = inAppService.getProductDescription(productId)
-        
-        WTFTwoButtonsAlert.show("Buy " + productName! + " for " + productPrice!,
-            message: productDescription!,
-            firstButtonTitle: "Ok",
-            secondButtonTitle: "Cancel",
-            viewPresenter: self) { () -> Void in
-                inAppService.purchaseProduct(productId)
-        }
+        inAppService.showBuyAlert(productId, viewPresenter: self)
     }
 }

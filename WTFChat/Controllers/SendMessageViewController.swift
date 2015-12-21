@@ -42,6 +42,9 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
         levelRequiredLabel.textColor = FAILED_COLOR
         
         cipherPicked(cipherType)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "productPurchased:", name: IAPHelperProductPurchasedNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "productPurchasedError:", name: IAPHelperProductPurchasedErrorNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,5 +93,45 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
         
         //TODO - replace with show add
         performSegueWithIdentifier("sendMessage", sender: self)
+    }
+    
+    @IBAction func unlockCipherTapped(sender: AnyObject) {
+        inAppService.showBuyAlert(IAPProducts.CIPHER_ALL, viewPresenter: self) { () -> Void in
+            if let productId = CipherFactory.getProductId(self.cipherType) {
+                inAppService.showBuyAlert(productId, viewPresenter: self)
+            }
+        }
+    }
+    
+    func productPurchased(notification: NSNotification) {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.cipherPicked(self.cipherType)
+        })
+    }
+    
+    func productPurchasedError(notification: NSNotification) {
+        if (notification.object != nil) {
+            let productIdentifier = notification.object as! String
+            
+            if let productTitle = inAppService.getProductTitle(productIdentifier) {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.cipherPicked(self.cipherType)
+                    
+                    WTFOneButtonAlert.show("Error",
+                        message: productTitle + " purchase error",
+                        firstButtonTitle: "Ok",
+                        viewPresenter: self)
+                })
+            }
+        } else {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.cipherPicked(self.cipherType)
+                
+                WTFOneButtonAlert.show("Error",
+                    message: "Unknown error occured",
+                    firstButtonTitle: "Ok",
+                    viewPresenter: self)
+            })
+        }
     }
 }
