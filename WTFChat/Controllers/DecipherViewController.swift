@@ -29,6 +29,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     var message: Message!
     var isStarted = false
     var isOvered = false
+    var isPaused = false
     var timer = Timer()
     
     var isSingleMode = false
@@ -98,6 +99,18 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        isPaused = false
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        isPaused = true
+    }
+    
     @IBAction func giveUpButtonPressed(sender: AnyObject) {
         if (isOvered) {
             return
@@ -164,10 +177,21 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     func showNoSuggestionsDialog() {
-        WTFOneButtonAlert.show("Use Hint: 0",
-            message: "You have used all hints",
-            firstButtonTitle: "Ok",
-            viewPresenter: self)
+        if (isSingleMode) {
+            WTFOneButtonAlert.show("Use Hint: 0",
+                message: "You have used all hints",
+                firstButtonTitle: "Ok",
+                viewPresenter: self)
+        } else {
+            WTFTwoButtonsAlert.show("Use Hint: 0",
+                message: "You have used all hints. Want to get more?",
+                firstButtonTitle: "Ok",
+                secondButtonTitle: "Cancel",
+                viewPresenter: self) { () -> Void in
+                    
+                    self.performSegueWithIdentifier("getMoreHints", sender: self)
+            }
+        }
     }
     
     func showSuggestionConfirm(word: Word) {
@@ -296,6 +320,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         }
         
         messageCipher.failed(message!)
+        message.timerSecs = timer.seconds
         
         bottomView.hidden = true
         bottomViewHeightConstraint.constant = 0
@@ -370,6 +395,13 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             return
         }
         
+        if (isPaused) {
+            NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
+                selector: "tick", userInfo: nil, repeats: false)
+            
+            return
+        }
+        
         timer.tick()
         topTimerLabel.text = timer.getTimeString()
         
@@ -406,11 +438,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         }
     }
     
-    /*override func shouldAutorotate() -> Bool {
-    return false
+    @IBAction func hintsBought(segue:UIStoryboardSegue) {
+        suggestions = userService.getUserSuggestions() - message.hintsUsed
     }
-    
-    override func supportedInterfaceOrientations() -> Int {
-    return UIInterfaceOrientation.Portrait.rawValue
-    }*/
 }

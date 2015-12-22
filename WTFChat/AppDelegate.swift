@@ -177,7 +177,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if (userService.getUserNewSuggestions() != 0) {
-            WTFOneButtonAlert.show("Free hints!",
+            WTFOneButtonAlert.show("Daily free hints!",
                 message: "You have just received " + String(userService.getUserNewSuggestions()),
                 firstButtonTitle: "Ok",
                 viewPresenter: currentController)

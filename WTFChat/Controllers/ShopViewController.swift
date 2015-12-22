@@ -8,26 +8,10 @@
 
 import Foundation
 
-class ShopViewController: UITableViewController {
-    
-    @IBOutlet weak var freeHintsLabel: UILabel!
-    @IBOutlet weak var freeHintsBuyLabel: UILabel!
+class ShopViewController: BaseShopViewController {
     
     @IBOutlet weak var x2HintsLabel: UILabel!
     @IBOutlet weak var x2HintsBuyLabel: UILabel!
-    
-    @IBOutlet weak var hints1Label: UILabel!
-    @IBOutlet weak var hints1BuyLabel: UILabel!
-    @IBOutlet weak var hints2Label: UILabel!
-    @IBOutlet weak var hints2BuyLabel: UILabel!
-    @IBOutlet weak var hints3Label: UILabel!
-    @IBOutlet weak var hints3BuyLabel: UILabel!
-    @IBOutlet weak var hints4Label: UILabel!
-    @IBOutlet weak var hints4BuyLabel: UILabel!
-    @IBOutlet weak var hints5Label: UILabel!
-    @IBOutlet weak var hints5BuyLabel: UILabel!
-    @IBOutlet weak var hints6Label: UILabel!
-    @IBOutlet weak var hints6BuyLabel: UILabel!
     
     @IBOutlet weak var allCiphersLabel: UILabel!
     @IBOutlet weak var allCiphersBuyLabel: UILabel!
@@ -40,35 +24,19 @@ class ShopViewController: UITableViewController {
     @IBOutlet weak var shuffleLabel: UILabel!
     @IBOutlet weak var shuffleBuyLabel: UILabel!
     
-    var detailColor: UIColor!
-    var tintColor: UIColor!
-    
     var isRestoreInProgress: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        detailColor = x2HintsBuyLabel.textColor
-        tintColor = self.view.tintColor
-        
         // Create a Restore Purchases button and hook it up to restoreTapped
         let restoreButton = UIBarButtonItem(title: "Restore", style: .Plain, target: self, action: "restoreTapped:")
         navigationItem.rightBarButtonItem = restoreButton
         
-        // Subscribe to a notification that fires when a product is purchased.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "productPurchased:", name: IAPHelperProductPurchasedNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "productPurchasedError:", name: IAPHelperProductPurchasedErrorNotification, object: nil)
+        // Subscribe to a notification that fires when a product is restored.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "productRestore:", name: IAPHelperProductRestoreNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "productRestoreError:", name: IAPHelperProductRestoreErrorNotification, object: nil)
         
-        updateTable()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
         updateTable()
     }
     
@@ -81,38 +49,6 @@ class ShopViewController: UITableViewController {
             viewPresenter: self) { () -> Void in
                 self.isRestoreInProgress = true
                 inAppService.restorePurchased()
-        }
-    }
-    
-    func productPurchased(notification: NSNotification) {
-        dispatch_async(dispatch_get_main_queue(), {
-            self.updateTable()
-        })
-    }
-    
-    func productPurchasedError(notification: NSNotification) {
-        if (notification.object != nil) {
-            let productIdentifier = notification.object as! String
-            
-            if let productTitle = inAppService.getProductTitle(productIdentifier) {
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.updateTable()
-                    
-                    WTFOneButtonAlert.show("Error",
-                        message: productTitle + " purchase error",
-                        firstButtonTitle: "Ok",
-                        viewPresenter: self)
-                })
-            }
-        } else {
-            dispatch_async(dispatch_get_main_queue(), {
-                self.updateTable()
-                
-                WTFOneButtonAlert.show("Error",
-                    message: "Unknown error occured",
-                    firstButtonTitle: "Ok",
-                    viewPresenter: self)
-            })
         }
     }
     
@@ -150,15 +86,10 @@ class ShopViewController: UITableViewController {
         }
     }
     
-    func updateTable() {
-        setBuyLabels(x2HintsLabel, buyTitle: x2HintsBuyLabel, productId: IAPProducts.HINTS_X2)
+    override func updateTable() {
+        super.updateTable()
         
-        setBuyLabels(hints1Label, buyTitle: hints1BuyLabel, productId: IAPProducts.HINTS_1)
-        setBuyLabels(hints2Label, buyTitle: hints2BuyLabel, productId: IAPProducts.HINTS_2)
-        setBuyLabels(hints3Label, buyTitle: hints3BuyLabel, productId: IAPProducts.HINTS_3)
-        setBuyLabels(hints4Label, buyTitle: hints4BuyLabel, productId: IAPProducts.HINTS_4)
-        setBuyLabels(hints5Label, buyTitle: hints5BuyLabel, productId: IAPProducts.HINTS_5)
-        setBuyLabels(hints6Label, buyTitle: hints6BuyLabel, productId: IAPProducts.HINTS_6)
+        setBuyLabels(x2HintsLabel, buyTitle: x2HintsBuyLabel, productId: IAPProducts.HINTS_X2)
         
         setBuyLabels(allCiphersLabel, buyTitle: allCiphersBuyLabel, productId: IAPProducts.CIPHER_ALL)
         setBuyLabels(leftCutterLabel, buyTitle: leftCutterBuyLabel, productId: IAPProducts.CIPHER_LEFT_CUTTER)
@@ -167,17 +98,6 @@ class ShopViewController: UITableViewController {
         setBuyLabels(shuffleLabel, buyTitle: shuffleBuyLabel, productId: IAPProducts.CIPHER_SHUFFLE)
         
         self.tableView.reloadData()
-    }
-    
-    private func setBuyLabels(title: UILabel, buyTitle: UILabel, productId: ProductIdentifier) {
-        title.text = inAppService.getProductTitle(productId)
-        buyTitle.text = inAppService.getProductPrice(productId)
-        
-        if inAppService.canPurchase(productId) && !inAppService.isPurchased(productId) {
-            buyTitle.textColor = tintColor
-        } else {
-            buyTitle.textColor = detailColor
-        }
     }
     
     let HINTS_SECTION = 1
@@ -230,9 +150,5 @@ class ShopViewController: UITableViewController {
                 showPurchaseAlert(IAPProducts.CIPHER_SHUFFLE)
             }
         }
-    }
-    
-    private func showPurchaseAlert(productId: ProductIdentifier) {
-        inAppService.showBuyAlert(productId, viewPresenter: self)
     }
 }

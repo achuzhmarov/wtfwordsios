@@ -17,6 +17,8 @@
 		482C241E1BA433F800288BB1 /* RightCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482C241D1BA433F800288BB1 /* RightCutterCipher.swift */; };
 		482C24241BA43CE500288BB1 /* ShuffleCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482C24231BA43CE500288BB1 /* ShuffleCipher.swift */; };
 		482E9ED21BC1825D00803CDE /* WTFAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482E9ED11BC1825D00803CDE /* WTFAlert.swift */; };
+		482EBECF1C29694C00C88EC9 /* BaseShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482EBECE1C29694C00C88EC9 /* BaseShopViewController.swift */; };
+		482EBED11C296A6D00C88EC9 /* HintsShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482EBED01C296A6D00C88EC9 /* HintsShopViewController.swift */; };
 		4835D4AE1C22DCCB008ABB37 /* CipherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4835D4AD1C22DCCB008ABB37 /* CipherService.swift */; };
 		483676491C2048200092C703 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483676481C2048200092C703 /* StoreKit.framework */; };
 		4836764B1C207B860092C703 /* InAppNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4836764A1C207B860092C703 /* InAppNetworkService.swift */; };
@@ -113,6 +115,8 @@
 		482C241D1BA433F800288BB1 /* RightCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightCutterCipher.swift; sourceTree = "<group>"; };
 		482C24231BA43CE500288BB1 /* ShuffleCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShuffleCipher.swift; sourceTree = "<group>"; };
 		482E9ED11BC1825D00803CDE /* WTFAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTFAlert.swift; sourceTree = "<group>"; };
+		482EBECE1C29694C00C88EC9 /* BaseShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseShopViewController.swift; sourceTree = "<group>"; };
+		482EBED01C296A6D00C88EC9 /* HintsShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HintsShopViewController.swift; sourceTree = "<group>"; };
 		4835D4AD1C22DCCB008ABB37 /* CipherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherService.swift; sourceTree = "<group>"; };
 		483676481C2048200092C703 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		4836764A1C207B860092C703 /* InAppNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppNetworkService.swift; sourceTree = "<group>"; };
@@ -243,7 +247,9 @@
 		4842C00B1C1F094A008153F0 /* Shop */ = {
 			isa = PBXGroup;
 			children = (
+				482EBECE1C29694C00C88EC9 /* BaseShopViewController.swift */,
 				4842C00C1C1F0965008153F0 /* ShopViewController.swift */,
+				482EBED01C296A6D00C88EC9 /* HintsShopViewController.swift */,
 			);
 			name = Shop;
 			sourceTree = "<group>";
@@ -642,6 +648,7 @@
 				4835D4AE1C22DCCB008ABB37 /* CipherService.swift in Sources */,
 				48E4E3AD1BE0ED9600E45D65 /* FriendInfo.swift in Sources */,
 				48E9D61F1BB3F5FB00BA0F2A /* LoginViewController.swift in Sources */,
+				482EBECF1C29694C00C88EC9 /* BaseShopViewController.swift in Sources */,
 				48EE657B1BB694E300A0DB07 /* KeychainWrapper.m in Sources */,
 				482C241A1BA433D500288BB1 /* CipherFactory.swift in Sources */,
 				4842C0111C1F1022008153F0 /* IAPHelper.swift in Sources */,
@@ -649,6 +656,7 @@
 				48E9A9AA1BEB7E9D00508847 /* AvatarService.swift in Sources */,
 				487D771D1BA0878400AF333C /* WordLabelContainer.swift in Sources */,
 				489666BA1B9B650400F769D1 /* FriendCell.swift in Sources */,
+				482EBED11C296A6D00C88EC9 /* HintsShopViewController.swift in Sources */,
 				48C661CC1BEF6C7B003AF4F5 /* MessageService.swift in Sources */,
 				48E9A9AC1BEB7FC900508847 /* TimeService.swift in Sources */,
 				48411F4A1BF629B4009B86FD /* EmailEditViewController.swift in Sources */,
