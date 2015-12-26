@@ -83,16 +83,22 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
     }
     
     func sendTapped(sender: AnyObject) {
-        print("send tapped")
-        
         performSegueWithIdentifier("sendMessage", sender: self)
     }
     
     func tryTapped(sender: AnyObject) {
-        print("try tapped")
-        
-        //TODO - replace with show add
-        performSegueWithIdentifier("sendMessage", sender: self)
+        if adColonyService.hasAd() {
+            adColonyService.showAd() { () -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.performSegueWithIdentifier("sendMessage", sender: self)
+                })
+            }
+        } else {
+            WTFOneButtonAlert.show("Error",
+                message: "No ads available",
+                firstButtonTitle: "Ok",
+                viewPresenter: self)
+        }
     }
     
     @IBAction func unlockCipherTapped(sender: AnyObject) {

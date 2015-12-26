@@ -28,6 +28,8 @@ class User {
     
     var buyNonConsum = [String]()
     
+    var freeHintsGained: Int = 0
+    
     init(login: String, suggestions: Int) {
         self.login = login
         self.suggestions = suggestions
@@ -36,7 +38,7 @@ class User {
     init(login: String, suggestions: Int, talks: [Talk], lastUpdate: NSDate,
         exp: Int, lvl: Int, newSuggestions: Int, friends: [FriendInfo],
         email: String, name: String, pushNew: Bool, pushDeciphered: Bool, rating: Int,
-        buyNonConsum: [String])
+        buyNonConsum: [String], freeHintsGained: Int)
     {
         self.login = login
         self.suggestions = suggestions
@@ -55,6 +57,8 @@ class User {
         self.rating = rating
         
         self.buyNonConsum = buyNonConsum
+        
+        self.freeHintsGained = freeHintsGained
     }
     
     func updateInfo(user: User) {
@@ -69,6 +73,8 @@ class User {
         self.pushNew = user.pushNew
         self.pushDeciphered = user.pushDeciphered
         self.rating = user.rating
+        
+        self.freeHintsGained = user.freeHintsGained
         
         for friendLvl in user.friends {
             updateFriendLvlInArray(friendLvl)
@@ -124,6 +130,8 @@ class User {
         var rating: Int = 0
         
         var buyNonConsum = [String]()
+        
+        var freeHintsGained: Int = 0
         
         if let value = json["login"].string {
             login = value
@@ -227,6 +235,13 @@ class User {
             throw error
         }
         
+        if let value = json["free_hints_gained"].int {
+            freeHintsGained = value
+        } else if let error = json["free_hints_gained"].error {
+            //do nothing
+            //throw error
+        }
+        
         return User(
             login: login,
             suggestions: suggestions,
@@ -241,7 +256,8 @@ class User {
             pushNew: pushNew,
             pushDeciphered: pushDeciphered,
             rating: rating,
-            buyNonConsum: buyNonConsum
+            buyNonConsum: buyNonConsum,
+            freeHintsGained: freeHintsGained
         )
     }
 }

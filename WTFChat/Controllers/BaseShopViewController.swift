@@ -88,6 +88,8 @@ class BaseShopViewController: UITableViewController {
         setBuyLabels(hints5Label, buyTitle: hints5BuyLabel, productId: IAPProducts.HINTS_5)
         setBuyLabels(hints6Label, buyTitle: hints6BuyLabel, productId: IAPProducts.HINTS_6)
 
+        setFreeAdHintLabel()
+        
         self.tableView.reloadData()
     }
     
@@ -102,7 +104,46 @@ class BaseShopViewController: UITableViewController {
         }
     }
     
+    func setFreeAdHintLabel() {
+        //freeHintsLabel.text
+        //freeHintsBuyLabel.text
+        
+        if userService.canAddFreeAdHint() && adColonyService.hasAd() {
+            freeHintsBuyLabel.textColor = tintColor
+        } else {
+            freeHintsBuyLabel.textColor = detailColor
+        }
+    }
+    
     func showPurchaseAlert(productId: ProductIdentifier) {
         inAppService.showBuyAlert(productId, viewPresenter: self)
+    }
+    
+    func showAdAlert() {
+        if userService.canAddFreeAdHint() && adColonyService.hasAd() {
+            WTFTwoButtonsAlert.show("View ad",
+                message: "Are you sure you want to view ad for a free hint?",
+                firstButtonTitle: "Ok",
+                secondButtonTitle: "Cancel",
+                viewPresenter: self) { () -> Void in
+                    adColonyService.showAd({ () -> Void in
+                        userService.addFreeAdHint()
+                        
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.updateTable()
+                            
+                            WTFOneButtonAlert.show("Free hint",
+                                message: "You have just received a free hint",
+                                firstButtonTitle: "Ok",
+                                viewPresenter: self)
+                        })
+                    })
+                }
+        } else {
+            WTFOneButtonAlert.show("No more ads",
+                message: "Try again tomorrow",
+                firstButtonTitle: "Ok",
+                viewPresenter: self)
+        }
     }
 }

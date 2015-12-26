@@ -29,7 +29,7 @@ class HintsShopViewController: BaseShopViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.section == HINTS_SECTION) {
             if (indexPath.row == HINTS_FREE) {
-                
+                showAdAlert()
             } else if (indexPath.row == HINTS_1) {
                 showPurchaseAlert(IAPProducts.HINTS_1)
             } else if (indexPath.row == HINTS_2) {

@@ -31,6 +31,23 @@
 		4842C0111C1F1022008153F0 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842C0101C1F1022008153F0 /* IAPHelper.swift */; };
 		4842C0131C1F11B2008153F0 /* IAPProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842C0121C1F11B2008153F0 /* IAPProducts.swift */; };
 		4842C0151C1F1416008153F0 /* InAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842C0141C1F1416008153F0 /* InAppService.swift */; };
+		484EC3511C2E714900C65F94 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3501C2E714900C65F94 /* libz.1.2.5.tbd */; };
+		484EC3531C2E715000C65F94 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3521C2E715000C65F94 /* AudioToolbox.framework */; };
+		484EC3551C2E715B00C65F94 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3541C2E715B00C65F94 /* AVFoundation.framework */; };
+		484EC3571C2E716100C65F94 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3561C2E716100C65F94 /* CoreGraphics.framework */; };
+		484EC3591C2E716800C65F94 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3581C2E716800C65F94 /* CoreMedia.framework */; };
+		484EC35B1C2E717400C65F94 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC35A1C2E717400C65F94 /* CoreTelephony.framework */; };
+		484EC35D1C2E717C00C65F94 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC35C1C2E717C00C65F94 /* EventKit.framework */; };
+		484EC35F1C2E718100C65F94 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC35E1C2E718100C65F94 /* EventKitUI.framework */; };
+		484EC3611C2E718600C65F94 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3601C2E718600C65F94 /* MediaPlayer.framework */; };
+		484EC3631C2E718C00C65F94 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3621C2E718C00C65F94 /* MessageUI.framework */; };
+		484EC3651C2E719100C65F94 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3641C2E719100C65F94 /* QuartzCore.framework */; };
+		484EC3671C2E719500C65F94 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3661C2E719500C65F94 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		484EC3691C2E719D00C65F94 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3681C2E719D00C65F94 /* SystemConfiguration.framework */; };
+		484EC36B1C2E71A400C65F94 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC36A1C2E71A400C65F94 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		484EC36D1C2E71FA00C65F94 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC36C1C2E71FA00C65F94 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		484EC36F1C2E7E7000C65F94 /* AdColonyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484EC36E1C2E7E7000C65F94 /* AdColonyService.swift */; };
+		484EC3761C2E8B8B00C65F94 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3751C2E8B8B00C65F94 /* AdColony.framework */; };
 		486506581BE2477B008555AD /* LvlService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486506571BE2477B008555AD /* LvlService.swift */; };
 		4865065A1BE2A492008555AD /* ExpGainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486506591BE2A492008555AD /* ExpGainView.swift */; };
 		487D771B1BA0749800AF333C /* RoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487D771A1BA0749800AF333C /* RoundedLabel.swift */; };
@@ -130,6 +147,23 @@
 		4842C0101C1F1022008153F0 /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		4842C0121C1F11B2008153F0 /* IAPProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPProducts.swift; sourceTree = "<group>"; };
 		4842C0141C1F1416008153F0 /* InAppService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppService.swift; sourceTree = "<group>"; };
+		484EC3501C2E714900C65F94 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		484EC3521C2E715000C65F94 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		484EC3541C2E715B00C65F94 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		484EC3561C2E716100C65F94 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		484EC3581C2E716800C65F94 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		484EC35A1C2E717400C65F94 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		484EC35C1C2E717C00C65F94 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		484EC35E1C2E718100C65F94 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		484EC3601C2E718600C65F94 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		484EC3621C2E718C00C65F94 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		484EC3641C2E719100C65F94 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		484EC3661C2E719500C65F94 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		484EC3681C2E719D00C65F94 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		484EC36A1C2E71A400C65F94 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		484EC36C1C2E71FA00C65F94 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		484EC36E1C2E7E7000C65F94 /* AdColonyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdColonyService.swift; sourceTree = "<group>"; };
+		484EC3751C2E8B8B00C65F94 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdColony.framework; path = Frameworks/AdColony.framework; sourceTree = "<group>"; };
 		486506571BE2477B008555AD /* LvlService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LvlService.swift; sourceTree = "<group>"; };
 		486506591BE2A492008555AD /* ExpGainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpGainView.swift; sourceTree = "<group>"; };
 		487D771A1BA0749800AF333C /* RoundedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedLabel.swift; sourceTree = "<group>"; };
@@ -209,6 +243,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				483676491C2048200092C703 /* StoreKit.framework in Frameworks */,
+				484EC36D1C2E71FA00C65F94 /* AdSupport.framework in Frameworks */,
+				484EC3511C2E714900C65F94 /* libz.1.2.5.tbd in Frameworks */,
+				484EC3531C2E715000C65F94 /* AudioToolbox.framework in Frameworks */,
+				484EC3551C2E715B00C65F94 /* AVFoundation.framework in Frameworks */,
+				484EC3571C2E716100C65F94 /* CoreGraphics.framework in Frameworks */,
+				484EC3761C2E8B8B00C65F94 /* AdColony.framework in Frameworks */,
+				484EC3591C2E716800C65F94 /* CoreMedia.framework in Frameworks */,
+				484EC35B1C2E717400C65F94 /* CoreTelephony.framework in Frameworks */,
+				484EC35D1C2E717C00C65F94 /* EventKit.framework in Frameworks */,
+				484EC35F1C2E718100C65F94 /* EventKitUI.framework in Frameworks */,
+				484EC3611C2E718600C65F94 /* MediaPlayer.framework in Frameworks */,
+				484EC3631C2E718C00C65F94 /* MessageUI.framework in Frameworks */,
+				484EC3651C2E719100C65F94 /* QuartzCore.framework in Frameworks */,
+				484EC3671C2E719500C65F94 /* Social.framework in Frameworks */,
+				484EC3691C2E719D00C65F94 /* SystemConfiguration.framework in Frameworks */,
+				484EC36B1C2E71A400C65F94 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +434,7 @@
 				48C661CB1BEF6C7B003AF4F5 /* MessageService.swift */,
 				48C661CD1BEF6D32003AF4F5 /* UserService.swift */,
 				4835D4AD1C22DCCB008ABB37 /* CipherService.swift */,
+				484EC36E1C2E7E7000C65F94 /* AdColonyService.swift */,
 			);
 			name = Logical;
 			sourceTree = "<group>";
@@ -489,6 +540,22 @@
 		49D7C70BCF12E2F6E166B7B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				484EC3751C2E8B8B00C65F94 /* AdColony.framework */,
+				484EC36C1C2E71FA00C65F94 /* AdSupport.framework */,
+				484EC36A1C2E71A400C65F94 /* WebKit.framework */,
+				484EC3681C2E719D00C65F94 /* SystemConfiguration.framework */,
+				484EC3661C2E719500C65F94 /* Social.framework */,
+				484EC3641C2E719100C65F94 /* QuartzCore.framework */,
+				484EC3621C2E718C00C65F94 /* MessageUI.framework */,
+				484EC3601C2E718600C65F94 /* MediaPlayer.framework */,
+				484EC35E1C2E718100C65F94 /* EventKitUI.framework */,
+				484EC35C1C2E717C00C65F94 /* EventKit.framework */,
+				484EC35A1C2E717400C65F94 /* CoreTelephony.framework */,
+				484EC3581C2E716800C65F94 /* CoreMedia.framework */,
+				484EC3561C2E716100C65F94 /* CoreGraphics.framework */,
+				484EC3541C2E715B00C65F94 /* AVFoundation.framework */,
+				484EC3521C2E715000C65F94 /* AudioToolbox.framework */,
+				484EC3501C2E714900C65F94 /* libz.1.2.5.tbd */,
 				483676481C2048200092C703 /* StoreKit.framework */,
 			);
 			name = Frameworks;
@@ -658,6 +725,7 @@
 				489666BA1B9B650400F769D1 /* FriendCell.swift in Sources */,
 				482EBED11C296A6D00C88EC9 /* HintsShopViewController.swift in Sources */,
 				48C661CC1BEF6C7B003AF4F5 /* MessageService.swift in Sources */,
+				484EC36F1C2E7E7000C65F94 /* AdColonyService.swift in Sources */,
 				48E9A9AC1BEB7FC900508847 /* TimeService.swift in Sources */,
 				48411F4A1BF629B4009B86FD /* EmailEditViewController.swift in Sources */,
 				488DF80D1BB2B1560085E31A /* SwiftyJSON.swift in Sources */,
@@ -822,6 +890,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Artem Chuzhmarov (LX6JEDUDGP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Artem Chuzhmarov (LX6JEDUDGP)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = WTFChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -841,6 +914,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Artem Chuzhmarov (LX6JEDUDGP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Artem Chuzhmarov (LX6JEDUDGP)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = WTFChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -252,6 +252,25 @@ class UserNetworkService: NSObject {
             }
         }
     }
+    
+    func addFreeAdHint(completion:(userInfo: User?, error: NSError?) -> Void) {
+        let url = "user/add_hint"
+        
+        networkService.post(nil, relativeUrl: url) { (json, error) -> Void in
+            if let requestError = error {
+                completion(userInfo: nil, error: requestError)
+            } else {
+                if let userJson = json {
+                    do {
+                        let user = try User.parseFromJson(userJson)
+                        completion(userInfo: user, error: nil)
+                    } catch let error as NSError {
+                        completion(userInfo: nil, error: error)
+                    }
+                }
+            }
+        }
+    }
 
     private func authorize(login: String, password: String, completion:(error: NSError?) -> Void) {
         var userData: [String: NSString]

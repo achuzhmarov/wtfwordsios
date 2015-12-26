@@ -276,4 +276,23 @@ class UserService: NSObject {
             completion(error: error)
         }
     }
+    
+    func addFreeAdHint() {
+        userNetworkService.addFreeAdHint { (userInfo, error) -> Void in
+            if (error != nil) {
+                print(error)
+            } else {
+                if (userInfo != nil) {
+                    userService.updateUserInfo(userInfo)
+                }
+            }
+        }
+    }
+    
+    let MAX_DAILY_FREE_HINTS_FROM_AD = 3
+    
+    func canAddFreeAdHint() -> Bool {
+        if (!isLoggedIn()) { return false }
+        return currentUser!.freeHintsGained < MAX_DAILY_FREE_HINTS_FROM_AD
+    }
 }
