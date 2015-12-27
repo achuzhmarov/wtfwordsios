@@ -41,16 +41,25 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     
     let SECONDS_PER_WORD = 20
     let HARD_SECONDS_PER_WORD = 30
-    let SUGGESTIONS_SINGLE_MODE = 3
+    let SUGGESTIONS_SINGLE_MODE = 5
     
     var initialViewFrame: CGRect!
     var expGainView = ExpGainView()
     
+    var isInLandscapeMode = false
+    var initialTopViewHeightConstraintConstant = CGFloat(0)
+    
+    let viewTitle = "Decipher"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initialTopViewHeightConstraintConstant = topViewHeightContraint.constant
+        
         let nav = self.navigationController?.navigationBar
         nav?.translucent = false
+        
+        self.title = viewTitle
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
@@ -103,6 +112,16 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         super.viewWillAppear(animated)
         
         isPaused = false
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if (UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
+            isInLandscapeMode = true
+        } else if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
+            isInLandscapeMode = false
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -252,7 +271,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             self.bottomViewConstraint.constant = keyboardFrame.size.height
         })
     }
-    
+
     func keyboardWillHide(notification: NSNotification) {
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.bottomViewConstraint.constant = 0
@@ -260,8 +279,48 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     func rotated(notification: NSNotification) {
-        //self.wordsTableView.updateMaxWidth()
-        //self.wordsTableView.setNewMessage(message, useCipherText: useCipherText, selfAuthor: selfAuthor)
+        if (UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
+            
+            if (!isInLandscapeMode) {
+                redrawWordsView()
+                
+                if (!isOvered) {
+                    hideTopTimer()
+                }
+            }
+            
+            isInLandscapeMode = true
+            
+        } else if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
+            
+            if (isInLandscapeMode) {
+                redrawWordsView()
+                
+                if (!isOvered) {
+                    showTopTimer()
+                }
+            }
+            
+            isInLandscapeMode = false
+            
+        }
+    }
+    
+    private func redrawWordsView() {
+        self.wordsTableView.updateMaxWidth()
+        self.wordsTableView.setNewMessage(message, useCipherText: useCipherText, selfAuthor: selfAuthor)
+    }
+    
+    private func hideTopTimer() {
+        topViewHeightContraint.constant = 0
+        topTimerLabel.text = ""
+        self.title = timer.getTimeString()
+    }
+    
+    private func showTopTimer() {
+        topViewHeightContraint.constant = initialTopViewHeightConstraintConstant
+        topTimerLabel.text = timer.getTimeString()
+        self.title = viewTitle
     }
     
     func dismissKeyboard(){
@@ -296,7 +355,11 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             timer.seconds = message!.timerSecs
         }
         
-        topTimerLabel.text = timer.getTimeString()
+        if (isInLandscapeMode) {
+            hideTopTimer()
+        } else {
+            showTopTimer()
+        }
         
         NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
             selector: "tick", userInfo: nil, repeats: false)
@@ -311,6 +374,9 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         guessTextField.becomeFirstResponder()
 
+        let giveUpButton = UIBarButtonItem(title: "Give Up", style: .Plain, target: self, action: "giveUpButtonPressed:")
+        navigationItem.rightBarButtonItem = giveUpButton
+        
         isStarted = true
     }
     
@@ -336,12 +402,14 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         }
         
         self.navigationItem.setHidesBackButton(false, animated:true)
+        self.title = viewTitle
         
         isOvered = true
         
         if (message.countSuccess() > 0 && !isSingleMode) {
             timer.seconds = 0
             topTimerLabel.text = ""
+            topViewHeightContraint.constant = initialTopViewHeightConstraintConstant
             self.expGainView.myInit(self.topView)
         } else {
             self.hideTopLayer()
@@ -363,6 +431,8 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             
             //userService.sendUsedHints()
         }
+        
+        navigationItem.rightBarButtonItem = nil
         
         messageService.updateMessageInTalk(message)
     }
@@ -403,7 +473,12 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         }
         
         timer.tick()
-        topTimerLabel.text = timer.getTimeString()
+        
+        if (isInLandscapeMode) {
+            self.title = timer.getTimeString()
+        } else {
+            topTimerLabel.text = timer.getTimeString()
+        }
         
         if (timer.isFinished()) {
             dispatch_async(dispatch_get_main_queue(), {

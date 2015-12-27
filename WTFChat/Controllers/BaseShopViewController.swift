@@ -121,7 +121,20 @@ class BaseShopViewController: UITableViewController {
     
     func showAdAlert() {
         if userService.canAddFreeAdHint() && adColonyService.hasAd() {
-            WTFTwoButtonsAlert.show("View ad",
+            adColonyService.showAd({ () -> Void in
+                userService.addFreeAdHint()
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.updateTable()
+                    
+                    WTFOneButtonAlert.show("Free hint",
+                        message: "You have just received a free hint",
+                        firstButtonTitle: "Ok",
+                        viewPresenter: self)
+                })
+            })
+            
+            /*WTFTwoButtonsAlert.show("View ad",
                 message: "Are you sure you want to view ad for a free hint?",
                 firstButtonTitle: "Ok",
                 secondButtonTitle: "Cancel",
@@ -138,7 +151,7 @@ class BaseShopViewController: UITableViewController {
                                 viewPresenter: self)
                         })
                     })
-                }
+                }*/
         } else {
             WTFOneButtonAlert.show("No more ads",
                 message: "Try again tomorrow",

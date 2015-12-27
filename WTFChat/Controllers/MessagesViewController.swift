@@ -25,6 +25,8 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
     
     var defaultMessageTextHeightConstraint: CGFloat!
     
+    var isKeyboardShown = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -232,6 +234,8 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         
         self.bottomViewConstraint.constant = keyboardHeight
         self.view.layoutIfNeeded()
+        
+        self.isKeyboardShown = true
     }
     
     func keyboardWillHide(notification: NSNotification) {
@@ -244,6 +248,10 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         
         self.bottomViewConstraint.constant = 0
         self.view.layoutIfNeeded()
+        
+        self.isKeyboardShown = false
+        
+        self.updateView()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -288,9 +296,18 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         } else {
             deleteRefreshControl()
         }
-        
-        self.messageTableView.updateTalk(self.talk)
-        talkService.talkViewed(self.talk.id)
+
+        if  (!self.isKeyboardShown) {
+            //update GUI only if keyboard hidden
+            self.messageTableView.updateTalk(self.talk)
+            talkService.talkViewed(self.talk.id)
+            
+            if (earlierLoaded > 0) {
+                self.messageTableView.scrollTableToEarlier(earlierLoaded - 1)
+            } else {
+                self.messageTableView.scrollTableToBottom()
+            }
+        }
         
         if (withSend) {
             dismissKeyboard()
@@ -298,11 +315,6 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
             sendButton.enabled = false
             messageText.scrollEnabled = false
             messageTextHeightConstraint.constant = defaultMessageTextHeightConstraint
-            self.messageTableView.scrollTableToBottom()
-        } else if (wasNew) {
-            self.messageTableView.scrollTableToBottom()
-        } else if (earlierLoaded > 0) {
-            self.messageTableView.scrollTableToEarlier(earlierLoaded - 1)
         }
     }
     
