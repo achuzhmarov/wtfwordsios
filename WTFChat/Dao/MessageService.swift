@@ -197,7 +197,7 @@ class MessageService: NSObject {
     
     private func updateOrCreateMessageInArray(talk: Talk, message: Message) -> Bool {
         for i in 0..<talk.messages.count {
-            let sameId = (message.id == talk.messages[i].id)
+            let sameId = (message.id != "" && (message.id == talk.messages[i].id))
             let wasSendedLocal = (message.extId != "" && (message.extId == talk.messages[i].extId))
             
             if  (sameId || wasSendedLocal) {

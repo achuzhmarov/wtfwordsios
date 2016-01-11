@@ -10,5 +10,19 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "specialized TalkService.setTalksByNewUser(User) -&gt; ():TalkService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "singleModeTalk">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CoreMessage.getMessage() -&gt; Message?:CoreMessage.swift">
+      </ContextState>
+      <ContextState
+         contextName = "static CoreMessage.getAll() -&gt; [Message] [inlined]:CoreMessage.swift">
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

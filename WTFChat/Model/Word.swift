@@ -54,6 +54,14 @@ class Word : NSObject {
         self.cipheredText = cipheredText
     }
     
+    init(text: String, additional: String, wordType: WordType, cipheredText: String, wasCloseTry: Bool) {
+        self.text = text
+        self.additional = additional
+        self.wordType = wordType
+        self.cipheredText = cipheredText
+        self.wasCloseTry = wasCloseTry
+    }
+    
     func getClearText() -> String {
         return self.text + self.additional
     }

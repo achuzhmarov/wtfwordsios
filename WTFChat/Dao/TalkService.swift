@@ -34,22 +34,18 @@ class TalkService: NSObject {
     }
     
     func clearTalks() {
-        self.talks = [Talk]()
+        talks = [Talk]()
         iosService.updatePushBadge(talks)
         updateTimer?.invalidate()
         messageService.clear()
+        
+        let singleModeTalk = createSingleModeTalk("")
+        talks.append(singleModeTalk)
     }
     
     func setTalksByNewUser(user: User) {
         self.talks = user.talks
-        
-        //add singleModeTalk
-        let singleModeTalk = Talk(id: "0")
-        singleModeTalk.isSingleMode = true
-        let singleModeUser = User(login: "Pass and Play", suggestions: 0)
-        singleModeTalk.users.append(singleModeUser.login)
-        singleModeTalk.users.append(user.login)
-        
+        let singleModeTalk = createSingleModeTalk(user.login)
         talks.append(singleModeTalk)
         
         iosService.updatePushBadge(talks)
@@ -65,6 +61,23 @@ class TalkService: NSObject {
         messageService.startUpdateTimer()
         
         fireUpdateTalksEvent()
+    }
+    
+    private func createSingleModeTalk(login: String) -> Talk {
+        //add singleModeTalk
+        let singleModeTalk = Talk(id: "0")
+        singleModeTalk.isSingleMode = true
+        let singleModeUser = User(login: "Pass and Play", suggestions: 0)
+        singleModeTalk.users.append(singleModeUser.login)
+        singleModeTalk.users.append(login)
+        
+        //load local messages for singleModeTalk
+        singleModeTalk.messages = CoreMessage.getAll()
+        if (singleModeTalk.messages.count > 0) {
+            singleModeTalk.lastMessage = singleModeTalk.messages.last
+        }
+        
+        return singleModeTalk
     }
     
     func getNewUnreadTalks() {
@@ -131,6 +144,17 @@ class TalkService: NSObject {
             }
         }
         
+        return nil
+    }
+    
+    func getSingleModeTalk() -> Talk? {
+        for talk in talks {
+            if (talk.id == "0") {
+                return talk
+            }
+        }
+        
+        //should never happen
         return nil
     }
     

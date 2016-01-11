@@ -169,9 +169,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         if (message!.deciphered) {
             gameOver()
-        }
-        
-        if (!isSingleMode) {
+        } else {
             sendMessageUpdate()
         }
     }
@@ -258,7 +256,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         if (message!.deciphered) {
             gameOver()
-        } else if (!isSingleMode) {
+        } else {
             sendMessageUpdate()
         }
     }
@@ -343,7 +341,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     func start() {
         self.navigationItem.setHidesBackButton(true, animated:true)
 
-        if (message!.timerSecs == 0 && message!.countSuccess() == 0 || isSingleMode) {
+        if (message!.timerSecs == 0 && message!.countSuccess() == 0) {
             let (_, mode) = CipherFactory.getCategoryAndMode(message!.cipherType)
             
             if (mode == CipherMode.Hard) {
@@ -415,7 +413,9 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             self.hideTopLayer()
         }
         
-        if (!isSingleMode) {
+        if (isSingleMode) {
+            CoreMessage.updateMessage(message)
+        } else {
             messageService.decipherMessage(message) { (message, error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     if let requestError = error {
@@ -428,8 +428,6 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
                     }
                 })
             }
-            
-            //userService.sendUsedHints()
         }
         
         navigationItem.rightBarButtonItem = nil
@@ -503,12 +501,21 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     private func sendMessageUpdate() {
+        if (isOvered) {
+            //do nothing
+            return
+        }
+        
         //update timer
         message.timerSecs = timer.seconds
         
-        messageService.decipherMessage(message) { (message, error) -> Void in
-            if let requestError = error {
-                print(requestError)
+        if (isSingleMode) {
+            CoreMessage.updateMessage(message)
+        } else {
+            messageService.decipherMessage(message) { (message, error) -> Void in
+                if let requestError = error {
+                    print(requestError)
+                }
             }
         }
     }

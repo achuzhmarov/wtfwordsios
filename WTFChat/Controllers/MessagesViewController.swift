@@ -131,6 +131,8 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
             if (!talk.isSingleMode) {
                 messageService.createMessage(newMessage)
             } else {
+                CoreMessage.create(newMessage)
+
                 self.updateView(true)
             }
         }
