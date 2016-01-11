@@ -199,11 +199,9 @@
                         <outlet property="passwordField" destination="wHN-rg-LFO" id="eLn-hF-k5a"/>
                         <outlet property="signUpButton" destination="M6t-0Q-crZ" id="Ckv-TH-3CK"/>
                         <outlet property="usernameField" destination="vAS-N1-yIw" id="VnK-tY-gzO"/>
-                        <segue destination="q4E-ts-lh6" kind="unwind" identifier="register" unwindAction="register:" id="WP8-mV-XSX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XUc-ys-nBx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="q4E-ts-lh6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1655" y="15"/>
         </scene>

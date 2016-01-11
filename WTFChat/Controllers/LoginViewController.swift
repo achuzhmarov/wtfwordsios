@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: BaseLoginViewController, UITextFieldDelegate {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -57,28 +57,5 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         loginButtonPressed(loginButton)
         return true
-    }
-    
-    func login(login: String, password: String) {
-        userService.login(login, password: password) { user, error -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
-                if let requestError = error {
-                    if (requestError.code == HTTP_UNAUTHORIZED) {
-                        WTFOneButtonAlert.show("Error", message: "Invalid credentials", firstButtonTitle: "Ok", viewPresenter: self)
-                    } else {
-                        WTFOneButtonAlert.show("Error", message: connectionErrorDescription(), firstButtonTitle: "Ok", viewPresenter: self)
-                    }
-                } else {
-                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                    appDelegate.showMainScreen()
-                }
-            })
-        }
-    }
-    
-    @IBAction func register(segue:UIStoryboardSegue) {
-        if let registrationController = segue.sourceViewController as? RegistrationViewController {
-            login(registrationController.username, password: registrationController.password)
-        }
     }
 }

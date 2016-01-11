@@ -39,13 +39,13 @@ class TalkService: NSObject {
         updateTimer?.invalidate()
         messageService.clear()
         
-        let singleModeTalk = createSingleModeTalk("")
+        let singleModeTalk = createSingleModeTalk("Local Mode", userLogin: "")
         talks.append(singleModeTalk)
     }
     
     func setTalksByNewUser(user: User) {
         self.talks = user.talks
-        let singleModeTalk = createSingleModeTalk(user.login)
+        let singleModeTalk = createSingleModeTalk("Pass and Play", userLogin: user.login)
         talks.append(singleModeTalk)
         
         iosService.updatePushBadge(talks)
@@ -63,13 +63,13 @@ class TalkService: NSObject {
         fireUpdateTalksEvent()
     }
     
-    private func createSingleModeTalk(login: String) -> Talk {
+    private func createSingleModeTalk(titleLogin: String, userLogin: String) -> Talk {
         //add singleModeTalk
         let singleModeTalk = Talk(id: "0")
         singleModeTalk.isSingleMode = true
-        let singleModeUser = User(login: "Pass and Play", suggestions: 0)
+        let singleModeUser = User(login: titleLogin, suggestions: 0)
         singleModeTalk.users.append(singleModeUser.login)
-        singleModeTalk.users.append(login)
+        singleModeTalk.users.append(userLogin)
         
         //load local messages for singleModeTalk
         singleModeTalk.messages = CoreMessage.getAll()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegistrationViewController: UIViewController, UITextFieldDelegate {
+class RegistrationViewController: BaseLoginViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -82,7 +82,7 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
                             viewPresenter: self)
                     }
                 } else {
-                    self.performSegueWithIdentifier("register", sender: self)
+                    self.login(self.username, password: self.password)
                 }
             })
         }

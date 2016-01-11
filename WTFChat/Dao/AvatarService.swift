@@ -28,7 +28,7 @@ class AvatarService {
         
         let nameLength = name.characters.count
         
-        let initials : String? = name[0...min(2, nameLength)].capitalizedString
+        let initials : String? = name[0...min(2, nameLength - 1)].capitalizedString
         
         let jsqImage = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(initials, backgroundColor: color, textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(CGFloat(13)), diameter: diameter)
         

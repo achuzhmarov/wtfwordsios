@@ -58,6 +58,7 @@
 		4865065A1BE2A492008555AD /* ExpGainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486506591BE2A492008555AD /* ExpGainView.swift */; };
 		487D771B1BA0749800AF333C /* RoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487D771A1BA0749800AF333C /* RoundedLabel.swift */; };
 		487D771D1BA0878400AF333C /* WordLabelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487D771C1BA0878400AF333C /* WordLabelContainer.swift */; };
+		488854081C4421F80056F19B /* BaseLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488854071C4421F80056F19B /* BaseLoginViewController.swift */; };
 		488DF80D1BB2B1560085E31A /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488DF80C1BB2B1560085E31A /* SwiftyJSON.swift */; };
 		488DF8101BB2B8F30085E31A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488DF80F1BB2B8F30085E31A /* NetworkService.swift */; };
 		489666981B9B640400F769D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489666971B9B640400F769D1 /* AppDelegate.swift */; };
@@ -180,6 +181,7 @@
 		486506591BE2A492008555AD /* ExpGainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpGainView.swift; sourceTree = "<group>"; };
 		487D771A1BA0749800AF333C /* RoundedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedLabel.swift; sourceTree = "<group>"; };
 		487D771C1BA0878400AF333C /* WordLabelContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordLabelContainer.swift; sourceTree = "<group>"; };
+		488854071C4421F80056F19B /* BaseLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseLoginViewController.swift; sourceTree = "<group>"; };
 		488DF80C1BB2B1560085E31A /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		488DF80F1BB2B8F30085E31A /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkService.swift; path = ../NetworkService.swift; sourceTree = "<group>"; };
 		489666921B9B640400F769D1 /* WTFChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WTFChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -470,6 +472,7 @@
 			children = (
 				48E9D61E1BB3F5FB00BA0F2A /* LoginViewController.swift */,
 				48F1373B1BB5C2CD00E5FFA7 /* RegistrationViewController.swift */,
+				488854071C4421F80056F19B /* BaseLoginViewController.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -732,6 +735,7 @@
 				487D771B1BA0749800AF333C /* RoundedLabel.swift in Sources */,
 				4828CFA81BF9E1C4005DCCAB /* RatingViewController.swift in Sources */,
 				482C241E1BA433F800288BB1 /* RightCutterCipher.swift in Sources */,
+				488854081C4421F80056F19B /* BaseLoginViewController.swift in Sources */,
 				489666DA1B9B656A00F769D1 /* Talk.swift in Sources */,
 				4828CFAA1BF9E1D2005DCCAB /* RatingCell.swift in Sources */,
 				4836764B1C207B860092C703 /* InAppNetworkService.swift in Sources */,
