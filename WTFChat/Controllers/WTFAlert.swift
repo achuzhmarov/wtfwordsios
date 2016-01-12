@@ -31,12 +31,12 @@ class WTFOneButtonAlert: NSObject, UIAlertViewDelegate  {
 }
 
 class WTFTwoButtonsAlert: NSObject, UIAlertViewDelegate {
-    class func show(title: String, message: String, firstButtonTitle: String, secondButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:() -> Void) {
+    class func show(title: String, message: String, firstButtonTitle: String, secondButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:(() -> Void)?) {
         
         return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: secondButtonTitle, viewPresenter: viewPresenter, alertButtonAction: alertButtonAction, cancelButtonAction: nil)
     }
     
-    class func show(title: String, message: String, firstButtonTitle: String, secondButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:() -> Void, cancelButtonAction:(() -> Void)?) {
+    class func show(title: String, message: String, firstButtonTitle: String, secondButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:(() -> Void)?, cancelButtonAction:(() -> Void)?) {
         
         if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
@@ -44,7 +44,7 @@ class WTFTwoButtonsAlert: NSObject, UIAlertViewDelegate {
                 preferredStyle: UIAlertControllerStyle.Alert)
             
             alert.addAction(UIAlertAction(title: firstButtonTitle, style: .Default, handler: { (action: UIAlertAction) in
-                alertButtonAction()
+                alertButtonAction?()
             }))
             
             alert.addAction(UIAlertAction(title: secondButtonTitle, style: .Default, handler: { (action: UIAlertAction) in
@@ -69,7 +69,7 @@ class AlertWithDelegate: UIAlertView, UIAlertViewDelegate {
     var alertButtonAction: (() -> Void)?
     var cancelButtonAction: (() -> Void)?
     
-    func setAlertFunction(alertButtonAction: () -> Void) {
+    func setAlertFunction(alertButtonAction: (() -> Void)?) {
         self.alertButtonAction = alertButtonAction
         self.delegate = self
     }

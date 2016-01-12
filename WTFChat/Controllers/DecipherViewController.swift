@@ -411,22 +411,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             self.hideTopLayer()
         }
         
-        if (isSingleMode) {
-            CoreMessage.updateMessage(message)
-        } else {
-            messageService.decipherMessage(message) { (message, error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if let requestError = error {
-                        //TODO - show error to user
-                        print(requestError)
-                    } else {
-                        if (message!.exp > 0) {
-                            self.expGainView.runProgress(message!.exp)
-                        }
-                    }
-                })
-            }
-        }
+        sendMessageDecipher()
         
         navigationItem.rightBarButtonItem = nil
         
@@ -498,7 +483,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         }
     }
     
-    private func sendMessageUpdate() {
+    func sendMessageUpdate() {
         if (isOvered) {
             //do nothing
             return
@@ -516,6 +501,26 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
                 }
             }
         }
+    }
+    
+    func sendMessageDecipher() {
+        if (isSingleMode) {
+            CoreMessage.updateMessage(message)
+        } else {
+            messageService.decipherMessage(message) { (message, error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    if let requestError = error {
+                        //TODO - show error to user
+                        print(requestError)
+                    } else {
+                        if (message!.exp > 0) {
+                            self.expGainView.runProgress(message!.exp)
+                        }
+                    }
+                })
+            }
+        }
+
     }
     
     @IBAction func hintsBought(segue:UIStoryboardSegue) {

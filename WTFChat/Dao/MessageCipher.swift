@@ -63,7 +63,7 @@ class MessageCipher {
         for uniChar in guessWord.unicodeScalars {
             if (isLastLetter) {
                 if (isLetter(uniChar)) {
-                    newWordText = "\(newWordText)\(String(uniChar))"
+                    newWordText += String(uniChar)
                 } else {
                     isLastLetter = false
                     
@@ -206,11 +206,16 @@ class MessageCipher {
         for uniChar in textWord.unicodeScalars {
             if (isLastLetter) {
                 if (isLetter(uniChar)) {
-                    newWordText = "\(newWordText)\(String(uniChar))"
+                    newWordText += String(uniChar)
                 } else {
                     isLastLetter = false
                     
-                    newWordAdditional = "\(newWordText)\(String(uniChar))"
+                    /*words.append(Word(text: newWordText, additional: newWordAdditional, wordType: getWordType(newWordText)))
+                    
+                    newWordText = ""
+                    newWordAdditional = String(uniChar)*/
+                    
+                    newWordAdditional += String(uniChar)
                 }
             } else {
                 if (isLetter(uniChar)) {
@@ -221,7 +226,7 @@ class MessageCipher {
                     newWordText = String(uniChar)
                     newWordAdditional = ""
                 } else {
-                    newWordAdditional = "\(newWordAdditional)\(String(uniChar))"
+                    newWordAdditional += String(uniChar)
                 }
             }
         }

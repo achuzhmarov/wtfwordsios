@@ -540,7 +540,7 @@
         <!--Decipher-->
         <scene sceneID="7nX-dJ-OjC">
             <objects>
-                <viewController id="Ovm-pP-y6h" customClass="DecipherViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Ovm-pP-y6h" customClass="TutorialDecipherViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Jzl-J8-28b"/>
                         <viewControllerLayoutGuide type="bottom" id="4ZM-6u-XHc"/>

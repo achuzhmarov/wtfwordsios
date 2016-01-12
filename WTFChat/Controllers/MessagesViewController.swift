@@ -289,7 +289,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         dismissKeyboard()
     }
     
-    private func updateView(withSend: Bool = false, earlierLoaded: Int = 0, wasNew: Bool = false) {
+    func updateView(withSend: Bool = false, earlierLoaded: Int = 0, wasNew: Bool = false) {
         //update talk
         talk = talkService.getByTalkId(talk.id)
         
