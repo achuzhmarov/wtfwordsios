@@ -24,6 +24,8 @@ class LvlService {
     }
     
     private func getExpByLvl(lvl: Int) -> Int {
-        return ((2 ^^ (lvl / 5)) - 1) * 5000 + (2 ^^ (lvl / 5 + 1)) * (lvl % 5) * 500
+        let leftMultiplier = intPow(2, power: lvl / 5) - 1
+        let rightMultiplier = intPow(2, power: lvl / 5 + 1)
+        return leftMultiplier * 5000 + rightMultiplier * (lvl % 5) * 500
     }
 }

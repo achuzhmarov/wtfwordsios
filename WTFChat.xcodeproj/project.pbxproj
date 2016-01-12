@@ -57,6 +57,13 @@
 		484EC3761C2E8B8B00C65F94 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3751C2E8B8B00C65F94 /* AdColony.framework */; };
 		486506581BE2477B008555AD /* LvlService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486506571BE2477B008555AD /* LvlService.swift */; };
 		4865065A1BE2A492008555AD /* ExpGainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486506591BE2A492008555AD /* ExpGainView.swift */; };
+		486B383F1C453AB700B14013 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B383E1C453AB700B14013 /* HelperFunctions.swift */; };
+		486B38421C453C9900B14013 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B38411C453C9900B14013 /* String+Extension.swift */; };
+		486B38441C453CE800B14013 /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B38431C453CE800B14013 /* NSDate+Extension.swift */; };
+		486B38461C453D5700B14013 /* NSError+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B38451C453D5700B14013 /* NSError+Extension.swift */; };
+		486B38481C453D8700B14013 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B38471C453D8700B14013 /* Array+Extension.swift */; };
+		486B384A1C453DA300B14013 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B38491C453DA300B14013 /* UIColor+Extension.swift */; };
+		486B384C1C453DBF00B14013 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B384B1C453DBF00B14013 /* Weak.swift */; };
 		487D771B1BA0749800AF333C /* RoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487D771A1BA0749800AF333C /* RoundedLabel.swift */; };
 		487D771D1BA0878400AF333C /* WordLabelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487D771C1BA0878400AF333C /* WordLabelContainer.swift */; };
 		488854081C4421F80056F19B /* BaseLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488854071C4421F80056F19B /* BaseLoginViewController.swift */; };
@@ -76,7 +83,6 @@
 		489666DA1B9B656A00F769D1 /* Talk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489666D51B9B656A00F769D1 /* Talk.swift */; };
 		489666DB1B9B656A00F769D1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489666D61B9B656A00F769D1 /* User.swift */; };
 		489666DC1B9B656A00F769D1 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489666D71B9B656A00F769D1 /* Word.swift */; };
-		48A2F9A81B9DF42C009E5434 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A2F9A71B9DF42C009E5434 /* Extensions.swift */; };
 		48C661C31BECCE1D003AF4F5 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C661C21BECCE1D003AF4F5 /* MessagesViewController.swift */; };
 		48C661C51BECCF38003AF4F5 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C661C41BECCF38003AF4F5 /* MessageCell.swift */; };
 		48C661C91BECE7FB003AF4F5 /* MessageTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C661C81BECE7FB003AF4F5 /* MessageTableView.swift */; };
@@ -181,6 +187,13 @@
 		484EC3751C2E8B8B00C65F94 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdColony.framework; path = Frameworks/AdColony.framework; sourceTree = "<group>"; };
 		486506571BE2477B008555AD /* LvlService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LvlService.swift; sourceTree = "<group>"; };
 		486506591BE2A492008555AD /* ExpGainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpGainView.swift; sourceTree = "<group>"; };
+		486B383E1C453AB700B14013 /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
+		486B38411C453C9900B14013 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		486B38431C453CE800B14013 /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
+		486B38451C453D5700B14013 /* NSError+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Extension.swift"; sourceTree = "<group>"; };
+		486B38471C453D8700B14013 /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		486B38491C453DA300B14013 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		486B384B1C453DBF00B14013 /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		487D771A1BA0749800AF333C /* RoundedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedLabel.swift; sourceTree = "<group>"; };
 		487D771C1BA0878400AF333C /* WordLabelContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordLabelContainer.swift; sourceTree = "<group>"; };
 		488854071C4421F80056F19B /* BaseLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseLoginViewController.swift; sourceTree = "<group>"; };
@@ -204,7 +217,6 @@
 		489666D51B9B656A00F769D1 /* Talk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Talk.swift; sourceTree = "<group>"; };
 		489666D61B9B656A00F769D1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		489666D71B9B656A00F769D1 /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
-		48A2F9A71B9DF42C009E5434 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		48C661C21BECCE1D003AF4F5 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		48C661C41BECCF38003AF4F5 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		48C661C81BECE7FB003AF4F5 /* MessageTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableView.swift; sourceTree = "<group>"; };
@@ -341,6 +353,28 @@
 			name = Shop;
 			sourceTree = "<group>";
 		};
+		486B383D1C453A7F00B14013 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				486B38411C453C9900B14013 /* String+Extension.swift */,
+				486B38431C453CE800B14013 /* NSDate+Extension.swift */,
+				486B38451C453D5700B14013 /* NSError+Extension.swift */,
+				486B38471C453D8700B14013 /* Array+Extension.swift */,
+				486B38491C453DA300B14013 /* UIColor+Extension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		486B38401C453ADF00B14013 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				486B383E1C453AB700B14013 /* HelperFunctions.swift */,
+				48EEB6251BA2F368007C5B5F /* AudioHelper.swift */,
+				486B384B1C453DBF00B14013 /* Weak.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		488DF80B1BB2B0FB0085E31A /* Lib */ = {
 			isa = PBXGroup;
 			children = (
@@ -380,13 +414,13 @@
 				489666D21B9B656A00F769D1 /* Model */,
 				489666BC1B9B651800F769D1 /* Service */,
 				489666B71B9B650400F769D1 /* Controller */,
+				486B383D1C453A7F00B14013 /* Extensions */,
+				486B38401C453ADF00B14013 /* Helpers */,
 				489666971B9B640400F769D1 /* AppDelegate.swift */,
 				4896669E1B9B640400F769D1 /* Images.xcassets */,
 				489666A01B9B640400F769D1 /* LaunchScreen.xib */,
 				489666951B9B640400F769D1 /* Supporting Files */,
 				48ECC8EE1B9DA0F900A15B47 /* WTFChat-Bridging-Header.h */,
-				48A2F9A71B9DF42C009E5434 /* Extensions.swift */,
-				48EEB6251BA2F368007C5B5F /* AudioHelper.swift */,
 				48F2F5461BA1DA71005CCAC8 /* StringDistanceCalculator.swift */,
 				48411F451BF61931009B86FD /* Login.storyboard */,
 				4896669B1B9B640400F769D1 /* Main.storyboard */,
@@ -727,6 +761,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48C661C91BECE7FB003AF4F5 /* MessageTableView.swift in Sources */,
+				486B38421C453C9900B14013 /* String+Extension.swift in Sources */,
 				4842C00D1C1F0965008153F0 /* ShopViewController.swift in Sources */,
 				48EE657F1BB6F2FE00A0DB07 /* AddFriendCell.swift in Sources */,
 				48EEB6261BA2F368007C5B5F /* AudioHelper.swift in Sources */,
@@ -734,6 +769,7 @@
 				4842C0131C1F11B2008153F0 /* IAPProducts.swift in Sources */,
 				48F48B8F1BF60A5300918C83 /* JSQMessagesTimestampFormatter.m in Sources */,
 				48F48B8A1BF609FB00918C83 /* JSQMessagesAvatarImageFactory.m in Sources */,
+				486B38461C453D5700B14013 /* NSError+Extension.swift in Sources */,
 				489666DC1B9B656A00F769D1 /* Word.swift in Sources */,
 				48F2F5471BA1DA71005CCAC8 /* StringDistanceCalculator.swift in Sources */,
 				482C24241BA43CE500288BB1 /* ShuffleCipher.swift in Sources */,
@@ -754,13 +790,16 @@
 				489666C51B9B651800F769D1 /* UserNetworkService.swift in Sources */,
 				48DBD96D1BD505AA00680ED3 /* DoubleCutterCipher.swift in Sources */,
 				48F2F5491BA1FF5A005CCAC8 /* Timer.swift in Sources */,
+				486B384A1C453DA300B14013 /* UIColor+Extension.swift in Sources */,
 				482E9ED21BC1825D00803CDE /* WTFAlert.swift in Sources */,
 				48115BB11C32E62400ACA2B4 /* CoreMessage+CoreDataProperties.swift in Sources */,
 				48115BB41C32E7B100ACA2B4 /* CoreDataService.swift in Sources */,
 				4835D4AE1C22DCCB008ABB37 /* CipherService.swift in Sources */,
+				486B384C1C453DBF00B14013 /* Weak.swift in Sources */,
 				48E4E3AD1BE0ED9600E45D65 /* FriendInfo.swift in Sources */,
 				48E9D61F1BB3F5FB00BA0F2A /* LoginViewController.swift in Sources */,
 				482EBECF1C29694C00C88EC9 /* BaseShopViewController.swift in Sources */,
+				486B38441C453CE800B14013 /* NSDate+Extension.swift in Sources */,
 				48EE657B1BB694E300A0DB07 /* KeychainWrapper.m in Sources */,
 				482C241A1BA433D500288BB1 /* CipherFactory.swift in Sources */,
 				4842C0111C1F1022008153F0 /* IAPHelper.swift in Sources */,
@@ -785,14 +824,15 @@
 				48D3A53E1BDF814800B2A1AD /* TalkService.swift in Sources */,
 				48C661C31BECCE1D003AF4F5 /* MessagesViewController.swift in Sources */,
 				48F2F5451BA1CAB2005CCAC8 /* WordsField.swift in Sources */,
-				48A2F9A81B9DF42C009E5434 /* Extensions.swift in Sources */,
 				48EE657D1BB6F1C300A0DB07 /* AddFriendViewController.swift in Sources */,
 				489666C31B9B651800F769D1 /* MessageNetworkService.swift in Sources */,
+				486B383F1C453AB700B14013 /* HelperFunctions.swift in Sources */,
 				48115BAF1C32E62400ACA2B4 /* CoreWord+CoreDataProperties.swift in Sources */,
 				4842C0151C1F1416008153F0 /* InAppService.swift in Sources */,
 				482AA4F71BC2E19100F101F8 /* LeftCutterCipher.swift in Sources */,
 				48411F4C1BF62F18009B86FD /* PasswordEditViewController.swift in Sources */,
 				48F1373C1BB5C2CD00E5FFA7 /* RegistrationViewController.swift in Sources */,
+				486B38481C453D8700B14013 /* Array+Extension.swift in Sources */,
 				486506581BE2477B008555AD /* LvlService.swift in Sources */,
 				4829B1801BBFE0C3009AC43F /* DecipherViewController.swift in Sources */,
 				48F44A621BC3F35900C1915F /* CipherPickerViewController.swift in Sources */,
