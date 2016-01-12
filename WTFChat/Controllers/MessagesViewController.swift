@@ -40,7 +40,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
             self.title = talk.getFriendLogin().capitalizedString
         } else {
             let friendInfo = userService.getFriendInfoByLogin(talk.getFriendLogin())
-            let title = friendInfo!.getDisplayName() + ", lvl " + String(friendInfo!.lvl)
+            let title = "\(friendInfo!.getDisplayName()), lvl \(String(friendInfo!.lvl))"
             configureTitleView(title, navigationItem: navigationItem)
         }
         

@@ -63,7 +63,7 @@ class MessageCipher {
         for uniChar in guessWord.unicodeScalars {
             if (isLastLetter) {
                 if (isLetter(uniChar)) {
-                    newWordText += String(uniChar)
+                    newWordText = "\(newWordText)\(String(uniChar))"
                 } else {
                     isLastLetter = false
                     
@@ -206,16 +206,11 @@ class MessageCipher {
         for uniChar in textWord.unicodeScalars {
             if (isLastLetter) {
                 if (isLetter(uniChar)) {
-                    newWordText += String(uniChar)
+                    newWordText = "\(newWordText)\(String(uniChar))"
                 } else {
                     isLastLetter = false
                     
-                    /*words.append(Word(text: newWordText, additional: newWordAdditional, wordType: getWordType(newWordText)))
-                    
-                    newWordText = ""
-                    newWordAdditional = String(uniChar)*/
-                    
-                    newWordAdditional += String(uniChar)
+                    newWordAdditional = "\(newWordText)\(String(uniChar))"
                 }
             } else {
                 if (isLetter(uniChar)) {
@@ -226,7 +221,7 @@ class MessageCipher {
                     newWordText = String(uniChar)
                     newWordAdditional = ""
                 } else {
-                    newWordAdditional += String(uniChar)
+                    newWordAdditional = "\(newWordAdditional)\(String(uniChar))"
                 }
             }
         }
@@ -278,9 +273,4 @@ class MessageCipher {
         
         return result
     }
-    
-    //let digits = NSCharacterSet.decimalDigitCharacterSet()
-    /*func isDigit(unicodeChar: UnicodeScalar) -> Bool {
-    return digits.longCharacterIsMember(unicodeChar.value)
-    }*/
 }

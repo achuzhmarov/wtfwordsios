@@ -84,7 +84,7 @@ class UserNetworkService: NSObject {
     }
     
     func sendUsedHints(suggestionsUsed: Int, completion:(error: NSError?) -> Void) {
-        let url = "user/use_suggestions/" + String(suggestionsUsed)
+        let url = "user/use_suggestions/\(String(suggestionsUsed))"
         networkService.post(nil, relativeUrl: url) { (json, error) -> Void in
             completion(error: error)
         }
@@ -94,7 +94,7 @@ class UserNetworkService: NSObject {
         var url = "user/friends"
         
         if (searchString != "") {
-            url += "/" + searchString.escapeForUrl()!
+            url = "\(url)/\(searchString.escapeForUrl()!)"
         }
         
         networkService.get(url) { (json, error) -> Void in
@@ -154,7 +154,7 @@ class UserNetworkService: NSObject {
     }
     
     func makeFriends(friendLogin: String, completion:(talk: Talk?, error: NSError?) -> Void) {
-        networkService.post(nil, relativeUrl:"user/friend/" + friendLogin.escapeForUrl()!) { (json, error) -> Void in
+        networkService.post(nil, relativeUrl:"user/friend/\(friendLogin.escapeForUrl()!)") { (json, error) -> Void in
             if let requestError = error {
                 completion(talk: nil, error: requestError)
             } else {

@@ -291,7 +291,7 @@
         <!--Messages-->
         <scene sceneID="ERU-5R-d4m">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="Xtw-QY-uXa" customClass="MessagesViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="Xtw-QY-uXa" customClass="TutorialMessagesViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qih-Ea-g6x"/>
                         <viewControllerLayoutGuide type="bottom" id="Hus-tx-8oR"/>

@@ -11,31 +11,24 @@ import Foundation
 class EasyDoubleCutterCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         if (word.getCharCount() == 2) {
-            return "..." + word.getLowerCase()[1] + "..." + word.additional
+            return "...\(word.getLowerCase()[1])...\(word.additional)"
         }
         
         let odd = ((word.getCharCount() % 2) == 1)
         let easyCiphered = DoubleCutterHelper.cutWord(word.getLowerCase(), odd: odd)
-            
-        //let cuttedEasyCiphered = DoubleCutterHelper.cutIfTooManyLetters(easyCiphered, odd: odd, maxChars: 6)
-            
-        return "..." + easyCiphered + "..." + word.additional
+
+        return "...\(easyCiphered)...\(word.additional)"
     }
 }
 
 class NormalDoubleCutterCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         if (word.getCharCount() == 2) {
-            return "..." + word.getLowerCase()[1] + "..." + word.additional
+            return "...\(word.getLowerCase()[1])...\(word.additional)"
         }
         
         let odd = ((word.getCharCount() % 2) == 1)
         let ciphered = DoubleCutterHelper.cutWord(word.getLowerCase(), odd: odd)
-        
-        /*let cipheredLength = ciphered.characters.count
-        if (cipheredLength > 1) {
-            ciphered = ciphered[1...cipheredLength-1]
-        }*/
 
         var maxChars: Int
         
@@ -49,14 +42,14 @@ class NormalDoubleCutterCipher: Cipher {
         
         let cuttedNormalCiphered = DoubleCutterHelper.cutIfTooManyLetters(ciphered, odd: odd, maxChars: maxChars)
         
-        return "..." + cuttedNormalCiphered + "..." + word.additional
+        return "...\(cuttedNormalCiphered)...\(word.additional)"
     }
 }
 
 class HardDoubleCutterCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         if (word.getCharCount() == 2) {
-            return "..." + word.getLowerCase()[1] + "..." + word.additional
+            return "...\(word.getLowerCase()[1])...\(word.additional)"
         }
         
         let odd = ((word.getCharCount() % 2) == 1)
@@ -65,7 +58,7 @@ class HardDoubleCutterCipher: Cipher {
         
         let cuttedHardCiphered = DoubleCutterHelper.cutIfTooManyLetters(hardCiphered, odd: odd, maxChars: 3)
         
-        return "..." + cuttedHardCiphered + "..." + word.additional
+        return "...\(cuttedHardCiphered)...\(word.additional)"
     }
 }
 

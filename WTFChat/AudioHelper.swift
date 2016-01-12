@@ -32,7 +32,7 @@ class AudioHelper {
             audioPlayer.play()
             
         } else {
-            print("audio file " + fileName + "." + ext + " is not found")
+            print("audio file \(fileName).\(ext) is not found")
         }
     }
 }

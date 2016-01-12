@@ -36,27 +36,10 @@ class MessageTableView: UITableView, UITableViewDataSource, UITableViewDelegate 
         return talk!.messages.count
     }
     
-    /*func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let message = talk.messages[indexPath.row]
-        
-        var height = 35.5
-        
-        if (needShowTime(indexPath.row, message: message)) {
-            height += 20
-        }
-        
-        return CGFloat(height)
-    }*/
-    
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let message = talk.messages[indexPath.row]
         
         var height = 35.5
-        /*let cellIdentifier = getCellIdentifier(indexPath.row, message: message)
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MessageCell
-        cell.updateMessage(message)
-        
-        var height = cell.messageText.bounds.height + 4.0*/
         
         if (needShowTime(indexPath.row, message: message)) {
             height += 20

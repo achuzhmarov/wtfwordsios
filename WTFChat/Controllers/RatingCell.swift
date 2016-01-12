@@ -38,7 +38,7 @@ class RatingCell: UITableViewCell {
         
         userLogin.text = user.login.capitalizedString
         userName.text = user.name.capitalizedString
-        userLvl.text = "lvl " + String(user.lvl)
+        userLvl.text = "lvl \(String(user.lvl))"
         
         if (user.exp == 0) {
             userNum.text = ""

@@ -105,7 +105,7 @@ class InAppService {
         let productPrice = inAppService.getProductPrice(productId)
         let productDescription = inAppService.getProductDescription(productId)
         
-        WTFTwoButtonsAlert.show("Buy " + productName! + " for " + productPrice!,
+        WTFTwoButtonsAlert.show("Buy \(productName!) for \(productPrice!)",
             message: productDescription!,
             firstButtonTitle: "Ok",
             secondButtonTitle: "Cancel",

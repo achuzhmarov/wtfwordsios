@@ -162,17 +162,17 @@ class Message : BaseEntity {
         
         for word in words {
             if (word.wordType == WordType.Delimiter) {
-                result += " "
+                result = "\(result) "
             } else if (word.wordType == WordType.LineBreak) {
-                result += "\n"
+                result = "\(result)\n"
             } else if (word.wordType == WordType.Ignore) {
                 if (word.text.characters.count > 0) {
-                    result += "???" + word.additional
+                    result = "\(result)???\(word.additional)"
                 } else {
-                    result += word.additional
+                    result = "\(result)\(word.additional)"
                 }
             } else {
-                result += "???" + word.additional
+                result = "\(result)???\(word.additional)"
             }
         }
         
@@ -183,7 +183,7 @@ class Message : BaseEntity {
         var result = ""
         
         for word in words! {
-            result += word.getClearText()
+            result = "\(result)\(word.getClearText())"
         }
             
         return result

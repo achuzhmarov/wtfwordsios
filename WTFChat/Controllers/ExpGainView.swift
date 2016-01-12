@@ -32,7 +32,7 @@ class ExpGainView: NSObject {
     func createLvlLabel(rootView: UIView, userLvl: Int) -> UILabel {
         //create gauge view
         let lvlLabel = UILabel()
-        lvlLabel.text = "LEVEL " + String(userLvl)
+        lvlLabel.text = "LEVEL \(String(userLvl))"
         lvlLabel.font = UIFont(name: lvlLabel.font.fontName, size: 14)
         lvlLabel.translatesAutoresizingMaskIntoConstraints = false
         lvlLabel.numberOfLines = 1
@@ -103,7 +103,7 @@ class ExpGainView: NSObject {
                 selector: "updateProgress", userInfo: nil, repeats: true)
         })
         
-        self.expLabel?.text = "+" + String(earnedExp) + "XP"
+        self.expLabel?.text = "+\(String(earnedExp))XP"
     }
     
     func updateProgress() {
@@ -128,7 +128,7 @@ class ExpGainView: NSObject {
                     
                     UIView.animateWithDuration(1,
                         animations: {
-                            self.lvlLabel?.text = "LEVEL " + userLvl
+                            self.lvlLabel?.text = "LEVEL \(userLvl)"
                         },
                         completion: nil
                     )

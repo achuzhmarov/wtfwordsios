@@ -17,6 +17,7 @@
 		4828CFAA1BF9E1D2005DCCAB /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4828CFA91BF9E1D2005DCCAB /* RatingCell.swift */; };
 		4829B1801BBFE0C3009AC43F /* DecipherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4829B17F1BBFE0C3009AC43F /* DecipherViewController.swift */; };
 		4829B1821BBFE2EB009AC43F /* WordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4829B1811BBFE2EB009AC43F /* WordsViewController.swift */; };
+		482A6A011C45285100B9F9CD /* TutorialMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482A6A001C45285100B9F9CD /* TutorialMessagesViewController.swift */; };
 		482AA4F51BC2C41500F101F8 /* SendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482AA4F41BC2C41500F101F8 /* SendMessageViewController.swift */; };
 		482AA4F71BC2E19100F101F8 /* LeftCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482AA4F61BC2E19100F101F8 /* LeftCutterCipher.swift */; };
 		482C241A1BA433D500288BB1 /* CipherFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482C24191BA433D500288BB1 /* CipherFactory.swift */; };
@@ -139,6 +140,7 @@
 		4828CFA91BF9E1D2005DCCAB /* RatingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
 		4829B17F1BBFE0C3009AC43F /* DecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecipherViewController.swift; sourceTree = "<group>"; };
 		4829B1811BBFE2EB009AC43F /* WordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsViewController.swift; sourceTree = "<group>"; };
+		482A6A001C45285100B9F9CD /* TutorialMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialMessagesViewController.swift; sourceTree = "<group>"; };
 		482AA4F41BC2C41500F101F8 /* SendMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMessageViewController.swift; sourceTree = "<group>"; };
 		482AA4F61BC2E19100F101F8 /* LeftCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftCutterCipher.swift; sourceTree = "<group>"; };
 		482C24191BA433D500288BB1 /* CipherFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherFactory.swift; sourceTree = "<group>"; };
@@ -308,6 +310,14 @@
 			name = Rating;
 			sourceTree = "<group>";
 		};
+		482A69FF1C45283200B9F9CD /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				482A6A001C45285100B9F9CD /* TutorialMessagesViewController.swift */,
+			);
+			name = Tutorial;
+			sourceTree = "<group>";
+		};
 		482C24181BA433C500288BB1 /* Cipher */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,8 +386,8 @@
 				489666951B9B640400F769D1 /* Supporting Files */,
 				48ECC8EE1B9DA0F900A15B47 /* WTFChat-Bridging-Header.h */,
 				48A2F9A71B9DF42C009E5434 /* Extensions.swift */,
-				48F2F5461BA1DA71005CCAC8 /* StringDistanceCalculator.swift */,
 				48EEB6251BA2F368007C5B5F /* AudioHelper.swift */,
+				48F2F5461BA1DA71005CCAC8 /* StringDistanceCalculator.swift */,
 				48411F451BF61931009B86FD /* Login.storyboard */,
 				4896669B1B9B640400F769D1 /* Main.storyboard */,
 			);
@@ -412,6 +422,7 @@
 		489666B71B9B650400F769D1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				482A69FF1C45283200B9F9CD /* Tutorial */,
 				48DCFC561BF39174004D4300 /* Login */,
 				48DCFC571BF391C6004D4300 /* Messages */,
 				4828CFA61BF9E12D005DCCAB /* Rating */,
@@ -731,6 +742,7 @@
 				489666D81B9B656A00F769D1 /* BaseEntity.swift in Sources */,
 				48D3A5401BDF81F900B2A1AD /* IosService.swift in Sources */,
 				48411F481BF626A5009B86FD /* NameEditViewController.swift in Sources */,
+				482A6A011C45285100B9F9CD /* TutorialMessagesViewController.swift in Sources */,
 				48115BB21C32E62400ACA2B4 /* CoreMessage.swift in Sources */,
 				487D771B1BA0749800AF333C /* RoundedLabel.swift in Sources */,
 				4828CFA81BF9E1C4005DCCAB /* RatingViewController.swift in Sources */,

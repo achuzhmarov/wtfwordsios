@@ -212,7 +212,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     func showSuggestionConfirm(word: Word) {
-        WTFTwoButtonsAlert.show("Use Hint: " + String(suggestions),
+        WTFTwoButtonsAlert.show("Use Hint: \(String(suggestions))",
             message: "Are you sure you want to use a hint?",
             firstButtonTitle: "Ok",
             secondButtonTitle: "Cancel",
@@ -247,8 +247,6 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             if (!isSingleMode) {
                 message.hintsUsed++
                 suggestions = userService.getUserSuggestions() - message.hintsUsed
-                
-                //userService.useSuggestion()
             }
         }
         

@@ -61,7 +61,7 @@ class PasswordEditViewController: UITableViewController, UITextFieldDelegate {
                     if (error!.code == HTTP_INCORRECT_PASSWORD) {
                         WTFOneButtonAlert.show("Error", message: "Wrong old password", firstButtonTitle: "Ok", viewPresenter: self)
                     } else {
-                        WTFOneButtonAlert.show("Error", message: "Can't update user info. " + connectionErrorDescription(), firstButtonTitle: "Ok", viewPresenter: self)
+                        WTFOneButtonAlert.show("Error", message: "Can't update user info. \(connectionErrorDescription())", firstButtonTitle: "Ok", viewPresenter: self)
                     }
                 } else {
                     self.navigationController?.popViewControllerAnimated(true)

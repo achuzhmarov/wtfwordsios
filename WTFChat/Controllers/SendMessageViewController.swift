@@ -8,8 +8,6 @@
 
 import UIKit
 
-let EXAMPLE_CIPHER_WORD = Word(text: "Welcome", additional: "!")
-
 class SendMessageViewController: UIViewController, CipherPickedComputer {
     @IBOutlet weak var messageWordsView: WordsViewController!
     
@@ -69,7 +67,7 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
             self.navigationItem.rightBarButtonItem = sendButton
         } else {
             if let cipherLvl = CipherFactory.getCipherLvl(cipherType) {
-                levelRequiredLabel.text = "Level " + String(cipherLvl) + " required"
+                levelRequiredLabel.text = "Level \(String(cipherLvl)) required"
             }
             
             levelRequiredLabel.hidden = false
@@ -124,7 +122,7 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
                     self.cipherPicked(self.cipherType)
                     
                     WTFOneButtonAlert.show("Error",
-                        message: productTitle + " purchase error",
+                        message: "\(productTitle) purchase error",
                         firstButtonTitle: "Ok",
                         viewPresenter: self)
                 })

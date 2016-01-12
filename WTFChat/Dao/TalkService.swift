@@ -45,7 +45,7 @@ class TalkService: NSObject {
     
     func setTalksByNewUser(user: User) {
         self.talks = user.talks
-        let singleModeTalk = createSingleModeTalk("Pass and Play", userLogin: user.login)
+        let singleModeTalk = createSingleModeTalk("Local Mode", userLogin: "")
         talks.append(singleModeTalk)
         
         iosService.updatePushBadge(talks)

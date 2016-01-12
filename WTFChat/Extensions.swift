@@ -135,12 +135,13 @@ extension String {
         return self.stringByReplacingOccurrencesOfString(what, withString: with, options: NSStringCompareOptions.LiteralSearch, range: nil)
     }
     
-    subscript (i: Int) -> Character {
+    /*subscript (i: Int) -> Character {
         return self[self.startIndex.advancedBy(i)]
-    }
+    }*/
     
     subscript (i: Int) -> String {
-        return String(self[i] as Character)
+        let char = self[self.startIndex.advancedBy(i)]
+        return String(char)
     }
     
     subscript (r: Range<Int>) -> String {

@@ -34,7 +34,7 @@ class AddFriendCell: UITableViewCell {
         initStyle()
 
         friendLogin.text = friend.login.capitalizedString
-        friendLvl.text = "lvl " + String(friend.lvl)
+        friendLvl.text = "lvl \(String(friend.lvl))"
         friendName.text = friend.name.capitalizedString
         
         friendImage.image = avatarService.getAvatarImage(friend.login,

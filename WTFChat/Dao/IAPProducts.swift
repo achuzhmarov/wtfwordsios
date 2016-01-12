@@ -11,19 +11,19 @@ import Foundation
 public class IAPProducts {
     private static let PREFIX = "wtf.wtfchat.wtfchatdev."
 
-    public static let CIPHER_ALL = PREFIX + "CipherAll"
-    public static let CIPHER_DOUBLE_CUTTER = PREFIX + "CipherDoubleCutter"
-    public static let CIPHER_LEFT_CUTTER = PREFIX + "CipherLeftCutter"
-    public static let CIPHER_RANDOM_CUTTER = PREFIX + "CipherRandomCutter"
-    public static let CIPHER_SHUFFLE = PREFIX + "CipherShuffle"
+    public static let CIPHER_ALL = "\(PREFIX)CipherAll"
+    public static let CIPHER_DOUBLE_CUTTER = "\(PREFIX)CipherDoubleCutter"
+    public static let CIPHER_LEFT_CUTTER = "\(PREFIX)CipherLeftCutter"
+    public static let CIPHER_RANDOM_CUTTER = "\(PREFIX)CipherRandomCutter"
+    public static let CIPHER_SHUFFLE = "\(PREFIX)CipherShuffle"
     
-    public static let HINTS_X2 = PREFIX + "HintsX2"
-    public static let HINTS_1 = PREFIX + "Hints10"
-    public static let HINTS_2 = PREFIX + "Hints30"
-    public static let HINTS_3 = PREFIX + "Hints60"
-    public static let HINTS_4 = PREFIX + "Hints100"
-    public static let HINTS_5 = PREFIX + "Hints200"
-    public static let HINTS_6 = PREFIX + "Hints1000"
+    public static let HINTS_X2 = "\(PREFIX)HintsX2"
+    public static let HINTS_1 = "\(PREFIX)Hints10"
+    public static let HINTS_2 = "\(PREFIX)Hints30"
+    public static let HINTS_3 = "\(PREFIX)Hints60"
+    public static let HINTS_4 = "\(PREFIX)Hints100"
+    public static let HINTS_5 = "\(PREFIX)Hints200"
+    public static let HINTS_6 = "\(PREFIX)Hints1000"
     
     public static let CONSUMABLE: Set<ProductIdentifier> = [
         HINTS_1,

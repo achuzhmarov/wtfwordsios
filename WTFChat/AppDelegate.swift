@@ -170,11 +170,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         {
             showFriendScreen(author)
         }
-        
-        /*if let info = userInfo["aps"] as? Dictionary<String, AnyObject>
-        {
-            let alertMsg = info["alert"] as! String
-        }*/
     }
     
     func showNewSuggestionsAlert() {
@@ -187,7 +182,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if (userService.getUserNewSuggestions() != 0) {
             WTFOneButtonAlert.show("Daily free hints!",
-                message: "You have just received " + String(userService.getUserNewSuggestions()),
+                message: "You have just received \(String(userService.getUserNewSuggestions()))",
                 firstButtonTitle: "Ok",
                 viewPresenter: currentController)
             
@@ -248,7 +243,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(projectName + ".sqlite")
+        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("\(projectName).sqlite")
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
             let migrationOptions = [NSMigratePersistentStoresAutomaticallyOption: true,

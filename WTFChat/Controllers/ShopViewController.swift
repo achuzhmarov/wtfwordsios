@@ -78,7 +78,7 @@ class ShopViewController: BaseShopViewController {
                     self.isRestoreInProgress = false
                     
                     WTFOneButtonAlert.show("Error",
-                        message: productTitle + " can't be restored",
+                        message: "\(productTitle) can't be restored",
                         firstButtonTitle: "Ok",
                         viewPresenter: self)
                 }

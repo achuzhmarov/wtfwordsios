@@ -58,6 +58,6 @@ class Timer {
     }
     
     func getTimeString() -> String {
-        return String(format: "%02d", getMinutes()) + ":" + String(format: "%02d", getSeconds())
+        return "\(String(format: "%02d", getMinutes())):\(String(format: "%02d", getSeconds()))"
     }
 }

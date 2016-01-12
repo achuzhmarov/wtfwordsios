@@ -59,19 +59,19 @@ class RegistrationViewController: BaseLoginViewController, UITextFieldDelegate {
                     //conflict
                     if (requestError.code == HTTP_LOGIN_EXISTS) {
                         self.usernameField.text = ""
-                        self.usernameField.placeholder = self.username + " already exists"
+                        self.usernameField.placeholder = "\(self.username) already exists"
                         
                         WTFOneButtonAlert.show("Error",
-                            message: "Login " + self.username + " already exists",
+                            message: "Login \(self.username) already exists",
                             firstButtonTitle: "Ok",
                             viewPresenter: self)
                         
                     } else if (requestError.code == HTTP_EMAIL_EXISTS) {
                         self.emailField.text = ""
-                        self.emailField.placeholder = self.email + " already exists"
+                        self.emailField.placeholder = "\(self.email) already exists"
                         
                         WTFOneButtonAlert.show("Error",
-                            message: "Email " + self.email + " already exists",
+                            message: "Email \(self.email) already exists",
                             firstButtonTitle: "Ok",
                             viewPresenter: self)
                         

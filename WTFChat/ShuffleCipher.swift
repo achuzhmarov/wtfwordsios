@@ -15,13 +15,13 @@ class ShuffleExceptFirstLetterCipher: Cipher {
         let firstLetter: String = word.getLowerCase()[0]
         let shuffled = word.getUpperCase()[1...wordLength].shuffle
         
-        return firstLetter + shuffled + word.additional
+        return "\(firstLetter)\(shuffled)\(word.additional)"
     }
 }
 
 class ShuffleFullWordCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
-        return word.getUpperCase().shuffle + word.additional
+        return "\(word.getUpperCase().shuffle)\(word.additional)"
     }
 }
 
@@ -34,7 +34,7 @@ class ShuffleWithExtraLetterCipher: Cipher {
             wordLength--
         }
         
-        let shuffled = "..." + word.getUpperCase()[1...wordLength].shuffle + "..."
+        let shuffled = "...\(word.getUpperCase()[1...wordLength].shuffle)..."
         return shuffled + word.additional
     }
 }

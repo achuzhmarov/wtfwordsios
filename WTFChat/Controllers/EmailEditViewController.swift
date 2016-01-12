@@ -41,7 +41,7 @@ class EmailEditViewController: UITableViewController, UITextFieldDelegate {
                     if (error!.code == HTTP_EMAIL_EXISTS) {
                         WTFOneButtonAlert.show("Error", message: "User with this email already exists", firstButtonTitle: "Ok", viewPresenter: self)
                     } else {
-                        WTFOneButtonAlert.show("Error", message: "Can't update user info. " + connectionErrorDescription(), firstButtonTitle: "Ok", viewPresenter: self)
+                        WTFOneButtonAlert.show("Error", message: "Can't update user info. \( connectionErrorDescription())", firstButtonTitle: "Ok", viewPresenter: self)
                     }
                 } else {
                     self.navigationController?.popViewControllerAnimated(true)

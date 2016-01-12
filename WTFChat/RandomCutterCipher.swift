@@ -13,7 +13,7 @@ class EasyRandomCutterCipher: Cipher {
         let charsLeft = word.getCharCount() / 2 + word.getCharCount() % 2
         
         let ciphered = RandomCutterHelper.CutRandomLetters(word.getLowerCase(), charsLeft: charsLeft)
-        return ciphered + word.additional
+        return "\(ciphered)\(word.additional)"
     }
 }
 
@@ -26,7 +26,7 @@ class NormalRandomCutterCipher: Cipher {
         }
         
         let ciphered = RandomCutterHelper.CutRandomLetters(word.getLowerCase(), charsLeft: charsLeft)
-        return ciphered + word.additional
+        return "\(ciphered)\(word.additional)"
     }
 }
 
@@ -39,7 +39,7 @@ class HardRandomCutterCipher: Cipher {
         }
         
         let ciphered = RandomCutterHelper.CutRandomLetters(word.getLowerCase(), charsLeft: charsLeft)
-        return ciphered + word.additional
+        return "\(ciphered)\(word.additional)"
     }
 }
 
@@ -53,9 +53,9 @@ private class RandomCutterHelper {
             
             for i in 0..<word.characters.count {
                 if (i == randomIndex) {
-                    newWord += "."
+                    newWord = "\(newWord)."
                 } else {
-                    newWord += word[i]
+                    newWord = "\(newWord)\(word[i])"
                 }
             }
             
@@ -75,13 +75,13 @@ private class RandomCutterHelper {
                 if (isLastCharDot) {
                     //skip
                 } else {
-                    newWord += "..."
+                    newWord = "\(newWord)..."
                 }
                 
                 isLastCharDot = true
             } else {
                 isLastCharDot = false
-                newWord += word[i]
+                newWord = "\(newWord)\(word[i])"
             }
         }
         

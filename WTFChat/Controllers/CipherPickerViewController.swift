@@ -30,14 +30,6 @@ class CipherPickerViewController: UIPickerView, UIPickerViewDataSource, UIPicker
             return cipherModes.count
         }
     }
-
-    /*func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if (component == 0) {
-            return cipherCategories[row].description
-        } else {
-            return cipherModes[row].description
-        }
-    }*/
     
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
         
@@ -74,12 +66,4 @@ class CipherPickerViewController: UIPickerView, UIPickerViewDataSource, UIPicker
         self.selectRow(category.rawValue, inComponent: 0, animated: true)
         self.selectRow(mode.rawValue, inComponent: 1, animated: true)
     }
-
-    /*func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
-        let pickerLabel = UILabel()
-        let titleData = pickerData[row]
-        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 26.0)!,NSForegroundColorAttributeName:UIColor.blackColor()])
-        pickerLabel.attributedText = myTitle
-        return pickerLabel
-    }*/
 }
