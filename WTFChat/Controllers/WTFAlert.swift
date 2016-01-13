@@ -9,22 +9,24 @@
 import Foundation
 
 class WTFOneButtonAlert: NSObject, UIAlertViewDelegate  {
-    class func show(title: String, message: String, firstButtonTitle: String, viewPresenter: UIViewController?) {
+    class func show(title: String, message: String, firstButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:(() -> Void)? = nil) {
+        
         if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
                 message: message,
                 preferredStyle: UIAlertControllerStyle.Alert)
             
             alert.addAction(UIAlertAction(title: firstButtonTitle, style: .Default, handler: { (action: UIAlertAction) in
-                //do nothing
+                alertButtonAction?()
             }))
 
             viewPresenter?.presentViewController(alert, animated: true, completion: nil)
         } else {
-            let alert = UIAlertView()
+            let alert = AlertWithDelegate()
             alert.title = title
             alert.message = message
             alert.addButtonWithTitle(firstButtonTitle)
+            alert.setAlertFunction(alertButtonAction)
             alert.show()
         }
     }

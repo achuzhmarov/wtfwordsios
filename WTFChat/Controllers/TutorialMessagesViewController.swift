@@ -8,30 +8,53 @@
 
 import UIKit
 
+enum TutorialStage: Int {
+    case Never = 1, Started, DecipherGuess, DecipherCloseTry, DecipherCloseTryHint, DecipherHint, DecipherRest, Deciphered, Skipped, Finished
+}
+
+var currentTutorialStage: TutorialStage = .Never
+
 class TutorialMessagesViewController: MessagesViewController {
     let TUTORIAL_MESSAGE = "Welcome to the chat! I am glad to see you here. Have a good time!"
-    
-    var isTutorialMode = false
-    var isTutorialFinished = false
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if (!isTutorialMode && !isTutorialFinished) {
+        switch currentTutorialStage {
+        case .Never:
             WTFTwoButtonsAlert.show("Tutorial",
                 message: "Hi! It is your first time, do you want to see a tutorial?",
                 firstButtonTitle: "Skip",
                 secondButtonTitle: "Yes",
                 viewPresenter: self,
-                alertButtonAction: nil,
+                alertButtonAction: { () -> Void in
+                    currentTutorialStage = .Skipped
+                },
                 cancelButtonAction: { () -> Void in
                     self.beginTutorial()
             })
+        case .Deciphered:
+            WTFOneButtonAlert.show("",
+                message: "So far so good! Let's try to send a message. Type any text you want and press 'Send' button",
+                firstButtonTitle: "Ok",
+                viewPresenter: self)
+        default: return
+        }
+    }
+    
+    override func sendButtonPressed(sender: AnyObject) {
+        if (currentTutorialStage == .Started) {
+            WTFOneButtonAlert.show("Tutorial",
+                message: "Please, tap on a blue bubble with question marks to decipher it!",
+                firstButtonTitle: "Ok",
+                viewPresenter: self)
+        } else {
+            self.performSegueWithIdentifier("showMessagePreview", sender: messageText.text)
         }
     }
     
     private func beginTutorial() {
-        isTutorialMode = true
+        currentTutorialStage = .Started
         setTutorialTalk()
         
         WTFOneButtonAlert.show("New message",
