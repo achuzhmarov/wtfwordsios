@@ -9,42 +9,51 @@
 import Foundation
 
 class TutorialDecipherViewController: DecipherViewController {
-    override func sendMessageUpdate() {
-        //do nothing
-    }
-    
-    override func sendMessageDecipher() {
-        //do nothing
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if (currentTutorialStage == .ResponseAquired) {
+            WTFOneButtonAlert.show("Details",
+                message: "Here is my progress. You can also tap on a screen to see words in its ciphered form. When you finished, please, go back to 'Tutorial' screen",
+                firstButtonTitle: "Ok",
+                viewPresenter: self) { () -> Void in
+                    currentTutorialStage = .DetailsViewed
+            }
+        }
     }
     
     override func start() {
         super.start()
         
-        isPaused = true
-        
-        WTFOneButtonAlert.show("Decipher",
-            message: "To decipher a message you have to enter your guesses for ciphered words. Try to type 'to' and press either 'Try' or 'enter' button",
-            firstButtonTitle: "Ok",
-            viewPresenter: self) { () -> Void in
-                self.isPaused = false
-                currentTutorialStage = .DecipherGuess
+        if (currentTutorialStage == .Started) {
+            isPaused = true
+            
+            WTFOneButtonAlert.show("Decipher",
+                message: "To decipher a message you have to enter your guesses for ciphered words. Try to type 'to' and press either 'Try' or 'enter' button",
+                firstButtonTitle: "Ok",
+                viewPresenter: self) { () -> Void in
+                    self.isPaused = false
+                    currentTutorialStage = .DecipherGuess
+            }
         }
     }
     
     override func gameOver() {
         super.gameOver()
         
-        topViewHeightContraint.constant = initialTopViewHeightConstraintConstant
-        self.expGainView.myInit(self.topView)
-        
-        //just some random exp value
-        self.expGainView.runProgress(55)
-        
-        WTFOneButtonAlert.show("",
-            message: "Yay! You have deciphered your first message. In online mode you will gain XP for it. Remember, if you deciphered all words in a message (all green) - you will get an x3 XP bonus! Now, please, return to previous screen ('Tutorial' button at left top corner)",
-            firstButtonTitle: "Ok",
-            viewPresenter: self) { () -> Void in
-                currentTutorialStage = .Deciphered
+        if (currentTutorialStage == .DecipherRest) {
+            topViewHeightContraint.constant = initialTopViewHeightConstraintConstant
+            self.expGainView.myInit(self.topView)
+            
+            //just some random exp value
+            self.expGainView.runProgress(55)
+            
+            WTFOneButtonAlert.show("",
+                message: "Yay! You have deciphered your first message. In online mode you will gain XP for it. Remember, if you deciphered all words in a message (all green) - you will get an x3 XP bonus! Now, please, return to previous screen ('Tutorial' button at left top corner)",
+                firstButtonTitle: "Ok",
+                viewPresenter: self) { () -> Void in
+                    currentTutorialStage = .Deciphered
+            }
         }
     }
     
@@ -185,5 +194,30 @@ class TutorialDecipherViewController: DecipherViewController {
             }
         default: return
         }
+    }
+    
+    override func sendMessageUpdate() {
+        switch (currentTutorialStage) {
+        case .Never, .Skipped, .Finished:
+            super.sendMessageUpdate()
+        default:
+            return
+        }
+    }
+    
+    override func sendMessageDecipher() {
+        switch (currentTutorialStage) {
+        case .Never, .Skipped, .Finished:
+            super.sendMessageDecipher()
+        default:
+            return
+        }
+    }
+    
+    override func showNoSuggestionsDialog() {
+        WTFOneButtonAlert.show("Use Hint: 0",
+            message: "You have used all hints",
+            firstButtonTitle: "Ok",
+            viewPresenter: self)
     }
 }

@@ -26,7 +26,7 @@ class MessageCell: UITableViewCell {
         messageText.initStyle()
     }
     
-    func updateMessage(message: Message) {
+    func updateMessage(message: Message, isSingleMode: Bool) {
         initStyle()
 
         let isOutcoming = (message.author == userService.getUserLogin())
@@ -53,7 +53,7 @@ class MessageCell: UITableViewCell {
             messageText.layer.backgroundColor = CIPHERED_COLOR.CGColor
         }
         
-        if (!isOutcoming) {
+        if (!isOutcoming && !isSingleMode) {
             friendImage.image = avatarService.getAvatarImage(message.author,
                 diameter: UInt(friendImage.bounds.height))
         }

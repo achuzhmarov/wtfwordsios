@@ -40,9 +40,9 @@ class HalfWordPlusOneFromEndCipher: Cipher {
             letterCount += 1
         }
         
-        //3 letters max
-        if (wordLength - letterCount > 2) {
-            letterCount = wordLength - 2
+        //2 letters max
+        if (wordLength - letterCount > 1) {
+            letterCount = wordLength - 1
         }
         
         return "...\(word.getLowerCase()[letterCount...wordLength])\(word.additional)"

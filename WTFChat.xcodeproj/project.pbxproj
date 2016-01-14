@@ -116,6 +116,7 @@
 		48EEB64B1BA31F0D007C5B5F /* ui-completed-status-alert-notification-sfx001.wav in Resources */ = {isa = PBXBuildFile; fileRef = 48EEB63E1BA31F0D007C5B5F /* ui-completed-status-alert-notification-sfx001.wav */; };
 		48EEB64C1BA31F0D007C5B5F /* ui-completed-status-alert-notification-sfx002.wav in Resources */ = {isa = PBXBuildFile; fileRef = 48EEB63F1BA31F0D007C5B5F /* ui-completed-status-alert-notification-sfx002.wav */; };
 		48EEB64D1BA31F0D007C5B5F /* ui-completed-status-alert-notification-sfx003.wav in Resources */ = {isa = PBXBuildFile; fileRef = 48EEB6401BA31F0D007C5B5F /* ui-completed-status-alert-notification-sfx003.wav */; };
+		48EEFF651C47A5EF006945BF /* TutorialSendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EEFF641C47A5EF006945BF /* TutorialSendMessageViewController.swift */; };
 		48F1373C1BB5C2CD00E5FFA7 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1373B1BB5C2CD00E5FFA7 /* RegistrationViewController.swift */; };
 		48F2F5451BA1CAB2005CCAC8 /* WordsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2F5441BA1CAB2005CCAC8 /* WordsField.swift */; };
 		48F2F5471BA1DA71005CCAC8 /* StringDistanceCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2F5461BA1DA71005CCAC8 /* StringDistanceCalculator.swift */; };
@@ -253,6 +254,7 @@
 		48EEB63E1BA31F0D007C5B5F /* ui-completed-status-alert-notification-sfx001.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "ui-completed-status-alert-notification-sfx001.wav"; path = "Sounds/ui-completed-status-alert-notification-sfx001.wav"; sourceTree = SOURCE_ROOT; };
 		48EEB63F1BA31F0D007C5B5F /* ui-completed-status-alert-notification-sfx002.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "ui-completed-status-alert-notification-sfx002.wav"; path = "Sounds/ui-completed-status-alert-notification-sfx002.wav"; sourceTree = SOURCE_ROOT; };
 		48EEB6401BA31F0D007C5B5F /* ui-completed-status-alert-notification-sfx003.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "ui-completed-status-alert-notification-sfx003.wav"; path = "Sounds/ui-completed-status-alert-notification-sfx003.wav"; sourceTree = SOURCE_ROOT; };
+		48EEFF641C47A5EF006945BF /* TutorialSendMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialSendMessageViewController.swift; sourceTree = "<group>"; };
 		48F1373B1BB5C2CD00E5FFA7 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		48F2F5441BA1CAB2005CCAC8 /* WordsField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsField.swift; sourceTree = "<group>"; };
 		48F2F5461BA1DA71005CCAC8 /* StringDistanceCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringDistanceCalculator.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 			children = (
 				482A6A001C45285100B9F9CD /* TutorialMessagesViewController.swift */,
 				489446FB1C456CC400F32F85 /* TutorialDecipherViewController.swift */,
+				48EEFF641C47A5EF006945BF /* TutorialSendMessageViewController.swift */,
 			);
 			name = Tutorial;
 			sourceTree = "<group>";
@@ -809,6 +812,7 @@
 				4842C0111C1F1022008153F0 /* IAPHelper.swift in Sources */,
 				488DF8101BB2B8F30085E31A /* NetworkService.swift in Sources */,
 				48E9A9AA1BEB7E9D00508847 /* AvatarService.swift in Sources */,
+				48EEFF651C47A5EF006945BF /* TutorialSendMessageViewController.swift in Sources */,
 				487D771D1BA0878400AF333C /* WordLabelContainer.swift in Sources */,
 				489666BA1B9B650400F769D1 /* FriendCell.swift in Sources */,
 				482EBED11C296A6D00C88EC9 /* HintsShopViewController.swift in Sources */,

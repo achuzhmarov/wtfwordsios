@@ -208,7 +208,7 @@
         <!--Preview-->
         <scene sceneID="oY1-OI-prQ">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="cCY-tc-dfM" customClass="SendMessageViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="cCY-tc-dfM" customClass="TutorialSendMessageViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9SW-Tj-jos"/>
                         <viewControllerLayoutGuide type="bottom" id="IvW-Mk-g2d"/>

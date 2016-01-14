@@ -295,4 +295,13 @@ class UserService: NSObject {
         if (!isLoggedIn()) { return false }
         return currentUser!.freeHintsGained < MAX_DAILY_FREE_HINTS_FROM_AD
     }
+    
+    //for tutorial
+    func setTutorialUser(user: User) {
+        self.currentUser = user
+    }
+    
+    func clearTutorialUser() {
+        self.currentUser = nil
+    }
 }

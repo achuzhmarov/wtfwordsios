@@ -19,6 +19,7 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
     var text = ""
     var cipherType = CipherType.HalfWordRoundDown
     var message: Message!
+    var isSingleMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +58,8 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
         
         messageWordsView.setNewMessage(message)
         
-        if cipherService.canUseCipher(cipherType) {
+        //you can use any cipher in LocalMode
+        if cipherService.canUseCipher(cipherType) || isSingleMode {
             levelRequiredLabel.hidden = true
             unlockCipherButton.hidden = true
             

@@ -284,6 +284,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
             
             targetController.text = text
             targetController.cipherType = self.cipherType
+            targetController.isSingleMode = talk.isSingleMode
         }
         
         dismissKeyboard()

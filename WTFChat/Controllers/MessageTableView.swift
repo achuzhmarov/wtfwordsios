@@ -54,7 +54,7 @@ class MessageTableView: UITableView, UITableViewDataSource, UITableViewDelegate 
         let cellIdentifier = getCellIdentifier(indexPath.row, message: message)
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MessageCell
         
-        cell.updateMessage(message)
+        cell.updateMessage(message, isSingleMode: talk.isSingleMode)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "messageTapped:")
         cell.messageText.addGestureRecognizer(tap)

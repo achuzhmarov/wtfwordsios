@@ -56,7 +56,7 @@ class HardDoubleCutterCipher: Cipher {
         let easyCiphered = DoubleCutterHelper.cutWord(word.getLowerCase(), odd: odd)
         let hardCiphered = DoubleCutterHelper.cutWord(easyCiphered, odd: odd)
         
-        let cuttedHardCiphered = DoubleCutterHelper.cutIfTooManyLetters(hardCiphered, odd: odd, maxChars: 3)
+        let cuttedHardCiphered = DoubleCutterHelper.cutIfTooManyLetters(hardCiphered, odd: odd, maxChars: 2)
         
         return "...\(cuttedHardCiphered)...\(word.additional)"
     }
