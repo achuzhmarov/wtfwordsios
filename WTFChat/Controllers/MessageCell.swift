@@ -56,6 +56,9 @@ class MessageCell: UITableViewCell {
         if (!isOutcoming && !isSingleMode) {
             friendImage.image = avatarService.getAvatarImage(message.author,
                 diameter: UInt(friendImage.bounds.height))
+        } else {
+            friendImage?.image = avatarService.getAvatarImage("🙂",
+                diameter: UInt(friendImage.bounds.height))
         }
         
         timeText?.attributedText = timeService.parseTime(message.timestamp)

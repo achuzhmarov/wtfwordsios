@@ -17,9 +17,9 @@ var currentTutorialStage: TutorialStage = .Never
 class TutorialMessagesViewController: MessagesViewController {
     let TUTORIAL_MESSAGE_MAIN = "Welcome to the chat! I am glad to see you here. Have a good time!"
     let TUTORIAL_TIP1 = "So, I see you are interested. Let's me give you some more advices about leveling up!"
-    let TUTORIAL_TIP2 = "You will get less XP for an orange word if you open it by tap. But you will still get X3 bonus XP for fully deciphered message."
-    let TUTORIAL_TIP3 = "There is daily XP limit for chatting with the same friend. If you start to gain small amount of XP, try to chat with someone else."
-    let TUTORIAL_TIP4 = "You will get the same XP amount for different ciphers. Only it's difficulty matter"
+    let TUTORIAL_TIP2 = "You will get less XP for an orange word if you directly open it. But you will still get X3 bonus XP for fully deciphered message."
+    let TUTORIAL_TIP3 = "There is a daily XP limit for chatting with the same friend. If you start to gain small amount of XP, try to chat with someone else."
+    let TUTORIAL_TIP4 = "You will get the same XP amount for different ciphers. Only its difficulty matter"
     let TUTORIAL_TIP5 = "You can get significally more XP when deciphering Hard messages. But it isn't simple, you see!"
     
     let TUTORIAL_STAGE_PROPERTY_KEY = "tutorialStage"
@@ -38,16 +38,16 @@ class TutorialMessagesViewController: MessagesViewController {
         case .Never:
             WTFTwoButtonsAlert.show("Tutorial",
                 message: "Hi! It is your first time, do you want to see a tutorial?",
-                firstButtonTitle: "Skip",
-                secondButtonTitle: "Yes",
+                firstButtonTitle: "Start tutorial",
+                secondButtonTitle: "Skip",
                 viewPresenter: self,
                 alertButtonAction: { () -> Void in
+                    self.beginTutorial()
+                },
+                cancelButtonAction: { () -> Void in
                     currentTutorialStage = .Skipped
                     self.nsUserDefaults.setInteger(currentTutorialStage.rawValue,
                         forKey: self.TUTORIAL_STAGE_PROPERTY_KEY)
-                },
-                cancelButtonAction: { () -> Void in
-                    self.beginTutorial()
             })
         case .Deciphered:
             WTFOneButtonAlert.show("",
@@ -63,7 +63,7 @@ class TutorialMessagesViewController: MessagesViewController {
                 viewPresenter: self)
         case .MessageSended:
             WTFOneButtonAlert.show("",
-                message: "Yay! You have successfully send your first message! You see? Wait a sec, i'll soon decipher it",
+                message: "Yay! You have successfully sent your first message! You see? Wait a sec, i'll soon decipher it",
                 firstButtonTitle: "Ok",
                 viewPresenter: self) { () -> Void in
                     sleep(1)

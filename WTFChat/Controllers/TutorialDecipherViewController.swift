@@ -49,7 +49,7 @@ class TutorialDecipherViewController: DecipherViewController {
             self.expGainView.runProgress(55)
             
             WTFOneButtonAlert.show("",
-                message: "Yay! You have deciphered your first message. In online mode you will gain XP for it. Remember, if you deciphered all words in a message (all green) - you will get an x3 XP bonus! Now, please, return to previous screen ('Tutorial' button at left top corner)",
+                message: "Yay! You have deciphered your first message. In online mode you will gain XP for it. Remember, if you have deciphered all words in a message (all green) - you will get an x3 XP bonus! Now, please, return to previous screen ('Tutorial' button at left top corner)",
                 firstButtonTitle: "Ok",
                 viewPresenter: self) { () -> Void in
                     currentTutorialStage = .Deciphered
@@ -82,7 +82,7 @@ class TutorialDecipherViewController: DecipherViewController {
                 self.isPaused = true
                 
                 WTFOneButtonAlert.show("",
-                    message: "Oh! We were close! Now word 'Ch...!' have orange color. You can try another guesses to get clear green result. But for the sake of the tutorial, let's try to tap on it to decipher it!",
+                    message: "Oh! We were close! Now word 'Ch...!' has orange color. You can try another guesses to get clear green result. But for the sake of the tutorial, let's try to tap on it to decipher it!",
                     firstButtonTitle: "Ok",
                     viewPresenter: self) { () -> Void in
                         self.isPaused = false
@@ -128,7 +128,7 @@ class TutorialDecipherViewController: DecipherViewController {
                 self.isPaused = true
                 
                 WTFOneButtonAlert.show("",
-                    message: "Wow, it actually worked! Now, let's try to use a similar hint on any blue word",
+                    message: "Wow, it had actually worked! Now, let's try to use a similar hint on any blue word",
                     firstButtonTitle: "Ok",
                     viewPresenter: self) { () -> Void in
                         self.isPaused = false
@@ -143,7 +143,7 @@ class TutorialDecipherViewController: DecipherViewController {
             self.isPaused = true
             
             WTFOneButtonAlert.show("",
-                message: "You see? You have a number of hints you can use to immidiately decipher any blue word! Awesome, isn't it? Try to decipher the rest of the message by yourself",
+                message: "You see? You have a number of hints you can use to immediately decipher any blue word! Awesome, isn't it? Try to decipher the rest of the message by yourself",
                 firstButtonTitle: "Ok",
                 viewPresenter: self) { () -> Void in
                     self.isPaused = false
@@ -215,7 +215,7 @@ class TutorialDecipherViewController: DecipherViewController {
     }
     
     override func showNoSuggestionsDialog() {
-        WTFOneButtonAlert.show("Use Hint: 0",
+        WTFOneButtonAlert.show("Hints remained: 0",
             message: "You have used all hints",
             firstButtonTitle: "Ok",
             viewPresenter: self)

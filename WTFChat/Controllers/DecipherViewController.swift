@@ -135,9 +135,9 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             return
         }
         
-        WTFTwoButtonsAlert.show("Give Up",
-            message: "Are you sure you want to give up?",
-            firstButtonTitle: "Ok",
+        WTFTwoButtonsAlert.show("Stop deciphering?",
+            message: "",
+            firstButtonTitle: "Give Up",
             secondButtonTitle: "Cancel",
             viewPresenter: self) { () -> Void in
                 self.gameOver()
@@ -195,14 +195,14 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     
     func showNoSuggestionsDialog() {
         if (isSingleMode) {
-            WTFOneButtonAlert.show("Use Hint: 0",
+            WTFOneButtonAlert.show("Hints remained: 0",
                 message: "You have used all hints",
                 firstButtonTitle: "Ok",
                 viewPresenter: self)
         } else {
-            WTFTwoButtonsAlert.show("Use Hint: 0",
+            WTFTwoButtonsAlert.show("Hints remained: 0",
                 message: "You have used all hints. Want to get more?",
-                firstButtonTitle: "Ok",
+                firstButtonTitle: "Get more",
                 secondButtonTitle: "Cancel",
                 viewPresenter: self) { () -> Void in
                     
@@ -212,9 +212,9 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     func showSuggestionConfirm(word: Word) {
-        WTFTwoButtonsAlert.show("Use Hint: \(String(suggestions))",
-            message: "Are you sure you want to use a hint?",
-            firstButtonTitle: "Ok",
+        WTFTwoButtonsAlert.show("Hints remained: \(String(suggestions))",
+            message: "",
+            firstButtonTitle: "Use a Hint",
             secondButtonTitle: "Cancel",
             viewPresenter: self) { () -> Void in
                 self.useSuggestion(word)
@@ -222,9 +222,9 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     func showCloseTrySuggestionsConfirm(word: Word) {
-        WTFTwoButtonsAlert.show("Descipher",
-            message: "Are you sure you want to decipher it?",
-            firstButtonTitle: "Ok",
+        WTFTwoButtonsAlert.show("Open this word?",
+            message: "",
+            firstButtonTitle: "Open",
             secondButtonTitle: "Cancel",
             viewPresenter: self) { () -> Void in
                 self.useSuggestion(word)

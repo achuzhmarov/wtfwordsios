@@ -63,7 +63,14 @@ class MessageTableView: UITableView, UITableViewDataSource, UITableViewDelegate 
     }
     
     private func getCellIdentifier(index: Int, message: Message) -> String {
-        let isOutcoming = (message.author == userService.getUserLogin())
+        var isOutcoming: Bool
+        
+        if (talk.isSingleMode) {
+            isOutcoming = (index % 2 == 1)
+        } else {
+            isOutcoming = (message.author == userService.getUserLogin())
+        }
+        
         let showTime = needShowTime(index, message: message)
         
         if (isOutcoming && showTime) {
