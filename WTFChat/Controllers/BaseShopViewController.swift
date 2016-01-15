@@ -122,19 +122,21 @@ class BaseShopViewController: UITableViewController {
                 userService.addFreeAdHint()
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.updateTable()
-                    
                     WTFOneButtonAlert.show("Free hint",
                         message: "You have just received a free hint",
                         firstButtonTitle: "Ok",
-                        viewPresenter: self)
+                        viewPresenter: self) { () -> Void in
+                            self.updateTable()
+                        }
                 })
             })
         } else {
             WTFOneButtonAlert.show("No more ads",
                 message: "Try again tomorrow",
                 firstButtonTitle: "Ok",
-                viewPresenter: self)
+                viewPresenter: self) { () -> Void in
+                    self.updateTable()
+                }
         }
     }
 }

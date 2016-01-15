@@ -159,6 +159,14 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     @IBAction func tryButtonPressed(sender: AnyObject) {
+        if (guessTextField.text!.characters.count > 1024) {
+            WTFOneButtonAlert.show("Too many characters",
+                message: "Your guess should be less than 1024 characters",
+                firstButtonTitle: "Ok",
+                viewPresenter: self)
+            return
+        }
+        
         messageCipher.decipher(message!, guessText: guessTextField.text!)
         
         let guessWords = guessTextField.text!.characters.split {$0 == " "}.map { String($0) }

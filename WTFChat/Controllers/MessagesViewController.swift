@@ -143,6 +143,14 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
     }
     
     @IBAction func sendButtonPressed(sender: AnyObject) {
+        if (messageText.text.characters.count > 1024) {
+            WTFOneButtonAlert.show("Too many characters",
+                message: "Your text should be less than 1024 characters",
+                firstButtonTitle: "Ok",
+                viewPresenter: self)
+            return
+        }
+        
         self.performSegueWithIdentifier("showMessagePreview", sender: messageText.text)
     }
     

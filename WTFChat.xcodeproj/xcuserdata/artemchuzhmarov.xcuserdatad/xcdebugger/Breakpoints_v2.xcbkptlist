@@ -438,11 +438,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WTFChat/Controllers/DecipherViewController.swift"
-            timestampString = "474312196.013277"
+            timestampString = "474560347.798051"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "498"
-            endingLineNumber = "498"
+            startingLineNumber = "506"
+            endingLineNumber = "506"
             landmarkName = "sendMessageUpdate()"
             landmarkType = "5">
          </BreakpointContent>
@@ -454,11 +454,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WTFChat/Controllers/DecipherViewController.swift"
-            timestampString = "474312196.013277"
+            timestampString = "474560347.798051"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "500"
-            endingLineNumber = "500"
+            startingLineNumber = "508"
+            endingLineNumber = "508"
             landmarkName = "sendMessageUpdate()"
             landmarkType = "5">
             <Locations>
@@ -540,22 +540,6 @@
             startingLineNumber = "203"
             endingLineNumber = "203"
             landmarkName = "updateOrCreateMessageInArray(_:message:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WTFChat/Controllers/MessagesViewController.swift"
-            timestampString = "474227698.034667"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "sendButtonPressed(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
