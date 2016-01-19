@@ -134,7 +134,7 @@ class MessageCipher {
         if (talk.isSingleMode) {
             author = talk.users[0]
         } else {
-            author = userService.getUserLogin()
+            author = currentUserService.getUserLogin()
         }
         
         let newMessage = Message(id: "",

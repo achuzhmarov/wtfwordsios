@@ -15,7 +15,7 @@ class EmailEditViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        emailText.text = userService.getUserEmail()
+        emailText.text = currentUserService.getUserEmail()
         emailText.delegate = self
         emailText.becomeFirstResponder()
     }

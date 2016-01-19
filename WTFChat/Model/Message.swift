@@ -148,7 +148,7 @@ class Message : BaseEntity {
     }
     
     func text() -> String! {
-        if (userService.getUserLogin() == self.author) {
+        if (currentUserService.getUserLogin() == self.author) {
             return clearText()
         } else if (self.deciphered) {
             return clearText()

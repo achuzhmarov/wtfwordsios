@@ -19,117 +19,12 @@ class UserService: NSObject {
     let USER_UPDATE_TIMER_INTERVAL = 10.0
     let userNetworkService = UserNetworkService()
     
-    private var currentUser: User?
-    private var suggestionsUsed : Int = 0
-    
     var updateTimer: NSTimer?
     
-    func isLoggedIn() -> Bool {
-        if currentUser != nil {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    func getUserName() -> String {
-        if (!isLoggedIn()) { return "" }
-        return currentUser!.name
-    }
-    
-    func getUserEmail() -> String {
-        if (!isLoggedIn()) { return "" }
-        return currentUser!.email
-    }
-    
-    func getUserPushNew() -> Bool {
-        if (!isLoggedIn()) { return true }
-        return currentUser!.pushNew
-    }
-    
-    func getUserPushDeciphered() -> Bool {
-        if (!isLoggedIn()) { return true }
-        return currentUser!.pushDeciphered
-    }
-    
-    func getUserSuggestions() -> Int {
-        if (!isLoggedIn()) { return 0 }
-        return currentUser!.suggestions
-    }
-    
-    func getUserNewSuggestions() -> Int {
-        if (!isLoggedIn()) { return 0 }
-        return currentUser!.newSuggestions
-    }
-    
-    func clearUserNewSuggestions() {
-        if (!isLoggedIn()) { return }
-        currentUser!.newSuggestions = 0
-    }
-    
-    func getUserLogin() -> String {
-        if (!isLoggedIn()) { return "" }
-        return currentUser!.login
-    }
-    
-    func getUserExp() -> Int {
-        if (!isLoggedIn()) { return 0 }
-        return currentUser!.exp
-    }
-    
-    func getUserLvl() -> Int {
-        if (!isLoggedIn()) { return 0 }
-        return currentUser!.lvl
-    }
-    
-    func useSuggestion() {
-        if (!isLoggedIn()) { return }
-        
-        currentUser!.suggestions--
-        suggestionsUsed++
-    }
-    
-    func getFriendInfoByLogin(login: String) -> FriendInfo? {
-        if (!isLoggedIn()) { return nil }
-        
-        for friend in currentUser!.friends {
-            if (friend.login == login) {
-                return friend
-            }
-        }
-        
-        return nil
-    }
-    
-    func getFriends() -> [FriendInfo] {
-        if (!isLoggedIn()) { return [FriendInfo]() }
-        return currentUser!.friends
-    }
-    
-    func isContainBuyNonConsum(productId: ProductIdentifier) -> Bool {
-        if (!isLoggedIn()) { return false }
-        
-        if let productRef = IAPProducts.getProductRef(productId) {
-            return currentUser!.buyNonConsum.contains(productRef)
-        }
-        
-        return false
-    }
-    
-    func getSelfUserInfo() -> FriendInfo? {
-        if (!isLoggedIn()) { return nil }
-        
-        return FriendInfo(
-            login: currentUser!.login,
-            lvl: currentUser!.lvl,
-            name: currentUser!.name,
-            exp: currentUser!.exp,
-            rating: currentUser!.rating
-        )
-    }
+    var freeAdHintsNotAdded = 0
     
     func setNewUser(user: User, password: String) {
-        self.currentUser = user
+        currentUserService.setNewUser(user)
         talkService.setTalksByNewUser(user)
         iosService.updateUserCredentials(user.login, password: password)
         
@@ -137,24 +32,23 @@ class UserService: NSObject {
         dispatch_async(dispatch_get_main_queue(), {
             self.updateTimer?.invalidate()
             self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(self.USER_UPDATE_TIMER_INTERVAL, target: self,
-                selector: "getNewInfo", userInfo: nil, repeats: true)
+                selector: "updateInfo", userInfo: nil, repeats: true)
         })
     }
     
-    func sendUsedHints() {
-        if suggestionsUsed > 0 {
-            userNetworkService.sendUsedHints(suggestionsUsed) { error in
-                if let requestError = error {
-                    print(requestError)
-                } else {
-                    self.suggestionsUsed = 0
-                }
+    func updateInfo() {
+        //send free hints gain in case of errors
+        if (freeAdHintsNotAdded != 0) {
+            let freeAdHintsToAdd = freeAdHintsNotAdded
+            freeAdHintsNotAdded = 0
+            
+            for _ in 0..<freeAdHintsToAdd {
+                addFreeAdHintRequest()
             }
         }
-    }
-    
-    func getNewInfo() {
-        userNetworkService.getNewInfo(currentUser!.lastUpdate) {userInfo, error in
+        
+        //get new user info
+        userNetworkService.getNewInfo(currentUserService.getLastUpdate()!) {userInfo, error in
             if let requestError = error {
                 print(requestError)
             } else {
@@ -168,7 +62,7 @@ class UserService: NSObject {
             return
         }
         
-        self.currentUser!.updateInfo(userInfo!)
+        currentUserService.updateInfo(userInfo!)
         
         if (userInfo!.newSuggestions != 0) {
             dispatch_async(dispatch_get_main_queue(), {
@@ -195,20 +89,18 @@ class UserService: NSObject {
         }
     }
     
-    func logout() {
+    func logoutNetworkRequest(completion: (error: NSError?) -> Void) {
         userNetworkService.logout(DEVICE_TOKEN) {error in
-            if let requestError = error {
-                print(requestError)
-            } else {
-                //ok - do nothing
-            }
+            completion(error: error)
         }
-        
-        currentUser = nil
+    }
+    
+    func logoutInner() {
+        currentUserService.setNewUser(nil)
         talkService.clearTalks()
         networkService.clearSession()
         iosService.resetUserCredentials()
-        
+    
         self.updateTimer?.invalidate()
     }
     
@@ -225,7 +117,7 @@ class UserService: NSObject {
     }
     
     func makeFriends(friend: FriendInfo, completion:(talk: Talk?, error: NSError?) -> Void) {
-        self.currentUser!.friends.append(friend)
+        currentUserService.addFriend(friend)
         userNetworkService.makeFriends(friend.login, completion: completion)
     }
     
@@ -240,7 +132,7 @@ class UserService: NSObject {
     func updateName(name: String, completion:(error: NSError?) -> Void) {
         userNetworkService.updateName(name) { error in
             if (error == nil) {
-                self.currentUser!.name = name
+                currentUserService.updateName(name)
             }
             
             completion(error: error)
@@ -250,7 +142,7 @@ class UserService: NSObject {
     func updateEmail(email: String, completion:(error: NSError?) -> Void) {
         userNetworkService.updateEmail(email) { error in
             if (error == nil) {
-                self.currentUser!.email = email
+                currentUserService.updateEmail(email)
             }
             
             completion(error: error)
@@ -260,7 +152,7 @@ class UserService: NSObject {
     func updatePushNew(pushNew: Bool, completion:(error: NSError?) -> Void) {
         userNetworkService.updatePushNew(pushNew) { error in
             if (error == nil) {
-                self.currentUser!.pushNew = pushNew
+                currentUserService.updatePushNew(pushNew)
             }
             
             completion(error: error)
@@ -270,7 +162,7 @@ class UserService: NSObject {
     func updatePushDeciphered(pushDeciphered: Bool, completion:(error: NSError?) -> Void) {
         userNetworkService.updatePushDeciphered(pushDeciphered) { error in
             if (error == nil) {
-                self.currentUser!.pushDeciphered = pushDeciphered
+                currentUserService.updatePushDeciphered(pushDeciphered)
             }
             
             completion(error: error)
@@ -278,30 +170,22 @@ class UserService: NSObject {
     }
     
     func addFreeAdHint() {
+        currentUserService.addFreeHint()
+        
+        addFreeAdHintRequest()
+    }
+    
+    private func addFreeAdHintRequest() {
         userNetworkService.addFreeAdHint { (userInfo, error) -> Void in
-            if (error != nil) {
-                print(error)
+            if let requestError = error {
+                self.freeAdHintsNotAdded++
+                
+                NSLog(requestError.localizedDescription)
             } else {
                 if (userInfo != nil) {
                     userService.updateUserInfo(userInfo)
                 }
             }
         }
-    }
-    
-    let MAX_DAILY_FREE_HINTS_FROM_AD = 3
-    
-    func canAddFreeAdHint() -> Bool {
-        if (!isLoggedIn()) { return false }
-        return currentUser!.freeHintsGained < MAX_DAILY_FREE_HINTS_FROM_AD
-    }
-    
-    //for tutorial
-    func setTutorialUser(user: User) {
-        self.currentUser = user
-    }
-    
-    func clearTutorialUser() {
-        self.currentUser = nil
     }
 }

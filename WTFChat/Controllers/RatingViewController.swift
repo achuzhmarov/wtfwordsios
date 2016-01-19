@@ -58,7 +58,7 @@ class RatingViewController: UIViewController, UITableViewDataSource, UITableView
                 } else {
                     if let friends = users {
                         self.friends = friends
-                        self.friends.append(userService.getSelfUserInfo()!)
+                        self.friends.append(currentUserService.getSelfUserInfo()!)
                         self.updateView()
                     }
                 }

@@ -48,21 +48,21 @@ class SettingsViewController: UITableViewController {
     }
     
     func updateUserInfo() {
-        loginText.text = userService.getUserLogin()
+        loginText.text = currentUserService.getUserLogin()
         
-        lvlText.text = String(userService.getUserLvl())
+        lvlText.text = String(currentUserService.getUserLvl())
         lvlProgress.progress = Float(lvlService.getCurrentLvlExp()) / Float(lvlService.getNextLvlExp())
         
-        hintsText.text = String(userService.getUserSuggestions())
+        hintsText.text = String(currentUserService.getUserSuggestions())
         
-        nameText.text = userService.getUserName()
-        emailText.text = userService.getUserEmail()
+        nameText.text = currentUserService.getUserName()
+        emailText.text = currentUserService.getUserEmail()
         
-        pushNewSwitch.setOn(userService.getUserPushNew(), animated: false)
-        pushDecipherSwitch.setOn(userService.getUserPushDeciphered(), animated: false)
+        pushNewSwitch.setOn(currentUserService.getUserPushNew(), animated: false)
+        pushDecipherSwitch.setOn(currentUserService.getUserPushDeciphered(), animated: false)
         
         userImage.image = avatarService.getAvatarImage(
-            userService.getUserLogin(),
+            currentUserService.getUserLogin(),
             diameter: UInt(userImage.bounds.height))
         
         self.tableView.reloadData()
@@ -74,7 +74,7 @@ class SettingsViewController: UITableViewController {
                 if (error != nil) {
                     WTFOneButtonAlert.show("Error", message: "Can't update user info. \(connectionErrorDescription())", firstButtonTitle: "Ok", viewPresenter: self)
                 
-                    self.pushNewSwitch.setOn(userService.getUserPushNew(), animated: true)
+                    self.pushNewSwitch.setOn(currentUserService.getUserPushNew(), animated: true)
                 }
             })
         }
@@ -86,7 +86,7 @@ class SettingsViewController: UITableViewController {
                 if (error != nil) {
                     WTFOneButtonAlert.show("Error", message: "Can't update user info. \(connectionErrorDescription())", firstButtonTitle: "Ok", viewPresenter: self)
                 
-                    self.pushDecipherSwitch.setOn(userService.getUserPushDeciphered(), animated: true)
+                    self.pushDecipherSwitch.setOn(currentUserService.getUserPushDeciphered(), animated: true)
                 }
             })
         }
@@ -107,8 +107,20 @@ class SettingsViewController: UITableViewController {
             firstButtonTitle: "Ok",
             secondButtonTitle: "Cancel",
             viewPresenter: self) { () -> Void in
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                appDelegate.logout()
+                self.logout()
+        }
+    }
+    
+    func logout() {
+        userService.logoutNetworkRequest() { (error) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
+                if (error != nil) {
+                    WTFOneButtonAlert.show("Error", message: "Can't logout. \(connectionErrorDescription())", firstButtonTitle: "Ok", viewPresenter: self)
+                } else {
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    appDelegate.logout()
+                }
+            })
         }
     }
 }

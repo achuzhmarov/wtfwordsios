@@ -88,7 +88,7 @@ class InAppService {
         }
         
         if (IAPProducts.OTHER.contains(productId)) {
-            return userService.isContainBuyNonConsum(productId)
+            return currentUserService.isContainBuyNonConsum(productId)
         }
         
         return false

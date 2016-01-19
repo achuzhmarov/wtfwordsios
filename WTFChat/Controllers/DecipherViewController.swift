@@ -88,7 +88,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         if (self.isSingleMode) {
             suggestions = (message.countNew() - 1) / SUGGESTIONS_SINGLE_MODE + 1
         } else {
-            suggestions = userService.getUserSuggestions() - message.hintsUsed
+            suggestions = currentUserService.getUserSuggestions() - message.hintsUsed
         }
         
         self.wordsTableView.delegate = self.wordsTableView
@@ -254,7 +254,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             
             if (!isSingleMode) {
                 message.hintsUsed++
-                suggestions = userService.getUserSuggestions() - message.hintsUsed
+                suggestions = currentUserService.getUserSuggestions() - message.hintsUsed
             }
         }
         
@@ -532,6 +532,6 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     @IBAction func hintsBought(segue:UIStoryboardSegue) {
-        suggestions = userService.getUserSuggestions() - message.hintsUsed
+        suggestions = currentUserService.getUserSuggestions() - message.hintsUsed
     }
 }

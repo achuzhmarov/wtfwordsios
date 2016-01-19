@@ -146,14 +146,15 @@ extension IAPHelper: SKPaymentTransactionObserver {
         let productId = transaction.payment.productIdentifier
         print("completeTransaction... \(productId)")
         validateReceiptForTransaction(transaction, isRestore: false)
-        SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+        //SKPaymentQueue.defaultQueue().finishTransaction(transaction)
     }
   
     private func restoreTransaction(transaction: SKPaymentTransaction) {
-        let productId = transaction.originalTransaction!.payment.productIdentifier
+        let productId = transaction.payment.productIdentifier
+        //let productId = transaction.originalTransaction!.payment.productIdentifier
         print("restoreTransaction... \(productId)")
         validateReceiptForTransaction(transaction, isRestore: true)
-        SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+        //SKPaymentQueue.defaultQueue().finishTransaction(transaction)
     }
     
     private func validateReceiptForTransaction(transaction: SKPaymentTransaction, isRestore: Bool) {
@@ -176,6 +177,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
                         }
                         
                         self.provideContentForProduct(transaction.payment.productIdentifier, isRestore: isRestore)
+                        SKPaymentQueue.defaultQueue().finishTransaction(transaction)
                     }
                 })
             } else {

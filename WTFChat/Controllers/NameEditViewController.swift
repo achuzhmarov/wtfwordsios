@@ -15,7 +15,7 @@ class NameEditViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        nameText.text = userService.getUserName()
+        nameText.text = currentUserService.getUserName()
         nameText.delegate = self
         nameText.becomeFirstResponder()
     }

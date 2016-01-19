@@ -51,7 +51,7 @@ class RatingCell: UITableViewCell {
         userImage.image = avatarService.getAvatarImage(user.login,
             diameter: UInt(userImage.bounds.height))
         
-        if (userService.getUserLogin() == user.login) {
+        if (currentUserService.getUserLogin() == user.login) {
             self.backgroundColor = UIColor(netHex: 0xEEEEEE)
         } else {
             self.backgroundColor = UIColor.whiteColor()

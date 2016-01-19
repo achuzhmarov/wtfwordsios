@@ -13,6 +13,7 @@
 		48115BB11C32E62400ACA2B4 /* CoreMessage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48115BAD1C32E62400ACA2B4 /* CoreMessage+CoreDataProperties.swift */; };
 		48115BB21C32E62400ACA2B4 /* CoreMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48115BAE1C32E62400ACA2B4 /* CoreMessage.swift */; };
 		48115BB41C32E7B100ACA2B4 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48115BB31C32E7B100ACA2B4 /* CoreDataService.swift */; };
+		4814942C1C4E773B000760B7 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4814942B1C4E773B000760B7 /* CurrentUserService.swift */; };
 		4828CFA81BF9E1C4005DCCAB /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4828CFA71BF9E1C4005DCCAB /* RatingViewController.swift */; };
 		4828CFAA1BF9E1D2005DCCAB /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4828CFA91BF9E1D2005DCCAB /* RatingCell.swift */; };
 		4829B1801BBFE0C3009AC43F /* DecipherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4829B17F1BBFE0C3009AC43F /* DecipherViewController.swift */; };
@@ -144,6 +145,7 @@
 		48115BAD1C32E62400ACA2B4 /* CoreMessage+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreMessage+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		48115BAE1C32E62400ACA2B4 /* CoreMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreMessage.swift; sourceTree = "<group>"; };
 		48115BB31C32E7B100ACA2B4 /* CoreDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		4814942B1C4E773B000760B7 /* CurrentUserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
 		4828CFA71BF9E1C4005DCCAB /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		4828CFA91BF9E1D2005DCCAB /* RatingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
 		4829B17F1BBFE0C3009AC43F /* DecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecipherViewController.swift; sourceTree = "<group>"; };
@@ -512,6 +514,7 @@
 				48D3A53D1BDF814800B2A1AD /* TalkService.swift */,
 				48C661CB1BEF6C7B003AF4F5 /* MessageService.swift */,
 				48C661CD1BEF6D32003AF4F5 /* UserService.swift */,
+				4814942B1C4E773B000760B7 /* CurrentUserService.swift */,
 				4835D4AD1C22DCCB008ABB37 /* CipherService.swift */,
 				484EC36E1C2E7E7000C65F94 /* AdColonyService.swift */,
 			);
@@ -788,6 +791,7 @@
 				48115BB21C32E62400ACA2B4 /* CoreMessage.swift in Sources */,
 				487D771B1BA0749800AF333C /* RoundedLabel.swift in Sources */,
 				4828CFA81BF9E1C4005DCCAB /* RatingViewController.swift in Sources */,
+				4814942C1C4E773B000760B7 /* CurrentUserService.swift in Sources */,
 				482C241E1BA433F800288BB1 /* RightCutterCipher.swift in Sources */,
 				488854081C4421F80056F19B /* BaseLoginViewController.swift in Sources */,
 				489666DA1B9B656A00F769D1 /* Talk.swift in Sources */,

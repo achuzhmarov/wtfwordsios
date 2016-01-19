@@ -105,7 +105,7 @@ class TutorialMessagesViewController: MessagesViewController {
                 self.cipherType = sendMessageController.cipherType
                 self.lastSendedMessage = sendMessageController.message
                 let newMessage = messageCipher.addNewMessageToTalk(self.lastSendedMessage!, talk: self.talk!)
-                newMessage.author = userService.getUserLogin()
+                newMessage.author = currentUserService.getUserLogin()
                 
                 talkService.updateTalkInArray(self.talk, withMessages: true)
                 
@@ -121,7 +121,7 @@ class TutorialMessagesViewController: MessagesViewController {
         
         let noviceUser = User(login: "Novice", suggestions: 4)
         noviceUser.buyNonConsum.append(IAPProducts.getProductRef(IAPProducts.CIPHER_ALL)!)
-        userService.setTutorialUser(noviceUser)
+        currentUserService.setNewUser(noviceUser)
         
         setTutorialTalk()
         
@@ -156,7 +156,7 @@ class TutorialMessagesViewController: MessagesViewController {
     private func endTutorial() {
         nsUserDefaults.setInteger(currentTutorialStage.rawValue, forKey: TUTORIAL_STAGE_PROPERTY_KEY)
         
-        userService.clearTutorialUser()
+        currentUserService.setNewUser(nil)
         
         talkService.clearTalks()
         self.talk = talkService.getSingleModeTalk()

@@ -37,7 +37,7 @@ class FriendsViewController: UITableViewController, TalkListener {
     }
     
     override func viewDidAppear(animated: Bool) {
-        if (userService.getUserNewSuggestions() != 0) {
+        if (currentUserService.getUserNewSuggestions() != 0) {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.showNewSuggestionsAlert()
         }

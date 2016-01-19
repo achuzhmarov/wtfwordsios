@@ -55,24 +55,24 @@ class CipherService {
     }
 
     private func isAllPurchased() -> Bool {
-        return userService.isContainBuyNonConsum(IAPProducts.CIPHER_ALL)
+        return currentUserService.isContainBuyNonConsum(IAPProducts.CIPHER_ALL)
     }
     
     private func isCipherPurchased(category: CipherCategory) -> Bool {
         if let productId = CipherFactory.getProductId(category) {
-            return userService.isContainBuyNonConsum(productId)
+            return currentUserService.isContainBuyNonConsum(productId)
         }
         
         return false
     }
     
     private func isProductPurchased(productId: ProductIdentifier) -> Bool {
-        return userService.isContainBuyNonConsum(productId)
+        return currentUserService.isContainBuyNonConsum(productId)
     }
     
     private func isLvlEnough(category: CipherCategory, mode: CipherMode) -> Bool {
         if let cipherLvl = CipherFactory.getCipherLvl(category, mode: mode) {
-            let userLvl = userService.getUserLvl()
+            let userLvl = currentUserService.getUserLvl()
             
             return (userLvl >= cipherLvl)
         }

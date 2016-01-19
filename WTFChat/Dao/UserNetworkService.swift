@@ -83,13 +83,6 @@ class UserNetworkService: NSObject {
         }
     }
     
-    func sendUsedHints(suggestionsUsed: Int, completion:(error: NSError?) -> Void) {
-        let url = "user/use_suggestions/\(String(suggestionsUsed))"
-        networkService.post(nil, relativeUrl: url) { (json, error) -> Void in
-            completion(error: error)
-        }
-    }
-    
     func getNewFriends(searchString: String, completion:(friends: [FriendInfo]?, error: NSError?) -> Void) {
         var url = "user/friends"
         

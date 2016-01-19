@@ -33,7 +33,7 @@ class FriendCell: UITableViewCell {
         if (talk.isSingleMode) {
             friendName.text = talk.getFriendLogin().capitalizedString
         } else {
-            let friendInfo = userService.getFriendInfoByLogin(talk.getFriendLogin())
+            let friendInfo = currentUserService.getFriendInfoByLogin(talk.getFriendLogin())
             friendName.text = friendInfo!.getDisplayName()
         }
         

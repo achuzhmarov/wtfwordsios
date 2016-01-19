@@ -68,7 +68,7 @@ class MessageTableView: UITableView, UITableViewDataSource, UITableViewDelegate 
         if (talk.isSingleMode) {
             isOutcoming = (index % 2 == 1)
         } else {
-            isOutcoming = (message.author == userService.getUserLogin())
+            isOutcoming = (message.author == currentUserService.getUserLogin())
         }
         
         let showTime = needShowTime(index, message: message)

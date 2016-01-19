@@ -12,15 +12,15 @@ let lvlService = LvlService()
 
 class LvlService {
     func getUserLvl() -> Int {
-        return userService.getUserLvl()
+        return currentUserService.getUserLvl()
     }
     
     func getCurrentLvlExp() -> Int {
-        return userService.getUserExp() - getExpByLvl(userService.getUserLvl())
+        return currentUserService.getUserExp() - getExpByLvl(currentUserService.getUserLvl())
     }
     
     func getNextLvlExp() -> Int {
-        return getExpByLvl(userService.getUserLvl() + 1) - getExpByLvl(userService.getUserLvl())
+        return getExpByLvl(currentUserService.getUserLvl() + 1) - getExpByLvl(currentUserService.getUserLvl())
     }
     
     private func getExpByLvl(lvl: Int) -> Int {

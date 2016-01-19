@@ -22,10 +22,12 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
     var cipherType = CipherType.HalfWordRoundDown
     var lastSendedMessage: Message?
     var firstTimeLoaded = true
-    
+
     var defaultMessageTextHeightConstraint: CGFloat!
     
     var isKeyboardShown = false
+    
+    var wasSuccessfullUpdate = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +41,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         if (talk.isSingleMode) {
             self.title = talk.getFriendLogin().capitalizedString
         } else {
-            let friendInfo = userService.getFriendInfoByLogin(talk.getFriendLogin())
+            let friendInfo = currentUserService.getFriendInfoByLogin(talk.getFriendLogin())
             let title = "\(friendInfo!.getDisplayName()), lvl \(String(friendInfo!.lvl))"
             configureTitleView(title, navigationItem: navigationItem)
         }
@@ -179,7 +181,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
     
     func updateLastCipherType() {
         for message in talk.messages {
-            if (message.author == userService.getUserLogin() || talk.isSingleMode) {
+            if (message.author == currentUserService.getUserLogin() || talk.isSingleMode) {
                 self.cipherType = message.cipherType
             }
         }
@@ -193,9 +195,13 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
     func updateMessages(talk: Talk?, wasNew: Bool, error: NSError?) {
         dispatch_async(dispatch_get_main_queue(), {
             if let requestError = error {
-                //TODO - show error to user
-                print(requestError)
+                if (!self.wasSuccessfullUpdate) {
+                    WTFOneButtonAlert.show("Error", message: "Can't load messages. \(connectionErrorDescription())", firstButtonTitle: "Ok", viewPresenter: self)
+                }
+                
+                NSLog(requestError.localizedDescription)
             } else {
+                self.wasSuccessfullUpdate = true
                 self.talk = talk
                 self.updateView(false, earlierLoaded: 0, wasNew: wasNew)
             }
@@ -206,13 +212,15 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
     func loadEarlierCompleteHandler(talk: Talk?, newMessagesCount: Int, error: NSError?) {
         dispatch_async(dispatch_get_main_queue(), {
             if let requestError = error {
-                //TODO - show error to user
-                print(requestError)
+                WTFOneButtonAlert.show("Error", message: "Can't load earlier messages. \(connectionErrorDescription())", firstButtonTitle: "Ok", viewPresenter: self)
+
+                NSLog(requestError.localizedDescription)
             } else {
                 self.talk = talk
-                self.refreshControl.endRefreshing()
                 self.updateView(false, earlierLoaded: newMessagesCount)
             }
+            
+            self.refreshControl.endRefreshing()
         })
     }
     
@@ -277,7 +285,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
             targetController.isSingleMode = talk.isSingleMode
             
             //self message - view only
-            if (message.author == userService.getUserLogin()) {
+            if (message.author == currentUserService.getUserLogin()) {
                 targetController.selfAuthor = true
                 
                 if (!message.deciphered) {

@@ -80,7 +80,7 @@ class TalkService: NSObject {
     }
     
     func getNewUnreadTalks() {
-        if (!userService.isLoggedIn()) {
+        if (!currentUserService.isLoggedIn()) {
             return
         }
         

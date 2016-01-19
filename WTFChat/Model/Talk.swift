@@ -65,7 +65,7 @@ class Talk : BaseEntity {
     
     func getFriendLogin() -> String {
         for user in self.users {
-            if (user != userService.getUserLogin()) {
+            if (user != currentUserService.getUserLogin()) {
                 return user
             }
         }

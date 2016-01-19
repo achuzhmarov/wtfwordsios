@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let notification = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject : AnyObject]
         {
-            if (userService.isLoggedIn()) {
+            if (currentUserService.isLoggedIn()) {
                 computeInactiveNotification(notification)
             }
         }
@@ -108,7 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func logout() {
-        userService.logout()
+        userService.logoutInner()
         showLoginScreen()
     }
     
@@ -124,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         DEVICE_TOKEN = tokenString
         
-        if (userService.isLoggedIn()) {
+        if (currentUserService.isLoggedIn()) {
             iosService.updateDeviceToken()
         }
     }
@@ -180,13 +180,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
         
-        if (userService.getUserNewSuggestions() != 0) {
+        if (currentUserService.getUserNewSuggestions() != 0) {
             WTFOneButtonAlert.show("Daily free hints!",
-                message: "You have just received \(String(userService.getUserNewSuggestions()))",
+                message: "You have just received \(String(currentUserService.getUserNewSuggestions()))",
                 firstButtonTitle: "Ok",
                 viewPresenter: currentController)
             
-            userService.clearUserNewSuggestions()
+            currentUserService.clearUserNewSuggestions()
         }
     }
     

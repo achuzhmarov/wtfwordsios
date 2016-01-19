@@ -29,7 +29,7 @@ class MessageCell: UITableViewCell {
     func updateMessage(message: Message, isSingleMode: Bool) {
         initStyle()
 
-        let isOutcoming = (message.author == userService.getUserLogin())
+        let isOutcoming = (message.author == currentUserService.getUserLogin())
         
         var text = ""
         

@@ -57,18 +57,7 @@ class MessageService: NSObject {
         talksToUpdate.insert(talk.id)
         
         if (talk.messages.count == 0) {
-            messageNetworkService.getMessagesByTalk(talk) { (messages, error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if let requestError = error {
-                        listener.updateMessages(nil, wasNew: false, error: requestError)
-                    } else {
-                        talk.messages = messages!
-                        talkService.updateTalkInArray(talk, withMessages: true)
-                        
-                        listener.updateMessages(talk, wasNew: true, error: nil)
-                    }
-                })
-            }
+            getInitialMessagesForTalk(talk, listener: listener)
         }
     }
 
@@ -90,22 +79,42 @@ class MessageService: NSObject {
         let lastUpdate = getMessagesLastUpdate(talk)
         let listener = listeners[talkId]?.listener
         
-        messageNetworkService.getUnreadMessagesByTalk(talk, lastUpdate: lastUpdate) { (messages, error) -> Void in
+        if (talk.messages.count == 0) {
+            getInitialMessagesForTalk(talk, listener: listener)
+        } else {
+            messageNetworkService.getUnreadMessagesByTalk(talk, lastUpdate: lastUpdate) { (messages, error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    if let requestError = error {
+                        listener?.updateMessages(nil, wasNew: false, error: requestError)
+                    } else {
+                        if let newMessages = messages {
+                            var wasNew = false
+                            
+                            for message in newMessages {
+                                let isNew = self.updateOrCreateMessageInArray(talk, message: message)
+                                wasNew = wasNew || isNew
+                            }
+                            
+                            talkService.updateTalkInArray(talk, withMessages: true)
+                            
+                            listener?.updateMessages(talk, wasNew: wasNew, error: nil)
+                        }
+                    }
+                })
+            }
+        }
+    }
+    
+    private func getInitialMessagesForTalk(talk: Talk, listener: MessageListener?) {
+        messageNetworkService.getMessagesByTalk(talk) { (messages, error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if let requestError = error {
                     listener?.updateMessages(nil, wasNew: false, error: requestError)
                 } else {
-                    if let newMessages = messages {
-                        var wasNew = false
-                        
-                        for message in newMessages {
-                            wasNew = wasNew || self.updateOrCreateMessageInArray(talk, message: message)
-                        }
-                        
-                        talkService.updateTalkInArray(talk, withMessages: true)
-                        
-                        listener?.updateMessages(talk, wasNew: wasNew, error: nil)
-                    }
+                    talk.messages = messages!
+                    talkService.updateTalkInArray(talk, withMessages: true)
+                    
+                    listener?.updateMessages(talk, wasNew: true, error: nil)
                 }
             })
         }

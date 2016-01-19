@@ -54,6 +54,8 @@ class BaseShopViewController: UITableViewController {
         })
     }
     
+    let connectionErrorMessage = "Please, check if you have a stable internet connection. Then use 'Restore' button. If you still don't get your purchase, please, restart the app."
+    
     func productPurchasedError(notification: NSNotification) {
         if (notification.object != nil) {
             let productIdentifier = notification.object as! String
@@ -63,7 +65,7 @@ class BaseShopViewController: UITableViewController {
                     self.updateTable()
                     
                     WTFOneButtonAlert.show("Error",
-                        message: "\(productTitle) purchase error",
+                        message: "\(productTitle) purchase error. \(self.connectionErrorMessage)",
                         firstButtonTitle: "Ok",
                         viewPresenter: self)
                 })
@@ -73,7 +75,7 @@ class BaseShopViewController: UITableViewController {
                 self.updateTable()
                 
                 WTFOneButtonAlert.show("Error",
-                    message: "Unknown error occured",
+                    message: "Unknown error occured. \(self.connectionErrorMessage)",
                     firstButtonTitle: "Ok",
                     viewPresenter: self)
             })
@@ -105,7 +107,7 @@ class BaseShopViewController: UITableViewController {
     }
     
     func setFreeAdHintLabel() {
-        if userService.canAddFreeAdHint() && adColonyService.hasAd() {
+        if currentUserService.canAddFreeAdHint() && adColonyService.hasAd() {
             freeHintsBuyLabel.textColor = tintColor
         } else {
             freeHintsBuyLabel.textColor = detailColor
@@ -117,7 +119,7 @@ class BaseShopViewController: UITableViewController {
     }
     
     func showAdAlert() {
-        if userService.canAddFreeAdHint() && adColonyService.hasAd() {
+        if currentUserService.canAddFreeAdHint() && adColonyService.hasAd() {
             adColonyService.showAd({ () -> Void in
                 userService.addFreeAdHint()
                 
