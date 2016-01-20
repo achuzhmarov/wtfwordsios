@@ -33,6 +33,7 @@ class CoreMessage: NSManagedObject {
             for item in words {
                 if let coreWord = item as? CoreWord {
                     self.removeWordsObject(coreWord)
+                    coreDataService.deleteObject(coreWord)
                 }
             }
         }
@@ -97,16 +98,59 @@ class CoreMessage: NSManagedObject {
         }
     }
     
-    class func create(message: Message) {
+    class func createOrUpdateMessage(message: Message) {
+        if CoreMessage.getMessageByExtId(message) != nil {
+            CoreMessage.updateMessage(message)
+        } else {
+            CoreMessage.createMessage(message)
+        }
+    }
+    
+    class func createMessage(message: Message) {
         let newCoreMessage = coreDataService.createObject(CORE_MESSAGE_CLASS_NAME) as! CoreMessage
         newCoreMessage.updateFromMessage(message)
         coreDataService.saveContext()
     }
     
-    class func getAll() -> [Message] {
+    class func getAllWaiting() -> [Message] {
+        let predicate = NSPredicate(format: "talkId != %@", "0")
+        return getByPredicate(predicate)
+    }
+    
+    class func getAllLocal() -> [Message] {
+        let predicate = NSPredicate(format: "talkId == %@", "0")
+        return getByPredicate(predicate)
+    }
+    
+    class func getByTalkId(talkId: String) -> [Message] {
+        let predicate = NSPredicate(format: "talkId == %@", talkId)
+        return getByPredicate(predicate)
+    }
+    
+    class func getMessageByExtId(message: Message) -> Message? {
         let fetchRequest = coreDataService.createFetch(CORE_MESSAGE_CLASS_NAME)
+        
+        let predicate = NSPredicate(format: "extId == %@", message.extId)
+        fetchRequest.predicate = predicate
+        
+        let results = coreDataService.executeFetch(fetchRequest)
+        
+        if (results.count > 0) {
+            if let coreMessage = results[0] as? CoreMessage {
+                return coreMessage.getMessage()
+            }
+        }
+            
+        return nil
+    }
+    
+    private class func getByPredicate(predicate: NSPredicate) -> [Message] {
+        let fetchRequest = coreDataService.createFetch(CORE_MESSAGE_CLASS_NAME)
+        
         let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        fetchRequest.predicate = predicate
         
         let results = coreDataService.executeFetch(fetchRequest)
         
@@ -131,9 +175,19 @@ class CoreMessage: NSManagedObject {
         
         let results = coreDataService.executeFetch(fetchRequest)
 
-        if let coreMessage = results[0] as? CoreMessage {
-            coreMessage.updateFromMessage(message)
-            coreDataService.saveContext()
+        if (results.count > 0) {
+            if let coreMessage = results[0] as? CoreMessage {
+                coreMessage.updateFromMessage(message)
+                coreDataService.saveContext()
+            }
+        }
+    }
+    
+    class func deleteMessageIfExists(message: Message) {
+        if CoreMessage.getMessageByExtId(message) != nil {
+            CoreMessage.deleteMessage(message)
+        } else {
+            //do nothing
         }
     }
     
@@ -145,9 +199,10 @@ class CoreMessage: NSManagedObject {
         
         let results = coreDataService.executeFetch(fetchRequest)
         
-        if let coreMessage = results[0] as? CoreMessage {
-            coreMessage.updateFromMessage(message)
-            coreDataService.saveContext()
+        if (results.count > 0) {
+            if let coreMessage = results[0] as? CoreMessage {
+                coreDataService.deleteObject(coreMessage)
+            }
         }
     }
 }

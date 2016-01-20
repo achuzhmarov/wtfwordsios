@@ -133,7 +133,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
             if (!talk.isSingleMode) {
                 messageService.createMessage(newMessage)
             } else {
-                CoreMessage.create(newMessage)
+                CoreMessage.createMessage(newMessage)
 
                 self.updateView(true)
             }
@@ -323,7 +323,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
             
             if (earlierLoaded > 0) {
                 self.messageTableView.scrollTableToEarlier(earlierLoaded - 1)
-            } else {
+            } else if (wasNew) {
                 self.messageTableView.scrollTableToBottom()
             }
         }

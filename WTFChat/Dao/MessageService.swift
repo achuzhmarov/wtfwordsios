@@ -69,8 +69,22 @@ class MessageService: NSObject {
     
     //for timer
     func updateMessages() {
+        sendLocalMessages()
+        
         for talkId in talksToUpdate {
             updateMessages(talkId)
+        }
+    }
+    
+    private func sendLocalMessages() {
+        let messages = CoreMessage.getAllWaiting()
+        
+        for message in messages {
+            if (message.id == "") {
+                createMessage(message)
+            } else {
+                decipherMessage(message)
+            }
         }
     }
     
@@ -151,7 +165,12 @@ class MessageService: NSObject {
             dispatch_async(dispatch_get_main_queue(), {
                 if let requestError = error {
                     listener?.messageSended(nil, error: requestError)
+                    
+                    //save message in localStore
+                    CoreMessage.createOrUpdateMessage(newMessage)
                 } else {
+                    CoreMessage.deleteMessageIfExists(newMessage)
+                    
                     if let responseMessage = message {
                         self.updateOrCreateMessageInArray(talk, message: responseMessage)
                         talkService.updateTalkInArray(talk, withMessages: true)
@@ -163,8 +182,19 @@ class MessageService: NSObject {
         }
     }
     
-    func decipherMessage(message: Message, completion:(message: Message?, error: NSError?) -> Void) {
-        messageNetworkService.decipherMessage(message, completion: completion)
+    func decipherMessage(decipheredMessage: Message, completion:((message: Message?, error: NSError?) -> Void)? = nil) {
+        messageNetworkService.decipherMessage(decipheredMessage){ (message, error) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error != nil {
+                    //save message in localStore
+                    CoreMessage.createOrUpdateMessage(decipheredMessage)
+                } else {
+                    CoreMessage.deleteMessageIfExists(decipheredMessage)
+                }
+                
+                completion?(message: message, error: error)
+            })
+        }
     }
     
     func updateMessageInTalk(message: Message) {

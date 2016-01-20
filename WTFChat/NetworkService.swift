@@ -13,9 +13,9 @@ let networkService = NetworkService(baseUrl: "https://wtfchat.wtf:42042/")
 
 class NetworkService: NSObject, NSURLSessionDelegate {
     var baseUrl: String
-    //var session = NSURLSession.sharedSession()
-    
     private var session: NSURLSession!
+    
+    let REQUEST_REPEAT_COUNT = 3
     
     init(baseUrl: String) {
         self.baseUrl = baseUrl
@@ -64,6 +64,22 @@ class NetworkService: NSObject, NSURLSessionDelegate {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
+        sendPostRequestWithRepeats(request, repeats: REQUEST_REPEAT_COUNT, completion: completion)
+    }
+    
+    private func sendPostRequestWithRepeats(request: NSMutableURLRequest, repeats: Int, completion:(json: JSON?, error: NSError?) -> Void) {
+        
+        sendPostRequest(request) { (json, error) -> Void in
+            if error != nil && repeats > 0 {
+                //in case of a error, try again
+                self.sendPostRequestWithRepeats(request, repeats: repeats - 1, completion: completion)
+            } else {
+                completion(json: json, error: error)
+            }
+        }
+    }
+    
+    private func sendPostRequest(request: NSMutableURLRequest, completion:(json: JSON?, error: NSError?) -> Void) {
         let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
             
             if let responseError = error {
@@ -87,6 +103,22 @@ class NetworkService: NSObject, NSURLSessionDelegate {
     func get(relativeUrl: String, completion:(json: JSON?, error: NSError?) -> Void) {
         let url = NSURL(string: baseUrl + relativeUrl)!
         
+        sendGetRequestWithRepeats(url, repeats: REQUEST_REPEAT_COUNT, completion: completion)
+    }
+    
+    private func sendGetRequestWithRepeats(url: NSURL, repeats: Int, completion:(json: JSON?, error: NSError?) -> Void) {
+        
+        sendGetRequest(url) { (json, error) -> Void in
+            if error != nil && repeats > 0 {
+                //in case of a error, try again
+                self.sendGetRequestWithRepeats(url, repeats: repeats - 1, completion: completion)
+            } else {
+                completion(json: json, error: error)
+            }
+        }
+    }
+    
+    private func sendGetRequest(url: NSURL, completion:(json: JSON?, error: NSError?) -> Void) {
         let loadDataTask = session.dataTaskWithURL(url) { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             
             if let responseError = error {

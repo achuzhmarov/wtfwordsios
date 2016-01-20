@@ -163,23 +163,23 @@ class TutorialMessagesViewController: MessagesViewController {
         
         var message = messageCipher.createMessage(TUTORIAL_TIP1, cipherType: CipherType.HalfWordRoundDownFromEnd)
         message = messageCipher.addNewMessageToTalk(message, talk: self.talk)
-        CoreMessage.create(message)
+        CoreMessage.createMessage(message)
         
         message = messageCipher.createMessage(TUTORIAL_TIP2, cipherType: CipherType.NormalDoubleCutter)
         message = messageCipher.addNewMessageToTalk(message, talk: self.talk)
-        CoreMessage.create(message)
+        CoreMessage.createMessage(message)
         
         message = messageCipher.createMessage(TUTORIAL_TIP3, cipherType: CipherType.NormalRandomCutter)
         message = messageCipher.addNewMessageToTalk(message, talk: self.talk)
-        CoreMessage.create(message)
+        CoreMessage.createMessage(message)
         
         message = messageCipher.createMessage(TUTORIAL_TIP4, cipherType: CipherType.ShuffleFullWord)
         message = messageCipher.addNewMessageToTalk(message, talk: self.talk)
-        CoreMessage.create(message)
+        CoreMessage.createMessage(message)
         
         message = messageCipher.createMessage(TUTORIAL_TIP5, cipherType: CipherType.FirstLetter)
         message = messageCipher.addNewMessageToTalk(message, talk: self.talk)
-        CoreMessage.create(message)
+        CoreMessage.createMessage(message)
         
         talkService.updateTalkInArray(self.talk, withMessages: true)
         

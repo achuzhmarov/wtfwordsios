@@ -71,7 +71,7 @@ class TalkService: NSObject {
         singleModeTalk.users.append("")
         
         //load local messages for singleModeTalk
-        singleModeTalk.messages = CoreMessage.getAll()
+        singleModeTalk.messages = CoreMessage.getAllLocal()
         if (singleModeTalk.messages.count > 0) {
             singleModeTalk.lastMessage = singleModeTalk.messages.last
         }

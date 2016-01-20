@@ -3,12 +3,32 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "static CoreMessage.getAll() -&gt; [Message] [inlined]:CoreMessage.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MessageService.(sendLocalMessages in _93E863E50040D176B07CA38C0AAB5FA4)() -&gt; ():MessageService.swift">
+      </ContextState>
+      <ContextState
          contextName = "SettingsViewController.updateUserInfo() -&gt; ():SettingsViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "userService.getUserName()">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CoreMessage.updateFromMessage(Message) -&gt; ():CoreMessage.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.words">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MessageService.(createMessage(MessageService) -&gt; (Message) -&gt; ()).(closure #1).(closure #1):MessageService.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CoreMessage.getMessage() -&gt; Message?:CoreMessage.swift">
       </ContextState>
       <ContextState
          contextName = "specialized TalkService.setTalksByNewUser(User) -&gt; ():TalkService.swift">
@@ -19,10 +39,12 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "CoreMessage.getMessage() -&gt; Message?:CoreMessage.swift">
-      </ContextState>
-      <ContextState
-         contextName = "static CoreMessage.getAll() -&gt; [Message] [inlined]:CoreMessage.swift">
+         contextName = "static CoreMessage.updateMessage(Message) -&gt; ():CoreMessage.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "coreMessage.words">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>
