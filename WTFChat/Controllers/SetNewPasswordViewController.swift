@@ -1,39 +1,41 @@
 //
-//  RegistrationViewController.swift
+//  SetNewPasswordViewController.swift
 //  WTFChat
 //
-//  Created by Artem Chuzhmarov on 25/09/15.
-//  Copyright © 2015 Artem Chuzhmarov. All rights reserved.
+//  Created by Artem Chuzhmarov on 21/01/16.
+//  Copyright © 2016 Artem Chuzhmarov. All rights reserved.
 //
 
 import UIKit
 
-class RegistrationViewController: BaseLoginViewController, UITextFieldDelegate {
+class SetNewPasswordViewController: BaseLoginViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var codeField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var passwordConfirmField: UITextField!
     
-    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var changeButton: UIButton!
     
     var username = ""
     var password = ""
-    var email = ""
+    var code = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        signUpButton.layer.cornerRadius = 10
+        
+        changeButton.layer.cornerRadius = 10
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
         
         usernameField.delegate = self
-        emailField.delegate = self
+        codeField.delegate = self
         passwordField.delegate = self
         passwordConfirmField.delegate = self
+        
+        usernameField.text = username
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -43,35 +45,27 @@ class RegistrationViewController: BaseLoginViewController, UITextFieldDelegate {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
-
-    func register() {
+    
+    func changePassword() {
         if (!checkData()) {
             return
         }
         
         self.username = usernameField.text!
         self.password = passwordField.text!
-        self.email = emailField.text!
+        self.code = codeField.text!
         
-        authService.register(username, password: password, email: email) { error -> Void in
+        authService.changePassword(username, password: password, code: code) { error -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if let requestError = error {
-                    //conflict
-                    if (requestError.code == HTTP_LOGIN_EXISTS) {
-                        self.usernameField.text = ""
-                        self.usernameField.placeholder = "\(self.username) already exists"
+                    if (requestError.code == HTTP_INCORRECT_LOGIN_OR_EMAIL) {
+                        WTFOneButtonAlert.show("Error", message: "Incorrect login or email", firstButtonTitle: "Ok", viewPresenter: self)
+                    } else if (requestError.code == HTTP_RESTORE_CODE_INVALID) {
+                        self.codeField.text = ""
+                        self.codeField.placeholder = "Invalid restore code"
                         
                         WTFOneButtonAlert.show("Error",
-                            message: "Login \(self.username) already exists",
-                            firstButtonTitle: "Ok",
-                            viewPresenter: self)
-                        
-                    } else if (requestError.code == HTTP_EMAIL_EXISTS) {
-                        self.emailField.text = ""
-                        self.emailField.placeholder = "\(self.email) already exists"
-                        
-                        WTFOneButtonAlert.show("Error",
-                            message: "Email \(self.email) already exists",
+                            message: "Invalid restore code",
                             firstButtonTitle: "Ok",
                             viewPresenter: self)
                         
@@ -96,15 +90,11 @@ class RegistrationViewController: BaseLoginViewController, UITextFieldDelegate {
             valid = false
         }
         
-        if (emailField.text == nil || emailField.text == "") {
-            emailField.placeholder = "Email required"
-            valid = false
-        } else if (!isValidEmail(emailField.text!)) {
-            emailField.textColor = UIColor.redColor()
-            emailField.placeholder = "Invalid email address"
+        if (codeField.text == nil || codeField.text == "") {
+            codeField.placeholder = "Code required"
             valid = false
         } else {
-            emailField.textColor = UIColor.blackColor()
+            codeField.textColor = UIColor.blackColor()
         }
         
         if (passwordField.text == nil || passwordField.text == "") {
@@ -128,11 +118,11 @@ class RegistrationViewController: BaseLoginViewController, UITextFieldDelegate {
     
     //text fields delegate method
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        register()
+        changePassword()
         return true
     }
     
-    @IBAction func signButtonPressed(sender: AnyObject) {
-        register()
+    @IBAction func changeButtonPressed(sender: AnyObject) {
+        changePassword()
     }
 }

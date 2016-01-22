@@ -18,7 +18,7 @@ class LoginViewController: BaseLoginViewController, UITextFieldDelegate {
 
         loginButton.layer.cornerRadius = 10
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
         usernameField.delegate = self
@@ -30,7 +30,7 @@ class LoginViewController: BaseLoginViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func DismissKeyboard(){
+    func dismissKeyboard(){
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
@@ -57,5 +57,14 @@ class LoginViewController: BaseLoginViewController, UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         loginButtonPressed(loginButton)
         return true
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "restorePassword" {
+            let targetController = segue.destinationViewController as! RestorePasswordViewController
+            targetController.username = usernameField.text!
+        }
+        
+        dismissKeyboard()
     }
 }

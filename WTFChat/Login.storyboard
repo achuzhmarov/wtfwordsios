@@ -75,6 +75,16 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3YN-eN-20B">
+                                <rect key="frame" x="198" y="250" width="205" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Forgot your password?">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="ePW-do-uhw" kind="show" identifier="restorePassword" id="mUf-52-H12"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.1019607843" green="0.66274509800000003" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -85,7 +95,9 @@
                             <constraint firstItem="3TU-vD-Lyy" firstAttribute="centerX" secondItem="pex-Ii-tio" secondAttribute="centerX" id="CVE-je-PcM"/>
                             <constraint firstItem="eeh-ib-hIl" firstAttribute="top" secondItem="bzl-5Q-Kqy" secondAttribute="bottom" constant="8" id="VVb-mC-MFC"/>
                             <constraint firstItem="768-1k-vIj" firstAttribute="top" secondItem="3TU-vD-Lyy" secondAttribute="bottom" constant="8" id="Xb5-tk-4QR"/>
+                            <constraint firstItem="3YN-eN-20B" firstAttribute="centerX" secondItem="pex-Ii-tio" secondAttribute="centerX" id="ha0-y7-7W6"/>
                             <constraint firstItem="CfL-WS-vIi" firstAttribute="centerX" secondItem="pex-Ii-tio" secondAttribute="centerX" id="l1y-1U-a3B"/>
+                            <constraint firstItem="3YN-eN-20B" firstAttribute="top" secondItem="eeh-ib-hIl" secondAttribute="bottom" constant="8" id="l5Y-4b-2sG"/>
                             <constraint firstItem="bzl-5Q-Kqy" firstAttribute="centerX" secondItem="pex-Ii-tio" secondAttribute="centerX" id="uOK-Pc-KTi"/>
                             <constraint firstItem="3TU-vD-Lyy" firstAttribute="top" secondItem="LLQ-BK-t6e" secondAttribute="bottom" constant="8" id="xWA-MW-MLw"/>
                         </constraints>
@@ -100,6 +112,194 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EI3-96-cGy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="879" y="-397"/>
+        </scene>
+        <!--Restore Password-->
+        <scene sceneID="KqE-i2-0Iq">
+            <objects>
+                <viewController id="ePW-do-uhw" customClass="RestorePasswordViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bg9-9g-D47"/>
+                        <viewControllerLayoutGuide type="bottom" id="SSk-uj-m7f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tTG-GB-8fE">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Login or email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uh8-uc-xRg">
+                                <rect key="frame" x="180" y="114" width="240" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="VPn-OT-gkE"/>
+                                    <constraint firstAttribute="width" constant="240" id="haZ-Mh-6RN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="alphabet" keyboardAppearance="light" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get a restore code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4t-WF-zTM">
+                                <rect key="frame" x="187" y="72" width="226" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="226" id="gIf-w3-N2h"/>
+                                    <constraint firstAttribute="height" constant="34" id="vWN-4G-9sZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9E-Jc-8qH">
+                                <rect key="frame" x="154" y="212" width="293" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="293" id="7rA-Fg-Tqf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Have already recieved the code?">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="XxW-Mk-7za" kind="show" identifier="enterCode" id="kSy-7V-1DT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XDX-Qi-ahr">
+                                <rect key="frame" x="200" y="152" width="200" height="52"/>
+                                <color key="backgroundColor" red="0.62745098040000002" green="0.83921568629999999" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="P3k-zW-w1u"/>
+                                    <constraint firstAttribute="height" constant="52" id="fec-WE-a6C"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="28"/>
+                                <color key="tintColor" red="0.0" green="0.40784313729999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Send Email">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendButtonPressed:" destination="ePW-do-uhw" eventType="touchUpInside" id="3lq-Ne-bEQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1019607843" green="0.66274509800000003" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Uh8-uc-xRg" firstAttribute="centerX" secondItem="tTG-GB-8fE" secondAttribute="centerX" id="6cn-QP-qE1"/>
+                            <constraint firstItem="R9E-Jc-8qH" firstAttribute="centerX" secondItem="tTG-GB-8fE" secondAttribute="centerX" id="BfD-dL-lOo"/>
+                            <constraint firstItem="Uh8-uc-xRg" firstAttribute="top" secondItem="G4t-WF-zTM" secondAttribute="bottom" constant="8" id="IPx-fj-YG1"/>
+                            <constraint firstItem="G4t-WF-zTM" firstAttribute="centerX" secondItem="tTG-GB-8fE" secondAttribute="centerX" id="WcQ-bu-WVZ"/>
+                            <constraint firstItem="XDX-Qi-ahr" firstAttribute="centerX" secondItem="tTG-GB-8fE" secondAttribute="centerX" id="XBP-qd-2RQ"/>
+                            <constraint firstItem="R9E-Jc-8qH" firstAttribute="top" secondItem="XDX-Qi-ahr" secondAttribute="bottom" constant="8" id="Y3q-lT-xfT"/>
+                            <constraint firstItem="G4t-WF-zTM" firstAttribute="top" secondItem="bg9-9g-D47" secondAttribute="bottom" constant="8" id="hji-eB-IWh"/>
+                            <constraint firstItem="XDX-Qi-ahr" firstAttribute="top" secondItem="Uh8-uc-xRg" secondAttribute="bottom" constant="8" id="iKE-rW-caQ"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Restore Password" id="6Zy-4Z-c3S"/>
+                    <connections>
+                        <outlet property="sendButton" destination="XDX-Qi-ahr" id="X01-TJ-PUq"/>
+                        <outlet property="usernameField" destination="Uh8-uc-xRg" id="pbL-ZC-lKp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0y4-qh-Bm2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1655" y="-750"/>
+        </scene>
+        <!--Set new password-->
+        <scene sceneID="Vkn-qb-u7G">
+            <objects>
+                <viewController id="XxW-Mk-7za" customClass="SetNewPasswordViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EvT-78-KgY"/>
+                        <viewControllerLayoutGuide type="bottom" id="3ab-ME-J3P"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VgG-Uo-MiA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Login or email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Nj-s3-vTh">
+                                <rect key="frame" x="180" y="114" width="240" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="KQX-Wl-s0s"/>
+                                    <constraint firstAttribute="height" constant="30" id="ajd-rZ-BjT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="alphabet" keyboardAppearance="light" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gd-Ul-j1K">
+                                <rect key="frame" x="190" y="72" width="221" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="221" id="RwP-Fx-ErG"/>
+                                    <constraint firstAttribute="height" constant="34" id="y1S-Rg-lGY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f7h-rz-3x3">
+                                <rect key="frame" x="180" y="190" width="240" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="xAd-lT-l6E"/>
+                                    <constraint firstAttribute="width" constant="240" id="zGW-Cc-aKW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="alphabet" keyboardAppearance="light" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tWw-zP-ELS">
+                                <rect key="frame" x="180" y="228" width="240" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="dcD-JH-wc4"/>
+                                    <constraint firstAttribute="width" constant="240" id="jh4-fR-lZt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="alphabet" keyboardAppearance="light" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yuh-To-NU2">
+                                <rect key="frame" x="200" y="266" width="200" height="52"/>
+                                <color key="backgroundColor" red="0.62745098040000002" green="0.83921568629999999" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="b8h-UM-ACF"/>
+                                    <constraint firstAttribute="width" constant="200" id="oyP-Iw-M2J"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="28"/>
+                                <color key="tintColor" red="0.0" green="0.40784313729999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Change">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeButtonPressed:" destination="XxW-Mk-7za" eventType="touchUpInside" id="BtV-X0-Fd1"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Code" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GD5-Cb-Zb6">
+                                <rect key="frame" x="180" y="152" width="240" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="KxY-1e-CX7"/>
+                                    <constraint firstAttribute="width" constant="240" id="zEL-3x-xYW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="alphabet" keyboardAppearance="light" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1019607843" green="0.66274509800000003" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Yuh-To-NU2" firstAttribute="top" secondItem="tWw-zP-ELS" secondAttribute="bottom" constant="8" id="DoY-UR-Phh"/>
+                            <constraint firstItem="f7h-rz-3x3" firstAttribute="top" secondItem="GD5-Cb-Zb6" secondAttribute="bottom" constant="8" id="EIJ-dH-5uE"/>
+                            <constraint firstItem="4Nj-s3-vTh" firstAttribute="centerX" secondItem="VgG-Uo-MiA" secondAttribute="centerX" id="J9g-1E-4vB"/>
+                            <constraint firstItem="Yuh-To-NU2" firstAttribute="centerX" secondItem="VgG-Uo-MiA" secondAttribute="centerX" id="KKN-z2-h5l"/>
+                            <constraint firstItem="tWw-zP-ELS" firstAttribute="centerX" secondItem="VgG-Uo-MiA" secondAttribute="centerX" id="Q4L-2M-Wbq"/>
+                            <constraint firstItem="5Gd-Ul-j1K" firstAttribute="top" secondItem="EvT-78-KgY" secondAttribute="bottom" constant="8" id="QEY-2b-OY9"/>
+                            <constraint firstItem="GD5-Cb-Zb6" firstAttribute="top" secondItem="4Nj-s3-vTh" secondAttribute="bottom" constant="8" id="gBx-bT-rfn"/>
+                            <constraint firstItem="5Gd-Ul-j1K" firstAttribute="centerX" secondItem="VgG-Uo-MiA" secondAttribute="centerX" id="hqt-c1-ESp"/>
+                            <constraint firstItem="tWw-zP-ELS" firstAttribute="top" secondItem="f7h-rz-3x3" secondAttribute="bottom" constant="8" id="jN4-xu-UIl"/>
+                            <constraint firstItem="GD5-Cb-Zb6" firstAttribute="centerX" secondItem="VgG-Uo-MiA" secondAttribute="centerX" id="rzh-p0-Vwy"/>
+                            <constraint firstItem="4Nj-s3-vTh" firstAttribute="top" secondItem="5Gd-Ul-j1K" secondAttribute="bottom" constant="8" id="wHp-Mc-LeK"/>
+                            <constraint firstItem="f7h-rz-3x3" firstAttribute="centerX" secondItem="VgG-Uo-MiA" secondAttribute="centerX" id="xVd-fq-cMl"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Set new password" id="KyV-Ha-WRn"/>
+                    <connections>
+                        <outlet property="changeButton" destination="Yuh-To-NU2" id="G2M-jS-JN9"/>
+                        <outlet property="codeField" destination="GD5-Cb-Zb6" id="e3S-Da-xI0"/>
+                        <outlet property="passwordConfirmField" destination="tWw-zP-ELS" id="eMs-hU-w34"/>
+                        <outlet property="passwordField" destination="f7h-rz-3x3" id="0aC-2k-25G"/>
+                        <outlet property="usernameField" destination="4Nj-s3-vTh" id="7B8-SX-6Dg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mE1-A4-PR4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2375" y="-750"/>
         </scene>
         <!--Registration-->
         <scene sceneID="Qlr-lL-Bwy">
@@ -698,6 +898,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wby-Ng-oF6"/>
+        <segue reference="zNh-Qp-h2d"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -1202,6 +1202,27 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="OKO-FR-d02">
+                                        <rect key="frame" x="0.0" y="146" width="600" height="47"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OKO-FR-d02" id="gYk-y8-uv2">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="46"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your password here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mRG-Xl-lcu">
+                                                    <rect key="frame" x="15" y="8" width="570" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="mRG-Xl-lcu" secondAttribute="bottom" constant="8" id="0cd-OX-5pC"/>
+                                                <constraint firstItem="mRG-Xl-lcu" firstAttribute="top" secondItem="gYk-y8-uv2" secondAttribute="top" constant="8" id="ZiS-M7-oos"/>
+                                                <constraint firstItem="mRG-Xl-lcu" firstAttribute="leading" secondItem="gYk-y8-uv2" secondAttribute="leading" constant="15" id="epA-Xn-7Xl"/>
+                                                <constraint firstAttribute="trailing" secondItem="mRG-Xl-lcu" secondAttribute="trailing" constant="15" id="uNr-Kt-pfo"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -1219,6 +1240,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="emailText" destination="SQM-4P-Act" id="YfP-RX-rgt"/>
+                        <outlet property="passwordText" destination="mRG-Xl-lcu" id="fPY-Pn-ShX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XOX-HR-P85" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -11,11 +11,14 @@ import Foundation
 class EmailEditViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emailText: UITextField!
+    @IBOutlet weak var passwordText: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         emailText.text = currentUserService.getUserEmail()
+        
+        passwordText.delegate = self
         emailText.delegate = self
         emailText.becomeFirstResponder()
     }
@@ -35,10 +38,17 @@ class EmailEditViewController: UITableViewController, UITextFieldDelegate {
             return
         }
         
-        userService.updateEmail(emailText.text!) { (error) -> Void in
+        if (passwordText.text == nil || passwordText.text == "") {
+            passwordText.placeholder = "Should not be empty"
+            return
+        }
+        
+        userService.updateEmail(emailText.text!, password: passwordText.text!) { (error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if (error != nil) {
-                    if (error!.code == HTTP_EMAIL_EXISTS) {
+                    if (error!.code == HTTP_INCORRECT_PASSWORD) {
+                        WTFOneButtonAlert.show("Error", message: "Incorrect password", firstButtonTitle: "Ok", viewPresenter: self)
+                    } else if (error!.code == HTTP_EMAIL_EXISTS) {
                         WTFOneButtonAlert.show("Error", message: "User with this email already exists", firstButtonTitle: "Ok", viewPresenter: self)
                     } else {
                         WTFOneButtonAlert.show("Error", message: "Can't update user info. \( connectionErrorDescription())", firstButtonTitle: "Ok", viewPresenter: self)

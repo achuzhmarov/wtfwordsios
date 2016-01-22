@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         adColonyService.initService()
         
         if (iosService.haveUserCredentials()) {
-            userService.loginWithKeychain() { user, error -> Void in
+            authService.loginWithKeychain() { user, error -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     if let requestError = error {
                         print(requestError)

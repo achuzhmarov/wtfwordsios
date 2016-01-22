@@ -112,7 +112,7 @@ class SettingsViewController: UITableViewController {
     }
     
     func logout() {
-        userService.logoutNetworkRequest() { (error) -> Void in
+        authService.logoutNetworkRequest() { (error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if (error != nil) {
                     WTFOneButtonAlert.show("Error", message: "Can't logout. \(connectionErrorDescription())", firstButtonTitle: "Ok", viewPresenter: self)

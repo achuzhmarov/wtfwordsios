@@ -10,11 +10,6 @@ import Foundation
 
 let userService = UserService()
 
-let HTTP_UNAUTHORIZED = 401
-let HTTP_LOGIN_EXISTS = 490
-let HTTP_EMAIL_EXISTS = 491
-let HTTP_INCORRECT_PASSWORD = 492
-
 class UserService: NSObject {
     let USER_UPDATE_TIMER_INTERVAL = 10.0
     let userNetworkService = UserNetworkService()
@@ -72,29 +67,6 @@ class UserService: NSObject {
         }
     }
     
-    func loginWithKeychain(completion: (user: User?, error: NSError?) -> Void) {
-        login(iosService.getKeychainUser()!, password: iosService.getKeychainPassword()!) { (user, error) -> Void in
-            completion(user: user, error: error)
-        }
-    }
-    
-    func login(login: String, password: String, completion: (user: User?, error: NSError?) -> Void) {
-        userNetworkService.login(login, password: password) {user, error in
-            if let requestError = error {
-                completion(user: nil, error: requestError)
-            } else {
-                self.setNewUser(user!, password: password)
-                completion(user: user, error: nil)
-            }
-        }
-    }
-    
-    func logoutNetworkRequest(completion: (error: NSError?) -> Void) {
-        userNetworkService.logout(DEVICE_TOKEN) {error in
-            completion(error: error)
-        }
-    }
-    
     func logoutInner() {
         currentUserService.setNewUser(nil)
         talkService.clearTalks()
@@ -121,10 +93,6 @@ class UserService: NSObject {
         userNetworkService.makeFriends(friend.login, completion: completion)
     }
     
-    func register(login: String, password: String, email: String, completion:(error: NSError?) -> Void) {
-        userNetworkService.register(login, password: password, email: email, completion: completion)
-    }
-    
     func updatePassword(oldPassword: String, newPassword: String, completion:(error: NSError?) -> Void) {
         userNetworkService.updatePassword(oldPassword, newPassword: newPassword, completion: completion)
     }
@@ -139,8 +107,8 @@ class UserService: NSObject {
         }
     }
     
-    func updateEmail(email: String, completion:(error: NSError?) -> Void) {
-        userNetworkService.updateEmail(email) { error in
+    func updateEmail(email: String, password: String, completion:(error: NSError?) -> Void) {
+        userNetworkService.updateEmail(email, password: password) { error in
             if (error == nil) {
                 currentUserService.updateEmail(email)
             }

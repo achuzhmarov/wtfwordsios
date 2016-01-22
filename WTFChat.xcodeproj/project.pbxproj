@@ -27,6 +27,10 @@
 		482E9ED21BC1825D00803CDE /* WTFAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482E9ED11BC1825D00803CDE /* WTFAlert.swift */; };
 		482EBECF1C29694C00C88EC9 /* BaseShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482EBECE1C29694C00C88EC9 /* BaseShopViewController.swift */; };
 		482EBED11C296A6D00C88EC9 /* HintsShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482EBED01C296A6D00C88EC9 /* HintsShopViewController.swift */; };
+		4830BB451C50EF5800C74690 /* RestorePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4830BB441C50EF5800C74690 /* RestorePasswordViewController.swift */; };
+		4830BB471C51384A00C74690 /* AuthNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4830BB461C51384A00C74690 /* AuthNetworkService.swift */; };
+		4830BB491C51390B00C74690 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4830BB481C51390B00C74690 /* AuthService.swift */; };
+		4830BB4B1C513F5400C74690 /* SetNewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4830BB4A1C513F5400C74690 /* SetNewPasswordViewController.swift */; };
 		4835D4AE1C22DCCB008ABB37 /* CipherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4835D4AD1C22DCCB008ABB37 /* CipherService.swift */; };
 		483676491C2048200092C703 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483676481C2048200092C703 /* StoreKit.framework */; };
 		4836764B1C207B860092C703 /* InAppNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4836764A1C207B860092C703 /* InAppNetworkService.swift */; };
@@ -159,6 +163,10 @@
 		482E9ED11BC1825D00803CDE /* WTFAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTFAlert.swift; sourceTree = "<group>"; };
 		482EBECE1C29694C00C88EC9 /* BaseShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseShopViewController.swift; sourceTree = "<group>"; };
 		482EBED01C296A6D00C88EC9 /* HintsShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HintsShopViewController.swift; sourceTree = "<group>"; };
+		4830BB441C50EF5800C74690 /* RestorePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestorePasswordViewController.swift; sourceTree = "<group>"; };
+		4830BB461C51384A00C74690 /* AuthNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthNetworkService.swift; sourceTree = "<group>"; };
+		4830BB481C51390B00C74690 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		4830BB4A1C513F5400C74690 /* SetNewPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetNewPasswordViewController.swift; sourceTree = "<group>"; };
 		4835D4AD1C22DCCB008ABB37 /* CipherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherService.swift; sourceTree = "<group>"; };
 		483676481C2048200092C703 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		4836764A1C207B860092C703 /* InAppNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppNetworkService.swift; sourceTree = "<group>"; };
@@ -517,6 +525,7 @@
 				4814942B1C4E773B000760B7 /* CurrentUserService.swift */,
 				4835D4AD1C22DCCB008ABB37 /* CipherService.swift */,
 				484EC36E1C2E7E7000C65F94 /* AdColonyService.swift */,
+				4830BB481C51390B00C74690 /* AuthService.swift */,
 			);
 			name = Logical;
 			sourceTree = "<group>";
@@ -524,9 +533,11 @@
 		48DCFC561BF39174004D4300 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				488854071C4421F80056F19B /* BaseLoginViewController.swift */,
 				48E9D61E1BB3F5FB00BA0F2A /* LoginViewController.swift */,
 				48F1373B1BB5C2CD00E5FFA7 /* RegistrationViewController.swift */,
-				488854071C4421F80056F19B /* BaseLoginViewController.swift */,
+				4830BB441C50EF5800C74690 /* RestorePasswordViewController.swift */,
+				4830BB4A1C513F5400C74690 /* SetNewPasswordViewController.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -570,6 +581,7 @@
 				489666BE1B9B651800F769D1 /* MessageNetworkService.swift */,
 				489666C01B9B651800F769D1 /* UserNetworkService.swift */,
 				4836764A1C207B860092C703 /* InAppNetworkService.swift */,
+				4830BB461C51384A00C74690 /* AuthNetworkService.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -810,16 +822,19 @@
 				48E4E3AD1BE0ED9600E45D65 /* FriendInfo.swift in Sources */,
 				48E9D61F1BB3F5FB00BA0F2A /* LoginViewController.swift in Sources */,
 				482EBECF1C29694C00C88EC9 /* BaseShopViewController.swift in Sources */,
+				4830BB4B1C513F5400C74690 /* SetNewPasswordViewController.swift in Sources */,
 				486B38441C453CE800B14013 /* NSDate+Extension.swift in Sources */,
 				48EE657B1BB694E300A0DB07 /* KeychainWrapper.m in Sources */,
 				482C241A1BA433D500288BB1 /* CipherFactory.swift in Sources */,
 				4842C0111C1F1022008153F0 /* IAPHelper.swift in Sources */,
+				4830BB451C50EF5800C74690 /* RestorePasswordViewController.swift in Sources */,
 				488DF8101BB2B8F30085E31A /* NetworkService.swift in Sources */,
 				48E9A9AA1BEB7E9D00508847 /* AvatarService.swift in Sources */,
 				48EEFF651C47A5EF006945BF /* TutorialSendMessageViewController.swift in Sources */,
 				487D771D1BA0878400AF333C /* WordLabelContainer.swift in Sources */,
 				489666BA1B9B650400F769D1 /* FriendCell.swift in Sources */,
 				482EBED11C296A6D00C88EC9 /* HintsShopViewController.swift in Sources */,
+				4830BB471C51384A00C74690 /* AuthNetworkService.swift in Sources */,
 				48C661CC1BEF6C7B003AF4F5 /* MessageService.swift in Sources */,
 				484EC36F1C2E7E7000C65F94 /* AdColonyService.swift in Sources */,
 				48E9A9AC1BEB7FC900508847 /* TimeService.swift in Sources */,
@@ -836,6 +851,7 @@
 				48D3A53E1BDF814800B2A1AD /* TalkService.swift in Sources */,
 				48C661C31BECCE1D003AF4F5 /* MessagesViewController.swift in Sources */,
 				48F2F5451BA1CAB2005CCAC8 /* WordsField.swift in Sources */,
+				4830BB491C51390B00C74690 /* AuthService.swift in Sources */,
 				48EE657D1BB6F1C300A0DB07 /* AddFriendViewController.swift in Sources */,
 				489666C31B9B651800F769D1 /* MessageNetworkService.swift in Sources */,
 				486B383F1C453AB700B14013 /* HelperFunctions.swift in Sources */,
