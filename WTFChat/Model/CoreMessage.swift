@@ -30,8 +30,8 @@ class CoreMessage: NSManagedObject {
         
         //clear old words if any
         if let words = self.words {
-            for item in words {
-                if let coreWord = item as? CoreWord {
+            for _ in 0..<words.count {
+                if let coreWord = words[0] as? CoreWord {
                     self.removeWordsObject(coreWord)
                     coreDataService.deleteObject(coreWord)
                 }
