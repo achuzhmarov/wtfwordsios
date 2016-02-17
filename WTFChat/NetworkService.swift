@@ -9,7 +9,7 @@
 import Foundation
 
 //let networkService = NetworkService(baseUrl: "https://127.0.0.1:5000/")
-let networkService = NetworkService(baseUrl: "https://wtfchat.wtf:42042/")
+let networkService = NetworkService(baseUrl: "https://wtfchat.wtf:42043/")
 
 class NetworkService: NSObject, NSURLSessionDelegate {
     var baseUrl: String
@@ -33,9 +33,15 @@ class NetworkService: NSObject, NSURLSessionDelegate {
     
     func clearSession() {
         session = NSURLSession(
-            configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
+            configuration: getDefaultConfiguration(),
             delegate: self,
             delegateQueue: nil)
+    }
+    
+    func getDefaultConfiguration() -> NSURLSessionConfiguration {
+        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+        config.timeoutIntervalForResource = 1
+        return config
     }
     
     func URLSession(session: NSURLSession, task: NSURLSessionTask, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void) {

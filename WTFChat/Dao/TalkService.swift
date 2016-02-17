@@ -66,7 +66,7 @@ class TalkService: NSObject {
         //add singleModeTalk
         let singleModeTalk = Talk(id: "0")
         singleModeTalk.isSingleMode = true
-        let singleModeUser = User(login: "Local Mode", suggestions: 0)
+        let singleModeUser = User(login: "Pass and Play", suggestions: 0)
         singleModeTalk.users.append(singleModeUser.login)
         singleModeTalk.users.append("")
         

@@ -44,7 +44,8 @@ class RatingCell: UITableViewCell {
             userNum.text = ""
             userGlobalNum?.text = ""
         } else {
-            userNum.text = String(num)
+            userNum?.text = String(user.rating)
+            //userNum?.text = String(num)
             userGlobalNum?.text = String(user.rating)
         }
         

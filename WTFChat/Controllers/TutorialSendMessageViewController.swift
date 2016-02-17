@@ -14,7 +14,7 @@ class TutorialSendMessageViewController: SendMessageViewController {
         
         if (currentTutorialStage == .SendMessage) {
             WTFOneButtonAlert.show("Choose a cipher",
-                message: "You can now choose a cipher type and a difficulty to cipher your message. Try different ones and see how your message transforms. Make a choice and press 'Send' button at the top right corner",
+                message: "You can now choose cipher type and difficulty to cipher your message. Try different ones and see how your message transforms. Make a choice and press 'Send' button at the top right corner.",
                 firstButtonTitle: "Ok",
                 viewPresenter: self) { () -> Void in
                     currentTutorialStage = .SelectCipher

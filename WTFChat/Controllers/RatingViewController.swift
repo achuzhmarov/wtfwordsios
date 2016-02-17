@@ -101,7 +101,8 @@ class RatingViewController: UIViewController, UITableViewDataSource, UITableView
         var cell: RatingCell
         
         if (showFriendsOnly) {
-            cell = tableView.dequeueReusableCellWithIdentifier("FriendRatingCell", forIndexPath: indexPath) as! RatingCell
+            cell = tableView.dequeueReusableCellWithIdentifier("GlobalRatingCell", forIndexPath: indexPath) as! RatingCell
+            //cell = tableView.dequeueReusableCellWithIdentifier("FriendRatingCell", forIndexPath: indexPath) as! RatingCell
             let friend = friends[indexPath.row]
             cell.updateUser(friend, num: indexPath.row + 1)
         } else {

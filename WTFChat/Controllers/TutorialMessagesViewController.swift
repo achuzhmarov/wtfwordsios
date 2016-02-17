@@ -16,11 +16,11 @@ var currentTutorialStage: TutorialStage = .Never
 
 class TutorialMessagesViewController: MessagesViewController {
     let TUTORIAL_MESSAGE_MAIN = "Welcome to the chat! I am glad to see you here. Have a good time!"
-    let TUTORIAL_TIP1 = "So, I see you are interested. Let's me give you some more advices about leveling up!"
-    let TUTORIAL_TIP2 = "You will get less XP for an orange word if you directly open it. But you will still get X3 bonus XP for fully deciphered message."
-    let TUTORIAL_TIP3 = "There is a daily XP limit for chatting with the same friend. If you start to gain small amount of XP, try to chat with someone else."
-    let TUTORIAL_TIP4 = "You will get the same XP amount for different ciphers. Only its difficulty matter"
-    let TUTORIAL_TIP5 = "You can get significally more XP when deciphering Hard messages. But it isn't simple, you see!"
+    let TUTORIAL_TIP1 = "So, I see you are interested. Let me give you some more advice on leveling up!"
+    let TUTORIAL_TIP2 = "You will get less XP for an orange word if you open it with a tap. But you will still get X3 bonus XP for fully deciphered message."
+    let TUTORIAL_TIP3 = "There is a daily XP threshold for chatting with the same friend. If you start getting less XP, try to chat with someone else."
+    let TUTORIAL_TIP4 = "You will get the same XP amount for different ciphers. Only its difficulty matters."
+    let TUTORIAL_TIP5 = "You can get significantly more XP when deciphering Hard messages. But it isn't simple, you see!"
     
     let TUTORIAL_STAGE_PROPERTY_KEY = "tutorialStage"
     let nsUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -37,8 +37,8 @@ class TutorialMessagesViewController: MessagesViewController {
         switch currentTutorialStage {
         case .Never:
             WTFTwoButtonsAlert.show("Tutorial",
-                message: "Hi! It is your first time, do you want to see a tutorial?",
-                firstButtonTitle: "Start tutorial",
+                message: "Hi! It is your first time, would you like to start a tutorial?",
+                firstButtonTitle: "Start",
                 secondButtonTitle: "Skip",
                 viewPresenter: self,
                 alertButtonAction: { () -> Void in
@@ -51,34 +51,34 @@ class TutorialMessagesViewController: MessagesViewController {
             })
         case .Deciphered:
             WTFOneButtonAlert.show("",
-                message: "So far so good! Let's try to send a message. Type any text you want and press 'Send' button",
+                message: "So far so good! Try to send a message. Type any text you want and press 'Send' button.",
                 firstButtonTitle: "Ok",
                 viewPresenter: self) { () -> Void in
                     currentTutorialStage = .SendMessage
             }
         case .SelectCipher:
             WTFOneButtonAlert.show("",
-                message: "You have not sent your message. Please, tap 'Send' button. After you selected a cipher, please, tap 'Send' again on a Preview screen",
+                message: "You have not sent your message. Please, tap 'Send' button. After you have selected a cipher, please, tap 'Send' again on the 'Preview' screen.",
                 firstButtonTitle: "Ok",
                 viewPresenter: self)
         case .MessageSended:
             WTFOneButtonAlert.show("",
-                message: "Yay! You have successfully sent your first message! You see? Wait a sec, i'll soon decipher it",
+                message: "Yay! You have successfully sent your first message! You see? Wait a sec, I will soon decipher it.",
                 firstButtonTitle: "Ok",
                 viewPresenter: self) { () -> Void in
                     sleep(1)
                     self.decipherSendedMessage()
                     
                     WTFOneButtonAlert.show("",
-                        message: "See? It was fast. In a real talk you will have to wait some more before your friend decipher it. As you see, I had some difficulties with deciphering. Please, tap on a message to view details.",
+                        message: "See? It was fast. In a real conversation you will have to wait some more before your friend decipher it. As you see, it is red! That means I had some difficulties deciphering it. Please, tap on a message to view details.",
                         firstButtonTitle: "Ok",
                         viewPresenter: self) { () -> Void in
                             currentTutorialStage = .ResponseAquired
                     }
             }
         case .DetailsViewed:
-            WTFOneButtonAlert.show("Finish",
-                message: "Yahooo! You have finished the tutorial! I'll give you some more messages to practice. But feel free to ignore it. Now you can play with someone in local mode (Pass and play) or SignUp for an online account to chat with people all over the world! Exciting, isn't it?",
+            WTFOneButtonAlert.show("Finished",
+                message: "Yahooo! You have finished the tutorial! I'll give you some more messages to practice. But feel free to ignore them. Now you can play with someone sitting next to you in 'Pass and play' mode or SignUp for an online account to chat with people all over the world! Exciting, isn't it?",
                 firstButtonTitle: "Ok",
                 viewPresenter: self) { () -> Void in
                     currentTutorialStage = .Finished
@@ -165,7 +165,7 @@ class TutorialMessagesViewController: MessagesViewController {
         message = messageCipher.addNewMessageToTalk(message, talk: self.talk)
         CoreMessage.createMessage(message)
         
-        message = messageCipher.createMessage(TUTORIAL_TIP2, cipherType: CipherType.NormalDoubleCutter)
+        message = messageCipher.createMessage(TUTORIAL_TIP2, cipherType: CipherType.ShuffleFullWord)
         message = messageCipher.addNewMessageToTalk(message, talk: self.talk)
         CoreMessage.createMessage(message)
         
@@ -173,7 +173,7 @@ class TutorialMessagesViewController: MessagesViewController {
         message = messageCipher.addNewMessageToTalk(message, talk: self.talk)
         CoreMessage.createMessage(message)
         
-        message = messageCipher.createMessage(TUTORIAL_TIP4, cipherType: CipherType.ShuffleFullWord)
+        message = messageCipher.createMessage(TUTORIAL_TIP4, cipherType: CipherType.NormalDoubleCutter)
         message = messageCipher.addNewMessageToTalk(message, talk: self.talk)
         CoreMessage.createMessage(message)
         

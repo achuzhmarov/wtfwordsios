@@ -114,7 +114,7 @@ class AuthNetworkService: NSObject {
             if let requestError = error {
                 completion(error: requestError)
             } else if let token = json!["token"].string {
-                let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+                let config = networkService.getDefaultConfiguration()
                 let authString = "Bearer \(token)"
                 config.HTTPAdditionalHeaders = ["Authorization" : authString]
                 
