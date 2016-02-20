@@ -9,7 +9,7 @@
 import Foundation
 
 public class IAPProducts {
-    private static let PREFIX = "wtf.wtfchat.wtfchatdev."
+    private static let PREFIX = "wtf.wtfchat.wtfchat."
 
     public static let CIPHER_ALL = "\(PREFIX)CipherAll"
     public static let CIPHER_DOUBLE_CUTTER = "\(PREFIX)CipherDoubleCutter"

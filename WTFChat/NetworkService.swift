@@ -8,8 +8,7 @@
 
 import Foundation
 
-//let networkService = NetworkService(baseUrl: "https://127.0.0.1:5000/")
-let networkService = NetworkService(baseUrl: "https://dev.wtfchat.wtf:42043/")
+let networkService = NetworkService(baseUrl: "https://wtfchat.wtf:42043/")
 
 class NetworkService: NSObject, NSURLSessionDelegate {
     var baseUrl: String
