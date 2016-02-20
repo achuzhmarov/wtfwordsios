@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 })
             }
         } else {
-            showLoginScreen()
+            showInitScreen()
         }
         
         //subscribe for pushNotifications
@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         friendsNavigationController.pushViewController(messagesController, animated: false)
     }
     
-    func showLoginScreen() {
+    func showInitScreen() {
         talkService.clearTalks()
         
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
@@ -91,6 +91,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let passAndPlayController = passAndPlayNavController.viewControllers[0] as! MessagesViewController
         passAndPlayController.talk = talkService.getSingleModeTalk()
         
+        showWindowAnimated(passAndPlayNavController)
+    }
+    
+    func showLoginScreen() {
+        talkService.clearTalks()
+        
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let passAndPlayNavController = storyboard.instantiateViewControllerWithIdentifier("loginNavController") as! UINavigationController
+        
+        let passAndPlayController = passAndPlayNavController.viewControllers[0] as! MessagesViewController
+        passAndPlayController.talk = talkService.getSingleModeTalk()
+        passAndPlayController.title = talkService.getSingleModeTalk()!.getFriendLogin().capitalizedString
+        
+        let loginController = storyboard.instantiateViewControllerWithIdentifier("loginController") as! LoginViewController
+
+        passAndPlayNavController.pushViewController(loginController, animated: false)
         showWindowAnimated(passAndPlayNavController)
     }
     

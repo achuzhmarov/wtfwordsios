@@ -48,7 +48,7 @@ class BaseShopViewController: UITableViewController {
         updateTable()
     }
     
-    func productPurchased(notification: NSNotification) {
+    func productPurchased(notification: NSNotification?) {
         dispatch_async(dispatch_get_main_queue(), {
             self.updateTable()
         })
@@ -128,7 +128,7 @@ class BaseShopViewController: UITableViewController {
                         message: "You have just received a free hint",
                         firstButtonTitle: "Ok",
                         viewPresenter: self) { () -> Void in
-                            self.updateTable()
+                            self.productPurchased(nil)
                         }
                 })
             })

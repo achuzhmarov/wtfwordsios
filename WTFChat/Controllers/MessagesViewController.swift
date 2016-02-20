@@ -334,6 +334,8 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
             sendButton.enabled = false
             messageText.scrollEnabled = false
             messageTextHeightConstraint.constant = defaultMessageTextHeightConstraint
+            
+            self.messageTableView.scrollTableToBottom()
         }
     }
     

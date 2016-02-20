@@ -46,7 +46,7 @@ class HintsShopViewController: BaseShopViewController {
         }
     }
     
-    override func productPurchased(notification: NSNotification) {
+    override func productPurchased(notification: NSNotification?) {
         dispatch_async(dispatch_get_main_queue(), {
             self.performSegueWithIdentifier("hintsBought", sender: self)
         })
