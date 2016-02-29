@@ -16,6 +16,7 @@ class NetworkService: NSObject, NSURLSessionDelegate {
     private var session: NSURLSession!
     
     let REQUEST_REPEAT_COUNT = 3
+    let REQUEST_TIMEOUT_SECONDS = 5
     
     init(baseUrl: String) {
         self.baseUrl = baseUrl
@@ -40,7 +41,7 @@ class NetworkService: NSObject, NSURLSessionDelegate {
     
     func getDefaultConfiguration() -> NSURLSessionConfiguration {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        config.timeoutIntervalForResource = 1
+        config.timeoutIntervalForResource = REQUEST_TIMEOUT_SECONDS
         return config
     }
     
