@@ -16,7 +16,7 @@ class NetworkService: NSObject, NSURLSessionDelegate {
     private var session: NSURLSession!
     
     let REQUEST_REPEAT_COUNT = 3
-    let REQUEST_TIMEOUT_SECONDS = 5
+    let REQUEST_TIMEOUT_SECONDS = NSTimeInterval(5)
     
     init(baseUrl: String) {
         self.baseUrl = baseUrl
