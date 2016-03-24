@@ -272,7 +272,7 @@ class MessageCipher {
         
         for char in string.unicodeScalars {
             if isLetterOnly(char) {
-                result++
+                result += 1
             }
         }
         

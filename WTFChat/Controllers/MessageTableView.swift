@@ -56,7 +56,7 @@ class MessageTableView: UITableView, UITableViewDataSource, UITableViewDelegate 
         
         cell.updateMessage(message, isSingleMode: talk.isSingleMode)
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "messageTapped:")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MessageTableView.messageTapped(_:)))
         cell.messageText.addGestureRecognizer(tap)
         
         return cell

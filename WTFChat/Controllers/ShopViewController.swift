@@ -30,12 +30,12 @@ class ShopViewController: BaseShopViewController {
         super.viewDidLoad()
         
         // Create a Restore Purchases button and hook it up to restoreTapped
-        let restoreButton = UIBarButtonItem(title: "Restore", style: .Plain, target: self, action: "restoreTapped:")
+        let restoreButton = UIBarButtonItem(title: "Restore", style: .Plain, target: self, action: #selector(ShopViewController.restoreTapped(_:)))
         navigationItem.rightBarButtonItem = restoreButton
         
         // Subscribe to a notification that fires when a product is restored.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "productRestore:", name: IAPHelperProductRestoreNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "productRestoreError:", name: IAPHelperProductRestoreErrorNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ShopViewController.productRestore(_:)), name: IAPHelperProductRestoreNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ShopViewController.productRestoreError(_:)), name: IAPHelperProductRestoreErrorNotification, object: nil)
         
         updateTable()
     }

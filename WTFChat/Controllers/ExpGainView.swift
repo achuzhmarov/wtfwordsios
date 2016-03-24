@@ -100,7 +100,7 @@ class ExpGainView: NSObject {
             self.progressBarTimer?.invalidate()
             
             self.progressBarTimer = NSTimer.scheduledTimerWithTimeInterval(self.progressUpdateInterval, target: self,
-                selector: "updateProgress", userInfo: nil, repeats: true)
+                selector: #selector(ExpGainView.updateProgress), userInfo: nil, repeats: true)
         })
         
         self.expLabel?.text = "+\(String(earnedExp))XP"

@@ -140,7 +140,7 @@ class Message : BaseEntity {
         
         for word in words {
             if (word.wordType == wordType) {
-                result++
+                result += 1
             }
         }
         

@@ -160,8 +160,8 @@ class CurrentUserService: NSObject {
         if (!isLoggedIn()) { return }
         
         if canAddFreeAdHint() {
-            self.user!.suggestions++
-            user!.freeHintsGained++
+            self.user!.suggestions += 1
+            user!.freeHintsGained += 1
         }
     }
 }

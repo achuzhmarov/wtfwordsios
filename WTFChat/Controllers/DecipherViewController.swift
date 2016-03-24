@@ -61,18 +61,25 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         self.title = viewTitle
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("rotated:"), name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DecipherViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DecipherViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DecipherViewController.rotated(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
         
         //Looks for single or multiple taps.
-        let tapDismiss: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        let tapStart: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "viewTapped")
+        let tapDismiss: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherViewController.dismissKeyboard))
+        let tapStart: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherViewController.viewTapped))
         view.addGestureRecognizer(tapDismiss)
         view.addGestureRecognizer(tapStart)
         
-        self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
+        startLabel.hidden = false
+        bottomView.hidden = true
+        topTimerLabel.hidden = true
+        wordsTableView.hidden = true
+        isStarted = false
+        isOvered = false
+        
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
         
         wordsTableView.suggestionComputer = self
         
@@ -250,10 +257,10 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             messageCipher.decipher(message!, suggestedWord: word, closeTry: true)
         } else {
             messageCipher.decipher(message!, suggestedWord: word)
-            suggestions--
+            suggestions -= 1
             
             if (!isSingleMode) {
-                message.hintsUsed++
+                message.hintsUsed += 1
                 suggestions = currentUserService.getUserSuggestions() - message.hintsUsed
             }
         }
@@ -366,7 +373,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         }
         
         NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
-            selector: "tick", userInfo: nil, repeats: false)
+            selector: #selector(DecipherViewController.tick), userInfo: nil, repeats: false)
         
         bottomView.hidden = false
         topTimerLabel.hidden = false
@@ -378,7 +385,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         guessTextField.becomeFirstResponder()
 
-        let giveUpButton = UIBarButtonItem(title: "Give Up", style: .Plain, target: self, action: "giveUpButtonPressed:")
+        let giveUpButton = UIBarButtonItem(title: "Give Up", style: .Plain, target: self, action: #selector(DecipherViewController.giveUpButtonPressed(_:)))
         navigationItem.rightBarButtonItem = giveUpButton
         
         isStarted = true
@@ -386,7 +393,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     
     func gameOver() {
         if (!talk.isSingleMode) {
-            talk.cipheredNum--
+            talk.cipheredNum -= 1
         }
         
         messageCipher.failed(message!)
@@ -456,7 +463,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         if (isPaused) {
             NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
-                selector: "tick", userInfo: nil, repeats: false)
+                selector: #selector(DecipherViewController.tick), userInfo: nil, repeats: false)
             
             return
         }
@@ -475,7 +482,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             })
         } else {
             NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
-                selector: "tick", userInfo: nil, repeats: false)
+                selector: #selector(DecipherViewController.tick), userInfo: nil, repeats: false)
             
             if (timer.isRunningOfTime()) {
                 topTimerLabel.textColor = UIColor.redColor()

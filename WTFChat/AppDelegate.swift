@@ -134,7 +134,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
         var tokenString = ""
         
-        for var i = 0; i < deviceToken.length; i++ {
+        for var i = 0; i < deviceToken.length; i += 1 {
             tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
         }
         

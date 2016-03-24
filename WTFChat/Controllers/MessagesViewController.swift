@@ -32,10 +32,10 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MessagesViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MessagesViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MessagesViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
         if (talk.isSingleMode) {
@@ -134,9 +134,10 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
                 messageService.createMessage(newMessage)
             } else {
                 CoreMessage.createMessage(newMessage)
-
-                self.updateView(true)
             }
+            
+            //Clear input text field in any case
+            self.updateView(true)
         }
     }
     
@@ -232,7 +233,8 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
                 print(requestError)
             } else {
                 self.talk = talk
-                self.updateView(true)
+                //TODO - now without send=true (because input text field was cleared early)
+                self.updateView()
             }
         })
     }
@@ -344,7 +346,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to load more")
-        refreshControl.addTarget(self, action: "loadEarlier:", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(MessageService.loadEarlier(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.messageTableView.addSubview(refreshControl)
         //self.messageTableView.insertSubview(refreshControl, atIndex: 0)
     }

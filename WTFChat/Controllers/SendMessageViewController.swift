@@ -42,8 +42,8 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
         
         cipherPicked(cipherType)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "productPurchased:", name: IAPHelperProductPurchasedNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "productPurchasedError:", name: IAPHelperProductPurchasedErrorNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SendMessageViewController.productPurchased(_:)), name: IAPHelperProductPurchasedNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SendMessageViewController.productPurchasedError(_:)), name: IAPHelperProductPurchasedErrorNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,7 +64,7 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
             unlockCipherButton.hidden = true
             
             let sendButton = UIBarButtonItem(title: "Send",
-                style: UIBarButtonItemStyle.Plain, target: self, action: "sendTapped:")
+                style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SendMessageViewController.sendTapped(_:)))
             
             self.navigationItem.rightBarButtonItem = sendButton
         } else {
@@ -76,7 +76,7 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
             unlockCipherButton.hidden = false
             
             let tryButton = UIBarButtonItem(title: "Try it",
-                style: UIBarButtonItemStyle.Plain, target: self, action: "tryTapped:")
+                style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SendMessageViewController.tryTapped(_:)))
             
             self.navigationItem.rightBarButtonItem = tryButton
         }

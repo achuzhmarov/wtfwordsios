@@ -54,7 +54,7 @@ class TalkService: NSObject {
         dispatch_async(dispatch_get_main_queue(), {
             self.updateTimer?.invalidate()
 
-            self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(self.TALKS_UPDATE_TIMER_INTERVAL, target: self, selector: "getNewUnreadTalks", userInfo: nil, repeats: true)
+            self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(self.TALKS_UPDATE_TIMER_INTERVAL, target: self, selector: #selector(TalkService.getNewUnreadTalks), userInfo: nil, repeats: true)
         })
 
         messageService.startUpdateTimer()
