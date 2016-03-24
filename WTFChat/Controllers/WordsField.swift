@@ -69,7 +69,7 @@ class WordsField {
                 if (i == index) {
                     return wordContainer
                 } else {
-                    i++
+                    i += 1
                 }
             }
         }

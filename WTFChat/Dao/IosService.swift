@@ -32,7 +32,7 @@ class IosService {
                 badge += talk.cipheredNum
                     
                 if (talk.decipherStatus != .No) {
-                    badge++
+                    badge += 1
                 }
             }
                 

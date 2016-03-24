@@ -25,7 +25,7 @@ class SetNewPasswordViewController: BaseLoginViewController, UITextFieldDelegate
         
         changeButton.layer.cornerRadius = 10
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SetNewPasswordViewController.DismissKeyboard))
         view.addGestureRecognizer(tap)
         
         usernameField.delegate = self

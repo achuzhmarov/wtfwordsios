@@ -38,7 +38,7 @@ class MessageService: NSObject {
             self.updateTimer?.invalidate()
             
             self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(self.MESSAGES_UPDATE_TIMER_INTERVAL, target: self,
-                selector: "updateMessages", userInfo: nil, repeats: true)
+                selector: #selector(MessageService.updateMessages as (MessageService) -> () -> ()), userInfo: nil, repeats: true)
         })
     }
     

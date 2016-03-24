@@ -27,7 +27,7 @@ class UserService: NSObject {
         dispatch_async(dispatch_get_main_queue(), {
             self.updateTimer?.invalidate()
             self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(self.USER_UPDATE_TIMER_INTERVAL, target: self,
-                selector: "updateInfo", userInfo: nil, repeats: true)
+                selector: #selector(UserService.updateInfo), userInfo: nil, repeats: true)
         })
     }
     
@@ -146,7 +146,7 @@ class UserService: NSObject {
     private func addFreeAdHintRequest() {
         userNetworkService.addFreeAdHint { (userInfo, error) -> Void in
             if let requestError = error {
-                self.freeAdHintsNotAdded++
+                self.freeAdHintsNotAdded += 1
                 
                 NSLog(requestError.localizedDescription)
             } else {

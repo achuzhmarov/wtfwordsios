@@ -212,7 +212,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     func createLabelForWord(word: Word) -> WordLabelContainer {
         let wordContainer = WordLabelContainer(word: word, useCipherText: useCipherText, selfAuthor: selfAuthor)
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "useSuggestion:")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WordsViewController.useSuggestion(_:)))
         wordContainer.label.addGestureRecognizer(tap)
         
         return wordContainer

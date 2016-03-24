@@ -36,8 +36,8 @@ class BaseShopViewController: UITableViewController {
         tintColor = self.view.tintColor
         
         // Subscribe to a notification that fires when a product is purchased.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "productPurchased:", name: IAPHelperProductPurchasedNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "productPurchasedError:", name: IAPHelperProductPurchasedErrorNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BaseShopViewController.productPurchased(_:)), name: IAPHelperProductPurchasedNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BaseShopViewController.productPurchasedError(_:)), name: IAPHelperProductPurchasedErrorNotification, object: nil)
     }
     
     override func didReceiveMemoryWarning() {

@@ -18,7 +18,7 @@ class LoginViewController: BaseLoginViewController, UITextFieldDelegate {
 
         loginButton.layer.cornerRadius = 10
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
         usernameField.delegate = self

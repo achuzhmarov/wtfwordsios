@@ -31,7 +31,7 @@ class ShuffleWithExtraLetterCipher: Cipher {
 
         //cut last letter
         if (word.getCharCount() > 2) {
-            wordLength--
+            wordLength -= 1
         }
         
         let shuffled = "...\(word.getUpperCase()[1...wordLength].shuffle)..."

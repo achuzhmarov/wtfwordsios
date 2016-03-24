@@ -19,7 +19,7 @@ class RestorePasswordViewController: UIViewController, UITextFieldDelegate {
         
         sendButton.layer.cornerRadius = 10
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RestorePasswordViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
         usernameField.delegate = self
