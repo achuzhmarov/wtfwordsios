@@ -3,3 +3,5 @@
 *.xcuserstate
 *.xcbkptlist
 Breakpoints_v2.xcbkptlist
+xcuserdata/**/*
+!xcuserdata/**/xcschemes/*
