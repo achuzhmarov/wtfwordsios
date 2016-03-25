@@ -229,9 +229,9 @@ extension IAPHelper: SKPaymentTransactionObserver {
         
         if transaction.error!.code != SKErrorCode.PaymentCancelled.rawValue {
             print("Transaction error: \(transaction.error!.localizedDescription)")
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(IAPHelperProductPurchasedErrorNotification, object: nil)
         }
-        
-        NSNotificationCenter.defaultCenter().postNotificationName(IAPHelperProductPurchasedErrorNotification, object: nil)
         
         SKPaymentQueue.defaultQueue().finishTransaction(transaction)
     }
