@@ -383,8 +383,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "157"
             endingLineNumber = "157"
-            landmarkName = "restoreTransaction(_:)"
-            landmarkType = "5">
+            landmarkName = "SKProduct"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -399,8 +399,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "142"
             endingLineNumber = "142"
-            landmarkName = "paymentQueue(_:updatedTransactions:)"
-            landmarkType = "5">
+            landmarkName = "SKProduct"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -415,8 +415,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "144"
             endingLineNumber = "144"
-            landmarkName = "paymentQueue(_:updatedTransactions:)"
-            landmarkType = "5">
+            landmarkName = "SKProduct"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -431,8 +431,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "139"
             endingLineNumber = "139"
-            landmarkName = "paymentQueue(_:updatedTransactions:)"
-            landmarkType = "5">
+            landmarkName = "SKProduct"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -447,8 +447,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "136"
             endingLineNumber = "136"
-            landmarkName = "paymentQueue(_:updatedTransactions:)"
-            landmarkType = "5">
+            landmarkName = "SKProduct"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -463,8 +463,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "134"
             endingLineNumber = "134"
-            landmarkName = "paymentQueue(_:updatedTransactions:)"
-            landmarkType = "5">
+            landmarkName = "SKProduct"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -479,8 +479,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "133"
             endingLineNumber = "133"
-            landmarkName = "paymentQueue(_:updatedTransactions:)"
-            landmarkType = "5">
+            landmarkName = "SKProduct"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
