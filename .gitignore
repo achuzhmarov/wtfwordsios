@@ -2,4 +2,7 @@
 /Frameworks
 *.xcuserstate
 *.xcbkptlist
+*.xcexplist
 Breakpoints_v2.xcbkptlist
+xcuserdata/**/*
+!xcuserdata/**/xcschemes/*
