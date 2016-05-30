@@ -147,16 +147,6 @@ class Message : BaseEntity {
         return result
     }
     
-    func text() -> String! {
-        if (currentUserService.getUserLogin() == self.author) {
-            return clearText()
-        } else if (self.deciphered) {
-            return clearText()
-        } else {
-            return questionMarks()
-        }
-    }
-    
     func questionMarks() -> String! {
         var result = ""
         

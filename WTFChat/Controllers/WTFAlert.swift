@@ -11,7 +11,7 @@ import Foundation
 class WTFOneButtonAlert: NSObject, UIAlertViewDelegate  {
     class func show(title: String, message: String, firstButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:(() -> Void)? = nil) {
         
-        if #available(iOS 8.0, *) {
+        //if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
                 message: message,
                 preferredStyle: UIAlertControllerStyle.Alert)
@@ -21,14 +21,14 @@ class WTFOneButtonAlert: NSObject, UIAlertViewDelegate  {
             }))
 
             viewPresenter?.presentViewController(alert, animated: true, completion: nil)
-        } else {
+        /*} else {
             let alert = AlertWithDelegate()
             alert.title = title
             alert.message = message
             alert.addButtonWithTitle(firstButtonTitle)
             alert.setAlertFunction(alertButtonAction)
             alert.show()
-        }
+        }*/
     }
 }
 
@@ -40,7 +40,7 @@ class WTFTwoButtonsAlert: NSObject, UIAlertViewDelegate {
     
     class func show(title: String, message: String, firstButtonTitle: String, secondButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:(() -> Void)?, cancelButtonAction:(() -> Void)?) {
         
-        if #available(iOS 8.0, *) {
+        //if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
                 message: message,
                 preferredStyle: UIAlertControllerStyle.Alert)
@@ -54,7 +54,7 @@ class WTFTwoButtonsAlert: NSObject, UIAlertViewDelegate {
             }))
 
             viewPresenter?.presentViewController(alert, animated: true, completion: nil)
-        } else {
+        /*} else {
             let alert = AlertWithDelegate()
             alert.title = title
             alert.message = message
@@ -63,7 +63,7 @@ class WTFTwoButtonsAlert: NSObject, UIAlertViewDelegate {
             alert.setAlertFunction(alertButtonAction)
             alert.setCancelFunction(cancelButtonAction)
             alert.show()
-        }
+        }*/
     }
 }
 

@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// Product identifiers are unique strings registered on the app store.
+public typealias ProductIdentifier = String
+
 public class IAPProducts {
     private static let PREFIX = "wtf.wtfchat.wtfchatdev."
 

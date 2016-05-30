@@ -9,6 +9,12 @@
 import UIKit
 
 class FriendCell: UITableViewCell {
+    private let currentUserService = serviceLocator.get(CurrentUserService)
+    private let avatarService = serviceLocator.get(AvatarService)
+    private let timeService = serviceLocator.get(TimeService)
+    private let talkService = serviceLocator.get(TalkService)
+    private let messageService = serviceLocator.get(MessageService)
+
     @IBOutlet private weak var friendImage: UIImageView!
     
     @IBOutlet private weak var lastMessageAuthorImage: UIImageView!
@@ -31,9 +37,10 @@ class FriendCell: UITableViewCell {
         initStyle()
         
         if (talk.isSingleMode) {
-            friendName.text = talk.getFriendLogin().capitalizedString
+            friendName.text = talkService.getFriendLogin(talk).capitalizedString
         } else {
-            let friendInfo = currentUserService.getFriendInfoByLogin(talk.getFriendLogin())
+            //TODO AWKARD!!!!
+            let friendInfo = currentUserService.getFriendInfoByLogin(talkService.getFriendLogin(talk))
             friendName.text = friendInfo!.getDisplayName()
         }
         
@@ -41,7 +48,7 @@ class FriendCell: UITableViewCell {
             updateCiphered(talk)
             updateMessage(message)
             
-            if (message.author != talk.getFriendLogin()) {
+            if (message.author != talkService.getFriendLogin(talk)) {
                 updateLastAuthorImage(message.author)
             } else {
                 hideLastAuthorImage()
@@ -51,8 +58,9 @@ class FriendCell: UITableViewCell {
             setEmptyCiphered()
             hideLastAuthorImage()
         }
-        
-        friendImage.image = avatarService.getAvatarImage(talk.getFriendLogin(),
+
+        //TODO AWKARD!!!
+        friendImage.image = avatarService.getAvatarImage(talkService.getFriendLogin(talk),
             diameter: UInt(friendImage.bounds.height))
     }
     
@@ -130,7 +138,7 @@ class FriendCell: UITableViewCell {
     private func updateMessage(message: Message) {
         lastMessageTime.text = timeService.parseTime(message.timestamp).string
         
-        lastMessage.text = message.text()
+        lastMessage.text = messageService.getMessageText(message)
         
         if (message.deciphered) {
             if (message.countFailed() > 0) {

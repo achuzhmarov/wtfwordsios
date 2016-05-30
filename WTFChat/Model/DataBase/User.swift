@@ -239,7 +239,6 @@ class User {
             freeHintsGained = value
         } else if let error = json["free_hints_gained"].error {
             //do nothing
-            //throw error
         }
         
         return User(

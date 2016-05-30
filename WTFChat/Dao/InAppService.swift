@@ -9,13 +9,19 @@
 import Foundation
 import StoreKit
 
-let inAppService = InAppService()
-
 class InAppService {
-    let inAppHelper = IAPHelper(productIdentifiers: IAPProducts.ALL)
+    private let inAppHelper: InAppHelper
+    private let currentUserService: CurrentUserService
+    private let cipherService: CipherService
     
-    var products = [SKProduct]()
-    
+    private var products = [SKProduct]()
+
+    init(inAppHelper: InAppHelper, currentUserService: CurrentUserService, cipherService: CipherService) {
+        self.inAppHelper = inAppHelper
+        self.currentUserService = currentUserService
+        self.cipherService = cipherService
+    }
+
     func getProductList() {
         inAppHelper.requestProductsWithCompletionHandler { success, products in
             if success {
@@ -97,13 +103,13 @@ class InAppService {
     func showBuyAlert(productId: ProductIdentifier, viewPresenter: UIViewController,
             cancelFunc: (() -> Void)? = nil) {
                 
-        if (!inAppService.canPurchase(productId) || inAppService.isPurchased(productId)) {
+        if (!canPurchase(productId) || isPurchased(productId)) {
             return
         }
         
-        let productName = inAppService.getProductTitle(productId)
-        let productPrice = inAppService.getProductPrice(productId)
-        let productDescription = inAppService.getProductDescription(productId)
+        let productName = getProductTitle(productId)
+        let productPrice = getProductPrice(productId)
+        let productDescription = getProductDescription(productId)
         
         WTFTwoButtonsAlert.show("Buy \(productName!) for \(productPrice!)",
             message: productDescription!,
@@ -111,7 +117,7 @@ class InAppService {
             secondButtonTitle: "Cancel",
             viewPresenter: viewPresenter,
             alertButtonAction: { () -> Void in
-                inAppService.purchaseProduct(productId)
+                self.purchaseProduct(productId)
             }, cancelButtonAction: { () -> Void in
                 cancelFunc?()
         })

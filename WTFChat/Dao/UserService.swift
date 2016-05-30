@@ -8,16 +8,25 @@
 
 import Foundation
 
-let userService = UserService()
-
 class UserService: NSObject {
-    let USER_UPDATE_TIMER_INTERVAL = 10.0
-    let userNetworkService = UserNetworkService()
+    private let USER_UPDATE_TIMER_INTERVAL = 10.0
+
+    private let userNetworkService: UserNetworkService
+    private let iosService: IosService
+    private let talkService: TalkService
+    private let currentUserService: CurrentUserService
+
+    private var updateTimer: NSTimer?
     
-    var updateTimer: NSTimer?
-    
-    var freeAdHintsNotAdded = 0
-    
+    private var freeAdHintsNotAdded = 0
+
+    init(userNetworkService: UserNetworkService, iosService: IosService, talkService: TalkService, currentUserService: CurrentUserService) {
+        self.userNetworkService = userNetworkService
+        self.iosService = iosService
+        self.talkService = talkService
+        self.currentUserService = currentUserService
+    }
+
     func setNewUser(user: User, password: String) {
         currentUserService.setNewUser(user)
         talkService.setTalksByNewUser(user)
@@ -67,15 +76,6 @@ class UserService: NSObject {
         }
     }
     
-    func logoutInner() {
-        currentUserService.setNewUser(nil)
-        talkService.clearTalks()
-        networkService.clearSession()
-        iosService.resetUserCredentials()
-    
-        self.updateTimer?.invalidate()
-    }
-    
     func getNewFriends(searchString: String, completion:(friends: [FriendInfo]?, error: NSError?) -> Void) {
         userNetworkService.getNewFriends(searchString, completion: completion)
     }
@@ -100,7 +100,7 @@ class UserService: NSObject {
     func updateName(name: String, completion:(error: NSError?) -> Void) {
         userNetworkService.updateName(name) { error in
             if (error == nil) {
-                currentUserService.updateName(name)
+                self.currentUserService.updateName(name)
             }
             
             completion(error: error)
@@ -110,7 +110,7 @@ class UserService: NSObject {
     func updateEmail(email: String, password: String, completion:(error: NSError?) -> Void) {
         userNetworkService.updateEmail(email, password: password) { error in
             if (error == nil) {
-                currentUserService.updateEmail(email)
+                self.currentUserService.updateEmail(email)
             }
             
             completion(error: error)
@@ -120,7 +120,7 @@ class UserService: NSObject {
     func updatePushNew(pushNew: Bool, completion:(error: NSError?) -> Void) {
         userNetworkService.updatePushNew(pushNew) { error in
             if (error == nil) {
-                currentUserService.updatePushNew(pushNew)
+                self.currentUserService.updatePushNew(pushNew)
             }
             
             completion(error: error)
@@ -130,7 +130,7 @@ class UserService: NSObject {
     func updatePushDeciphered(pushDeciphered: Bool, completion:(error: NSError?) -> Void) {
         userNetworkService.updatePushDeciphered(pushDeciphered) { error in
             if (error == nil) {
-                currentUserService.updatePushDeciphered(pushDeciphered)
+                self.currentUserService.updatePushDeciphered(pushDeciphered)
             }
             
             completion(error: error)
@@ -151,7 +151,7 @@ class UserService: NSObject {
                 NSLog(requestError.localizedDescription)
             } else {
                 if (userInfo != nil) {
-                    userService.updateUserInfo(userInfo)
+                    self.updateUserInfo(userInfo)
                 }
             }
         }

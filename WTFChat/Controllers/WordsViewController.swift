@@ -13,7 +13,8 @@ protocol SuggestionComputer: class {
 }
 
 class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelegate {
-    
+    private let messageCipherService = serviceLocator.get(MessageCipherService)
+
     var message: Message?
     var rows = WordsField()
     var tempRows = WordsField()
@@ -118,7 +119,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     func animateWarning(guesses: [String]?) {
         for wordContainer in rows.getAllWordContainers() {
             if (wordContainer.word.wordType == WordType.New) {
-                if (messageCipher.wasCloseTry(wordContainer.word, guessWords: guesses)) {
+                if (messageCipherService.wasCloseTry(wordContainer.word, guessWords: guesses)) {
                     wordContainer.animateWarning()
                     wordContainer.word.wasCloseTry = true
                     wordContainer.originalWord.wasCloseTry = true
@@ -133,7 +134,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         
         for wordContainer in rows.getAllWordContainers() {
             if (wordContainer.word.wordType == WordType.New) {
-                if (messageCipher.wasCloseTry(wordContainer.word, guessWords: guesses)) {
+                if (messageCipherService.wasCloseTry(wordContainer.word, guessWords: guesses)) {
                     wordContainer.animateWarning()
                     wordContainer.word.wasCloseTry = true
                     wordContainer.originalWord.wasCloseTry = true

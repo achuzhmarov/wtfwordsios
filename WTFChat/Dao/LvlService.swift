@@ -8,9 +8,13 @@
 
 import Foundation
 
-let lvlService = LvlService()
-
 class LvlService {
+    private let currentUserService: CurrentUserService
+
+    init(currentUserService: CurrentUserService) {
+        self.currentUserService = currentUserService
+    }
+
     func getUserLvl() -> Int {
         return currentUserService.getUserLvl()
     }

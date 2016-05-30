@@ -9,6 +9,9 @@
 import UIKit
 
 class RatingCell: UITableViewCell {
+    private let currentUserService = serviceLocator.get(CurrentUserService)
+    private let avatarService = serviceLocator.get(AvatarService)
+
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userLogin: UILabel!
     @IBOutlet weak var userName: UILabel!

@@ -8,16 +8,14 @@
 
 import Foundation
 
-let adColonyService = AdColonyService()
-
 class AdColonyService: NSObject, AdColonyDelegate, AdColonyAdDelegate {
-    let APP_ID = "appd77cbb2311044ee891"
-    let ZONE_INTER_ID = "vz4af259c3f86548debc"
-    let ZONE_REWARDED_ID = "vz87332b6313114a238d"
-    
-    var isInterAvailable = false
-    var isRewardedAvailable = false
-    
+    private let APP_ID = "appd77cbb2311044ee891"
+    private let ZONE_INTER_ID = "vz4af259c3f86548debc"
+    private let ZONE_REWARDED_ID = "vz87332b6313114a238d"
+
+    private var isInterAvailable = false
+    private var isRewardedAvailable = false
+
     var delegateFunc: (() -> Void)?
     
     func initService() {

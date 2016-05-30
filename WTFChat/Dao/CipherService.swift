@@ -8,9 +8,13 @@
 
 import Foundation
 
-let cipherService = CipherService()
-
 class CipherService {
+    private let currentUserService: CurrentUserService
+
+    init(currentUserService: CurrentUserService) {
+        self.currentUserService = currentUserService
+    }
+
     func isOwnedCipher(productId: ProductIdentifier) -> Bool {
         if (!IAPProducts.CIPHERS.contains(productId)) {
             return false

@@ -15,6 +15,12 @@ let WAIT_FOR_USER_LOADING_IN_SECONDS = UInt32(2)
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    private let messageService = serviceLocator.get(MessageService)
+    private let userService = serviceLocator.get(UserService)
+    private let inAppService = serviceLocator.get(InAppService)
+    private let talkService = serviceLocator.get(TalkService)
+    private let currentUserService = serviceLocator.get(CurrentUserService)
+    private let adColonyService = serviceLocator.get(AdColonyService)
 
     var window: UIWindow?
     
@@ -24,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         adColonyService.initService()
         
-        if (iosService.haveUserCredentials()) {
+        /*if (iosService.haveUserCredentials()) {
             authService.loginWithKeychain() { user, error -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     if let requestError = error {
@@ -37,24 +43,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         } else {
             showInitScreen()
-        }
+        }*/
         
         //subscribe for pushNotifications
-        if #available(iOS 8.0, *) {
+        //if #available(iOS 8.0, *) {
             let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
             UIApplication.sharedApplication().registerUserNotificationSettings(settings)
             UIApplication.sharedApplication().registerForRemoteNotifications()
-        } else {
+        /*} else {
             application.registerForRemoteNotificationTypes([.Alert, .Badge, .Sound])
-        }
+        }*/
         
         sleep(WAIT_FOR_USER_LOADING_IN_SECONDS)
         
         if let notification = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject : AnyObject]
         {
-            if (currentUserService.isLoggedIn()) {
+            /*if (currentUserService.isLoggedIn()) {
                 computeInactiveNotification(notification)
-            }
+            }*/
         }
         
         return true
@@ -82,34 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         friendsNavigationController.pushViewController(messagesController, animated: false)
     }
     
-    func showInitScreen() {
-        talkService.clearTalks()
-        
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        let passAndPlayNavController = storyboard.instantiateViewControllerWithIdentifier("loginNavController") as! UINavigationController
-        
-        let passAndPlayController = passAndPlayNavController.viewControllers[0] as! MessagesViewController
-        passAndPlayController.talk = talkService.getSingleModeTalk()
-        
-        showWindowAnimated(passAndPlayNavController)
-    }
-    
-    func showLoginScreen() {
-        talkService.clearTalks()
-        
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        let passAndPlayNavController = storyboard.instantiateViewControllerWithIdentifier("loginNavController") as! UINavigationController
-        
-        let passAndPlayController = passAndPlayNavController.viewControllers[0] as! MessagesViewController
-        passAndPlayController.talk = talkService.getSingleModeTalk()
-        passAndPlayController.title = talkService.getSingleModeTalk()!.getFriendLogin().capitalizedString
-        
-        let loginController = storyboard.instantiateViewControllerWithIdentifier("loginController") as! LoginViewController
-
-        passAndPlayNavController.pushViewController(loginController, animated: false)
-        showWindowAnimated(passAndPlayNavController)
-    }
-    
     private func showWindowAnimated(viewController: UIViewController) {
         UIView.transitionWithView(window!,
             duration: 0.5,
@@ -121,11 +99,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UIView.setAnimationsEnabled(oldState)
             },
             completion: nil)
-    }
-    
-    func logout() {
-        userService.logoutInner()
-        showLoginScreen()
     }
     
     func application(application: UIApplication,didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
@@ -140,9 +113,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         DEVICE_TOKEN = tokenString
         
-        if (currentUserService.isLoggedIn()) {
+        /*if (currentUserService.isLoggedIn()) {
             iosService.updateDeviceToken()
-        }
+        }*/
     }
     
     //Called if unable to register for APNS.

@@ -8,29 +8,60 @@
 
 import Foundation
 
-let talkService = TalkService()
-
 protocol TalkListener: class {
     func updateTalks(talks: [Talk]?, error: NSError?)
 }
 
 class TalkService: NSObject {
     let TALKS_UPDATE_TIMER_INTERVAL = 10.0
-    
+
+    private let talkNetworkService: TalkNetworkService
+    private let iosService: IosService
+    private let currentUserService: CurrentUserService
+
+    //TODO - JUST AWFUL
+    var messageService: MessageService!
+
     var updateTimer: NSTimer?
     
     var talks = [Talk]()
     
     weak var friendsTalkListener: TalkListener?
-    
+
+    //TODO - Should be deleted
+    init(talkNetworkService: TalkNetworkService, iosService: IosService, currentUserService: CurrentUserService) {
+        self.talkNetworkService = talkNetworkService
+        self.iosService = iosService
+        self.currentUserService = currentUserService
+    }
+
+    init(talkNetworkService: TalkNetworkService, iosService: IosService, currentUserService: CurrentUserService, messageService: MessageService) {
+        self.talkNetworkService = talkNetworkService
+        self.iosService = iosService
+        self.messageService = messageService
+        self.currentUserService = currentUserService
+    }
+
     func getTalkByLogin(friend: String) -> Talk? {
         for talk in talks {
-            if (talk.getFriendLogin() == friend) {
+            if (getFriendLogin(talk) == friend) {
                 return talk
             }
         }
         
         return nil
+    }
+
+    func getFriendLogin(talk: Talk) -> String {
+        for user in talk.users {
+            if (user != currentUserService.getUserLogin()) {
+                return user
+            }
+        }
+
+        //should never happen
+        //TODO - add logging?
+        return ""
     }
     
     func clearTalks() {
@@ -85,34 +116,24 @@ class TalkService: NSObject {
         }
         
         let lastUpdate = self.getTalksLastUpdate()
-        
-        let lastUpdateData = [
-            "last_update": NSDate.parseStringJSONFromDate(lastUpdate)!
-        ]
-        
-        let postJSON = JSON(lastUpdateData)
-        
-        networkService.post(postJSON, relativeUrl: "user/new_talks_by_time") { (json, error) -> Void in
-            if let requestError = error {
-                self.friendsTalkListener?.updateTalks(nil, error: requestError)
-            } else {
-                if let talksJson = json {
-                    do {
-                        let talks = try Talk.parseArrayFromJson(talksJson)
-                        
-                        for talk in talks {
-                            self.updateOrCreateTalkInArray(talk)
-                            messageService.fireMessagesUpdate(talk.id)
-                        }
-                        
-                        self.fireUpdateTalksEvent()
-                    } catch let error as NSError {
-                        self.friendsTalkListener?.updateTalks(nil, error: error)
-                    }
+
+        talkNetworkService.getNewUnreadTalks(lastUpdate) { (talks, error) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
+                if let requestError = error {
+                    self.friendsTalkListener?.updateTalks(nil, error: requestError)
                 } else {
-                    //no new talks - do nothing
+                    if let newTalks = talks {
+                        for talk in newTalks {
+                            self.updateOrCreateTalkInArray(talk)
+                            self.messageService.fireMessagesUpdate(talk.id)
+                        }
+
+                        self.fireUpdateTalksEvent()
+                    } else {
+                        //no new talks - do nothing
+                    }
                 }
-            }
+            })
         }
     }
     

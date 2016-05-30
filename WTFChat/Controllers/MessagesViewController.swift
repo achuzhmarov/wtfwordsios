@@ -9,6 +9,11 @@
 import UIKit
 
 class MessagesViewController: UIViewController, MessageTappedComputer, UITextViewDelegate, MessageListener {
+    private let messageService = serviceLocator.get(MessageService)
+    private let talkService = serviceLocator.get(TalkService)
+    private let currentUserService = serviceLocator.get(CurrentUserService)
+    private let messageCipherService = serviceLocator.get(MessageCipherService)
+
     @IBOutlet weak var messageText: UITextView!
     @IBOutlet weak var messageTextHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageTableView: MessageTableView!
@@ -39,9 +44,10 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         view.addGestureRecognizer(tap)
         
         if (talk.isSingleMode) {
-            self.title = talk.getFriendLogin().capitalizedString
+            self.title = talkService.getFriendLogin(talk).capitalizedString
         } else {
-            let friendInfo = currentUserService.getFriendInfoByLogin(talk.getFriendLogin())
+            //TODO AWKARD!!!!!!
+            let friendInfo = currentUserService.getFriendInfoByLogin(talkService.getFriendLogin(talk))
             let title = "\(friendInfo!.getDisplayName()), lvl \(String(friendInfo!.lvl))"
             configureTitleView(title, navigationItem: navigationItem)
         }
@@ -127,7 +133,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
             self.cipherType = sendMessageController.cipherType
             self.lastSendedMessage = sendMessageController.message
             
-            let newMessage = messageCipher.addNewMessageToTalk(self.lastSendedMessage!, talk: self.talk!)
+            let newMessage = messageCipherService.addNewMessageToTalk(self.lastSendedMessage!, talk: self.talk!)
             talkService.updateTalkInArray(self.talk, withMessages: true)
             
             if (!talk.isSingleMode) {

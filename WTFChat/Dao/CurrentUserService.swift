@@ -8,12 +8,10 @@
 
 import Foundation
 
-let currentUserService = CurrentUserService()
-
 class CurrentUserService: NSObject {
     private var user: User?
-    
-    let MAX_DAILY_FREE_HINTS_FROM_AD = 3
+
+    private let MAX_DAILY_FREE_HINTS_FROM_AD = 3
     
     func isLoggedIn() -> Bool {
         if user != nil {

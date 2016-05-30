@@ -8,10 +8,8 @@
 
 import Foundation
 
-let avatarService = AvatarService()
-
 class AvatarService {
-    var avatarImageCache = [String: [UInt: UIImage]]()
+    private var avatarImageCache = [String: [UInt: UIImage]]()
     
     func getAvatarImage(name: String, diameter: UInt) -> UIImage {
         if let userAvatars = avatarImageCache[name] {

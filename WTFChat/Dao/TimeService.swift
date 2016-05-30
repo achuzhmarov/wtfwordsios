@@ -8,10 +8,8 @@
 
 import Foundation
 
-let timeService = TimeService()
-
 class TimeService {
-    var timesCache = [NSDate: NSAttributedString]()
+    private var timesCache = [NSDate: NSAttributedString]()
     
     func parseTime(time: NSDate) -> NSAttributedString {
         if let parsedTime = timesCache[time] {

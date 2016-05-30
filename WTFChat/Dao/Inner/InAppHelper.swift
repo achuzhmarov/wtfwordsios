@@ -1,5 +1,5 @@
 //
-//  IAPHelper.swift
+//  InAppHelper.swift
 //  inappragedemo
 //
 //  Created by Ray Fix on 5/1/15.
@@ -15,21 +15,18 @@ public let IAPHelperProductPurchasedErrorNotification = "IAPHelperProductPurchas
 public let IAPHelperProductRestoreNotification = "IAPHelperProductRestoreNotification"
 public let IAPHelperProductRestoreErrorNotification = "IAPHelperProductRestoreErrorNotification"
 
-/// Product identifiers are unique strings registered on the app store.
-public typealias ProductIdentifier = String
-
 /// Completion handler called when products are fetched.
 public typealias RequestProductsCompletionHandler = (success: Bool, products: [SKProduct]) -> ()
 
-
 /// A Helper class for In-App-Purchases, it can fetch products, tell you if a product has been purchased,
 /// purchase products, and restore purchases.  Uses NSUserDefaults to cache if a product has been purchased.
-public class IAPHelper : NSObject  {
-    
+public class InAppHelper: NSObject  {
     /// MARK: - Private Properties
   
-    private let inAppNetworkService = InAppNetworkService()
-    
+    private let inAppNetworkService: InAppNetworkService
+    private let currentUserService: CurrentUserService
+    private let userService: UserService
+
     // Used to keep track of the possible products and which ones have been purchased.
     private let productIdentifiers: Set<ProductIdentifier>
     private var purchasedProductIdentifiers = Set<ProductIdentifier>()
@@ -41,7 +38,11 @@ public class IAPHelper : NSObject  {
     /// MARK: - User facing API
   
     /// Initialize the helper.  Pass in the set of ProductIdentifiers supported by the app.
-    public init(productIdentifiers: Set<ProductIdentifier>) {
+    init(inAppNetworkService: InAppNetworkService, currentUserService: CurrentUserService, userService: UserService, productIdentifiers: Set<ProductIdentifier>) {
+        self.inAppNetworkService = inAppNetworkService
+        self.currentUserService = currentUserService
+        self.userService = userService
+
         self.productIdentifiers = productIdentifiers
         for productIdentifier in productIdentifiers {
             let purchased = NSUserDefaults.standardUserDefaults().boolForKey(productIdentifier)
@@ -92,59 +93,59 @@ public class IAPHelper : NSObject  {
 // This extension is used to get a list of products, their titles, descriptions,
 // and prices from the Apple server.
 
-extension IAPHelper: SKProductsRequestDelegate {
-  public func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
-    print("Loaded list of products...")
-    let products = response.products 
-    completionHandler?(success: true, products: products)
-    clearRequest()
-    
-    // debug printing
-    /*for p in products {
-      print("Found product: \(p.productIdentifier) \(p.localizedTitle) \(p.price.floatValue) \(p.localizedDescription)")
-    }*/
-  }
-  
-  public func request(request: SKRequest, didFailWithError error: NSError) {
-    print("Failed to load list of products.")
-    print("Error: \(error)")
-    clearRequest()
-  }
-  
-  private func clearRequest() {
-    productsRequest = nil
-    completionHandler = nil
-  }
+extension InAppHelper: SKProductsRequestDelegate {
+    public func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+        print("Loaded list of products...")
+        let products = response.products
+        completionHandler?(success: true, products: products)
+        clearRequest()
+
+        // debug printing
+        /*for p in products {
+          print("Found product: \(p.productIdentifier) \(p.localizedTitle) \(p.price.floatValue) \(p.localizedDescription)")
+        }*/
+    }
+
+    public func request(request: SKRequest, didFailWithError error: NSError) {
+        print("Failed to load list of products.")
+        print("Error: \(error)")
+        clearRequest()
+    }
+
+    private func clearRequest() {
+        productsRequest = nil
+        completionHandler = nil
+    }
 }
 
 
-extension IAPHelper: SKPaymentTransactionObserver {
-  /// This is a function called by the payment queue, not to be called directly.
-  /// For each transaction act accordingly, save in the purchased cache, issue notifications,
-  /// mark the transaction as complete.
-  public func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-    if !currentUserService.isLoggedIn() {
-        return
-    }
+extension InAppHelper: SKPaymentTransactionObserver {
+    /// This is a function called by the payment queue, not to be called directly.
+    /// For each transaction act accordingly, save in the purchased cache, issue notifications,
+    /// mark the transaction as complete.
+    public func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        if !currentUserService.isLoggedIn() {
+            return
+        }
 
-    for transaction in transactions {
-      switch (transaction.transactionState) {
-      case .Purchased:
-        completeTransaction(transaction)
-        break
-      case .Failed:
-        failedTransaction(transaction)
-        break
-      case .Restored:
-        restoreTransaction(transaction)
-        break
-      case .Deferred:
-        break
-      case .Purchasing:
-        break
-      }
+        for transaction in transactions {
+            switch (transaction.transactionState) {
+                case .Purchased:
+                    completeTransaction(transaction)
+                    break
+                case .Failed:
+                    failedTransaction(transaction)
+                    break
+                case .Restored:
+                    restoreTransaction(transaction)
+                    break
+                case .Deferred:
+                    break
+                case .Purchasing:
+                    break
+            }
+        }
     }
-  }
   
     private func completeTransaction(transaction: SKPaymentTransaction) {
         let productId = transaction.payment.productIdentifier
@@ -175,9 +176,9 @@ extension IAPHelper: SKPaymentTransactionObserver {
                         self.saveError(transaction, isRestore: isRestore)
                     } else {
                         print("Successfully verified receipt!")
-                        
+
                         if (userInfo != nil) {
-                            userService.updateUserInfo(userInfo)
+                            self.userService.updateUserInfo(userInfo)
                         }
                         
                         self.provideContentForProduct(transaction.payment.productIdentifier, isRestore: isRestore)

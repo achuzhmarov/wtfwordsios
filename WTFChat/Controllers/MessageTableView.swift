@@ -15,8 +15,11 @@ protocol MessageTappedComputer: class {
 let INTERVAL_BETWEEN_MESSAGES_TO_SHOW_TOP_TIMESTAMP_IN_SECONDS = 10 * 60
 
 class MessageTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
-    var oldMessagesCount = 0
-    var talk: Talk!
+    private let currentUserService = serviceLocator.get(CurrentUserService)
+
+    private var oldMessagesCount = 0
+    private var talk: Talk!
+
     weak var messageTappedComputer: MessageTappedComputer?
     
     func updateTalk(talk: Talk) {

@@ -9,6 +9,8 @@
 import Foundation
 
 class ExpGainView: NSObject {
+    private let lvlService = serviceLocator.get(LvlService)
+
     var progressView: UIProgressView?
     var expLabel: UILabel?
     var lvlLabel: UILabel?

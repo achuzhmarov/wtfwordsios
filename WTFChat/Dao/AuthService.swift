@@ -8,8 +8,6 @@
 
 import Foundation
 
-let authService = AuthService()
-
 let HTTP_UNAUTHORIZED = 401
 let HTTP_LOGIN_EXISTS = 490
 let HTTP_EMAIL_EXISTS = 491
@@ -18,7 +16,15 @@ let HTTP_RESTORE_CODE_INVALID = 493
 let HTTP_INCORRECT_LOGIN_OR_EMAIL = 494
 
 class AuthService: NSObject {
-    let authNetworkService = AuthNetworkService()
+    private let authNetworkService: AuthNetworkService
+    private let iosService: IosService
+    private let userService: UserService
+
+    init(authNetworkService: AuthNetworkService, iosService: IosService, userService: UserService) {
+        self.authNetworkService = authNetworkService
+        self.iosService = iosService
+        self.userService = userService
+    }
     
     func loginWithKeychain(completion: (user: User?, error: NSError?) -> Void) {
         login(iosService.getKeychainUser()!, password: iosService.getKeychainPassword()!) { (user, error) -> Void in
@@ -31,7 +37,7 @@ class AuthService: NSObject {
             if let requestError = error {
                 completion(user: nil, error: requestError)
             } else {
-                userService.setNewUser(user!, password: password)
+                self.userService.setNewUser(user!, password: password)
                 completion(user: user, error: nil)
             }
         }

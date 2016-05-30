@@ -27,14 +27,14 @@ extension NSDate
     func addYears(yearsToAdd : Int) -> NSDate
     {
         let calendar = NSCalendar.currentCalendar()
-        
-        if #available(iOS 8.0, *) {
+
+        //if #available(iOS 8.0, *) {
             return calendar.dateByAddingUnit(.Year, value: yearsToAdd, toDate: self, options: NSCalendarOptions())!
-        } else {
+        /*} else {
             //approximation
             let secondsInYear : NSTimeInterval = Double(yearsToAdd) * 60 * 60 * 24 * 365
             return self.dateByAddingTimeInterval(secondsInYear)
-        }
+        }*/
     }
     
     class func parseDateFromStringJSON(string: String) -> NSDate? {

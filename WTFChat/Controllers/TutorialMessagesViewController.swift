@@ -15,16 +15,20 @@ enum TutorialStage: Int {
 var currentTutorialStage: TutorialStage = .Never
 
 class TutorialMessagesViewController: MessagesViewController {
-    let TUTORIAL_MESSAGE_MAIN = "Welcome to the chat! I am glad to see you here. Have a good time!"
-    let TUTORIAL_TIP1 = "So, I see you are interested. Let me give you some more advice on leveling up!"
-    let TUTORIAL_TIP2 = "You will get less XP for an orange word if you open it with a tap. But you will still get X3 bonus XP for fully deciphered message."
-    let TUTORIAL_TIP3 = "There is a daily XP threshold for chatting with the same friend. If you start getting less XP, try to chat with someone else."
-    let TUTORIAL_TIP4 = "You will get the same XP amount for different ciphers. Only its difficulty matters."
-    let TUTORIAL_TIP5 = "You can get significantly more XP when deciphering Hard messages. But it isn't simple, you see!"
-    
-    let TUTORIAL_STAGE_PROPERTY_KEY = "tutorialStage"
-    let nsUserDefaults = NSUserDefaults.standardUserDefaults()
-    
+    private let TUTORIAL_MESSAGE_MAIN = "Welcome to the chat! I am glad to see you here. Have a good time!"
+    private let TUTORIAL_TIP1 = "So, I see you are interested. Let me give you some more advice on leveling up!"
+    private let TUTORIAL_TIP2 = "You will get less XP for an orange word if you open it with a tap. But you will still get X3 bonus XP for fully deciphered message."
+    private let TUTORIAL_TIP3 = "There is a daily XP threshold for chatting with the same friend. If you start getting less XP, try to chat with someone else."
+    private let TUTORIAL_TIP4 = "You will get the same XP amount for different ciphers. Only its difficulty matters."
+    private let TUTORIAL_TIP5 = "You can get significantly more XP when deciphering Hard messages. But it isn't simple, you see!"
+
+    private let TUTORIAL_STAGE_PROPERTY_KEY = "tutorialStage"
+    private let nsUserDefaults = NSUserDefaults.standardUserDefaults()
+
+    private let talkService = serviceLocator.get(TalkService)
+    private let currentUserService = serviceLocator.get(CurrentUserService)
+    private let messageCipherService = serviceLocator.get(MessageCipherService)
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -104,7 +108,7 @@ class TutorialMessagesViewController: MessagesViewController {
             if let sendMessageController = segue.sourceViewController as? SendMessageViewController {
                 self.cipherType = sendMessageController.cipherType
                 self.lastSendedMessage = sendMessageController.message
-                let newMessage = messageCipher.addNewMessageToTalk(self.lastSendedMessage!, talk: self.talk!)
+                let newMessage = messageCipherService.addNewMessageToTalk(self.lastSendedMessage!, talk: self.talk!)
                 newMessage.author = currentUserService.getUserLogin()
                 
                 talkService.updateTalkInArray(self.talk, withMessages: true)
@@ -142,8 +146,8 @@ class TutorialMessagesViewController: MessagesViewController {
         tutorialTalk.users.append("")
         
         //load tutorial message
-        var message = messageCipher.createMessage(TUTORIAL_MESSAGE_MAIN, cipherType: CipherType.HalfWordRoundDown)
-        message = messageCipher.addNewMessageToTalk(message, talk: tutorialTalk)
+        var message = messageCipherService.createMessage(TUTORIAL_MESSAGE_MAIN, cipherType: CipherType.HalfWordRoundDown)
+        message = messageCipherService.addNewMessageToTalk(message, talk: tutorialTalk)
         message.author = tutorialUser.login
         
         talkService.addNewTalk(tutorialTalk)
@@ -161,29 +165,29 @@ class TutorialMessagesViewController: MessagesViewController {
         talkService.clearTalks()
         self.talk = talkService.getSingleModeTalk()
         
-        var message = messageCipher.createMessage(TUTORIAL_TIP1, cipherType: CipherType.HalfWordRoundDownFromEnd)
-        message = messageCipher.addNewMessageToTalk(message, talk: self.talk)
+        var message = messageCipherService.createMessage(TUTORIAL_TIP1, cipherType: CipherType.HalfWordRoundDownFromEnd)
+        message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
         CoreMessage.createMessage(message)
         
-        message = messageCipher.createMessage(TUTORIAL_TIP2, cipherType: CipherType.ShuffleFullWord)
-        message = messageCipher.addNewMessageToTalk(message, talk: self.talk)
+        message = messageCipherService.createMessage(TUTORIAL_TIP2, cipherType: CipherType.ShuffleFullWord)
+        message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
         CoreMessage.createMessage(message)
         
-        message = messageCipher.createMessage(TUTORIAL_TIP3, cipherType: CipherType.NormalRandomCutter)
-        message = messageCipher.addNewMessageToTalk(message, talk: self.talk)
+        message = messageCipherService.createMessage(TUTORIAL_TIP3, cipherType: CipherType.NormalRandomCutter)
+        message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
         CoreMessage.createMessage(message)
         
-        message = messageCipher.createMessage(TUTORIAL_TIP4, cipherType: CipherType.NormalDoubleCutter)
-        message = messageCipher.addNewMessageToTalk(message, talk: self.talk)
+        message = messageCipherService.createMessage(TUTORIAL_TIP4, cipherType: CipherType.NormalDoubleCutter)
+        message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
         CoreMessage.createMessage(message)
         
-        message = messageCipher.createMessage(TUTORIAL_TIP5, cipherType: CipherType.FirstLetter)
-        message = messageCipher.addNewMessageToTalk(message, talk: self.talk)
+        message = messageCipherService.createMessage(TUTORIAL_TIP5, cipherType: CipherType.FirstLetter)
+        message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
         CoreMessage.createMessage(message)
         
         talkService.updateTalkInArray(self.talk, withMessages: true)
         
-        self.title = talk.getFriendLogin().capitalizedString
+        self.title = talkService.getFriendLogin(talk).capitalizedString
         
         self.updateView()
     }

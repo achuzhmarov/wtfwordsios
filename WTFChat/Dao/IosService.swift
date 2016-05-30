@@ -8,11 +8,15 @@
 
 import Foundation
 
-let iosService = IosService()
-
 class IosService {
-    let keychain = KeychainWrapper()
-    
+    private let iosNetworkService: IosNetworkService
+
+    private let keychain = KeychainWrapper()
+
+    init(iosNetworkService: IosNetworkService) {
+        self.iosNetworkService = iosNetworkService
+    }
+
     func updatePushBadge(talks: [Talk]?) {
         //can only change badge from main_queue
         dispatch_async(dispatch_get_main_queue(), {
@@ -41,23 +45,7 @@ class IosService {
     }
     
     func updateDeviceToken() {
-        var postJSON: JSON? = nil
-        
-        if let deviceToken = DEVICE_TOKEN {
-            let userData = [
-                "device_token": deviceToken
-            ]
-            
-            postJSON = JSON(userData)
-        }
-        
-        networkService.post(postJSON, relativeUrl: "user/ios_token") { (json, error) -> Void in
-            if let requestError = error {
-                print(requestError)
-            } else {
-                //ok - do nothing
-            }
-        }
+        iosNetworkService.updateDeviceToken(DEVICE_TOKEN)
     }
     
     func getKeychainUser() -> String? {

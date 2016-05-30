@@ -9,6 +9,11 @@
 import Foundation
 
 class InAppNetworkService: NSObject {
+    private let networkService: NetworkService
+
+    init(networkService: NetworkService) {
+        self.networkService = networkService
+    }
     
     func verifyInAppPurchase(receipt: String, productId: ProductIdentifier,
         completion:(userInfo: User?, error: NSError?) -> Void) {

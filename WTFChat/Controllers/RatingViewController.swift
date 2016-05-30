@@ -9,6 +9,9 @@
 import UIKit
 
 class RatingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    private let userService = serviceLocator.get(UserService)
+    private let currentUserService = serviceLocator.get(CurrentUserService)
+
     @IBOutlet weak var categorySegment: UISegmentedControl!
     @IBOutlet weak var usersView: UITableView!
     
@@ -58,7 +61,7 @@ class RatingViewController: UIViewController, UITableViewDataSource, UITableView
                 } else {
                     if let friends = users {
                         self.friends = friends
-                        self.friends.append(currentUserService.getSelfUserInfo()!)
+                        self.friends.append(self.currentUserService.getSelfUserInfo()!)
                         self.updateView()
                     }
                 }

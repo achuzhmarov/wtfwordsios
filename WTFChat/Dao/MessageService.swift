@@ -8,8 +8,6 @@
 
 import Foundation
 
-let messageService = MessageService()
-
 protocol MessageListener: class {
     func updateMessages(talk: Talk?, wasNew: Bool, error: NSError?)
     func messageSended(talk: Talk?, error: NSError?)
@@ -25,14 +23,33 @@ struct WeakListener {
 }
 
 class MessageService: NSObject {
-    let MESSAGES_UPDATE_TIMER_INTERVAL = 10.0
-    let messageNetworkService = MessageNetworkService()
+    private let MESSAGES_UPDATE_TIMER_INTERVAL = 10.0
+
+    private let messageNetworkService: MessageNetworkService
+    private let talkService: TalkService
+    private let currentUserService: CurrentUserService
     
     var listeners = [String: WeakListener]()
     var talksToUpdate = Set<String>()
     
     var updateTimer: NSTimer?
-    
+
+    init(messageNetworkService: MessageNetworkService, talkService: TalkService, currentUserService: CurrentUserService) {
+        self.messageNetworkService = messageNetworkService
+        self.talkService = talkService
+        self.currentUserService = currentUserService
+    }
+
+    func getMessageText(message: Message) -> String! {
+        if (currentUserService.getUserLogin() == message.author) {
+            return message.clearText()
+        } else if (message.deciphered) {
+            return message.clearText()
+        } else {
+            return message.questionMarks()
+        }
+    }
+
     func startUpdateTimer() {
         dispatch_async(dispatch_get_main_queue(), {
             self.updateTimer?.invalidate()
@@ -109,7 +126,7 @@ class MessageService: NSObject {
                                 wasNew = wasNew || isNew
                             }
                             
-                            talkService.updateTalkInArray(talk, withMessages: true)
+                            self.talkService.updateTalkInArray(talk, withMessages: true)
                             
                             listener?.updateMessages(talk, wasNew: wasNew, error: nil)
                         }
@@ -126,7 +143,7 @@ class MessageService: NSObject {
                     listener?.updateMessages(nil, wasNew: false, error: requestError)
                 } else {
                     talk.messages = messages!
-                    talkService.updateTalkInArray(talk, withMessages: true)
+                    self.talkService.updateTalkInArray(talk, withMessages: true)
                     
                     listener?.updateMessages(talk, wasNew: true, error: nil)
                 }
@@ -148,7 +165,7 @@ class MessageService: NSObject {
                             self.updateOrCreateMessageInArray(talk, message: message)
                         }
                         
-                        talkService.updateTalkInArray(talk, withMessages: true)
+                        self.talkService.updateTalkInArray(talk, withMessages: true)
                         
                         listener?.loadEarlierCompleteHandler(talk, newMessagesCount: newMessages.count, error: nil)
                     }
@@ -173,7 +190,7 @@ class MessageService: NSObject {
                     
                     if let responseMessage = message {
                         self.updateOrCreateMessageInArray(talk, message: responseMessage)
-                        talkService.updateTalkInArray(talk, withMessages: true)
+                        self.talkService.updateTalkInArray(talk, withMessages: true)
                         
                         listener?.messageSended(talk, error: nil)
                     }

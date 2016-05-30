@@ -9,6 +9,10 @@
 import UIKit
 
 class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldDelegate {
+    private let messageService = serviceLocator.get(MessageService)
+    private let currentUserService = serviceLocator.get(CurrentUserService)
+    private let messageCipherService = serviceLocator.get(MessageCipherService)
+
     @IBOutlet weak var topTimerLabel: UILabel!
     
     @IBOutlet weak var startLabel: UILabel!
@@ -174,7 +178,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             return
         }
         
-        messageCipher.decipher(message!, guessText: guessTextField.text!)
+        messageCipherService.decipher(message!, guessText: guessTextField.text!)
         
         let guessWords = guessTextField.text!.characters.split {$0 == " "}.map { String($0) }
         
@@ -254,9 +258,9 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         audioHelper.playSound("success")
         
         if (word.wasCloseTry) {
-            messageCipher.decipher(message!, suggestedWord: word, closeTry: true)
+            messageCipherService.decipher(message!, suggestedWord: word, closeTry: true)
         } else {
-            messageCipher.decipher(message!, suggestedWord: word)
+            messageCipherService.decipher(message!, suggestedWord: word)
             suggestions -= 1
             
             if (!isSingleMode) {
@@ -396,7 +400,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             talk.cipheredNum -= 1
         }
         
-        messageCipher.failed(message!)
+        messageCipherService.failed(message!)
         message.timerSecs = timer.seconds
         
         bottomView.hidden = true

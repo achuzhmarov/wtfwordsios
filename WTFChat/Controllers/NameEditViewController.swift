@@ -9,7 +9,9 @@
 import Foundation
 
 class NameEditViewController: UITableViewController, UITextFieldDelegate {
-    
+    private let userService = serviceLocator.get(UserService)
+    private let currentUserService = serviceLocator.get(CurrentUserService)
+
     @IBOutlet weak var nameText: UITextField!
     
     override func viewDidLoad() {

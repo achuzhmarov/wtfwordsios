@@ -9,7 +9,12 @@
 import Foundation
 
 class UserNetworkService: NSObject {
-    
+    let networkService: NetworkService
+
+    init(networkService: NetworkService) {
+        self.networkService = networkService
+    }
+
     func getNewInfo(lastUpdate: NSDate, completion:(userInfo: User?, error: NSError?) -> Void) {
         let lastUpdateData = [
             "last_update": NSDate.parseStringJSONFromDate(lastUpdate)!

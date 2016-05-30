@@ -9,6 +9,11 @@
 import Foundation
 
 class AuthNetworkService: NSObject {
+    private let networkService: NetworkService
+
+    init(networkService: NetworkService) {
+        self.networkService = networkService
+    }
     
     func login(login: String, password: String, completion: (user: User?, error: NSError?) -> Void) {
         self.authorize(login, password: password) { error -> Void in
@@ -114,11 +119,11 @@ class AuthNetworkService: NSObject {
             if let requestError = error {
                 completion(error: requestError)
             } else if let token = json!["token"].string {
-                let config = networkService.getDefaultConfiguration()
+                let config = self.networkService.getDefaultConfiguration()
                 let authString = "Bearer \(token)"
                 config.HTTPAdditionalHeaders = ["Authorization" : authString]
                 
-                networkService.updateSessionConfiguration(config)
+                self.networkService.updateSessionConfiguration(config)
                 
                 completion(error: nil)
             } else {

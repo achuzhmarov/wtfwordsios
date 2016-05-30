@@ -9,7 +9,8 @@
 import Foundation
 
 class ShopViewController: BaseShopViewController {
-    
+    private let inAppService = serviceLocator.get(InAppService)
+
     @IBOutlet weak var x2HintsLabel: UILabel!
     @IBOutlet weak var x2HintsBuyLabel: UILabel!
     
@@ -48,7 +49,7 @@ class ShopViewController: BaseShopViewController {
             secondButtonTitle: "Cancel",
             viewPresenter: self) { () -> Void in
                 self.isRestoreInProgress = true
-                inAppService.restorePurchased()
+                self.inAppService.restorePurchased()
         }
     }
     

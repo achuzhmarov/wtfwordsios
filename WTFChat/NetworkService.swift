@@ -8,15 +8,12 @@
 
 import Foundation
 
-//let networkService = NetworkService(baseUrl: "https://127.0.0.1:5000/")
-let networkService = NetworkService(baseUrl: "https://dev.wtfchat.wtf:42043/")
-
 class NetworkService: NSObject, NSURLSessionDelegate {
-    var baseUrl: String
+    private var baseUrl: String
     private var session: NSURLSession!
-    
-    let REQUEST_REPEAT_COUNT = 3
-    let REQUEST_TIMEOUT_SECONDS = NSTimeInterval(30)
+
+    private let REQUEST_REPEAT_COUNT = 3
+    private let REQUEST_TIMEOUT_SECONDS = NSTimeInterval(30)
     
     init(baseUrl: String) {
         self.baseUrl = baseUrl

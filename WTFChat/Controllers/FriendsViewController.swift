@@ -19,6 +19,9 @@ let FONT_COLOR = UIColor.whiteColor()
 let IGNORE_COLOR = UIColor(hue: 240.0 / 360.0, saturation: 0.02, brightness: 0.92, alpha: 1.0)
 
 class FriendsViewController: UITableViewController, TalkListener {
+    private let currentUserService = serviceLocator.get(CurrentUserService)
+    private let talkService = serviceLocator.get(TalkService)
+
     var talks = [Talk]()
     
     override func viewDidLoad() {
@@ -82,7 +85,10 @@ class FriendsViewController: UITableViewController, TalkListener {
             } else if (talk2.lastMessage != nil) {
                 return false
             } else {
-                return talk1.getFriendLogin().isGreater(talk2.getFriendLogin())
+                let friend1 = talkService.getFriendLogin(talk1)
+                let friend2 = talkService.getFriendLogin(talk2)
+
+                return friend1.isGreater(friend2)
             }
         }
         
@@ -118,14 +124,6 @@ class FriendsViewController: UITableViewController, TalkListener {
             if let rowIndex = tableView.indexPathForSelectedRow?.row {
                 targetController.talk = talks[rowIndex]
             }
-        }
-    }
-    
-    @IBAction func addFriend(segue:UIStoryboardSegue) {
-        if let addFriendController = segue.sourceViewController as? AddFriendViewController {
-            //self.talks.append(addFriendController.createdTalk!)
-            talkService.addNewTalk(addFriendController.createdTalk!)
-            //self.updateView()
         }
     }
 }

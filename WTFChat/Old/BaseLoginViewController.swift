@@ -9,7 +9,8 @@
 import Foundation
 
 class BaseLoginViewController: UIViewController {
-    
+    private let authService = serviceLocator.get(AuthService)
+
     func login(login: String, password: String) {
         authService.login(login, password: password) { user, error -> Void in
             dispatch_async(dispatch_get_main_queue(), {

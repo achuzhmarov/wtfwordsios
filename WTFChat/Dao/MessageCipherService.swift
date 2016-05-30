@@ -1,5 +1,5 @@
 //
-//  MessageCipher.swift
+//  MessageCipherService.swift
 //  WTFChat
 //
 //  Created by Artem Chuzhmarov on 24/09/15.
@@ -8,11 +8,15 @@
 
 import Foundation
 
-let messageCipher = MessageCipher()
+class MessageCipherService {
+    private let WORD_SPECIAL_SYMBOLS = ["'", "-"]
 
-class MessageCipher {
-    let WORD_SPECIAL_SYMBOLS = ["'", "-"]
-    
+    private let currentUserService: CurrentUserService
+
+    init(currentUserService: CurrentUserService) {
+        self.currentUserService = currentUserService
+    }
+
     func getCompareString(string: String) -> String {
         return string.uppercaseString.removeChars(WORD_SPECIAL_SYMBOLS).replace("Ё", with: "Е")
     }

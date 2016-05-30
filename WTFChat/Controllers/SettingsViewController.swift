@@ -9,6 +9,10 @@
 import UIKit
 
 class SettingsViewController: UITableViewController {
+    private let userService = serviceLocator.get(UserService)
+    private let currentUserService = serviceLocator.get(CurrentUserService)
+    private let lvlService = serviceLocator.get(LvlService)
+    private let avatarService = serviceLocator.get(AvatarService)
 
     @IBOutlet weak var userImage: UIImageView!
     
@@ -20,18 +24,13 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var hintsText: UILabel!
     
     @IBOutlet weak var nameText: UILabel!
-    @IBOutlet weak var emailText: UILabel!
-    
-    @IBOutlet weak var logoutText: UILabel!
     
     @IBOutlet weak var pushNewSwitch: UISwitch!
     @IBOutlet weak var pushDecipherSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        logoutText.textColor = FAILED_COLOR
-        
+
         userImage.layer.borderColor = UIColor.whiteColor().CGColor
         userImage.layer.cornerRadius = userImage.bounds.width/2
         userImage.clipsToBounds = true
@@ -56,7 +55,6 @@ class SettingsViewController: UITableViewController {
         hintsText.text = String(currentUserService.getUserSuggestions())
         
         nameText.text = currentUserService.getUserName()
-        emailText.text = currentUserService.getUserEmail()
         
         pushNewSwitch.setOn(currentUserService.getUserPushNew(), animated: false)
         pushDecipherSwitch.setOn(currentUserService.getUserPushDeciphered(), animated: false)
@@ -74,7 +72,7 @@ class SettingsViewController: UITableViewController {
                 if (error != nil) {
                     WTFOneButtonAlert.show("Error", message: "Can't update user info. \(connectionErrorDescription())", firstButtonTitle: "Ok", viewPresenter: self)
                 
-                    self.pushNewSwitch.setOn(currentUserService.getUserPushNew(), animated: true)
+                    self.pushNewSwitch.setOn(self.currentUserService.getUserPushNew(), animated: true)
                 }
             })
         }
@@ -86,39 +84,7 @@ class SettingsViewController: UITableViewController {
                 if (error != nil) {
                     WTFOneButtonAlert.show("Error", message: "Can't update user info. \(connectionErrorDescription())", firstButtonTitle: "Ok", viewPresenter: self)
                 
-                    self.pushDecipherSwitch.setOn(currentUserService.getUserPushDeciphered(), animated: true)
-                }
-            })
-        }
-    }
-    
-    let LOGOUT_SECTION = 5
-    let LOGOUT_ROW = 0
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if (indexPath.section == LOGOUT_SECTION && indexPath.row == LOGOUT_ROW) {
-            showLogoutAlert()
-        }
-    }
-    
-    func showLogoutAlert() {
-        WTFTwoButtonsAlert.show("Logout",
-            message: "Are you sure you want to logout?",
-            firstButtonTitle: "Ok",
-            secondButtonTitle: "Cancel",
-            viewPresenter: self) { () -> Void in
-                self.logout()
-        }
-    }
-    
-    func logout() {
-        authService.logoutNetworkRequest() { (error) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
-                if (error != nil) {
-                    WTFOneButtonAlert.show("Error", message: "Can't logout. \(connectionErrorDescription())", firstButtonTitle: "Ok", viewPresenter: self)
-                } else {
-                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                    appDelegate.logout()
+                    self.pushDecipherSwitch.setOn(self.currentUserService.getUserPushDeciphered(), animated: true)
                 }
             })
         }

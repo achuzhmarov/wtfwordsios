@@ -9,7 +9,11 @@
 import Foundation
 
 class BaseShopViewController: UITableViewController {
-    
+    private let inAppService = serviceLocator.get(InAppService)
+    private let userService = serviceLocator.get(UserService)
+    private let adColonyService = serviceLocator.get(AdColonyService)
+    private let currentUserService = serviceLocator.get(CurrentUserService)
+
     @IBOutlet weak var freeHintsLabel: UILabel!
     @IBOutlet weak var freeHintsBuyLabel: UILabel!
     
@@ -28,7 +32,7 @@ class BaseShopViewController: UITableViewController {
     
     var detailColor: UIColor!
     var tintColor: UIColor!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -121,7 +125,7 @@ class BaseShopViewController: UITableViewController {
     func showAdAlert() {
         if currentUserService.canAddFreeAdHint() && adColonyService.hasAd() {
             adColonyService.showAd({ () -> Void in
-                userService.addFreeAdHint()
+                self.userService.addFreeAdHint()
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     WTFOneButtonAlert.show("Free hint",

@@ -9,13 +9,19 @@
 import Foundation
 
 class MessageNetworkService: NSObject {
+    private let networkService: NetworkService
+
+    init(networkService: NetworkService) {
+        self.networkService = networkService
+    }
+
     func markTalkAsReaded(talk: Talk, completion:(error: NSError?) -> Void) {
         networkService.post(nil, relativeUrl: "messages/read/\(talk.id)") { (json, error) -> Void in
             completion(error: error)
         }
     }
     
-    func getMessagesByTalk(talk: Talk, completion:(messages: [Message]?, error: NSError?) -> Void) {
+    func getMessagesByTalk(talk: Talk, completion: (messages: [Message]?, error: NSError?) -> Void) {
         networkService.get("messages/\(talk.id)") { (json, error) -> Void in
             if let requestError = error {
                 completion(messages: nil, error: requestError)

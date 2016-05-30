@@ -9,6 +9,11 @@
 import UIKit
 
 class SendMessageViewController: UIViewController, CipherPickedComputer {
+    private let inAppService = serviceLocator.get(InAppService)
+    private let messageCipherService = serviceLocator.get(MessageCipherService)
+    private let cipherService = serviceLocator.get(CipherService)
+    private let adColonyService = serviceLocator.get(AdColonyService)
+
     @IBOutlet weak var messageWordsView: WordsViewController!
     
     @IBOutlet weak var cipherPicker: CipherPickerViewController!
@@ -24,7 +29,7 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        message = messageCipher.createMessage(text, cipherType: cipherType)
+        message = messageCipherService.createMessage(text, cipherType: cipherType)
         
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
@@ -54,7 +59,7 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
     func cipherPicked(cipherType: CipherType) {
         self.cipherType = cipherType
         
-        message = messageCipher.createMessage(text, cipherType: cipherType)
+        message = messageCipherService.createMessage(text, cipherType: cipherType)
         
         messageWordsView.setNewMessage(message)
         
@@ -104,7 +109,7 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
     @IBAction func unlockCipherTapped(sender: AnyObject) {
         inAppService.showBuyAlert(IAPProducts.CIPHER_ALL, viewPresenter: self) { () -> Void in
             if let productId = CipherFactory.getProductId(self.cipherType) {
-                inAppService.showBuyAlert(productId, viewPresenter: self)
+                self.inAppService.showBuyAlert(productId, viewPresenter: self)
             }
         }
     }
