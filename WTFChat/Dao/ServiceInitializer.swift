@@ -48,13 +48,18 @@ class ServiceInitializer {
 
         //other
         serviceLocator.add(
+            cipherService,
+            LvlService(currentUserService: currentUserService),
+            MessageCipherService(currentUserService: currentUserService)
+        )
+
+        //without dependencies
+        serviceLocator.add(
+            currentUserService,
             AdColonyService(),
             AvatarService(),
-            cipherService,
-            currentUserService,
-            LvlService(currentUserService: currentUserService),
-            MessageCipherService(currentUserService: currentUserService),
-            TimeService()
+            TimeService(),
+            AudioService()
         )
     }
 }

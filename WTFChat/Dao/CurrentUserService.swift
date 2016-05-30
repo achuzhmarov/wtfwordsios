@@ -175,7 +175,7 @@ class CurrentUserService: NSObject {
         }
 
         //should never happen
-        //TODO - add logging?
+        print("getFriendLogin from not a friend?")
         return ""
     }
 

@@ -12,6 +12,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     private let messageService = serviceLocator.get(MessageService)
     private let currentUserService = serviceLocator.get(CurrentUserService)
     private let messageCipherService = serviceLocator.get(MessageCipherService)
+    private let audioService = serviceLocator.get(AudioService)
 
     @IBOutlet weak var topTimerLabel: UILabel!
     
@@ -255,7 +256,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             return
         }
         
-        audioHelper.playSound("success")
+        audioService.playSound("success")
         
         if (word.wasCloseTry) {
             messageCipherService.decipher(message!, suggestedWord: word, closeTry: true)
@@ -411,9 +412,9 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         dismissKeyboard()
         
         if (message!.countFailed() == 0) {
-            audioHelper.playSound("win")
+            audioService.playSound("win")
         } else {
-            audioHelper.playSound("lose")
+            audioService.playSound("lose")
         }
         
         self.navigationItem.setHidesBackButton(false, animated:true)

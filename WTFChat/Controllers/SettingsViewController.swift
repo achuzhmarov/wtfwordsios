@@ -70,7 +70,7 @@ class SettingsViewController: UITableViewController {
         userService.updatePushNew(pushNewSwitch.on) { (error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if (error != nil) {
-                    WTFOneButtonAlert.show("Error", message: "Can't update user info. \(connectionErrorDescription())", firstButtonTitle: "Ok", viewPresenter: self)
+                    WTFOneButtonAlert.show("Error", message: "Can't update user info. \(WTFOneButtonAlert.CON_ERR)", firstButtonTitle: "Ok", viewPresenter: self)
                 
                     self.pushNewSwitch.setOn(self.currentUserService.getUserPushNew(), animated: true)
                 }
@@ -82,7 +82,7 @@ class SettingsViewController: UITableViewController {
         userService.updatePushDeciphered(pushDecipherSwitch.on) { (error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if (error != nil) {
-                    WTFOneButtonAlert.show("Error", message: "Can't update user info. \(connectionErrorDescription())", firstButtonTitle: "Ok", viewPresenter: self)
+                    WTFOneButtonAlert.show("Error", message: "Can't update user info. \(WTFOneButtonAlert.CON_ERR)", firstButtonTitle: "Ok", viewPresenter: self)
                 
                     self.pushDecipherSwitch.setOn(self.currentUserService.getUserPushDeciphered(), animated: true)
                 }

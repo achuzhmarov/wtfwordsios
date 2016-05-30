@@ -9,11 +9,14 @@
 import Foundation
 
 class WTFOneButtonAlert: NSObject, UIAlertViewDelegate  {
+    static let CON_ERR = "%conError%"
+    private static let connectionErrorDescription = "Internet connection problem"
+
     class func show(title: String, message: String, firstButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:(() -> Void)? = nil) {
         
         //if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
-                message: message,
+                message: message.replace(CON_ERR, with: connectionErrorDescription),
                 preferredStyle: UIAlertControllerStyle.Alert)
             
             alert.addAction(UIAlertAction(title: firstButtonTitle, style: .Default, handler: { (action: UIAlertAction) in

@@ -58,9 +58,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let notification = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject : AnyObject]
         {
-            /*if (currentUserService.isLoggedIn()) {
+            if (currentUserService.isLoggedIn()) {
                 computeInactiveNotification(notification)
-            }*/
+            }
         }
         
         return true
@@ -107,12 +107,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
         var tokenString = ""
         
-        for var i = 0; i < deviceToken.length; i += 1 {
+        for i in 0..<deviceToken.length {
             tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
         }
         
         DEVICE_TOKEN = tokenString
-        
+
+        //TODO - update device token
         /*if (currentUserService.isLoggedIn()) {
             iosService.updateDeviceToken()
         }*/
@@ -120,8 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //Called if unable to register for APNS.
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        //TODO logging?
-        //print(error)
+        print(error)
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {

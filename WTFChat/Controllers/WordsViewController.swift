@@ -14,6 +14,7 @@ protocol SuggestionComputer: class {
 
 class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelegate {
     private let messageCipherService = serviceLocator.get(MessageCipherService)
+    private let audioService = serviceLocator.get(AudioService)
 
     var message: Message?
     var rows = WordsField()
@@ -89,7 +90,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
             
             if (needUpdate()) {
                 updateView()
-                audioHelper.playSound("success")
+                audioService.playSound("success")
                 animateWarning(tries)
             } else {
                 animateError(tries)
@@ -147,9 +148,9 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         }
         
         if (wasWarning) {
-            audioHelper.playSound("warning")
+            audioService.playSound("warning")
         } else if (wasError) {
-            audioHelper.playSound("error")
+            audioService.playSound("error")
         }
     }
     

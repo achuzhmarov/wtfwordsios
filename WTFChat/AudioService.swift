@@ -1,5 +1,5 @@
 //
-//  AudioHelper.swift
+//  AudioService.swift
 //  WTFChat
 //
 //  Created by Artem Chuzhmarov on 11/09/15.
@@ -9,9 +9,7 @@
 import UIKit
 import AVFoundation
 
-var audioHelper = AudioHelper()
-
-class AudioHelper {
+class AudioService {
     
     var audioPlayer:AVAudioPlayer!
     let defaultExt = "wav"

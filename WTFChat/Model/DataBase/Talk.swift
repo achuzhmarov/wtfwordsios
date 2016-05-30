@@ -63,18 +63,6 @@ class Talk : BaseEntity {
         lastMessage = message
     }
     
-    /*func getFriendLogin() -> String {
-        for user in self.users {
-            if (user != currentUserService.getUserLogin()) {
-                return user
-            }
-        }
-        
-        //should never happen
-        //TODO - add logging?
-        return ""
-    }*/
-    
     class func parseArrayFromJson(json: JSON) throws -> [Talk] {
         var talks = [Talk]()
         

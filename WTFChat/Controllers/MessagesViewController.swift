@@ -46,7 +46,6 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         if (talk.isSingleMode) {
             self.title = currentUserService.getFriendLogin(talk).capitalizedString
         } else {
-            //TODO AWKARD!!!!!!
             let friendInfo = currentUserService.getFriendInfoByTalk(talk)
             let title = "\(friendInfo!.getDisplayName()), lvl \(String(friendInfo!.lvl))"
             configureTitleView(title, navigationItem: navigationItem)
@@ -110,6 +109,16 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
             
             showMessages(0.3, delay: 0)
         }
+    }
+
+    private func configureTitleView(title: String, navigationItem: UINavigationItem) {
+        let titleLabel = UILabel()
+        titleLabel.textAlignment = .Center
+        titleLabel.font = UIFont.boldSystemFontOfSize(17.0)
+        titleLabel.text = title
+        navigationItem.titleView = titleLabel
+        titleLabel.sizeToFit()
+        titleLabel.adjustsFontSizeToFitWidth = true
     }
     
     func showMessages(duration: NSTimeInterval, delay: NSTimeInterval) {
@@ -203,7 +212,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         dispatch_async(dispatch_get_main_queue(), {
             if let requestError = error {
                 if (!self.wasSuccessfullUpdate) {
-                    WTFOneButtonAlert.show("Error", message: "Can't load messages. \(connectionErrorDescription())", firstButtonTitle: "Ok", viewPresenter: self)
+                    WTFOneButtonAlert.show("Error", message: "Can't load messages. \(WTFOneButtonAlert.CON_ERR)", firstButtonTitle: "Ok", viewPresenter: self)
                 }
                 
                 NSLog(requestError.localizedDescription)
@@ -219,7 +228,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
     func loadEarlierCompleteHandler(talk: Talk?, newMessagesCount: Int, error: NSError?) {
         dispatch_async(dispatch_get_main_queue(), {
             if let requestError = error {
-                WTFOneButtonAlert.show("Error", message: "Can't load earlier messages. \(connectionErrorDescription())", firstButtonTitle: "Ok", viewPresenter: self)
+                WTFOneButtonAlert.show("Error", message: "Can't load earlier messages. \(WTFOneButtonAlert.CON_ERR)", firstButtonTitle: "Ok", viewPresenter: self)
 
                 NSLog(requestError.localizedDescription)
             } else {

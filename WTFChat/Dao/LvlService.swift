@@ -32,4 +32,8 @@ class LvlService {
         let rightMultiplier = intPow(2, power: lvl / 5 + 1)
         return leftMultiplier * 5000 + rightMultiplier * (lvl % 5) * 500
     }
+
+    private func intPow(radix: Int, power: Int) -> Int {
+        return Int(pow(Double(radix), Double(power)))
+    }
 }
