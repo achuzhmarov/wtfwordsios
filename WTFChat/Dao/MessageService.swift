@@ -27,27 +27,15 @@ class MessageService: NSObject {
 
     private let messageNetworkService: MessageNetworkService
     private let talkService: TalkService
-    private let currentUserService: CurrentUserService
     
     var listeners = [String: WeakListener]()
     var talksToUpdate = Set<String>()
     
     var updateTimer: NSTimer?
 
-    init(messageNetworkService: MessageNetworkService, talkService: TalkService, currentUserService: CurrentUserService) {
+    init(messageNetworkService: MessageNetworkService, talkService: TalkService) {
         self.messageNetworkService = messageNetworkService
         self.talkService = talkService
-        self.currentUserService = currentUserService
-    }
-
-    func getMessageText(message: Message) -> String! {
-        if (currentUserService.getUserLogin() == message.author) {
-            return message.clearText()
-        } else if (message.deciphered) {
-            return message.clearText()
-        } else {
-            return message.questionMarks()
-        }
     }
 
     func startUpdateTimer() {

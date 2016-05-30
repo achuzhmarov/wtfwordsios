@@ -27,7 +27,7 @@ class ServiceInitializer {
 
         //TODO - AWFUL DEPENDENCY
         let talkService = TalkService(talkNetworkService: talkNetworkService, iosService: iosService, currentUserService: currentUserService)
-        let messageService = MessageService(messageNetworkService: messageNetworkService, talkService: talkService, currentUserService: currentUserService)
+        let messageService = MessageService(messageNetworkService: messageNetworkService, talkService: talkService)
         talkService.messageService = messageService
 
         let userService = UserService(userNetworkService: userNetworkService, iosService: iosService, talkService: talkService, currentUserService: currentUserService)

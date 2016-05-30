@@ -85,8 +85,8 @@ class FriendsViewController: UITableViewController, TalkListener {
             } else if (talk2.lastMessage != nil) {
                 return false
             } else {
-                let friend1 = talkService.getFriendLogin(talk1)
-                let friend2 = talkService.getFriendLogin(talk2)
+                let friend1 = currentUserService.getFriendLogin(talk1)
+                let friend2 = currentUserService.getFriendLogin(talk2)
 
                 return friend1.isGreater(friend2)
             }

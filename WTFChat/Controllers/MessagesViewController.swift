@@ -44,10 +44,10 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         view.addGestureRecognizer(tap)
         
         if (talk.isSingleMode) {
-            self.title = talkService.getFriendLogin(talk).capitalizedString
+            self.title = currentUserService.getFriendLogin(talk).capitalizedString
         } else {
             //TODO AWKARD!!!!!!
-            let friendInfo = currentUserService.getFriendInfoByLogin(talkService.getFriendLogin(talk))
+            let friendInfo = currentUserService.getFriendInfoByTalk(talk)
             let title = "\(friendInfo!.getDisplayName()), lvl \(String(friendInfo!.lvl))"
             configureTitleView(title, navigationItem: navigationItem)
         }

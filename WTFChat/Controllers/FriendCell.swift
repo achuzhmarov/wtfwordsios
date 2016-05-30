@@ -12,8 +12,6 @@ class FriendCell: UITableViewCell {
     private let currentUserService = serviceLocator.get(CurrentUserService)
     private let avatarService = serviceLocator.get(AvatarService)
     private let timeService = serviceLocator.get(TimeService)
-    private let talkService = serviceLocator.get(TalkService)
-    private let messageService = serviceLocator.get(MessageService)
 
     @IBOutlet private weak var friendImage: UIImageView!
     
@@ -37,10 +35,9 @@ class FriendCell: UITableViewCell {
         initStyle()
         
         if (talk.isSingleMode) {
-            friendName.text = talkService.getFriendLogin(talk).capitalizedString
+            friendName.text = currentUserService.getFriendLogin(talk).capitalizedString
         } else {
-            //TODO AWKARD!!!!
-            let friendInfo = currentUserService.getFriendInfoByLogin(talkService.getFriendLogin(talk))
+            let friendInfo = currentUserService.getFriendInfoByTalk(talk)
             friendName.text = friendInfo!.getDisplayName()
         }
         
@@ -48,7 +45,7 @@ class FriendCell: UITableViewCell {
             updateCiphered(talk)
             updateMessage(message)
             
-            if (message.author != talkService.getFriendLogin(talk)) {
+            if (message.author != currentUserService.getFriendLogin(talk)) {
                 updateLastAuthorImage(message.author)
             } else {
                 hideLastAuthorImage()
@@ -60,7 +57,7 @@ class FriendCell: UITableViewCell {
         }
 
         //TODO AWKARD!!!
-        friendImage.image = avatarService.getAvatarImage(talkService.getFriendLogin(talk),
+        friendImage.image = avatarService.getAvatarImage(currentUserService.getFriendLogin(talk),
             diameter: UInt(friendImage.bounds.height))
     }
     
@@ -138,7 +135,7 @@ class FriendCell: UITableViewCell {
     private func updateMessage(message: Message) {
         lastMessageTime.text = timeService.parseTime(message.timestamp).string
         
-        lastMessage.text = messageService.getMessageText(message)
+        lastMessage.text = currentUserService.getMessageText(message)
         
         if (message.deciphered) {
             if (message.countFailed() > 0) {

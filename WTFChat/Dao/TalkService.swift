@@ -44,24 +44,12 @@ class TalkService: NSObject {
 
     func getTalkByLogin(friend: String) -> Talk? {
         for talk in talks {
-            if (getFriendLogin(talk) == friend) {
+            if (currentUserService.getFriendLogin(talk) == friend) {
                 return talk
             }
         }
-        
+
         return nil
-    }
-
-    func getFriendLogin(talk: Talk) -> String {
-        for user in talk.users {
-            if (user != currentUserService.getUserLogin()) {
-                return user
-            }
-        }
-
-        //should never happen
-        //TODO - add logging?
-        return ""
     }
     
     func clearTalks() {

@@ -187,7 +187,7 @@ class TutorialMessagesViewController: MessagesViewController {
         
         talkService.updateTalkInArray(self.talk, withMessages: true)
         
-        self.title = talkService.getFriendLogin(talk).capitalizedString
+        self.title = currentUserService.getFriendLogin(talk).capitalizedString
         
         self.updateView()
     }

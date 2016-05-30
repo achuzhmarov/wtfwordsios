@@ -12,7 +12,6 @@ class MessageCell: UITableViewCell {
     private let currentUserService = serviceLocator.get(CurrentUserService)
     private let avatarService = serviceLocator.get(AvatarService)
     private let timeService = serviceLocator.get(TimeService)
-    private let messageService = serviceLocator.get(MessageService)
 
     @IBOutlet weak var friendImage: UIImageView!
     @IBOutlet weak var messageText: RoundedLabel!
@@ -41,7 +40,7 @@ class MessageCell: UITableViewCell {
         if (isOutcoming) {
             text = message.clearText()
         } else {
-            text = messageService.getMessageText(message)
+            text = currentUserService.getMessageText(message)
         }
         
         messageText.text = text

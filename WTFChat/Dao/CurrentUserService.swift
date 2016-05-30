@@ -87,6 +87,10 @@ class CurrentUserService: NSObject {
         
         return nil
     }
+
+    func getFriendInfoByTalk(talk: Talk) -> FriendInfo? {
+        return getFriendInfoByLogin(getFriendLogin(talk))
+    }
     
     func getFriends() -> [FriendInfo] {
         if (!isLoggedIn()) { return [FriendInfo]() }
@@ -160,6 +164,28 @@ class CurrentUserService: NSObject {
         if canAddFreeAdHint() {
             self.user!.suggestions += 1
             user!.freeHintsGained += 1
+        }
+    }
+
+    func getFriendLogin(talk: Talk) -> String {
+        for user in talk.users {
+            if (user != getUserLogin()) {
+                return user
+            }
+        }
+
+        //should never happen
+        //TODO - add logging?
+        return ""
+    }
+
+    func getMessageText(message: Message) -> String! {
+        if (getUserLogin() == message.author) {
+            return message.clearText()
+        } else if (message.deciphered) {
+            return message.clearText()
+        } else {
+            return message.questionMarks()
         }
     }
 }
