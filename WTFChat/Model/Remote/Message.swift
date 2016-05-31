@@ -16,7 +16,8 @@ class Message : BaseEntity {
     var author: String
     var words: [Word]!
     var deciphered: Bool
-    var cipherType = CipherType.HalfWordRoundDown
+    var cipherType = CipherType.RightCutter
+    var cipherDifficulty = CipherDifficulty.Normal
     var exp: Int = 0
     
     var isLocal: Bool = false
@@ -37,7 +38,7 @@ class Message : BaseEntity {
         super.init(id: id)
     }
     
-    init(id: String, talkId: String, author: String, words: [Word], cipherType: CipherType) {
+    init(id: String, talkId: String, author: String, words: [Word], cipherType: CipherType, cipherDifficulty: CipherDifficulty) {
         
         self.timestamp = NSDate()
         self.lastUpdate = self.timestamp
@@ -45,6 +46,7 @@ class Message : BaseEntity {
         self.author = author
         self.deciphered = false
         self.cipherType = cipherType
+        self.cipherDifficulty = cipherDifficulty
         
         self.words = words
         
@@ -73,7 +75,7 @@ class Message : BaseEntity {
         super.init(id: id)
     }
     
-    init(id: String, talkId: String, author: String, words: [Word], deciphered: Bool, cipherType: CipherType, timestamp: NSDate, lastUpdate: NSDate, exp: Int, extId: String, timerSecs: Int, hintsUsed: Int) {
+    init(id: String, talkId: String, author: String, words: [Word], deciphered: Bool, cipherType: CipherType, cipherDifficulty: CipherDifficulty, timestamp: NSDate, lastUpdate: NSDate, exp: Int, extId: String, timerSecs: Int, hintsUsed: Int) {
         
         self.timestamp = timestamp
         self.lastUpdate = lastUpdate
@@ -81,6 +83,7 @@ class Message : BaseEntity {
         self.author = author
         self.deciphered = deciphered
         self.cipherType = cipherType
+        self.cipherDifficulty = cipherDifficulty
         self.words = words
         self.exp = exp
         self.extId = extId
@@ -93,7 +96,7 @@ class Message : BaseEntity {
     func cipherWords() {
         for word in words! {
             if (word.wordType == WordType.New) {
-                word.cipheredText = CipherFactory.cipherText(cipherType, word: word)
+                word.cipheredText = CipherFactory.cipherText(cipherType, difficulty: cipherDifficulty, word: word)
             }
         }
     }
@@ -213,6 +216,7 @@ class Message : BaseEntity {
             "author": self.author,
             "deciphered": self.deciphered,
             "cipher_type": self.cipherType.rawValue,
+            "cipher_difficulty": self.cipherDifficulty.rawValue,
             "timestamp": NSDate.parseStringJSONFromDate(self.timestamp)!,
             "last_update": NSDate.parseStringJSONFromDate(self.lastUpdate)!,
             "ext_id": self.extId,
@@ -266,6 +270,7 @@ class Message : BaseEntity {
         var words = [Word]()
         var deciphered: Bool
         var cipherType: CipherType
+        var cipherDifficulty: CipherDifficulty
         var timestamp: NSDate
         var lastUpdate: NSDate
         var exp: Int = 0
@@ -307,6 +312,12 @@ class Message : BaseEntity {
             cipherType = CipherType(rawValue: value)!
         } else {
             throw json["cipher_type"].error!
+        }
+
+        if let value = json["cipher_difficulty"].int {
+            cipherDifficulty = CipherDifficulty(rawValue: value)!
+        } else {
+            throw json["cipher_difficulty"].error!
         }
         
         if let value = json["timestamp"].string {
@@ -364,6 +375,7 @@ class Message : BaseEntity {
             words: words,
             deciphered: deciphered,
             cipherType: cipherType,
+            cipherDifficulty: cipherDifficulty,
             timestamp: timestamp,
             lastUpdate: lastUpdate,
             exp: exp,

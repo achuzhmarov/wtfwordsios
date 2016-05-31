@@ -8,7 +8,7 @@
 
 import Foundation
 
-class EasyRandomCutterCipher: Cipher {
+class RandomCutterEasyCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         let charsLeft = word.getCharCount() / 2 + word.getCharCount() % 2
         
@@ -17,7 +17,7 @@ class EasyRandomCutterCipher: Cipher {
     }
 }
 
-class NormalRandomCutterCipher: Cipher {
+class RandomCutterNormalCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         var charsLeft = word.getCharCount() / 2
         
@@ -30,7 +30,7 @@ class NormalRandomCutterCipher: Cipher {
     }
 }
 
-class HardRandomCutterCipher: Cipher {
+class RandomCutterHardCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         var charsLeft = word.getCharCount() / 2
         

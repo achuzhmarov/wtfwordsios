@@ -22,8 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        ServiceInitializer.initServices()
-
         notificationService = serviceLocator.get(NotificationService)
         adColonyService = serviceLocator.get(AdColonyService)
         inAppService = serviceLocator.get(InAppService)

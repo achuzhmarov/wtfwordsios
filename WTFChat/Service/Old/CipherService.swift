@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CipherService {
+/*class CipherService {
     private let currentUserService: CurrentUserService
 
     init(currentUserService: CurrentUserService) {
@@ -36,23 +36,23 @@ class CipherService {
         
         return false
     }
-    
-    func canUseCipher(category: CipherCategory, mode: CipherMode) -> Bool {
+
+    func canUseCipher(type: CipherType, difficulty: CipherDifficulty) -> Bool {
         if (isAllPurchased()) {
             return true
         }
         
-        if (isCipherPurchased(category)) {
+        if (isCipherPurchased(type)) {
             return true
         }
         
-        if (isLvlEnough(category, mode: mode)) {
+        if (isLvlEnough(type, difficulty: difficulty)) {
             return true
         }
         
         return false
     }
-    
+
     func canUseCipher(cipherType: CipherType) -> Bool {
         let (category, mode) = CipherFactory.getCategoryAndMode(cipherType)
         return canUseCipher(category, mode: mode)
@@ -69,13 +69,13 @@ class CipherService {
         
         return false
     }
-    
+
     private func isProductPurchased(productId: ProductIdentifier) -> Bool {
         return currentUserService.isContainBuyNonConsum(productId)
     }
     
-    private func isLvlEnough(category: CipherCategory, mode: CipherMode) -> Bool {
-        if let cipherLvl = CipherFactory.getCipherLvl(category, mode: mode) {
+    private func isLvlEnough(type: CipherType, difficulty: CipherDifficulty) -> Bool {
+        if let cipherLvl = CipherFactory.getCipherLvl(type, difficulty: difficulty) {
             let userLvl = currentUserService.getUserLvl()
             
             return (userLvl >= cipherLvl)
@@ -83,4 +83,4 @@ class CipherService {
         
         return false
     }
-}
+}*/

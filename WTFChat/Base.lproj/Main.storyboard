@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -129,7 +128,36 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XSr-iI-HyS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1121" y="327"/>
+            <point key="canvasLocation" x="1121" y="347"/>
+        </scene>
+        <!--Single Mode-->
+        <scene sceneID="2zo-NC-r6V">
+            <objects>
+                <tableViewController id="oBV-TN-pBo" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="5No-DF-4Tm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="1p3-fC-ijO">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1p3-fC-ijO" id="afX-mL-d4p">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="oBV-TN-pBo" id="9RF-S8-Uw9"/>
+                            <outlet property="delegate" destination="oBV-TN-pBo" id="Dbq-yI-5g5"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Single Mode" id="126-rH-w5R"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wcT-ay-CM9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1121" y="-456"/>
         </scene>
         <!--Shop-->
         <scene sceneID="2LL-pZ-zCu">
@@ -725,7 +753,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ka-cv-y30" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="4AX-JW-O27" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2689" y="1045"/>
+            <point key="canvasLocation" x="2689" y="1095"/>
         </scene>
         <!--Settings-->
         <scene sceneID="wRd-fR-oI6">
@@ -1228,6 +1256,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <segue destination="Qk0-zU-mZi" kind="relationship" relationship="viewControllers" id="eiF-5d-jQD"/>
                         <segue destination="4GE-8z-ZXW" kind="relationship" relationship="viewControllers" id="8p1-8g-GN2"/>
                         <segue destination="ANN-Ac-Xeo" kind="relationship" relationship="viewControllers" id="mKy-Te-ODF"/>
                         <segue destination="eZL-Vv-MId" kind="relationship" relationship="viewControllers" id="7GV-c5-FXu"/>
@@ -1251,7 +1280,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="37" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bSn-oB-tla" customClass="WordsViewController" customModule="WTFChat" customModuleProvider="target">
-                                <rect key="frame" x="16" y="72" width="572" height="350"/>
+                                <rect key="frame" x="16" y="72" width="572" height="379"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WordsRowCell" id="khY-e4-cD4">
@@ -1270,39 +1299,16 @@
                                     <constraint firstAttribute="height" constant="100" id="cex-UZ-Rn5"/>
                                 </constraints>
                             </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 55 required" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2RL-uX-TlP">
-                                <rect key="frame" x="20" y="430" width="280" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ktt-Qd-MfY">
-                                <rect key="frame" x="300" y="430" width="280" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="a0X-JI-bbo"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Unlock now"/>
-                                <connections>
-                                    <action selector="unlockCipherTapped:" destination="tE0-XD-KQv" eventType="touchUpInside" id="IHu-9U-Fjl"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2RL-uX-TlP" firstAttribute="leading" secondItem="FNy-hO-6ac" secondAttribute="leadingMargin" id="2eA-I7-EHx"/>
                             <constraint firstItem="bSn-oB-tla" firstAttribute="leading" secondItem="FNy-hO-6ac" secondAttribute="leadingMargin" constant="-4" id="52L-Ar-bmg"/>
-                            <constraint firstItem="URP-ue-1VC" firstAttribute="top" secondItem="2RL-uX-TlP" secondAttribute="bottom" id="5BO-Ru-eIL"/>
                             <constraint firstItem="63E-kw-JJE" firstAttribute="top" secondItem="URP-ue-1VC" secondAttribute="bottom" id="7TP-qr-gP1"/>
-                            <constraint firstItem="URP-ue-1VC" firstAttribute="top" secondItem="Ktt-Qd-MfY" secondAttribute="bottom" id="DQr-3U-eKW"/>
-                            <constraint firstItem="2RL-uX-TlP" firstAttribute="trailing" secondItem="FNy-hO-6ac" secondAttribute="centerX" id="HEF-VJ-Bar"/>
-                            <constraint firstItem="2RL-uX-TlP" firstAttribute="top" secondItem="bSn-oB-tla" secondAttribute="bottom" constant="8" id="Ij0-Zb-bXM"/>
+                            <constraint firstItem="URP-ue-1VC" firstAttribute="top" secondItem="bSn-oB-tla" secondAttribute="bottom" id="DPz-fT-5ye"/>
                             <constraint firstItem="bSn-oB-tla" firstAttribute="trailing" secondItem="FNy-hO-6ac" secondAttribute="trailingMargin" constant="8" id="K1K-LE-P9Y"/>
                             <constraint firstItem="URP-ue-1VC" firstAttribute="leading" secondItem="FNy-hO-6ac" secondAttribute="leadingMargin" id="SI9-X0-icx"/>
-                            <constraint firstItem="Ktt-Qd-MfY" firstAttribute="trailing" secondItem="FNy-hO-6ac" secondAttribute="trailingMargin" id="esM-Nk-0ab"/>
                             <constraint firstItem="URP-ue-1VC" firstAttribute="trailing" secondItem="FNy-hO-6ac" secondAttribute="trailingMargin" id="hq3-ln-mls"/>
                             <constraint firstItem="bSn-oB-tla" firstAttribute="top" secondItem="9um-Jo-hIU" secondAttribute="bottom" constant="8" id="oxZ-lS-P5j"/>
-                            <constraint firstItem="Ktt-Qd-MfY" firstAttribute="leading" secondItem="FNy-hO-6ac" secondAttribute="centerX" id="qMx-3s-o99"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Preview" id="18t-tn-tUg">
@@ -1310,16 +1316,14 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cipherPicker" destination="URP-ue-1VC" id="jTu-Kz-NQz"/>
-                        <outlet property="levelRequiredLabel" destination="2RL-uX-TlP" id="qqQ-HT-WXI"/>
                         <outlet property="messageWordsView" destination="bSn-oB-tla" id="9uQ-Hu-N6B"/>
-                        <outlet property="unlockCipherButton" destination="Ktt-Qd-MfY" id="UtS-N0-iDF"/>
                         <segue destination="iY0-hB-6OE" kind="unwind" identifier="sendMessage" unwindAction="sendMessage:" id="goq-e2-h3N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t5V-xq-zqT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="iY0-hB-6OE" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1917" y="1045"/>
+            <point key="canvasLocation" x="1917" y="1095"/>
         </scene>
         <!--Messages-->
         <scene sceneID="bPu-ca-lZV">
@@ -1556,7 +1560,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6qX-oU-49H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1917" y="327"/>
+            <point key="canvasLocation" x="1917" y="347"/>
         </scene>
         <!--Decipher-->
         <scene sceneID="F8Z-hj-r0t">
@@ -1698,7 +1702,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2689" y="327"/>
+            <point key="canvasLocation" x="2689" y="347"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MAi-wm-bOx">
@@ -1719,7 +1723,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GWl-i4-IRr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="371" y="327"/>
+            <point key="canvasLocation" x="371" y="347"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zRz-p9-HAi">
@@ -2440,10 +2444,33 @@
             </objects>
             <point key="canvasLocation" x="371" y="3226"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="UVK-04-Ijm">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qk0-zU-mZi" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="favorites" selectedImage="facorites filled" id="l12-pK-N2H">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kfs-ax-Pki">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="oBV-TN-pBo" kind="relationship" relationship="rootViewController" id="hmi-bs-jz9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZKQ-uQ-Fpw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="371" y="-456"/>
+        </scene>
     </scenes>
     <resources>
         <image name="chat" width="30" height="30"/>
         <image name="chat filled" width="30" height="30"/>
+        <image name="facorites filled" width="30" height="30"/>
+        <image name="favorites" width="30" height="30"/>
         <image name="rating" width="30" height="30"/>
         <image name="rating filled" width="30" height="30"/>
         <image name="settings" width="30" height="30"/>

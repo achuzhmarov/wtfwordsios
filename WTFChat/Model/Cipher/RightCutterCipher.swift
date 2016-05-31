@@ -8,14 +8,14 @@
 
 import Foundation
 
-class HalfWordRoundUpCipher: Cipher {
+class RightCutterEasyCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         let letterCount = word.getCharCount() / 2 + word.getCharCount() % 2 - 1
         return "\(word.getCapitalized()[0...letterCount])...\(word.additional)"
     }
 }
 
-class HalfWordRoundDownCipher: Cipher {
+class RightCutterNormalCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         var letterCount = word.getCharCount() / 2 - 1
         
@@ -28,7 +28,7 @@ class HalfWordRoundDownCipher: Cipher {
     }
 }
 
-class FirstLetterCipher: Cipher {
+class RightCutterHardCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         return "\(word.getCapitalized()[0])...\(word.additional)"
     }

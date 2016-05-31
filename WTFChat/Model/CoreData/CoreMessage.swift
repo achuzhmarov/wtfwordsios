@@ -22,6 +22,7 @@ class CoreMessage: NSManagedObject {
         self.author = message.author
         self.deciphered = message.deciphered
         self.cipherType = message.cipherType.rawValue
+        self.cipherDifficulty = message.cipherDifficulty.rawValue
         self.exp = message.exp
         self.isLocal = message.isLocal
         self.extId = message.extId
@@ -37,6 +38,7 @@ class CoreMessage: NSManagedObject {
             self.author == nil ||
             self.deciphered == nil ||
             self.cipherType == nil ||
+            self.cipherDifficulty == nil ||
             self.exp == nil ||
             self.isLocal == nil ||
             self.extId == nil ||
@@ -46,38 +48,38 @@ class CoreMessage: NSManagedObject {
                 
                 return nil
         }
-        
-        if let enumCipherType = CipherType(rawValue: Int(self.cipherType!)) {
-            var domainWords = [Word]()
-            
-            for item in self.words! {
-                if let coreWord = item as? CoreWord {
-                    if let domainWord = coreWord.getWord() {
-                        domainWords.append(domainWord)
-                    }
+
+        var domainWords = [Word]()
+
+        for item in self.words! {
+            if let coreWord = item as? CoreWord {
+                if let domainWord = coreWord.getWord() {
+                    domainWords.append(domainWord)
                 }
             }
-            
-            let message = Message(
-                id: self.id!,
-                talkId: self.talkId!,
-                author: self.author!,
-                words: domainWords,
-                deciphered: Bool(self.deciphered!),
-                cipherType: enumCipherType,
-                timestamp: self.timestamp!,
-                lastUpdate: self.lastUpdate!,
-                exp: Int(self.exp!),
-                extId: self.extId!,
-                timerSecs: Int(self.timerSecs!),
-                hintsUsed: Int(self.hintsUsed!)
-            )
-            
-            message.isLocal = Bool(self.isLocal!)
-            
-            return message
-        } else {
-            return nil
         }
+
+        let enumCipherType = CipherType(rawValue: Int(self.cipherType!))
+        let enumCipherDifficulty = CipherDifficulty(rawValue: Int(self.cipherDifficulty!))
+
+        let message = Message(
+            id: self.id!,
+            talkId: self.talkId!,
+            author: self.author!,
+            words: domainWords,
+            deciphered: Bool(self.deciphered!),
+            cipherType: enumCipherType!,
+            cipherDifficulty: enumCipherDifficulty!,
+            timestamp: self.timestamp!,
+            lastUpdate: self.lastUpdate!,
+            exp: Int(self.exp!),
+            extId: self.extId!,
+            timerSecs: Int(self.timerSecs!),
+            hintsUsed: Int(self.hintsUsed!)
+        )
+
+        message.isLocal = Bool(self.isLocal!)
+
+        return message
     }
 }

@@ -361,9 +361,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         self.navigationItem.setHidesBackButton(true, animated:true)
 
         if (message!.timerSecs == 0 && message!.countSuccess() == 0) {
-            let (_, mode) = CipherFactory.getCategoryAndMode(message!.cipherType)
-            
-            if (mode == CipherMode.Hard) {
+            if (message!.cipherDifficulty == .Hard) {
                 timer.seconds = message!.countNew() * HARD_SECONDS_PER_WORD
             } else {
                 timer.seconds = message!.countNew() * SECONDS_PER_WORD

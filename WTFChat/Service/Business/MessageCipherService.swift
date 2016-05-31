@@ -127,8 +127,8 @@ class MessageCipherService {
         message.deciphered = true
     }
     
-    func createMessage(talk: Talk, text: String, cipherType: CipherType) -> Message {
-        let generatedMessage = createMessage(text, cipherType: cipherType)
+    func createMessage(talk: Talk, text: String, cipherType: CipherType, cipherDifficulty: CipherDifficulty) -> Message {
+        let generatedMessage = createMessage(text, cipherType: cipherType, cipherDifficulty: cipherDifficulty)
         return addNewMessageToTalk(generatedMessage, talk: talk)
     }
     
@@ -145,7 +145,8 @@ class MessageCipherService {
             talkId: talk.id,
             author: author,
             words: generatedMessage.words,
-            cipherType: generatedMessage.cipherType
+            cipherType: generatedMessage.cipherType,
+            cipherDifficulty: generatedMessage.cipherDifficulty
         )
         
         newMessage.isLocal = true
@@ -157,7 +158,7 @@ class MessageCipherService {
         return newMessage
     }
     
-    func createMessage(text: String, cipherType: CipherType) -> Message {
+    func createMessage(text: String, cipherType: CipherType, cipherDifficulty: CipherDifficulty) -> Message {
         let strings = text.characters.split {$0 == "\n"}.map { String($0) }
         
         var firstSentence = true
@@ -190,7 +191,8 @@ class MessageCipherService {
             talkId: "",
             author: "",
             words: words,
-            cipherType: cipherType
+            cipherType: cipherType,
+            cipherDifficulty: cipherDifficulty
         )
         
         newMessage.cipherWords()

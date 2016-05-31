@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ShuffleExceptFirstLetterCipher: Cipher {
+class ShuffleEasyCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         let wordLength = word.getCharCount() - 1
         
@@ -19,13 +19,13 @@ class ShuffleExceptFirstLetterCipher: Cipher {
     }
 }
 
-class ShuffleFullWordCipher: Cipher {
+class ShuffleNormalCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         return "\(word.getUpperCase().shuffle)\(word.additional)"
     }
 }
 
-class ShuffleWithExtraLetterCipher: Cipher {
+class ShuffleHardCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         var wordLength = word.getCharCount() - 1
 

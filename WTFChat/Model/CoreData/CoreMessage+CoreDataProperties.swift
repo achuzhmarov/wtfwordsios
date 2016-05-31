@@ -20,6 +20,7 @@ extension CoreMessage {
     @NSManaged var author: String?
     @NSManaged var deciphered: NSNumber?
     @NSManaged var cipherType: NSNumber?
+    @NSManaged var cipherDifficulty: NSNumber?
     @NSManaged var exp: NSNumber?
     @NSManaged var timerSecs: NSNumber?
     @NSManaged var hintsUsed: NSNumber?

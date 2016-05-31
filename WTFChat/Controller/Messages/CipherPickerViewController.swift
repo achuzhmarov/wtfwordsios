@@ -9,14 +9,16 @@
 import UIKit
 
 protocol CipherPickedComputer {
-    func cipherPicked(cipherType: CipherType)
+    func cipherPicked(type: CipherType, difficulty: CipherDifficulty)
 }
 
 class CipherPickerViewController: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
-    let cipherCategories = CipherFactory.getAllCategories()
-    let cipherModes = CipherFactory.getAllModes()
+    let cipherTypes = CipherFactory.getAllTypes()
+    let cipherDificulties = CipherFactory.getAllDifficulties()
     
-    var cipherType = CipherType.HalfWordRoundDown
+    var cipherType = CipherType.RightCutter
+    var cipherDifficulty = CipherDifficulty.Normal
+
     var cipherPickedComputer: CipherPickedComputer?
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -25,9 +27,9 @@ class CipherPickerViewController: UIPickerView, UIPickerViewDataSource, UIPicker
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if (component == 0) {
-            return cipherCategories.count
+            return cipherTypes.count
         } else {
-            return cipherModes.count
+            return cipherDificulties.count
         }
     }
     
@@ -36,9 +38,9 @@ class CipherPickerViewController: UIPickerView, UIPickerViewDataSource, UIPicker
         var titleData = ""
         
         if (component == 0) {
-            titleData = cipherCategories[row].description
+            titleData = cipherTypes[row].description
         } else {
-            titleData = cipherModes[row].description
+            titleData = cipherDificulties[row].description
         }
         
         let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Verdana", size: 18.0)!])
@@ -51,19 +53,17 @@ class CipherPickerViewController: UIPickerView, UIPickerViewDataSource, UIPicker
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let category = cipherCategories[self.selectedRowInComponent(0)]
-        let mode = cipherModes[self.selectedRowInComponent(1)]
-        
-        let cipherType = CipherFactory.getCipherType(category, mode: mode)
-        
-        cipherPickedComputer?.cipherPicked(cipherType)
+        let type = cipherTypes[self.selectedRowInComponent(0)]
+        let difficulty = cipherDificulties[self.selectedRowInComponent(1)]
+
+        cipherPickedComputer?.cipherPicked(type, difficulty: difficulty)
     }
     
-    func updateCipherType(cipherType: CipherType) {
-        self.cipherType = cipherType
-        let (category, mode) = CipherFactory.getCategoryAndMode(cipherType)
+    func updateCipher(type: CipherType, difficulty: CipherDifficulty) {
+        self.cipherType = type
+        self.cipherDifficulty = difficulty
         
-        self.selectRow(category.rawValue, inComponent: 0, animated: true)
-        self.selectRow(mode.rawValue, inComponent: 1, animated: true)
+        self.selectRow(cipherType.rawValue, inComponent: 0, animated: true)
+        self.selectRow(cipherDifficulty.rawValue, inComponent: 1, animated: true)
     }
 }

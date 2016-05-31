@@ -8,7 +8,7 @@
 
 import Foundation
 
-class EasyDoubleCutterCipher: Cipher {
+class DoubleCutterEasyCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         if (word.getCharCount() == 2) {
             return "...\(word.getLowerCase()[1])...\(word.additional)"
@@ -21,7 +21,7 @@ class EasyDoubleCutterCipher: Cipher {
     }
 }
 
-class NormalDoubleCutterCipher: Cipher {
+class DoubleCutterNormalCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         if (word.getCharCount() == 2) {
             return "...\(word.getLowerCase()[1])...\(word.additional)"
@@ -46,7 +46,7 @@ class NormalDoubleCutterCipher: Cipher {
     }
 }
 
-class HardDoubleCutterCipher: Cipher {
+class DoubleCutterHardCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         if (word.getCharCount() == 2) {
             return "...\(word.getLowerCase()[1])...\(word.additional)"

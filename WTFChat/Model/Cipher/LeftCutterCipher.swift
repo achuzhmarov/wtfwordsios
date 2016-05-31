@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ExceptTwoLettersFromEndCipher: Cipher {
+class LeftCutterEasyCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         let wordLength = word.getCharCount() - 1
         let letterCount = word.getCharCount() / 5 + 1
@@ -17,7 +17,7 @@ class ExceptTwoLettersFromEndCipher: Cipher {
     }
 }
 
-class HalfWordRoundDownFromEndCipher: Cipher {
+class LeftCutterNormalCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         let wordLength = word.getCharCount() - 1
         var letterCount = word.getCharCount() / 2 + word.getCharCount() % 2
@@ -31,7 +31,7 @@ class HalfWordRoundDownFromEndCipher: Cipher {
     }
 }
 
-class HalfWordPlusOneFromEndCipher: Cipher {
+class LeftCutterHardCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         let wordLength = word.getCharCount() - 1
         var letterCount = word.getCharCount() / 2 + word.getCharCount() % 2

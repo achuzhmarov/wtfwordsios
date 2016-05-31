@@ -147,7 +147,7 @@ class TutorialMessagesViewController: MessagesViewController {
         tutorialTalk.users.append("")
         
         //load tutorial message
-        var message = messageCipherService.createMessage(TUTORIAL_MESSAGE_MAIN, cipherType: CipherType.HalfWordRoundDown)
+        var message = messageCipherService.createMessage(TUTORIAL_MESSAGE_MAIN, cipherType: .RightCutter, cipherDifficulty: .Normal)
         message = messageCipherService.addNewMessageToTalk(message, talk: tutorialTalk)
         message.author = tutorialUser.login
         
@@ -166,23 +166,23 @@ class TutorialMessagesViewController: MessagesViewController {
         talkService.clearTalks()
         self.talk = talkService.getSingleModeTalk()
         
-        var message = messageCipherService.createMessage(TUTORIAL_TIP1, cipherType: CipherType.HalfWordRoundDownFromEnd)
+        var message = messageCipherService.createMessage(TUTORIAL_TIP1, cipherType: .LeftCutter, cipherDifficulty: .Normal)
         message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
         coreMessageService.createMessage(message)
         
-        message = messageCipherService.createMessage(TUTORIAL_TIP2, cipherType: CipherType.ShuffleFullWord)
+        message = messageCipherService.createMessage(TUTORIAL_TIP2, cipherType: .Shuffle, cipherDifficulty: .Normal)
         message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
         coreMessageService.createMessage(message)
         
-        message = messageCipherService.createMessage(TUTORIAL_TIP3, cipherType: CipherType.NormalRandomCutter)
+        message = messageCipherService.createMessage(TUTORIAL_TIP3, cipherType: .RandomCutter, cipherDifficulty: .Normal)
         message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
         coreMessageService.createMessage(message)
         
-        message = messageCipherService.createMessage(TUTORIAL_TIP4, cipherType: CipherType.NormalDoubleCutter)
+        message = messageCipherService.createMessage(TUTORIAL_TIP4, cipherType: .DoubleCutter, cipherDifficulty: .Normal)
         message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
         coreMessageService.createMessage(message)
         
-        message = messageCipherService.createMessage(TUTORIAL_TIP5, cipherType: CipherType.FirstLetter)
+        message = messageCipherService.createMessage(TUTORIAL_TIP5, cipherType: .RightCutter, cipherDifficulty: .Hard)
         message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
         coreMessageService.createMessage(message)
         

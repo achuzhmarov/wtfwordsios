@@ -12,14 +12,12 @@ import StoreKit
 class InAppService {
     private let inAppHelper: InAppHelper
     private let currentUserService: CurrentUserService
-    private let cipherService: CipherService
     
     private var products = [SKProduct]()
 
-    init(inAppHelper: InAppHelper, currentUserService: CurrentUserService, cipherService: CipherService) {
+    init(inAppHelper: InAppHelper, currentUserService: CurrentUserService) {
         self.inAppHelper = inAppHelper
         self.currentUserService = currentUserService
-        self.cipherService = cipherService
     }
 
     func getProductList() {
@@ -87,10 +85,6 @@ class InAppService {
     func isPurchased(productId: ProductIdentifier) -> Bool {
         if (IAPProducts.CONSUMABLE.contains(productId)) {
             return false
-        }
-        
-        if (IAPProducts.CIPHERS.contains(productId)) {
-            return cipherService.isOwnedCipher(productId)
         }
         
         if (IAPProducts.OTHER.contains(productId)) {

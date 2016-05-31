@@ -25,7 +25,8 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
     
     var timer: NSTimer?
     var talk: Talk!
-    var cipherType = CipherType.HalfWordRoundDown
+    var cipherType = CipherType.RightCutter
+    var cipherDifficulty = CipherDifficulty.Normal
     var lastSendedMessage: Message?
     var firstTimeLoaded = true
 
@@ -141,6 +142,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
             }
             
             self.cipherType = sendMessageController.cipherType
+            self.cipherDifficulty = sendMessageController.cipherDifficulty
             self.lastSendedMessage = sendMessageController.message
             
             let newMessage = messageCipherService.addNewMessageToTalk(self.lastSendedMessage!, talk: self.talk!)
@@ -200,6 +202,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         for message in talk.messages {
             if (message.author == currentUserService.getUserLogin() || talk.isSingleMode) {
                 self.cipherType = message.cipherType
+                self.cipherDifficulty = message.cipherDifficulty
             }
         }
     }
