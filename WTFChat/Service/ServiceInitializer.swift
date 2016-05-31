@@ -15,7 +15,6 @@ class ServiceInitializer {
         let currentUserService = CurrentUserService()
 
         let networkService = NetworkService(baseUrl: BASE_URL)
-
         let authNetworkService = AuthNetworkService(networkService: networkService)
         let messageNetworkService = MessageNetworkService(networkService: networkService)
         let userNetworkService = UserNetworkService(networkService: networkService)
@@ -25,12 +24,17 @@ class ServiceInitializer {
 
         let iosService = IosService(iosNetworkService: iosNetworkService)
 
+        let coreDataService = CoreDataService()
+        let coreMessageService = CoreMessageService(coreDataService: coreDataService)
+
         //TODO - AWFUL DEPENDENCY
-        let talkService = TalkService(talkNetworkService: talkNetworkService, iosService: iosService, currentUserService: currentUserService)
-        let messageService = MessageService(messageNetworkService: messageNetworkService, talkService: talkService)
+        let talkService = TalkService(talkNetworkService: talkNetworkService, iosService: iosService, currentUserService: currentUserService, coreMessageService: coreMessageService)
+        let messageService = MessageService(messageNetworkService: messageNetworkService, talkService: talkService, coreMessageService: coreMessageService)
         talkService.messageService = messageService
 
-        let userService = UserService(userNetworkService: userNetworkService, iosService: iosService, talkService: talkService, currentUserService: currentUserService)
+        let windowService = WindowService(talkService: talkService, currentUserService: currentUserService)
+
+        let userService = UserService(userNetworkService: userNetworkService, iosService: iosService, talkService: talkService, currentUserService: currentUserService, windowService: windowService)
 
         let inAppHelper = InAppHelper(inAppNetworkService: inAppNetworkService, currentUserService: currentUserService, userService: userService, productIdentifiers: IAPProducts.ALL)
 
@@ -50,7 +54,9 @@ class ServiceInitializer {
         serviceLocator.add(
             cipherService,
             LvlService(currentUserService: currentUserService),
-            MessageCipherService(currentUserService: currentUserService)
+            MessageCipherService(currentUserService: currentUserService),
+            windowService,
+            NotificationService(windowService: windowService, messageService: messageService, talkService: talkService)
         )
 
         //without dependencies
@@ -59,7 +65,8 @@ class ServiceInitializer {
             AdColonyService(),
             AvatarService(),
             TimeService(),
-            AudioService()
+            AudioService(),
+            coreMessageService
         )
     }
 }

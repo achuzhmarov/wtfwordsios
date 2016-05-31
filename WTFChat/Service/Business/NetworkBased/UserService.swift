@@ -15,16 +15,18 @@ class UserService: NSObject {
     private let iosService: IosService
     private let talkService: TalkService
     private let currentUserService: CurrentUserService
+    private let windowService: WindowService
 
     private var updateTimer: NSTimer?
     
     private var freeAdHintsNotAdded = 0
 
-    init(userNetworkService: UserNetworkService, iosService: IosService, talkService: TalkService, currentUserService: CurrentUserService) {
+    init(userNetworkService: UserNetworkService, iosService: IosService, talkService: TalkService, currentUserService: CurrentUserService, windowService: WindowService) {
         self.userNetworkService = userNetworkService
         self.iosService = iosService
         self.talkService = talkService
         self.currentUserService = currentUserService
+        self.windowService = windowService
     }
 
     func setNewUser(user: User, password: String) {
@@ -70,8 +72,7 @@ class UserService: NSObject {
         
         if (userInfo!.newSuggestions != 0) {
             dispatch_async(dispatch_get_main_queue(), {
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                appDelegate.showNewSuggestionsAlert()
+                self.windowService.showNewSuggestionsAlert()
             })
         }
     }

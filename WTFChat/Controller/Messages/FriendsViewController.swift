@@ -19,8 +19,9 @@ let FONT_COLOR = UIColor.whiteColor()
 let IGNORE_COLOR = UIColor(hue: 240.0 / 360.0, saturation: 0.02, brightness: 0.92, alpha: 1.0)
 
 class FriendsViewController: UITableViewController, TalkListener {
-    private let currentUserService = serviceLocator.get(CurrentUserService)
-    private let talkService = serviceLocator.get(TalkService)
+    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    private let talkService: TalkService = serviceLocator.get(TalkService)
+    private let windowService: WindowService = serviceLocator.get(WindowService)
 
     var talks = [Talk]()
     
@@ -41,8 +42,7 @@ class FriendsViewController: UITableViewController, TalkListener {
     
     override func viewDidAppear(animated: Bool) {
         if (currentUserService.getUserNewSuggestions() != 0) {
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.showNewSuggestionsAlert()
+            windowService.showNewSuggestionsAlert()
         }
     }
     

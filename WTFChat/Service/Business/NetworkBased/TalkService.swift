@@ -18,6 +18,7 @@ class TalkService: NSObject {
     private let talkNetworkService: TalkNetworkService
     private let iosService: IosService
     private let currentUserService: CurrentUserService
+    private let coreMessageService: CoreMessageService
 
     //TODO - JUST AWFUL
     var messageService: MessageService!
@@ -29,17 +30,19 @@ class TalkService: NSObject {
     weak var friendsTalkListener: TalkListener?
 
     //TODO - Should be deleted
-    init(talkNetworkService: TalkNetworkService, iosService: IosService, currentUserService: CurrentUserService) {
+    init(talkNetworkService: TalkNetworkService, iosService: IosService, currentUserService: CurrentUserService, coreMessageService: CoreMessageService) {
         self.talkNetworkService = talkNetworkService
         self.iosService = iosService
         self.currentUserService = currentUserService
+        self.coreMessageService = coreMessageService
     }
 
-    init(talkNetworkService: TalkNetworkService, iosService: IosService, currentUserService: CurrentUserService, messageService: MessageService) {
+    init(talkNetworkService: TalkNetworkService, iosService: IosService, currentUserService: CurrentUserService, coreMessageService: CoreMessageService, messageService: MessageService) {
         self.talkNetworkService = talkNetworkService
         self.iosService = iosService
         self.messageService = messageService
         self.currentUserService = currentUserService
+        self.coreMessageService = coreMessageService
     }
 
     func getTalkByLogin(friend: String) -> Talk? {
@@ -90,7 +93,7 @@ class TalkService: NSObject {
         singleModeTalk.users.append("")
         
         //load local messages for singleModeTalk
-        singleModeTalk.messages = CoreMessage.getAllLocal()
+        singleModeTalk.messages = coreMessageService.getAllLocal()
         if (singleModeTalk.messages.count > 0) {
             singleModeTalk.lastMessage = singleModeTalk.messages.last
         }

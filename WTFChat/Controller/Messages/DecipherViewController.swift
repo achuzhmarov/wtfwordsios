@@ -9,10 +9,11 @@
 import UIKit
 
 class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldDelegate {
-    private let messageService = serviceLocator.get(MessageService)
-    private let currentUserService = serviceLocator.get(CurrentUserService)
-    private let messageCipherService = serviceLocator.get(MessageCipherService)
-    private let audioService = serviceLocator.get(AudioService)
+    private let messageService: MessageService = serviceLocator.get(MessageService)
+    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    private let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
+    private let audioService: AudioService = serviceLocator.get(AudioService)
+    private let coreMessageService: CoreMessageService = serviceLocator.get(CoreMessageService)
 
     @IBOutlet weak var topTimerLabel: UILabel!
     
@@ -513,7 +514,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         message.timerSecs = timer.seconds
         
         if (isSingleMode) {
-            CoreMessage.updateMessage(message)
+            coreMessageService.updateMessage(message)
         } else {
             messageService.decipherMessage(message) { (message, error) -> Void in
                 if let requestError = error {
@@ -525,7 +526,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     
     func sendMessageDecipher() {
         if (isSingleMode) {
-            CoreMessage.updateMessage(message)
+            coreMessageService.updateMessage(message)
         } else {
             messageService.decipherMessage(message) { (message, error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {

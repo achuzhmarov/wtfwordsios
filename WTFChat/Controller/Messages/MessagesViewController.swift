@@ -9,10 +9,11 @@
 import UIKit
 
 class MessagesViewController: UIViewController, MessageTappedComputer, UITextViewDelegate, MessageListener {
-    private let messageService = serviceLocator.get(MessageService)
-    private let talkService = serviceLocator.get(TalkService)
-    private let currentUserService = serviceLocator.get(CurrentUserService)
-    private let messageCipherService = serviceLocator.get(MessageCipherService)
+    private let messageService: MessageService = serviceLocator.get(MessageService)
+    private let talkService: TalkService = serviceLocator.get(TalkService)
+    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    private let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
+    private let coreMessageService: CoreMessageService = serviceLocator.get(CoreMessageService)
 
     @IBOutlet weak var messageText: UITextView!
     @IBOutlet weak var messageTextHeightConstraint: NSLayoutConstraint!
@@ -148,7 +149,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
             if (!talk.isSingleMode) {
                 messageService.createMessage(newMessage)
             } else {
-                CoreMessage.createMessage(newMessage)
+                coreMessageService.createMessage(newMessage)
             }
             
             //Clear input text field in any case

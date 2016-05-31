@@ -9,7 +9,8 @@
 import Foundation
 
 class BaseLoginViewController: UIViewController {
-    private let authService = serviceLocator.get(AuthService)
+    private let authService: AuthService = serviceLocator.get(AuthService)
+    private let windowService: WindowService = serviceLocator.get(WindowService)
 
     func login(login: String, password: String) {
         authService.login(login, password: password) { user, error -> Void in
@@ -21,8 +22,7 @@ class BaseLoginViewController: UIViewController {
                         WTFOneButtonAlert.show("Error", message: WTFOneButtonAlert.CON_ERR, firstButtonTitle: "Ok", viewPresenter: self)
                     }
                 } else {
-                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                    appDelegate.showMainScreen()
+                    self.windowService.showMainScreen()
                 }
             })
         }

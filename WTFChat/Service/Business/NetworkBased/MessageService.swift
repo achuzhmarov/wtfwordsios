@@ -27,15 +27,17 @@ class MessageService: NSObject {
 
     private let messageNetworkService: MessageNetworkService
     private let talkService: TalkService
+    private let coreMessageService: CoreMessageService
     
     var listeners = [String: WeakListener]()
     var talksToUpdate = Set<String>()
     
     var updateTimer: NSTimer?
 
-    init(messageNetworkService: MessageNetworkService, talkService: TalkService) {
+    init(messageNetworkService: MessageNetworkService, talkService: TalkService, coreMessageService: CoreMessageService) {
         self.messageNetworkService = messageNetworkService
         self.talkService = talkService
+        self.coreMessageService = coreMessageService
     }
 
     func startUpdateTimer() {
@@ -82,7 +84,7 @@ class MessageService: NSObject {
     }
     
     private func sendLocalMessages() {
-        let messages = CoreMessage.getAllWaiting()
+        let messages = coreMessageService.getAllWaiting()
         
         for message in messages {
             if (message.id == "") {
@@ -172,9 +174,9 @@ class MessageService: NSObject {
                     listener?.messageSended(nil, error: requestError)
                     
                     //save message in localStore
-                    CoreMessage.createOrUpdateMessage(newMessage)
+                    self.coreMessageService.createOrUpdateMessage(newMessage)
                 } else {
-                    CoreMessage.deleteMessageIfExists(newMessage)
+                    self.coreMessageService.deleteMessageIfExists(newMessage)
                     
                     if let responseMessage = message {
                         self.updateOrCreateMessageInArray(talk, message: responseMessage)
@@ -192,9 +194,9 @@ class MessageService: NSObject {
             dispatch_async(dispatch_get_main_queue(), {
                 if error != nil {
                     //save message in localStore
-                    CoreMessage.createOrUpdateMessage(decipheredMessage)
+                    self.coreMessageService.createOrUpdateMessage(decipheredMessage)
                 } else {
-                    CoreMessage.deleteMessageIfExists(decipheredMessage)
+                    self.coreMessageService.deleteMessageIfExists(decipheredMessage)
                 }
                 
                 completion?(message: message, error: error)

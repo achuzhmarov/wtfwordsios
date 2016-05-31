@@ -25,9 +25,10 @@ class TutorialMessagesViewController: MessagesViewController {
     private let TUTORIAL_STAGE_PROPERTY_KEY = "tutorialStage"
     private let nsUserDefaults = NSUserDefaults.standardUserDefaults()
 
-    private let talkService = serviceLocator.get(TalkService)
-    private let currentUserService = serviceLocator.get(CurrentUserService)
-    private let messageCipherService = serviceLocator.get(MessageCipherService)
+    private let talkService: TalkService = serviceLocator.get(TalkService)
+    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    private let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
+    private let coreMessageService: CoreMessageService = serviceLocator.get(CoreMessageService)
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -167,23 +168,23 @@ class TutorialMessagesViewController: MessagesViewController {
         
         var message = messageCipherService.createMessage(TUTORIAL_TIP1, cipherType: CipherType.HalfWordRoundDownFromEnd)
         message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
-        CoreMessage.createMessage(message)
+        coreMessageService.createMessage(message)
         
         message = messageCipherService.createMessage(TUTORIAL_TIP2, cipherType: CipherType.ShuffleFullWord)
         message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
-        CoreMessage.createMessage(message)
+        coreMessageService.createMessage(message)
         
         message = messageCipherService.createMessage(TUTORIAL_TIP3, cipherType: CipherType.NormalRandomCutter)
         message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
-        CoreMessage.createMessage(message)
+        coreMessageService.createMessage(message)
         
         message = messageCipherService.createMessage(TUTORIAL_TIP4, cipherType: CipherType.NormalDoubleCutter)
         message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
-        CoreMessage.createMessage(message)
+        coreMessageService.createMessage(message)
         
         message = messageCipherService.createMessage(TUTORIAL_TIP5, cipherType: CipherType.FirstLetter)
         message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
-        CoreMessage.createMessage(message)
+        coreMessageService.createMessage(message)
         
         talkService.updateTalkInArray(self.talk, withMessages: true)
         
