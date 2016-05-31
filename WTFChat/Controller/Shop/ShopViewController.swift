@@ -9,7 +9,7 @@
 import Foundation
 
 class ShopViewController: BaseShopViewController {
-    private let inAppService = serviceLocator.get(InAppService)
+    private let inAppService: InAppService = serviceLocator.get(InAppService)
 
     @IBOutlet weak var x2HintsLabel: UILabel!
     @IBOutlet weak var x2HintsBuyLabel: UILabel!

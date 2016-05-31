@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E37C032D66D97CED79A6E2D /* CipherFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CAD3B7D27CDA3056228B /* CipherFactory.swift */; };
 		3E37C05032226280542E7FAB /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CCE7F85D3B25FC789326 /* MessageService.swift */; };
 		3E37C0608D8F704273F9224E /* AuthNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CEEE214DEDE08C287D6E /* AuthNetworkService.swift */; };
 		3E37C077492EE60ADD851740 /* IosService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CB2062DC4DEEBA05E21C /* IosService.swift */; };
 		3E37C08A3F51A2132170D34F /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C7E3F583D6FA5A7F1FB6 /* RatingViewController.swift */; };
 		3E37C08F0E72B51E34C34C0C /* MessageCipherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE6082F2F1A3F3447039 /* MessageCipherService.swift */; };
 		3E37C09542BF837429242F77 /* ShuffleCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE3A4F3A448936932B0C /* ShuffleCipher.swift */; };
+		3E37C0B2CA5925AE2757629B /* TutorialCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CC38BBB78EEC291E5537 /* TutorialCell.swift */; };
 		3E37C0B2DD34BF70C03C3CCE /* TalkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C494AB274D00A123AD98 /* TalkService.swift */; };
 		3E37C0B7F0483844F4878858 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C4BEDF2AA2D749F18C4A /* ShopViewController.swift */; };
+		3E37C0CF3D7BFE34B1D8B1BB /* CipherType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C131EF321BA3531C5804 /* CipherType.swift */; };
 		3E37C11FE8560E4F16B62C17 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C49D18DB2FD017226F88 /* SettingsViewController.swift */; };
 		3E37C171F2B2B6C7B82FDE2B /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C8C94FDE3C085500AD3A /* SwiftyJSON.swift */; };
 		3E37C1767BCB23EE740A1F12 /* InAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C5E0D3BB7755C97ABFBA /* InAppService.swift */; };
@@ -38,6 +39,7 @@
 		3E37C3683AA4CFF3A3A72BEA /* SendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C3D22A5276F6A21716B7 /* SendMessageViewController.swift */; };
 		3E37C372A6C80699F9121EBA /* MessageTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C837C8AABDE6E0B38F73 /* MessageTableView.swift */; };
 		3E37C3ECABBC95B7C702E149 /* WordLabelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C953B797DEC923D1E0F5 /* WordLabelContainer.swift */; };
+		3E37C4165ED9274A81E2A77A /* DifficultyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CA1122E662AC8FBF97DC /* DifficultyCell.swift */; };
 		3E37C43E909755541AA2F96D /* CipherPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CCD67817B8B8D28F5144 /* CipherPickerViewController.swift */; };
 		3E37C463BFB724BA46AE0287 /* CoreWord+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C3BDFC67DEBF5216B419 /* CoreWord+CoreDataProperties.swift */; };
 		3E37C4862DC1BC584ED264EC /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE4C5020ACF6542CC3C0 /* RatingCell.swift */; };
@@ -47,15 +49,18 @@
 		3E37C556299DA54151F82083 /* HintsShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CEAFAD5645723457C239 /* HintsShopViewController.swift */; };
 		3E37C5632ECD4344FDE27FAA /* UserNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C391067751E01AB11640 /* UserNetworkService.swift */; };
 		3E37C5741BA48E54DC6F3CB4 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C38B9A8A13C8A590A5BD /* String+Extension.swift */; };
+		3E37C584E8B166324813C3BE /* CipherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CA0E47FE8053178B1840 /* CipherService.swift */; };
 		3E37C59C0020A7E295BFF00F /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E37CA45A72832DD44521244 /* win.wav */; };
 		3E37C666EEAE6EE7FB8FD21E /* InAppNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CDFA29519F29AF09FE8B /* InAppNetworkService.swift */; };
 		3E37C691B8C0309DCA71C837 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C48EB596F7289C6C456C /* Array+Extension.swift */; };
 		3E37C72D86D7EC6EC42A82AF /* NSError+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C27838218C4F22B21722 /* NSError+Extension.swift */; };
+		3E37C72F0CF62B09B8E764CC /* CipherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C97ECF9691C6B9C3E22A /* CipherCell.swift */; };
 		3E37C74894BCD5FD517803CD /* CipherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C85E134520E621A5BE3A /* CipherData.swift */; };
 		3E37C768ECCFE7A20ABE175F /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C0E641E8486597514592 /* AuthService.swift */; };
 		3E37C783293B861B6FA7DFA9 /* IosNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C320AE4961869792586B /* IosNetworkService.swift */; };
 		3E37C7904E15A41C440D1D33 /* lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E37C9A3614141DC5B51F768 /* lose.wav */; };
 		3E37C7C669159E1179202F10 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C6E654A52598D1504630 /* UIColor+Extension.swift */; };
+		3E37C7DF5B97C966D2012E03 /* Cipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C30F426379E0470AF162 /* Cipher.swift */; };
 		3E37C801AF8DC996E4FA3120 /* LeftCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C01193735DC9191BE76C /* LeftCutterCipher.swift */; };
 		3E37C840254F6AB3FFF9E844 /* AudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CC18034686E90B6C6BC8 /* AudioService.swift */; };
 		3E37C85D3E39EADB0DBE3DB9 /* RoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C950EF592E3489F22F2A /* RoundedLabel.swift */; };
@@ -94,11 +99,11 @@
 		3E37CE9F182F7E9FD7518152 /* BaseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C1273574E76D3FBA075E /* BaseEntity.swift */; };
 		3E37CEE9BE3C0CB33E172313 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE11FB42D287E2CBBC28 /* UserService.swift */; };
 		3E37CF039F0DCE1755ADE82C /* TalkNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF444956F635D14AB33E /* TalkNetworkService.swift */; };
+		3E37CF1DC371CE32934B0AF8 /* CipherDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C7B3CA8FB6461A10A098 /* CipherDifficulty.swift */; };
 		3E37CF2F213BB685C1ED37ED /* DoubleCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C4A342D2FB743520F79A /* DoubleCutterCipher.swift */; };
 		3E37CF9BB9E38508A738BB04 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF7CE01320ED801C2095 /* FriendCell.swift */; };
 		3E37CFBAD3191C926F1F2EAA /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C55F6CB09A955B097EED /* ServiceLocator.swift */; };
 		3E37CFD200CDEED01D646E9B /* AvatarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C0BA72DA4018F543AF1A /* AvatarService.swift */; };
-		3E37CFE8C35000814F3BEF6B /* CipherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C8F2D9BA5C2EF8BB7807 /* CipherService.swift */; };
 		481BDD991C58FE5D00ABD558 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 481BDD981C58FE5D00ABD558 /* LaunchScreen.storyboard */; };
 		483676491C2048200092C703 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483676481C2048200092C703 /* StoreKit.framework */; };
 		484EC3511C2E714900C65F94 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3501C2E714900C65F94 /* libz.1.2.5.tbd */; };
@@ -140,6 +145,7 @@
 		3E37C0E641E8486597514592 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		3E37C106D7CA0FD89102CE33 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
 		3E37C1273574E76D3FBA075E /* BaseEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseEntity.swift; sourceTree = "<group>"; };
+		3E37C131EF321BA3531C5804 /* CipherType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherType.swift; sourceTree = "<group>"; };
 		3E37C140CF13E7D63DFC1DDD /* WindowService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowService.swift; sourceTree = "<group>"; };
 		3E37C153F3D2B31763619A6D /* TutorialSendMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialSendMessageViewController.swift; sourceTree = "<group>"; };
 		3E37C16A4DB8A60189B53BCB /* CoreMessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreMessageService.swift; sourceTree = "<group>"; };
@@ -151,6 +157,7 @@
 		3E37C27838218C4F22B21722 /* NSError+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Extension.swift"; sourceTree = "<group>"; };
 		3E37C283CC6663C54ADE8296 /* CoreDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		3E37C2D873FA507A19AD8B4E /* NameEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameEditViewController.swift; sourceTree = "<group>"; };
+		3E37C30F426379E0470AF162 /* Cipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cipher.swift; sourceTree = "<group>"; };
 		3E37C320AE4961869792586B /* IosNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IosNetworkService.swift; sourceTree = "<group>"; };
 		3E37C36B4FCFE7E98ECF47C9 /* CoreMessage+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreMessage+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3E37C38B9A8A13C8A590A5BD /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -182,29 +189,32 @@
 		3E37C73CF0E1728E0C36BAC1 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		3E37C74155F978515511E166 /* CoreMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreMessage.swift; sourceTree = "<group>"; };
 		3E37C7567924686F83EB2112 /* TutorialDecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialDecipherViewController.swift; sourceTree = "<group>"; };
+		3E37C7B3CA8FB6461A10A098 /* CipherDifficulty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherDifficulty.swift; sourceTree = "<group>"; };
 		3E37C7E3F583D6FA5A7F1FB6 /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		3E37C8377C447C2140182584 /* WTFChat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WTFChat.xcdatamodel; sourceTree = "<group>"; };
 		3E37C837C8AABDE6E0B38F73 /* MessageTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableView.swift; sourceTree = "<group>"; };
 		3E37C85E134520E621A5BE3A /* CipherData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherData.swift; sourceTree = "<group>"; };
 		3E37C890E5A751082A2A8251 /* JSQMessageAvatarImageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessageAvatarImageDataSource.h; sourceTree = "<group>"; };
 		3E37C8C94FDE3C085500AD3A /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
-		3E37C8F2D9BA5C2EF8BB7807 /* CipherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherService.swift; sourceTree = "<group>"; };
 		3E37C94384F16DE3D06549E7 /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
 		3E37C950EF592E3489F22F2A /* RoundedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedLabel.swift; sourceTree = "<group>"; };
 		3E37C953B797DEC923D1E0F5 /* WordLabelContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordLabelContainer.swift; sourceTree = "<group>"; };
+		3E37C97ECF9691C6B9C3E22A /* CipherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherCell.swift; sourceTree = "<group>"; };
 		3E37C98636554709D1F080F3 /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
 		3E37C9A3614141DC5B51F768 /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lose.wav; sourceTree = "<group>"; };
 		3E37C9D2F88CEB8C0C9A360A /* StringDistanceCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringDistanceCalculator.swift; sourceTree = "<group>"; };
 		3E37C9ED2D4796D1E2A18168 /* CoreWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreWord.swift; sourceTree = "<group>"; };
+		3E37CA0E47FE8053178B1840 /* CipherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherService.swift; sourceTree = "<group>"; };
+		3E37CA1122E662AC8FBF97DC /* DifficultyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DifficultyCell.swift; sourceTree = "<group>"; };
 		3E37CA45A72832DD44521244 /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = win.wav; sourceTree = "<group>"; };
 		3E37CA609C53E8BEDAF2131B /* IAPProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPProducts.swift; sourceTree = "<group>"; };
 		3E37CA9049DA3801F0F07E0F /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
-		3E37CAD3B7D27CDA3056228B /* CipherFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherFactory.swift; sourceTree = "<group>"; };
 		3E37CB2062DC4DEEBA05E21C /* IosService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IosService.swift; sourceTree = "<group>"; };
 		3E37CB627C8C45BBD8C82592 /* ServiceInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceInitializer.swift; sourceTree = "<group>"; };
 		3E37CBF3B1602BA1DD301A55 /* UIColor+JSQMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+JSQMessages.h"; sourceTree = "<group>"; };
 		3E37CBF9FFC782A8D35B6B7C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3E37CC18034686E90B6C6BC8 /* AudioService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
+		3E37CC38BBB78EEC291E5537 /* TutorialCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialCell.swift; sourceTree = "<group>"; };
 		3E37CC3BCE2D521EC38F21E1 /* TimeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeService.swift; sourceTree = "<group>"; };
 		3E37CCD67817B8B8D28F5144 /* CipherPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherPickerViewController.swift; sourceTree = "<group>"; };
 		3E37CCE7F85D3B25FC789326 /* MessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
@@ -307,6 +317,7 @@
 				3E37C40A9EFCE6528396684C /* AdColonyService.swift */,
 				3E37CE63F3AB49391E2AB456 /* CurrentUserService.swift */,
 				3E37CE6082F2F1A3F3447039 /* MessageCipherService.swift */,
+				3E37CA0E47FE8053178B1840 /* CipherService.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -388,7 +399,6 @@
 				3E37C9D2F88CEB8C0C9A360A /* StringDistanceCalculator.swift */,
 				3E37CB261522ACFBC9557A69 /* GUI */,
 				3E37CF93363D9A37CF8BFEF9 /* CoreData */,
-				3E37C79B9F86E989A89C7013 /* Old */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -405,6 +415,9 @@
 			isa = PBXGroup;
 			children = (
 				3E37C697FAA1E14CB0C5DD26 /* SingleModeViewController.swift */,
+				3E37CC38BBB78EEC291E5537 /* TutorialCell.swift */,
+				3E37CA1122E662AC8FBF97DC /* DifficultyCell.swift */,
+				3E37C97ECF9691C6B9C3E22A /* CipherCell.swift */,
 			);
 			path = Single;
 			sourceTree = "<group>";
@@ -419,14 +432,6 @@
 				3E37C36B4FCFE7E98ECF47C9 /* CoreMessage+CoreDataProperties.swift */,
 			);
 			path = CoreData;
-			sourceTree = "<group>";
-		};
-		3E37C79B9F86E989A89C7013 /* Old */ = {
-			isa = PBXGroup;
-			children = (
-				3E37C8F2D9BA5C2EF8BB7807 /* CipherService.swift */,
-			);
-			path = Old;
 			sourceTree = "<group>";
 		};
 		3E37C8A836211143FA22FC0F /* Rating */ = {
@@ -461,13 +466,15 @@
 		3E37CAF909D972CF09507237 /* Cipher */ = {
 			isa = PBXGroup;
 			children = (
-				3E37CAD3B7D27CDA3056228B /* CipherFactory.swift */,
 				3E37CE3A4F3A448936932B0C /* ShuffleCipher.swift */,
 				3E37C01193735DC9191BE76C /* LeftCutterCipher.swift */,
 				3E37C3BCA4B1D6CA9EEA40DD /* RightCutterCipher.swift */,
 				3E37C4A342D2FB743520F79A /* DoubleCutterCipher.swift */,
 				3E37C5AFEE099B3AB166D8BC /* RandomCutterCipher.swift */,
 				3E37C85E134520E621A5BE3A /* CipherData.swift */,
+				3E37C30F426379E0470AF162 /* Cipher.swift */,
+				3E37C131EF321BA3531C5804 /* CipherType.swift */,
+				3E37C7B3CA8FB6461A10A098 /* CipherDifficulty.swift */,
 			);
 			path = Cipher;
 			sourceTree = "<group>";
@@ -871,14 +878,19 @@
 				3E37CA2B523E0518E8EA066D /* CoreDataService.swift in Sources */,
 				3E37C334132A7A5D66672CB7 /* CoreMessageService.swift in Sources */,
 				3E37C5446B840A65D14086EC /* SingleModeViewController.swift in Sources */,
-				3E37C032D66D97CED79A6E2D /* CipherFactory.swift in Sources */,
 				3E37C09542BF837429242F77 /* ShuffleCipher.swift in Sources */,
 				3E37C801AF8DC996E4FA3120 /* LeftCutterCipher.swift in Sources */,
 				3E37CE0C12C0B8AF2418AFC5 /* RightCutterCipher.swift in Sources */,
 				3E37CF2F213BB685C1ED37ED /* DoubleCutterCipher.swift in Sources */,
 				3E37CDB27F3D64CA485D55FA /* RandomCutterCipher.swift in Sources */,
 				3E37C74894BCD5FD517803CD /* CipherData.swift in Sources */,
-				3E37CFE8C35000814F3BEF6B /* CipherService.swift in Sources */,
+				3E37C0B2CA5925AE2757629B /* TutorialCell.swift in Sources */,
+				3E37C4165ED9274A81E2A77A /* DifficultyCell.swift in Sources */,
+				3E37C72F0CF62B09B8E764CC /* CipherCell.swift in Sources */,
+				3E37C584E8B166324813C3BE /* CipherService.swift in Sources */,
+				3E37C7DF5B97C966D2012E03 /* Cipher.swift in Sources */,
+				3E37C0CF3D7BFE34B1D8B1BB /* CipherType.swift in Sources */,
+				3E37CF1DC371CE32934B0AF8 /* CipherDifficulty.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,11 +13,13 @@ protocol CipherPickedComputer {
 }
 
 class CipherPickerViewController: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
-    let cipherTypes = CipherFactory.getAllTypes()
-    let cipherDificulties = CipherFactory.getAllDifficulties()
-    
-    var cipherType = CipherType.RightCutter
-    var cipherDifficulty = CipherDifficulty.Normal
+    private let cipherService: CipherService = serviceLocator.get(CipherService)
+
+    private let cipherTypes = CipherType.getAll()
+    private let cipherDifficulties = CipherDifficulty.getAll()
+
+    private var cipherType = CipherType.RightCutter
+    private var cipherDifficulty = CipherDifficulty.Normal
 
     var cipherPickedComputer: CipherPickedComputer?
     
@@ -29,7 +31,7 @@ class CipherPickerViewController: UIPickerView, UIPickerViewDataSource, UIPicker
         if (component == 0) {
             return cipherTypes.count
         } else {
-            return cipherDificulties.count
+            return cipherDifficulties.count
         }
     }
     
@@ -40,7 +42,7 @@ class CipherPickerViewController: UIPickerView, UIPickerViewDataSource, UIPicker
         if (component == 0) {
             titleData = cipherTypes[row].description
         } else {
-            titleData = cipherDificulties[row].description
+            titleData = cipherDifficulties[row].description
         }
         
         let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Verdana", size: 18.0)!])
@@ -54,7 +56,7 @@ class CipherPickerViewController: UIPickerView, UIPickerViewDataSource, UIPicker
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let type = cipherTypes[self.selectedRowInComponent(0)]
-        let difficulty = cipherDificulties[self.selectedRowInComponent(1)]
+        let difficulty = cipherDifficulties[self.selectedRowInComponent(1)]
 
         cipherPickedComputer?.cipherPicked(type, difficulty: difficulty)
     }

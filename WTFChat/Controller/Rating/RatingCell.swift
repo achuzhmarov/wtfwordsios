@@ -1,5 +1,5 @@
 //
-//  RatingCell.swift
+//  TutorialCell.swift
 //  WTFChat
 //
 //  Created by Artem Chuzhmarov on 16/11/15.
@@ -9,8 +9,8 @@
 import UIKit
 
 class RatingCell: UITableViewCell {
-    private let currentUserService = serviceLocator.get(CurrentUserService)
-    private let avatarService = serviceLocator.get(AvatarService)
+    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    private let avatarService: AvatarService = serviceLocator.get(AvatarService)
 
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userLogin: UILabel!

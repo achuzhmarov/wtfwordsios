@@ -12,9 +12,11 @@ class MessageCipherService {
     private let WORD_SPECIAL_SYMBOLS = ["'", "-"]
 
     private let currentUserService: CurrentUserService
+    private let cipherService: CipherService
 
-    init(currentUserService: CurrentUserService) {
+    init(currentUserService: CurrentUserService, cipherService: CipherService) {
         self.currentUserService = currentUserService
+        self.cipherService = cipherService
     }
 
     func getCompareString(string: String) -> String {
@@ -194,8 +196,8 @@ class MessageCipherService {
             cipherType: cipherType,
             cipherDifficulty: cipherDifficulty
         )
-        
-        newMessage.cipherWords()
+
+        cipherService.cipherMessage(newMessage)
         checkDeciphered(newMessage)
         
         return newMessage

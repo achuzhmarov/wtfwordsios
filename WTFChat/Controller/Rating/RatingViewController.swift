@@ -9,8 +9,8 @@
 import UIKit
 
 class RatingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    private let userService = serviceLocator.get(UserService)
-    private let currentUserService = serviceLocator.get(CurrentUserService)
+    private let userService: UserService = serviceLocator.get(UserService)
+    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
 
     @IBOutlet weak var categorySegment: UISegmentedControl!
     @IBOutlet weak var usersView: UITableView!

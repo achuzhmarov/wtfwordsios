@@ -48,23 +48,26 @@ class ServiceInitializer {
             AuthService(authNetworkService: authNetworkService, iosService: iosService, userService: userService)
         )
 
+        //core data
+        serviceLocator.add(
+            coreDataService,
+            coreMessageService
+        )
+
+        let cipherService = CipherService()
+
         //other
         serviceLocator.add(
             LvlService(currentUserService: currentUserService),
-            MessageCipherService(currentUserService: currentUserService),
+            MessageCipherService(currentUserService: currentUserService, cipherService: cipherService),
             windowService,
-            NotificationService(windowService: windowService, messageService: messageService, talkService: talkService)
-        )
-
-        //without dependencies
-        serviceLocator.add(
+            NotificationService(windowService: windowService, messageService: messageService, talkService: talkService),
             currentUserService,
             AdColonyService(),
             AvatarService(),
             TimeService(),
             AudioService(),
-            coreDataService,
-            coreMessageService
+            cipherService
         )
     }
 }

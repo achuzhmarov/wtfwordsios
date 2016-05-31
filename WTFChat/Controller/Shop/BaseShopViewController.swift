@@ -9,10 +9,10 @@
 import Foundation
 
 class BaseShopViewController: UITableViewController {
-    private let inAppService = serviceLocator.get(InAppService)
-    private let userService = serviceLocator.get(UserService)
-    private let adColonyService = serviceLocator.get(AdColonyService)
-    private let currentUserService = serviceLocator.get(CurrentUserService)
+    private let inAppService: InAppService = serviceLocator.get(InAppService)
+    private let userService: UserService = serviceLocator.get(UserService)
+    private let adColonyService: AdColonyService = serviceLocator.get(AdColonyService)
+    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
 
     @IBOutlet weak var freeHintsLabel: UILabel!
     @IBOutlet weak var freeHintsBuyLabel: UILabel!

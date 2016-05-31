@@ -93,14 +93,6 @@ class Message : BaseEntity {
         super.init(id: id)
     }
     
-    func cipherWords() {
-        for word in words! {
-            if (word.wordType == WordType.New) {
-                word.cipheredText = CipherFactory.cipherText(cipherType, difficulty: cipherDifficulty, word: word)
-            }
-        }
-    }
-    
     func getWordsWithoutSpaces() -> [Word] {
         var result = [Word]()
         

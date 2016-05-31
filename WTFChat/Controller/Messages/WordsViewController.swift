@@ -13,8 +13,8 @@ protocol SuggestionComputer: class {
 }
 
 class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelegate {
-    private let messageCipherService = serviceLocator.get(MessageCipherService)
-    private let audioService = serviceLocator.get(AudioService)
+    private let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
+    private let audioService: AudioService = serviceLocator.get(AudioService)
 
     var message: Message?
     var rows = WordsField()

@@ -15,6 +15,11 @@ enum TutorialStage: Int {
 var currentTutorialStage: TutorialStage = .Never
 
 class TutorialMessagesViewController: MessagesViewController {
+    private let talkService: TalkService = serviceLocator.get(TalkService)
+    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    private let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
+    private let coreMessageService: CoreMessageService = serviceLocator.get(CoreMessageService)
+
     private let TUTORIAL_MESSAGE_MAIN = "Welcome to the chat! I am glad to see you here. Have a good time!"
     private let TUTORIAL_TIP1 = "So, I see you are interested. Let me give you some more advice on leveling up!"
     private let TUTORIAL_TIP2 = "You will get less XP for an orange word if you open it with a tap. But you will still get X3 bonus XP for fully deciphered message."
@@ -24,11 +29,6 @@ class TutorialMessagesViewController: MessagesViewController {
 
     private let TUTORIAL_STAGE_PROPERTY_KEY = "tutorialStage"
     private let nsUserDefaults = NSUserDefaults.standardUserDefaults()
-
-    private let talkService: TalkService = serviceLocator.get(TalkService)
-    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
-    private let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
-    private let coreMessageService: CoreMessageService = serviceLocator.get(CoreMessageService)
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

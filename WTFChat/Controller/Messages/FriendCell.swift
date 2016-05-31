@@ -9,9 +9,9 @@
 import UIKit
 
 class FriendCell: UITableViewCell {
-    private let currentUserService = serviceLocator.get(CurrentUserService)
-    private let avatarService = serviceLocator.get(AvatarService)
-    private let timeService = serviceLocator.get(TimeService)
+    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    private let avatarService: AvatarService = serviceLocator.get(AvatarService)
+    private let timeService: TimeService = serviceLocator.get(TimeService)
 
     @IBOutlet private weak var friendImage: UIImageView!
     

@@ -8,56 +8,8 @@
 
 import Foundation
 
-protocol Cipher {
-    func getTextForDecipher(word: Word) -> String
-}
-
-enum CipherType : Int, CustomStringConvertible {
-    case RightCutter = 0
-    case LeftCutter
-    case DoubleCutter
-    case RandomCutter
-    case Shuffle
-    
-    var description : String {
-        get {
-            switch self {
-            case CipherType.RightCutter:
-                return "Right Cutter"
-            case CipherType.LeftCutter:
-                return "Left Cutter"
-            case CipherType.DoubleCutter:
-                return "Double Cutter"
-            case CipherType.RandomCutter:
-                return "Random Cutter"
-            case CipherType.Shuffle:
-                return "Shuffle"
-            }
-        }
-    }
-}
-
-enum CipherDifficulty : Int, CustomStringConvertible {
-    case Easy = 0
-    case Normal
-    case Hard
-    
-    var description : String {
-        get {
-            switch self {
-            case CipherDifficulty.Easy:
-                return "Easy"
-            case CipherDifficulty.Normal:
-                return "Normal"
-            case CipherDifficulty.Hard:
-                return "Hard"
-            }
-        }
-    }
-}
-
-class CipherFactory {
-    static let ciphers: [CipherData] = [
+class CipherService {
+    private let ciphers: [CipherData] = [
             CipherData(type: .RightCutter, difficulty: .Easy, maxStars: 10, cipher: RightCutterEasyCipher()),
             CipherData(type: .RightCutter, difficulty: .Normal, maxStars: 25, cipher: RightCutterNormalCipher()),
             CipherData(type: .RightCutter, difficulty: .Hard, maxStars: 50, cipher: RightCutterHardCipher()),
@@ -79,26 +31,26 @@ class CipherFactory {
             CipherData(type: .Shuffle, difficulty: .Hard, maxStars: 50, cipher: ShuffleHardCipher())
     ]
 
-    private class func getCipher(type: CipherType, difficulty: CipherDifficulty) -> Cipher? {
+    func getCipherData(type: CipherType, difficulty: CipherDifficulty) -> CipherData? {
         for cipherData in ciphers {
             if (cipherData.type == type && cipherData.difficulty == difficulty) {
-                return cipherData.cipher
+                return cipherData
             }
         }
 
         return nil
     }
 
-    class func cipherText(type: CipherType, difficulty: CipherDifficulty, word: Word) -> String {
-        return getCipher(type, difficulty: difficulty)!.getTextForDecipher(word)
+    func cipherMessage(message: Message) {
+        for word in message.words! {
+            if (word.wordType == WordType.New) {
+                word.cipheredText = cipherText(message.cipherType, difficulty: message.cipherDifficulty, word: word)
+            }
+        }
     }
-    
-    class func getAllTypes() -> [CipherType] {
-        return [.RightCutter, .LeftCutter, .DoubleCutter, .RandomCutter, .Shuffle]
-    }
-    
-    class func getAllDifficulties() -> [CipherDifficulty] {
-        return [.Easy, .Normal, .Hard]
+
+    private func cipherText(type: CipherType, difficulty: CipherDifficulty, word: Word) -> String {
+        return getCipherData(type, difficulty: difficulty)!.cipher.getTextForDecipher(word)
     }
 }
 

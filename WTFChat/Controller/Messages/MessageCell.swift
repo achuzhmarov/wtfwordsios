@@ -9,9 +9,9 @@
 import UIKit
 
 class MessageCell: UITableViewCell {
-    private let currentUserService = serviceLocator.get(CurrentUserService)
-    private let avatarService = serviceLocator.get(AvatarService)
-    private let timeService = serviceLocator.get(TimeService)
+    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    private let avatarService: AvatarService = serviceLocator.get(AvatarService)
+    private let timeService: TimeService = serviceLocator.get(TimeService)
 
     @IBOutlet weak var friendImage: UIImageView!
     @IBOutlet weak var messageText: RoundedLabel!
