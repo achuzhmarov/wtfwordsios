@@ -19,4 +19,12 @@ class CipherData {
         self.maxStars = maxStars
         self.cipher = cipher
     }
+
+    init(type: CipherType, difficulty: CipherDifficulty, maxStars: Int, cipher: Cipher, wins: Int) {
+        self.type = type
+        self.difficulty = difficulty
+        self.maxStars = maxStars
+        self.cipher = cipher
+        self.wins = wins
+    }
 }

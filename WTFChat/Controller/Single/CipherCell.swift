@@ -9,19 +9,15 @@
 import UIKit
 
 class CipherCell: UITableViewCell {
-    @IBOutlet weak var starImage: UIImageView!
+    @IBOutlet weak var starImage: StarImage!
     @IBOutlet weak var cipherText: UILabel!
-    @IBOutlet weak var progressText: UILabel!
+    //@IBOutlet weak var progressText: UILabel!
 
     private var cipherData: CipherData!
 
     func initStyle() {
-        starImage.layer.borderColor = UIColor.whiteColor().CGColor
-        starImage.layer.cornerRadius = starImage.bounds.width/2
-        starImage.clipsToBounds = true
-
-        cipherText.adjustsFontSizeToFitWidth = true
-        progressText.adjustsFontSizeToFitWidth = true
+        //cipherText.adjustsFontSizeToFitWidth = true
+        //progressText.adjustsFontSizeToFitWidth = true
 
         self.selectionStyle = .None;
     }
@@ -30,9 +26,15 @@ class CipherCell: UITableViewCell {
         initStyle()
 
         cipherText.text = cipherData.type.description
-        progressText.text = String(cipherData.wins) + " / " + String(cipherData.maxStars)
-        
-        /*starImage.image = avatarService.getAvatarImage(user.login,
-            diameter: UInt(userImage.bounds.height))*/
+
+        if (cipherData.wins < cipherData.maxStars) {
+            //progressText.text = String(cipherData.maxStars - cipherData.wins)
+            self.backgroundColor = UIColor.whiteColor()
+        } else {
+            //progressText.text = ""
+            self.backgroundColor = StarImage.lightGoldColor
+        }
+
+        starImage.updateStarImage(cipherData.wins, max: cipherData.maxStars)
     }
 }

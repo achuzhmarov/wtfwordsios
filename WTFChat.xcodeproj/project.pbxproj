@@ -83,6 +83,7 @@
 		3E37CCDF07BF1A4334EAC5DA /* NameEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C2D873FA507A19AD8B4E /* NameEditViewController.swift */; };
 		3E37CCE6BCAC93E1CA45166D /* TutorialSendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C153F3D2B31763619A6D /* TutorialSendMessageViewController.swift */; };
 		3E37CCEA6AE026C1F2BAA823 /* FriendInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C4645C4059D432DBFD2B /* FriendInfo.swift */; };
+		3E37CD248B6D5B79473B93D6 /* StarImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C700933EFCDFDC9B7684 /* StarImage.swift */; };
 		3E37CD2D55F5CD76AA25BDCA /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C465F5FBB13D4D60E0F4 /* MessagesViewController.swift */; };
 		3E37CD3AA3A97DBC522D5C61 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CFB3727D88DA944234CF /* Word.swift */; };
 		3E37CD4854290AC763C2A18F /* DecipherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF7210612C5D50A22EB5 /* DecipherViewController.swift */; };
@@ -186,6 +187,7 @@
 		3E37C697FAA1E14CB0C5DD26 /* SingleModeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleModeViewController.swift; sourceTree = "<group>"; };
 		3E37C6C7C133E31AA96F07CB /* JSQMessagesAvatarImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesAvatarImage.m; sourceTree = "<group>"; };
 		3E37C6E654A52598D1504630 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		3E37C700933EFCDFDC9B7684 /* StarImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarImage.swift; sourceTree = "<group>"; };
 		3E37C73CF0E1728E0C36BAC1 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		3E37C74155F978515511E166 /* CoreMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreMessage.swift; sourceTree = "<group>"; };
 		3E37C7567924686F83EB2112 /* TutorialDecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialDecipherViewController.swift; sourceTree = "<group>"; };
@@ -556,6 +558,7 @@
 				3E37CE1FEB6473D153DA3909 /* Timer.swift */,
 				3E37C68FC994889C5F99557F /* WTFAlert.swift */,
 				3E37C950EF592E3489F22F2A /* RoundedLabel.swift */,
+				3E37C700933EFCDFDC9B7684 /* StarImage.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -891,6 +894,7 @@
 				3E37C7DF5B97C966D2012E03 /* Cipher.swift in Sources */,
 				3E37C0CF3D7BFE34B1D8B1BB /* CipherType.swift in Sources */,
 				3E37CF1DC371CE32934B0AF8 /* CipherDifficulty.swift in Sources */,
+				3E37CD248B6D5B79473B93D6 /* StarImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

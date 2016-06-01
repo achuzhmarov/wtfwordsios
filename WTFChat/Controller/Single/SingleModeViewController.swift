@@ -15,6 +15,14 @@ class SingleModeViewController: UITableViewController {
 
     private let cipherService: CipherService = serviceLocator.get(CipherService)
 
+    //private var activeSection = 1
+
+    private var openedSections: [Int: Bool] = [
+        1: true,
+        2: false,
+        3: false
+    ]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.definesPresentationContext = true
@@ -45,9 +53,12 @@ class SingleModeViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == TUTORIAL_SECTION) {
             return 1
-        } else {
+        } else if (openedSections[section]!) {
             //one row for every cipher type + header
             return cipherTypes.count + 1
+        } else {
+            //only header to show
+            return 1
         }
     }
 
@@ -75,6 +86,30 @@ class SingleModeViewController: UITableViewController {
             cell.updateCipher(cipherData!)
 
             return cell
+        }
+    }
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if (indexPath.section == TUTORIAL_SECTION) {
+
+        //} else if (indexPath.section == activeSection) {
+
+        } else if (indexPath.row == 0) {
+            //tap header
+            openedSections[indexPath.section] = !openedSections[indexPath.section]!
+
+            tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
+
+            //openedSections[activeSection] = false
+
+            //tableView.reloadSections(NSIndexSet(indexesInRange: NSRange(1...3)), withRowAnimation: .Fade)
+
+            //tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
+            //tableView.reloadSections(NSIndexSet(index: activeSection), withRowAnimation: .Fade)
+
+            //activeSection = indexPath.section
+        } else {
+
         }
     }
 }
