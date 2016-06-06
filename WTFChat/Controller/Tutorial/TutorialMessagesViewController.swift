@@ -113,8 +113,8 @@ class TutorialMessagesViewController: MessagesViewController {
                 newMessage.author = currentUserService.getUserLogin()
                 
                 talkService.updateTalkInArray(self.talk, withMessages: true)
-                
-                self.updateView(true)
+
+                updateViewAfterSend()
             }
         } else {
             super.sendMessage(segue)

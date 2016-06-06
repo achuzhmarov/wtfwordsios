@@ -248,7 +248,7 @@
                                 <connections>
                                     <outlet property="cipherText" destination="4T9-mR-VMB" id="tUX-Rm-DQm"/>
                                     <outlet property="starImage" destination="9QC-YM-4x5" id="z0x-ke-G5h"/>
-                                    <segue destination="LWO-Fa-zGc" kind="show" id="OdB-FU-LXI"/>
+                                    <segue destination="LWO-Fa-zGc" kind="show" identifier="showMessages" id="OdB-FU-LXI"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

@@ -1,6 +1,6 @@
 import UIKit
 
-class MessagesViewController: UIViewController, MessageTappedComputer, UITextViewDelegate, MessageListener {
+class MessagesViewController: BaseMessageViewController, MessageListener {
     private let messageService: MessageService = serviceLocator.get(MessageService)
     private let talkService: TalkService = serviceLocator.get(TalkService)
     private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
@@ -9,21 +9,17 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
 
     @IBOutlet weak var messageText: UITextView!
     @IBOutlet weak var messageTextHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var messageTableView: MessageTableView!
     @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var sendButton: UIButton!
     
     var refreshControl:UIRefreshControl!
     
     var timer: NSTimer?
-    var talk: Talk!
     var cipherType = CipherType.RightCutter
     var cipherDifficulty = CipherDifficulty.Normal
     var lastSendedMessage: Message?
-    var firstTimeLoaded = true
 
     var defaultMessageTextHeightConstraint: CGFloat!
-    
     var isKeyboardShown = false
     
     var wasSuccessfullUpdate = false
@@ -36,29 +32,16 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MessagesViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        
-        if (talk.isSingleMode) {
-            self.title = currentUserService.getFriendLogin(talk).capitalizedString
-        } else {
-            let friendInfo = currentUserService.getFriendInfoByTalk(talk)
-            let title = "\(friendInfo!.getDisplayName()), lvl \(String(friendInfo!.lvl))"
-            configureTitleView(title, navigationItem: navigationItem)
-        }
-        
-        self.messageTableView.delegate = self.messageTableView
-        self.messageTableView.dataSource = self.messageTableView
-        self.messageTableView.rowHeight = UITableViewAutomaticDimension
-        self.messageTableView.messageTappedComputer = self
-        
-        if (!talk.isSingleMode) {
-            messageService.initMessageListener(talk, listener: self)
-        }
+
+        let friendInfo = currentUserService.getFriendInfoByTalk(talk)
+        let title = "\(friendInfo!.getDisplayName()), lvl \(String(friendInfo!.lvl))"
+        configureTitleView(title, navigationItem: navigationItem)
+
+        messageService.initMessageListener(talk, listener: self)
         
         dispatch_async(dispatch_get_main_queue(), {
-            self.updateView(false, earlierLoaded: 0, wasNew: true)
+            self.updateViewAfterGetNew()
         })
-        
-        self.messageTableView.alpha = 0
         
         messageText.layer.cornerRadius = 5
         messageText.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.5).CGColor
@@ -75,35 +58,6 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         NSNotificationCenter.defaultCenter().removeObserver(self)
         messageService.removeListener(talk)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if (talk.messages.count > 0) {
-            self.updateView()
-            
-            if (self.messageTableView.alpha == 0) {
-                firstTimeLoaded = false
-                
-                let delay = Double(talk.messages.count) / 200.0
-                showMessages(0.5, delay: delay)
-            }
-        }
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if (firstTimeLoaded) {
-            firstTimeLoaded = false
-            
-            showMessages(0.3, delay: 0)
-        }
-    }
 
     private func configureTitleView(title: String, navigationItem: UINavigationItem) {
         let titleLabel = UILabel()
@@ -113,13 +67,6 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         navigationItem.titleView = titleLabel
         titleLabel.sizeToFit()
         titleLabel.adjustsFontSizeToFitWidth = true
-    }
-    
-    func showMessages(duration: NSTimeInterval, delay: NSTimeInterval) {
-        UIView.animateWithDuration(duration, delay: delay,
-            options: [], animations: {
-                self.messageTableView.alpha = 1
-            }, completion: nil)
     }
     
     // MARK: - Navigation
@@ -145,14 +92,9 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
             } else {
                 coreMessageService.createMessage(newMessage)
             }
-            
-            //Clear input text field in any case
-            self.updateView(true)
+
+            updateViewAfterSend()
         }
-    }
-    
-    func messageTapped(message: Message) {
-        performSegueWithIdentifier("showDecipher", sender: message)
     }
     
     @IBAction func sendButtonPressed(sender: AnyObject) {
@@ -190,7 +132,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         }
     }
     
-    func updateLastCipherType() {
+    private func updateLastCipherType() {
         for message in talk.messages {
             if (message.author == currentUserService.getUserLogin() || talk.isSingleMode) {
                 self.cipherType = message.cipherType
@@ -215,7 +157,12 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
             } else {
                 self.wasSuccessfullUpdate = true
                 self.talk = talk
-                self.updateView(false, earlierLoaded: 0, wasNew: wasNew)
+
+                if (wasNew) {
+                    self.updateViewAfterGetNew()
+                } else {
+                    self.updateView()
+                }
             }
         })
     }
@@ -229,7 +176,7 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
                 NSLog(requestError.localizedDescription)
             } else {
                 self.talk = talk
-                self.updateView(false, earlierLoaded: newMessagesCount)
+                self.updateViewAfterGetEarlier(newMessagesCount)
             }
             
             self.refreshControl.endRefreshing()
@@ -286,21 +233,20 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+
         if segue.identifier == "showDecipher" {
             let targetController = segue.destinationViewController as! DecipherViewController
-            
+
             let message = sender as! Message
-            
+
             targetController.message = message
             targetController.talk = talk
-            
-            //single mode
-            targetController.isSingleMode = talk.isSingleMode
-            
+
             //self message - view only
             if (message.author == currentUserService.getUserLogin()) {
                 targetController.selfAuthor = true
-                
+
                 if (!message.deciphered) {
                     targetController.useCipherText = true
                 }
@@ -318,11 +264,10 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         
         dismissKeyboard()
     }
-    
-    func updateView(withSend: Bool = false, earlierLoaded: Int = 0, wasNew: Bool = false) {
-        //update talk
+
+    override func updateView() {
         talk = talkService.getByTalkId(talk.id)
-        
+
         if (talk.messages.count != 0 && talk.messageCount > talk.messages.count) {
             createRefreshControl()
         } else {
@@ -332,26 +277,38 @@ class MessagesViewController: UIViewController, MessageTappedComputer, UITextVie
         if  (!self.isKeyboardShown) {
             //update GUI only if keyboard hidden
             self.messageTableView.updateTalk(self.talk)
+
             talkService.talkViewed(self.talk.id)
-            
-            if (earlierLoaded > 0) {
-                self.messageTableView.scrollTableToEarlier(earlierLoaded - 1)
-            } else if (wasNew) {
-                self.messageTableView.scrollTableToBottom()
-            }
-        }
-        
-        if (withSend) {
-            dismissKeyboard()
-            messageText.text = ""
-            sendButton.enabled = false
-            messageText.scrollEnabled = false
-            messageTextHeightConstraint.constant = defaultMessageTextHeightConstraint
-            
-            self.messageTableView.scrollTableToBottom()
         }
     }
-    
+
+    func updateViewAfterSend() {
+        updateView()
+
+        dismissKeyboard()
+
+        messageText.text = ""
+        sendButton.enabled = false
+        messageText.scrollEnabled = false
+        messageTextHeightConstraint.constant = defaultMessageTextHeightConstraint
+
+        messageTableView.scrollTableToBottom()
+    }
+
+    func updateViewAfterGetEarlier(earlierLoaded: Int) {
+        updateView()
+
+        if  (!self.isKeyboardShown) {
+            messageTableView.scrollTableToEarlier(earlierLoaded - 1)
+        }
+    }
+
+    func updateViewAfterGetNew() {
+        updateView()
+
+        messageTableView.scrollTableToBottom()
+    }
+
     private func createRefreshControl() {
         deleteRefreshControl()
         

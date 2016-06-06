@@ -90,26 +90,24 @@ class SingleModeViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if (indexPath.section == TUTORIAL_SECTION) {
-
-        //} else if (indexPath.section == activeSection) {
-
-        } else if (indexPath.row == 0) {
+        if (indexPath.section != TUTORIAL_SECTION && indexPath.row == 0) {
             //tap header
             openedSections[indexPath.section] = !openedSections[indexPath.section]!
-
             tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
+        }
+    }
 
-            //openedSections[activeSection] = false
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showMessages" {
+            let targetController = segue.destinationViewController as! SingleMessageViewController
 
-            //tableView.reloadSections(NSIndexSet(indexesInRange: NSRange(1...3)), withRowAnimation: .Fade)
+            if let index: NSIndexPath = tableView.indexPathForSelectedRow? {
+                let cipherType = cipherTypes[indexPath.row - 1]
+                let cipherDifficulty = cipherDifficulties[indexPath.section - 1]
 
-            //tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
-            //tableView.reloadSections(NSIndexSet(index: activeSection), withRowAnimation: .Fade)
-
-            //activeSection = indexPath.section
-        } else {
-
+                //TODO - get correct talk
+                //targetController.talk = talks[rowIndex]
+            }
         }
     }
 }
