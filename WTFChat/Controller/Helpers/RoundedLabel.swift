@@ -1,11 +1,3 @@
-//
-//  WordLabel.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 09/09/15.
-//  Copyright (c) 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import UIKit
 
 class RoundedLabel: UILabel {

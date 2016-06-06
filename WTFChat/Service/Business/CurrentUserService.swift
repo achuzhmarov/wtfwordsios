@@ -178,14 +178,4 @@ class CurrentUserService: NSObject {
         print("getFriendLogin from not a friend?")
         return ""
     }
-
-    func getMessageText(message: Message) -> String! {
-        if (getUserLogin() == message.author) {
-            return message.clearText()
-        } else if (message.deciphered) {
-            return message.clearText()
-        } else {
-            return message.questionMarks()
-        }
-    }
 }

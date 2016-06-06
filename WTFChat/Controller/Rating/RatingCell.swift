@@ -52,7 +52,7 @@ class RatingCell: UITableViewCell {
             userGlobalNum?.text = String(user.rating)
         }
         
-        userImage.image = avatarService.getAvatarImage(user.login,
+        userImage.image = avatarService.getImage(user.login,
             diameter: UInt(userImage.bounds.height))
         
         if (currentUserService.getUserLogin() == user.login) {

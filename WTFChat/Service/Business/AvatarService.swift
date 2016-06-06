@@ -9,9 +9,15 @@
 import Foundation
 
 class AvatarService {
-    private var avatarImageCache = [String: [UInt: UIImage]]()
+    private final let defaultInitials = "🙂"
     
-    func getAvatarImage(name: String, diameter: UInt) -> UIImage {
+    private var avatarImageCache = [String: [UInt: UIImage]]()
+
+    func getSingleModeImage(diameter: UInt) -> UIImage {
+        return getImage(defaultInitials, diameter: diameter)
+    }
+
+    func getImage(name: String, diameter: UInt) -> UIImage {
         if let userAvatars = avatarImageCache[name] {
             if let image = userAvatars[diameter] {
                 return image
@@ -31,7 +37,7 @@ class AvatarService {
         if (nameLength != 0) {
             initials = name[0...min(2, nameLength - 1)].capitalizedString
         } else {
-            initials = "🙂"
+            initials = defaultInitials
         }
         
         let jsqImage = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(initials, backgroundColor: color, textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(CGFloat(13)), diameter: diameter)

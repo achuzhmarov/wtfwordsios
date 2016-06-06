@@ -1,8 +1,3 @@
-//
-// Created by Artem Chuzhmarov on 01/06/16.
-// Copyright (c) 2016 Artem Chuzhmarov. All rights reserved.
-//
-
 import UIKit
 
 class StarImage: UIImageView {

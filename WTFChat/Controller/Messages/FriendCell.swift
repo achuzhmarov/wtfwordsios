@@ -57,7 +57,7 @@ class FriendCell: UITableViewCell {
         }
 
         //TODO AWKARD!!!
-        friendImage.image = avatarService.getAvatarImage(currentUserService.getFriendLogin(talk),
+        friendImage.image = avatarService.getImage(currentUserService.getFriendLogin(talk),
             diameter: UInt(friendImage.bounds.height))
     }
     
@@ -90,7 +90,7 @@ class FriendCell: UITableViewCell {
     }
     
     private func updateLastAuthorImage(name: String) {
-        lastMessageAuthorImage.image = avatarService.getAvatarImage(name,
+        lastMessageAuthorImage.image = avatarService.getImage(name,
             diameter: UInt(lastMessageAuthorImage.bounds.height))
         
         lastMessageAuthorImageWidth.constant = 30
@@ -134,17 +134,20 @@ class FriendCell: UITableViewCell {
     
     private func updateMessage(message: Message) {
         lastMessageTime.text = timeService.parseTime(message.timestamp).string
-        
-        lastMessage.text = currentUserService.getMessageText(message)
-        
-        if (message.deciphered) {
-            if (message.countFailed() > 0) {
-                lastMessage.layer.backgroundColor = FAILED_COLOR.CGColor
-            } else {
-                lastMessage.layer.backgroundColor = SUCCESS_COLOR.CGColor
-            }
+
+        if (message.author == currentUserService.getUserLogin()) {
+            lastMessage.text = message.clearText()
         } else {
-            lastMessage.layer.backgroundColor = CIPHERED_COLOR.CGColor
+            lastMessage.text = message.text()
+        }
+
+        switch message.getMessageStatus() {
+            case .Success:
+                lastMessage.layer.backgroundColor = SUCCESS_COLOR.CGColor
+            case .Failed:
+                lastMessage.layer.backgroundColor = FAILED_COLOR.CGColor
+            case .Ciphered:
+                lastMessage.layer.backgroundColor = CIPHERED_COLOR.CGColor
         }
     }
 }

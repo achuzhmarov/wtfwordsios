@@ -1,14 +1,6 @@
-//
-//  FriendLvl.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 28/10/15.
-//  Copyright © 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import Foundation
 
-class FriendInfo {
+class JsonFriendInfo : NSObject {
     var login: String
     var lvl: Int
     var exp: Int
@@ -21,14 +13,6 @@ class FriendInfo {
         self.name = name
         self.exp = exp
         self.rating = rating
-    }
-
-    func getDisplayName() -> String {
-        if (name != "") {
-            return name.capitalizedString
-        } else {
-            return login.capitalizedString
-        }
     }
     
     class func parseFromJson(json: JSON) throws -> FriendInfo {
@@ -77,25 +61,5 @@ class FriendInfo {
             exp: exp,
             rating: rating
         )
-    }
-    
-    class func compareByLvl(user1: FriendInfo, user2: FriendInfo) -> Bool {
-        if (user1.lvl > user2.lvl) {
-            return true
-        } else if (user1.lvl < user2.lvl) {
-            return false
-        } else {
-            return user1.login.isGreater(user2.login)
-        }
-    }
-    
-    class func compareByExp(user1: FriendInfo, user2: FriendInfo) -> Bool {
-        if (user1.exp > user2.exp) {
-            return true
-        } else if (user1.exp < user2.exp) {
-            return false
-        } else {
-            return user1.login.isGreater(user2.login)
-        }
     }
 }

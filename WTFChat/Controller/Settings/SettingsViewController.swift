@@ -59,7 +59,7 @@ class SettingsViewController: UITableViewController {
         pushNewSwitch.setOn(currentUserService.getUserPushNew(), animated: false)
         pushDecipherSwitch.setOn(currentUserService.getUserPushDeciphered(), animated: false)
         
-        userImage.image = avatarService.getAvatarImage(
+        userImage.image = avatarService.getImage(
             currentUserService.getUserLogin(),
             diameter: UInt(userImage.bounds.height))
         

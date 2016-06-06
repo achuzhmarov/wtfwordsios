@@ -248,6 +248,7 @@
                                 <connections>
                                     <outlet property="cipherText" destination="4T9-mR-VMB" id="tUX-Rm-DQm"/>
                                     <outlet property="starImage" destination="9QC-YM-4x5" id="z0x-ke-G5h"/>
+                                    <segue destination="LWO-Fa-zGc" kind="show" id="OdB-FU-LXI"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -261,6 +262,183 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wcT-ay-CM9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1121" y="-456"/>
+        </scene>
+        <!--Single Messages-->
+        <scene sceneID="wu4-hX-UZD">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="LWO-Fa-zGc" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iYV-l0-lZp"/>
+                        <viewControllerLayoutGuide type="bottom" id="frG-1G-eeQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Shr-YW-i4m">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h3E-vg-4vq" customClass="SingleMessageTableView" customModule="WTFChat" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IncomingTimeCell" rowHeight="55" id="woZ-c2-dDf" customClass="SingleMessageCell" customModule="WTFChat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="woZ-c2-dDf" id="Vql-3e-4yy">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="55"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jbq-QI-8PP">
+                                                    <rect key="frame" x="284" y="0.0" width="33" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="OO3-Pe-A2V"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0r4-F9-e6D">
+                                                    <rect key="frame" x="8" y="20" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="Ct9-6I-zQl"/>
+                                                        <constraint firstAttribute="width" constant="32" id="eMp-WY-p7w"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J8d-0c-7fr" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
+                                                    <rect key="frame" x="44" y="20" width="40" height="31"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="J8d-0c-7fr" secondAttribute="trailing" constant="40" id="0cS-pK-rKt"/>
+                                                <constraint firstItem="0r4-F9-e6D" firstAttribute="leading" secondItem="Vql-3e-4yy" secondAttribute="leadingMargin" id="Gpz-fZ-49E"/>
+                                                <constraint firstItem="0r4-F9-e6D" firstAttribute="top" secondItem="jbq-QI-8PP" secondAttribute="bottom" id="RIy-8o-MyR"/>
+                                                <constraint firstItem="jbq-QI-8PP" firstAttribute="centerX" secondItem="Vql-3e-4yy" secondAttribute="centerX" id="alN-CD-hJK"/>
+                                                <constraint firstItem="jbq-QI-8PP" firstAttribute="top" secondItem="Vql-3e-4yy" secondAttribute="top" id="gns-Pu-xbo"/>
+                                                <constraint firstAttribute="bottom" secondItem="J8d-0c-7fr" secondAttribute="bottom" constant="4" id="jis-QQ-khO"/>
+                                                <constraint firstItem="J8d-0c-7fr" firstAttribute="top" secondItem="jbq-QI-8PP" secondAttribute="bottom" id="uZA-6N-GZG"/>
+                                                <constraint firstItem="J8d-0c-7fr" firstAttribute="leading" secondItem="0r4-F9-e6D" secondAttribute="trailing" constant="4" id="yBQ-vD-Hm8"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="friendImage" destination="0r4-F9-e6D" id="lWg-vC-DBB"/>
+                                            <outlet property="messageText" destination="J8d-0c-7fr" id="8Ji-Qh-fmN"/>
+                                            <outlet property="timeText" destination="jbq-QI-8PP" id="gHH-b4-VGq"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OutcomingTimeCell" rowHeight="55" id="YEp-ES-GLQ" customClass="SingleMessageCell" customModule="WTFChat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="83" width="600" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YEp-ES-GLQ" id="4wT-5k-88x">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="55"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6P-IS-elK">
+                                                    <rect key="frame" x="284" y="0.0" width="33" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="61V-r6-E5H"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ae0-69-dHn" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
+                                                    <rect key="frame" x="548" y="20" width="40" height="31"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ae0-69-dHn" firstAttribute="top" secondItem="X6P-IS-elK" secondAttribute="bottom" id="3eG-hJ-Hwi"/>
+                                                <constraint firstItem="X6P-IS-elK" firstAttribute="centerX" secondItem="4wT-5k-88x" secondAttribute="centerX" id="Ag1-Ni-jQ5"/>
+                                                <constraint firstItem="ae0-69-dHn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4wT-5k-88x" secondAttribute="leading" constant="67" id="DhL-ff-hx0"/>
+                                                <constraint firstItem="X6P-IS-elK" firstAttribute="top" secondItem="4wT-5k-88x" secondAttribute="top" id="g0L-1g-3b0"/>
+                                                <constraint firstAttribute="trailing" secondItem="ae0-69-dHn" secondAttribute="trailing" constant="12" id="kKM-ha-1rE"/>
+                                                <constraint firstAttribute="bottom" secondItem="ae0-69-dHn" secondAttribute="bottom" constant="4" id="oN1-85-cSF"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="messageText" destination="ae0-69-dHn" id="X4Z-Ra-ktg"/>
+                                            <outlet property="timeText" destination="X6P-IS-elK" id="GI2-ht-trF"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OutcomingCell" rowHeight="35" id="XRX-wy-j2b" customClass="SingleMessageCell" customModule="WTFChat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="138" width="600" height="35"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XRX-wy-j2b" id="6O1-oj-eE7">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="35"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9a-a2-AKZ" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
+                                                    <rect key="frame" x="548" y="0.0" width="40" height="31"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="A9a-a2-AKZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6O1-oj-eE7" secondAttribute="leading" constant="67" id="1S6-e2-3Bw"/>
+                                                <constraint firstAttribute="bottom" secondItem="A9a-a2-AKZ" secondAttribute="bottom" constant="4" id="3C9-Lc-vjf"/>
+                                                <constraint firstAttribute="trailing" secondItem="A9a-a2-AKZ" secondAttribute="trailing" constant="12" id="6Sd-RI-Dlj"/>
+                                                <constraint firstItem="A9a-a2-AKZ" firstAttribute="top" secondItem="6O1-oj-eE7" secondAttribute="top" id="YOO-7k-TTn"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="messageText" destination="A9a-a2-AKZ" id="6NQ-LF-oKD"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IncomingCell" rowHeight="35" id="nET-xe-I7J" customClass="SingleMessageCell" customModule="WTFChat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="173" width="600" height="35"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nET-xe-I7J" id="E4u-wl-A4P">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="35"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xCX-mr-O7J">
+                                                    <rect key="frame" x="8" y="0.0" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="Nqv-86-Q8O"/>
+                                                        <constraint firstAttribute="width" constant="32" id="rkZ-zi-7wp"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FIF-Bl-Om7" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
+                                                    <rect key="frame" x="44" y="0.0" width="40" height="31"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="FIF-Bl-Om7" firstAttribute="leading" secondItem="xCX-mr-O7J" secondAttribute="trailing" constant="4" id="CS9-Ef-GZm"/>
+                                                <constraint firstItem="xCX-mr-O7J" firstAttribute="top" secondItem="E4u-wl-A4P" secondAttribute="topMargin" constant="-8" id="LVL-yS-Ba5"/>
+                                                <constraint firstItem="FIF-Bl-Om7" firstAttribute="top" secondItem="E4u-wl-A4P" secondAttribute="topMargin" constant="-8" id="U8E-73-s9Y"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FIF-Bl-Om7" secondAttribute="trailing" constant="40" id="XFU-uj-fEV"/>
+                                                <constraint firstItem="xCX-mr-O7J" firstAttribute="leading" secondItem="E4u-wl-A4P" secondAttribute="leadingMargin" id="fdN-1y-QMf"/>
+                                                <constraint firstAttribute="bottom" secondItem="FIF-Bl-Om7" secondAttribute="bottom" constant="4" id="kW7-eA-DNg"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="friendImage" destination="xCX-mr-O7J" id="RoG-vC-tOD"/>
+                                            <outlet property="messageText" destination="FIF-Bl-Om7" id="P3Z-Hs-9n2"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="frG-1G-eeQ" firstAttribute="top" secondItem="h3E-vg-4vq" secondAttribute="bottom" id="8fX-rD-hzL"/>
+                            <constraint firstItem="h3E-vg-4vq" firstAttribute="top" secondItem="iYV-l0-lZp" secondAttribute="bottom" id="Bkt-g3-JUF"/>
+                            <constraint firstAttribute="trailing" secondItem="h3E-vg-4vq" secondAttribute="trailing" id="MWU-s6-r6b"/>
+                            <constraint firstItem="h3E-vg-4vq" firstAttribute="leading" secondItem="Shr-YW-i4m" secondAttribute="leading" id="yRC-mH-rnb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Single Messages" id="oCL-h9-nLv"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gQv-x8-MOd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1917" y="-456"/>
         </scene>
         <!--Shop-->
         <scene sceneID="2LL-pZ-zCu">
@@ -1641,12 +1819,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="YAM-5d-aDo" firstAttribute="top" secondItem="ZTd-Xc-2Q4" secondAttribute="bottom" constant="8" id="0bl-Ta-kFh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YAM-5d-aDo" secondAttribute="trailing" constant="-20" id="5I4-3X-vVI"/>
                             <constraint firstItem="SFE-eo-ibm" firstAttribute="leading" secondItem="4p8-Ec-LiE" secondAttribute="leadingMargin" constant="-20" id="Goe-UM-QrK"/>
                             <constraint firstItem="YAM-5d-aDo" firstAttribute="leading" secondItem="4p8-Ec-LiE" secondAttribute="leadingMargin" constant="-20" id="Lk0-CH-gmh"/>
                             <constraint firstAttribute="bottom" secondItem="SFE-eo-ibm" secondAttribute="bottom" id="WRX-tU-h4h"/>
                             <constraint firstItem="YAM-5d-aDo" firstAttribute="bottom" secondItem="SFE-eo-ibm" secondAttribute="top" id="q9v-ur-6RG"/>
+                            <constraint firstItem="YAM-5d-aDo" firstAttribute="top" secondItem="ZTd-Xc-2Q4" secondAttribute="bottom" constant="8" id="rhD-rE-kOs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="SFE-eo-ibm" secondAttribute="trailing" constant="-20" id="z8D-uO-6z9"/>
                         </constraints>
                     </view>

@@ -1,11 +1,3 @@
-//
-//  AlertHelper.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 04/10/15.
-//  Copyright © 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import Foundation
 
 class WTFOneButtonAlert: NSObject, UIAlertViewDelegate  {

@@ -360,7 +360,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     func start() {
         self.navigationItem.setHidesBackButton(true, animated:true)
 
-        if (message!.timerSecs == 0 && message!.countSuccess() == 0) {
+        if (message!.guessIsNotStarted()) {
             if (message!.cipherDifficulty == .Hard) {
                 timer.seconds = message!.countNew() * HARD_SECONDS_PER_WORD
             } else {
@@ -410,7 +410,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         dismissKeyboard()
         
-        if (message!.countFailed() == 0) {
+        if (message!.getMessageStatus() == .Success) {
             audioService.playSound("win")
         } else {
             audioService.playSound("lose")
@@ -421,7 +421,8 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         isOvered = true
         
-        if (message.countSuccess() > 0 && !isSingleMode) {
+        if (message.hasSuccessWords() && !isSingleMode) {
+            //init exp gain
             timer.seconds = 0
             topTimerLabel.text = ""
             topViewHeightContraint.constant = initialTopViewHeightConstraintConstant
