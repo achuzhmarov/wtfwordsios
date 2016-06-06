@@ -7,10 +7,6 @@
 //
 
 import Foundation
-import CoreData
-
-let CORE_WORD_CLASS_NAME = "CoreWord"
-let CORE_MESSAGE_CLASS_NAME = "CoreMessage"
 
 class CoreMessage: NSManagedObject {
     

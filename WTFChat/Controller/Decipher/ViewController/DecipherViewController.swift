@@ -38,7 +38,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     var isPaused = false
     var timer = Timer()
     
-    var isSingleMode = false
+    var isPassAndPlay = false
     var suggestions = 0
     
     //for viewOnly mode
@@ -98,7 +98,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
                 }, completion: nil)
         }
         
-        if (self.isSingleMode) {
+        if (self.isPassAndPlay) {
             suggestions = (message.countNew() - 1) / SUGGESTIONS_SINGLE_MODE + 1
         } else {
             suggestions = currentUserService.getUserSuggestions() - message.hintsUsed
@@ -215,7 +215,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     func showNoSuggestionsDialog() {
-        if (isSingleMode) {
+        if (isPassAndPlay) {
             WTFOneButtonAlert.show("Hints remained: 0",
                 message: "You have used all hints",
                 firstButtonTitle: "Ok",
@@ -265,7 +265,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
             messageCipherService.decipher(message!, suggestedWord: word)
             suggestions -= 1
             
-            if (!isSingleMode) {
+            if (!isPassAndPlay) {
                 message.hintsUsed += 1
                 suggestions = currentUserService.getUserSuggestions() - message.hintsUsed
             }
@@ -421,7 +421,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         
         isOvered = true
         
-        if (message.hasSuccessWords() && !isSingleMode) {
+        if (message.hasSuccessWords() && !isPassAndPlay) {
             //init exp gain
             timer.seconds = 0
             topTimerLabel.text = ""
@@ -512,7 +512,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         //update timer
         message.timerSecs = timer.seconds
         
-        if (isSingleMode) {
+        if (isPassAndPlay) {
             coreMessageService.updateMessage(message)
         } else {
             messageService.decipherMessage(message) { (message, error) -> Void in
@@ -524,7 +524,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     }
     
     func sendMessageDecipher() {
-        if (isSingleMode) {
+        if (isPassAndPlay) {
             coreMessageService.updateMessage(message)
         } else {
             messageService.decipherMessage(message) { (message, error) -> Void in

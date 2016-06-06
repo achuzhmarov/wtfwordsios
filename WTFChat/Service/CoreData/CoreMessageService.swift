@@ -6,6 +6,9 @@
 import Foundation
 
 class CoreMessageService {
+    private let CORE_WORD_CLASS_NAME = "CoreWord"
+    private let CORE_MESSAGE_CLASS_NAME = "CoreMessage"
+
     private let coreDataService: CoreDataService
 
     init(coreDataService: CoreDataService) {
