@@ -1,6 +1,50 @@
 import Foundation
 
-class Word: JsonWord {
+enum WordType: Int {
+    case New = 1, Success, Failed, Delimiter, Ignore, LineBreak, CloseTry
+}
+
+class Word: NSObject {
+    var text: String
+    var wordType = WordType.New
+    var additional = ""
+    var cipheredText = ""
+    var wasCloseTry = false
+
+    init (word: Word) {
+        self.text = word.text
+        self.additional = word.additional
+        self.wordType = word.wordType
+        self.cipheredText = word.cipheredText
+        self.wasCloseTry = word.wasCloseTry
+    }
+
+    init(text: String, wordType: WordType) {
+        self.text = text
+        self.wordType = wordType
+    }
+
+    init(text: String, additional: String, wordType: WordType) {
+        self.text = text
+        self.additional = additional
+        self.wordType = wordType
+    }
+
+    init(text: String, additional: String, wordType: WordType, cipheredText: String) {
+        self.text = text
+        self.additional = additional
+        self.wordType = wordType
+        self.cipheredText = cipheredText
+    }
+
+    init(text: String, additional: String, wordType: WordType, cipheredText: String, wasCloseTry: Bool) {
+        self.text = text
+        self.additional = additional
+        self.wordType = wordType
+        self.cipheredText = cipheredText
+        self.wasCloseTry = wasCloseTry
+    }
+
     func getClearText() -> String {
         return self.text + self.additional
     }

@@ -31,7 +31,7 @@ class InAppNetworkService: NSObject {
             } else {
                 if let userJson = json {
                     do {
-                        let user = try User.parseFromJson(userJson)
+                        let user = try JsonUserParser.fromJson(userJson)
                         completion(userInfo: user, error: nil)
                     } catch let error as NSError {
                         completion(userInfo: nil, error: error)

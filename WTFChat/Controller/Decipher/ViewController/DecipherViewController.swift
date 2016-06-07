@@ -32,7 +32,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     @IBOutlet weak var topViewHeightContraint: NSLayoutConstraint!
     
     var talk: Talk!
-    var message: Message!
+    var message: RemoteMessage!
     var isStarted = false
     var isOvered = false
     var isPaused = false
@@ -434,7 +434,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
         sendMessageDecipher()
         
         navigationItem.rightBarButtonItem = nil
-        
+
         messageService.updateMessageInTalk(message)
     }
     

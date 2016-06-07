@@ -14,6 +14,7 @@ class MessageCell: BaseMessageCell {
 
         messageText.sizeToFit()
 
-        friendImage?.image = avatarService.getImage(message.author, diameter: UInt(friendImage.bounds.height))
+        friendImage?.image = avatarService.getImage((message as! RemoteMessage).author,
+                diameter: UInt(friendImage.bounds.height))
     }
 }

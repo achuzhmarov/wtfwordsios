@@ -25,7 +25,7 @@ class TalkNetworkService {
             } else {
                 if let talksJson = json {
                     do {
-                        let talks = try Talk.parseArrayFromJson(talksJson)
+                        let talks = try JsonTalkParser.arrayFromJson(talksJson)
                         completion(talks: talks, error: nil)
                     } catch let error as NSError {
                         completion(talks: nil, error: error)

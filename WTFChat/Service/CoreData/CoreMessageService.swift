@@ -15,12 +15,12 @@ class CoreMessageService {
         self.coreDataService = coreDataService
     }
 
-    func updateFromMessage(coreMessage: CoreMessage, message: Message) {
+    func updateFromMessage(coreMessage: CoreMessage, message: RemoteMessage) {
         coreMessage.updateFromMessageWithoutWords(message)
         updateMessageWords(coreMessage, message: message)
     }
 
-    private func updateMessageWords(coreMessage: CoreMessage, message: Message) {
+    private func updateMessageWords(coreMessage: CoreMessage, message: RemoteMessage) {
         //clear old words if any
         if let words = coreMessage.words {
             for _ in 0..<words.count {
@@ -39,7 +39,7 @@ class CoreMessageService {
         }
     }
 
-    func createOrUpdateMessage(message: Message) {
+    func createOrUpdateMessage(message: RemoteMessage) {
         if getMessageByExtId(message) != nil {
             updateMessage(message)
         } else {
@@ -47,28 +47,28 @@ class CoreMessageService {
         }
     }
 
-    func createMessage(message: Message) {
+    func createMessage(message: RemoteMessage) {
         let newCoreMessage = coreDataService.createObject(CORE_MESSAGE_CLASS_NAME) as! CoreMessage
         updateFromMessage(newCoreMessage, message: message)
         coreDataService.saveContext()
     }
 
-    func getAllWaiting() -> [Message] {
+    func getAllWaiting() -> [RemoteMessage] {
         let predicate = NSPredicate(format: "talkId != %@", "0")
         return getByPredicate(predicate)
     }
 
-    func getAllLocal() -> [Message] {
+    func getAllLocal() -> [RemoteMessage] {
         let predicate = NSPredicate(format: "talkId == %@", "0")
         return getByPredicate(predicate)
     }
 
-    func getByTalkId(talkId: String) -> [Message] {
+    func getByTalkId(talkId: String) -> [RemoteMessage] {
         let predicate = NSPredicate(format: "talkId == %@", talkId)
         return getByPredicate(predicate)
     }
 
-    func getMessageByExtId(message: Message) -> Message? {
+    func getMessageByExtId(message: RemoteMessage) -> RemoteMessage? {
         let fetchRequest = coreDataService.createFetch(CORE_MESSAGE_CLASS_NAME)
 
         let predicate = NSPredicate(format: "extId == %@", message.extId)
@@ -85,7 +85,7 @@ class CoreMessageService {
         return nil
     }
 
-    private func getByPredicate(predicate: NSPredicate) -> [Message] {
+    private func getByPredicate(predicate: NSPredicate) -> [RemoteMessage] {
         let fetchRequest = coreDataService.createFetch(CORE_MESSAGE_CLASS_NAME)
 
         let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: true)
@@ -95,7 +95,7 @@ class CoreMessageService {
 
         let results = coreDataService.executeFetch(fetchRequest)
 
-        var domainMessages = [Message]()
+        var domainMessages = [RemoteMessage]()
 
         for item in results {
             if let coreMessage = item as? CoreMessage {
@@ -108,7 +108,7 @@ class CoreMessageService {
         return domainMessages
     }
 
-    func updateMessage(message: Message) {
+    func updateMessage(message: RemoteMessage) {
         let fetchRequest = coreDataService.createFetch(CORE_MESSAGE_CLASS_NAME)
 
         let predicate = NSPredicate(format: "extId == %@", message.extId)
@@ -124,7 +124,7 @@ class CoreMessageService {
         }
     }
 
-    func deleteMessageIfExists(message: Message) {
+    func deleteMessageIfExists(message: RemoteMessage) {
         if getMessageByExtId(message) != nil {
             deleteMessage(message)
         } else {
@@ -132,7 +132,7 @@ class CoreMessageService {
         }
     }
 
-    func deleteMessage(message: Message) {
+    func deleteMessage(message: RemoteMessage) {
         let fetchRequest = coreDataService.createFetch(CORE_MESSAGE_CLASS_NAME)
 
         let predicate = NSPredicate(format: "extId == %@", message.extId)

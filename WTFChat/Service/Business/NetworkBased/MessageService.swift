@@ -164,7 +164,7 @@ class MessageService: NSObject {
         }
     }
     
-    func createMessage(newMessage: Message) {
+    func createMessage(newMessage: RemoteMessage) {
         let talk = talkService.getByTalkId(newMessage.talkId)!
         let listener = listeners[talk.id]?.listener
         
@@ -189,7 +189,7 @@ class MessageService: NSObject {
         }
     }
     
-    func decipherMessage(decipheredMessage: Message, completion:((message: Message?, error: NSError?) -> Void)? = nil) {
+    func decipherMessage(decipheredMessage: RemoteMessage, completion:((message: RemoteMessage?, error: NSError?) -> Void)? = nil) {
         messageNetworkService.decipherMessage(decipheredMessage){ (message, error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if error != nil {
@@ -204,7 +204,7 @@ class MessageService: NSObject {
         }
     }
     
-    func updateMessageInTalk(message: Message) {
+    func updateMessageInTalk(message: RemoteMessage) {
         let talk = talkService.getByTalkId(message.talkId)!
         updateOrCreateMessageInArray(talk, message: message)
         talkService.updateTalkInArray(talk, withMessages: true)
@@ -241,7 +241,7 @@ class MessageService: NSObject {
         }
     }
     
-    private func updateOrCreateMessageInArray(talk: Talk, message: Message) -> Bool {
+    private func updateOrCreateMessageInArray(talk: Talk, message: RemoteMessage) -> Bool {
         for i in 0..<talk.messages.count {
             let sameId = (message.id != "" && (message.id == talk.messages[i].id))
             let wasSendedLocal = (message.extId != "" && (message.extId == talk.messages[i].extId))

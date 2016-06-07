@@ -1,41 +1,36 @@
 import Foundation
 import CoreData
 
-class CoreMessage: NSManagedObject {
-    
-    func updateFromMessageWithoutWords(message: RemoteMessage) {
-        self.id = message.id
+class CoreSingleMessage: NSManagedObject {
+
+    func updateFromMessageWithoutWords(message: SingleMessage) {
         self.timestamp = message.timestamp
         self.lastUpdate = message.lastUpdate
-        self.talkId = message.talkId
-        self.author = message.author
         self.deciphered = message.deciphered
         self.cipherType = message.cipherType.rawValue
         self.cipherDifficulty = message.cipherDifficulty.rawValue
         self.exp = message.exp
-        self.isLocal = message.isLocal
         self.extId = message.extId
         self.timerSecs = message.timerSecs
         self.hintsUsed = message.hintsUsed
     }
-    
-    func getMessage() -> RemoteMessage? {
-        if (self.id == nil ||
-            self.timestamp == nil ||
-            self.lastUpdate == nil ||
-            self.talkId == nil ||
-            self.author == nil ||
-            self.deciphered == nil ||
-            self.cipherType == nil ||
-            self.cipherDifficulty == nil ||
-            self.exp == nil ||
-            self.isLocal == nil ||
-            self.extId == nil ||
-            self.timerSecs == nil ||
-            self.hintsUsed == nil ||
-            self.words == nil) {
-                
-                return nil
+
+    func getMessage() -> SingleMessage? {
+        if  (
+                self.timestamp == nil ||
+                self.lastUpdate == nil ||
+                self.deciphered == nil ||
+                self.cipherType == nil ||
+                self.cipherDifficulty == nil ||
+                self.exp == nil ||
+                self.extId == nil ||
+                self.timerSecs == nil ||
+                self.hintsUsed == nil ||
+                self.words == nil
+            )
+        {
+
+            return nil
         }
 
         var domainWords = [Word]()
@@ -51,21 +46,17 @@ class CoreMessage: NSManagedObject {
         let enumCipherType = CipherType(rawValue: Int(self.cipherType!))
         let enumCipherDifficulty = CipherDifficulty(rawValue: Int(self.cipherDifficulty!))
 
-        let message = RemoteMessage(
-            id: self.id!,
-            talkId: self.talkId!,
-            author: self.author!,
-            words: domainWords,
-            deciphered: Bool(self.deciphered!),
+        let message = SingleMessage(
+            extId: self.extId!,
             cipherType: enumCipherType!,
             cipherDifficulty: enumCipherDifficulty!,
+            words: domainWords,
+            deciphered: Bool(self.deciphered!),
             timestamp: self.timestamp!,
             lastUpdate: self.lastUpdate!,
             exp: Int(self.exp!),
-            extId: self.extId!,
             timerSecs: Int(self.timerSecs!),
-            hintsUsed: Int(self.hintsUsed!),
-            isLocal: Bool(self.isLocal!)
+            hintsUsed: Int(self.hintsUsed!)
         )
 
         return message

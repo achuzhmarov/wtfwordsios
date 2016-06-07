@@ -31,11 +31,6 @@ class CurrentUserService: NSObject {
         return user!.name
     }
     
-    func getUserEmail() -> String {
-        if (!isLoggedIn()) { return "" }
-        return user!.email
-    }
-    
     func getUserPushNew() -> Bool {
         if (!isLoggedIn()) { return true }
         return user!.pushNew
@@ -141,11 +136,6 @@ class CurrentUserService: NSObject {
     func updateName(name: String) {
         if (!isLoggedIn()) { return }
         self.user!.name = name
-    }
-    
-    func updateEmail(email: String) {
-        if (!isLoggedIn()) { return }
-        self.user!.email = email
     }
     
     func updatePushNew(pushNew: Bool) {

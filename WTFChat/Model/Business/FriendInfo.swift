@@ -1,6 +1,20 @@
 import Foundation
 
-class FriendInfo: JsonFriendInfo {
+class FriendInfo: NSObject {
+    var login: String
+    var lvl: Int
+    var exp: Int
+    var name: String
+    var rating: Int
+
+    init(login: String, lvl: Int, name: String, exp: Int, rating: Int) {
+        self.login = login
+        self.lvl = lvl
+        self.name = name
+        self.exp = exp
+        self.rating = rating
+    }
+
     func getDisplayName() -> String {
         if (name != "") {
             return name.capitalizedString

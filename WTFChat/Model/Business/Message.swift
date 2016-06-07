@@ -4,7 +4,52 @@ enum MessageStatus: Int {
     case Ciphered = 1, Success, Failed
 }
 
-class Message: JsonMessage {
+class Message: NSObject {
+    var timestamp: NSDate
+    var lastUpdate: NSDate
+    var cipherType = CipherType.RightCutter
+    var cipherDifficulty = CipherDifficulty.Normal
+
+    var extId: String = ""
+    var deciphered: Bool = false
+    var exp: Int = 0
+    var timerSecs: Int = 0
+    var hintsUsed: Int = 0
+
+    var words: [Word]!
+    var tries = [String]()
+
+    override init() {
+        self.timestamp = NSDate()
+        self.lastUpdate = timestamp
+    }
+
+    init(extId: String, cipherType: CipherType, cipherDifficulty: CipherDifficulty, words: [Word]) {
+        self.extId = extId
+        self.cipherType = cipherType
+        self.cipherDifficulty = cipherDifficulty
+        self.words = words
+
+        self.timestamp = NSDate()
+        self.lastUpdate = timestamp
+    }
+
+    init(extId: String, cipherType: CipherType, cipherDifficulty: CipherDifficulty, words: [Word],
+         deciphered: Bool, timestamp: NSDate, lastUpdate: NSDate, exp: Int, timerSecs: Int, hintsUsed: Int) {
+
+        self.extId = extId
+        self.cipherType = cipherType
+        self.cipherDifficulty = cipherDifficulty
+        self.words = words
+
+        self.deciphered = deciphered
+        self.timestamp = timestamp
+        self.lastUpdate = lastUpdate
+        self.exp = exp
+        self.timerSecs = timerSecs
+        self.hintsUsed = hintsUsed
+    }
+
     func getWordsWithoutSpaces() -> [Word] {
         var result = [Word]()
 

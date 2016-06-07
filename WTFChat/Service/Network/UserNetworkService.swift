@@ -28,7 +28,7 @@ class UserNetworkService: NSObject {
             } else {
                 if let userJson = json {
                     do {
-                        let user = try User.parseFromJson(userJson)
+                        let user = try JsonUserParser.fromJson(userJson)
                         completion(userInfo: user, error: nil)
                     } catch let error as NSError {
                         completion(userInfo: nil, error: error)
@@ -51,7 +51,7 @@ class UserNetworkService: NSObject {
             } else {
                 if let friendsJson = json {
                     do {
-                        let friends = try User.parseFriendsFromJson(friendsJson)
+                        let friends = try JsonUserParser.friendsFromJson(friendsJson)
                         completion(friends: friends, error: nil)
                     } catch let error as NSError {
                         completion(friends: nil, error: error)
@@ -70,7 +70,7 @@ class UserNetworkService: NSObject {
             } else {
                 if let friendsJson = json {
                     do {
-                        let friends = try User.parseFriendsFromJson(friendsJson)
+                        let friends = try JsonUserParser.friendsFromJson(friendsJson)
                         completion(friends: friends, error: nil)
                     } catch let error as NSError {
                         completion(friends: nil, error: error)
@@ -89,7 +89,7 @@ class UserNetworkService: NSObject {
             } else {
                 if let friendsJson = json {
                     do {
-                        let friends = try User.parseFriendsFromJson(friendsJson)
+                        let friends = try JsonUserParser.friendsFromJson(friendsJson)
                         completion(friends: friends, error: nil)
                     } catch let error as NSError {
                         completion(friends: nil, error: error)
@@ -108,7 +108,7 @@ class UserNetworkService: NSObject {
             } else {
                 if let talkJson = json {
                     do {
-                        let talk = try Talk.parseFromJson(talkJson)
+                        let talk = try JsonTalkParser.fromJson(talkJson)
                         completion(talk: talk, error: nil)
                     } catch let error as NSError {
                         completion(talk: nil, error: error)
@@ -145,23 +145,6 @@ class UserNetworkService: NSObject {
         let postJSON = JSON(requestData)
         
         networkService.post(postJSON, relativeUrl: "user/name") { (json, error) -> Void in
-            if let requestError = error {
-                completion(error: requestError)
-            } else {
-                completion(error: nil)
-            }
-        }
-    }
-    
-    func updateEmail(email: String, password: String, completion:(error: NSError?) -> Void) {
-        let requestData = [
-            "email": email,
-            "old_password": password
-        ]
-        
-        let postJSON = JSON(requestData)
-        
-        networkService.post(postJSON, relativeUrl: "user/email") { (json, error) -> Void in
             if let requestError = error {
                 completion(error: requestError)
             } else {
@@ -211,7 +194,7 @@ class UserNetworkService: NSObject {
             } else {
                 if let userJson = json {
                     do {
-                        let user = try User.parseFromJson(userJson)
+                        let user = try JsonUserParser.fromJson(userJson)
                         completion(userInfo: user, error: nil)
                     } catch let error as NSError {
                         completion(userInfo: nil, error: error)

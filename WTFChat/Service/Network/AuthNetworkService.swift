@@ -138,7 +138,7 @@ class AuthNetworkService: NSObject {
                 completion(user: nil, error: requestError)
             } else if let userJson = json {
                 do {
-                    let user = try User.parseFromJson(userJson)
+                    let user = try JsonUserParser.fromJson(userJson)
                     completion(user: user, error: nil)
                 } catch let error as NSError {
                     completion(user: nil, error: error)

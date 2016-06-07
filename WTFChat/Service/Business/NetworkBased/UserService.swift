@@ -108,16 +108,6 @@ class UserService: NSObject {
         }
     }
     
-    func updateEmail(email: String, password: String, completion:(error: NSError?) -> Void) {
-        userNetworkService.updateEmail(email, password: password) { error in
-            if (error == nil) {
-                self.currentUserService.updateEmail(email)
-            }
-            
-            completion(error: error)
-        }
-    }
-    
     func updatePushNew(pushNew: Bool, completion:(error: NSError?) -> Void) {
         userNetworkService.updatePushNew(pushNew) { error in
             if (error == nil) {

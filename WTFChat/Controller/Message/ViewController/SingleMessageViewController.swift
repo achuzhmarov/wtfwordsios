@@ -19,7 +19,8 @@ class SingleMessageViewController: BaseMessageViewController {
 
             let message = sender as! Message
 
-            targetController.message = message
+            //TODO - update decipherController for singleMode
+            //targetController.message = message
             targetController.talk = talk
         }
     }

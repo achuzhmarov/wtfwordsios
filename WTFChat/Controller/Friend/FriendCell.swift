@@ -29,7 +29,7 @@ class FriendCell: UITableViewCell {
     @IBOutlet private weak var cipheredNum: RoundedLabel!
     @IBOutlet private weak var cipheredNumWidthConstraint: NSLayoutConstraint!
     
-    var message: Message?
+    var message: RemoteMessage?
 
     func updateTalk(talk: Talk) {
         initStyle()
@@ -132,7 +132,7 @@ class FriendCell: UITableViewCell {
         lastMessageTime.text = ""
     }
     
-    private func updateMessage(message: Message) {
+    private func updateMessage(message: RemoteMessage) {
         lastMessageTime.text = timeService.parseTime(message.timestamp).string
 
         if (message.author == currentUserService.getUserLogin()) {

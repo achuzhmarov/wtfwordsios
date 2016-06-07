@@ -21,13 +21,13 @@ class MessageNetworkService: NSObject {
         }
     }
     
-    func getMessagesByTalk(talk: Talk, completion: (messages: [Message]?, error: NSError?) -> Void) {
+    func getMessagesByTalk(talk: Talk, completion: (messages: [RemoteMessage]?, error: NSError?) -> Void) {
         networkService.get("messages/\(talk.id)") { (json, error) -> Void in
             if let requestError = error {
                 completion(messages: nil, error: requestError)
             } else {
                 do {
-                    let messages = try Message.parseArrayFromJson(json!)
+                    let messages = try JsonRemoteMessageParser.arrayFromJson(json!)
                     completion(messages: messages, error: nil)
                 } catch let error as NSError {
                     completion(messages: nil, error: error)
@@ -40,7 +40,7 @@ class MessageNetworkService: NSObject {
     func getUnreadMessagesByTalk(
         talk: Talk,
         lastUpdate: NSDate,
-        completion:(messages: [Message]?, error: NSError?) -> Void)
+        completion:(messages: [RemoteMessage]?, error: NSError?) -> Void)
     {
         let lastUpdateData = [
             "last_update": NSDate.parseStringJSONFromDate(lastUpdate)!
@@ -54,7 +54,7 @@ class MessageNetworkService: NSObject {
             } else {
                 if let messagesJson = json {
                     do {
-                        let messages = try Message.parseArrayFromJson(messagesJson)
+                        let messages = try JsonRemoteMessageParser.arrayFromJson(messagesJson)
                         completion(messages: messages, error: nil)
                     } catch let error as NSError {
                         completion(messages: nil, error: error)
@@ -69,7 +69,7 @@ class MessageNetworkService: NSObject {
     func getEarlierMessagesByTalk(
         talk: Talk,
         skip: Int,
-        completion:(messages: [Message]?, error: NSError?) -> Void)
+        completion:(messages: [RemoteMessage]?, error: NSError?) -> Void)
     {
         networkService.get("messages/earlier/\(talk.id)/\(String(skip))") { (json, error) -> Void in
             if let requestError = error {
@@ -77,7 +77,7 @@ class MessageNetworkService: NSObject {
             } else {
                 if let messagesJson = json {
                     do {
-                        let messages = try Message.parseArrayFromJson(messagesJson)
+                        let messages = try JsonRemoteMessageParser.arrayFromJson(messagesJson)
                         completion(messages: messages, error: nil)
                     } catch let error as NSError {
                         completion(messages: nil, error: error)
@@ -89,8 +89,8 @@ class MessageNetworkService: NSObject {
         }
     }
     
-    func saveMessage(message: Message, completion:(message: Message?, error: NSError?) -> Void) {
-        let postJSON = message.getNewJson()
+    func saveMessage(message: RemoteMessage, completion:(message: RemoteMessage?, error: NSError?) -> Void) {
+        let postJSON = JsonRemoteMessageParser.newFromMessage(message)
         
         networkService.post(postJSON, relativeUrl: "messages/add") {json, error -> Void in
             if let requestError = error {
@@ -98,7 +98,7 @@ class MessageNetworkService: NSObject {
             } else {
                 if let messageJson = json {
                     do {
-                        let message = try Message.parseFromJson(messageJson)
+                        let message = try JsonRemoteMessageParser.fromJson(messageJson)
                         completion(message: message, error: nil)
                     } catch let error as NSError {
                         completion(message: nil, error: error)
@@ -110,8 +110,8 @@ class MessageNetworkService: NSObject {
         }
     }
     
-    func decipherMessage(message: Message, completion:(message: Message?, error: NSError?) -> Void) {
-        let postJSON = message.getDecipherJson()
+    func decipherMessage(message: RemoteMessage, completion:(message: RemoteMessage?, error: NSError?) -> Void) {
+        let postJSON = JsonRemoteMessageParser.decipherFromMessage(message)
         
         networkService.post(postJSON, relativeUrl: "messages/decipher") {json, error -> Void in
             if let requestError = error {
@@ -119,7 +119,7 @@ class MessageNetworkService: NSObject {
             } else {
                 if let messageJson = json {
                     do {
-                        let message = try Message.parseFromJson(messageJson)
+                        let message = try JsonRemoteMessageParser.fromJson(messageJson)
                         completion(message: message, error: nil)
                     } catch let error as NSError {
                         completion(message: nil, error: error)

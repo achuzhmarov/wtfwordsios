@@ -14,8 +14,7 @@ class SingleModeViewController: UITableViewController {
     private let cipherDifficulties = CipherDifficulty.getAll()
 
     private let cipherService: CipherService = serviceLocator.get(CipherService)
-
-    //private var activeSection = 1
+    private var cipherTalks: [SingleTalk]!
 
     private var openedSections: [Int: Bool] = [
         1: true,
@@ -82,8 +81,8 @@ class SingleModeViewController: UITableViewController {
             let cipherType = cipherTypes[indexPath.row - 1]
             let cipherDifficulty = cipherDifficulties[indexPath.section - 1]
 
-            let cipherData = cipherService.getCipherData(cipherType, difficulty: cipherDifficulty)
-            cell.updateCipher(cipherData!)
+            /*let cipherSettings = cipherService.getCipherSettings(cipherType, difficulty: cipherDifficulty)
+            cell.updateCipher()*/
 
             return cell
         }
@@ -101,9 +100,9 @@ class SingleModeViewController: UITableViewController {
         if segue.identifier == "showMessages" {
             let targetController = segue.destinationViewController as! SingleMessageViewController
 
-            if let index: NSIndexPath = tableView.indexPathForSelectedRow? {
-                let cipherType = cipherTypes[indexPath.row - 1]
-                let cipherDifficulty = cipherDifficulties[indexPath.section - 1]
+            if let index: NSIndexPath = tableView.indexPathForSelectedRow {
+                let cipherType = cipherTypes[index.row - 1]
+                let cipherDifficulty = cipherDifficulties[index.section - 1]
 
                 //TODO - get correct talk
                 //targetController.talk = talks[rowIndex]

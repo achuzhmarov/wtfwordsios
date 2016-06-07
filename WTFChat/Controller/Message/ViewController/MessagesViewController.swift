@@ -238,7 +238,7 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
         if segue.identifier == "showDecipher" {
             let targetController = segue.destinationViewController as! DecipherViewController
 
-            let message = sender as! Message
+            let message = sender as! RemoteMessage
 
             targetController.message = message
             targetController.talk = talk

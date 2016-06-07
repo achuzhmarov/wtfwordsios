@@ -147,9 +147,9 @@ class TutorialMessagesViewController: MessagesViewController {
         tutorialTalk.users.append("")
         
         //load tutorial message
-        var message = messageCipherService.createMessage(TUTORIAL_MESSAGE_MAIN, cipherType: .RightCutter, cipherDifficulty: .Normal)
-        message = messageCipherService.addNewMessageToTalk(message, talk: tutorialTalk)
-        message.author = tutorialUser.login
+        let message = messageCipherService.createMessage(TUTORIAL_MESSAGE_MAIN, cipherType: .RightCutter, cipherDifficulty: .Normal)
+        let remoteMessage = messageCipherService.addNewMessageToTalk(message, talk: tutorialTalk)
+        remoteMessage.author = tutorialUser.login
         
         talkService.addNewTalk(tutorialTalk)
         
@@ -167,24 +167,24 @@ class TutorialMessagesViewController: MessagesViewController {
         self.talk = talkService.getSingleModeTalk()
         
         var message = messageCipherService.createMessage(TUTORIAL_TIP1, cipherType: .LeftCutter, cipherDifficulty: .Normal)
-        message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
-        coreMessageService.createMessage(message)
+        var remoteMessage = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
+        coreMessageService.createMessage(remoteMessage)
         
         message = messageCipherService.createMessage(TUTORIAL_TIP2, cipherType: .Shuffle, cipherDifficulty: .Normal)
-        message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
-        coreMessageService.createMessage(message)
+        remoteMessage = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
+        coreMessageService.createMessage(remoteMessage)
         
         message = messageCipherService.createMessage(TUTORIAL_TIP3, cipherType: .RandomCutter, cipherDifficulty: .Normal)
-        message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
-        coreMessageService.createMessage(message)
+        remoteMessage = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
+        coreMessageService.createMessage(remoteMessage)
         
         message = messageCipherService.createMessage(TUTORIAL_TIP4, cipherType: .DoubleCutter, cipherDifficulty: .Normal)
-        message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
-        coreMessageService.createMessage(message)
+        remoteMessage = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
+        coreMessageService.createMessage(remoteMessage)
         
         message = messageCipherService.createMessage(TUTORIAL_TIP5, cipherType: .RightCutter, cipherDifficulty: .Hard)
-        message = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
-        coreMessageService.createMessage(message)
+        remoteMessage = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
+        coreMessageService.createMessage(remoteMessage)
         
         talkService.updateTalkInArray(self.talk, withMessages: true)
         

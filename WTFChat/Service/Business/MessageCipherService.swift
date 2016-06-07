@@ -129,12 +129,12 @@ class MessageCipherService {
         message.deciphered = true
     }
     
-    func createMessage(talk: Talk, text: String, cipherType: CipherType, cipherDifficulty: CipherDifficulty) -> Message {
+    func createMessage(talk: Talk, text: String, cipherType: CipherType, cipherDifficulty: CipherDifficulty) -> RemoteMessage {
         let generatedMessage = createMessage(text, cipherType: cipherType, cipherDifficulty: cipherDifficulty)
         return addNewMessageToTalk(generatedMessage, talk: talk)
     }
     
-    func addNewMessageToTalk(generatedMessage: Message, talk: Talk) -> Message {
+    func addNewMessageToTalk(generatedMessage: Message, talk: Talk) -> RemoteMessage {
         var author: String
         
         if (talk.isSingleMode) {
@@ -143,16 +143,13 @@ class MessageCipherService {
             author = currentUserService.getUserLogin()
         }
         
-        let newMessage = Message(id: "",
+        let newMessage = RemoteMessage(
+            baseMessage: generatedMessage,
             talkId: talk.id,
-            author: author,
-            words: generatedMessage.words,
-            cipherType: generatedMessage.cipherType,
-            cipherDifficulty: generatedMessage.cipherDifficulty
+            author: author
         )
         
         newMessage.isLocal = true
-        newMessage.extId = NSUUID().UUIDString
         checkDeciphered(newMessage)
         
         talk.appendMessage(newMessage)
@@ -189,12 +186,11 @@ class MessageCipherService {
             }
         }
         
-        let newMessage = Message(id: "",
-            talkId: "",
-            author: "",
-            words: words,
+        let newMessage = Message(
+            extId: NSUUID().UUIDString,
             cipherType: cipherType,
-            cipherDifficulty: cipherDifficulty
+            cipherDifficulty: cipherDifficulty,
+            words: words
         )
 
         cipherService.cipherMessage(newMessage)
@@ -217,11 +213,6 @@ class MessageCipherService {
                     newWordText += String(uniChar)
                 } else {
                     isLastLetter = false
-                    
-                    /*words.append(Word(text: newWordText, additional: newWordAdditional, wordType: getWordType(newWordText)))
-                    
-                    newWordText = ""
-                    newWordAdditional = String(uniChar)*/
                     
                     newWordAdditional += String(uniChar)
                 }
