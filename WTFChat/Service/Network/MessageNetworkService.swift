@@ -15,13 +15,13 @@ class MessageNetworkService: NSObject {
         self.networkService = networkService
     }
 
-    func markTalkAsReaded(talk: Talk, completion:(error: NSError?) -> Void) {
+    func markTalkAsReaded(talk: FriendTalk, completion:(error: NSError?) -> Void) {
         networkService.post(nil, relativeUrl: "messages/read/\(talk.id)") { (json, error) -> Void in
             completion(error: error)
         }
     }
     
-    func getMessagesByTalk(talk: Talk, completion: (messages: [RemoteMessage]?, error: NSError?) -> Void) {
+    func getMessagesByTalk(talk: FriendTalk, completion: (messages: [RemoteMessage]?, error: NSError?) -> Void) {
         networkService.get("messages/\(talk.id)") { (json, error) -> Void in
             if let requestError = error {
                 completion(messages: nil, error: requestError)
@@ -38,7 +38,7 @@ class MessageNetworkService: NSObject {
     }
     
     func getUnreadMessagesByTalk(
-        talk: Talk,
+        talk: FriendTalk,
         lastUpdate: NSDate,
         completion:(messages: [RemoteMessage]?, error: NSError?) -> Void)
     {
@@ -67,7 +67,7 @@ class MessageNetworkService: NSObject {
     }
     
     func getEarlierMessagesByTalk(
-        talk: Talk,
+        talk: FriendTalk,
         skip: Int,
         completion:(messages: [RemoteMessage]?, error: NSError?) -> Void)
     {

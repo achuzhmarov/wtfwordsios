@@ -20,7 +20,7 @@ class RemoteMessage: Message {
 
     init(id: String, talkId: String, author: String, words: [Word], deciphered: Bool, cipherType: CipherType,
          cipherDifficulty: CipherDifficulty, timestamp: NSDate, lastUpdate: NSDate, exp: Int, extId: String,
-         timerSecs: Int, hintsUsed: Int, isLocal: Bool) {
+         timerSecs: Int, hintsUsed: Int, isLocal: Bool = false) {
 
         self.id = id;
         self.talkId = talkId

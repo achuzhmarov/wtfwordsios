@@ -31,7 +31,7 @@ class FriendCell: UITableViewCell {
     
     var message: RemoteMessage?
 
-    func updateTalk(talk: Talk) {
+    func updateTalk(talk: FriendTalk) {
         initStyle()
         
         if (talk.isSingleMode) {
@@ -97,7 +97,7 @@ class FriendCell: UITableViewCell {
         lastMessageAuthorImageMargin.constant = 4
     }
     
-    private func updateCiphered(talk: Talk) {
+    private func updateCiphered(talk: FriendTalk) {
         cipheredNumWidthConstraint.constant = 13
         cipheredNum.hidden = false
         cipheredNum.text = " "

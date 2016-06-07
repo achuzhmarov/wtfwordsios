@@ -83,7 +83,7 @@ class CurrentUserService: NSObject {
         return nil
     }
 
-    func getFriendInfoByTalk(talk: Talk) -> FriendInfo? {
+    func getFriendInfoByTalk(talk: FriendTalk) -> FriendInfo? {
         return getFriendInfoByLogin(getFriendLogin(talk))
     }
     
@@ -157,7 +157,7 @@ class CurrentUserService: NSObject {
         }
     }
 
-    func getFriendLogin(talk: Talk) -> String {
+    func getFriendLogin(talk: FriendTalk) -> String {
         for user in talk.users {
             if (user != getUserLogin()) {
                 return user

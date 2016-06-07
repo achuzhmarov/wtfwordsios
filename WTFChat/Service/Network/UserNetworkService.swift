@@ -101,7 +101,7 @@ class UserNetworkService: NSObject {
         }
     }
     
-    func makeFriends(friendLogin: String, completion:(talk: Talk?, error: NSError?) -> Void) {
+    func makeFriends(friendLogin: String, completion:(talk: FriendTalk?, error: NSError?) -> Void) {
         networkService.post(nil, relativeUrl:"user/friend/\(friendLogin.escapeForUrl()!)") { (json, error) -> Void in
             if let requestError = error {
                 completion(talk: nil, error: requestError)

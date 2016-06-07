@@ -186,8 +186,7 @@ class JsonRemoteMessageParser {
             exp: exp,
             extId: extId,
             timerSecs: timerSecs,
-            hintsUsed: hintsUsed,
-            isLocal: false
+            hintsUsed: hintsUsed
         )
     }
 }

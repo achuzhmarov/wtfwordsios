@@ -31,7 +31,7 @@ class DecipherViewController: UIViewController, SuggestionComputer, UITextFieldD
     
     @IBOutlet weak var topViewHeightContraint: NSLayoutConstraint!
     
-    var talk: Talk!
+    var talk: FriendTalk!
     var message: RemoteMessage!
     var isStarted = false
     var isOvered = false

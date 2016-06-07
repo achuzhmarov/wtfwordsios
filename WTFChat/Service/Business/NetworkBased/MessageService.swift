@@ -9,9 +9,9 @@
 import Foundation
 
 protocol MessageListener: class {
-    func updateMessages(talk: Talk?, wasNew: Bool, error: NSError?)
-    func messageSended(talk: Talk?, error: NSError?)
-    func loadEarlierCompleteHandler(talk: Talk?, newMessagesCount: Int, error: NSError?)
+    func updateMessages(talk: FriendTalk?, wasNew: Bool, error: NSError?)
+    func messageSended(talk: FriendTalk?, error: NSError?)
+    func loadEarlierCompleteHandler(talk: FriendTalk?, newMessagesCount: Int, error: NSError?)
 }
 
 struct WeakListener {
@@ -55,11 +55,11 @@ class MessageService: NSObject {
         self.talksToUpdate = Set<String>()
     }
     
-    func removeListener(talk: Talk) {
+    func removeListener(talk: FriendTalk) {
         listeners[talk.id] = nil
     }
     
-    func initMessageListener(talk: Talk, listener: MessageListener) {
+    func initMessageListener(talk: FriendTalk, listener: MessageListener) {
         listeners[talk.id] = WeakListener(listener: listener)
         talksToUpdate.insert(talk.id)
         
@@ -126,7 +126,7 @@ class MessageService: NSObject {
         }
     }
     
-    private func getInitialMessagesForTalk(talk: Talk, listener: MessageListener?) {
+    private func getInitialMessagesForTalk(talk: FriendTalk, listener: MessageListener?) {
         messageNetworkService.getMessagesByTalk(talk) { (messages, error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if let requestError = error {
@@ -210,7 +210,7 @@ class MessageService: NSObject {
         talkService.updateTalkInArray(talk, withMessages: true)
     }
     
-    func markTalkAsReaded(talk: Talk) {
+    func markTalkAsReaded(talk: FriendTalk) {
         messageNetworkService.markTalkAsReaded(talk) { (error) -> Void in
             if let requestError = error {
                 print(requestError)
@@ -220,7 +220,7 @@ class MessageService: NSObject {
         }
     }
     
-    private func getMessagesLastUpdate(talk: Talk) -> NSDate {
+    private func getMessagesLastUpdate(talk: FriendTalk) -> NSDate {
         var lastUpdate: NSDate?
         
         for message in talk.messages {
@@ -241,7 +241,7 @@ class MessageService: NSObject {
         }
     }
     
-    private func updateOrCreateMessageInArray(talk: Talk, message: RemoteMessage) -> Bool {
+    private func updateOrCreateMessageInArray(talk: FriendTalk, message: RemoteMessage) -> Bool {
         for i in 0..<talk.messages.count {
             let sameId = (message.id != "" && (message.id == talk.messages[i].id))
             let wasSendedLocal = (message.extId != "" && (message.extId == talk.messages[i].extId))

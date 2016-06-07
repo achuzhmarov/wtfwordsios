@@ -15,24 +15,7 @@ class CoreSingleMessage: NSManagedObject {
         self.hintsUsed = message.hintsUsed
     }
 
-    func getMessage() -> SingleMessage? {
-        if  (
-                self.timestamp == nil ||
-                self.lastUpdate == nil ||
-                self.deciphered == nil ||
-                self.cipherType == nil ||
-                self.cipherDifficulty == nil ||
-                self.exp == nil ||
-                self.extId == nil ||
-                self.timerSecs == nil ||
-                self.hintsUsed == nil ||
-                self.words == nil
-            )
-        {
-
-            return nil
-        }
-
+    func getSingleMessage() -> SingleMessage? {
         var domainWords = [Word]()
 
         for item in self.words! {
@@ -58,6 +41,8 @@ class CoreSingleMessage: NSManagedObject {
             timerSecs: Int(self.timerSecs!),
             hintsUsed: Int(self.hintsUsed!)
         )
+
+        message.setCoreSingleMessage(self)
 
         return message
     }

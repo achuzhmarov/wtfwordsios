@@ -4,7 +4,7 @@ enum DecipherStatus: Int {
     case No = 1, Success, Failed
 }
 
-class Talk: NSObject {
+class FriendTalk: NSObject {
     let id: String
     var users = [String]()
     var hasUnread: Bool = false

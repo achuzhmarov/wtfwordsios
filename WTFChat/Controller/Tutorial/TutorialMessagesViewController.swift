@@ -140,7 +140,7 @@ class TutorialMessagesViewController: MessagesViewController {
     
     private func setTutorialTalk() {
         //add singleModeTalk
-        let tutorialTalk = Talk(id: "00")
+        let tutorialTalk = FriendTalk(id: "00")
         //tutorialTalk.isSingleMode = true
         let tutorialUser = User(login: "Tutorial", suggestions: 0)
         tutorialTalk.users.append(tutorialUser.login)

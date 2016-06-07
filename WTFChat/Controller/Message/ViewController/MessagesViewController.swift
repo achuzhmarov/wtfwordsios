@@ -146,7 +146,7 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
     }
     
     //delegate for MessageListener
-    func updateMessages(talk: Talk?, wasNew: Bool, error: NSError?) {
+    func updateMessages(talk: FriendTalk?, wasNew: Bool, error: NSError?) {
         dispatch_async(dispatch_get_main_queue(), {
             if let requestError = error {
                 if (!self.wasSuccessfullUpdate) {
@@ -168,7 +168,7 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
     }
     
     //delegate for MessageListener
-    func loadEarlierCompleteHandler(talk: Talk?, newMessagesCount: Int, error: NSError?) {
+    func loadEarlierCompleteHandler(talk: FriendTalk?, newMessagesCount: Int, error: NSError?) {
         dispatch_async(dispatch_get_main_queue(), {
             if let requestError = error {
                 WTFOneButtonAlert.show("Error", message: "Can't load earlier messages. \(WTFOneButtonAlert.CON_ERR)", firstButtonTitle: "Ok", viewPresenter: self)
@@ -184,7 +184,7 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
     }
     
     //delegate for MessageListener
-    func messageSended(talk: Talk?, error: NSError?) {
+    func messageSended(talk: FriendTalk?, error: NSError?) {
         dispatch_async(dispatch_get_main_queue(), {
             if let requestError = error {
                 //TODO - show error to user

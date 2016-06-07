@@ -20,24 +20,6 @@ class CoreMessage: NSManagedObject {
     }
     
     func getMessage() -> RemoteMessage? {
-        if (self.id == nil ||
-            self.timestamp == nil ||
-            self.lastUpdate == nil ||
-            self.talkId == nil ||
-            self.author == nil ||
-            self.deciphered == nil ||
-            self.cipherType == nil ||
-            self.cipherDifficulty == nil ||
-            self.exp == nil ||
-            self.isLocal == nil ||
-            self.extId == nil ||
-            self.timerSecs == nil ||
-            self.hintsUsed == nil ||
-            self.words == nil) {
-                
-                return nil
-        }
-
         var domainWords = [Word]()
 
         for item in self.words! {

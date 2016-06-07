@@ -3,7 +3,7 @@ import Foundation
 class BaseMessageViewController: UIViewController, MessageTappedComputer, UITextViewDelegate {
     @IBOutlet weak var messageTableView: MessageTableView!
 
-    var talk: Talk!
+    var talk: FriendTalk!
     var firstTimeLoaded = true
 
     override func viewDidLoad() {

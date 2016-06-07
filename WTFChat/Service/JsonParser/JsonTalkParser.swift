@@ -1,8 +1,8 @@
 import Foundation
 
 class JsonTalkParser {
-    class func arrayFromJson(json: JSON) throws -> [Talk] {
-        var talks = [Talk]()
+    class func arrayFromJson(json: JSON) throws -> [FriendTalk] {
+        var talks = [FriendTalk]()
 
         if let value = json.array {
             for talkJson in value {
@@ -15,7 +15,7 @@ class JsonTalkParser {
         return talks
     }
 
-    class func fromJson(json: JSON) throws -> Talk {
+    class func fromJson(json: JSON) throws -> FriendTalk {
         var id: String
         var hasUnread: Bool
         var cipheredNum: Int
@@ -88,7 +88,7 @@ class JsonTalkParser {
             //throw json["last_update"].error!
         }
 
-        return Talk(
+        return FriendTalk(
             id: id,
             hasUnread: hasUnread,
             cipheredNum: cipheredNum,

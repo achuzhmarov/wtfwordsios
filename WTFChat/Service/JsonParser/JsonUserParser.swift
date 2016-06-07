@@ -18,7 +18,7 @@ class JsonUserParser {
     class func fromJson(json: JSON) throws -> User {
         var login: String
         var suggestions: Int = 0
-        var talks = [Talk]()
+        var talks = [FriendTalk]()
         var lastUpdate: NSDate = NSDate.defaultPast()
         var exp: Int = 0
         var lvl: Int = 0

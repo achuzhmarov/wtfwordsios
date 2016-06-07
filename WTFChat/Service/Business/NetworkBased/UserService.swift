@@ -89,7 +89,7 @@ class UserService: NSObject {
         userNetworkService.getFriendsRating(completion)
     }
     
-    func makeFriends(friend: FriendInfo, completion:(talk: Talk?, error: NSError?) -> Void) {
+    func makeFriends(friend: FriendInfo, completion:(talk: FriendTalk?, error: NSError?) -> Void) {
         currentUserService.addFriend(friend)
         userNetworkService.makeFriends(friend.login, completion: completion)
     }

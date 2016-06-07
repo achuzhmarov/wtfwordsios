@@ -9,7 +9,7 @@
 import Foundation
 
 protocol TalkListener: class {
-    func updateTalks(talks: [Talk]?, error: NSError?)
+    func updateTalks(talks: [FriendTalk]?, error: NSError?)
 }
 
 class TalkService: NSObject {
@@ -25,7 +25,7 @@ class TalkService: NSObject {
 
     var updateTimer: NSTimer?
     
-    var talks = [Talk]()
+    var talks = [FriendTalk]()
     
     weak var friendsTalkListener: TalkListener?
 
@@ -45,7 +45,7 @@ class TalkService: NSObject {
         self.coreMessageService = coreMessageService
     }
 
-    func getTalkByLogin(friend: String) -> Talk? {
+    func getTalkByLogin(friend: String) -> FriendTalk? {
         for talk in talks {
             if (currentUserService.getFriendLogin(talk) == friend) {
                 return talk
@@ -56,7 +56,7 @@ class TalkService: NSObject {
     }
     
     func clearTalks() {
-        talks = [Talk]()
+        talks = [FriendTalk]()
         iosService.updatePushBadge(talks)
         updateTimer?.invalidate()
         messageService.clear()
@@ -84,9 +84,9 @@ class TalkService: NSObject {
         fireUpdateTalksEvent()
     }
     
-    private func createSingleModeTalk() -> Talk {
+    private func createSingleModeTalk() -> FriendTalk {
         //add singleModeTalk
-        let singleModeTalk = Talk(id: "0")
+        let singleModeTalk = FriendTalk(id: "0")
         singleModeTalk.isSingleMode = true
         let singleModeUser = User(login: "Pass and Play", suggestions: 0)
         singleModeTalk.users.append(singleModeUser.login)
@@ -128,12 +128,12 @@ class TalkService: NSObject {
         }
     }
     
-    func addNewTalk(talk: Talk) {
+    func addNewTalk(talk: FriendTalk) {
         talks.append(talk)
         fireUpdateTalksEvent()
     }
     
-    func updateTalkInArray(talk: Talk, withMessages: Bool = false) {
+    func updateTalkInArray(talk: FriendTalk, withMessages: Bool = false) {
         updateOrCreateTalkInArray(talk, withMessages: withMessages)
         fireUpdateTalksEvent()
     }
@@ -148,7 +148,7 @@ class TalkService: NSObject {
         }
     }
     
-    func getByTalkId(talkId: String) -> Talk? {
+    func getByTalkId(talkId: String) -> FriendTalk? {
         for talk in talks {
             if (talkId == talk.id) {
                 return talk
@@ -158,7 +158,7 @@ class TalkService: NSObject {
         return nil
     }
     
-    func getSingleModeTalk() -> Talk? {
+    func getSingleModeTalk() -> FriendTalk? {
         for talk in talks {
             if (talk.id == "0") {
                 return talk
@@ -174,7 +174,7 @@ class TalkService: NSObject {
         self.friendsTalkListener?.updateTalks(talks, error: nil)
     }
     
-    private func updateOrCreateTalkInArray(talk: Talk, withMessages: Bool = false) {
+    private func updateOrCreateTalkInArray(talk: FriendTalk, withMessages: Bool = false) {
         for i in 0..<talks.count {
             if (talk.id == talks[i].id) {
                 

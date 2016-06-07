@@ -129,12 +129,12 @@ class MessageCipherService {
         message.deciphered = true
     }
     
-    func createMessage(talk: Talk, text: String, cipherType: CipherType, cipherDifficulty: CipherDifficulty) -> RemoteMessage {
+    func createMessage(talk: FriendTalk, text: String, cipherType: CipherType, cipherDifficulty: CipherDifficulty) -> RemoteMessage {
         let generatedMessage = createMessage(text, cipherType: cipherType, cipherDifficulty: cipherDifficulty)
         return addNewMessageToTalk(generatedMessage, talk: talk)
     }
     
-    func addNewMessageToTalk(generatedMessage: Message, talk: Talk) -> RemoteMessage {
+    func addNewMessageToTalk(generatedMessage: Message, talk: FriendTalk) -> RemoteMessage {
         var author: String
         
         if (talk.isSingleMode) {

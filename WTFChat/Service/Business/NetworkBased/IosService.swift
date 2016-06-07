@@ -17,7 +17,7 @@ class IosService {
         self.iosNetworkService = iosNetworkService
     }
 
-    func updatePushBadge(talks: [Talk]?) {
+    func updatePushBadge(talks: [FriendTalk]?) {
         //can only change badge from main_queue
         dispatch_async(dispatch_get_main_queue(), {
             if (talks == nil) {

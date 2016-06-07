@@ -12,7 +12,7 @@ class TalkNetworkService {
         self.networkService = networkService
     }
 
-    func getNewUnreadTalks(lastUpdate: NSDate, completion: (talks: [Talk]?, error: NSError?) -> Void) {
+    func getNewUnreadTalks(lastUpdate: NSDate, completion: (talks: [FriendTalk]?, error: NSError?) -> Void) {
         let lastUpdateData = [
                 "last_update": NSDate.parseStringJSONFromDate(lastUpdate)!
         ]

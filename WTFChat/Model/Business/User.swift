@@ -3,7 +3,7 @@ import Foundation
 class User: NSObject {
     var login: String
     var suggestions: Int
-    var talks = [Talk]()
+    var talks = [FriendTalk]()
 
     var lastUpdate: NSDate = NSDate.defaultPast()
     var exp: Int = 0
@@ -26,7 +26,7 @@ class User: NSObject {
         self.suggestions = suggestions
     }
 
-    init(login: String, suggestions: Int, talks: [Talk], lastUpdate: NSDate,
+    init(login: String, suggestions: Int, talks: [FriendTalk], lastUpdate: NSDate,
          exp: Int, lvl: Int, newSuggestions: Int, friends: [FriendInfo],
          name: String, pushNew: Bool, pushDeciphered: Bool, rating: Int,
          buyNonConsum: [String], freeHintsGained: Int)

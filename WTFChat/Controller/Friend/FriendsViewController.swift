@@ -23,7 +23,7 @@ class FriendsViewController: UITableViewController, TalkListener {
     private let talkService: TalkService = serviceLocator.get(TalkService)
     private let windowService: WindowService = serviceLocator.get(WindowService)
 
-    var talks = [Talk]()
+    var talks = [FriendTalk]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +58,7 @@ class FriendsViewController: UITableViewController, TalkListener {
     }
     
     //delegate for TalkListener
-    func updateTalks(talks: [Talk]?, error: NSError?) {
+    func updateTalks(talks: [FriendTalk]?, error: NSError?) {
         dispatch_async(dispatch_get_main_queue(), {
             if let requestError = error {
                 //TODO - show error to user
