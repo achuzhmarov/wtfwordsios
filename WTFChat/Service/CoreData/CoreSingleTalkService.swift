@@ -22,19 +22,19 @@ class CoreSingleTalkService {
     }
 
     func getAll(predicate: NSPredicate) -> [SingleTalk] {
-        let fetchRequest = coreDataService.createFetch(CORE_MESSAGE_CLASS_NAME)
+        let fetchRequest = coreDataService.createFetch(CORE_SINGLE_TALK_CLASS_NAME)
         let results = coreDataService.executeFetch(fetchRequest)
 
         var domainTalks = [SingleTalk]()
 
         for item in results {
             if let coreSingleTalk = item as? CoreSingleTalk {
-                if let domainTalks = coreSingleTalk.getSingleTalk() {
-                    domainMessages.append(domainMessage)
+                if let domainTalk = coreSingleTalk.getSingleTalk() {
+                    domainTalks.append(domainTalk)
                 }
             }
         }
 
-        return domainMessages
+        return domainTalks
     }
 }

@@ -7,6 +7,10 @@ class CoreSingleMessageService {
 
     private let coreDataService: CoreDataService
 
+    init(coreDataService: CoreDataService) {
+        self.coreDataService = coreDataService
+    }
+
     func updateMessage(message: SingleMessage) {
         updateFromMessage(message.getCoreSingleMessage(), message: message)
         coreDataService.saveContext()

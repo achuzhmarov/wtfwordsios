@@ -22,13 +22,15 @@ class CoreSingleTalk: NSManagedObject {
             }
         }
 
-        let result = SingleTalk(
+        let talk = SingleTalk(
             cipherType: enumCipherType!,
             cipherDifficulty: enumCipherDifficulty!,
             wins: Int(self.wins!),
             messages: domainMessages
         )
 
-        result.setCoreSingleTalk(self)
+        talk.setCoreSingleTalk(self)
+
+        return talk
     }
 }

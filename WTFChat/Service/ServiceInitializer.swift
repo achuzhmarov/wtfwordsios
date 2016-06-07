@@ -14,6 +14,7 @@ class ServiceInitializer {
     static func initServices() {
         let currentUserService = CurrentUserService()
 
+        //network
         let networkService = NetworkService(baseUrl: BASE_URL)
         let authNetworkService = AuthNetworkService(networkService: networkService)
         let messageNetworkService = MessageNetworkService(networkService: networkService)
@@ -24,8 +25,11 @@ class ServiceInitializer {
 
         let iosService = IosService(iosNetworkService: iosNetworkService)
 
+        //core
         let coreDataService = CoreDataService()
         let coreMessageService = CoreMessageService(coreDataService: coreDataService)
+        let coreSingleTalkService = CoreSingleTalkService(coreDataService: coreDataService)
+        let coreSingleMessageService = CoreSingleMessageService(coreDataService: coreDataService)
 
         //TODO - AWFUL DEPENDENCY
         let talkService = TalkService(talkNetworkService: talkNetworkService, iosService: iosService, currentUserService: currentUserService, coreMessageService: coreMessageService)
@@ -51,7 +55,9 @@ class ServiceInitializer {
         //core data
         serviceLocator.add(
             coreDataService,
-            coreMessageService
+            coreMessageService,
+            coreSingleTalkService,
+            coreSingleMessageService
         )
 
         let cipherService = CipherService()

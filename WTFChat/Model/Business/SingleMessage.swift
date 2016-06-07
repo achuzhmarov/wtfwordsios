@@ -7,7 +7,7 @@ class SingleMessage: Message {
         self.coreSingleMessage = coreSingleMessage
     }
 
-    func getCoreSingleMessage() {
+    func getCoreSingleMessage() -> CoreSingleMessage {
         return coreSingleMessage
     }
 }
