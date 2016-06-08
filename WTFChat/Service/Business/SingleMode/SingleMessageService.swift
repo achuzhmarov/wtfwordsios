@@ -39,7 +39,7 @@ class SingleMessageService: Service {
 
         //TODO - update talk (wins)
 
-        //TODO - update userv (single exp + lvl)
+        //TODO - update user (single exp + lvl)
 
         coreSingleMessageService.updateMessage(singleMessage)
     }
