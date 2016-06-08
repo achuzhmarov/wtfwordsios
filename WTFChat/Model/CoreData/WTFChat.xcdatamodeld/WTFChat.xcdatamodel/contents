@@ -14,7 +14,7 @@
         <attribute name="talkId" attributeType="String" syncable="YES"/>
         <attribute name="timerSecs" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="words" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CoreWord" inverseName="message" inverseEntity="CoreWord" syncable="YES"/>
+        <relationship name="words" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CoreWord" syncable="YES"/>
     </entity>
     <entity name="CoreSingleMessage" representedClassName="CoreSingleMessage" syncable="YES">
         <attribute name="cipherDifficulty" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -26,14 +26,13 @@
         <attribute name="lastUpdate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="timerSecs" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="talk" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreSingleTalk" inverseName="messages" inverseEntity="CoreSingleTalk" syncable="YES"/>
-        <relationship name="words" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CoreWord" inverseName="singleMessage" inverseEntity="CoreWord" syncable="YES"/>
+        <relationship name="words" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CoreWord" syncable="YES"/>
     </entity>
     <entity name="CoreSingleTalk" representedClassName="CoreSingleTalk" syncable="YES">
         <attribute name="cipherDifficulty" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="cipherType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="wins" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreSingleMessage" inverseName="talk" inverseEntity="CoreSingleMessage" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreSingleMessage" syncable="YES"/>
     </entity>
     <entity name="CoreWord" representedClassName=".CoreWord" syncable="YES">
         <attribute name="additional" attributeType="String" syncable="YES"/>
@@ -41,13 +40,11 @@
         <attribute name="text" attributeType="String" syncable="YES"/>
         <attribute name="wasCloseTry" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="wordType" attributeType="Integer 16" defaultValueString="1" syncable="YES"/>
-        <relationship name="message" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreMessage" inverseName="words" inverseEntity="CoreMessage" syncable="YES"/>
-        <relationship name="singleMessage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreSingleMessage" inverseName="words" inverseEntity="CoreSingleMessage" syncable="YES"/>
     </entity>
     <elements>
         <element name="CoreMessage" positionX="-281" positionY="-9" width="128" height="253"/>
-        <element name="CoreSingleMessage" positionX="-65" positionY="326" width="128" height="208"/>
-        <element name="CoreSingleTalk" positionX="-279" positionY="342" width="128" height="103"/>
-        <element name="CoreWord" positionX="-72" positionY="-9" width="128" height="148"/>
+        <element name="CoreSingleMessage" positionX="-47" positionY="279" width="128" height="193"/>
+        <element name="CoreSingleTalk" positionX="-281" positionY="342" width="128" height="103"/>
+        <element name="CoreWord" positionX="-72" positionY="-9" width="128" height="118"/>
     </elements>
 </model>
