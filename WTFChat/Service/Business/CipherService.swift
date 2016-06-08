@@ -1,6 +1,6 @@
 import Foundation
 
-class CipherService {
+class CipherService: Service {
     private let ciphers: [CipherSettings] = [
             CipherSettings(type: .RightCutter, difficulty: .Easy, maxStars: 5, cipher: RightCutterEasyCipher()),
             CipherSettings(type: .RightCutter, difficulty: .Normal, maxStars: 10, cipher: RightCutterNormalCipher()),
@@ -31,7 +31,7 @@ class CipherService {
         }
     }
 
-    private func getCipherSettings(type: CipherType, difficulty: CipherDifficulty) -> CipherSettings? {
+    func getCipherSettings(type: CipherType, difficulty: CipherDifficulty) -> CipherSettings? {
         for cipherData in ciphers {
             if (cipherData.type == type && cipherData.difficulty == difficulty) {
                 return cipherData

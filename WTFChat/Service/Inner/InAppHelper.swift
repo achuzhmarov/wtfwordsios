@@ -124,10 +124,6 @@ extension InAppHelper: SKPaymentTransactionObserver {
     /// For each transaction act accordingly, save in the purchased cache, issue notifications,
     /// mark the transaction as complete.
     public func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        if !currentUserService.isLoggedIn() {
-            return
-        }
-
         for transaction in transactions {
             switch (transaction.transactionState) {
                 case .Purchased:

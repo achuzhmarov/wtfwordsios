@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MessageCipherService {
+class MessageCipherService: Service {
     private let WORD_SPECIAL_SYMBOLS = ["'", "-"]
 
     private let currentUserService: CurrentUserService
@@ -98,11 +98,11 @@ class MessageCipherService {
         return result
     }
     
-    func decipher(message: Message, suggestedWord: Word, closeTry: Bool = false) {
+    func decipher(message: Message, hintedWord: Word, closeTry: Bool = false) {
         if (closeTry) {
-            suggestedWord.wordType = WordType.CloseTry
+            hintedWord.wordType = WordType.CloseTry
         } else {
-            suggestedWord.wordType = WordType.Success
+            hintedWord.wordType = WordType.Success
         }
         
         checkDeciphered(message)

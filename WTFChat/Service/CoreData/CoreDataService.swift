@@ -6,7 +6,7 @@
 import Foundation
 import CoreData
 
-class CoreDataService {
+class CoreDataService: Service {
     private static let projectName = "WTFChat"
 
     private lazy var applicationDocumentsDirectory: NSURL = {

@@ -22,7 +22,7 @@ struct WeakListener {
     }
 }
 
-class MessageService: NSObject {
+class MessageService: Service {
     private let MESSAGES_UPDATE_TIMER_INTERVAL = 10.0
 
     private let messageNetworkService: MessageNetworkService
@@ -204,8 +204,12 @@ class MessageService: NSObject {
         }
     }
     
-    func updateMessageInTalk(message: RemoteMessage) {
+    func decipherMessageInTalk(message: RemoteMessage) {
         let talk = talkService.getByTalkId(message.talkId)!
+        if (!talk.isSingleMode) {
+            talk.cipheredNum -= 1
+        }
+
         updateOrCreateMessageInArray(talk, message: message)
         talkService.updateTalkInArray(talk, withMessages: true)
     }
@@ -225,7 +229,7 @@ class MessageService: NSObject {
         
         for message in talk.messages {
             //ignore local messages
-            if (message.isLocal) {
+            if ((message as! RemoteMessage).isLocal) {
                 continue
             }
             
@@ -243,7 +247,7 @@ class MessageService: NSObject {
     
     private func updateOrCreateMessageInArray(talk: FriendTalk, message: RemoteMessage) -> Bool {
         for i in 0..<talk.messages.count {
-            let sameId = (message.id != "" && (message.id == talk.messages[i].id))
+            let sameId = (message.id != "" && (message.id == (talk.messages[i] as! RemoteMessage).id))
             let wasSendedLocal = (message.extId != "" && (message.extId == talk.messages[i].extId))
             
             if  (sameId || wasSendedLocal) {

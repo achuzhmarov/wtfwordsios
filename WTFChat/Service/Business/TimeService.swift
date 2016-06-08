@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TimeService {
+class TimeService: Service {
     private var timesCache = [NSDate: NSAttributedString]()
     
     func parseTime(time: NSDate) -> NSAttributedString {

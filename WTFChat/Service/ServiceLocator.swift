@@ -8,8 +8,9 @@ import Foundation
 class ServiceLocator {
     lazy var s = [String: Any]()
 
-    func add(services: Any...) {
+    func add(services: Service...) {
         for service in services {
+            service.initService()
             s[typeName(service)] = service
         }
     }

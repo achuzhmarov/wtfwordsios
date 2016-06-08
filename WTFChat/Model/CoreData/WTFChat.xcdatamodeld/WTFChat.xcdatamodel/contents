@@ -16,7 +16,7 @@
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="words" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CoreWord" syncable="YES"/>
     </entity>
-    <entity name="CoreSingleMessage" representedClassName="CoreSingleMessage" syncable="YES">
+    <entity name="CoreSingleMessage" representedClassName=".CoreSingleMessage" syncable="YES">
         <attribute name="cipherDifficulty" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="cipherType" attributeType="Integer 16" defaultValueString="1" syncable="YES"/>
         <attribute name="deciphered" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
@@ -28,11 +28,11 @@
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="words" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CoreWord" syncable="YES"/>
     </entity>
-    <entity name="CoreSingleTalk" representedClassName="CoreSingleTalk" syncable="YES">
+    <entity name="CoreSingleTalk" representedClassName=".CoreSingleTalk" syncable="YES">
         <attribute name="cipherDifficulty" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="cipherType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="wins" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreSingleMessage" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CoreSingleMessage" syncable="YES"/>
     </entity>
     <entity name="CoreWord" representedClassName=".CoreWord" syncable="YES">
         <attribute name="additional" attributeType="String" syncable="YES"/>

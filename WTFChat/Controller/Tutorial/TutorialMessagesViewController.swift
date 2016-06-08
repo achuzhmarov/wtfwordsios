@@ -109,10 +109,10 @@ class TutorialMessagesViewController: MessagesViewController {
             if let sendMessageController = segue.sourceViewController as? SendMessageViewController {
                 self.cipherType = sendMessageController.cipherType
                 self.lastSendedMessage = sendMessageController.message
-                let newMessage = messageCipherService.addNewMessageToTalk(self.lastSendedMessage!, talk: self.talk!)
+                let newMessage = messageCipherService.addNewMessageToTalk(self.lastSendedMessage!, talk: self.friendTalk!)
                 newMessage.author = currentUserService.getUserLogin()
                 
-                talkService.updateTalkInArray(self.talk, withMessages: true)
+                talkService.updateTalkInArray(self.friendTalk, withMessages: true)
 
                 updateViewAfterSend()
             }
@@ -124,9 +124,9 @@ class TutorialMessagesViewController: MessagesViewController {
     private func beginTutorial() {
         currentTutorialStage = .Started
         
-        let noviceUser = User(login: "Novice", suggestions: 4)
+        let noviceUser = User(login: "Novice", hints: 4)
         noviceUser.buyNonConsum.append(IAPProducts.getProductRef(IAPProducts.CIPHER_ALL)!)
-        currentUserService.setNewUser(noviceUser)
+        //currentUserService.setNewUser(noviceUser)
         
         setTutorialTalk()
         
@@ -142,7 +142,7 @@ class TutorialMessagesViewController: MessagesViewController {
         //add singleModeTalk
         let tutorialTalk = FriendTalk(id: "00")
         //tutorialTalk.isSingleMode = true
-        let tutorialUser = User(login: "Tutorial", suggestions: 0)
+        let tutorialUser = User(login: "Tutorial")
         tutorialTalk.users.append(tutorialUser.login)
         tutorialTalk.users.append("")
         
@@ -161,34 +161,34 @@ class TutorialMessagesViewController: MessagesViewController {
     private func endTutorial() {
         nsUserDefaults.setInteger(currentTutorialStage.rawValue, forKey: TUTORIAL_STAGE_PROPERTY_KEY)
         
-        currentUserService.setNewUser(nil)
+        //currentUserService.setNewUser(nil)
         
         talkService.clearTalks()
         self.talk = talkService.getSingleModeTalk()
         
         var message = messageCipherService.createMessage(TUTORIAL_TIP1, cipherType: .LeftCutter, cipherDifficulty: .Normal)
-        var remoteMessage = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
+        var remoteMessage = messageCipherService.addNewMessageToTalk(message, talk: self.friendTalk)
         coreMessageService.createMessage(remoteMessage)
         
         message = messageCipherService.createMessage(TUTORIAL_TIP2, cipherType: .Shuffle, cipherDifficulty: .Normal)
-        remoteMessage = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
+        remoteMessage = messageCipherService.addNewMessageToTalk(message, talk: self.friendTalk)
         coreMessageService.createMessage(remoteMessage)
         
         message = messageCipherService.createMessage(TUTORIAL_TIP3, cipherType: .RandomCutter, cipherDifficulty: .Normal)
-        remoteMessage = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
+        remoteMessage = messageCipherService.addNewMessageToTalk(message, talk: self.friendTalk)
         coreMessageService.createMessage(remoteMessage)
         
         message = messageCipherService.createMessage(TUTORIAL_TIP4, cipherType: .DoubleCutter, cipherDifficulty: .Normal)
-        remoteMessage = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
+        remoteMessage = messageCipherService.addNewMessageToTalk(message, talk: self.friendTalk)
         coreMessageService.createMessage(remoteMessage)
         
         message = messageCipherService.createMessage(TUTORIAL_TIP5, cipherType: .RightCutter, cipherDifficulty: .Hard)
-        remoteMessage = messageCipherService.addNewMessageToTalk(message, talk: self.talk)
+        remoteMessage = messageCipherService.addNewMessageToTalk(message, talk: self.friendTalk)
         coreMessageService.createMessage(remoteMessage)
         
-        talkService.updateTalkInArray(self.talk, withMessages: true)
+        talkService.updateTalkInArray(self.friendTalk, withMessages: true)
         
-        self.title = currentUserService.getFriendLogin(talk).capitalizedString
+        self.title = currentUserService.getFriendLogin(friendTalk).capitalizedString
         
         self.updateView()
     }

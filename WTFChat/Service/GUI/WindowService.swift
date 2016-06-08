@@ -5,7 +5,7 @@
 
 import Foundation
 
-class WindowService {
+class WindowService: Service {
     private let window = UIApplication.sharedApplication().delegate!.window!
     private let talkService: TalkService
     private let currentUserService: CurrentUserService

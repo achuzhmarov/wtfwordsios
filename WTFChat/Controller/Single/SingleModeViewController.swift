@@ -6,6 +6,9 @@
 import Foundation
 
 class SingleModeViewController: UITableViewController {
+    private let cipherService: CipherService = serviceLocator.get(CipherService)
+    private let singleTalkService: SingleTalkService = serviceLocator.get(SingleTalkService)
+
     private let TUTORIAL_SECTION = 0
     private let HEADER_ROW = 0
     private let HEADER_ROW_HEIGHT = CGFloat(30)
@@ -13,7 +16,6 @@ class SingleModeViewController: UITableViewController {
     private let cipherTypes = CipherType.getAll()
     private let cipherDifficulties = CipherDifficulty.getAll()
 
-    private let cipherService: CipherService = serviceLocator.get(CipherService)
     private var cipherTalks: [SingleTalk]!
 
     private var openedSections: [Int: Bool] = [
@@ -25,6 +27,9 @@ class SingleModeViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.definesPresentationContext = true
+
+        let nav = self.navigationController?.navigationBar
+        nav?.translucent = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,8 +86,8 @@ class SingleModeViewController: UITableViewController {
             let cipherType = cipherTypes[indexPath.row - 1]
             let cipherDifficulty = cipherDifficulties[indexPath.section - 1]
 
-            /*let cipherSettings = cipherService.getCipherSettings(cipherType, difficulty: cipherDifficulty)
-            cell.updateCipher()*/
+            let singleTalk = singleTalkService.getSingleTalk(cipherType, cipherDifficulty: cipherDifficulty)
+            cell.updateSingleTalk(singleTalk!)
 
             return cell
         }
@@ -103,9 +108,9 @@ class SingleModeViewController: UITableViewController {
             if let index: NSIndexPath = tableView.indexPathForSelectedRow {
                 let cipherType = cipherTypes[index.row - 1]
                 let cipherDifficulty = cipherDifficulties[index.section - 1]
+                let singleTalk = singleTalkService.getSingleTalk(cipherType, cipherDifficulty: cipherDifficulty)
 
-                //TODO - get correct talk
-                //targetController.talk = talks[rowIndex]
+                targetController.talk = singleTalk!
             }
         }
     }

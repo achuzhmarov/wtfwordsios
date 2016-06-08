@@ -2,7 +2,7 @@ import Foundation
 
 let CORE_WORD_CLASS_NAME = "CoreWord"
 
-class CoreSingleMessageService {
+class CoreSingleMessageService: Service {
     private let CORE_SINGLE_MESSAGE_CLASS_NAME = "CoreSingleMessage"
 
     private let coreDataService: CoreDataService
@@ -18,7 +18,11 @@ class CoreSingleMessageService {
 
     func createMessage(singleTalk: SingleTalk, message: SingleMessage) {
         let newCoreSingleMessage = coreDataService.createObject(CORE_SINGLE_MESSAGE_CLASS_NAME) as! CoreSingleMessage
+        message.setCoreSingleMessage(newCoreSingleMessage)
         updateFromMessage(newCoreSingleMessage, message: message)
+
+        singleTalk.appendMessage(message)
+
         coreDataService.saveContext()
     }
 

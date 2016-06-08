@@ -5,7 +5,7 @@
 
 import Foundation
 
-class TalkNetworkService {
+class TalkNetworkService: Service {
     private let networkService: NetworkService
 
     init(networkService: NetworkService) {

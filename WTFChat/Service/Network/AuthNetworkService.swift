@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AuthNetworkService: NSObject {
+class AuthNetworkService: Service {
     private let networkService: NetworkService
 
     init(networkService: NetworkService) {

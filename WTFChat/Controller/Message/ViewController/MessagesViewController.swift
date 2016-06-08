@@ -23,9 +23,13 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
     var isKeyboardShown = false
     
     var wasSuccessfullUpdate = false
-    
+
+    var friendTalk: FriendTalk!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        friendTalk = talk as! FriendTalk
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MessagesViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MessagesViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
@@ -33,11 +37,11 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MessagesViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
 
-        let friendInfo = currentUserService.getFriendInfoByTalk(talk)
+        let friendInfo = currentUserService.getFriendInfoByTalk(friendTalk)
         let title = "\(friendInfo!.getDisplayName()), lvl \(String(friendInfo!.lvl))"
         configureTitleView(title, navigationItem: navigationItem)
 
-        messageService.initMessageListener(talk, listener: self)
+        messageService.initMessageListener(friendTalk, listener: self)
         
         dispatch_async(dispatch_get_main_queue(), {
             self.updateViewAfterGetNew()
@@ -56,7 +60,7 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
 
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
-        messageService.removeListener(talk)
+        messageService.removeListener(friendTalk)
     }
 
     private func configureTitleView(title: String, navigationItem: UINavigationItem) {
@@ -84,10 +88,10 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
             self.cipherDifficulty = sendMessageController.cipherDifficulty
             self.lastSendedMessage = sendMessageController.message
             
-            let newMessage = messageCipherService.addNewMessageToTalk(self.lastSendedMessage!, talk: self.talk!)
-            talkService.updateTalkInArray(self.talk, withMessages: true)
+            let newMessage = messageCipherService.addNewMessageToTalk(self.lastSendedMessage!, talk: self.friendTalk!)
+            talkService.updateTalkInArray(self.friendTalk, withMessages: true)
             
-            if (!talk.isSingleMode) {
+            if (!friendTalk.isSingleMode) {
                 messageService.createMessage(newMessage)
             } else {
                 coreMessageService.createMessage(newMessage)
@@ -134,7 +138,7 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
     
     private func updateLastCipherType() {
         for message in talk.messages {
-            if (message.author == currentUserService.getUserLogin() || talk.isSingleMode) {
+            if ((message as! RemoteMessage).author == currentUserService.getUserLogin() || friendTalk.isSingleMode) {
                 self.cipherType = message.cipherType
                 self.cipherDifficulty = message.cipherDifficulty
             }
@@ -199,7 +203,7 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
     
     //refreshControl delegate
     func loadEarlier(sender:AnyObject) {
-        messageService.loadEarlier(talk.id)
+        messageService.loadEarlier(friendTalk.id)
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -241,7 +245,6 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
             let message = sender as! RemoteMessage
 
             targetController.message = message
-            targetController.talk = talk
 
             //self message - view only
             if (message.author == currentUserService.getUserLogin()) {
@@ -259,16 +262,16 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
             
             targetController.text = text
             targetController.cipherType = self.cipherType
-            targetController.isSingleMode = talk.isSingleMode
+            targetController.isSingleMode = friendTalk.isSingleMode
         }
         
         dismissKeyboard()
     }
 
     override func updateView() {
-        talk = talkService.getByTalkId(talk.id)
+        talk = talkService.getByTalkId(friendTalk.id)
 
-        if (talk.messages.count != 0 && talk.messageCount > talk.messages.count) {
+        if (talk.messages.count != 0 && friendTalk.messageCount > talk.messages.count) {
             createRefreshControl()
         } else {
             deleteRefreshControl()
@@ -276,9 +279,9 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
 
         if  (!self.isKeyboardShown) {
             //update GUI only if keyboard hidden
-            self.messageTableView.updateTalk(self.talk)
+            self.messageTableView.updateTalk(self.friendTalk)
 
-            talkService.talkViewed(self.talk.id)
+            talkService.talkViewed(self.friendTalk.id)
         }
     }
 

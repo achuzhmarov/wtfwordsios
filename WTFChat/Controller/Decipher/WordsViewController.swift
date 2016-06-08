@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol SuggestionComputer: class {
-    func suggestionTapped(word: Word)
+protocol HintComputer: class {
+    func hintTapped(word: Word)
 }
 
 class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelegate {
@@ -24,7 +24,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     var useCipherText = false
     var selfAuthor = false
     
-    weak var suggestionComputer: SuggestionComputer?
+    weak var hintComputer: HintComputer?
     
     @objc func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -224,7 +224,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         let label = sender.view as! RoundedLabel
         let wordContainer = label.tagObject as! WordLabelContainer
         
-        self.suggestionComputer?.suggestionTapped(wordContainer.originalWord)
+        self.hintComputer?.hintTapped(wordContainer.originalWord)
     }
     
     func getRowWidth(row: [WordLabelContainer]) -> CGFloat {

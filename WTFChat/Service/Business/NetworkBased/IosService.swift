@@ -8,7 +8,7 @@
 
 import Foundation
 
-class IosService {
+class IosService: Service {
     private let iosNetworkService: IosNetworkService
 
     private let keychain = KeychainWrapper()

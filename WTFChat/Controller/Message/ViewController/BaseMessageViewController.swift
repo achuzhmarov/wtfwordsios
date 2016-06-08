@@ -1,9 +1,9 @@
 import Foundation
 
 class BaseMessageViewController: UIViewController, MessageTappedComputer, UITextViewDelegate {
-    @IBOutlet weak var messageTableView: MessageTableView!
+    @IBOutlet weak var messageTableView: BaseMessageTableView!
 
-    var talk: FriendTalk!
+    var talk: Talk!
     var firstTimeLoaded = true
 
     override func viewDidLoad() {
@@ -15,6 +15,9 @@ class BaseMessageViewController: UIViewController, MessageTappedComputer, UIText
         self.messageTableView.messageTappedComputer = self
 
         self.messageTableView.alpha = 0
+
+        let nav = self.navigationController?.navigationBar
+        nav?.translucent = false
     }
 
     override func viewWillAppear(animated: Bool) {

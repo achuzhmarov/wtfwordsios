@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MessageNetworkService: NSObject {
+class MessageNetworkService: Service {
     private let networkService: NetworkService
 
     init(networkService: NetworkService) {

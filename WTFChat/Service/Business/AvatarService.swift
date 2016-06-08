@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AvatarService {
+class AvatarService: Service {
     private final let defaultInitials = "🙂"
     
     private var avatarImageCache = [String: [UInt: UIImage]]()

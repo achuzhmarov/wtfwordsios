@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class AudioService {
+class AudioService: Service {
     
     var audioPlayer:AVAudioPlayer!
     let defaultExt = "wav"

@@ -12,7 +12,7 @@ protocol TalkListener: class {
     func updateTalks(talks: [FriendTalk]?, error: NSError?)
 }
 
-class TalkService: NSObject {
+class TalkService: Service {
     let TALKS_UPDATE_TIMER_INTERVAL = 10.0
 
     private let talkNetworkService: TalkNetworkService
@@ -88,24 +88,20 @@ class TalkService: NSObject {
         //add singleModeTalk
         let singleModeTalk = FriendTalk(id: "0")
         singleModeTalk.isSingleMode = true
-        let singleModeUser = User(login: "Pass and Play", suggestions: 0)
+        let singleModeUser = User(login: "Pass and Play")
         singleModeTalk.users.append(singleModeUser.login)
         singleModeTalk.users.append("")
         
         //load local messages for singleModeTalk
         singleModeTalk.messages = coreMessageService.getAllLocal()
         if (singleModeTalk.messages.count > 0) {
-            singleModeTalk.lastMessage = singleModeTalk.messages.last
+            singleModeTalk.lastMessage = singleModeTalk.messages.last as? RemoteMessage
         }
         
         return singleModeTalk
     }
     
     func getNewUnreadTalks() {
-        if (!currentUserService.isLoggedIn()) {
-            return
-        }
-        
         let lastUpdate = self.getTalksLastUpdate()
 
         talkNetworkService.getNewUnreadTalks(lastUpdate) { (talks, error) -> Void in
@@ -183,7 +179,7 @@ class TalkService: NSObject {
                     talk.messages = talk.messages.sort { (message1, message2) -> Bool in
                         return message1.timestamp.isLess(message2.timestamp)
                     }
-                    talk.lastMessage = talk.messages.last
+                    talk.lastMessage = talk.messages.last as? RemoteMessage
                 } else {
                     //save early downloaded messages before update
                     talk.messages = talks[i].messages

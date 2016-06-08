@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AdColonyService: NSObject, AdColonyDelegate, AdColonyAdDelegate {
+class AdColonyService: Service, AdColonyDelegate, AdColonyAdDelegate {
     private let APP_ID = "appd77cbb2311044ee891"
     private let ZONE_INTER_ID = "vz4af259c3f86548debc"
     private let ZONE_REWARDED_ID = "vz87332b6313114a238d"
@@ -17,8 +17,8 @@ class AdColonyService: NSObject, AdColonyDelegate, AdColonyAdDelegate {
     private var isRewardedAvailable = false
 
     var delegateFunc: (() -> Void)?
-    
-    func initService() {
+
+    override func initService() {
         //Configure AdColony once on app launch
         AdColony.configureWithAppID(APP_ID, zoneIDs: [ZONE_INTER_ID, ZONE_REWARDED_ID], delegate: self, logging: true)
     }

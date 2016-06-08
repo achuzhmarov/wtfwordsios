@@ -5,7 +5,7 @@
 
 import Foundation
 
-class NotificationService {
+class NotificationService: Service {
     private let windowService: WindowService
     private let messageService: MessageService
     private let talkService: TalkService
@@ -21,7 +21,7 @@ class NotificationService {
 
         let currentController = windowService.getCurrentController()
         if let messageViewController = currentController as? MessagesViewController {
-            messageService.updateMessages(messageViewController.talk.id)
+            messageService.updateMessages(messageViewController.friendTalk.id)
         }
 
         //show localNotification (added to ios notifications window)

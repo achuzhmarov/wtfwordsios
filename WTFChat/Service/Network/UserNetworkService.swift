@@ -8,7 +8,7 @@
 
 import Foundation
 
-class UserNetworkService: NSObject {
+class UserNetworkService: Service {
     let networkService: NetworkService
 
     init(networkService: NetworkService) {

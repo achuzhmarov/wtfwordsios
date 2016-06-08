@@ -5,7 +5,7 @@
 
 import Foundation
 
-class CoreMessageService {
+class CoreMessageService: Service {
     private let CORE_MESSAGE_CLASS_NAME = "CoreMessage"
 
     private let coreDataService: CoreDataService

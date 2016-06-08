@@ -5,7 +5,7 @@
 
 import Foundation
 
-class IosNetworkService {
+class IosNetworkService: Service {
     private let networkService: NetworkService
 
     init(networkService: NetworkService) {

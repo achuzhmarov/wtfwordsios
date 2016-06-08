@@ -12,8 +12,6 @@ class ServiceInitializer {
     private static let BASE_URL = "https://dev.wtfchat.wtf:42043/"
 
     static func initServices() {
-        let currentUserService = CurrentUserService()
-
         //network
         let networkService = NetworkService(baseUrl: BASE_URL)
         let authNetworkService = AuthNetworkService(networkService: networkService)
@@ -24,6 +22,9 @@ class ServiceInitializer {
         let iosNetworkService = IosNetworkService(networkService: networkService)
 
         let iosService = IosService(iosNetworkService: iosNetworkService)
+        let expService = ExpService()
+
+        let currentUserService = CurrentUserService(iosService: iosService, expService: expService)
 
         //core
         let coreDataService = CoreDataService()
@@ -61,11 +62,23 @@ class ServiceInitializer {
         )
 
         let cipherService = CipherService()
+        let challengeMessageService = ChallengeMessageService()
+        let messageCipherService = MessageCipherService(currentUserService: currentUserService, cipherService: cipherService)
+
+        //core based
+        serviceLocator.add(
+            SingleTalkService(coreSingleTalkService: coreSingleTalkService, cipherService: cipherService),
+            SingleMessageService(
+                coreSingleMessageService: coreSingleMessageService,
+                challengeMessageService: challengeMessageService,
+                messageCipherService: messageCipherService
+            )
+        )
 
         //other
         serviceLocator.add(
-            LvlService(currentUserService: currentUserService),
-            MessageCipherService(currentUserService: currentUserService, cipherService: cipherService),
+            expService,
+            messageCipherService,
             windowService,
             NotificationService(windowService: windowService, messageService: messageService, talkService: talkService),
             currentUserService,
@@ -73,7 +86,8 @@ class ServiceInitializer {
             AvatarService(),
             TimeService(),
             AudioService(),
-            cipherService
+            cipherService,
+            challengeMessageService
         )
     }
 }

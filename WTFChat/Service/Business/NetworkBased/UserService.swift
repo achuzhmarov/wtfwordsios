@@ -8,7 +8,7 @@
 
 import Foundation
 
-class UserService: NSObject {
+class UserService: Service {
     private let USER_UPDATE_TIMER_INTERVAL = 10.0
 
     private let userNetworkService: UserNetworkService
@@ -29,7 +29,7 @@ class UserService: NSObject {
         self.windowService = windowService
     }
 
-    func setNewUser(user: User, password: String) {
+    /*func setNewUser(user: User, password: String) {
         currentUserService.setNewUser(user)
         talkService.setTalksByNewUser(user)
         iosService.updateUserCredentials(user.login, password: password)
@@ -40,7 +40,7 @@ class UserService: NSObject {
             self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(self.USER_UPDATE_TIMER_INTERVAL, target: self,
                 selector: #selector(UserService.updateInfo), userInfo: nil, repeats: true)
         })
-    }
+    }*/
     
     func updateInfo() {
         //send free hints gain in case of errors
@@ -54,7 +54,7 @@ class UserService: NSObject {
         }
         
         //get new user info
-        userNetworkService.getNewInfo(currentUserService.getLastUpdate()!) {userInfo, error in
+        userNetworkService.getNewInfo(currentUserService.getLastUpdate()) {userInfo, error in
             if let requestError = error {
                 print(requestError)
             } else {
@@ -70,7 +70,7 @@ class UserService: NSObject {
         
         currentUserService.updateInfo(userInfo!)
         
-        if (userInfo!.newSuggestions != 0) {
+        if (userInfo!.newHints != 0) {
             dispatch_async(dispatch_get_main_queue(), {
                 self.windowService.showNewSuggestionsAlert()
             })

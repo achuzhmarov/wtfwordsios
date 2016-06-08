@@ -18,17 +18,17 @@ class CipherCell: UITableViewCell {
         self.selectionStyle = .None;
     }
     
-    func updateCipher(cipherTalk: SingleTalk) {
+    func updateSingleTalk(singleTalk: SingleTalk) {
         initStyle()
 
-        cipherText.text = cipherTalk.cipherType.description
+        cipherText.text = singleTalk.cipherType.description
 
-        if (cipherTalk.wins < cipherTalk.cipherSettings!.maxStars) {
+        if (singleTalk.wins < singleTalk.cipherSettings!.maxStars) {
             self.backgroundColor = UIColor.whiteColor()
         } else {
             self.backgroundColor = StarImage.lightGoldColor
         }
 
-        starImage.updateStarImage(cipherTalk.wins, max: cipherTalk.cipherSettings!.maxStars)
+        starImage.updateStarImage(singleTalk.wins, max: singleTalk.cipherSettings!.maxStars)
     }
 }

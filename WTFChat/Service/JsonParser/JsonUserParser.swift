@@ -17,12 +17,12 @@ class JsonUserParser {
 
     class func fromJson(json: JSON) throws -> User {
         var login: String
-        var suggestions: Int = 0
+        var hints: Int = 0
         var talks = [FriendTalk]()
         var lastUpdate: NSDate = NSDate.defaultPast()
         var exp: Int = 0
-        var lvl: Int = 0
-        var newSuggestions: Int = 0
+        var singleExp: Int = 0
+        var newHints: Int = 0
         var friends = [FriendInfo]()
 
         var name: String
@@ -42,7 +42,7 @@ class JsonUserParser {
         }
 
         if let value = json["suggestions"].int {
-            suggestions = value
+            hints = value
         } else if let error = json["suggestions"].error {
             throw error
         }
@@ -73,14 +73,14 @@ class JsonUserParser {
             throw error
         }
 
-        if let value = json["lvl"].int {
-            lvl = value
-        } else if let error = json["lvl"].error {
+        if let value = json["single_exp"].int {
+            singleExp = value
+        } else if let error = json["single_exp"].error {
             throw error
         }
 
         if let value = json["new_suggestions"].int {
-            newSuggestions = value
+            newHints = value
         } else if let error = json["new_suggestions"].error {
             throw error
         }
@@ -139,12 +139,12 @@ class JsonUserParser {
 
         return User(
             login: login,
-            suggestions: suggestions,
+            hints: hints,
             talks: talks,
             lastUpdate: lastUpdate,
             exp: exp,
-            lvl: lvl,
-            newSuggestions: newSuggestions,
+            singleExp: singleExp,
+            newHints: newHints,
             friends: friends,
             name: name,
             pushNew: pushNew,

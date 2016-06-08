@@ -9,7 +9,7 @@
 import Foundation
 
 class ExpGainView: NSObject {
-    private let lvlService: LvlService = serviceLocator.get(LvlService)
+    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
 
     var progressView: UIProgressView?
     var expLabel: UILabel?
@@ -22,13 +22,13 @@ class ExpGainView: NSObject {
     let progressUpdateInterval = 0.1
     let progressUpdateMaxStep = Float(0.125)
     
-    func myInit(superView: UIView) {
-        self.lvlLabel = createLvlLabel(superView, userLvl: lvlService.getUserLvl())
+    func initView(superView: UIView) {
+        self.lvlLabel = createLvlLabel(superView, userLvl: currentUserService.getUserLvl())
         self.expLabel = createExpLabel(superView)
         self.progressView = createProgressBar(superView)
         
-        userExp = lvlService.getCurrentLvlExp()
-        nextLvlExp = lvlService.getNextLvlExp()
+        userExp = currentUserService.getCurrentLvlExp()
+        nextLvlExp = currentUserService.getNextLvlExp()
     }
     
     func createLvlLabel(rootView: UIView, userLvl: Int) -> UILabel {
@@ -123,7 +123,7 @@ class ExpGainView: NSObject {
             self.progressBarTimer?.invalidate()
             
             if (progressView!.progress == 1) {
-                let userLvl = String(lvlService.getUserLvl() + 1)
+                let userLvl = String(currentUserService.getUserLvl() + 1)
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     usleep(1000 * 500)

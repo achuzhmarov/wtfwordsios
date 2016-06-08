@@ -39,10 +39,9 @@ class CoreSingleMessage: NSManagedObject {
             lastUpdate: self.lastUpdate!,
             exp: Int(self.exp!),
             timerSecs: Int(self.timerSecs!),
-            hintsUsed: Int(self.hintsUsed!)
+            hintsUsed: Int(self.hintsUsed!),
+            coreSingleMessage: self
         )
-
-        message.setCoreSingleMessage(self)
 
         return message
     }

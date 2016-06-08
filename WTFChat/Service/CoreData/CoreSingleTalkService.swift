@@ -1,6 +1,6 @@
 import Foundation
 
-class CoreSingleTalkService {
+class CoreSingleTalkService: Service {
     private let CORE_SINGLE_TALK_CLASS_NAME = "CoreSingleTalk"
 
     private let coreDataService: CoreDataService
@@ -21,7 +21,7 @@ class CoreSingleTalkService {
         coreDataService.saveContext()
     }
 
-    func getAll(predicate: NSPredicate) -> [SingleTalk] {
+    func getAll() -> [SingleTalk] {
         let fetchRequest = coreDataService.createFetch(CORE_SINGLE_TALK_CLASS_NAME)
         let results = coreDataService.executeFetch(fetchRequest)
 

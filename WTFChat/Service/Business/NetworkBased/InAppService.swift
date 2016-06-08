@@ -9,7 +9,7 @@
 import Foundation
 import StoreKit
 
-class InAppService {
+class InAppService: Service {
     private let inAppHelper: InAppHelper
     private let currentUserService: CurrentUserService
     
@@ -20,7 +20,7 @@ class InAppService {
         self.currentUserService = currentUserService
     }
 
-    func getProductList() {
+    override func initService() {
         inAppHelper.requestProductsWithCompletionHandler { success, products in
             if success {
                 self.products = products

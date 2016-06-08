@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NetworkService: NSObject, NSURLSessionDelegate {
+class NetworkService: Service, NSURLSessionDelegate {
     private var baseUrl: String
     private var session: NSURLSession!
 

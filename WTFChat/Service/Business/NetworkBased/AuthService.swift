@@ -15,7 +15,7 @@ let HTTP_INCORRECT_PASSWORD = 492
 let HTTP_RESTORE_CODE_INVALID = 493
 let HTTP_INCORRECT_LOGIN_OR_EMAIL = 494
 
-class AuthService: NSObject {
+class AuthService: Service {
     private let authNetworkService: AuthNetworkService
     private let iosService: IosService
     private let userService: UserService
@@ -37,7 +37,7 @@ class AuthService: NSObject {
             if let requestError = error {
                 completion(user: nil, error: requestError)
             } else {
-                self.userService.setNewUser(user!, password: password)
+                //self.userService.setNewUser(user!, password: password)
                 completion(user: user, error: nil)
             }
         }

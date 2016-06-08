@@ -12,23 +12,24 @@ class CoreSingleTalk: NSManagedObject {
         let enumCipherType = CipherType(rawValue: Int(self.cipherType!))
         let enumCipherDifficulty = CipherDifficulty(rawValue: Int(self.cipherDifficulty!))
 
+        let talk = SingleTalk(
+            cipherType: enumCipherType!,
+            cipherDifficulty: enumCipherDifficulty!,
+            wins: Int(self.wins!)
+        )
+
         var domainMessages = [SingleMessage]()
 
         for item in self.messages! {
             if let coreSingleMessage = item as? CoreSingleMessage {
                 if let domainSingleMessage = coreSingleMessage.getSingleMessage() {
+                    domainSingleMessage.singleTalk = talk
                     domainMessages.append(domainSingleMessage)
                 }
             }
         }
 
-        let talk = SingleTalk(
-            cipherType: enumCipherType!,
-            cipherDifficulty: enumCipherDifficulty!,
-            wins: Int(self.wins!),
-            messages: domainMessages
-        )
-
+        talk.messages = domainMessages
         talk.setCoreSingleTalk(self)
 
         return talk

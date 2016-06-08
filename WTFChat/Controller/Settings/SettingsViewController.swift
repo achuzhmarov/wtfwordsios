@@ -11,7 +11,6 @@ import UIKit
 class SettingsViewController: UITableViewController {
     private let userService: UserService = serviceLocator.get(UserService)
     private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
-    private let lvlService: LvlService = serviceLocator.get(LvlService)
     private let avatarService: AvatarService = serviceLocator.get(AvatarService)
 
     @IBOutlet weak var userImage: UIImageView!
@@ -50,9 +49,9 @@ class SettingsViewController: UITableViewController {
         loginText.text = currentUserService.getUserLogin()
         
         lvlText.text = String(currentUserService.getUserLvl())
-        lvlProgress.progress = Float(lvlService.getCurrentLvlExp()) / Float(lvlService.getNextLvlExp())
+        lvlProgress.progress = Float(currentUserService.getCurrentLvlExp()) / Float(currentUserService.getNextLvlExp())
         
-        hintsText.text = String(currentUserService.getUserSuggestions())
+        hintsText.text = String(currentUserService.getUserHints())
         
         nameText.text = currentUserService.getUserName()
         

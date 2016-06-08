@@ -1,10 +1,9 @@
 import Foundation
 
-class SingleTalk {
-    let cipherType: CipherType
-    let cipherDifficulty: CipherDifficulty
+class SingleTalk: Talk {
+    var cipherType: CipherType
+    var cipherDifficulty: CipherDifficulty
     var wins = 0
-    var messages = [Message]()
 
     private var coreSingleTalk: CoreSingleTalk!
 
@@ -14,11 +13,13 @@ class SingleTalk {
         self.cipherType = cipherType
         self.cipherDifficulty = cipherDifficulty
         self.wins = wins
-        self.messages = messages
+
+        super.init(messages: messages)
     }
 
-    func appendMessage(message: Message) {
+    func appendMessage(message: SingleMessage) {
         messages.append(message)
+        coreSingleTalk.addMessagesObject(message.getCoreSingleMessage())
     }
 
     func setCoreSingleTalk(coreSingleTalk: CoreSingleTalk) {

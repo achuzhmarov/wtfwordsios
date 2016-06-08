@@ -15,20 +15,13 @@ let WAIT_FOR_USER_LOADING_IN_SECONDS = UInt32(2)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private var notificationService: NotificationService!
-    private var adColonyService: AdColonyService!
-    private var inAppService: InAppService!
     private var coreDataService: CoreDataService!
 
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         notificationService = serviceLocator.get(NotificationService)
-        adColonyService = serviceLocator.get(AdColonyService)
-        inAppService = serviceLocator.get(InAppService)
         coreDataService = serviceLocator.get(CoreDataService)
-
-        adColonyService.initService()
-        inAppService.getProductList()
         
         /*if (iosService.haveUserCredentials()) {
             authService.loginWithKeychain() { user, error -> Void in

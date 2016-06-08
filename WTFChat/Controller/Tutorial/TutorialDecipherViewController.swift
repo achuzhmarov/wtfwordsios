@@ -43,7 +43,7 @@ class TutorialDecipherViewController: DecipherViewController {
         
         if (currentTutorialStage == .DecipherRest) {
             topViewHeightContraint.constant = initialTopViewHeightConstraintConstant
-            self.expGainView.myInit(self.topView)
+            self.expGainView.initView(self.topView)
             
             //just some random exp value
             self.expGainView.runProgress(55)
@@ -115,7 +115,7 @@ class TutorialDecipherViewController: DecipherViewController {
         }
     }
     
-    override func useSuggestion(word: Word) {
+    override func useHint(word: Word) {
         switch (currentTutorialStage) {
         case .DecipherGuess:
             showWrongActionAlert()
@@ -123,7 +123,7 @@ class TutorialDecipherViewController: DecipherViewController {
             showWrongActionAlert()
         case .DecipherCloseTryHint:
             if (word.wasCloseTry) {
-                super.useSuggestion(word)
+                super.useHint(word)
                 
                 self.isPaused = true
                 
@@ -138,7 +138,7 @@ class TutorialDecipherViewController: DecipherViewController {
                 showWrongActionAlert()
             }
         case .DecipherHint:
-            super.useSuggestion(word)
+            super.useHint(word)
             
             self.isPaused = true
             
@@ -150,7 +150,7 @@ class TutorialDecipherViewController: DecipherViewController {
                     currentTutorialStage = .DecipherRest
             }
         default:
-            super.useSuggestion(word)
+            super.useHint(word)
         }
     }
     
@@ -214,7 +214,7 @@ class TutorialDecipherViewController: DecipherViewController {
         }
     }
     
-    override func showNoSuggestionsDialog() {
+    override func showNoHintsDialog() {
         WTFOneButtonAlert.show("Hints remained: 0",
             message: "You have used all hints",
             firstButtonTitle: "Ok",

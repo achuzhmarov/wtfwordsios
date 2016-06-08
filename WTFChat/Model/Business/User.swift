@@ -2,13 +2,13 @@ import Foundation
 
 class User: NSObject {
     var login: String
-    var suggestions: Int
+    var hints: Int = 0
     var talks = [FriendTalk]()
 
     var lastUpdate: NSDate = NSDate.defaultPast()
     var exp: Int = 0
-    var lvl: Int = 0
-    var newSuggestions: Int = 0
+    var singleExp: Int = 0
+    var newHints: Int = 0
     var friends = [FriendInfo]()
 
     var name: String = ""
@@ -21,23 +21,27 @@ class User: NSObject {
 
     var freeHintsGained: Int = 0
 
-    init(login: String, suggestions: Int) {
+    init(login: String) {
         self.login = login
-        self.suggestions = suggestions
     }
 
-    init(login: String, suggestions: Int, talks: [FriendTalk], lastUpdate: NSDate,
-         exp: Int, lvl: Int, newSuggestions: Int, friends: [FriendInfo],
+    init(login: String, hints: Int) {
+        self.login = login
+        self.hints = hints
+    }
+
+    init(login: String, hints: Int, talks: [FriendTalk], lastUpdate: NSDate,
+         exp: Int, singleExp: Int, newHints: Int, friends: [FriendInfo],
          name: String, pushNew: Bool, pushDeciphered: Bool, rating: Int,
          buyNonConsum: [String], freeHintsGained: Int)
     {
         self.login = login
-        self.suggestions = suggestions
+        self.hints = hints
         self.talks = talks
         self.lastUpdate = lastUpdate
         self.exp = exp
-        self.lvl = lvl
-        self.newSuggestions = newSuggestions
+        self.singleExp = singleExp
+        self.newHints = newHints
         self.friends = friends
 
         self.name = name
@@ -53,10 +57,10 @@ class User: NSObject {
 
     func updateInfo(user: User) {
         self.lastUpdate = user.lastUpdate
-        self.suggestions = user.suggestions
-        self.newSuggestions = user.newSuggestions
+        self.hints = user.hints
+        self.newHints = user.newHints
         self.exp = user.exp
-        self.lvl = user.lvl
+        self.singleExp = user.singleExp
 
         self.name = user.name
         self.pushNew = user.pushNew
@@ -85,5 +89,9 @@ class User: NSObject {
         }
 
         friends.append(friend)
+    }
+
+    func getFullExp() -> Int {
+        return exp + singleExp
     }
 }

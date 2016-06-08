@@ -4,7 +4,7 @@ enum DecipherStatus: Int {
     case No = 1, Success, Failed
 }
 
-class FriendTalk: NSObject {
+class FriendTalk: Talk {
     let id: String
     var users = [String]()
     var hasUnread: Bool = false
@@ -13,13 +13,13 @@ class FriendTalk: NSObject {
     var lastUpdate: NSDate = NSDate()
     var messageCount: Int = 0
 
-    var messages = [RemoteMessage]()
-
     var lastMessage: RemoteMessage?
     var isSingleMode = false
 
     init(id: String) {
         self.id = id;
+
+        super.init()
     }
 
     init(id: String, hasUnread: Bool, cipheredNum: Int, lastMessage: RemoteMessage?, users: [String], decipherStatus: DecipherStatus, lastUpdate: NSDate, messageCount: Int) {
@@ -31,6 +31,8 @@ class FriendTalk: NSObject {
         self.decipherStatus = decipherStatus
         self.lastUpdate = lastUpdate
         self.messageCount = messageCount
+
+        super.init()
     }
 
     func appendMessage(message: RemoteMessage) {
