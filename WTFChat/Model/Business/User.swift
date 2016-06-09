@@ -2,7 +2,7 @@ import Foundation
 
 class User: NSObject {
     var login: String
-    var hints: Int = 0
+    var hints: Int = 10
     var talks = [FriendTalk]()
 
     var lastUpdate: NSDate = NSDate.defaultPast()

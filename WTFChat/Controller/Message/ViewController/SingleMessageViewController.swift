@@ -22,6 +22,8 @@ class SingleMessageViewController: BaseMessageViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepareForSegue(segue, sender: sender)
 
+        UIHelper.clearBackButton(navigationItem)
+
         if segue.identifier == "showDecipher" {
             let targetController = segue.destinationViewController as! SingleDecipherViewController
 

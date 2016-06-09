@@ -31,7 +31,7 @@ class ExpGainView: NSObject {
         nextLvlExp = currentUserService.getNextLvlExp()
     }
     
-    func createLvlLabel(rootView: UIView, userLvl: Int) -> UILabel {
+    private func createLvlLabel(rootView: UIView, userLvl: Int) -> UILabel {
         //create gauge view
         let lvlLabel = UILabel()
         lvlLabel.text = "LEVEL \(String(userLvl))"
@@ -51,8 +51,8 @@ class ExpGainView: NSObject {
         
         return lvlLabel
     }
-    
-    func createExpLabel(rootView: UIView) -> UILabel {
+
+    private func createExpLabel(rootView: UIView) -> UILabel {
         //create gauge view
         let expLabel = UILabel()
         expLabel.font = UIFont(name: expLabel.font.fontName, size: 14)
@@ -72,7 +72,7 @@ class ExpGainView: NSObject {
         return expLabel
     }
     
-    func createProgressBar(rootView: UIView) -> UIProgressView {
+    private func createProgressBar(rootView: UIView) -> UIProgressView {
         let progressView = UIProgressView(progressViewStyle: UIProgressViewStyle.Default)
         progressView.progress = 0
         progressView.translatesAutoresizingMaskIntoConstraints = false
@@ -89,10 +89,10 @@ class ExpGainView: NSObject {
 
         return progressView
     }
-    
-    func runProgress(earnedExp: Int) {
+
+    func runProgress(earnedExp: Int, starStatus: StarStatus = .NoChange) {
         if (progressView == nil) {
-            NSLog("call to runProgress while no myInit")
+            NSLog("call to runProgress while no initView")
             return
         }
         
@@ -104,8 +104,19 @@ class ExpGainView: NSObject {
             self.progressBarTimer = NSTimer.scheduledTimerWithTimeInterval(self.progressUpdateInterval, target: self,
                 selector: #selector(ExpGainView.updateProgress), userInfo: nil, repeats: true)
         })
-        
-        self.expLabel?.text = "+\(String(earnedExp))XP"
+
+        self.expLabel?.text = "+\(String(earnedExp))XP" + getStarTextByStatus(starStatus)
+    }
+
+    private func getStarTextByStatus(starStatus: StarStatus) -> String {
+        switch starStatus {
+            case .Mastered:
+                return " " + Emoji.MASTERED_STAR + Emoji.MASTERED_STAR + Emoji.MASTERED_STAR
+            case .EarnStar:
+                return " +" + Emoji.STAR
+            case .NoChange:
+                return ""
+        }
     }
     
     func updateProgress() {

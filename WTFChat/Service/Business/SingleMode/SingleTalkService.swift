@@ -57,4 +57,8 @@ class SingleTalkService: Service {
 
         return nil
     }
+
+    func updateSingleTalk(singleTalk: SingleTalk) {
+        coreSingleTalkService.updateSingleTalk(singleTalk)
+    }
 }

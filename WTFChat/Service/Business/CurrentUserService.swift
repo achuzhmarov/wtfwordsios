@@ -213,6 +213,11 @@ class CurrentUserService: Service {
 
 
 
+    func earnSingleExp(earnedExp: Int) {
+        user.singleExp += earnedExp
+        saveUserInLocalStorage()
+    }
+
     func clearUserNewSuggestions() {
         user.newHints = 0
         saveUserInLocalStorage()

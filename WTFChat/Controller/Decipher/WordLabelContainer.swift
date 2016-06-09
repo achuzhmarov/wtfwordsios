@@ -36,7 +36,7 @@ class WordLabelContainer {
         label.initStyle()
         
         if (useCipherText) {
-            if (word.wordType != WordType.Ignore) {
+            if (word.type != WordType.Ignore) {
                 label.text = word.getCipheredText()
             } else {
                 label.text = word.getTextForDecipher()
@@ -50,7 +50,7 @@ class WordLabelContainer {
         label.textColor = UIColor.whiteColor()
         label.font = UIFont(name: label.font.fontName, size: 17)
         
-        switch word.wordType {
+        switch word.type {
         case .New:
             if (word.wasCloseTry) {
                 label.layer.backgroundColor = TRY_COLOR.CGColor

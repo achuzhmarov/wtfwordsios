@@ -31,7 +31,7 @@ class ExpService: Service {
 
         var currentExp = exp
 
-        while currentExp > 0 {
+        while currentExp >= 0 {
             currentExp -= (1 + lvlStage) * BASE_LVL_EXP
 
             lvlStep += 1
@@ -53,5 +53,74 @@ class ExpService: Service {
 
     private func intPow(radix: Int, power: Int) -> Int {
         return Int(pow(Double(radix), Double(power)))
+    }
+
+    func calculateExpForMessage(message: Message) -> Int {
+        var dupWordsInMessage = Set<String>()
+
+        var expResult = 0
+
+        for word in message.words {
+            expResult += calculateExpForWord(
+                word,
+                wasInMessage: dupWordsInMessage.contains(word.text),
+                cipherDifficulty:message.cipherDifficulty
+            )
+
+            dupWordsInMessage.insert(word.text)
+        }
+
+        if message.getMessageStatus() == .Success {
+            expResult *= 3
+        }
+
+        return expResult
+    }
+
+    private func calculateExpForWord(word: Word, wasInMessage: Bool, cipherDifficulty: CipherDifficulty) -> Int {
+        if word.type != .Success && word.type != .CloseTry {
+            return 0
+        }
+
+        if wasInMessage {
+            return 0
+        }
+
+        if word.getCharCount() == 2 {
+            if word.type == .CloseTry {
+                return 0
+            }
+
+            return 1
+        }
+
+        switch cipherDifficulty {
+            case .Easy:
+                return 1
+            case .Normal:
+                if word.type == .CloseTry {
+                    return 1
+                }
+
+                if word.getCharCount() == 3 {
+                    return 2
+                }
+
+                return 3
+            case .Hard:
+                if word.type == .CloseTry {
+                    if word.getCharCount() == 3 {
+                        return 2
+                    }
+
+                    return 5
+                }
+
+                if word.getCharCount() == 3 {
+                    return 3
+                }
+
+                return 10
+        }
     }
 }

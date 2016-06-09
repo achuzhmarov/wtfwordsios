@@ -33,24 +33,54 @@ class ServiceInitializer {
         let coreSingleMessageService = CoreSingleMessageService(coreDataService: coreDataService)
 
         //TODO - AWFUL DEPENDENCY
-        let talkService = TalkService(talkNetworkService: talkNetworkService, iosService: iosService, currentUserService: currentUserService, coreMessageService: coreMessageService)
-        let messageService = MessageService(messageNetworkService: messageNetworkService, talkService: talkService, coreMessageService: coreMessageService)
+        let talkService = TalkService(
+            talkNetworkService: talkNetworkService,
+            iosService: iosService,
+            currentUserService: currentUserService,
+            coreMessageService: coreMessageService
+        )
+        let messageService = MessageService(
+            messageNetworkService: messageNetworkService,
+            talkService: talkService,
+            coreMessageService: coreMessageService
+        )
         talkService.messageService = messageService
 
-        let windowService = WindowService(talkService: talkService, currentUserService: currentUserService)
+        let windowService = WindowService(
+            talkService: talkService,
+            currentUserService: currentUserService
+        )
 
-        let userService = UserService(userNetworkService: userNetworkService, iosService: iosService, talkService: talkService, currentUserService: currentUserService, windowService: windowService)
+        let userService = UserService(
+            userNetworkService: userNetworkService,
+            iosService: iosService,
+            talkService: talkService,
+            currentUserService: currentUserService,
+            windowService: windowService
+        )
 
-        let inAppHelper = InAppHelper(inAppNetworkService: inAppNetworkService, currentUserService: currentUserService, userService: userService, productIdentifiers: IAPProducts.ALL)
+        let inAppHelper = InAppHelper(
+            inAppNetworkService: inAppNetworkService,
+            currentUserService: currentUserService,
+            userService: userService,
+            productIdentifiers: IAPProducts.ALL
+        )
 
         //network
         serviceLocator.add(
-            InAppService(inAppHelper: inAppHelper, currentUserService: currentUserService),
+            InAppService(
+                inAppHelper: inAppHelper,
+                currentUserService: currentUserService
+            ),
             iosService,
             userService,
             messageService,
             talkService,
-            AuthService(authNetworkService: authNetworkService, iosService: iosService, userService: userService)
+            AuthService(
+                authNetworkService: authNetworkService,
+                iosService: iosService,
+                userService: userService
+            )
         )
 
         //core data
@@ -63,15 +93,34 @@ class ServiceInitializer {
 
         let cipherService = CipherService()
         let challengeMessageService = ChallengeMessageService()
-        let messageCipherService = MessageCipherService(currentUserService: currentUserService, cipherService: cipherService)
+        let messageCipherService = MessageCipherService(
+            currentUserService: currentUserService,
+            cipherService: cipherService
+        )
+
+        let singleTalkService = SingleTalkService(
+            coreSingleTalkService: coreSingleTalkService,
+            cipherService: cipherService
+        )
+
+        let singleMessageService = SingleMessageService(
+            coreSingleMessageService: coreSingleMessageService,
+            challengeMessageService: challengeMessageService,
+            messageCipherService: messageCipherService
+        )
 
         //core based
         serviceLocator.add(
-            SingleTalkService(coreSingleTalkService: coreSingleTalkService, cipherService: cipherService),
-            SingleMessageService(
-                coreSingleMessageService: coreSingleMessageService,
-                challengeMessageService: challengeMessageService,
-                messageCipherService: messageCipherService
+            singleTalkService,
+            singleMessageService
+        )
+
+        serviceLocator.add(
+            SingleModeService(
+                singleMessageService: singleMessageService,
+                singleTalkService: singleTalkService,
+                expService: expService,
+                currentUserService: currentUserService
             )
         )
 
@@ -80,7 +129,11 @@ class ServiceInitializer {
             expService,
             messageCipherService,
             windowService,
-            NotificationService(windowService: windowService, messageService: messageService, talkService: talkService),
+            NotificationService(
+                windowService: windowService,
+                messageService: messageService,
+                talkService: talkService
+            ),
             currentUserService,
             AdColonyService(),
             AvatarService(),

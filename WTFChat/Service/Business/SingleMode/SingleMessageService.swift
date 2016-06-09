@@ -32,15 +32,4 @@ class SingleMessageService: Service {
     func updateMessage(singleMessage: SingleMessage) {
         coreSingleMessageService.updateMessage(singleMessage)
     }
-
-    //TODO - move to separate SingleModeService
-    func decipherMessage(singleMessage: SingleMessage) {
-        //TODO - Compute exp
-
-        //TODO - update talk (wins)
-
-        //TODO - update user (single exp + lvl)
-
-        coreSingleMessageService.updateMessage(singleMessage)
-    }
 }

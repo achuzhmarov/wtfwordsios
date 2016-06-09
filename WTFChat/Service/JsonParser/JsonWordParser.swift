@@ -6,7 +6,7 @@ class JsonWordParser {
                 "text": word.text,
                 "additional": word.additional,
                 "ciphered_text": word.cipheredText,
-                "word_type": word.wordType.rawValue
+                "word_type": word.type.rawValue
         ]
 
         return json
@@ -45,7 +45,7 @@ class JsonWordParser {
         return Word(
             text: text,
             additional: additional,
-            wordType: wordType,
+            type: wordType,
             cipheredText: cipheredText
         )
     }

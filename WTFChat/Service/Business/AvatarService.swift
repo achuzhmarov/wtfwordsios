@@ -9,12 +9,10 @@
 import Foundation
 
 class AvatarService: Service {
-    private final let defaultInitials = "🙂"
-    
     private var avatarImageCache = [String: [UInt: UIImage]]()
 
     func getSingleModeImage(diameter: UInt) -> UIImage {
-        return getImage(defaultInitials, diameter: diameter)
+        return getImage(Emoji.SMILE_FACE, diameter: diameter)
     }
 
     func getImage(name: String, diameter: UInt) -> UIImage {
@@ -37,7 +35,7 @@ class AvatarService: Service {
         if (nameLength != 0) {
             initials = name[0...min(2, nameLength - 1)].capitalizedString
         } else {
-            initials = defaultInitials
+            initials = Emoji.SMILE_FACE
         }
         
         let jsqImage = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(initials, backgroundColor: color, textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(CGFloat(13)), diameter: diameter)

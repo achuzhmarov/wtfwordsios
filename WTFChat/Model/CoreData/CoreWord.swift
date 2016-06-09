@@ -5,7 +5,7 @@ class CoreWord: NSManagedObject {
     func updateFromWord(word: Word) {
         self.text = word.text
         self.additional = word.additional
-        self.wordType = word.wordType.rawValue
+        self.wordType = word.type.rawValue
         self.cipheredText = word.cipheredText
         self.wasCloseTry = word.wasCloseTry
     }
@@ -16,7 +16,7 @@ class CoreWord: NSManagedObject {
         return Word(
             text: self.text!,
             additional: self.additional!,
-            wordType: enumWordType!,
+            type: enumWordType!,
             cipheredText: self.cipheredText!,
             wasCloseTry: Bool(self.wasCloseTry!)
         )

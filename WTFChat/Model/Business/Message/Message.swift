@@ -54,7 +54,7 @@ class Message: NSObject {
         var result = [Word]()
 
         for word in words {
-            if (word.wordType != WordType.Delimiter) {
+            if (word.type != WordType.Delimiter) {
                 result.append(word)
             }
         }
@@ -66,8 +66,8 @@ class Message: NSObject {
         var result = [Word]()
 
         for word in words {
-            if (word.wordType != WordType.Delimiter &&
-                    word.wordType != WordType.LineBreak) {
+            if (word.type != WordType.Delimiter &&
+                    word.type != WordType.LineBreak) {
                 result.append(word)
             }
         }
@@ -81,7 +81,7 @@ class Message: NSObject {
 
     func hasSuccessWords() -> Bool {
         let successWordsCount = countWordsByStatus(WordType.Success) + countWordsByStatus(WordType.CloseTry)
-        return successWordsCount == 0
+        return successWordsCount > 0
     }
 
     func countNew() -> Int {
@@ -105,7 +105,7 @@ class Message: NSObject {
         var result = 0
 
         for word in words {
-            if (word.wordType == wordType) {
+            if (word.type == wordType) {
                 result += 1
             }
         }
@@ -124,19 +124,20 @@ class Message: NSObject {
     func questionMarks() -> String! {
         var result = ""
 
-        for word in words {
-            if (word.wordType == WordType.Delimiter) {
-                result = "\(result) "
-            } else if (word.wordType == WordType.LineBreak) {
-                result = "\(result)\n"
-            } else if (word.wordType == WordType.Ignore) {
-                if (word.text.characters.count > 0) {
+        for word: Word in words {
+            switch word.type {
+                case .Delimiter:
+                    result = "\(result) "
+                case .LineBreak:
+                    result = "\(result)\n"
+                case .Ignore:
+                    if (word.getCharCount() > 0) {
+                        result = "\(result)???\(word.additional)"
+                    } else {
+                        result = "\(result)\(word.additional)"
+                    }
+                default:
                     result = "\(result)???\(word.additional)"
-                } else {
-                    result = "\(result)\(word.additional)"
-                }
-            } else {
-                result = "\(result)???\(word.additional)"
             }
         }
 
@@ -146,7 +147,7 @@ class Message: NSObject {
     func clearText() -> String! {
         var result = ""
 
-        for word in words! {
+        for word: Word in words! {
             result = "\(result)\(word.getClearText())"
         }
 

@@ -233,7 +233,7 @@ class BaseDecipherViewController: UIViewController, HintComputer, UITextFieldDel
             return
         }
 
-        if (word.wordType == WordType.New) {
+        if (word.type == WordType.New) {
             if (word.wasCloseTry) {
                 showCloseTryHintConfirm(word)
             } else if (hints > 0) {

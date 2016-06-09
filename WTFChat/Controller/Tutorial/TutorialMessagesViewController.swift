@@ -199,16 +199,16 @@ class TutorialMessagesViewController: MessagesViewController {
         for i in 0..<message.words.count {
             let word = message.words[i]
             
-            if (word.wordType == .New) {
-                message.words[i].wordType = .Success
+            if (word.type == .New) {
+                message.words[i].type = .Success
             }
         }
         
         for _ in 0...2 {
             let randomIndex = Int(arc4random_uniform(UInt32(message.words.count)))
             
-            if (message.words[randomIndex].wordType == .Success) {
-                message.words[randomIndex].wordType = .Failed
+            if (message.words[randomIndex].type == .Success) {
+                message.words[randomIndex].type = .Failed
             }
         }
         

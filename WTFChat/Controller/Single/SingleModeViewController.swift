@@ -5,9 +5,11 @@
 
 import Foundation
 
-class SingleModeViewController: UITableViewController {
+class SingleModeViewController: UIViewController {
     private let cipherService: CipherService = serviceLocator.get(CipherService)
     private let singleTalkService: SingleTalkService = serviceLocator.get(SingleTalkService)
+
+    @IBOutlet weak var cipherTableView: CipherTableView!
 
     private let TUTORIAL_SECTION = 0
     private let HEADER_ROW = 0
@@ -30,13 +32,28 @@ class SingleModeViewController: UITableViewController {
 
         let nav = self.navigationController?.navigationBar
         nav?.translucent = false
+
+        self.cipherTableView.delegate = self.cipherTableView
+        self.cipherTableView.dataSource = self.cipherTableView
+
+        /*let tryButton = UIBarButtonItem(title: "Try it",
+                style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SendMessageViewController.tryTapped(_:)))*/
+
+        //let heartsText = Emoji.FULL_HEART + Emoji.FULL_HEART + Emoji.FULL_HEART
+        /*let heartsText = Emoji.FULL_HEART
+
+        let heartButton = UIBarButtonItem(title: heartsText,
+            style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+
+        navigationItem.rightBarButtonItem = heartButton*/
+        //self.tabBarController?.tabBar.items![0].title = ""
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
 
-    // MARK: - Table view data source
+        cipherTableView.reloadData()
+    }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         //one section for every difficulty + tutorial section
@@ -102,6 +119,8 @@ class SingleModeViewController: UITableViewController {
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        UIHelper.clearBackButton(navigationItem)
+
         if segue.identifier == "showMessages" {
             let targetController = segue.destinationViewController as! SingleMessageViewController
 

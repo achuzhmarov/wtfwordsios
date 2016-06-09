@@ -109,7 +109,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         var wordContainers = rows.getAllWordContainers()
         
         for i in 0..<wordContainers.count {
-            if (newWords[i].wordType != wordContainers[i].word.wordType) {
+            if (newWords[i].type != wordContainers[i].word.type) {
                 return true
             }
         }
@@ -119,7 +119,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     
     func animateWarning(guesses: [String]?) {
         for wordContainer in rows.getAllWordContainers() {
-            if (wordContainer.word.wordType == WordType.New) {
+            if (wordContainer.word.type == WordType.New) {
                 if (messageCipherService.wasCloseTry(wordContainer.word, guessWords: guesses)) {
                     wordContainer.animateWarning()
                     wordContainer.word.wasCloseTry = true
@@ -134,7 +134,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         var wasError = false
         
         for wordContainer in rows.getAllWordContainers() {
-            if (wordContainer.word.wordType == WordType.New) {
+            if (wordContainer.word.type == WordType.New) {
                 if (messageCipherService.wasCloseTry(wordContainer.word, guessWords: guesses)) {
                     wordContainer.animateWarning()
                     wordContainer.word.wasCloseTry = true
@@ -178,7 +178,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         var isNewRow = false
         
         for word in message!.getWordsWithoutSpaces() {
-            if (word.wordType == WordType.LineBreak) {
+            if (word.type == WordType.LineBreak) {
                 isNewRow = true
             } else {
                 addWord(word, targetRows: targetRows, isNewRow: isNewRow)

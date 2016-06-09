@@ -34,9 +34,9 @@
 		3E37C2146C03104E4D13EF25 /* BaseMessageTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C5C4514B1C85700FD701 /* BaseMessageTableView.swift */; };
 		3E37C218D6A69440E4B6BB14 /* BaseShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CDCE1C95DD4AD3A62436 /* BaseShopViewController.swift */; };
 		3E37C232A669DDBFD4D7BA81 /* WTFChat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CEF039C3B4D79D370CA8 /* WTFChat.xcdatamodeld */; };
-		3E37C23AD6DDBC7DD6BB269B /* StringDistanceCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C9D2F88CEB8C0C9A360A /* StringDistanceCalculator.swift */; };
 		3E37C259C39CBA1D3230FBD8 /* MessageTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CBC272EAAF55FCEC9D1B /* MessageTableView.swift */; };
 		3E37C259CAE06BD0793EE82B /* InAppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C1F9700AC20414BB119D /* InAppHelper.swift */; };
+		3E37C26DF1D21CF031912277 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C26F571173D1A34B84C0 /* UIHelper.swift */; };
 		3E37C2896D9872CC4F6D3135 /* BaseLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C24DE3323E553F227BA7 /* BaseLoginViewController.swift */; };
 		3E37C2A7EF6201A559B94DC8 /* DoubleCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C7A3DF5F77D8BB21ACF2 /* DoubleCutterCipher.swift */; };
 		3E37C2AFF23FD89DFE8B8369 /* AdColonyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C40A9EFCE6528396684C /* AdColonyService.swift */; };
@@ -47,6 +47,7 @@
 		3E37C33BC340BC8E08C1FEC0 /* JSQMessagesAvatarImageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C181D2F78B57DDA548E8 /* JSQMessagesAvatarImageFactory.m */; };
 		3E37C34B4DF113739B00FF37 /* JSQMessagesAvatarImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C6C7C133E31AA96F07CB /* JSQMessagesAvatarImage.m */; };
 		3E37C34CFDF416F591FBD63D /* WordLabelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C4FD95144695C0B33C1E /* WordLabelContainer.swift */; };
+		3E37C38A67ECA85E5CEC5A9D /* CipherTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CC9429E8E458FE99FF79 /* CipherTableView.swift */; };
 		3E37C3F3B18D7602DAD76115 /* JsonTalkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C9C5431B2975F0CF0EDA /* JsonTalkParser.swift */; };
 		3E37C4096C8A103472FF6D31 /* CoreSingleMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C000FF65106B6402CCD1 /* CoreSingleMessage.swift */; };
 		3E37C4165ED9274A81E2A77A /* DifficultyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CA1122E662AC8FBF97DC /* DifficultyCell.swift */; };
@@ -66,6 +67,7 @@
 		3E37C5B70B39B077F44C2929 /* SendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CB956830C95C77F2EB83 /* SendMessageViewController.swift */; };
 		3E37C5C8FACADD34E92E907F /* BaseDecipherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C63E89380D93121CA96F /* BaseDecipherViewController.swift */; };
 		3E37C61073350DD3DDA483AC /* JsonRemoteMessageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CA98C78155A2DD7BF23D /* JsonRemoteMessageParser.swift */; };
+		3E37C610A7533AD52FB60E11 /* SingleModeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C98D2B9F4E893CD4D339 /* SingleModeService.swift */; };
 		3E37C61E7B31099744D65DB7 /* JsonUserParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C187B0E332A553524FF3 /* JsonUserParser.swift */; };
 		3E37C666EEAE6EE7FB8FD21E /* InAppNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CDFA29519F29AF09FE8B /* InAppNetworkService.swift */; };
 		3E37C66DCB2A24B74F86B67E /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF958614B2A9CDBCC806 /* MessageCell.swift */; };
@@ -89,6 +91,7 @@
 		3E37C9092F90E27F56CA4C73 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E37C106D7CA0FD89102CE33 /* success.wav */; };
 		3E37C9258D5D04AAEE2FBAB0 /* DecipherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C74708BBD30FFD80F3D8 /* DecipherViewController.swift */; };
 		3E37C9583AAE1C00A03A3C1F /* FriendTalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CA604DD381FD27CBE5E3 /* FriendTalk.swift */; };
+		3E37C99932B963E82129A66D /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C53DCD55B39A905F6D14 /* Emoji.swift */; };
 		3E37C9B7180D2951376EB746 /* CipherPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE8CEA89F836412E7B01 /* CipherPickerViewController.swift */; };
 		3E37C9F852381E6F00542A00 /* WTFAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C68FC994889C5F99557F /* WTFAlert.swift */; };
 		3E37CA2B523E0518E8EA066D /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C283CC6663C54ADE8296 /* CoreDataService.swift */; };
@@ -130,6 +133,7 @@
 		3E37CF1DC371CE32934B0AF8 /* CipherDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C7B3CA8FB6461A10A098 /* CipherDifficulty.swift */; };
 		3E37CF2517274EB82043C70F /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF41FF729B01C20A331C /* FriendsViewController.swift */; };
 		3E37CF40639DE96F7ECD2FFF /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF6963D91364EF83A207 /* FriendCell.swift */; };
+		3E37CF45BDDAE583D56E6828 /* StringDistanceCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C70593D65C37D59A0F8C /* StringDistanceCalculator.swift */; };
 		3E37CF618E0063CD7038735D /* WordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF3E05D6CC07532749A2 /* WordsViewController.swift */; };
 		3E37CFBAD3191C926F1F2EAA /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C55F6CB09A955B097EED /* ServiceLocator.swift */; };
 		3E37CFD200CDEED01D646E9B /* AvatarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C0BA72DA4018F543AF1A /* AvatarService.swift */; };
@@ -188,6 +192,7 @@
 		3E37C187B0E332A553524FF3 /* JsonUserParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonUserParser.swift; sourceTree = "<group>"; };
 		3E37C1F9700AC20414BB119D /* InAppHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppHelper.swift; sourceTree = "<group>"; };
 		3E37C24DE3323E553F227BA7 /* BaseLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseLoginViewController.swift; sourceTree = "<group>"; };
+		3E37C26F571173D1A34B84C0 /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		3E37C27838218C4F22B21722 /* NSError+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Extension.swift"; sourceTree = "<group>"; };
 		3E37C283CC6663C54ADE8296 /* CoreDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		3E37C2D873FA507A19AD8B4E /* NameEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameEditViewController.swift; sourceTree = "<group>"; };
@@ -210,6 +215,7 @@
 		3E37C4B0E41355EE8EB15D15 /* ExpGainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpGainView.swift; sourceTree = "<group>"; };
 		3E37C4BEDF2AA2D749F18C4A /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		3E37C4FD95144695C0B33C1E /* WordLabelContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordLabelContainer.swift; sourceTree = "<group>"; };
+		3E37C53DCD55B39A905F6D14 /* Emoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		3E37C55F6CB09A955B097EED /* ServiceLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		3E37C5C4514B1C85700FD701 /* BaseMessageTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMessageTableView.swift; sourceTree = "<group>"; };
 		3E37C5E0D3BB7755C97ABFBA /* InAppService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppService.swift; sourceTree = "<group>"; };
@@ -221,6 +227,7 @@
 		3E37C6C7C133E31AA96F07CB /* JSQMessagesAvatarImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesAvatarImage.m; sourceTree = "<group>"; };
 		3E37C6E654A52598D1504630 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		3E37C700933EFCDFDC9B7684 /* StarImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarImage.swift; sourceTree = "<group>"; };
+		3E37C70593D65C37D59A0F8C /* StringDistanceCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringDistanceCalculator.swift; sourceTree = "<group>"; };
 		3E37C73CF0E1728E0C36BAC1 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		3E37C740EA3FC73CD995E1D3 /* CoreSingleTalk+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreSingleTalk+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3E37C74155F978515511E166 /* CoreMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreMessage.swift; sourceTree = "<group>"; };
@@ -242,10 +249,10 @@
 		3E37C950EF592E3489F22F2A /* RoundedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedLabel.swift; sourceTree = "<group>"; };
 		3E37C97ECF9691C6B9C3E22A /* CipherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherCell.swift; sourceTree = "<group>"; };
 		3E37C98636554709D1F080F3 /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
+		3E37C98D2B9F4E893CD4D339 /* SingleModeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleModeService.swift; sourceTree = "<group>"; };
 		3E37C98DB01429284B1E0CCC /* RemoteMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteMessage.swift; sourceTree = "<group>"; };
 		3E37C9A3614141DC5B51F768 /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lose.wav; sourceTree = "<group>"; };
 		3E37C9C5431B2975F0CF0EDA /* JsonTalkParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonTalkParser.swift; sourceTree = "<group>"; };
-		3E37C9D2F88CEB8C0C9A360A /* StringDistanceCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringDistanceCalculator.swift; sourceTree = "<group>"; };
 		3E37C9ED2D4796D1E2A18168 /* CoreWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreWord.swift; sourceTree = "<group>"; };
 		3E37CA002D08C6BD6690A3F3 /* SingleMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleMessage.swift; sourceTree = "<group>"; };
 		3E37CA0E47FE8053178B1840 /* CipherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherService.swift; sourceTree = "<group>"; };
@@ -269,6 +276,7 @@
 		3E37CC38BBB78EEC291E5537 /* TutorialCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialCell.swift; sourceTree = "<group>"; };
 		3E37CC3BCE2D521EC38F21E1 /* TimeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeService.swift; sourceTree = "<group>"; };
 		3E37CC3CA1DA3D967F7FCFF2 /* ShuffleCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShuffleCipher.swift; sourceTree = "<group>"; };
+		3E37CC9429E8E458FE99FF79 /* CipherTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherTableView.swift; sourceTree = "<group>"; };
 		3E37CCE7F85D3B25FC789326 /* MessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
 		3E37CCF50294A21336CBD706 /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
 		3E37CD4B1B909D08C2C5A635 /* FriendInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendInfo.swift; sourceTree = "<group>"; };
@@ -488,11 +496,11 @@
 				3E37C030B7A14EF7AAAFF84C /* Business */,
 				3E37C55F6CB09A955B097EED /* ServiceLocator.swift */,
 				3E37CB627C8C45BBD8C82592 /* ServiceInitializer.swift */,
-				3E37C9D2F88CEB8C0C9A360A /* StringDistanceCalculator.swift */,
 				3E37CB261522ACFBC9557A69 /* GUI */,
 				3E37CF93363D9A37CF8BFEF9 /* CoreData */,
 				3E37CD5FCF43794CD505FEB7 /* JsonParser */,
 				3E37C661DC1DA76D3A02A49C /* Service.swift */,
+				3E37C779FED1A278D4F5C274 /* Other */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -524,6 +532,7 @@
 				3E37CC38BBB78EEC291E5537 /* TutorialCell.swift */,
 				3E37CA1122E662AC8FBF97DC /* DifficultyCell.swift */,
 				3E37C97ECF9691C6B9C3E22A /* CipherCell.swift */,
+				3E37CC9429E8E458FE99FF79 /* CipherTableView.swift */,
 			);
 			path = Single;
 			sourceTree = "<group>";
@@ -564,6 +573,15 @@
 				3E37C740EA3FC73CD995E1D3 /* CoreSingleTalk+CoreDataProperties.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		3E37C779FED1A278D4F5C274 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				3E37C70593D65C37D59A0F8C /* StringDistanceCalculator.swift */,
+				3E37C53DCD55B39A905F6D14 /* Emoji.swift */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 		3E37C7F4457439FA4E8A69A3 /* Talk */ = {
@@ -739,6 +757,7 @@
 			children = (
 				3E37CA7F24D7C789667A1506 /* SingleTalkService.swift */,
 				3E37CF45362C75741955A6F2 /* SingleMessageService.swift */,
+				3E37C98D2B9F4E893CD4D339 /* SingleModeService.swift */,
 			);
 			path = SingleMode;
 			sourceTree = "<group>";
@@ -750,6 +769,7 @@
 				3E37C68FC994889C5F99557F /* WTFAlert.swift */,
 				3E37C950EF592E3489F22F2A /* RoundedLabel.swift */,
 				3E37C700933EFCDFDC9B7684 /* StarImage.swift */,
+				3E37C26F571173D1A34B84C0 /* UIHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1019,7 +1039,6 @@
 				3E37C08F0E72B51E34C34C0C /* MessageCipherService.swift in Sources */,
 				3E37CFBAD3191C926F1F2EAA /* ServiceLocator.swift in Sources */,
 				3E37C4B39DAC6C3A9C09222D /* ServiceInitializer.swift in Sources */,
-				3E37C23AD6DDBC7DD6BB269B /* StringDistanceCalculator.swift in Sources */,
 				3E37CAD76575F4FCF506839B /* CoreWord.swift in Sources */,
 				3E37CE37EBF06284E2CD83F5 /* CoreMessage.swift in Sources */,
 				3E37C232A669DDBFD4D7BA81 /* WTFChat.xcdatamodeld in Sources */,
@@ -1103,6 +1122,11 @@
 				3E37CE9249522003E406A452 /* ChallengeMessageService.swift in Sources */,
 				3E37C59C630524D1F5DA26BC /* SingleTalkService.swift in Sources */,
 				3E37C4A65CAA433F21B331CD /* SingleMessageService.swift in Sources */,
+				3E37C610A7533AD52FB60E11 /* SingleModeService.swift in Sources */,
+				3E37CF45BDDAE583D56E6828 /* StringDistanceCalculator.swift in Sources */,
+				3E37C99932B963E82129A66D /* Emoji.swift in Sources */,
+				3E37C26DF1D21CF031912277 /* UIHelper.swift in Sources */,
+				3E37C38A67ECA85E5CEC5A9D /* CipherTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

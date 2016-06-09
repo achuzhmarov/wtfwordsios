@@ -33,8 +33,8 @@ class MessageCipherService: Service {
             
             for guess in guesses {
                 for word in words! {
-                    if (word.wordType == WordType.New && getCompareString(word.text) == guess) {
-                        word.wordType = WordType.Success
+                    if (word.type == WordType.New && getCompareString(word.text) == guess) {
+                        word.type = WordType.Success
                     }
                 }
             }
@@ -100,9 +100,9 @@ class MessageCipherService: Service {
     
     func decipher(message: Message, hintedWord: Word, closeTry: Bool = false) {
         if (closeTry) {
-            hintedWord.wordType = WordType.CloseTry
+            hintedWord.type = WordType.CloseTry
         } else {
-            hintedWord.wordType = WordType.Success
+            hintedWord.type = WordType.Success
         }
         
         checkDeciphered(message)
@@ -117,11 +117,11 @@ class MessageCipherService: Service {
     
     func failed(message: Message) {
         for word in message.words! {
-            if (word.wordType == WordType.New) {
+            if (word.type == WordType.New) {
                 if (word.wasCloseTry) {
-                    word.wordType = WordType.CloseTry
+                    word.type = WordType.CloseTry
                 } else {
-                    word.wordType = WordType.Failed
+                    word.type = WordType.Failed
                 }
             }
         }
@@ -220,7 +220,7 @@ class MessageCipherService: Service {
                 if (isLetter(uniChar)) {
                     isLastLetter = true
                     
-                    words.append(Word(text: newWordText, additional: newWordAdditional, wordType: getWordType(newWordText)))
+                    words.append(Word(text: newWordText, additional: newWordAdditional, type: getWordType(newWordText)))
                     
                     newWordText = String(uniChar)
                     newWordAdditional = ""
@@ -230,7 +230,7 @@ class MessageCipherService: Service {
             }
         }
         
-        words.append(Word(text: newWordText, additional: newWordAdditional, wordType: getWordType(newWordText)))
+        words.append(Word(text: newWordText, additional: newWordAdditional, type: getWordType(newWordText)))
         
         return words
     }

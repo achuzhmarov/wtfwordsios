@@ -6,7 +6,7 @@ enum WordType: Int {
 
 class Word: NSObject {
     var text: String
-    var wordType = WordType.New
+    var type = WordType.New
     var additional = ""
     var cipheredText = ""
     var wasCloseTry = false
@@ -14,33 +14,33 @@ class Word: NSObject {
     init (word: Word) {
         self.text = word.text
         self.additional = word.additional
-        self.wordType = word.wordType
+        self.type = word.type
         self.cipheredText = word.cipheredText
         self.wasCloseTry = word.wasCloseTry
     }
 
-    init(text: String, wordType: WordType) {
+    init(text: String, type: WordType) {
         self.text = text
-        self.wordType = wordType
+        self.type = type
     }
 
-    init(text: String, additional: String, wordType: WordType) {
+    init(text: String, additional: String, type: WordType) {
         self.text = text
         self.additional = additional
-        self.wordType = wordType
+        self.type = type
     }
 
-    init(text: String, additional: String, wordType: WordType, cipheredText: String) {
+    init(text: String, additional: String, type: WordType, cipheredText: String) {
         self.text = text
         self.additional = additional
-        self.wordType = wordType
+        self.type = type
         self.cipheredText = cipheredText
     }
 
-    init(text: String, additional: String, wordType: WordType, cipheredText: String, wasCloseTry: Bool) {
+    init(text: String, additional: String, type: WordType, cipheredText: String, wasCloseTry: Bool) {
         self.text = text
         self.additional = additional
-        self.wordType = wordType
+        self.type = type
         self.cipheredText = cipheredText
         self.wasCloseTry = wasCloseTry
     }
@@ -54,7 +54,7 @@ class Word: NSObject {
     }
 
     func getTextForDecipher() -> String {
-        if (self.wordType == WordType.New) {
+        if (self.type == WordType.New) {
             return cipheredText
         } else {
             return text + additional
@@ -78,15 +78,15 @@ class Word: NSObject {
     }
 
     class func delimiterWord() -> Word {
-        return Word(text: " ", wordType: WordType.Delimiter)
+        return Word(text: " ", type: WordType.Delimiter)
     }
 
     class func lineBreakWord() -> Word {
-        return Word(text: "\n", wordType: WordType.LineBreak)
+        return Word(text: "\n", type: WordType.LineBreak)
     }
 
     func checkEquals(word: Word) -> Bool {
-        if (self.wordType != word.wordType ||
+        if (self.type != word.type ||
                 self.cipheredText != word.cipheredText ||
                 self.text != word.text ||
                 self.additional != word.additional
