@@ -1,42 +1,40 @@
 import Foundation
 
 class CipherTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
+    private let singleTalkService: SingleTalkService = serviceLocator.get(SingleTalkService)
+
+    private let cipherTypes = CipherType.getAll()
+    private var cipherDifficulty = CipherDifficulty.Easy
+
     @objc func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
 
     @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (talk == nil) {
-            return 0
-        }
-
-        return talk!.messages.count
-    }
-
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let message = talk.messages[indexPath.row]
-
-        var height = 35.5
-
-        if (needShowTime(indexPath.row, message: message)) {
-            height += 20
-        }
-
-        return CGFloat(height)
+        return cipherTypes.count
     }
 
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let message = talk.messages[indexPath.row]
+        let cell = dequeueReusableCellWithIdentifier("CipherCell", forIndexPath: indexPath) as! CipherCell
 
-        let isOutcoming = isOutcomingMessageCell(indexPath.row, message: message)
-        let cellIdentifier = getCellIdentifier(indexPath.row, message: message, isOutcoming: isOutcoming)
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! BaseMessageCell
+        let cipherType = cipherTypes[indexPath.row]
 
-        cell.updateMessage(message, isOutcoming: isOutcoming)
-
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MessageTableView.messageTapped(_:)))
-        cell.messageText.addGestureRecognizer(tap)
+        let singleTalk = singleTalkService.getSingleTalk(cipherType, cipherDifficulty: cipherDifficulty)
+        cell.updateSingleTalk(singleTalk!)
 
         return cell
+    }
+
+    func updateCipherDifficulty(cipherDifficulty: CipherDifficulty) {
+        self.cipherDifficulty = cipherDifficulty
+        reloadData()
+    }
+
+    func getSelectedCipherType() -> CipherType? {
+        if let index: NSIndexPath = indexPathForSelectedRow {
+            return cipherTypes[index.row]
+        }
+
+        return nil
     }
 }

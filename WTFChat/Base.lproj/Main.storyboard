@@ -133,6 +133,7 @@
         <!--Single Mode-->
         <scene sceneID="gQb-Ks-HfI">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nlC-Qd-y5y" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="ScS-sP-nfP" customClass="SingleModeViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pXO-1C-1HI"/>
@@ -143,8 +144,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xct-vC-LN0" customClass="CipherTableView" customModule="WTFChat" customModuleProvider="target">
-                                <rect key="frame" x="20" y="108" width="560" height="435"/>
+                                <rect key="frame" x="20" y="108" width="560" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="pNs-Zf-zir"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CipherCell" id="kR4-a5-NZM" customClass="CipherCell" customModule="WTFChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="560" height="44"/>
@@ -200,25 +204,51 @@
                                     <segment title="Hard"/>
                                 </segments>
                                 <color key="tintColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="difficultyChanged:" destination="ScS-sP-nfP" eventType="valueChanged" id="JDy-uB-Zoc"/>
+                                </connections>
                             </segmentedControl>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kko-Hd-9CC">
+                                <rect key="frame" x="20" y="266" width="560" height="277"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lyY-oi-gsV">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="9uO-xp-eXT">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Xct-vC-LN0" firstAttribute="top" secondItem="LdY-lx-5u8" secondAttribute="bottom" constant="8" id="8gg-eu-W0T"/>
                             <constraint firstItem="LdY-lx-5u8" firstAttribute="trailing" secondItem="MMr-QE-d2u" secondAttribute="trailingMargin" id="9kr-K1-mZM"/>
-                            <constraint firstItem="mWF-Gg-Zqd" firstAttribute="top" secondItem="Xct-vC-LN0" secondAttribute="bottom" constant="8" id="G3M-1g-aDn"/>
+                            <constraint firstItem="kko-Hd-9CC" firstAttribute="top" secondItem="Xct-vC-LN0" secondAttribute="bottom" constant="8" id="AKd-qv-5mn"/>
                             <constraint firstItem="LdY-lx-5u8" firstAttribute="leading" secondItem="MMr-QE-d2u" secondAttribute="leadingMargin" id="OCR-YT-GOU"/>
                             <constraint firstItem="LdY-lx-5u8" firstAttribute="top" secondItem="pXO-1C-1HI" secondAttribute="bottom" constant="8" id="Rwx-9f-IO2"/>
                             <constraint firstItem="Xct-vC-LN0" firstAttribute="trailing" secondItem="MMr-QE-d2u" secondAttribute="trailingMargin" id="SNl-WP-2Pm"/>
                             <constraint firstItem="Xct-vC-LN0" firstAttribute="leading" secondItem="MMr-QE-d2u" secondAttribute="leadingMargin" id="UuR-Vj-bpG"/>
+                            <constraint firstItem="mWF-Gg-Zqd" firstAttribute="top" secondItem="kko-Hd-9CC" secondAttribute="bottom" constant="8" id="oH5-7d-aJQ"/>
+                            <constraint firstItem="kko-Hd-9CC" firstAttribute="trailing" secondItem="MMr-QE-d2u" secondAttribute="trailingMargin" id="tIL-V3-4nl"/>
+                            <constraint firstItem="kko-Hd-9CC" firstAttribute="leading" secondItem="MMr-QE-d2u" secondAttribute="leadingMargin" id="vL2-22-NGy"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Single Mode" id="dgC-GV-RQx"/>
                     <connections>
                         <outlet property="cipherTableView" destination="Xct-vC-LN0" id="NDA-41-6dZ"/>
+                        <outlet property="difficultySelector" destination="LdY-lx-5u8" id="YdH-em-ILq"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nlC-Qd-y5y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1121" y="-1182"/>
         </scene>

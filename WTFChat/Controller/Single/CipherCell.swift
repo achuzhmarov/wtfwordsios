@@ -23,11 +23,11 @@ class CipherCell: UITableViewCell {
 
         cipherText.text = singleTalk.cipherType.description
 
-        if (singleTalk.wins < singleTalk.cipherSettings!.maxStars) {
+        /*if (singleTalk.wins < singleTalk.cipherSettings!.maxStars) {
             self.backgroundColor = UIColor.whiteColor()
         } else {
             self.backgroundColor = StarImage.lightGoldColor
-        }
+        }*/
 
         starImage.updateStarImage(singleTalk.wins, max: singleTalk.cipherSettings!.maxStars)
     }
