@@ -109,11 +109,11 @@ class FriendCell: UITableViewCell {
                 cipheredNum.text = String(talk.cipheredNum)
             }
             
-            cipheredNum.layer.backgroundColor = CIPHERED_COLOR.CGColor
+            cipheredNum.layer.backgroundColor = Color.CIPHERED.CGColor
         } else if (talk.decipherStatus == .Success) {
-            cipheredNum.layer.backgroundColor = SUCCESS_COLOR.CGColor
+            cipheredNum.layer.backgroundColor = Color.SUCCESS.CGColor
         } else if (talk.decipherStatus == .Failed) {
-            cipheredNum.layer.backgroundColor = FAILED_COLOR.CGColor
+            cipheredNum.layer.backgroundColor = Color.FAILED.CGColor
         } else {
             setEmptyCiphered()
         }
@@ -143,11 +143,11 @@ class FriendCell: UITableViewCell {
 
         switch message.getMessageStatus() {
             case .Success:
-                lastMessage.layer.backgroundColor = SUCCESS_COLOR.CGColor
+                lastMessage.layer.backgroundColor = Color.SUCCESS.CGColor
             case .Failed:
-                lastMessage.layer.backgroundColor = FAILED_COLOR.CGColor
+                lastMessage.layer.backgroundColor = Color.FAILED.CGColor
             case .Ciphered:
-                lastMessage.layer.backgroundColor = CIPHERED_COLOR.CGColor
+                lastMessage.layer.backgroundColor = Color.CIPHERED.CGColor
         }
     }
 }

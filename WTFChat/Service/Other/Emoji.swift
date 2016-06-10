@@ -7,4 +7,6 @@ class Emoji {
     static let NEW_HEART = "💝"
     static let STAR = "⭐"
     static let MASTERED_STAR = "🌟"
+    static let LOCK = "🔒"
+    
 }

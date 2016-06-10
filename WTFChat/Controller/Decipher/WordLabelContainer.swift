@@ -53,17 +53,17 @@ class WordLabelContainer {
         switch word.type {
         case .New:
             if (word.wasCloseTry) {
-                label.layer.backgroundColor = TRY_COLOR.CGColor
+                label.layer.backgroundColor = Color.TRY.CGColor
             } else {
-                label.layer.backgroundColor = CIPHERED_COLOR.CGColor
+                label.layer.backgroundColor = Color.CIPHERED.CGColor
             }
         case .Ignore:
-            label.layer.backgroundColor = IGNORE_COLOR.CGColor
+            label.layer.backgroundColor = Color.IGNORE.CGColor
             label.textColor = UIColor.blackColor()
         case .Failed:
-            label.layer.backgroundColor = FAILED_COLOR.CGColor
+            label.layer.backgroundColor = Color.FAILED.CGColor
         default:
-            label.layer.backgroundColor = SUCCESS_COLOR.CGColor
+            label.layer.backgroundColor = Color.SUCCESS.CGColor
         }
         
         label.layer.cornerRadius = 8.0
@@ -103,7 +103,7 @@ class WordLabelContainer {
         UIView.animateWithDuration(0.3, delay: 0,
             options: [], animations: {
                 self.label.center.y -= 3
-                self.label.layer.backgroundColor = TRY_COLOR.CGColor
+                self.label.layer.backgroundColor = Color.TRY.CGColor
             }, completion: nil)
         
         UIView.animateWithDuration(0.4, delay: 0.3,
@@ -117,7 +117,7 @@ class WordLabelContainer {
         UIView.animateWithDuration(0.3, delay: 0,
             options: [], animations: {
                 self.label.center.y -= 3
-                self.label.layer.backgroundColor = FAILED_COLOR.CGColor
+                self.label.layer.backgroundColor = Color.FAILED.CGColor
             }, completion: nil)
         
         UIView.animateWithDuration(0.4, delay: 0.3,
@@ -125,9 +125,9 @@ class WordLabelContainer {
                 self.label.center.y += 3
                 
                 if (self.word.wasCloseTry) {
-                    self.label.layer.backgroundColor = TRY_COLOR.CGColor
+                    self.label.layer.backgroundColor = Color.TRY.CGColor
                 } else {
-                    self.label.layer.backgroundColor = CIPHERED_COLOR.CGColor
+                    self.label.layer.backgroundColor = Color.CIPHERED.CGColor
                 }
             }, completion: nil)
     }

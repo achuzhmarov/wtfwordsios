@@ -13,8 +13,6 @@ protocol CipherPickedComputer {
 }
 
 class CipherPickerViewController: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
-    private let cipherService: CipherService = serviceLocator.get(CipherService)
-
     private let cipherTypes = CipherType.getAll()
     private let cipherDifficulties = CipherDifficulty.getAll()
 

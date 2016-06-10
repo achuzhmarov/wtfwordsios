@@ -9,12 +9,8 @@ class SingleModeViewController: UIViewController {
     private let singleTalkService: SingleTalkService = serviceLocator.get(SingleTalkService)
 
     @IBOutlet weak var cipherTableView: CipherTableView!
-    @IBOutlet weak var difficultySelector: UISegmentedControl!
 
-    private let cipherDifficulties = CipherDifficulty.getAll()
-    private var selectedDifficulty = CipherDifficulty.Easy
-
-    private var cipherTalks: [SingleTalk]!
+    private var selectedCipherType = CipherType.RightCutter
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,20 +19,8 @@ class SingleModeViewController: UIViewController {
         let nav = self.navigationController?.navigationBar
         nav?.translucent = false
 
-        cipherTableView.delegate = self.cipherTableView
-        cipherTableView.dataSource = self.cipherTableView
-
-        /*let tryButton = UIBarButtonItem(title: "Try it",
-                style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SendMessageViewController.tryTapped(_:)))*/
-
-        //let heartsText = Emoji.FULL_HEART + Emoji.FULL_HEART + Emoji.FULL_HEART
-        /*let heartsText = Emoji.FULL_HEART
-
-        let heartButton = UIBarButtonItem(title: heartsText,
-            style: UIBarButtonItemStyle.Plain, target: self, action: nil)
-
-        navigationItem.rightBarButtonItem = heartButton*/
-        //self.tabBarController?.tabBar.items![0].title = ""
+        cipherTableView.delegate = cipherTableView
+        cipherTableView.dataSource = cipherTableView
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -45,21 +29,16 @@ class SingleModeViewController: UIViewController {
         cipherTableView.reloadData()
     }
 
-    @IBAction func difficultyChanged(sender: AnyObject) {
-        selectedDifficulty = cipherDifficulties[difficultySelector.selectedSegmentIndex]
-        cipherTableView.updateCipherDifficulty(selectedDifficulty)
-    }
-
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         UIHelper.clearBackButton(navigationItem)
 
-        if segue.identifier == "showMessages" {
-            let targetController = segue.destinationViewController as! SingleMessageViewController
+        /*if segue.identifier == "selectCipher" {
+            let targetController = segue.destinationViewController as! LvlSelectViewController
 
             if let cipherType = cipherTableView.getSelectedCipherType() {
                 let singleTalk = singleTalkService.getSingleTalk(cipherType, cipherDifficulty: selectedDifficulty)
                 targetController.talk = singleTalk!
             }
-        }
+        }*/
     }
 }
