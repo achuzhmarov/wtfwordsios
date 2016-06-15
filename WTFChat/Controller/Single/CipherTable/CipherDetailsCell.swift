@@ -11,12 +11,18 @@ class CipherDetailsCell: UITableViewCell {
     private var selectedDifficulty = CipherDifficulty.Easy
     private var cipherType = CipherType.RightCutter
 
+    func initStyle() {
+        self.selectionStyle = .None;
+    }
+
     @IBAction func difficultyChanged(sender: AnyObject) {
         selectedDifficulty = cipherDifficulties[difficultySelector.selectedSegmentIndex]
         updateLvlCollectionView()
     }
 
     func updateCipherType(cipherType: CipherType) {
+        initStyle()
+
         self.cipherType = cipherType
 
         lvlCollectionView.delegate = lvlCollectionView

@@ -26,30 +26,89 @@ class CipherTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
         }
     }
 
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return tableView.rowHeight
+    }
+
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if (indexPath.row == HEADER_ROW) {
             return tableView.rowHeight
         } else {
-            return CGFloat(LVLS_ROW_HEIGHT)
+            let cellSpacing: CGFloat = 10.0
+            let cellSize: CGFloat = 45.0
+            let widthPadding: CGFloat = 8.0 * 2
+
+            let lvlCollectionHeight = getCollectionViewHeight(tableView, indexPath: indexPath,
+                    cellSpacing: cellSpacing, cellSize: cellSize, widthPadding: widthPadding)
+
+            let difficultySelectorHeight: CGFloat = 28.0
+            let verticalPadding: CGFloat = 8.0 * 2
+
+            return lvlCollectionHeight + difficultySelectorHeight + verticalPadding
         }
+    }
+
+    private func getCollectionViewHeight(tableView: UITableView, indexPath: NSIndexPath,
+                                    cellSpacing: CGFloat, cellSize: CGFloat, widthPadding: CGFloat) -> CGFloat {
+
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = CGSizeMake(cellSize, cellSize)
+
+        // Set left and right margins
+        flowLayout.minimumInteritemSpacing = cellSpacing
+
+        // Set top and bottom margins
+        flowLayout.minimumLineSpacing = cellSpacing
+
+        let size = CGSize(
+            width: tableView.bounds.width - widthPadding,
+            height: tableView.bounds.height
+        )
+
+        let frame = CGRect(
+            origin: tableView.bounds.origin,
+            size: size
+        )
+
+        let lvlCollectionView = LvlCollectionView(frame: frame, collectionViewLayout: flowLayout)
+
+        let cipherType = cipherTypes[indexPath.section]
+        let singleTalk = singleTalkService.getSingleTalk(cipherType, cipherDifficulty: .Hard)!
+        lvlCollectionView.updateSingleTalk(singleTalk)
+        lvlCollectionView.dataSource = lvlCollectionView
+
+        let collectionViewSize = lvlCollectionView.collectionViewLayout.collectionViewContentSize()
+
+        return collectionViewSize.height
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if (indexPath.row == HEADER_ROW) {
-            let cell = dequeueReusableCellWithIdentifier(HEADER_CELL_ID, forIndexPath: indexPath) as! CipherHeaderCell
-
-            let cipherType = cipherTypes[indexPath.section]
-            cell.updateCipherType(cipherType)
-
-            return cell
+            return createCipherHeaderCell(indexPath)
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(DETAILS_CELL_ID, forIndexPath: indexPath) as! CipherDetailsCell
-
-            let cipherType = cipherTypes[indexPath.section]
-            cell.updateCipherType(cipherType)
-
+            let cell = createCipherDetailsCell(indexPath)
+            tableView.setNeedsLayout()
+            tableView.layoutIfNeeded()
             return cell
         }
+    }
+
+    private func createCipherHeaderCell(indexPath: NSIndexPath) -> CipherHeaderCell  {
+        let cell = dequeueReusableCellWithIdentifier(HEADER_CELL_ID, forIndexPath: indexPath) as! CipherHeaderCell
+
+        let cipherType = cipherTypes[indexPath.section]
+        cell.updateCipherType(cipherType)
+
+        return cell
+    }
+
+    private func createCipherDetailsCell(indexPath: NSIndexPath) -> CipherDetailsCell  {
+        let cell = dequeueReusableCellWithIdentifier(DETAILS_CELL_ID, forIndexPath: indexPath) as! CipherDetailsCell
+
+        let cipherType = cipherTypes[indexPath.section]
+        cell.updateCipherType(cipherType)
+
+        return cell
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

@@ -21,6 +21,7 @@ class SingleModeViewController: UIViewController {
 
         cipherTableView.delegate = cipherTableView
         cipherTableView.dataSource = cipherTableView
+        cipherTableView.rowHeight = UITableViewAutomaticDimension
     }
 
     override func viewWillAppear(animated: Bool) {
