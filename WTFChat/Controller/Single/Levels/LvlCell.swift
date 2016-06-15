@@ -6,7 +6,7 @@ class LvlCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
 
     private func initStyle() {
-        titleLabel.textColor = Color.FONT
+        titleLabel.textColor = Color.Font
 
         layer.cornerRadius = 12.0
 
@@ -20,11 +20,11 @@ class LvlCell: UICollectionViewCell {
         titleLabel.text = String(level.id)
 
         if (level.cleared) {
-            layer.backgroundColor = Color.SUCCESS.CGColor
+            layer.backgroundColor = Color.Success.CGColor
         } else if singleModeService.isLevelAvailable(level) {
-            layer.backgroundColor = Color.CIPHERED.CGColor
+            layer.backgroundColor = Color.Ciphered.CGColor
         } else {
-            layer.backgroundColor = Color.IGNORE.CGColor
+            layer.backgroundColor = Color.Ignore.CGColor
             titleLabel.text = Emoji.LOCK
         }
     }

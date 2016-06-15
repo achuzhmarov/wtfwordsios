@@ -14,7 +14,7 @@ class BaseMessageCell: UITableViewCell {
 
         self.selectionStyle = .None;
 
-        messageText.textColor = Color.FONT
+        messageText.textColor = Color.Font
         messageText.font = UIFont(name: messageText.font.fontName, size: 16)
         messageText.layer.cornerRadius = 10.0
         messageText.initStyle()
@@ -29,11 +29,11 @@ class BaseMessageCell: UITableViewCell {
 
         switch message.getMessageStatus() {
             case .Success:
-                messageText.layer.backgroundColor = Color.SUCCESS.CGColor
+                messageText.layer.backgroundColor = Color.Success.CGColor
             case .Failed:
-                messageText.layer.backgroundColor = Color.FAILED.CGColor
+                messageText.layer.backgroundColor = Color.Failed.CGColor
             case .Ciphered:
-                messageText.layer.backgroundColor = Color.CIPHERED.CGColor
+                messageText.layer.backgroundColor = Color.Ciphered.CGColor
         }
     }
 }

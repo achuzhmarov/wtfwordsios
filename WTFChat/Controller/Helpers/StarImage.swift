@@ -1,25 +1,61 @@
 import UIKit
 
-class StarImage: UIImageView {
-    //Gold colors
-    static let lightGoldColor = UIColor(red: 1.0, green: 0.98, blue: 0.9, alpha: 1.0)
-    static let darkGoldColor = UIColor(red: 0.6, green: 0.5, blue: 0.15, alpha: 1.0)
-    static let midGoldColor = UIColor(red: 0.86, green: 0.73, blue: 0.3, alpha: 1.0)
+class StarGradient {
+    let light: UIColor
+    let mid: UIColor
+    let dark: UIColor
 
-    static var cache = [CGFloat: UIImage]()
+    init(light: UIColor, mid: UIColor, dark: UIColor) {
+        self.light = light
+        self.mid = mid
+        self.dark = dark
+    }
 
-    func updateStarImage(current: Int, max: Int) {
-        let gradientProgress = calculateGradientProgress(current, max: max)
+    static let EasyGrad = StarGradient(light: Color.EasyLight, mid: Color.EasyMid, dark: Color.EasyDark)
+    static let NormalGrad = StarGradient(light: Color.NormalLight, mid: Color.NormalMid, dark: Color.NormalDark)
+    static let HardGrad = StarGradient(light: Color.HardLight, mid: Color.HardMid, dark: Color.HardDark)
+}
 
-        if let cachedImage = StarImage.cache[gradientProgress] {
-            image = cachedImage
-        } else {
-            image = createStarImage(gradientProgress)
-            StarImage.cache[gradientProgress] = image
+class StarImageCache {
+    var cache = [CipherDifficulty: [CGFloat: UIImage]]()
+
+    init() {
+        for difficulty in CipherDifficulty.getAll() {
+            cache[difficulty] = [CGFloat: UIImage]()
         }
     }
 
-    private func createStarImage(gradientProgress: CGFloat) -> UIImage {
+    func getImage(difficulty: CipherDifficulty, progress: CGFloat) -> UIImage? {
+        let difficultyCache = cache[difficulty]!
+
+        if let cachedImage = difficultyCache[progress] {
+            return cachedImage
+        }
+
+        return nil
+    }
+
+    func addImage(difficulty: CipherDifficulty, progress: CGFloat, image: UIImage) {
+        cache[difficulty]![progress] = image
+    }
+}
+
+class StarImage: UIImageView {
+    private static var cache = StarImageCache()
+
+    func updateStarImage(difficulty: CipherDifficulty, progress: Float) {
+        let gradientProgress = calculateGradientProgress(progress)
+
+        if let cachedImage = StarImage.cache.getImage(difficulty, progress: gradientProgress) {
+            image = cachedImage
+        } else {
+            let starGradient = getStarGradient(difficulty)
+            image = createStarImage(gradientProgress, starGradient: starGradient)
+            StarImage.cache.addImage(difficulty, progress: gradientProgress, image: image!)
+        }
+    }
+
+    private func createStarImage(gradientProgress: CGFloat, starGradient: StarGradient) -> UIImage {
         print("creating Star Image for gradient \(gradientProgress)")
 
         let size = CGSize(width: bounds.width, height: bounds.height)
@@ -30,7 +66,7 @@ class StarImage: UIImageView {
         //Add Shadow
         let shadow:UIColor = UIColor.blackColor().colorWithAlphaComponent(0.80)
         let shadowOffset = CGSizeMake(1.0, 1.0)
-        let shadowBlurRadius: CGFloat = 4
+        let shadowBlurRadius: CGFloat = size.height / 10
 
         CGContextSetShadowWithColor(context,
                 shadowOffset,
@@ -59,7 +95,7 @@ class StarImage: UIImageView {
 
         starPath.closePath()
 
-        StarImage.darkGoldColor.setStroke()
+        starGradient.dark.setStroke()
         starPath.lineWidth = 1
         starPath.stroke()
 
@@ -74,9 +110,9 @@ class StarImage: UIImageView {
         let gradient = CGGradientCreateWithColors(
             CGColorSpaceCreateDeviceRGB(),
                 [
-                    StarImage.lightGoldColor.CGColor,
-                    StarImage.midGoldColor.CGColor,
-                    StarImage.darkGoldColor.CGColor
+                    starGradient.light.CGColor,
+                    starGradient.mid.CGColor,
+                    starGradient.dark.CGColor
                 ],
 
                 [
@@ -105,14 +141,20 @@ class StarImage: UIImageView {
 
     private static let gradientProgress: [CGFloat] = [0.1, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7]
 
-    private func calculateGradientProgress(current: Int, max: Int) -> CGFloat {
-        if (current >= max) {
-            return 1.0
-        }
-
-        let progress = Float(current) / Float(max)
+    private func calculateGradientProgress(progress: Float) -> CGFloat {
         let gradientIndex = Int(progress * 10)
 
         return StarImage.gradientProgress[gradientIndex]
+    }
+
+    private func getStarGradient(difficulty: CipherDifficulty) -> StarGradient {
+        switch difficulty {
+            case .Easy:
+                return StarGradient.EasyGrad
+            case .Normal:
+                return StarGradient.NormalGrad
+            case .Hard:
+                return StarGradient.HardGrad
+        }
     }
 }

@@ -35,4 +35,16 @@ class SingleModeCategory {
     func getLastLevel() -> Level {
         return levels[levels.count - 1]
     }
+
+    func getProgress(difficulty: CipherDifficulty) -> Float {
+        var completedLevels = 0
+
+        for level in levels {
+            if (level.isClearedForDifficulty(difficulty)) {
+                completedLevels += 1
+            }
+        }
+
+        return Float(completedLevels) / Float(levels.count)
+    }
 }

@@ -25,4 +25,19 @@ class Level {
     func setCoreLevel(coreLevel: CoreLevel) {
         self.coreLevel = coreLevel
     }
+
+    func isClearedForDifficulty(difficulty: CipherDifficulty) -> Bool {
+        if (cleared) {
+            switch difficulty {
+                case .Easy:
+                    return true
+                case .Normal:
+                    return clearedDifficulty == .Normal || clearedDifficulty == .Hard
+                case .Hard:
+                    return clearedDifficulty == .Hard
+            }
+        } else {
+            return false
+        }
+    }
 }

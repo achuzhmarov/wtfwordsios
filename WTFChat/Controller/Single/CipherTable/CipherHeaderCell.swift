@@ -3,7 +3,9 @@ import UIKit
 class CipherHeaderCell: UITableViewCell {
     private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
 
-    @IBOutlet weak var starImage: StarImage!
+    @IBOutlet weak var easyStarImage: StarImage!
+    @IBOutlet weak var normalStarImage: StarImage!
+    @IBOutlet weak var hardStarImage: StarImage!
     @IBOutlet weak var cipherText: UILabel!
 
     func initStyle() {
@@ -15,12 +17,10 @@ class CipherHeaderCell: UITableViewCell {
 
         cipherText.text = cipherType.description
 
-        //let category = singleModeCategoryService.getSingleTalk(cipherType)
+        let category = singleModeCategoryService.getCategory(cipherType)!
 
-        /*let easyTalk = singleModeCategoryService.getSingleTalk(cipherType, cipherDifficulty: .Easy)!
-        let normalTalk = singleModeCategoryService.getSingleTalk(cipherType, cipherDifficulty: .Normal)!
-        let hardTalk = singleModeCategoryService.getSingleTalk(cipherType, cipherDifficulty: .Hard)!
-
-        starImage.updateStarImage(easyTalk.wins, max: easyTalk.cipherSettings!.maxStars)*/
+        easyStarImage.updateStarImage(.Easy, progress: category.getProgress(.Easy))
+        normalStarImage.updateStarImage(.Normal, progress: category.getProgress(.Normal))
+        hardStarImage.updateStarImage(.Hard, progress: category.getProgress(.Hard))
     }
 }

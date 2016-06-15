@@ -24,6 +24,7 @@
 		3E37C0E7CB86520D7D087D9F /* CoreSingleModeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C84CFE48DB3D81A1DF54 /* CoreSingleModeCategory.swift */; };
 		3E37C1133C5E08DA63EDD707 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CAC67CD3944E4BBD3AAC /* Word.swift */; };
 		3E37C11FE8560E4F16B62C17 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C49D18DB2FD017226F88 /* SettingsViewController.swift */; };
+		3E37C150C84BB5935FF38A7A /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CBBDBF1FE0CA7AFB58BF /* Level.swift */; };
 		3E37C171F2B2B6C7B82FDE2B /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C8C94FDE3C085500AD3A /* SwiftyJSON.swift */; };
 		3E37C1767BCB23EE740A1F12 /* InAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C5E0D3BB7755C97ABFBA /* InAppService.swift */; };
 		3E37C19182FB55501F45A16F /* TutorialDecipherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C7567924686F83EB2112 /* TutorialDecipherViewController.swift */; };
@@ -126,7 +127,6 @@
 		3E37CD9B65744FC3AE100E93 /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E37CA9049DA3801F0F07E0F /* error.wav */; };
 		3E37CDC66A4CA01F05B90265 /* RemoteMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C98DB01429284B1E0CCC /* RemoteMessage.swift */; };
 		3E37CDC6D13DA0D9F0C02B63 /* CipherTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C07D558CCCFCE312D2D5 /* CipherTableView.swift */; };
-		3E37CDDFD0EFF15D0498D04A /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C4ABA39193311FA3D650 /* Level.swift */; };
 		3E37CE2828A4F691CF812C2B /* TutorialMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C659ABA1CBA0BD66C8BC /* TutorialMessagesViewController.swift */; };
 		3E37CE37EBF06284E2CD83F5 /* CoreMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C74155F978515511E166 /* CoreMessage.swift */; };
 		3E37CE3F38C74E5401872C02 /* TimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CC3BCE2D521EC38F21E1 /* TimeService.swift */; };
@@ -227,7 +227,6 @@
 		3E37C494AB274D00A123AD98 /* TalkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkService.swift; sourceTree = "<group>"; };
 		3E37C4974DA6892C78D7443B /* CoreLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLevel.swift; sourceTree = "<group>"; };
 		3E37C49D18DB2FD017226F88 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		3E37C4ABA39193311FA3D650 /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		3E37C4AC96F9D6F7719268D2 /* ChallengeMessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeMessageService.swift; sourceTree = "<group>"; };
 		3E37C4B0E41355EE8EB15D15 /* ExpGainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpGainView.swift; sourceTree = "<group>"; };
 		3E37C4BEDF2AA2D749F18C4A /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
@@ -289,6 +288,7 @@
 		3E37CB627C8C45BBD8C82592 /* ServiceInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceInitializer.swift; sourceTree = "<group>"; };
 		3E37CB956830C95C77F2EB83 /* SendMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMessageViewController.swift; sourceTree = "<group>"; };
 		3E37CB9BD06B805CB468863F /* CoreLevel+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreLevel+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3E37CBBDBF1FE0CA7AFB58BF /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		3E37CBC272EAAF55FCEC9D1B /* MessageTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableView.swift; sourceTree = "<group>"; };
 		3E37CBF3B1602BA1DD301A55 /* UIColor+JSQMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+JSQMessages.h"; sourceTree = "<group>"; };
 		3E37CC1146FBFEFE53A3B280 /* DecipherHintsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecipherHintsHelper.swift; sourceTree = "<group>"; };
@@ -531,7 +531,6 @@
 				3E37CAC67CD3944E4BBD3AAC /* Word.swift */,
 				3E37C7F4457439FA4E8A69A3 /* Talk */,
 				3E37CAE07249D8C9B73719EE /* Message */,
-				3E37C4ABA39193311FA3D650 /* Level.swift */,
 				3E37C93ABDD8DEAF3A0ED13C /* Single */,
 			);
 			path = Business;
@@ -650,6 +649,7 @@
 			isa = PBXGroup;
 			children = (
 				3E37C1AF38A5FBA2397A56AE /* SingleModeCategory.swift */,
+				3E37CBBDBF1FE0CA7AFB58BF /* Level.swift */,
 			);
 			path = Single;
 			sourceTree = "<group>";
@@ -1180,13 +1180,13 @@
 				3E37CDC6D13DA0D9F0C02B63 /* CipherTableView.swift in Sources */,
 				3E37CED21971E4DF98325C30 /* CipherHeaderCell.swift in Sources */,
 				3E37C4739A4D7735DFA7A868 /* CipherDetailsCell.swift in Sources */,
-				3E37CDDFD0EFF15D0498D04A /* Level.swift in Sources */,
 				3E37C62FCE9D99D1B39AE420 /* CoreLevel.swift in Sources */,
 				3E37C5A1A6E0ACFDD0F4F67A /* CoreLevel+CoreDataProperties.swift in Sources */,
 				3E37C2772DE28B94A5E838AB /* SingleTalk.swift in Sources */,
 				3E37C9DFD34CBE7A92508B6A /* SingleModeCategory.swift in Sources */,
 				3E37C37691C04504C860F0B6 /* CoreLevelService.swift in Sources */,
 				3E37C0E2CF6459EAE081D1E4 /* LevelService.swift in Sources */,
+				3E37C150C84BB5935FF38A7A /* Level.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -166,27 +166,47 @@
                                                         <constraint firstAttribute="height" constant="1" id="Sib-N8-gdg"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DCG-tB-uav" customClass="StarImage" customModule="WTFChat" customModuleProvider="target">
-                                                    <rect key="frame" x="522" y="6" width="30" height="30"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DCG-tB-uav" customClass="StarImage" customModule="WTFChat" customModuleProvider="target">
+                                                    <rect key="frame" x="522" y="7" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="HDs-gE-KaL"/>
                                                         <constraint firstAttribute="height" constant="30" id="M4J-7H-kEl"/>
                                                     </constraints>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WDF-I9-GxN" customClass="StarImage" customModule="WTFChat" customModuleProvider="target">
+                                                    <rect key="frame" x="484" y="7" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="Q01-O0-TH2"/>
+                                                        <constraint firstAttribute="height" constant="30" id="aoy-Q3-NvG"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="swf-CS-FaV" customClass="StarImage" customModule="WTFChat" customModuleProvider="target">
+                                                    <rect key="frame" x="446" y="7" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="4kP-KQ-Aob"/>
+                                                        <constraint firstAttribute="height" constant="30" id="hy9-kP-Ugd"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="4Me-rT-QkN" firstAttribute="leading" secondItem="rA7-iA-1y8" secondAttribute="leading" id="1gO-SX-hqQ"/>
+                                                <constraint firstItem="swf-CS-FaV" firstAttribute="centerY" secondItem="rA7-iA-1y8" secondAttribute="centerY" id="8gg-pV-lrR"/>
+                                                <constraint firstItem="WDF-I9-GxN" firstAttribute="leading" secondItem="swf-CS-FaV" secondAttribute="trailing" constant="8" id="9df-lq-6IO"/>
                                                 <constraint firstItem="4Me-rT-QkN" firstAttribute="top" secondItem="rA7-iA-1y8" secondAttribute="top" id="EpG-0w-HcG"/>
+                                                <constraint firstItem="DCG-tB-uav" firstAttribute="leading" secondItem="WDF-I9-GxN" secondAttribute="trailing" constant="8" id="IKV-Re-N5t"/>
                                                 <constraint firstItem="DCG-tB-uav" firstAttribute="trailing" secondItem="rA7-iA-1y8" secondAttribute="trailingMargin" id="JEV-Av-KIl"/>
                                                 <constraint firstItem="M7v-DX-kdx" firstAttribute="leading" secondItem="rA7-iA-1y8" secondAttribute="leadingMargin" id="aqR-1o-lcQ"/>
                                                 <constraint firstItem="DCG-tB-uav" firstAttribute="centerY" secondItem="rA7-iA-1y8" secondAttribute="centerY" id="cRg-eG-KPy"/>
                                                 <constraint firstAttribute="trailing" secondItem="4Me-rT-QkN" secondAttribute="trailing" id="f3c-Qy-fpR"/>
+                                                <constraint firstItem="WDF-I9-GxN" firstAttribute="centerY" secondItem="rA7-iA-1y8" secondAttribute="centerY" id="i3L-RY-XRg"/>
                                                 <constraint firstItem="M7v-DX-kdx" firstAttribute="centerY" secondItem="rA7-iA-1y8" secondAttribute="centerY" id="vte-k3-hdb"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="cipherText" destination="M7v-DX-kdx" id="3Nu-Ha-1Hl"/>
-                                            <outlet property="starImage" destination="DCG-tB-uav" id="zBd-cn-6Yc"/>
+                                            <outlet property="easyStarImage" destination="swf-CS-FaV" id="oaI-yL-jTy"/>
+                                            <outlet property="hardStarImage" destination="DCG-tB-uav" id="90Y-8f-R9B"/>
+                                            <outlet property="normalStarImage" destination="WDF-I9-GxN" id="mKT-cV-igI"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CipherDetailsCell" rowHeight="300" id="yZZ-ao-LLf" customClass="CipherDetailsCell" customModule="WTFChat" customModuleProvider="target">
