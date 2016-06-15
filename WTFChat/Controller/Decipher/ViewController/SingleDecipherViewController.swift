@@ -5,7 +5,7 @@ class SingleDecipherViewController: BaseDecipherViewController {
     private let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
 
     override func sendMessageUpdate() {
-        singleMessageService.updateMessage(message as! SingleMessage)
+        //singleMessageService.updateMessage(message as! SingleMessage)
     }
 
     override func sendMessageDecipher() {

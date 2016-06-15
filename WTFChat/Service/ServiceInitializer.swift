@@ -29,8 +29,9 @@ class ServiceInitializer {
         //core
         let coreDataService = CoreDataService()
         let coreMessageService = CoreMessageService(coreDataService: coreDataService)
-        let coreSingleTalkService = CoreSingleTalkService(coreDataService: coreDataService)
-        let coreSingleMessageService = CoreSingleMessageService(coreDataService: coreDataService)
+        let coreSingleModeCategoryService = CoreSingleModeCategoryService(coreDataService: coreDataService)
+        //let coreSingleMessageService = CoreSingleMessageService(coreDataService: coreDataService)
+        let coreLevelService = CoreLevelService(coreDataService: coreDataService)
 
         //TODO - AWFUL DEPENDENCY
         let talkService = TalkService(
@@ -87,8 +88,8 @@ class ServiceInitializer {
         serviceLocator.add(
             coreDataService,
             coreMessageService,
-            coreSingleTalkService,
-            coreSingleMessageService
+            coreSingleModeCategoryService,
+            coreLevelService
         )
 
         let cipherService = CipherService()
@@ -98,29 +99,32 @@ class ServiceInitializer {
             cipherService: cipherService
         )
 
-        let singleTalkService = SingleTalkService(
-            coreSingleTalkService: coreSingleTalkService,
-            cipherService: cipherService
+        let singleModeCategoryService = SingleModeCategoryService(
+            coreSingleModeCategoryService: coreSingleModeCategoryService,
+            coreLevelService: coreLevelService
         )
 
-        let singleMessageService = SingleMessageService(
+        let levelService = LevelService(
+            coreLevelService: coreLevelService
+        )
+
+        /*let singleMessageService = SingleMessageService(
             coreSingleMessageService: coreSingleMessageService,
             challengeMessageService: challengeMessageService,
             messageCipherService: messageCipherService
-        )
+        )*/
 
         //core based
         serviceLocator.add(
-            singleTalkService,
-            singleMessageService
+            singleModeCategoryService
         )
 
         serviceLocator.add(
             SingleModeService(
-                singleMessageService: singleMessageService,
-                singleTalkService: singleTalkService,
+                singleModeCategoryService: singleModeCategoryService,
                 expService: expService,
-                currentUserService: currentUserService
+                currentUserService: currentUserService,
+                levelService: levelService
             )
         )
 

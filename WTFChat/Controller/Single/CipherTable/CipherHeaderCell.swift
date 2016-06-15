@@ -1,7 +1,7 @@
 import UIKit
 
 class CipherHeaderCell: UITableViewCell {
-    private let singleTalkService: SingleTalkService = serviceLocator.get(SingleTalkService)
+    private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
 
     @IBOutlet weak var starImage: StarImage!
     @IBOutlet weak var cipherText: UILabel!
@@ -15,10 +15,12 @@ class CipherHeaderCell: UITableViewCell {
 
         cipherText.text = cipherType.description
 
-        let easyTalk = singleTalkService.getSingleTalk(cipherType, cipherDifficulty: .Easy)!
-        let normalTalk = singleTalkService.getSingleTalk(cipherType, cipherDifficulty: .Normal)!
-        let hardTalk = singleTalkService.getSingleTalk(cipherType, cipherDifficulty: .Hard)!
+        //let category = singleModeCategoryService.getSingleTalk(cipherType)
 
-        starImage.updateStarImage(easyTalk.wins, max: easyTalk.cipherSettings!.maxStars)
+        /*let easyTalk = singleModeCategoryService.getSingleTalk(cipherType, cipherDifficulty: .Easy)!
+        let normalTalk = singleModeCategoryService.getSingleTalk(cipherType, cipherDifficulty: .Normal)!
+        let hardTalk = singleModeCategoryService.getSingleTalk(cipherType, cipherDifficulty: .Hard)!
+
+        starImage.updateStarImage(easyTalk.wins, max: easyTalk.cipherSettings!.maxStars)*/
     }
 }

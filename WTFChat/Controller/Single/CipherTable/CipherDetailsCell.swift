@@ -1,7 +1,7 @@
 import Foundation
 
 class CipherDetailsCell: UITableViewCell {
-    private let singleTalkService: SingleTalkService = serviceLocator.get(SingleTalkService)
+    private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
 
     @IBOutlet weak var lvlCollectionView: LvlCollectionView!
     @IBOutlet weak var difficultySelector: UISegmentedControl!
@@ -31,7 +31,7 @@ class CipherDetailsCell: UITableViewCell {
     }
 
     private func updateLvlCollectionView() {
-        let singleTalk = singleTalkService.getSingleTalk(cipherType, cipherDifficulty: selectedDifficulty)!
-        lvlCollectionView.updateSingleTalk(singleTalk)
+        let category = singleModeCategoryService.getCategory(cipherType)!
+        lvlCollectionView.updateCategory(category)
     }
 }

@@ -2,25 +2,25 @@ import Foundation
 
 class CipherService: Service {
     private let ciphers: [CipherSettings] = [
-            CipherSettings(type: .RightCutter, difficulty: .Easy, maxStars: 5, cipher: RightCutterEasyCipher()),
-            CipherSettings(type: .RightCutter, difficulty: .Normal, maxStars: 10, cipher: RightCutterNormalCipher()),
-            CipherSettings(type: .RightCutter, difficulty: .Hard, maxStars: 10, cipher: RightCutterHardCipher()),
+            CipherSettings(type: .RightCutter, difficulty: .Easy, cipher: RightCutterEasyCipher()),
+            CipherSettings(type: .RightCutter, difficulty: .Normal, cipher: RightCutterNormalCipher()),
+            CipherSettings(type: .RightCutter, difficulty: .Hard, cipher: RightCutterHardCipher()),
 
-            CipherSettings(type: .LeftCutter, difficulty: .Easy, maxStars: 5, cipher: LeftCutterEasyCipher()),
-            CipherSettings(type: .LeftCutter, difficulty: .Normal, maxStars: 10, cipher: LeftCutterNormalCipher()),
-            CipherSettings(type: .LeftCutter, difficulty: .Hard, maxStars: 10, cipher: LeftCutterHardCipher()),
+            CipherSettings(type: .LeftCutter, difficulty: .Easy, cipher: LeftCutterEasyCipher()),
+            CipherSettings(type: .LeftCutter, difficulty: .Normal, cipher: LeftCutterNormalCipher()),
+            CipherSettings(type: .LeftCutter, difficulty: .Hard, cipher: LeftCutterHardCipher()),
 
-            CipherSettings(type: .DoubleCutter, difficulty: .Easy, maxStars: 5, cipher: DoubleCutterEasyCipher()),
-            CipherSettings(type: .DoubleCutter, difficulty: .Normal, maxStars: 15, cipher: DoubleCutterNormalCipher()),
-            CipherSettings(type: .DoubleCutter, difficulty: .Hard, maxStars: 20, cipher: DoubleCutterHardCipher()),
+            CipherSettings(type: .DoubleCutter, difficulty: .Easy, cipher: DoubleCutterEasyCipher()),
+            CipherSettings(type: .DoubleCutter, difficulty: .Normal, cipher: DoubleCutterNormalCipher()),
+            CipherSettings(type: .DoubleCutter, difficulty: .Hard, cipher: DoubleCutterHardCipher()),
 
-            CipherSettings(type: .RandomCutter, difficulty: .Easy, maxStars: 5, cipher: RandomCutterEasyCipher()),
-            CipherSettings(type: .RandomCutter, difficulty: .Normal, maxStars: 20, cipher: RandomCutterNormalCipher()),
-            CipherSettings(type: .RandomCutter, difficulty: .Hard, maxStars: 30, cipher: RandomCutterHardCipher()),
+            CipherSettings(type: .RandomCutter, difficulty: .Easy, cipher: RandomCutterEasyCipher()),
+            CipherSettings(type: .RandomCutter, difficulty: .Normal, cipher: RandomCutterNormalCipher()),
+            CipherSettings(type: .RandomCutter, difficulty: .Hard, cipher: RandomCutterHardCipher()),
 
-            CipherSettings(type: .Shuffle, difficulty: .Easy, maxStars: 5, cipher: ShuffleEasyCipher()),
-            CipherSettings(type: .Shuffle, difficulty: .Normal, maxStars: 20, cipher: ShuffleNormalCipher()),
-            CipherSettings(type: .Shuffle, difficulty: .Hard, maxStars: 30, cipher: ShuffleHardCipher())
+            CipherSettings(type: .Shuffle, difficulty: .Easy, cipher: ShuffleEasyCipher()),
+            CipherSettings(type: .Shuffle, difficulty: .Normal, cipher: ShuffleNormalCipher()),
+            CipherSettings(type: .Shuffle, difficulty: .Hard, cipher: ShuffleHardCipher())
     ]
 
     func cipherMessage(message: Message) {
@@ -31,18 +31,19 @@ class CipherService: Service {
         }
     }
 
-    func getCipherSettings(type: CipherType, difficulty: CipherDifficulty) -> CipherSettings? {
+    private func cipherText(type: CipherType, difficulty: CipherDifficulty, word: Word) -> String {
+        let cipher = getCipher(type, difficulty: difficulty)!
+        return cipher.getTextForDecipher(word)
+    }
+
+    private func getCipher(type: CipherType, difficulty: CipherDifficulty) -> Cipher? {
         for cipherData in ciphers {
             if (cipherData.type == type && cipherData.difficulty == difficulty) {
-                return cipherData
+                return cipherData.cipher
             }
         }
 
         return nil
-    }
-
-    private func cipherText(type: CipherType, difficulty: CipherDifficulty, word: Word) -> String {
-        return getCipherSettings(type, difficulty: difficulty)!.cipher.getTextForDecipher(word)
     }
 }
 

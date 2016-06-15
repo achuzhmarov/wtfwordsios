@@ -3,7 +3,7 @@ import Foundation
 let CORE_WORD_CLASS_NAME = "CoreWord"
 
 class CoreSingleMessageService: Service {
-    private let CORE_SINGLE_MESSAGE_CLASS_NAME = "CoreSingleMessage"
+    /*private let CORE_SINGLE_MESSAGE_CLASS_NAME = "CoreSingleMessage"
 
     private let coreDataService: CoreDataService
 
@@ -48,5 +48,5 @@ class CoreSingleMessageService: Service {
             newCoreWord.updateFromWord(domainWord)
             coreSingleMessage.addWordsObject(newCoreWord)
         }
-    }
+    }*/
 }

@@ -6,7 +6,7 @@
 import Foundation
 
 class SingleModeViewController: UIViewController {
-    private let singleTalkService: SingleTalkService = serviceLocator.get(SingleTalkService)
+    private let singleTalkService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
 
     @IBOutlet weak var cipherTableView: CipherTableView!
 

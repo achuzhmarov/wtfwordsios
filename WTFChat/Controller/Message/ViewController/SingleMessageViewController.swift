@@ -1,7 +1,7 @@
 import Foundation
 
 class SingleMessageViewController: BaseMessageViewController {
-    private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
+    /*private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
 
     var singleTalk: SingleTalk!
 
@@ -47,5 +47,5 @@ class SingleMessageViewController: BaseMessageViewController {
         } else {
             singleMessageService.generateNewMessageForTalk(singleTalk)
         }
-    }
+    }*/
 }

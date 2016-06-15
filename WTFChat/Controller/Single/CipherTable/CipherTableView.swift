@@ -1,7 +1,7 @@
 import Foundation
 
 class CipherTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
-    private let singleTalkService: SingleTalkService = serviceLocator.get(SingleTalkService)
+    private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
 
     private let HEADER_CELL_ID = "CipherHeaderCell"
     private let DETAILS_CELL_ID = "CipherDetailsCell"
@@ -73,8 +73,8 @@ class CipherTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
         let lvlCollectionView = LvlCollectionView(frame: frame, collectionViewLayout: flowLayout)
 
         let cipherType = cipherTypes[indexPath.section]
-        let singleTalk = singleTalkService.getSingleTalk(cipherType, cipherDifficulty: .Hard)!
-        lvlCollectionView.updateSingleTalk(singleTalk)
+        let category = singleModeCategoryService.getCategory(cipherType)!
+        lvlCollectionView.updateCategory(category)
         lvlCollectionView.dataSource = lvlCollectionView
 
         let collectionViewSize = lvlCollectionView.collectionViewLayout.collectionViewContentSize()

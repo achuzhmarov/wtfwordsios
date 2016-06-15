@@ -7,31 +7,30 @@ enum StarStatus : Int {
 }
 
 class SingleModeService: Service {
-    private let singleMessageService: SingleMessageService
-    private let singleTalkService: SingleTalkService
+    private let categoryService: SingleModeCategoryService
+    private let levelService: LevelService
     private let expService: ExpService
     private let currentUserService: CurrentUserService
 
-    init(singleMessageService: SingleMessageService,
-         singleTalkService: SingleTalkService,
+    init(singleModeCategoryService: SingleModeCategoryService,
          expService: ExpService,
-         currentUserService: CurrentUserService)
+         currentUserService: CurrentUserService,
+         levelService: LevelService)
     {
-        self.singleMessageService = singleMessageService
-        self.singleTalkService = singleTalkService
+        self.categoryService = singleModeCategoryService
         self.expService = expService
         self.currentUserService = currentUserService
+        self.levelService = levelService
     }
 
     func finishDecipher(singleMessage: SingleMessage) {
         singleMessage.exp = expService.calculateExpForMessage(singleMessage)
-        singleMessageService.updateMessage(singleMessage)
 
         if (singleMessage.getMessageStatus() == .Success) {
-            let talk = singleMessage.singleTalk
+            /*let talk = singleMessage.singleTalk
             talk.wins += 1
 
-            singleTalkService.updateSingleTalk(talk)
+            singleTalkService.updateSingleTalk(talk)*/
         }
 
         currentUserService.earnSingleExp(singleMessage.exp)
@@ -39,15 +38,26 @@ class SingleModeService: Service {
 
     func getStarStatus(singleMessage: SingleMessage) -> StarStatus {
         if (singleMessage.getMessageStatus() == .Success) {
-            let talk = singleMessage.singleTalk
+            /*let talk = singleMessage.singleTalk
 
             if (talk.wins < talk.cipherSettings!.maxStars) {
                 return .EarnStar
             } else if (talk.wins == talk.cipherSettings!.maxStars) {
                 return .Mastered
-            }
+            }*/
         }
 
         return .NoChange
+    }
+
+    func isLevelAvailable(level: Level) -> Bool {
+        if let previousLevel = levelService.getPreviousLevel(level) {
+            return previousLevel.cleared
+        } else if let previousCategory = categoryService.getPreviousCategory(level.category) {
+            return previousCategory.getLastLevel().cleared
+        } else {
+            //first level
+            return true
+        }
     }
 }

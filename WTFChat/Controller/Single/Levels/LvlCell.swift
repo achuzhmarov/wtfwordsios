@@ -1,6 +1,8 @@
 import Foundation
 
 class LvlCell: UICollectionViewCell {
+    private let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
+
     @IBOutlet weak var titleLabel: UILabel!
 
     private func initStyle() {
@@ -12,14 +14,14 @@ class LvlCell: UICollectionViewCell {
         //layer.borderColor = UIColor.blackColor().CGColor
     }
 
-    func updateLvl(index: Int) {
+    func updateLevel(level: Level) {
         initStyle()
 
-        titleLabel.text = String(index + 1)
+        titleLabel.text = String(level.id)
 
-        if (index < 4) {
+        if (level.cleared) {
             layer.backgroundColor = Color.SUCCESS.CGColor
-        } else if (index < 5) {
+        } else if singleModeService.isLevelAvailable(level) {
             layer.backgroundColor = Color.CIPHERED.CGColor
         } else {
             layer.backgroundColor = Color.IGNORE.CGColor
