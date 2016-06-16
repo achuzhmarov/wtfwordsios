@@ -7,7 +7,7 @@ class BaseDecipherViewController: UIViewController, HintComputer, UITextFieldDel
 
     @IBOutlet weak var topTimerLabel: UILabel!
 
-    @IBOutlet weak var startLabel: UILabel!
+    @IBOutlet weak var startView: UIView!
     @IBOutlet weak var topView: UIView!
 
     @IBOutlet weak var wordsTableView: WordsViewController!
@@ -20,9 +20,6 @@ class BaseDecipherViewController: UIViewController, HintComputer, UITextFieldDel
     @IBOutlet weak var bottomViewHeightConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var topViewHeightContraint: NSLayoutConstraint!
-
-    private let SECONDS_PER_WORD = 20
-    private let HARD_SECONDS_PER_WORD = 30
 
     let VIEW_TITLE = "Decipher"
 
@@ -58,13 +55,13 @@ class BaseDecipherViewController: UIViewController, HintComputer, UITextFieldDel
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DecipherViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DecipherViewController.rotated(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
 
-        //Looks for single or multiple taps.
         let tapDismiss: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherViewController.dismissKeyboard))
-        let tapStart: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherViewController.viewTapped))
         view.addGestureRecognizer(tapDismiss)
-        view.addGestureRecognizer(tapStart)
 
-        startLabel.hidden = false
+        let tapView: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherViewController.viewTapped))
+        view.addGestureRecognizer(tapView)
+
+        startView.hidden = false
         bottomView.hidden = true
         topTimerLabel.hidden = true
         wordsTableView.hidden = true
@@ -75,15 +72,6 @@ class BaseDecipherViewController: UIViewController, HintComputer, UITextFieldDel
         view.layoutIfNeeded()
 
         wordsTableView.hintComputer = self
-
-        if (message.deciphered || selfAuthor) {
-            setViewOnlyStage()
-        } else {
-            UIView.animateWithDuration(1, delay: 0,
-                    options: [.Repeat, .Autoreverse], animations: {
-                self.startLabel.alpha = 0
-            }, completion: nil)
-        }
 
         self.wordsTableView.delegate = self.wordsTableView
         self.wordsTableView.dataSource = self.wordsTableView
@@ -125,6 +113,12 @@ class BaseDecipherViewController: UIViewController, HintComputer, UITextFieldDel
         isPaused = true
     }
 
+    func viewTapped() {
+        if (isOvered) {
+            changeCipherStateForViewOnly()
+        }
+    }
+
     @IBAction func giveUpButtonPressed(sender: AnyObject) {
         if (isOvered) {
             return
@@ -163,15 +157,15 @@ class BaseDecipherViewController: UIViewController, HintComputer, UITextFieldDel
             return
         }
 
-        messageCipherService.decipher(message!, guessText: guessTextField.text!)
+        messageCipherService.decipher(message, guessText: guessTextField.text!)
 
         let guessWords = guessTextField.text!.characters.split {$0 == " "}.map { String($0) }
 
-        wordsTableView.updateMessage(message!, tries: guessWords)
+        wordsTableView.updateMessage(message, tries: guessWords)
         guessTextField.text = ""
         tryButton.enabled = false
 
-        if (message!.deciphered) {
+        if (message.deciphered) {
             gameOver()
         } else {
             updateMessage()
@@ -246,14 +240,6 @@ class BaseDecipherViewController: UIViewController, HintComputer, UITextFieldDel
         }
     }
 
-    func viewTapped() {
-        if (isOvered) {
-            changeCipherStateForViewOnly()
-        } else if (!isStarted) {
-            start()
-        }
-    }
-
     private func changeCipherStateForViewOnly() {
         useCipherText = !useCipherText
         self.wordsTableView.setNewMessage(message, useCipherText: useCipherText, selfAuthor: selfAuthor)
@@ -279,14 +265,10 @@ class BaseDecipherViewController: UIViewController, HintComputer, UITextFieldDel
     func start() {
         self.navigationItem.setHidesBackButton(true, animated:true)
 
-        if (message!.guessIsNotStarted()) {
-            if (message!.cipherDifficulty == .Hard) {
-                timer.seconds = message!.countNew() * HARD_SECONDS_PER_WORD
-            } else {
-                timer.seconds = message!.countNew() * SECONDS_PER_WORD
-            }
+        if (message.guessIsNotStarted()) {
+            timer.seconds = messageCipherService.getTimerSeconds(message)
         } else {
-            timer.seconds = message!.timerSecs
+            timer.seconds = message.timerSecs
         }
 
         if (isInLandscapeMode) {
@@ -302,9 +284,9 @@ class BaseDecipherViewController: UIViewController, HintComputer, UITextFieldDel
         topTimerLabel.hidden = false
         wordsTableView.hidden = false
 
-        startLabel.removeFromSuperview()
+        startView.removeFromSuperview()
 
-        wordsTableView.updateMessage(message!)
+        wordsTableView.updateMessage(message)
 
         guessTextField.becomeFirstResponder()
 
@@ -357,17 +339,17 @@ class BaseDecipherViewController: UIViewController, HintComputer, UITextFieldDel
     }
 
     func gameOver() {
-        messageCipherService.failed(message!)
+        messageCipherService.failed(message)
         message.timerSecs = timer.seconds
 
         bottomView.hidden = true
         bottomViewHeightConstraint.constant = 0
 
-        wordsTableView.updateMessage(message!)
+        wordsTableView.updateMessage(message)
 
         dismissKeyboard()
 
-        if (message!.getMessageStatus() == .Success) {
+        if (message.getMessageStatus() == .Success) {
             audioService.playSound("win")
         } else {
             audioService.playSound("lose")
@@ -407,9 +389,9 @@ class BaseDecipherViewController: UIViewController, HintComputer, UITextFieldDel
         self.view.layoutIfNeeded()
     }
 
-    private func setViewOnlyStage() {
-        startLabel.removeFromSuperview()
-        wordsTableView.updateMessage(message!)
+    func setViewOnlyStage() {
+        startView.removeFromSuperview()
+        wordsTableView.updateMessage(message)
         wordsTableView.hidden = false
 
         bottomViewHeightConstraint.constant = 0
@@ -459,15 +441,15 @@ class BaseDecipherViewController: UIViewController, HintComputer, UITextFieldDel
         audioService.playSound("success")
 
         if (word.wasCloseTry) {
-            messageCipherService.decipher(message!, hintedWord: word, closeTry: true)
+            messageCipherService.decipher(message, hintedWord: word, closeTry: true)
         } else {
-            messageCipherService.decipher(message!, hintedWord: word)
+            messageCipherService.decipher(message, hintedWord: word)
             updateHintsUsed()
         }
 
-        wordsTableView.updateMessage(message!)
+        wordsTableView.updateMessage(message)
 
-        if (message!.deciphered) {
+        if (message.deciphered) {
             gameOver()
         } else {
             updateMessage()

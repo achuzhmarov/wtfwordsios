@@ -1,7 +1,13 @@
 import Foundation
 
+protocol LevelSelectedComputer {
+    func levelSelected(level: Level)
+}
+
 class LvlCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate { //UICollectionViewDelegateFlowLayout {
     var category: SingleModeCategory!
+
+    var levelSelectedComputer: LevelSelectedComputer?
 
     func updateCategory(category: SingleModeCategory) {
         self.category = category
@@ -21,5 +27,9 @@ class LvlCollectionView: UICollectionView, UICollectionViewDataSource, UICollect
 
         cell.updateLevel(category.levels[indexPath.item])
         return cell
+    }
+
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        levelSelectedComputer?.levelSelected(category.levels[indexPath.item])
     }
 }

@@ -277,4 +277,15 @@ class MessageCipherService: Service {
         
         return result
     }
+
+    private let SECONDS_PER_WORD = 20
+    private let HARD_SECONDS_PER_WORD = 30
+
+    func getTimerSeconds(message: Message) -> Int {
+        if (message.cipherDifficulty == .Hard) {
+            return message.countNew() * HARD_SECONDS_PER_WORD
+        } else {
+            return message.countNew() * SECONDS_PER_WORD
+        }
+    }
 }

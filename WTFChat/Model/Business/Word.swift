@@ -49,6 +49,35 @@ class Word: NSObject {
         return self.text + self.additional
     }
 
+    func getQuestionMarks() -> String {
+        if (hasText()) {
+            return "???" + additional
+        } else {
+            return getClearText()
+        }
+    }
+
+    private func hasText() -> Bool {
+        switch type {
+        case .Delimiter:
+            return false
+        case .LineBreak:
+            return false
+        case .Ignore:
+            if (getCharCount() > 0) {
+                return true
+            } else {
+                return false
+            }
+        default:
+            return true
+        }
+    }
+
+    func hasCipheredText() -> Bool {
+        return hasText() && type != .Ignore
+    }
+
     func getCipheredText() -> String {
         return cipheredText
     }

@@ -2,7 +2,7 @@ import Foundation
 
 class SingleMessage: Message {
     private var coreSingleMessage: CoreSingleMessage!
-    var singleTalk: SingleTalk!
+    var level: Level!
 
     init(message: Message) {
         super.init(

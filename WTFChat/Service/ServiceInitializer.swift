@@ -93,7 +93,7 @@ class ServiceInitializer {
         )
 
         let cipherService = CipherService()
-        let challengeMessageService = ChallengeMessageService()
+        let textGeneratorService = TextGeneratorService()
         let messageCipherService = MessageCipherService(
             currentUserService: currentUserService,
             cipherService: cipherService
@@ -108,11 +108,10 @@ class ServiceInitializer {
             coreLevelService: coreLevelService
         )
 
-        /*let singleMessageService = SingleMessageService(
-            coreSingleMessageService: coreSingleMessageService,
-            challengeMessageService: challengeMessageService,
+        let singleMessageService = SingleMessageService(
+            textGeneratorService: textGeneratorService,
             messageCipherService: messageCipherService
-        )*/
+        )
 
         //core based
         serviceLocator.add(
@@ -125,7 +124,8 @@ class ServiceInitializer {
                 expService: expService,
                 currentUserService: currentUserService,
                 levelService: levelService
-            )
+            ),
+            singleMessageService
         )
 
         //other
@@ -144,7 +144,7 @@ class ServiceInitializer {
             TimeService(),
             AudioService(),
             cipherService,
-            challengeMessageService
+                    textGeneratorService
         )
     }
 }

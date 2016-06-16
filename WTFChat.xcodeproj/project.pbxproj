@@ -131,7 +131,7 @@
 		3E37CE37EBF06284E2CD83F5 /* CoreMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C74155F978515511E166 /* CoreMessage.swift */; };
 		3E37CE3F38C74E5401872C02 /* TimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CC3BCE2D521EC38F21E1 /* TimeService.swift */; };
 		3E37CE438AEE9F1DD92C5DDC /* LvlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C7E7C827EF8FECBCAC2D /* LvlCell.swift */; };
-		3E37CE9249522003E406A452 /* ChallengeMessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C4AC96F9D6F7719268D2 /* ChallengeMessageService.swift */; };
+		3E37CE9249522003E406A452 /* TextGeneratorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C4AC96F9D6F7719268D2 /* TextGeneratorService.swift */; };
 		3E37CE95F6D266FC3E2C86E7 /* WindowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C140CF13E7D63DFC1DDD /* WindowService.swift */; };
 		3E37CE9D843E851046E44D46 /* MessageNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE047F561F77F917AC33 /* MessageNetworkService.swift */; };
 		3E37CED21971E4DF98325C30 /* CipherHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C21A5D7E07C8CFB4DCE6 /* CipherHeaderCell.swift */; };
@@ -227,7 +227,7 @@
 		3E37C494AB274D00A123AD98 /* TalkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkService.swift; sourceTree = "<group>"; };
 		3E37C4974DA6892C78D7443B /* CoreLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLevel.swift; sourceTree = "<group>"; };
 		3E37C49D18DB2FD017226F88 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		3E37C4AC96F9D6F7719268D2 /* ChallengeMessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeMessageService.swift; sourceTree = "<group>"; };
+		3E37C4AC96F9D6F7719268D2 /* TextGeneratorService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextGeneratorService.swift; sourceTree = "<group>"; };
 		3E37C4B0E41355EE8EB15D15 /* ExpGainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpGainView.swift; sourceTree = "<group>"; };
 		3E37C4BEDF2AA2D749F18C4A /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		3E37C4FD95144695C0B33C1E /* WordLabelContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordLabelContainer.swift; sourceTree = "<group>"; };
@@ -402,7 +402,7 @@
 				3E37CE63F3AB49391E2AB456 /* CurrentUserService.swift */,
 				3E37CE6082F2F1A3F3447039 /* MessageCipherService.swift */,
 				3E37CA0E47FE8053178B1840 /* CipherService.swift */,
-				3E37C4AC96F9D6F7719268D2 /* ChallengeMessageService.swift */,
+				3E37C4AC96F9D6F7719268D2 /* TextGeneratorService.swift */,
 				3E37CEA07F3A6F4B456B9E2B /* SingleMode */,
 			);
 			path = Business;
@@ -1167,7 +1167,7 @@
 				3E37CAC099A2F4C865A8A698 /* SingleMessage.swift in Sources */,
 				3E37C0C2481BAFA3396B4EDB /* Talk.swift in Sources */,
 				3E37CEFEF015986F56B25948 /* DecipherHintsHelper.swift in Sources */,
-				3E37CE9249522003E406A452 /* ChallengeMessageService.swift in Sources */,
+				3E37CE9249522003E406A452 /* TextGeneratorService.swift in Sources */,
 				3E37C59C630524D1F5DA26BC /* SingleModeCategoryService.swift in Sources */,
 				3E37C4A65CAA433F21B331CD /* SingleMessageService.swift in Sources */,
 				3E37C610A7533AD52FB60E11 /* SingleModeService.swift in Sources */,

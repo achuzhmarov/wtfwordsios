@@ -5,12 +5,14 @@
 
 import Foundation
 
-class SingleModeViewController: UIViewController {
-    private let singleTalkService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
+class SingleModeViewController: UIViewController, LevelSelectedComputer {
+    private let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
+
+    private let DECIPHER_SEGUE_ID = "showDecipher"
 
     @IBOutlet weak var cipherTableView: CipherTableView!
 
-    private var selectedCipherType = CipherType.RightCutter
+    private var selectedLevel: Level?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,7 @@ class SingleModeViewController: UIViewController {
         cipherTableView.delegate = cipherTableView
         cipherTableView.dataSource = cipherTableView
         cipherTableView.rowHeight = UITableViewAutomaticDimension
+        cipherTableView.levelSelectedComputer = self
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -33,13 +36,16 @@ class SingleModeViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         UIHelper.clearBackButton(navigationItem)
 
-        /*if segue.identifier == "selectCipher" {
-            let targetController = segue.destinationViewController as! LvlSelectViewController
+        if segue.identifier == DECIPHER_SEGUE_ID {
+            let targetController = segue.destinationViewController as! SingleDecipherViewController
+            targetController.level = selectedLevel
+        }
+    }
 
-            if let cipherType = cipherTableView.getSelectedCipherType() {
-                let singleTalk = singleTalkService.getSingleTalk(cipherType, cipherDifficulty: selectedDifficulty)
-                targetController.talk = singleTalk!
-            }
-        }*/
+    func levelSelected(level: Level) {
+        if (singleModeService.isLevelAvailable(level)) {
+            selectedLevel = level
+            self.performSegueWithIdentifier(DECIPHER_SEGUE_ID, sender: self)
+        }
     }
 }

@@ -5,6 +5,8 @@ enum MessageStatus: Int {
 }
 
 class Message: NSObject {
+    static let WORDS_FOR_PREVIEW = 3
+
     var timestamp: NSDate
     var lastUpdate: NSDate
     var cipherType = CipherType.RightCutter
@@ -121,24 +123,30 @@ class Message: NSObject {
         }
     }
 
+    func preview() -> String {
+        var result = ""
+        var index = 0
+
+        for word: Word in words {
+            if (index < Message.WORDS_FOR_PREVIEW) {
+                result += word.getTextForDecipher()
+            } else {
+                result += word.getQuestionMarks()
+            }
+
+            if (word.hasCipheredText()) {
+                index += 1
+            }
+        }
+
+        return result
+    }
+
     func questionMarks() -> String! {
         var result = ""
 
         for word: Word in words {
-            switch word.type {
-                case .Delimiter:
-                    result = "\(result) "
-                case .LineBreak:
-                    result = "\(result)\n"
-                case .Ignore:
-                    if (word.getCharCount() > 0) {
-                        result = "\(result)???\(word.additional)"
-                    } else {
-                        result = "\(result)\(word.additional)"
-                    }
-                default:
-                    result = "\(result)???\(word.additional)"
-            }
+            result += word.getQuestionMarks()
         }
 
         return result
@@ -148,7 +156,7 @@ class Message: NSObject {
         var result = ""
 
         for word: Word in words! {
-            result = "\(result)\(word.getClearText())"
+            result += word.getClearText()
         }
 
         return result

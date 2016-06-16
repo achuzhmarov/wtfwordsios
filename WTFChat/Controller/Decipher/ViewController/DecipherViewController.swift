@@ -10,7 +10,20 @@ import UIKit
 
 class DecipherViewController: BaseDecipherViewController {
     private let messageService: MessageService = serviceLocator.get(MessageService)
-    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        if (message.deciphered || selfAuthor) {
+            setViewOnlyStage()
+        } else {
+            UIView.animateWithDuration(1, delay: 0,
+                    options: [.Repeat, .Autoreverse], animations: {
+                self.startView.alpha = 0
+            }, completion: nil)
+        }
+    }
+
     override func sendMessageUpdate() {
         messageService.decipherMessage(message as! RemoteMessage) { (message, error) -> Void in
             if let requestError = error {
@@ -33,6 +46,14 @@ class DecipherViewController: BaseDecipherViewController {
                     }
                 }
             })
+        }
+    }
+
+    override func viewTapped() {
+        super.viewTapped()
+
+        if (!isStarted) {
+            start()
         }
     }
 }
