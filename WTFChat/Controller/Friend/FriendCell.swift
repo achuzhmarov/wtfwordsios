@@ -31,9 +31,30 @@ class FriendCell: UITableViewCell {
     
     var message: RemoteMessage?
 
+    private func initStyle() {
+        friendImage.layer.borderColor = UIColor.whiteColor().CGColor
+        friendImage.layer.cornerRadius = friendImage.bounds.width/2
+        friendImage.clipsToBounds = true
+
+        self.selectionStyle = .None;
+
+        cipheredNum.setMargins(0, left: 4, bottom: 0, right: 4)
+        cipheredNum.layer.cornerRadius = 6.0;
+        cipheredNum.textColor = UIColor.whiteColor()
+        cipheredNum.font = UIFont(name: lastMessage.font.fontName, size: 10)
+        cipheredNum.numberOfLines = 1
+
+        lastMessage.layer.cornerRadius = 8.0;
+        lastMessage.textColor = UIColor.whiteColor()
+        lastMessage.font = UIFont(name: lastMessage.font.fontName, size: 13)
+        lastMessage.numberOfLines = 1
+
+        friendName.adjustsFontSizeToFitWidth = true
+    }
+
     func updateTalk(talk: FriendTalk) {
         initStyle()
-        
+
         if (talk.isSingleMode) {
             friendName.text = currentUserService.getFriendLogin(talk).capitalizedString
         } else {
@@ -59,29 +80,6 @@ class FriendCell: UITableViewCell {
         //TODO AWKARD!!!
         friendImage.image = avatarService.getImage(currentUserService.getFriendLogin(talk),
             diameter: UInt(friendImage.bounds.height))
-    }
-    
-    private func initStyle() {
-        friendImage.layer.borderColor = UIColor.whiteColor().CGColor
-        friendImage.layer.cornerRadius = friendImage.bounds.width/2
-        friendImage.clipsToBounds = true
-        
-        self.selectionStyle = .None;
-        
-        cipheredNum.setMargins(0, left: 4, bottom: 0, right: 4)
-        cipheredNum.layer.cornerRadius = 6.0;
-        cipheredNum.textColor = UIColor.whiteColor()
-        cipheredNum.font = UIFont(name: lastMessage.font.fontName, size: 10)
-        cipheredNum.numberOfLines = 1
-        cipheredNum.initStyle()
-        
-        lastMessage.layer.cornerRadius = 8.0;
-        lastMessage.textColor = UIColor.whiteColor()
-        lastMessage.font = UIFont(name: lastMessage.font.fontName, size: 13)
-        lastMessage.numberOfLines = 1
-        lastMessage.initStyle()
-        
-        friendName.adjustsFontSizeToFitWidth = true
     }
     
     private func hideLastAuthorImage() {

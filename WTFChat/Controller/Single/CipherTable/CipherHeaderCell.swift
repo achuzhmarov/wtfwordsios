@@ -8,7 +8,7 @@ class CipherHeaderCell: UITableViewCell {
     @IBOutlet weak var hardStarImage: StarImage!
     @IBOutlet weak var cipherText: UILabel!
 
-    func initStyle() {
+    private func initStyle() {
         self.selectionStyle = .None;
     }
 

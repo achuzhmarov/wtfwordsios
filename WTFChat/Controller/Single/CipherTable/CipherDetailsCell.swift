@@ -7,7 +7,7 @@ class CipherDetailsCell: UITableViewCell {
 
     private var cipherType = CipherType.RightCutter
 
-    func initStyle() {
+    private func initStyle() {
         self.selectionStyle = .None;
     }
 

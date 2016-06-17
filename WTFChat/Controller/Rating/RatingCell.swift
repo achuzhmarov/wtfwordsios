@@ -19,12 +19,7 @@ class RatingCell: UITableViewCell {
     @IBOutlet weak var userNum: UILabel!
     @IBOutlet weak var userGlobalNum: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-    func initStyle() {
+    private func initStyle() {
         userImage.layer.borderColor = UIColor.whiteColor().CGColor
         userImage.layer.cornerRadius = userImage.bounds.width/2
         userImage.clipsToBounds = true
@@ -38,7 +33,7 @@ class RatingCell: UITableViewCell {
     
     func updateUser(user: FriendInfo, num: Int) {
         initStyle()
-        
+
         userLogin.text = user.login.capitalizedString
         userName.text = user.name.capitalizedString
         userLvl.text = "lvl \(String(user.lvl))"

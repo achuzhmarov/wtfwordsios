@@ -3,6 +3,22 @@ import UIKit
 class RoundedLabel: UILabel {
     var tagObject: AnyObject?
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initStyle()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initStyle()
+    }
+
+    private func initStyle() {
+        layer.masksToBounds = false
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.mainScreen().scale
+    }
+
     func getWidth() -> CGFloat {
         return bounds.width
     }
@@ -21,12 +37,6 @@ class RoundedLabel: UILabel {
     
     func setMargins(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
         edgeInsets = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
-    }
-
-    func initStyle() {
-        layer.masksToBounds = false
-        layer.shouldRasterize = true
-        layer.rasterizationScale = UIScreen.mainScreen().scale
     }
 }
 

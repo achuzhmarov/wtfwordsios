@@ -7,7 +7,7 @@ class BaseMessageCell: UITableViewCell {
     @IBOutlet weak var messageText: RoundedLabel!
     @IBOutlet weak var timeText: UILabel!
 
-    func initStyle() {
+    private func initStyle() {
         friendImage?.layer.borderColor = UIColor.whiteColor().CGColor
         friendImage?.layer.cornerRadius = friendImage.bounds.width/2
         friendImage?.clipsToBounds = true
@@ -17,7 +17,6 @@ class BaseMessageCell: UITableViewCell {
         messageText.textColor = Color.Font
         messageText.font = UIFont(name: messageText.font.fontName, size: 16)
         messageText.layer.cornerRadius = 10.0
-        messageText.initStyle()
     }
 
     func updateMessage(message: Message, isOutcoming: Bool) {

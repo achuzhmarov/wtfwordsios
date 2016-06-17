@@ -33,8 +33,6 @@ class WordLabelContainer {
     }
     
     func updateLabel() {
-        label.initStyle()
-        
         if (useCipherText) {
             if (word.type != WordType.Ignore) {
                 label.text = word.getCipheredText()

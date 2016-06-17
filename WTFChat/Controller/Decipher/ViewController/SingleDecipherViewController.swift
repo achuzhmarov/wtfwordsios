@@ -62,8 +62,6 @@ class SingleDecipherViewController: BaseDecipherViewController {
     }
 
     private func updateMessageExample() {
-        exampleLabel.initStyle()
-
         exampleLabel.textColor = UIColor.whiteColor()
         //exampleLabel.font = UIFont(name: textPreviewLabel.font.fontName, size: 17)
 
@@ -79,8 +77,6 @@ class SingleDecipherViewController: BaseDecipherViewController {
     }
 
     private func updateMessagePreview() {
-        textPreviewLabel.initStyle()
-
         textPreviewLabel.textColor = UIColor.whiteColor()
         textPreviewLabel.font = UIFont(name: textPreviewLabel.font.fontName, size: 17)
 
