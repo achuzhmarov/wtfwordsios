@@ -5,6 +5,8 @@ enum WordType: Int {
 }
 
 class Word: NSObject {
+    static let HIDED_SYMBOL = "*"
+
     var text: String
     var type = WordType.New
     var additional = ""
@@ -49,12 +51,18 @@ class Word: NSObject {
         return self.text + self.additional
     }
 
-    func getQuestionMarks() -> String {
-        if (hasText()) {
-            return "???" + additional
-        } else {
-            return getClearText()
+    func getHidedText() -> String {
+        var result = ""
+
+        let cipheredTextOnly = cipheredText
+            .replace(".", with: "")
+            .replace(additional, with: "")
+
+        for _ in 0..<cipheredTextOnly.characters.count {
+            result += Word.HIDED_SYMBOL
         }
+
+        return result + additional
     }
 
     private func hasText() -> Bool {
@@ -107,11 +115,11 @@ class Word: NSObject {
     }
 
     class func delimiterWord() -> Word {
-        return Word(text: " ", type: WordType.Delimiter)
+        return Word(text: "", additional: " ", type: WordType.Delimiter)
     }
 
     class func lineBreakWord() -> Word {
-        return Word(text: "\n", type: WordType.LineBreak)
+        return Word(text: "", additional: "\n", type: WordType.LineBreak)
     }
 
     func checkEquals(word: Word) -> Bool {

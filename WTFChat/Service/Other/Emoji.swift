@@ -8,5 +8,9 @@ class Emoji {
     static let STAR = "⭐"
     static let MASTERED_STAR = "🌟"
     static let LOCK = "🔒"
-    
+    static let QUESTION = "❔"
+    static let FLAG = "🏳"
+    static let CIRCLE = "⚪"
+    static let SMALL_SQUARE = "▫️"
+    static let SQUARE = "◻️"
 }

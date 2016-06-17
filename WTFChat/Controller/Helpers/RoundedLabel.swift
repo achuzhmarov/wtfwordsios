@@ -2,7 +2,7 @@ import UIKit
 
 class RoundedLabel: UILabel {
     var tagObject: AnyObject?
-    
+
     func getWidth() -> CGFloat {
         return bounds.width
     }
@@ -22,7 +22,7 @@ class RoundedLabel: UILabel {
     func setMargins(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
         edgeInsets = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
     }
-    
+
     func initStyle() {
         layer.masksToBounds = false
         layer.shouldRasterize = true

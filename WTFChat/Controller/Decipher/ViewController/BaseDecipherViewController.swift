@@ -253,7 +253,10 @@ class BaseDecipherViewController: UIViewController, HintComputer, UITextFieldDel
     private func hideTopTimer() {
         topViewHeightContraint.constant = 0
         topTimerLabel.text = ""
-        self.title = timer.getTimeString()
+
+        if (isStarted) {
+            self.title = timer.getTimeString()
+        }
     }
 
     private func showTopTimer() {

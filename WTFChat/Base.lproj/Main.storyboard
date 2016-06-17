@@ -2690,22 +2690,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H0o-b3-K3y" userLabel="Start View">
                                 <rect key="frame" x="16" y="8" width="572" height="520"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3no-vM-Nm4">
-                                        <rect key="frame" x="254" y="103" width="64" height="48"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                        <state key="normal" title="Start"/>
-                                        <connections>
-                                            <action selector="startPressed:" destination="I8r-Zw-u53" eventType="touchUpInside" id="e7T-ck-vcD"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="arg-sH-dWh" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="74" width="572" height="21"/>
+                                        <rect key="frame" x="110" y="112" width="462" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8M-OX-jp1" userLabel="Time">
-                                        <rect key="frame" x="0.0" y="36" width="69" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8M-OX-jp1" userLabel="Time">
+                                        <rect key="frame" x="110" y="36" width="69" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2722,19 +2714,72 @@
                                             <action selector="difficultyChanged:" destination="I8r-Zw-u53" eventType="valueChanged" id="lBI-qQ-4Fx"/>
                                         </connections>
                                     </segmentedControl>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Example" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3eS-NI-ZjX" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
+                                        <rect key="frame" x="110" y="74" width="100" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="Cm8-sy-IAd"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Xg-xi-x2n">
+                                        <rect key="frame" x="0.0" y="36" width="102" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Example" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MUM-mg-e0y">
+                                        <rect key="frame" x="0.0" y="74" width="102" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="102" id="IRf-yt-nxN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2b-CK-Vv7">
+                                        <rect key="frame" x="0.0" y="107" width="102" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3no-vM-Nm4" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="141" width="572" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <color key="tintColor" red="0.011764705882352941" green="0.18431372549019609" blue="0.42745098039215684" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Start">
+                                            <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="startPressed:" destination="I8r-Zw-u53" eventType="touchUpInside" id="e7T-ck-vcD"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="D8M-OX-jp1" firstAttribute="leading" secondItem="H0o-b3-K3y" secondAttribute="leading" id="7Sd-sg-Trw"/>
+                                    <constraint firstItem="arg-sH-dWh" firstAttribute="top" secondItem="3eS-NI-ZjX" secondAttribute="bottom" constant="8" id="2u3-TN-YwM"/>
                                     <constraint firstAttribute="trailing" secondItem="LdY-lx-5u8" secondAttribute="trailing" id="Fsg-uL-xWg"/>
                                     <constraint firstAttribute="trailing" secondItem="arg-sH-dWh" secondAttribute="trailing" id="GmQ-NU-QU4"/>
-                                    <constraint firstItem="arg-sH-dWh" firstAttribute="leading" secondItem="H0o-b3-K3y" secondAttribute="leading" id="KZe-Tk-eIT"/>
-                                    <constraint firstItem="3no-vM-Nm4" firstAttribute="top" secondItem="arg-sH-dWh" secondAttribute="bottom" constant="8" id="Qaq-qa-g0Q"/>
+                                    <constraint firstItem="3no-vM-Nm4" firstAttribute="top" secondItem="arg-sH-dWh" secondAttribute="bottom" constant="8" id="IFy-Ph-XYI"/>
+                                    <constraint firstItem="j2b-CK-Vv7" firstAttribute="leading" secondItem="H0o-b3-K3y" secondAttribute="leading" id="Oee-cJ-hu6"/>
+                                    <constraint firstItem="MUM-mg-e0y" firstAttribute="centerY" secondItem="3eS-NI-ZjX" secondAttribute="centerY" id="OfO-NP-Hqg"/>
+                                    <constraint firstItem="j2b-CK-Vv7" firstAttribute="trailing" secondItem="MUM-mg-e0y" secondAttribute="trailing" id="PFj-6Y-hdc"/>
+                                    <constraint firstItem="D8M-OX-jp1" firstAttribute="leading" secondItem="7Xg-xi-x2n" secondAttribute="trailing" constant="8" id="QoZ-1n-MSk"/>
+                                    <constraint firstItem="D8M-OX-jp1" firstAttribute="centerY" secondItem="7Xg-xi-x2n" secondAttribute="centerY" id="Uwp-Mu-qWn"/>
                                     <constraint firstItem="D8M-OX-jp1" firstAttribute="top" secondItem="LdY-lx-5u8" secondAttribute="bottom" constant="8" id="Xc4-uk-Ti4"/>
-                                    <constraint firstItem="arg-sH-dWh" firstAttribute="top" secondItem="D8M-OX-jp1" secondAttribute="bottom" constant="8" id="c96-wq-Xew"/>
-                                    <constraint firstItem="3no-vM-Nm4" firstAttribute="centerX" secondItem="H0o-b3-K3y" secondAttribute="centerX" id="cws-nJ-mZ5"/>
+                                    <constraint firstItem="j2b-CK-Vv7" firstAttribute="centerY" secondItem="arg-sH-dWh" secondAttribute="centerY" id="Xst-3O-Fji"/>
+                                    <constraint firstItem="3eS-NI-ZjX" firstAttribute="top" secondItem="D8M-OX-jp1" secondAttribute="bottom" constant="8" id="bKR-74-myH"/>
+                                    <constraint firstItem="3no-vM-Nm4" firstAttribute="leading" secondItem="H0o-b3-K3y" secondAttribute="leading" id="bVl-ba-jWq"/>
+                                    <constraint firstItem="7Xg-xi-x2n" firstAttribute="leading" secondItem="H0o-b3-K3y" secondAttribute="leading" id="gJI-AH-lRs"/>
+                                    <constraint firstItem="7Xg-xi-x2n" firstAttribute="top" secondItem="LdY-lx-5u8" secondAttribute="bottom" constant="8" id="kP4-3X-MmY"/>
                                     <constraint firstItem="LdY-lx-5u8" firstAttribute="leading" secondItem="H0o-b3-K3y" secondAttribute="leading" id="lMO-8Q-2Kg"/>
+                                    <constraint firstItem="7Xg-xi-x2n" firstAttribute="trailing" secondItem="MUM-mg-e0y" secondAttribute="trailing" id="o8E-pu-MBQ"/>
+                                    <constraint firstItem="arg-sH-dWh" firstAttribute="leading" secondItem="j2b-CK-Vv7" secondAttribute="trailing" constant="8" id="oRq-7E-cT8"/>
+                                    <constraint firstItem="MUM-mg-e0y" firstAttribute="leading" secondItem="H0o-b3-K3y" secondAttribute="leading" id="qne-qC-SNH"/>
+                                    <constraint firstAttribute="trailing" secondItem="3no-vM-Nm4" secondAttribute="trailing" id="ugh-t0-CgY"/>
                                     <constraint firstItem="LdY-lx-5u8" firstAttribute="top" secondItem="H0o-b3-K3y" secondAttribute="top" id="yjN-gC-YJO"/>
+                                    <constraint firstItem="3eS-NI-ZjX" firstAttribute="leading" secondItem="MUM-mg-e0y" secondAttribute="trailing" constant="8" id="zdQ-r7-zjp"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -2764,6 +2809,7 @@
                         <outlet property="bottomViewConstraint" destination="kGk-JK-IBL" id="OVw-te-azo"/>
                         <outlet property="bottomViewHeightConstraint" destination="kSC-je-6U9" id="EKA-2Y-dbh"/>
                         <outlet property="difficultySelector" destination="LdY-lx-5u8" id="DoZ-iC-aoP"/>
+                        <outlet property="exampleLabel" destination="3eS-NI-ZjX" id="hB3-bS-cLn"/>
                         <outlet property="guessTextField" destination="Ot7-VD-0hV" id="V0j-1Y-MCm"/>
                         <outlet property="startTimerLabel" destination="D8M-OX-jp1" id="nut-bX-PUt"/>
                         <outlet property="startView" destination="H0o-b3-K3y" id="fh5-q1-o6R"/>

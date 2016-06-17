@@ -10,6 +10,9 @@ class LvlCell: UICollectionViewCell {
 
         layer.cornerRadius = 12.0
 
+        layer.masksToBounds = false
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.mainScreen().scale
         //layer.borderWidth = 1
         //layer.borderColor = UIColor.blackColor().CGColor
     }

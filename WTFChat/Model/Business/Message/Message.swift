@@ -123,6 +123,16 @@ class Message: NSObject {
         }
     }
 
+    func ciphered() -> String {
+        var result = ""
+
+        for word: Word in words {
+            result += word.getTextForDecipher()
+        }
+
+        return result
+    }
+
     func preview() -> String {
         var result = ""
         var index = 0
@@ -131,7 +141,7 @@ class Message: NSObject {
             if (index < Message.WORDS_FOR_PREVIEW) {
                 result += word.getTextForDecipher()
             } else {
-                result += word.getQuestionMarks()
+                result += word.getHidedText()
             }
 
             if (word.hasCipheredText()) {
@@ -146,7 +156,7 @@ class Message: NSObject {
         var result = ""
 
         for word: Word in words {
-            result += word.getQuestionMarks()
+            result += word.getHidedText()
         }
 
         return result

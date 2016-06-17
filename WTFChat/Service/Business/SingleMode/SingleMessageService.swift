@@ -11,9 +11,11 @@ class SingleMessageService: Service {
         self.textGeneratorService = textGeneratorService
     }
 
-    func getMessageForLevel(level: Level, difficulty: CipherDifficulty) -> SingleMessage {
-        let text = textGeneratorService.getTextForLevel(level)
+    func getTextForLevel(level: Level) -> String {
+        return textGeneratorService.getTextForLevel(level)
+    }
 
+    func getMessageForLevel(level: Level, difficulty: CipherDifficulty, text: String) -> SingleMessage {
         let message = messageCipherService.createMessage(
             text,
             cipherType: level.category.cipherType,

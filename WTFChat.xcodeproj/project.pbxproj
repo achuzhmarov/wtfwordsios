@@ -59,6 +59,7 @@
 		3E37C4862DC1BC584ED264EC /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE4C5020ACF6542CC3C0 /* RatingCell.swift */; };
 		3E37C4A65CAA433F21B331CD /* SingleMessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF45362C75741955A6F2 /* SingleMessageService.swift */; };
 		3E37C4B39DAC6C3A9C09222D /* ServiceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CB627C8C45BBD8C82592 /* ServiceInitializer.swift */; };
+		3E37C4B5D4BF98ED40A2C130 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF47929B32484447BAE2 /* UIImage+Extension.swift */; };
 		3E37C5061E1B18C7DD11DC3E /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CFEEAC9762C3361A9C50 /* Weak.swift */; };
 		3E37C5446B840A65D14086EC /* SingleModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C697FAA1E14CB0C5DD26 /* SingleModeViewController.swift */; };
 		3E37C548C008F4F4535FF9DD /* SingleMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C174D58D33F0F69B5070 /* SingleMessageCell.swift */; };
@@ -144,6 +145,7 @@
 		3E37CF40639DE96F7ECD2FFF /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF6963D91364EF83A207 /* FriendCell.swift */; };
 		3E37CF45BDDAE583D56E6828 /* StringDistanceCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C70593D65C37D59A0F8C /* StringDistanceCalculator.swift */; };
 		3E37CF618E0063CD7038735D /* WordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF3E05D6CC07532749A2 /* WordsViewController.swift */; };
+		3E37CF6555E429F891DD2033 /* BorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C926E5C0E77FF7317639 /* BorderedButton.swift */; };
 		3E37CFBAD3191C926F1F2EAA /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C55F6CB09A955B097EED /* ServiceLocator.swift */; };
 		3E37CFD200CDEED01D646E9B /* AvatarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C0BA72DA4018F543AF1A /* AvatarService.swift */; };
 		481BDD991C58FE5D00ABD558 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 481BDD981C58FE5D00ABD558 /* LaunchScreen.storyboard */; };
@@ -264,6 +266,7 @@
 		3E37C890E5A751082A2A8251 /* JSQMessageAvatarImageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessageAvatarImageDataSource.h; sourceTree = "<group>"; };
 		3E37C8C94FDE3C085500AD3A /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		3E37C8CAF1CB833A270BDCC4 /* SingleMessageTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleMessageTableView.swift; sourceTree = "<group>"; };
+		3E37C926E5C0E77FF7317639 /* BorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
 		3E37C94384F16DE3D06549E7 /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
 		3E37C950EF592E3489F22F2A /* RoundedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedLabel.swift; sourceTree = "<group>"; };
 		3E37C98636554709D1F080F3 /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
@@ -322,6 +325,7 @@
 		3E37CF41FF729B01C20A331C /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		3E37CF444956F635D14AB33E /* TalkNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkNetworkService.swift; sourceTree = "<group>"; };
 		3E37CF45362C75741955A6F2 /* SingleMessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleMessageService.swift; sourceTree = "<group>"; };
+		3E37CF47929B32484447BAE2 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		3E37CF6963D91364EF83A207 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		3E37CF958614B2A9CDBCC806 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		3E37CFDFD39EB65F6E0470F0 /* warning.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = warning.wav; sourceTree = "<group>"; };
@@ -771,6 +775,7 @@
 				3E37C38B9A8A13C8A590A5BD /* String+Extension.swift */,
 				3E37C27838218C4F22B21722 /* NSError+Extension.swift */,
 				3E37C6E654A52598D1504630 /* UIColor+Extension.swift */,
+				3E37CF47929B32484447BAE2 /* UIImage+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -820,6 +825,7 @@
 				3E37C700933EFCDFDC9B7684 /* StarImage.swift */,
 				3E37C26F571173D1A34B84C0 /* UIHelper.swift */,
 				3E37C6A2A4D0A075DFE4342B /* Color.swift */,
+				3E37C926E5C0E77FF7317639 /* BorderedButton.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1187,6 +1193,8 @@
 				3E37C37691C04504C860F0B6 /* CoreLevelService.swift in Sources */,
 				3E37C0E2CF6459EAE081D1E4 /* LevelService.swift in Sources */,
 				3E37C150C84BB5935FF38A7A /* Level.swift in Sources */,
+				3E37CF6555E429F891DD2033 /* BorderedButton.swift in Sources */,
+				3E37C4B5D4BF98ED40A2C130 /* UIImage+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,14 +7,17 @@ class SingleDecipherViewController: BaseDecipherViewController {
 
     @IBOutlet weak var difficultySelector: UISegmentedControl!
     @IBOutlet weak var startTimerLabel: UILabel!
+    @IBOutlet weak var exampleLabel: RoundedLabel!
     @IBOutlet weak var textPreviewLabel: RoundedLabel!
 
     private let cipherDifficulties = CipherDifficulty.getAll()
     private var selectedDifficulty = CipherDifficulty.Easy
 
     var level: Level!
+    var messageText: String!
 
     override func viewDidLoad() {
+        messageText = singleMessageService.getTextForLevel(level)
         updateMessage()
         super.viewDidLoad()
     }
@@ -46,14 +49,33 @@ class SingleDecipherViewController: BaseDecipherViewController {
     }
 
     private func updateMessage() {
-        message = singleMessageService.getMessageForLevel(level, difficulty: selectedDifficulty)
+        message = singleMessageService.getMessageForLevel(level, difficulty: selectedDifficulty, text: messageText)
         updateTime()
+        updateMessageExample()
         updateMessagePreview()
     }
 
     private func updateTime() {
         let timer = Timer(seconds: messageCipherService.getTimerSeconds(message))
-        startTimerLabel.text = "Time: " + timer.getTimeString()
+        startTimerLabel.text = timer.getTimeString()
+        //startTimerLabel.text = "Time: " + timer.getTimeString()
+    }
+
+    private func updateMessageExample() {
+        exampleLabel.initStyle()
+
+        exampleLabel.textColor = UIColor.whiteColor()
+        //exampleLabel.font = UIFont(name: textPreviewLabel.font.fontName, size: 17)
+
+        exampleLabel.layer.backgroundColor = Color.Ciphered.CGColor
+        exampleLabel.layer.cornerRadius = 8.0
+        exampleLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        let exampleMessage = messageCipherService.createExampleMessage(
+            level.category.cipherType, cipherDifficulty: selectedDifficulty
+        )
+
+        exampleLabel.text = exampleMessage.ciphered()
     }
 
     private func updateMessagePreview() {

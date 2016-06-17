@@ -10,6 +10,7 @@ import Foundation
 
 class MessageCipherService: Service {
     private let WORD_SPECIAL_SYMBOLS = ["'", "-"]
+    private let EXAMPLE_TEXT = "Example"
 
     private let currentUserService: CurrentUserService
     private let cipherService: CipherService
@@ -156,7 +157,11 @@ class MessageCipherService: Service {
         
         return newMessage
     }
-    
+
+    func createExampleMessage(cipherType: CipherType, cipherDifficulty: CipherDifficulty) -> Message {
+        return createMessage(EXAMPLE_TEXT, cipherType: cipherType, cipherDifficulty: cipherDifficulty)
+    }
+
     func createMessage(text: String, cipherType: CipherType, cipherDifficulty: CipherDifficulty) -> Message {
         let strings = text.characters.split {$0 == "\n"}.map { String($0) }
         
