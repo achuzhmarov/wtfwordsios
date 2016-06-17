@@ -20,6 +20,20 @@ class SingleDecipherViewController: BaseDecipherViewController {
         messageText = singleMessageService.getTextForLevel(level)
         updateMessage()
         super.viewDidLoad()
+
+        exampleLabel.textColor = Color.Text
+        exampleLabel.layer.backgroundColor = Color.Ciphered.CGColor
+        exampleLabel.layer.cornerRadius = 8.0
+        exampleLabel.translatesAutoresizingMaskIntoConstraints = false
+        //exampleLabel.addGradient(Gradient.CipheredGrad)
+
+        textPreviewLabel.textColor = Color.Text
+        textPreviewLabel.font = UIFont(name: textPreviewLabel.font.fontName, size: 17)
+        textPreviewLabel.layer.backgroundColor = Color.Ciphered.CGColor
+        textPreviewLabel.layer.cornerRadius = 8.0
+        textPreviewLabel.translatesAutoresizingMaskIntoConstraints = false
+        textPreviewLabel.numberOfLines = 0
+        //textPreviewLabel.addGradient(Gradient.CipheredGrad)
     }
 
     @IBAction func difficultyChanged(sender: AnyObject) {
@@ -43,8 +57,7 @@ class SingleDecipherViewController: BaseDecipherViewController {
         singleModeService.finishDecipher(singleMessage)
 
         if (message.exp > 0) {
-            let starStatus = singleModeService.getStarStatus(singleMessage)
-            self.expGainView.runProgress(message.exp, starStatus: starStatus)
+            self.expGainView.runProgress(message.exp)
         }
     }
 
@@ -58,17 +71,9 @@ class SingleDecipherViewController: BaseDecipherViewController {
     private func updateTime() {
         let timer = Timer(seconds: messageCipherService.getTimerSeconds(message))
         startTimerLabel.text = timer.getTimeString()
-        //startTimerLabel.text = "Time: " + timer.getTimeString()
     }
 
     private func updateMessageExample() {
-        exampleLabel.textColor = UIColor.whiteColor()
-        //exampleLabel.font = UIFont(name: textPreviewLabel.font.fontName, size: 17)
-
-        exampleLabel.layer.backgroundColor = Color.Ciphered.CGColor
-        exampleLabel.layer.cornerRadius = 8.0
-        exampleLabel.translatesAutoresizingMaskIntoConstraints = false
-
         let exampleMessage = messageCipherService.createExampleMessage(
             level.category.cipherType, cipherDifficulty: selectedDifficulty
         )
@@ -77,14 +82,6 @@ class SingleDecipherViewController: BaseDecipherViewController {
     }
 
     private func updateMessagePreview() {
-        textPreviewLabel.textColor = UIColor.whiteColor()
-        textPreviewLabel.font = UIFont(name: textPreviewLabel.font.fontName, size: 17)
-
-        textPreviewLabel.layer.backgroundColor = Color.Ciphered.CGColor
-        textPreviewLabel.layer.cornerRadius = 8.0
-        textPreviewLabel.translatesAutoresizingMaskIntoConstraints = false
-        textPreviewLabel.numberOfLines = 0
-
         textPreviewLabel.text = message.text()
     }
 }

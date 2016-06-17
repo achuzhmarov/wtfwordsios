@@ -5,30 +5,51 @@ class LvlCell: UICollectionViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
 
+    private var level: Level!
+
+    private var gradientLayer: CAGradientLayer?
+
     private func initStyle() {
-        titleLabel.textColor = Color.Font
+        titleLabel.textColor = Color.Text
 
         layer.cornerRadius = 12.0
 
         layer.masksToBounds = false
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.mainScreen().scale
-        //layer.borderWidth = 1
-        //layer.borderColor = UIColor.blackColor().CGColor
+
+        gradientLayer?.removeFromSuperlayer()
     }
 
     func updateLevel(level: Level) {
         initStyle()
 
-        titleLabel.text = String(level.id)
+        self.level = level
 
         if (level.cleared) {
-            layer.backgroundColor = Color.Success.CGColor
+            setClearedState()
         } else if singleModeService.isLevelAvailable(level) {
-            layer.backgroundColor = Color.Ciphered.CGColor
+            setAvailableState()
         } else {
-            layer.backgroundColor = Color.Ignore.CGColor
-            titleLabel.text = Emoji.LOCK
+            setIgnoredState()
         }
+    }
+
+    private func setClearedState() {
+        titleLabel.text = String(level.id)
+
+        let gradient = Gradient.getLevelGradientByDifficulty(level.clearedDifficulty!)
+        gradientLayer = addGradient(gradient)
+    }
+
+    private func setAvailableState() {
+        titleLabel.text = String(level.id)
+
+        gradientLayer = addGradient(Gradient.CipheredGrad)
+    }
+
+    private func setIgnoredState() {
+        titleLabel.text = Emoji.LOCK
+        layer.backgroundColor = Color.Ignore.CGColor
     }
 }

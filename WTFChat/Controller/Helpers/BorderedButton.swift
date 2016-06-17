@@ -23,7 +23,7 @@ class BorderedButton: UIButton {
             right: HORIZONTAL_PADDING
         )
         setTitleColor(mainColor, forState: .Normal)
-        setTitleColor(Color.Font, forState: .Highlighted)
+        setTitleColor(Color.Text, forState: .Highlighted)
         setBackgroundImage(UIImage(color: mainColor), forState: .Highlighted)
     }
 }

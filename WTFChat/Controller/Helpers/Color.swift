@@ -8,7 +8,7 @@ class Color {
     static let Ciphered = UIColor(netHex:0x0092D7)
     static let Failed = UIColor(netHex:0xF26964)
     static let Try = UIColor(netHex:0xEE8D09)
-    static let Font = UIColor.whiteColor()
+    static let Text = UIColor.whiteColor()
     static let Ignore = UIColor(hue: 240.0 / 360.0, saturation: 0.02, brightness: 0.92, alpha: 1.0)
 
     static let EasyDark = UIColor(red: 126/255, green: 73/255, blue: 13/255, alpha: 1.0)
@@ -22,4 +22,18 @@ class Color {
     static let HardDark = UIColor(red: 0.6, green: 0.5, blue: 0.15, alpha: 1.0)
     static let HardMid = UIColor(red: 0.86, green: 0.73, blue: 0.3, alpha: 1.0)
     static let HardLight = UIColor(red: 1.0, green: 0.98, blue: 0.9, alpha: 1.0)
+
+    static let CipheredMid = UIColor(red: 18/255, green: 140/255, blue: 220/255, alpha: 1.0)
+    static let CipheredDark = UIColor(red: 15/255, green: 105/255, blue: 169/255, alpha: 1.0)
+
+    static func getBorderColorByDifficulty(difficulty: CipherDifficulty) -> UIColor {
+        switch difficulty {
+            case .Easy:
+                return Color.EasyDark
+            case .Normal:
+                return Color.NormalDark
+            case .Hard:
+                return Color.HardDark
+        }
+    }
 }

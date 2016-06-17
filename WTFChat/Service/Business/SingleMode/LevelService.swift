@@ -10,7 +10,7 @@ class LevelService: Service {
     }
 
     func updateLevel(level: Level) {
-
+        coreLevelService.updateLevel(level)
     }
 
     func getPreviousLevel(level: Level) -> Level? {

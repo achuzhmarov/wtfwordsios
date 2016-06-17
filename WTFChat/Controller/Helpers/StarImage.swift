@@ -1,21 +1,5 @@
 import UIKit
 
-class StarGradient {
-    let light: UIColor
-    let mid: UIColor
-    let dark: UIColor
-
-    init(light: UIColor, mid: UIColor, dark: UIColor) {
-        self.light = light
-        self.mid = mid
-        self.dark = dark
-    }
-
-    static let EasyGrad = StarGradient(light: Color.EasyLight, mid: Color.EasyMid, dark: Color.EasyDark)
-    static let NormalGrad = StarGradient(light: Color.NormalLight, mid: Color.NormalMid, dark: Color.NormalDark)
-    static let HardGrad = StarGradient(light: Color.HardLight, mid: Color.HardMid, dark: Color.HardDark)
-}
-
 class StarImageCache {
     var cache = [CipherDifficulty: [CGFloat: UIImage]]()
 
@@ -49,15 +33,14 @@ class StarImage: UIImageView {
         if let cachedImage = StarImage.cache.getImage(difficulty, progress: gradientProgress) {
             image = cachedImage
         } else {
-            let starGradient = getStarGradient(difficulty)
-            image = createStarImage(gradientProgress, starGradient: starGradient)
+            let starGradient = Gradient.getStarGradientByDifficulty(difficulty)
+            let borderColor = Color.getBorderColorByDifficulty(difficulty)
+            image = createStarImage(gradientProgress, starGradient: starGradient, borderColor: borderColor)
             StarImage.cache.addImage(difficulty, progress: gradientProgress, image: image!)
         }
     }
 
-    private func createStarImage(gradientProgress: CGFloat, starGradient: StarGradient) -> UIImage {
-        print("creating Star Image for gradient \(gradientProgress)")
-
+    private func createStarImage(gradientProgress: CGFloat, starGradient: [CGColor], borderColor: UIColor) -> UIImage {
         let size = CGSize(width: bounds.width, height: bounds.height)
 
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
@@ -95,7 +78,7 @@ class StarImage: UIImageView {
 
         starPath.closePath()
 
-        starGradient.dark.setStroke()
+        borderColor.setStroke()
         starPath.lineWidth = 1
         starPath.stroke()
 
@@ -109,11 +92,7 @@ class StarImage: UIImageView {
 
         let gradient = CGGradientCreateWithColors(
             CGColorSpaceCreateDeviceRGB(),
-                [
-                    starGradient.light.CGColor,
-                    starGradient.mid.CGColor,
-                    starGradient.dark.CGColor
-                ],
+                starGradient,
 
                 [
                     firstColorLocation,
@@ -145,16 +124,5 @@ class StarImage: UIImageView {
         let gradientIndex = Int(progress * 10)
 
         return StarImage.gradientProgress[gradientIndex]
-    }
-
-    private func getStarGradient(difficulty: CipherDifficulty) -> StarGradient {
-        switch difficulty {
-            case .Easy:
-                return StarGradient.EasyGrad
-            case .Normal:
-                return StarGradient.NormalGrad
-            case .Hard:
-                return StarGradient.HardGrad
-        }
     }
 }

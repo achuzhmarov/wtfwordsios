@@ -27,27 +27,13 @@ class SingleModeService: Service {
         singleMessage.exp = expService.calculateExpForMessage(singleMessage)
 
         if (singleMessage.getMessageStatus() == .Success) {
-            /*let talk = singleMessage.singleTalk
-            talk.wins += 1
-
-            singleTalkService.updateSingleTalk(talk)*/
+            let level = singleMessage.level
+            level.cleared = true
+            level.clearedDifficulty = singleMessage.cipherDifficulty
+            levelService.updateLevel(level)
         }
 
         currentUserService.earnSingleExp(singleMessage.exp)
-    }
-
-    func getStarStatus(singleMessage: SingleMessage) -> StarStatus {
-        if (singleMessage.getMessageStatus() == .Success) {
-            /*let talk = singleMessage.singleTalk
-
-            if (talk.wins < talk.cipherSettings!.maxStars) {
-                return .EarnStar
-            } else if (talk.wins == talk.cipherSettings!.maxStars) {
-                return .Mastered
-            }*/
-        }
-
-        return .NoChange
     }
 
     func isLevelAvailable(level: Level) -> Bool {

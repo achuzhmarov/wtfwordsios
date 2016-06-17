@@ -90,7 +90,7 @@ class ExpGainView: NSObject {
         return progressView
     }
 
-    func runProgress(earnedExp: Int, starStatus: StarStatus = .NoChange) {
+    func runProgress(earnedExp: Int) {
         if (progressView == nil) {
             NSLog("call to runProgress while no initView")
             return
@@ -105,18 +105,7 @@ class ExpGainView: NSObject {
                 selector: #selector(ExpGainView.updateProgress), userInfo: nil, repeats: true)
         })
 
-        self.expLabel?.text = "+\(String(earnedExp))XP" + getStarTextByStatus(starStatus)
-    }
-
-    private func getStarTextByStatus(starStatus: StarStatus) -> String {
-        switch starStatus {
-            case .Mastered:
-                return " " + Emoji.MASTERED_STAR + Emoji.MASTERED_STAR + Emoji.MASTERED_STAR
-            case .EarnStar:
-                return " +" + Emoji.STAR
-            case .NoChange:
-                return ""
-        }
+        self.expLabel?.text = "+\(String(earnedExp))XP"
     }
     
     func updateProgress() {
