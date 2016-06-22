@@ -11,7 +11,7 @@ class SingleDecipherViewController: BaseDecipherViewController {
     @IBOutlet weak var textPreviewLabel: RoundedLabel!
 
     private let cipherDifficulties = CipherDifficulty.getAll()
-    private var selectedDifficulty = CipherDifficulty.Easy
+    private var selectedDifficulty = CipherDifficulty.Normal
 
     var level: Level!
     var messageText: String!

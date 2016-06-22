@@ -5,7 +5,8 @@ enum WordType: Int {
 }
 
 class Word: NSObject {
-    static let HIDED_SYMBOL = "*"
+    static let HIDE_SYMBOL = "*"
+    static let NOT_HIDED_SYMBOLS: [Character] = [".", ",", "!", "?", "(", ")", " ", "\n"]
 
     var text: String
     var type = WordType.New
@@ -59,10 +60,18 @@ class Word: NSObject {
             .replace(additional, with: "")
 
         for _ in 0..<cipheredTextOnly.characters.count {
-            result += Word.HIDED_SYMBOL
+            result += Word.HIDE_SYMBOL
         }
 
-        return result + additional
+        for char in additional.characters {
+            if (Word.NOT_HIDED_SYMBOLS.contains(char)) {
+                result += String(char)
+            } else {
+                result += Word.HIDE_SYMBOL
+            }
+        }
+
+        return result
     }
 
     private func hasText() -> Bool {
