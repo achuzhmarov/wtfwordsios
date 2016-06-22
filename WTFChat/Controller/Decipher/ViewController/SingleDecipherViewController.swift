@@ -34,6 +34,8 @@ class SingleDecipherViewController: BaseDecipherViewController {
         textPreviewLabel.translatesAutoresizingMaskIntoConstraints = false
         textPreviewLabel.numberOfLines = 0
         //textPreviewLabel.addGradient(Gradient.CipheredGrad)
+
+        updateSelectedDifficultyInGUI()
     }
 
     @IBAction func difficultyChanged(sender: AnyObject) {
@@ -83,5 +85,18 @@ class SingleDecipherViewController: BaseDecipherViewController {
 
     private func updateMessagePreview() {
         textPreviewLabel.text = message.text()
+    }
+
+    private func updateSelectedDifficultyInGUI() {
+        var index = 0
+
+        for i in 0..<cipherDifficulties.count {
+            if (cipherDifficulties[i] == selectedDifficulty) {
+                index = i
+                break
+            }
+        }
+
+        difficultySelector.selectedSegmentIndex = index
     }
 }
