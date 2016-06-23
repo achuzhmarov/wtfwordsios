@@ -2691,7 +2691,7 @@
                                 <rect key="frame" x="16" y="8" width="572" height="520"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="arg-sH-dWh" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="85" y="100" width="487" height="21"/>
+                                        <rect key="frame" x="85" y="132" width="487" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2739,13 +2739,25 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2b-CK-Vv7">
-                                        <rect key="frame" x="0.0" y="99" width="77" height="24"/>
+                                        <rect key="frame" x="0.0" y="131" width="77" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82I-X0-hdD">
+                                        <rect key="frame" x="0.0" y="100" width="77" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LOh-aD-SEi">
+                                        <rect key="frame" x="85" y="100" width="39" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3no-vM-Nm4" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="129" width="572" height="42"/>
+                                        <rect key="frame" x="0.0" y="161" width="572" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <color key="tintColor" red="0.011764705882352941" green="0.18431372549019609" blue="0.42745098039215684" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Start">
@@ -2758,26 +2770,31 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="arg-sH-dWh" firstAttribute="top" secondItem="3eS-NI-ZjX" secondAttribute="bottom" constant="8" id="2u3-TN-YwM"/>
+                                    <constraint firstItem="LOh-aD-SEi" firstAttribute="top" secondItem="3eS-NI-ZjX" secondAttribute="bottom" constant="8" id="9oa-W7-Kyg"/>
                                     <constraint firstAttribute="trailing" secondItem="LdY-lx-5u8" secondAttribute="trailing" id="Fsg-uL-xWg"/>
                                     <constraint firstAttribute="trailing" secondItem="arg-sH-dWh" secondAttribute="trailing" id="GmQ-NU-QU4"/>
                                     <constraint firstItem="3no-vM-Nm4" firstAttribute="top" secondItem="arg-sH-dWh" secondAttribute="bottom" constant="8" id="IFy-Ph-XYI"/>
+                                    <constraint firstItem="82I-X0-hdD" firstAttribute="centerY" secondItem="LOh-aD-SEi" secondAttribute="centerY" id="N7l-tr-4dW"/>
                                     <constraint firstItem="j2b-CK-Vv7" firstAttribute="leading" secondItem="H0o-b3-K3y" secondAttribute="leading" id="Oee-cJ-hu6"/>
                                     <constraint firstItem="MUM-mg-e0y" firstAttribute="centerY" secondItem="3eS-NI-ZjX" secondAttribute="centerY" id="OfO-NP-Hqg"/>
                                     <constraint firstItem="j2b-CK-Vv7" firstAttribute="trailing" secondItem="MUM-mg-e0y" secondAttribute="trailing" id="PFj-6Y-hdc"/>
                                     <constraint firstItem="D8M-OX-jp1" firstAttribute="leading" secondItem="7Xg-xi-x2n" secondAttribute="trailing" constant="8" id="QoZ-1n-MSk"/>
+                                    <constraint firstItem="arg-sH-dWh" firstAttribute="top" secondItem="LOh-aD-SEi" secondAttribute="bottom" constant="8" id="SZ1-og-Tkn"/>
                                     <constraint firstItem="D8M-OX-jp1" firstAttribute="centerY" secondItem="7Xg-xi-x2n" secondAttribute="centerY" id="Uwp-Mu-qWn"/>
                                     <constraint firstItem="D8M-OX-jp1" firstAttribute="top" secondItem="LdY-lx-5u8" secondAttribute="bottom" constant="8" id="Xc4-uk-Ti4"/>
                                     <constraint firstItem="j2b-CK-Vv7" firstAttribute="centerY" secondItem="arg-sH-dWh" secondAttribute="centerY" id="Xst-3O-Fji"/>
                                     <constraint firstItem="3eS-NI-ZjX" firstAttribute="top" secondItem="D8M-OX-jp1" secondAttribute="bottom" constant="8" id="bKR-74-myH"/>
                                     <constraint firstItem="3no-vM-Nm4" firstAttribute="leading" secondItem="H0o-b3-K3y" secondAttribute="leading" id="bVl-ba-jWq"/>
+                                    <constraint firstItem="82I-X0-hdD" firstAttribute="leading" secondItem="H0o-b3-K3y" secondAttribute="leading" id="fOb-yE-WZm"/>
                                     <constraint firstItem="7Xg-xi-x2n" firstAttribute="leading" secondItem="H0o-b3-K3y" secondAttribute="leading" id="gJI-AH-lRs"/>
                                     <constraint firstItem="7Xg-xi-x2n" firstAttribute="top" secondItem="LdY-lx-5u8" secondAttribute="bottom" constant="8" id="kP4-3X-MmY"/>
                                     <constraint firstItem="LdY-lx-5u8" firstAttribute="leading" secondItem="H0o-b3-K3y" secondAttribute="leading" id="lMO-8Q-2Kg"/>
                                     <constraint firstItem="7Xg-xi-x2n" firstAttribute="trailing" secondItem="MUM-mg-e0y" secondAttribute="trailing" id="o8E-pu-MBQ"/>
                                     <constraint firstItem="arg-sH-dWh" firstAttribute="leading" secondItem="j2b-CK-Vv7" secondAttribute="trailing" constant="8" id="oRq-7E-cT8"/>
                                     <constraint firstItem="MUM-mg-e0y" firstAttribute="leading" secondItem="H0o-b3-K3y" secondAttribute="leading" id="qne-qC-SNH"/>
+                                    <constraint firstItem="LOh-aD-SEi" firstAttribute="leading" secondItem="82I-X0-hdD" secondAttribute="trailing" constant="8" id="uC1-Vr-6cu"/>
                                     <constraint firstAttribute="trailing" secondItem="3no-vM-Nm4" secondAttribute="trailing" id="ugh-t0-CgY"/>
+                                    <constraint firstItem="82I-X0-hdD" firstAttribute="trailing" secondItem="MUM-mg-e0y" secondAttribute="trailing" id="wTj-MJ-JlO"/>
                                     <constraint firstItem="LdY-lx-5u8" firstAttribute="top" secondItem="H0o-b3-K3y" secondAttribute="top" id="yjN-gC-YJO"/>
                                     <constraint firstItem="3eS-NI-ZjX" firstAttribute="leading" secondItem="MUM-mg-e0y" secondAttribute="trailing" constant="8" id="zdQ-r7-zjp"/>
                                 </constraints>
@@ -2814,6 +2831,7 @@
                         <outlet property="startTimerLabel" destination="D8M-OX-jp1" id="nut-bX-PUt"/>
                         <outlet property="startView" destination="H0o-b3-K3y" id="fh5-q1-o6R"/>
                         <outlet property="textPreviewLabel" destination="arg-sH-dWh" id="pfs-w1-kFO"/>
+                        <outlet property="titleLabel" destination="LOh-aD-SEi" id="DQz-ja-r0l"/>
                         <outlet property="topTimerLabel" destination="g4L-D7-KeN" id="Noq-ft-Xzj"/>
                         <outlet property="topView" destination="irN-JP-MaA" id="ZDX-6E-IP8"/>
                         <outlet property="topViewHeightContraint" destination="sLg-7P-WF1" id="XBN-GQ-kNP"/>

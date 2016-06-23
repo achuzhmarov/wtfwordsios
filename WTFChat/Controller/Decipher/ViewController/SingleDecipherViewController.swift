@@ -8,6 +8,7 @@ class SingleDecipherViewController: BaseDecipherViewController {
     @IBOutlet weak var difficultySelector: UISegmentedControl!
     @IBOutlet weak var startTimerLabel: UILabel!
     @IBOutlet weak var exampleLabel: RoundedLabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var textPreviewLabel: RoundedLabel!
 
     private let cipherDifficulties = CipherDifficulty.getAll()
@@ -15,9 +16,11 @@ class SingleDecipherViewController: BaseDecipherViewController {
 
     var level: Level!
     var messageText: String!
+    var messageCategory: TextCategory!
 
     override func viewDidLoad() {
-        messageText = singleMessageService.getTextForLevel(level)
+        messageCategory = singleMessageService.getTextCategoryForLevel(level)
+        messageText = messageCategory.getRandomText()
         updateMessage()
         super.viewDidLoad()
 
@@ -67,12 +70,17 @@ class SingleDecipherViewController: BaseDecipherViewController {
         message = singleMessageService.getMessageForLevel(level, difficulty: selectedDifficulty, text: messageText)
         updateTime()
         updateMessageExample()
+        updateMessageTitle()
         updateMessagePreview()
     }
 
     private func updateTime() {
         let timer = Timer(seconds: messageCipherService.getTimerSeconds(message))
         startTimerLabel.text = timer.getTimeString()
+    }
+
+    private func updateMessageTitle() {
+        titleLabel.text = messageCategory.title
     }
 
     private func updateMessageExample() {

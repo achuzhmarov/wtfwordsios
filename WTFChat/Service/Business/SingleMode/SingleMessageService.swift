@@ -1,18 +1,18 @@
 import Foundation
 
 class SingleMessageService: Service {
-    private let textGeneratorService: TextGeneratorService
+    private let textGeneratorService: TextCategoryService
     private let messageCipherService: MessageCipherService
 
-    init(textGeneratorService: TextGeneratorService,
+    init(textGeneratorService: TextCategoryService,
          messageCipherService: MessageCipherService) {
 
         self.messageCipherService = messageCipherService
         self.textGeneratorService = textGeneratorService
     }
 
-    func getTextForLevel(level: Level) -> String {
-        return textGeneratorService.getTextForLevel(level)
+    func getTextCategoryForLevel(level: Level) -> TextCategory {
+        return textGeneratorService.getTextCategoryForLevel(level)
     }
 
     func getMessageForLevel(level: Level, difficulty: CipherDifficulty, text: String) -> SingleMessage {

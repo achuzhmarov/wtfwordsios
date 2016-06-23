@@ -93,7 +93,7 @@ class ServiceInitializer {
         )
 
         let cipherService = CipherService()
-        let textGeneratorService = TextGeneratorService()
+        let textCategoryService = TextCategoryService()
         let messageCipherService = MessageCipherService(
             currentUserService: currentUserService,
             cipherService: cipherService
@@ -109,7 +109,7 @@ class ServiceInitializer {
         )
 
         let singleMessageService = SingleMessageService(
-            textGeneratorService: textGeneratorService,
+            textGeneratorService: textCategoryService,
             messageCipherService: messageCipherService
         )
 
@@ -144,7 +144,7 @@ class ServiceInitializer {
             TimeService(),
             AudioService(),
             cipherService,
-                    textGeneratorService
+                    textCategoryService
         )
     }
 }

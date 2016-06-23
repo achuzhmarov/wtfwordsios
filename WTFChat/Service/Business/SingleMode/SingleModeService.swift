@@ -40,7 +40,9 @@ class SingleModeService: Service {
         if let previousLevel = levelService.getPreviousLevel(level) {
             return previousLevel.cleared
         } else if let previousCategory = categoryService.getPreviousCategory(level.category) {
-            return previousCategory.getLastLevel().cleared
+            //TODO - temporary for testing
+            return true
+            //return previousCategory.getLastLevel().cleared
         } else {
             //first level
             return true
