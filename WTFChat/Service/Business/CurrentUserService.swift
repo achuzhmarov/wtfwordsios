@@ -246,7 +246,12 @@ class CurrentUserService: Service {
         user.pushDeciphered = pushDeciphered
         saveUserInLocalStorage()
     }
-    
+
+    func useHints(hintsUsed: Int) {
+        user.hints -= hintsUsed
+        saveUserInLocalStorage()
+    }
+
     func addFreeHint() {
         if canAddFreeAdHint() {
             user.hints += 1

@@ -123,7 +123,7 @@ class ExpGainView: NSObject {
             self.progressBarTimer?.invalidate()
             
             if (progressView!.progress == 1) {
-                let userLvl = String(currentUserService.getUserLvl() + 1)
+                let userLvl = String(currentUserService.getUserLvl())
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     usleep(1000 * 500)

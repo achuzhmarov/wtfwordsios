@@ -9,8 +9,13 @@
 import Foundation
 
 class MessageCipherService: Service {
-    private let WORD_SPECIAL_SYMBOLS = ["'", "-"]
+    private let WORD_SPECIAL_SYMBOLS = ["'"]//, "-"]
+
+    //дефис и длинное тире
+    private let ADDITIONAL_EXCEPTIONS = ["-","—"]
+
     private let EXAMPLE_TEXT = "Example"
+    private let ROMAN_LETTERS = ["X","V","I"]
 
     private let currentUserService: CurrentUserService
     private let cipherService: CipherService
@@ -216,9 +221,19 @@ class MessageCipherService: Service {
             if (isLastLetter) {
                 if (isLetter(uniChar)) {
                     newWordText += String(uniChar)
+                } else if ADDITIONAL_EXCEPTIONS.contains(String(uniChar)) {
+                    isLastLetter = false
+
+                    if (newWordText != "") {
+                        words.append(Word(text: newWordText, additional: newWordAdditional, type: getWordType(newWordText)))
+                    }
+
+                    newWordText = ""
+                    newWordAdditional = String(uniChar)
+
                 } else {
                     isLastLetter = false
-                    
+
                     newWordAdditional += String(uniChar)
                 }
             } else {
@@ -243,9 +258,23 @@ class MessageCipherService: Service {
     private func getWordType(newWordText: String) -> WordType {
         if (countLettersOnly(newWordText) <= 1) {
             return WordType.Ignore
+        } else if isRomanDate(newWordText) {
+            return WordType.Ignore
         } else {
             return WordType.New
         }
+    }
+
+    private func isRomanDate(text: String) -> Bool {
+        for char in text.characters {
+            if ROMAN_LETTERS.contains(String(char)) {
+                continue
+            } else {
+                return false
+            }
+        }
+
+        return true
     }
     
     private let letters = NSCharacterSet.letterCharacterSet()

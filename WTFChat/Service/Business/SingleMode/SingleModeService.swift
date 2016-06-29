@@ -34,6 +34,7 @@ class SingleModeService: Service {
         }
 
         currentUserService.earnSingleExp(singleMessage.exp)
+        currentUserService.useHints(singleMessage.hintsUsed)
     }
 
     func isLevelAvailable(level: Level) -> Bool {
