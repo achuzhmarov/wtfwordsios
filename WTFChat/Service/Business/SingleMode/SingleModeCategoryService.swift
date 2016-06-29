@@ -1,7 +1,7 @@
 import Foundation
 
 class SingleModeCategoryService: Service {
-    private let LVLS_PER_CATEGORY = 30
+    private let LVLS_PER_CATEGORY = 24
 
     private let coreSingleModeCategoryService: CoreSingleModeCategoryService
     private let coreLevelService: CoreLevelService
