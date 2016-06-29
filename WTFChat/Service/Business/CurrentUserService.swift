@@ -186,7 +186,8 @@ class CurrentUserService: Service {
     }
     
     func canAddFreeAdHint() -> Bool {
-        return user.freeHintsGained < MAX_DAILY_FREE_HINTS_FROM_AD
+        return true
+        //return user.freeHintsGained < MAX_DAILY_FREE_HINTS_FROM_AD
     }
     
     func getSelfUserInfo() -> FriendInfo? {
