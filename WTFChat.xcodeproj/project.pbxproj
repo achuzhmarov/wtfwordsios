@@ -141,7 +141,6 @@
 		3E37CE9D843E851046E44D46 /* MessageNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE047F561F77F917AC33 /* MessageNetworkService.swift */; };
 		3E37CED21971E4DF98325C30 /* CipherHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C21A5D7E07C8CFB4DCE6 /* CipherHeaderCell.swift */; };
 		3E37CEE9BE3C0CB33E172313 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE11FB42D287E2CBBC28 /* UserService.swift */; };
-		3E37CEFEF015986F56B25948 /* DecipherHintsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CC1146FBFEFE53A3B280 /* DecipherHintsHelper.swift */; };
 		3E37CF02D114762477F8B055 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C6A2A4D0A075DFE4342B /* Color.swift */; };
 		3E37CF039F0DCE1755ADE82C /* TalkNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF444956F635D14AB33E /* TalkNetworkService.swift */; };
 		3E37CF1DC371CE32934B0AF8 /* CipherDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C7B3CA8FB6461A10A098 /* CipherDifficulty.swift */; };
@@ -301,7 +300,6 @@
 		3E37CBBDBF1FE0CA7AFB58BF /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		3E37CBC272EAAF55FCEC9D1B /* MessageTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableView.swift; sourceTree = "<group>"; };
 		3E37CBF3B1602BA1DD301A55 /* UIColor+JSQMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+JSQMessages.h"; sourceTree = "<group>"; };
-		3E37CC1146FBFEFE53A3B280 /* DecipherHintsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecipherHintsHelper.swift; sourceTree = "<group>"; };
 		3E37CC18034686E90B6C6BC8 /* AudioService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
 		3E37CC38BBB78EEC291E5537 /* TutorialCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialCell.swift; sourceTree = "<group>"; };
 		3E37CC3BCE2D521EC38F21E1 /* TimeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeService.swift; sourceTree = "<group>"; };
@@ -650,7 +648,6 @@
 				3E37CEC9575B52D804AFFD17 /* WordsField.swift */,
 				3E37CF3E05D6CC07532749A2 /* WordsViewController.swift */,
 				3E37CAE9D18A9E222BA248C0 /* ViewController */,
-				3E37CC1146FBFEFE53A3B280 /* DecipherHintsHelper.swift */,
 			);
 			path = Decipher;
 			sourceTree = "<group>";
@@ -1201,7 +1198,6 @@
 				3E37CDC66A4CA01F05B90265 /* RemoteMessage.swift in Sources */,
 				3E37CAC099A2F4C865A8A698 /* SingleMessage.swift in Sources */,
 				3E37C0C2481BAFA3396B4EDB /* Talk.swift in Sources */,
-				3E37CEFEF015986F56B25948 /* DecipherHintsHelper.swift in Sources */,
 				3E37CE9249522003E406A452 /* TextCategoryService.swift in Sources */,
 				3E37C59C630524D1F5DA26BC /* SingleModeCategoryService.swift in Sources */,
 				3E37C4A65CAA433F21B331CD /* SingleMessageService.swift in Sources */,

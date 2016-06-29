@@ -7,6 +7,7 @@ import Foundation
 
 class SingleModeViewController: UIViewController, LevelSelectedComputer {
     private let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
+    private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
 
     private let DECIPHER_SEGUE_ID = "showDecipher"
 
@@ -44,8 +45,17 @@ class SingleModeViewController: UIViewController, LevelSelectedComputer {
 
     func levelSelected(level: Level) {
         if (singleModeService.isLevelAvailable(level)) {
-            selectedLevel = level
-            self.performSegueWithIdentifier(DECIPHER_SEGUE_ID, sender: self)
+            if (singleMessageService.hasTextCategoryForLevel(level)) {
+                selectedLevel = level
+                self.performSegueWithIdentifier(DECIPHER_SEGUE_ID, sender: self)
+            } else {
+                WTFOneButtonAlert.show("Not available yet",
+                        message: "This level is not available yet. Please, wait for the next release!",
+                        firstButtonTitle: "Ok",
+                        viewPresenter: self)
+
+                return
+            }
         }
     }
 }

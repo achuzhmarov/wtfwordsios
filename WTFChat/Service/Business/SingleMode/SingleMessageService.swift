@@ -11,8 +11,13 @@ class SingleMessageService: Service {
         self.textGeneratorService = textGeneratorService
     }
 
-    func getTextCategoryForLevel(level: Level) -> TextCategory {
-        return textGeneratorService.getTextCategoryForLevel(level)
+    func hasTextCategoryForLevel(level: Level) -> Bool {
+        let text = textGeneratorService.getTextCategoryForLevel(level)
+        return text != nil
+    }
+
+    func getTextCategoryForLevel(level: Level) -> TextCategory! {
+        return textGeneratorService.getTextCategoryForLevel(level)!
     }
 
     func getMessageForLevel(level: Level, difficulty: CipherDifficulty, text: String) -> SingleMessage {
