@@ -4,6 +4,7 @@ class SingleDecipherViewController: BaseDecipherViewController {
     private let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
     private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
     private let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
+    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
 
     @IBOutlet weak var difficultySelector: UISegmentedControl!
     @IBOutlet weak var startTimerLabel: UILabel!
@@ -19,6 +20,7 @@ class SingleDecipherViewController: BaseDecipherViewController {
     var messageCategory: TextCategory!
 
     override func viewDidLoad() {
+        selectedDifficulty = currentUserService.getLastSelectedDifficulty()
         messageCategory = singleMessageService.getTextCategoryForLevel(level)
         messageText = messageCategory.getRandomText()
         updateMessage()
@@ -43,6 +45,7 @@ class SingleDecipherViewController: BaseDecipherViewController {
 
     @IBAction func difficultyChanged(sender: AnyObject) {
         selectedDifficulty = cipherDifficulties[difficultySelector.selectedSegmentIndex]
+        currentUserService.updateLastSelectedDifficulty(selectedDifficulty)
         updateMessage()
     }
 

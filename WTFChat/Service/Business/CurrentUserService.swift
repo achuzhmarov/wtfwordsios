@@ -25,6 +25,7 @@ class CurrentUserService: Service {
         static let PUSH_DECIPHERED = "USER_PUSH_DECIPHERED"
         static let RATING = "USER_RATING"
         static let FREE_HINTS_GAINED = "USER_FREE_HINTS_GAINED"
+        static let LAST_SELECTED_DIFFICULTY = "USER_LAST_SELECTED_DIFFICULTY"
     }
 
     private var user: User!
@@ -93,6 +94,8 @@ class CurrentUserService: Service {
         user = User(login: login)
 
         saveUserInLocalStorage()
+
+        updateLastSelectedDifficulty(.Normal)
     }
 
     private func saveUserInLocalStorage() {
@@ -187,6 +190,7 @@ class CurrentUserService: Service {
     
     func canAddFreeAdHint() -> Bool {
         return true
+        //TODO - Free Hints - restrict or not restrict???
         //return user.freeHintsGained < MAX_DAILY_FREE_HINTS_FROM_AD
     }
     
@@ -211,8 +215,6 @@ class CurrentUserService: Service {
         print("getFriendLogin from not a friend?")
         return ""
     }
-
-
 
     func earnSingleExp(earnedExp: Int) {
         user.singleExp += earnedExp
@@ -259,5 +261,14 @@ class CurrentUserService: Service {
             user.freeHintsGained += 1
             saveUserInLocalStorage()
         }
+    }
+
+
+    func getLastSelectedDifficulty() -> CipherDifficulty {
+        return CipherDifficulty(rawValue: getIntField(KEY.LAST_SELECTED_DIFFICULTY))!
+    }
+
+    func updateLastSelectedDifficulty(cipherDifficulty: CipherDifficulty) {
+        saveField(KEY.LAST_SELECTED_DIFFICULTY, value: cipherDifficulty.rawValue)
     }
 }
