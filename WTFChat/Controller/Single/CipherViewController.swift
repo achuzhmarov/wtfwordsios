@@ -1,5 +1,9 @@
 import Foundation
 
+protocol CipherViewAppearedNotifier {
+    func cipherViewAppeared(viewController: CipherViewController)
+}
+
 class CipherViewController: UIViewController, LevelSelectedComputer {
     private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
     private let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
@@ -13,6 +17,7 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
     @IBOutlet weak var lvlCollectionView: LvlCollectionView!
 
     var activeCipherIndex = 0
+    var cipherViewAppearedNotifier: CipherViewAppearedNotifier?
 
     private let DECIPHER_SEGUE_ID = "showDecipher"
     private let LVL_CELL_SPACING: CGFloat = 10.0
@@ -36,6 +41,7 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         reloadData()
+        cipherViewAppearedNotifier?.cipherViewAppeared(self)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

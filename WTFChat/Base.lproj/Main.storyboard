@@ -2692,6 +2692,9 @@
                             </containerView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="gG1-Hw-UNQ">
                                 <rect key="frame" x="280" y="339" width="39" height="37"/>
+                                <connections>
+                                    <action selector="pageChanged:" destination="c9g-0d-Ip0" eventType="valueChanged" id="eBu-UZ-wfa"/>
+                                </connections>
                             </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

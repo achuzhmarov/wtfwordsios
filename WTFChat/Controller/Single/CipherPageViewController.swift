@@ -1,12 +1,12 @@
 import Foundation
 
-class CipherPageViewController: UIPageViewController {
+class CipherPageViewController: UIPageViewController, CipherViewAppearedNotifier {
     private let cipherTypes = CipherType.getAll()
     private var activeCipherIndex = 0
 
-    private var currentViewController: CipherViewController?
-
     private var viewControllersCache = [Int: CipherViewController]()
+
+    private var currentCipherViewController: CipherViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,15 +23,14 @@ class CipherPageViewController: UIPageViewController {
                     direction: .Forward,
                     animated: false,
                     completion: nil)
-
-            currentViewController = viewController
         }
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        notifyParentForViewUpdate(currentViewController!)
+        let parent = self.parentViewController as! SingleModeViewController
+        parent.cipherViewUpdated(currentCipherViewController!)
     }
 
     private func initViewControllers() {
@@ -45,6 +44,7 @@ class CipherPageViewController: UIPageViewController {
             return cachedController
         } else if let storyboard = storyboard, page = storyboard.instantiateViewControllerWithIdentifier("CipherViewController") as? CipherViewController {
             page.activeCipherIndex = index
+            page.cipherViewAppearedNotifier = self
             viewControllersCache[index] = page
             return page
         }
@@ -52,10 +52,12 @@ class CipherPageViewController: UIPageViewController {
         return nil
     }
 
-    private func notifyParentForViewUpdate(newController: CipherViewController) {
-        currentViewController = newController
-        let parent = self.parentViewController as! SingleModeViewController
-        parent.cipherViewUpdated(newController)
+    func cipherViewAppeared(viewController: CipherViewController) {
+        currentCipherViewController = viewController
+
+        if let parent = self.parentViewController as? SingleModeViewController {
+            parent.cipherViewUpdated(viewController)
+        }
     }
 }
 
@@ -68,12 +70,7 @@ extension CipherPageViewController: UIPageViewControllerDataSource {
             var index = viewController.activeCipherIndex
             guard index != NSNotFound && index != 0 else { return nil }
             index = index - 1
-
-            activeCipherIndex = index
-
-            let page = singleModeViewController(index)
-            notifyParentForViewUpdate(page!)
-            return page
+            return singleModeViewController(index)
         }
         return nil
     }
@@ -86,15 +83,12 @@ extension CipherPageViewController: UIPageViewControllerDataSource {
             guard index != NSNotFound else { return nil }
             index = index + 1
             guard index != cipherTypes.count else {return nil}
-
-            activeCipherIndex = index
-
-            let page = singleModeViewController(index)
-            notifyParentForViewUpdate(page!)
-            return page
+            return singleModeViewController(index)
         }
         return nil
     }
+
+
 
     // MARK: UIPageControl
     /*func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {

@@ -68,9 +68,13 @@ class SingleModeViewController: UIViewController {
 
     private func configurePageControl() {
         pageControl.numberOfPages = cipherTypes.count
-        pageControl.currentPage = (currentCipherView?.activeCipherIndex ?? 0) + 1
-        pageControl.tintColor = UIColor.redColor()
+        pageControl.currentPage = currentCipherView?.activeCipherIndex ?? 0
+        //pageControl.tintColor = UIColor.redColor()
         pageControl.pageIndicatorTintColor = UIColor.blackColor()
-        pageControl.currentPageIndicatorTintColor = UIColor.greenColor()
+        pageControl.currentPageIndicatorTintColor = Color.Ciphered
+    }
+
+    @IBAction func pageChanged(sender: AnyObject) {
+        print(pageControl.currentPage)
     }
 }
