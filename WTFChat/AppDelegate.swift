@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         notificationService = serviceLocator.get(NotificationService)
         coreDataService = serviceLocator.get(CoreDataService)
-        
+
         /*if (iosService.haveUserCredentials()) {
             authService.loginWithKeychain() { user, error -> Void in
                 dispatch_async(dispatch_get_main_queue(), {

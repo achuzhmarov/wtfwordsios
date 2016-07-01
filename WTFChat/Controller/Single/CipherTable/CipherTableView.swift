@@ -10,30 +10,31 @@ class CipherTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     private let LVLS_ROW_HEIGHT = 300
 
     private let cipherTypes = CipherType.getAll()
-    private var cipherDifficulty = CipherDifficulty.Easy
 
-    private var selectedType = CipherType.RightCutter
+    var activeCipherIndex = 0
 
-    private var openedSections: [Int: Bool] = [
+    /*private var openedSections: [Int: Bool] = [
             0: true,
             1: false,
             2: false,
             3: false,
             4: false
-    ]
+    ]*/
 
     var levelSelectedComputer: LevelSelectedComputer?
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return cipherTypes.count
+        return 1
+        //return cipherTypes.count
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (openedSections[section]!) { //if (cipherTypes[section] == selectedType) {
+        return 2
+        /*if (openedSections[section]!) { //if (cipherTypes[section] == selectedType) {
             return 2
         } else {
             return 1
-        }
+        }*/
     }
 
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -103,7 +104,8 @@ class CipherTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     private func createCipherHeaderCell(indexPath: NSIndexPath) -> CipherHeaderCell  {
         let cell = dequeueReusableCellWithIdentifier(HEADER_CELL_ID, forIndexPath: indexPath) as! CipherHeaderCell
 
-        let cipherType = cipherTypes[indexPath.section]
+        //let cipherType = cipherTypes[indexPath.section]
+        let cipherType = cipherTypes[activeCipherIndex]
         cell.updateCipherType(cipherType)
 
         return cell
@@ -112,14 +114,15 @@ class CipherTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     private func createCipherDetailsCell(indexPath: NSIndexPath) -> CipherDetailsCell  {
         let cell = dequeueReusableCellWithIdentifier(DETAILS_CELL_ID, forIndexPath: indexPath) as! CipherDetailsCell
 
-        let cipherType = cipherTypes[indexPath.section]
+        //let cipherType = cipherTypes[indexPath.section]
+        let cipherType = cipherTypes[activeCipherIndex]
         cell.updateCipherType(cipherType)
         cell.setLevelSelectedComputer(levelSelectedComputer)
 
         return cell
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    /*func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.row == HEADER_ROW) {
             let section = indexPath.section
             openedSections[section] = !openedSections[section]!
@@ -131,10 +134,29 @@ class CipherTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
                 tableView.scrollToRowAtIndexPath(newRowPath, atScrollPosition: .Bottom, animated: true)
             }
         }
+    }*/
+
+    func swipeRight() {
+        /*let minIndex = 0
+
+        if (activeCipherIndex > minIndex) {
+            activeCipherIndex -= 1
+
+            reloadSections(NSIndexSet(index: 0), withRowAnimation: .Right)
+        }
+
+        print("Swiped right")*/
     }
 
-    func updateCipherDifficulty(cipherDifficulty: CipherDifficulty) {
-        self.cipherDifficulty = cipherDifficulty
-        reloadData()
+    func swipeLeft() {
+        /*let maxIndex = cipherTypes.count - 1
+
+        if (activeCipherIndex < maxIndex) {
+            activeCipherIndex += 1
+
+            reloadSections(NSIndexSet(index: 0), withRowAnimation: .Left)
+        }
+
+        print("Swiped left")*/
     }
 }

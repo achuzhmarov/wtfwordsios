@@ -1,61 +1,76 @@
-//
-// Created by Artem Chuzhmarov on 31/05/16.
-// Copyright (c) 2016 Artem Chuzhmarov. All rights reserved.
-//
-
 import Foundation
 
-class SingleModeViewController: UIViewController, LevelSelectedComputer {
-    private let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
-    private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
+class SingleModeViewController: UIViewController {
+    @IBOutlet weak var cipherViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var pageControl: UIPageControl!
 
-    private let DECIPHER_SEGUE_ID = "showDecipher"
+    private var isInLandscapeMode = false
+    private var currentCipherView: CipherViewController?
 
-    @IBOutlet weak var cipherTableView: CipherTableView!
+    private var landscapeCipherHeight: CGFloat = 0
+    private var portraitCipherHeight: CGFloat = 0
 
-    private var selectedLevel: Level?
+    private let cipherTypes = CipherType.getAll()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.definesPresentationContext = true
 
-        let nav = self.navigationController?.navigationBar
-        nav?.translucent = false
+        configurePageControl()
 
-        cipherTableView.delegate = cipherTableView
-        cipherTableView.dataSource = cipherTableView
-        cipherTableView.rowHeight = UITableViewAutomaticDimension
-        cipherTableView.levelSelectedComputer = self
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SingleModeViewController.rotated(_:)),
+                name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
-        cipherTableView.reloadData()
+    func cipherViewUpdated(newController: CipherViewController) {
+        currentCipherView = newController
+        updateCipherViewHeight()
+        configurePageControl()
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        UIHelper.clearBackButton(navigationItem)
-
-        if segue.identifier == DECIPHER_SEGUE_ID {
-            let targetController = segue.destinationViewController as! SingleDecipherViewController
-            targetController.level = selectedLevel
+    func updateCipherViewHeight() {
+        if (isInLandscapeMode) {
+            updateLandscapeCipherHeightIfNeeded()
+            cipherViewHeightConstraint.constant = landscapeCipherHeight
+        } else {
+            updatePortraitCipherHeightIfNeeded()
+            cipherViewHeightConstraint.constant = portraitCipherHeight
         }
     }
 
-    func levelSelected(level: Level) {
-        if (singleModeService.isLevelAvailable(level)) {
-            if (singleMessageService.hasTextCategoryForLevel(level)) {
-                selectedLevel = level
-                self.performSegueWithIdentifier(DECIPHER_SEGUE_ID, sender: self)
-            } else {
-                WTFOneButtonAlert.show("Not available yet",
-                        message: "This level is not available yet. Please, wait for the next release!",
-                        firstButtonTitle: "Ok",
-                        viewPresenter: self)
+    private func updateLandscapeCipherHeightIfNeeded() {
+        if landscapeCipherHeight == 0 {
+            landscapeCipherHeight = currentCipherView!.getFullHeight()
+        }
+    }
 
-                return
+    private func updatePortraitCipherHeightIfNeeded() {
+        if portraitCipherHeight == 0 {
+            portraitCipherHeight = currentCipherView!.getFullHeight()
+        }
+    }
+
+    func rotated(notification: NSNotification) {
+        if (UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
+            if (!isInLandscapeMode) {
+                isInLandscapeMode = true
+                updateCipherViewHeight()
+            }
+        } else if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
+            if (isInLandscapeMode) {
+                isInLandscapeMode = false
+                updateCipherViewHeight()
             }
         }
+
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
+    }
+
+    private func configurePageControl() {
+        pageControl.numberOfPages = cipherTypes.count
+        pageControl.currentPage = (currentCipherView?.activeCipherIndex ?? 0) + 1
+        pageControl.tintColor = UIColor.redColor()
+        pageControl.pageIndicatorTintColor = UIColor.blackColor()
+        pageControl.currentPageIndicatorTintColor = UIColor.greenColor()
     }
 }
