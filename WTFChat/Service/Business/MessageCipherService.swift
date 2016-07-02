@@ -12,7 +12,9 @@ class MessageCipherService: Service {
     private let WORD_SPECIAL_SYMBOLS = ["'"]//, "-"]
 
     //дефис и длинное тире
-    private let ADDITIONAL_EXCEPTIONS = ["-","—","/"]
+    private let ADDITIONAL_EXCEPTIONS = ["-","—","/","«","»"]
+
+    private let DELIMITERS = NSCharacterSet(charactersInString: "  ")
 
     private let EXAMPLE_TEXT = "Example"
     private let ROMAN_LETTERS = ["X","V","I"]
@@ -180,8 +182,8 @@ class MessageCipherService: Service {
             } else {
                 words.append(Word.lineBreakWord())
             }
-            
-            let textWords = curString.characters.split {$0 == " "}.map { String($0) }
+
+            let textWords = curString.componentsSeparatedByCharactersInSet(DELIMITERS)
             
             var firstWord = true
             

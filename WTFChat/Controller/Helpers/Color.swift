@@ -23,22 +23,21 @@ class Color {
     static let HardMid = UIColor(red: 0.86, green: 0.73, blue: 0.3, alpha: 1.0)
     static let HardLight = UIColor(red: 1.0, green: 0.98, blue: 0.9, alpha: 1.0)
 
-    static let CipheredLight = UIColor(red: 18/255, green: 140/255, blue: 220/255, alpha: 1.0)
+    static let CipheredLight = UIColor(red: 18/255, green: 120/255, blue: 207/255, alpha: 1.0)
     static let CipheredDark = UIColor(red: 15/255, green: 105/255, blue: 169/255, alpha: 1.0)
 
-    static let FailedLight = UIColor(red: 220/255, green: 100/255, blue: 104/255, alpha: 1.0)
-    static let FailedDark = UIColor(red: 194/255, green: 69/255, blue: 72/255, alpha: 1.0)
-    //static let FailedLight = UIColor(red: 194/255, green: 69/255, blue: 72/255, alpha: 1.0)
-    //static let FailedDark = UIColor(red: 164/255, green: 36/255, blue: 40/255, alpha: 1.0)
+    static let FailedLight = UIColor(red: 207/255, green: 91/255, blue: 75/255, alpha: 1.0)
+    static let FailedDark = UIColor(red: 171/255, green: 65/255, blue: 49/255, alpha: 1.0)
 
-    static let SuccessLight = UIColor(red: 18/255, green: 140/255, blue: 220/255, alpha: 1.0)
-    static let SuccessDark = UIColor(red: 15/255, green: 105/255, blue: 169/255, alpha: 1.0)
+    static let SuccessLight = UIColor(red: 27/255, green: 160/255, blue: 102/255, alpha: 1.0)
+    static let SuccessDark = UIColor(red: 25/255, green: 127/255, blue: 83/255, alpha: 1.0)
 
-    static let TryLight = UIColor(red: 18/255, green: 140/255, blue: 220/255, alpha: 1.0)
-    static let TryDark = UIColor(red: 15/255, green: 105/255, blue: 169/255, alpha: 1.0)
+    //static let TryLight = UIColor(red: 219/255, green: 117/255, blue: 0/255, alpha: 1.0)
+    //static let TryDark = UIColor(red: 207/255, green: 99/255, blue: 0/255, alpha: 1.0)
 
-    //static let BackgroundMid = UIColor(red: 214/255, green: 227/255, blue: 243/255, alpha: 1.0)
-    //static let BackgroundDark = UIColor(red: 114/255, green: 178/255, blue: 255/255, alpha: 1.0)
+    static let TryLight = UIColor(red: 207/255, green: 119/255, blue: 42/255, alpha: 1.0)
+    static let TryDark = UIColor(red: 173/255, green: 99/255, blue: 25/255, alpha: 1.0)
+
     static let BackgroundLight = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
     static let BackgroundDark = UIColor(red: 197/255, green: 227/255, blue: 245/255, alpha: 1.0)
 

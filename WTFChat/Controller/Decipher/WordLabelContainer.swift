@@ -1,11 +1,3 @@
-//
-//  WordLabelContainer.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 09/09/15.
-//  Copyright (c) 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import Foundation
 
 class WordLabelContainer {
@@ -54,21 +46,15 @@ class WordLabelContainer {
         case .New:
             if (word.wasCloseTry) {
                 label.addGradientToLabel(Gradient.Try)
-                //label.layer.backgroundColor = Color.Try.CGColor
             } else {
                 label.addGradientToLabel(Gradient.Ciphered)
-                //label.layer.backgroundColor = Color.Ciphered.CGColor
             }
         case .Ignore:
             label.addGradientToLabel(Gradient.Ignored)
-            //label.layer.backgroundColor = Color.Ignore.CGColor
-            //label.textColor = UIColor.blackColor()
         case .Failed:
             label.addGradientToLabel(Gradient.Failed)
-            //label.layer.backgroundColor = Color.Failed.CGColor
         default:
             label.addGradientToLabel(Gradient.Success)
-            //label.layer.backgroundColor = Color.Success.CGColor
         }
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -106,38 +92,36 @@ class WordLabelContainer {
         UIView.animateWithDuration(0.3, delay: 0,
             options: [], animations: {
                 self.label.center.y -= 3
-                self.label.addGradient(Gradient.Try)
-                //self.label.layer.backgroundColor = Color.Try.CGColor
-            }, completion: nil)
-        
-        UIView.animateWithDuration(0.4, delay: 0.3,
-            options: [], animations: {
-                self.label.center.y += 3
-                //self.label.layer.backgroundColor = CIPHERED_COLOR.CGColor
-            }, completion: nil)
+                self.label.addGradientToLabel(Gradient.Try)
+            }, completion: animateWarningBack)
+    }
+
+    private func animateWarningBack(completed: Bool) {
+        UIView.animateWithDuration(0.4, delay: 0,
+                options: [], animations: {
+            self.label.center.y += 3
+        }, completion: nil)
     }
     
     func animateError() {
-        self.label.addGradient(Gradient.Failed)
-
         UIView.animateWithDuration(0.3, delay: 0,
             options: [], animations: {
                 self.label.center.y -= 3
-                //self.label.layer.backgroundColor = Color.Failed.CGColor
-            }, completion: nil)
-        
-        /*UIView.animateWithDuration(0.4, delay: 0.3,
-            options: [], animations: {
-                self.label.center.y += 3
-                
-                if (self.word.wasCloseTry) {
-                    self.label.addGradientToLabel(Gradient.Try)
-                    //self.label.layer.backgroundColor = Color.Try.CGColor
-                } else {
-                    self.label.addGradientToLabel(Gradient.Ciphered)
-                    //self.label.layer.backgroundColor = Color.Ciphered.CGColor
-                }
-            }, completion: nil)*/
+                self.label.addGradientToLabel(Gradient.Failed)
+            }, completion: animateErrorBack)
+    }
+
+    private func animateErrorBack(completed: Bool) {
+        UIView.animateWithDuration(0.4, delay: 0,
+                options: [], animations: {
+            self.label.center.y += 3
+
+            if (self.word.wasCloseTry) {
+                self.label.addGradientToLabel(Gradient.Try)
+            } else {
+                self.label.addGradientToLabel(Gradient.Ciphered)
+            }
+        }, completion: nil)
     }
     
     let labelHorizontalMargin = CGFloat(2)
