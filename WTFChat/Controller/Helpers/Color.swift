@@ -32,10 +32,7 @@ class Color {
     static let SuccessLight = UIColor(red: 27/255, green: 160/255, blue: 102/255, alpha: 1.0)
     static let SuccessDark = UIColor(red: 25/255, green: 127/255, blue: 83/255, alpha: 1.0)
 
-    //static let TryLight = UIColor(red: 219/255, green: 117/255, blue: 0/255, alpha: 1.0)
-    //static let TryDark = UIColor(red: 207/255, green: 99/255, blue: 0/255, alpha: 1.0)
-
-    static let TryLight = UIColor(red: 207/255, green: 119/255, blue: 42/255, alpha: 1.0)
+    static let TryLight = UIColor(red: 218/255, green: 129/255, blue: 49/255, alpha: 1.0)
     static let TryDark = UIColor(red: 173/255, green: 99/255, blue: 25/255, alpha: 1.0)
 
     static let BackgroundLight = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)

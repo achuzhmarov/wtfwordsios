@@ -170,7 +170,10 @@ class MessageCipherService: Service {
     }
 
     func createMessage(text: String, cipherType: CipherType, cipherDifficulty: CipherDifficulty) -> Message {
-        let strings = text.characters.split {$0 == "\n"}.map { String($0) }
+        var preparedText = text.replace("\r", with: "\n")
+        preparedText = preparedText.replace("\n\n", with: "\n")
+
+        let strings = preparedText.characters.split {$0 == "\n"}.map { String($0) }
         
         var firstSentence = true
         
