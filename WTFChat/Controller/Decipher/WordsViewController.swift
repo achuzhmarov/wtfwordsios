@@ -36,7 +36,8 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WordsRowCell", forIndexPath: indexPath) as UITableViewCell
-        
+        cell.backgroundColor = UIColor.clearColor()
+
         let row = rows.getRow(indexPath.row)
         
         var first = true

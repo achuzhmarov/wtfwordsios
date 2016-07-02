@@ -19,6 +19,8 @@ class LvlCell: UICollectionViewCell {
         layer.rasterizationScale = UIScreen.mainScreen().scale
 
         gradientLayer?.removeFromSuperlayer()
+
+        backgroundColor = UIColor.clearColor()
     }
 
     func updateLevel(level: Level) {
@@ -45,11 +47,13 @@ class LvlCell: UICollectionViewCell {
     private func setAvailableState() {
         titleLabel.text = String(level.id)
 
-        gradientLayer = addGradient(Gradient.CipheredGrad)
+        gradientLayer = addGradient(Gradient.Ciphered)
     }
 
     private func setIgnoredState() {
         titleLabel.text = Emoji.LOCK
-        layer.backgroundColor = Color.Ignore.CGColor
+
+        gradientLayer = addGradient(Gradient.Ignored)
+        //layer.backgroundColor = Color.Ignore.CGColor
     }
 }

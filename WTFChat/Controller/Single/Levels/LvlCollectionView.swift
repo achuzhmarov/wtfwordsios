@@ -10,6 +10,8 @@ class LvlCollectionView: UICollectionView, UICollectionViewDataSource, UICollect
     var levelSelectedComputer: LevelSelectedComputer?
 
     func updateCategory(category: SingleModeCategory) {
+        self.backgroundColor = UIColor.clearColor()
+
         self.category = category
         reloadData()
     }

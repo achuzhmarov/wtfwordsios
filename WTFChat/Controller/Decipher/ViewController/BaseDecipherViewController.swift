@@ -1,6 +1,6 @@
 import Foundation
 
-class BaseDecipherViewController: UIViewController, HintComputer, UITextFieldDelegate {
+class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFieldDelegate {
     private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
     private let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
     private let audioService: AudioService = serviceLocator.get(AudioService)
@@ -75,6 +75,7 @@ class BaseDecipherViewController: UIViewController, HintComputer, UITextFieldDel
 
         self.wordsTableView.delegate = self.wordsTableView
         self.wordsTableView.dataSource = self.wordsTableView
+        self.wordsTableView.backgroundColor = UIColor.clearColor()
 
         guessTextField.delegate = self
 

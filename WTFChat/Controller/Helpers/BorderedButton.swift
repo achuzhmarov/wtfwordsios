@@ -9,21 +9,24 @@ class BorderedButton: UIButton {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
-        let mainColor = tintColor
-        //let mainColor = Color.Ciphered
-
         layer.borderWidth = BORDER_WIDTH
-        layer.borderColor = mainColor.CGColor
+        layer.borderColor = Color.CipheredDark.CGColor
         layer.cornerRadius = CORNER_RADIUS
         clipsToBounds = true
-        contentEdgeInsets = UIEdgeInsets(
+
+        /*contentEdgeInsets = UIEdgeInsets(
             top: VERTICAL_PADDING,
             left: HORIZONTAL_PADDING,
             bottom: VERTICAL_PADDING,
             right: HORIZONTAL_PADDING
-        )
-        setTitleColor(mainColor, forState: .Normal)
+        )*/
+
+        setTitleColor(Color.Text, forState: .Normal)
         setTitleColor(Color.Text, forState: .Highlighted)
-        setBackgroundImage(UIImage(color: mainColor), forState: .Highlighted)
+        //setBackgroundImage(UIImage(color: mainColor), forState: .Highlighted)
+
+        //setBackgroundImage(Color.Button, forState: .Normal)
+
+        addGradient(Gradient.Ciphered)
     }
 }

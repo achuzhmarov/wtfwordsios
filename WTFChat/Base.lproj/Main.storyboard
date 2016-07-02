@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="g4E-8o-6Yd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1y9-fa-bIc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -164,7 +164,6 @@
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mEJ-Vt-nA5" customClass="LvlCollectionView" customModule="WTFChat" customModuleProvider="target">
                                 <rect key="frame" x="20" y="66" width="560" height="534"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2VN-2l-qiT">
                                     <size key="itemSize" width="45" height="45"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -180,7 +179,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="42" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Onj-pf-PeI">
-                                                    <rect key="frame" x="10" y="10" width="25" height="24"/>
+                                                    <rect key="frame" x="10" y="11" width="25" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -206,7 +205,6 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="3hv-QJ-EyM" secondAttribute="trailing" constant="20" id="0kR-hQ-YRO"/>
                             <constraint firstItem="DVh-hw-hz3" firstAttribute="top" secondItem="3YM-2h-k3P" secondAttribute="bottom" constant="8" id="2Zc-HH-5Ot"/>
@@ -233,153 +231,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6gt-fz-ZxF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2689" y="-1270"/>
-        </scene>
-        <!--Single Mode-->
-        <scene sceneID="gQb-Ks-HfI">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ScS-sP-nfP" customClass="SingleModeViewControllerOld" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="pXO-1C-1HI"/>
-                        <viewControllerLayoutGuide type="bottom" id="mWF-Gg-Zqd"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="MMr-QE-d2u">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xct-vC-LN0" customClass="CipherTableView" customModule="WTFChat" customModuleProvider="target">
-                                <rect key="frame" x="20" y="72" width="560" height="520"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CipherHeaderCell" id="kR4-a5-NZM" customClass="CipherHeaderCell" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="560" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kR4-a5-NZM" id="rA7-iA-1y8">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cipher Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7v-DX-kdx">
-                                                    <rect key="frame" x="8" y="11" width="93" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DCG-tB-uav" customClass="StarImage" customModule="WTFChat" customModuleProvider="target">
-                                                    <rect key="frame" x="522" y="7" width="30" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="HDs-gE-KaL"/>
-                                                        <constraint firstAttribute="height" constant="30" id="M4J-7H-kEl"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WDF-I9-GxN" customClass="StarImage" customModule="WTFChat" customModuleProvider="target">
-                                                    <rect key="frame" x="484" y="7" width="30" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="Q01-O0-TH2"/>
-                                                        <constraint firstAttribute="height" constant="30" id="aoy-Q3-NvG"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="swf-CS-FaV" customClass="StarImage" customModule="WTFChat" customModuleProvider="target">
-                                                    <rect key="frame" x="446" y="7" width="30" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="4kP-KQ-Aob"/>
-                                                        <constraint firstAttribute="height" constant="30" id="hy9-kP-Ugd"/>
-                                                    </constraints>
-                                                </imageView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="swf-CS-FaV" firstAttribute="centerY" secondItem="rA7-iA-1y8" secondAttribute="centerY" id="8gg-pV-lrR"/>
-                                                <constraint firstItem="WDF-I9-GxN" firstAttribute="leading" secondItem="swf-CS-FaV" secondAttribute="trailing" constant="8" id="9df-lq-6IO"/>
-                                                <constraint firstItem="DCG-tB-uav" firstAttribute="leading" secondItem="WDF-I9-GxN" secondAttribute="trailing" constant="8" id="IKV-Re-N5t"/>
-                                                <constraint firstItem="DCG-tB-uav" firstAttribute="trailing" secondItem="rA7-iA-1y8" secondAttribute="trailingMargin" id="JEV-Av-KIl"/>
-                                                <constraint firstItem="M7v-DX-kdx" firstAttribute="leading" secondItem="rA7-iA-1y8" secondAttribute="leadingMargin" id="aqR-1o-lcQ"/>
-                                                <constraint firstItem="DCG-tB-uav" firstAttribute="centerY" secondItem="rA7-iA-1y8" secondAttribute="centerY" id="cRg-eG-KPy"/>
-                                                <constraint firstItem="WDF-I9-GxN" firstAttribute="centerY" secondItem="rA7-iA-1y8" secondAttribute="centerY" id="i3L-RY-XRg"/>
-                                                <constraint firstItem="M7v-DX-kdx" firstAttribute="centerY" secondItem="rA7-iA-1y8" secondAttribute="centerY" id="vte-k3-hdb"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="cipherText" destination="M7v-DX-kdx" id="3Nu-Ha-1Hl"/>
-                                            <outlet property="easyStarImage" destination="swf-CS-FaV" id="oaI-yL-jTy"/>
-                                            <outlet property="hardStarImage" destination="DCG-tB-uav" id="90Y-8f-R9B"/>
-                                            <outlet property="normalStarImage" destination="WDF-I9-GxN" id="mKT-cV-igI"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CipherDetailsCell" rowHeight="300" id="yZZ-ao-LLf" customClass="CipherDetailsCell" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="560" height="300"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yZZ-ao-LLf" id="Ltq-19-67T">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="300"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sKg-mr-h5U" customClass="LvlCollectionView" customModule="WTFChat" customModuleProvider="target">
-                                                    <rect key="frame" x="8" y="0.0" width="544" height="300"/>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2hp-sb-dLO">
-                                                        <size key="itemSize" width="45" height="45"/>
-                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    </collectionViewFlowLayout>
-                                                    <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LvlCell" id="zUz-Wb-CWA" customClass="LvlCell" customModule="WTFChat" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                                <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
-                                                                <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="42" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ofy-2O-rZS">
-                                                                        <rect key="frame" x="10" y="10" width="25" height="24"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                </subviews>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                            </view>
-                                                            <constraints>
-                                                                <constraint firstItem="Ofy-2O-rZS" firstAttribute="centerX" secondItem="zUz-Wb-CWA" secondAttribute="centerX" id="15l-Mk-k7i"/>
-                                                                <constraint firstItem="Ofy-2O-rZS" firstAttribute="centerY" secondItem="zUz-Wb-CWA" secondAttribute="centerY" id="i6w-nh-uPF"/>
-                                                            </constraints>
-                                                            <connections>
-                                                                <outlet property="titleLabel" destination="Ofy-2O-rZS" id="Lzg-yE-NgM"/>
-                                                            </connections>
-                                                        </collectionViewCell>
-                                                    </cells>
-                                                </collectionView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="sKg-mr-h5U" firstAttribute="leading" secondItem="Ltq-19-67T" secondAttribute="leadingMargin" id="3E8-bm-HBp"/>
-                                                <constraint firstAttribute="bottom" secondItem="sKg-mr-h5U" secondAttribute="bottom" id="Bds-dA-vYx"/>
-                                                <constraint firstItem="sKg-mr-h5U" firstAttribute="top" secondItem="Ltq-19-67T" secondAttribute="top" id="cFt-K1-Njw"/>
-                                                <constraint firstItem="sKg-mr-h5U" firstAttribute="trailing" secondItem="Ltq-19-67T" secondAttribute="trailingMargin" id="ktn-ca-Iog"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="lvlCollectionView" destination="sKg-mr-h5U" id="p1T-SO-if9"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="mWF-Gg-Zqd" firstAttribute="top" secondItem="Xct-vC-LN0" secondAttribute="bottom" constant="8" id="BO7-3I-nuo"/>
-                            <constraint firstItem="Xct-vC-LN0" firstAttribute="top" secondItem="pXO-1C-1HI" secondAttribute="bottom" constant="8" id="F3h-wA-OeL"/>
-                            <constraint firstItem="Xct-vC-LN0" firstAttribute="trailing" secondItem="MMr-QE-d2u" secondAttribute="trailingMargin" id="SNl-WP-2Pm"/>
-                            <constraint firstItem="Xct-vC-LN0" firstAttribute="leading" secondItem="MMr-QE-d2u" secondAttribute="leadingMargin" id="UuR-Vj-bpG"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Single Mode" id="dgC-GV-RQx"/>
-                    <connections>
-                        <outlet property="cipherTableView" destination="Xct-vC-LN0" id="NDA-41-6dZ"/>
-                        <segue destination="I8r-Zw-u53" kind="show" identifier="showDecipher" id="Ld4-kH-UNE"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nlC-Qd-y5y" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1917" y="-456"/>
+            <point key="canvasLocation" x="2689" y="-456"/>
         </scene>
         <!--Shop-->
         <scene sceneID="2LL-pZ-zCu">
@@ -975,7 +827,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ka-cv-y30" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="4AX-JW-O27" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3491" y="-66"/>
+            <point key="canvasLocation" x="4303" y="-66"/>
         </scene>
         <!--Settings-->
         <scene sceneID="wRd-fR-oI6">
@@ -2691,17 +2543,35 @@
                                 </connections>
                             </containerView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="gG1-Hw-UNQ">
-                                <rect key="frame" x="280" y="339" width="39" height="37"/>
+                                <rect key="frame" x="281" y="339" width="39" height="37"/>
                                 <connections>
                                     <action selector="pageChanged:" destination="c9g-0d-Ip0" eventType="valueChanged" id="eBu-UZ-wfa"/>
                                 </connections>
                             </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zw0-D0-wnf" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
+                                <rect key="frame" x="225" y="550" width="150" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="IMg-oq-E9K"/>
+                                    <constraint firstAttribute="width" constant="150" id="p1g-q9-gws"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Menu">
+                                    <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="startPressed:" destination="I8r-Zw-u53" eventType="touchUpInside" id="lqt-AW-ACy"/>
+                                    <segue destination="wCg-tS-TA8" kind="unwind" unwindAction="back:" id="pkb-uI-Tl6"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.62352941176470589" green="0.82745098039215681" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="gsK-Me-ycK" secondAttribute="trailing" id="5Lr-Fd-VSU"/>
+                            <constraint firstItem="gsK-Me-ycK" firstAttribute="top" secondItem="fvw-YL-OjZ" secondAttribute="bottom" id="I0I-re-9a2"/>
+                            <constraint firstItem="zw0-D0-wnf" firstAttribute="centerX" secondItem="hf0-JX-BRq" secondAttribute="centerX" id="KdG-rT-ufn"/>
                             <constraint firstItem="gG1-Hw-UNQ" firstAttribute="top" secondItem="gsK-Me-ycK" secondAttribute="bottom" constant="8" id="L7v-X6-8Fl"/>
-                            <constraint firstItem="gsK-Me-ycK" firstAttribute="top" secondItem="fvw-YL-OjZ" secondAttribute="bottom" id="WKe-CJ-1tP"/>
+                            <constraint firstItem="iFS-Hq-JCO" firstAttribute="top" secondItem="zw0-D0-wnf" secondAttribute="bottom" constant="8" id="T5q-XO-GgQ"/>
                             <constraint firstItem="gsK-Me-ycK" firstAttribute="leading" secondItem="hf0-JX-BRq" secondAttribute="leading" id="eMO-f0-sf8"/>
                             <constraint firstItem="gG1-Hw-UNQ" firstAttribute="centerX" secondItem="hf0-JX-BRq" secondAttribute="centerX" id="jVP-fh-bUy"/>
                         </constraints>
@@ -2713,29 +2583,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="doQ-qh-6Bg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="wCg-tS-TA8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1183" y="-1270"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="UVK-04-Ijm">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qk0-zU-mZi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="favorites" selectedImage="facorites filled" id="l12-pK-N2H">
-                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
-                    </tabBarItem>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kfs-ax-Pki">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="ScS-sP-nfP" kind="relationship" relationship="rootViewController" id="c42-qv-lMJ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZKQ-uQ-Fpw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="371" y="-456"/>
+            <point key="canvasLocation" x="1121" y="-456"/>
         </scene>
         <!--Cipher Page View Controller-->
         <scene sceneID="kI2-uh-35W">
@@ -2743,7 +2593,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="mbc-Dy-URf" customClass="CipherPageViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="42z-p4-KFZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1917" y="-1270.5"/>
+            <point key="canvasLocation" x="1917" y="-456.5"/>
         </scene>
         <!--Single Decipher-->
         <scene sceneID="Tgv-9u-etU">
@@ -2771,7 +2621,6 @@
                                         </connections>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="g4L-D7-KeN" secondAttribute="centerX" id="6vs-yh-nUm"/>
                                     <constraint firstAttribute="centerY" secondItem="g4L-D7-KeN" secondAttribute="centerY" id="l6h-xQ-bwp"/>
@@ -2825,7 +2674,6 @@
                                         </connections>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="Ot7-VD-0hV" firstAttribute="centerY" secondItem="Q4h-fm-Q60" secondAttribute="centerY" id="2UI-3M-RzR"/>
                                     <constraint firstAttribute="trailing" secondItem="asD-ZR-q5d" secondAttribute="trailing" constant="12" id="RV9-Ak-niP"/>
@@ -2909,6 +2757,9 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3no-vM-Nm4" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="161" width="572" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="42" id="dLN-9O-8a8"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <color key="tintColor" red="0.011764705882352941" green="0.18431372549019609" blue="0.42745098039215684" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Start">
@@ -2919,7 +2770,6 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="LOh-aD-SEi" firstAttribute="top" secondItem="3eS-NI-ZjX" secondAttribute="bottom" constant="8" id="9oa-W7-Kyg"/>
                                     <constraint firstAttribute="trailing" secondItem="LdY-lx-5u8" secondAttribute="trailing" id="Fsg-uL-xWg"/>
@@ -2951,7 +2801,6 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Q4h-fm-Q60" firstAttribute="top" secondItem="tuq-h9-gT4" secondAttribute="bottom" constant="8" id="0VD-9R-mmu"/>
@@ -2998,32 +2847,71 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2689" y="-456"/>
+            <point key="canvasLocation" x="3501" y="-456"/>
+        </scene>
+        <!--WTFWords-->
+        <scene sceneID="8wB-Na-XZx">
+            <objects>
+                <viewController id="Wft-8G-zQQ" customClass="MainViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sX4-SA-z5e"/>
+                        <viewControllerLayoutGuide type="bottom" id="HvJ-QY-gBL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0Ci-GI-c8x">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ZP-7H-hpk" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
+                                <rect key="frame" x="200" y="279" width="200" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="aXy-VK-Hi3"/>
+                                    <constraint firstAttribute="height" constant="42" id="uIc-cl-7LJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Single mode">
+                                    <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="startPressed:" destination="I8r-Zw-u53" eventType="touchUpInside" id="eIK-Cl-Ig4"/>
+                                    <segue destination="c9g-0d-Ip0" kind="show" id="C5F-dh-8Hi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0ZP-7H-hpk" firstAttribute="centerY" secondItem="0Ci-GI-c8x" secondAttribute="centerY" id="E9L-d8-pjh"/>
+                            <constraint firstItem="0ZP-7H-hpk" firstAttribute="centerX" secondItem="0Ci-GI-c8x" secondAttribute="centerX" id="TE6-qA-soI"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="WTFWords" id="nWF-9P-Gaz"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6av-An-Jy9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="371" y="-456"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="RON-x7-PHI">
+        <scene sceneID="Z9f-8x-WjK">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="g4E-8o-6Yd" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1y9-fa-bIc" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="04v-UT-Q48">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ecl-zI-wv3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="c9g-0d-Ip0" kind="relationship" relationship="rootViewController" id="5af-lw-I6y"/>
+                        <segue destination="Wft-8G-zQQ" kind="relationship" relationship="rootViewController" id="v0c-o6-Lr6"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RF9-Jz-YNT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1yA-Fg-fiJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="371" y="-1270"/>
+            <point key="canvasLocation" x="-385" y="-456"/>
         </scene>
     </scenes>
     <resources>
         <image name="chat" width="30" height="30"/>
         <image name="chat filled" width="30" height="30"/>
-        <image name="facorites filled" width="30" height="30"/>
-        <image name="favorites" width="30" height="30"/>
         <image name="rating" width="30" height="30"/>
         <image name="rating filled" width="30" height="30"/>
         <image name="settings" width="30" height="30"/>
@@ -3033,6 +2921,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Zfz-7X-dGB"/>
-        <segue reference="PaC-V2-yef"/>
     </inferredMetricsTieBreakers>
 </document>

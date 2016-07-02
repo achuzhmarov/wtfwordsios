@@ -26,6 +26,14 @@ class Color {
     static let CipheredMid = UIColor(red: 18/255, green: 140/255, blue: 220/255, alpha: 1.0)
     static let CipheredDark = UIColor(red: 15/255, green: 105/255, blue: 169/255, alpha: 1.0)
 
+    //static let BackgroundMid = UIColor(red: 214/255, green: 227/255, blue: 243/255, alpha: 1.0)
+    //static let BackgroundDark = UIColor(red: 114/255, green: 178/255, blue: 255/255, alpha: 1.0)
+    static let BackgroundMid = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+    static let BackgroundDark = UIColor(red: 197/255, green: 227/255, blue: 245/255, alpha: 1.0)
+
+    static let IgnoreMid = UIColor(red: 140/255, green: 144/255, blue: 158/255, alpha: 1.0)
+    static let IgnoreDark = UIColor(red: 105/255, green: 107/255, blue: 112/255, alpha: 1.0)
+
     static func getBorderColorByDifficulty(difficulty: CipherDifficulty) -> UIColor {
         switch difficulty {
             case .Easy:
@@ -36,4 +44,7 @@ class Color {
                 return Color.HardDark
         }
     }
+
+    static let Background = UIColor(patternImage: UIImage(named: "background")!)
+    static let Button = UIImage(named: "button")!
 }

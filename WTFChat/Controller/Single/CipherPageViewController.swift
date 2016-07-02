@@ -2,8 +2,6 @@ import Foundation
 
 class CipherPageViewController: UIPageViewController, CipherViewAppearedNotifier {
     private let cipherTypes = CipherType.getAll()
-    private var activeCipherIndex = 0
-
     private var viewControllersCache = [Int: CipherViewController]()
 
     private var currentCipherViewController: CipherViewController?
@@ -17,13 +15,7 @@ class CipherPageViewController: UIPageViewController, CipherViewAppearedNotifier
 
         initViewControllers()
 
-        if let viewController = singleModeViewController(activeCipherIndex) {
-            let viewControllers = [viewController]
-            setViewControllers(viewControllers,
-                    direction: .Forward,
-                    animated: false,
-                    completion: nil)
-        }
+        showPage(0)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -57,6 +49,29 @@ class CipherPageViewController: UIPageViewController, CipherViewAppearedNotifier
 
         if let parent = self.parentViewController as? SingleModeViewController {
             parent.cipherViewUpdated(viewController)
+        }
+    }
+
+    func showPage(index: Int){
+        var direction: UIPageViewControllerNavigationDirection!
+        var animated: Bool!
+
+        if let currentIndex = currentCipherViewController?.activeCipherIndex {
+            animated = true
+
+            if currentIndex > index {
+                direction = .Reverse
+            } else {
+                direction = .Forward
+            }
+        } else {
+            animated = false
+            direction = .Forward
+        }
+
+        if let viewController = singleModeViewController(index) {
+            let viewControllers = [viewController]
+            setViewControllers(viewControllers, direction: direction, animated: animated, completion: nil)
         }
     }
 }
