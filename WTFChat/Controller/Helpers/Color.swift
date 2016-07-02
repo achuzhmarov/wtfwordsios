@@ -26,8 +26,10 @@ class Color {
     static let CipheredLight = UIColor(red: 18/255, green: 140/255, blue: 220/255, alpha: 1.0)
     static let CipheredDark = UIColor(red: 15/255, green: 105/255, blue: 169/255, alpha: 1.0)
 
-    static let FailedLight = UIColor(red: 18/255, green: 140/255, blue: 220/255, alpha: 1.0)
-    static let FailedDark = UIColor(red: 15/255, green: 105/255, blue: 169/255, alpha: 1.0)
+    static let FailedLight = UIColor(red: 220/255, green: 100/255, blue: 104/255, alpha: 1.0)
+    static let FailedDark = UIColor(red: 194/255, green: 69/255, blue: 72/255, alpha: 1.0)
+    //static let FailedLight = UIColor(red: 194/255, green: 69/255, blue: 72/255, alpha: 1.0)
+    //static let FailedDark = UIColor(red: 164/255, green: 36/255, blue: 40/255, alpha: 1.0)
 
     static let SuccessLight = UIColor(red: 18/255, green: 140/255, blue: 220/255, alpha: 1.0)
     static let SuccessDark = UIColor(red: 15/255, green: 105/255, blue: 169/255, alpha: 1.0)

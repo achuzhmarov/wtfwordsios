@@ -118,14 +118,15 @@ class WordLabelContainer {
     }
     
     func animateError() {
+        self.label.addGradient(Gradient.Failed)
+
         UIView.animateWithDuration(0.3, delay: 0,
             options: [], animations: {
                 self.label.center.y -= 3
-                self.label.addGradient(Gradient.Failed)
                 //self.label.layer.backgroundColor = Color.Failed.CGColor
             }, completion: nil)
         
-        UIView.animateWithDuration(0.4, delay: 0.3,
+        /*UIView.animateWithDuration(0.4, delay: 0.3,
             options: [], animations: {
                 self.label.center.y += 3
                 
@@ -136,7 +137,7 @@ class WordLabelContainer {
                     self.label.addGradientToLabel(Gradient.Ciphered)
                     //self.label.layer.backgroundColor = Color.Ciphered.CGColor
                 }
-            }, completion: nil)
+            }, completion: nil)*/
     }
     
     let labelHorizontalMargin = CGFloat(2)
