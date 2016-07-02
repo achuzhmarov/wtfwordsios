@@ -47,24 +47,29 @@ class WordLabelContainer {
         
         label.textColor = UIColor.whiteColor()
         label.font = UIFont(name: label.font.fontName, size: 17)
-        
+
+        label.layer.cornerRadius = 8.0
+
         switch word.type {
         case .New:
             if (word.wasCloseTry) {
-                label.layer.backgroundColor = Color.Try.CGColor
+                label.addGradientToLabel(Gradient.Try)
+                //label.layer.backgroundColor = Color.Try.CGColor
             } else {
-                label.layer.backgroundColor = Color.Ciphered.CGColor
+                label.addGradientToLabel(Gradient.Ciphered)
+                //label.layer.backgroundColor = Color.Ciphered.CGColor
             }
         case .Ignore:
-            label.layer.backgroundColor = Color.Ignore.CGColor
-            label.textColor = UIColor.blackColor()
+            label.addGradientToLabel(Gradient.Ignored)
+            //label.layer.backgroundColor = Color.Ignore.CGColor
+            //label.textColor = UIColor.blackColor()
         case .Failed:
-            label.layer.backgroundColor = Color.Failed.CGColor
+            label.addGradientToLabel(Gradient.Failed)
+            //label.layer.backgroundColor = Color.Failed.CGColor
         default:
-            label.layer.backgroundColor = Color.Success.CGColor
+            label.addGradientToLabel(Gradient.Success)
+            //label.layer.backgroundColor = Color.Success.CGColor
         }
-        
-        label.layer.cornerRadius = 8.0
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -101,7 +106,8 @@ class WordLabelContainer {
         UIView.animateWithDuration(0.3, delay: 0,
             options: [], animations: {
                 self.label.center.y -= 3
-                self.label.layer.backgroundColor = Color.Try.CGColor
+                self.label.addGradient(Gradient.Try)
+                //self.label.layer.backgroundColor = Color.Try.CGColor
             }, completion: nil)
         
         UIView.animateWithDuration(0.4, delay: 0.3,
@@ -115,7 +121,8 @@ class WordLabelContainer {
         UIView.animateWithDuration(0.3, delay: 0,
             options: [], animations: {
                 self.label.center.y -= 3
-                self.label.layer.backgroundColor = Color.Failed.CGColor
+                self.label.addGradient(Gradient.Failed)
+                //self.label.layer.backgroundColor = Color.Failed.CGColor
             }, completion: nil)
         
         UIView.animateWithDuration(0.4, delay: 0.3,
@@ -123,9 +130,11 @@ class WordLabelContainer {
                 self.label.center.y += 3
                 
                 if (self.word.wasCloseTry) {
-                    self.label.layer.backgroundColor = Color.Try.CGColor
+                    self.label.addGradientToLabel(Gradient.Try)
+                    //self.label.layer.backgroundColor = Color.Try.CGColor
                 } else {
-                    self.label.layer.backgroundColor = Color.Ciphered.CGColor
+                    self.label.addGradientToLabel(Gradient.Ciphered)
+                    //self.label.layer.backgroundColor = Color.Ciphered.CGColor
                 }
             }, completion: nil)
     }

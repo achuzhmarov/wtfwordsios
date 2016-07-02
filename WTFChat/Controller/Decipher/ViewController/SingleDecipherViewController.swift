@@ -8,9 +8,8 @@ class SingleDecipherViewController: BaseDecipherViewController {
 
     @IBOutlet weak var difficultySelector: UISegmentedControl!
     @IBOutlet weak var startTimerLabel: UILabel!
-    @IBOutlet weak var exampleLabel: RoundedLabel!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var textPreviewLabel: RoundedLabel!
+    @IBOutlet weak var textPreviewLabel: UILabel!
 
     private let cipherDifficulties = CipherDifficulty.getAll()
     private var selectedDifficulty = CipherDifficulty.Normal
@@ -26,19 +25,14 @@ class SingleDecipherViewController: BaseDecipherViewController {
         updateMessage()
         super.viewDidLoad()
 
-        exampleLabel.textColor = Color.Text
+        /*exampleLabel.textColor = Color.Text
         exampleLabel.layer.backgroundColor = Color.Ciphered.CGColor
         exampleLabel.layer.cornerRadius = 8.0
         exampleLabel.translatesAutoresizingMaskIntoConstraints = false
-        //exampleLabel.addGradient(Gradient.CipheredGrad)
+        exampleLabel.addGradientToLabel(Gradient.Ciphered)*/
 
-        textPreviewLabel.textColor = Color.Text
-        textPreviewLabel.font = UIFont(name: textPreviewLabel.font.fontName, size: 17)
-        textPreviewLabel.layer.backgroundColor = Color.Ciphered.CGColor
-        textPreviewLabel.layer.cornerRadius = 8.0
-        textPreviewLabel.translatesAutoresizingMaskIntoConstraints = false
+        textPreviewLabel.font = UIFont(name: textPreviewLabel.font.fontName, size: 20)
         textPreviewLabel.numberOfLines = 0
-        //textPreviewLabel.addGradient(Gradient.CipheredGrad)
 
         updateSelectedDifficultyInGUI()
     }
@@ -72,7 +66,7 @@ class SingleDecipherViewController: BaseDecipherViewController {
     private func updateMessage() {
         message = singleMessageService.getMessageForLevel(level, difficulty: selectedDifficulty, text: messageText)
         updateTime()
-        updateMessageExample()
+        //updateMessageExample()
         updateMessageTitle()
         updateMessagePreview()
     }
@@ -86,13 +80,13 @@ class SingleDecipherViewController: BaseDecipherViewController {
         titleLabel.text = messageCategory.title
     }
 
-    private func updateMessageExample() {
+    /*private func updateMessageExample() {
         let exampleMessage = messageCipherService.createExampleMessage(
             level.category.cipherType, cipherDifficulty: selectedDifficulty
         )
 
         exampleLabel.text = exampleMessage.ciphered()
-    }
+    }*/
 
     private func updateMessagePreview() {
         textPreviewLabel.text = message.text()

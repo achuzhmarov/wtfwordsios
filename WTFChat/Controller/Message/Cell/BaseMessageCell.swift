@@ -28,11 +28,14 @@ class BaseMessageCell: UITableViewCell {
 
         switch message.getMessageStatus() {
             case .Success:
-                messageText.layer.backgroundColor = Color.Success.CGColor
+                messageText.addGradientToLabel(Gradient.Success)
+                //messageText.layer.backgroundColor = Color.Success.CGColor
             case .Failed:
-                messageText.layer.backgroundColor = Color.Failed.CGColor
+                messageText.addGradientToLabel(Gradient.Failed)
+                //messageText.layer.backgroundColor = Color.Failed.CGColor
             case .Ciphered:
-                messageText.layer.backgroundColor = Color.Ciphered.CGColor
+                messageText.addGradientToLabel(Gradient.Ciphered)
+                //messageText.layer.backgroundColor = Color.Ciphered.CGColor
         }
     }
 }

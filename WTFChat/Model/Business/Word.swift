@@ -55,11 +55,17 @@ class Word: NSObject {
     func getHidedText() -> String {
         var result = ""
 
-        let cipheredTextOnly = cipheredText
-            .replace(".", with: "")
-            .replace(additional, with: "")
+        var textToHide = ""
 
-        for _ in 0..<cipheredTextOnly.characters.count {
+        if (cipheredText != "") {
+            textToHide = cipheredText
+                .replace(".", with: "")
+                .replace(additional, with: "")
+        } else {
+            textToHide = text
+        }
+
+        for _ in 0..<textToHide.characters.count {
             result += Word.HIDE_SYMBOL
         }
 
