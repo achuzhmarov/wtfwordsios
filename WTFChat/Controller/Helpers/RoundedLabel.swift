@@ -6,7 +6,7 @@ class RoundedLabel: UILabel {
     private var gradientLayer: CAGradientLayer?
     private var newLabelView: RoundedLabel?
 
-    override public var text: String? {
+    override var text: String? {
         didSet {
             newLabelView?.text = self.text
         }

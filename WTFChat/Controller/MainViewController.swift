@@ -3,9 +3,11 @@ import Foundation
 class MainViewController: BaseUIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.navigationController?.navigationBarHidden = true
     }
 
-    @IBAction func back(segue:UIStoryboardSegue) {
+    @IBAction func backToMenu(segue:UIStoryboardSegue) {
 
     }
 }

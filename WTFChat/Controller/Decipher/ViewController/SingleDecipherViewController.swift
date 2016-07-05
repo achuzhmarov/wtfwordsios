@@ -25,12 +25,6 @@ class SingleDecipherViewController: BaseDecipherViewController {
         updateMessage()
         super.viewDidLoad()
 
-        /*exampleLabel.textColor = Color.Text
-        exampleLabel.layer.backgroundColor = Color.Ciphered.CGColor
-        exampleLabel.layer.cornerRadius = 8.0
-        exampleLabel.translatesAutoresizingMaskIntoConstraints = false
-        exampleLabel.addGradientToLabel(Gradient.Ciphered)*/
-
         textPreviewLabel.font = UIFont(name: textPreviewLabel.font.fontName, size: 20)
         textPreviewLabel.numberOfLines = 0
 

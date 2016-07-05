@@ -16,8 +16,6 @@ class SingleModeViewController: BaseUIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.setHidesBackButton(true, animated:true)
-
         configurePageControl()
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SingleModeViewController.rotated(_:)),
@@ -128,5 +126,9 @@ class SingleModeViewController: BaseUIViewController {
                 break
             }
         }
+    }
+
+    @IBAction func backToCiphers(segue:UIStoryboardSegue) {
+
     }
 }
