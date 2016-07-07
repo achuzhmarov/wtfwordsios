@@ -41,19 +41,19 @@ class LvlCell: UICollectionViewCell {
         titleLabel.text = String(level.id)
 
         let gradient = Gradient.getLevelGradientByDifficulty(level.clearedDifficulty!)
-        gradientLayer = addGradient(gradient)
+        gradientLayer = addDiagonalGradient(gradient)
     }
 
     private func setAvailableState() {
         titleLabel.text = String(level.id)
 
-        gradientLayer = addGradient(Gradient.Ciphered)
+        gradientLayer = addDiagonalGradient(Gradient.Ciphered)
     }
 
     private func setIgnoredState() {
         titleLabel.text = Emoji.LOCK
 
-        gradientLayer = addGradient(Gradient.Ignored)
+        gradientLayer = addDiagonalGradient(Gradient.Ignored)
         //layer.backgroundColor = Color.Ignore.CGColor
     }
 }

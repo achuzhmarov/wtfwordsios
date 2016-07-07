@@ -53,6 +53,16 @@ extension UIBezierPath {
         return UIBezierPath.arrow(size - startPadding - endPadding, from: startPoint, to: endPoint)
     }
 
+    class func bottomArrow(size: CGFloat) -> UIBezierPath {
+        let startPadding = size * START_PADDING_SCALE
+        let endPadding = size * END_PADDING_SCALE
+
+        let startPoint = CGPointMake(size/2, startPadding)
+        let endPoint = CGPointMake(size/2, size - endPadding)
+
+        return UIBezierPath.arrow(size - startPadding - endPadding, from: startPoint, to: endPoint)
+    }
+
     class func leftArrow(size: CGFloat) -> UIBezierPath {
         let startPadding = size * START_PADDING_SCALE
         let endPadding = size * END_PADDING_SCALE
@@ -84,4 +94,8 @@ extension UIBezierPath {
         )
     }
 
+    class func roundedRect(size: CGFloat) -> UIBezierPath {
+        let rect = CGRectMake(0, 0, size, size)
+        return UIBezierPath(roundedRect: rect, cornerRadius: 8.0)
+    }
 }

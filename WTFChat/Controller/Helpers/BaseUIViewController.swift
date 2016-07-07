@@ -9,6 +9,29 @@ class BaseUIViewController: UIViewController {
 
         self.view.backgroundColor = Color.BackgroundDark
 
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BaseUIViewController.baseRotated(_:)),
+                name: UIDeviceOrientationDidChangeNotification, object: nil)
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        computeOrientation()
+    }
+
+    func baseRotated(notification: NSNotification) {
+        if (UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
+            if (!baseIsInLandscapeMode) {
+                computeOrientation()
+            }
+        } else if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
+            if (baseIsInLandscapeMode) {
+                computeOrientation()
+            }
+        }
+    }
+
+    func computeOrientation() {
         if (UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
             baseIsInLandscapeMode = true
         } else {
@@ -16,27 +39,14 @@ class BaseUIViewController: UIViewController {
         }
 
         updateBackgroundGradient()
-
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BaseUIViewController.baseRotated(_:)),
-                name: UIDeviceOrientationDidChangeNotification, object: nil)
-    }
-
-    func baseRotated(notification: NSNotification) {
-        if (UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
-            if (!baseIsInLandscapeMode) {
-                baseIsInLandscapeMode = true
-                updateBackgroundGradient()
-            }
-        } else if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
-            if (baseIsInLandscapeMode) {
-                baseIsInLandscapeMode = false
-                updateBackgroundGradient()
-            }
-        }
     }
 
     func updateBackgroundGradient() {
         gradientLayer?.removeFromSuperlayer()
-        gradientLayer = self.view.addGradient(Gradient.Background)
+        gradientLayer = self.view.addDiagonalGradient(Gradient.Background)
+    }
+
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
 }

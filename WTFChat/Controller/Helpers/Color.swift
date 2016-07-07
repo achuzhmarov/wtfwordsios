@@ -36,6 +36,7 @@ class Color {
     static let TryDark = UIColor(red: 173/255, green: 99/255, blue: 25/255, alpha: 1.0)
 
     static let BackgroundLight = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+    static let BackgroundMid = UIColor(red: 212/255, green: 229/255, blue: 240/255, alpha: 1.0)
     static let BackgroundDark = UIColor(red: 197/255, green: 227/255, blue: 245/255, alpha: 1.0)
 
     static let IgnoreLight = UIColor(red: 140/255, green: 144/255, blue: 158/255, alpha: 1.0)
@@ -51,7 +52,4 @@ class Color {
                 return Color.HardDark
         }
     }
-
-    static let Background = UIColor(patternImage: UIImage(named: "background")!)
-    static let Button = UIImage(named: "button")!
 }

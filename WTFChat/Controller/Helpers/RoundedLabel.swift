@@ -70,7 +70,7 @@ class RoundedLabel: UILabel {
         newLabel.numberOfLines = self.numberOfLines
         //newLabel.translatesAutoresizingMaskIntoConstraints = self.translatesAutoresizingMaskIntoConstraints
 
-        gradientLayer = self.addGradient(gradient)
+        gradientLayer = self.addDiagonalGradient(gradient)
         newLabelView = newLabel
         self.addSubview(newLabel)
 

@@ -1,8 +1,17 @@
 import Foundation
 
 class SingleModeViewController: BaseUIViewController {
+    @IBOutlet weak var menuBorder: UIView!
+    @IBOutlet weak var menuBackground: UIView!
     @IBOutlet weak var cipherViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var pageControlTopPaddingConstraint: NSLayoutConstraint!
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var exitGesture: UIGestureRecognizer!
+
+    let PageControlAdditionalPadding: CGFloat = 8
+
+    var handleOffstagePanComputer: ((pan: UIPanGestureRecognizer) -> Void)?
+
     private var cipherPageViewController: CipherPageViewController!
 
     private var isInLandscapeMode = false
@@ -30,6 +39,11 @@ class SingleModeViewController: BaseUIViewController {
         self.view.addGestureRecognizer(swipeRight)
 
         cipherPageViewController.view.backgroundColor = UIColor.clearColor()
+
+        exitGesture.addTarget(self, action: #selector(SingleModeViewController.handleOffstagePan(_:)))
+
+        menuBorder.backgroundColor = Color.BackgroundDark
+        menuBackground.addLinearGradient(Gradient.BackgroundMenu)
     }
 
     func cipherViewUpdated(newController: CipherViewController) {
@@ -41,10 +55,12 @@ class SingleModeViewController: BaseUIViewController {
     func updateCipherViewHeight() {
         if (isInLandscapeMode) {
             updateLandscapeCipherHeightIfNeeded()
-            cipherViewHeightConstraint.constant = landscapeCipherHeight
+            pageControlTopPaddingConstraint.constant = landscapeCipherHeight + PageControlAdditionalPadding
+            //cipherViewHeightConstraint.constant = landscapeCipherHeight
         } else {
             updatePortraitCipherHeightIfNeeded()
-            cipherViewHeightConstraint.constant = portraitCipherHeight
+            pageControlTopPaddingConstraint.constant = portraitCipherHeight + PageControlAdditionalPadding
+            //cipherViewHeightConstraint.constant = portraitCipherHeight
         }
     }
 
@@ -113,19 +129,51 @@ class SingleModeViewController: BaseUIViewController {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.Left:
-                let nextPage = pageControl.currentPage + 1
-                if (nextPage < cipherTypes.count) {
-                    cipherPageViewController.showPage(nextPage)
-                }
+                swipeLeft()
             case UISwipeGestureRecognizerDirection.Right:
-                let prevPage = pageControl.currentPage - 1
-                if (prevPage >= 0) {
-                    cipherPageViewController.showPage(prevPage)
-                }
+                swipeRight()
             default:
                 break
             }
         }
+    }
+
+    func swipeLeft() {
+        let nextPage = pageControl.currentPage + 1
+        if (nextPage < cipherTypes.count) {
+            cipherPageViewController.showPage(nextPage)
+        }
+    }
+
+    func swipeRight() {
+        let prevPage = pageControl.currentPage - 1
+        if (prevPage >= 0) {
+            cipherPageViewController.showPage(prevPage)
+        }
+    }
+
+    func unwindSegue() {
+        self.performSegueWithIdentifier("backToMenu", sender: self)
+    }
+
+    func handleOffstagePan(pan: UIPanGestureRecognizer) {
+        /*let translation = pan.translationInView(pan.view!.superview!)
+        let d = translation.x / CGRectGetHeight(pan.view!.superview!.frame)
+
+        handleOffstagePanComputer?(pan: pan)
+
+        if (pan.state != .Began && pan.state != .Changed) {
+            print(d)
+
+            if(d > 0.2){
+                swipeRight()
+            }
+            else if(d < -0.2) {
+                swipeLeft()
+            }
+        }*/
+
+        handleOffstagePanComputer?(pan: pan)
     }
 
     @IBAction func backToCiphers(segue:UIStoryboardSegue) {

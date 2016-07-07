@@ -6,6 +6,12 @@ class TopArrowImage: ArrowImage {
     }
 }
 
+class BottomArrowImage: ArrowImage {
+    override func getArrowPath(size: CGFloat) -> UIBezierPath {
+        return UIBezierPath.bottomArrow(size)
+    }
+}
+
 class RightArrowImage: ArrowImage {
     override func getArrowPath(size: CGFloat) -> UIBezierPath {
         return UIBezierPath.rightArrow(size)
@@ -34,7 +40,7 @@ class ArrowImage: UIImageView {
         CGContextSaveGState(context)
 
         addGradient(context!,
-                clipPath: getCirclePath(size),
+                clipPath: getBackPath(size),
                 size: size,
                 colors: backgroundGradient
         )
@@ -57,8 +63,8 @@ class ArrowImage: UIImageView {
         CGContextDrawLinearGradient(context, gradient, CGPointMake(0, 0), CGPointMake(size, size), [])
     }
 
-    func getCirclePath(size: CGFloat) -> UIBezierPath {
-        return UIBezierPath.circle(size)
+    func getBackPath(size: CGFloat) -> UIBezierPath {
+        return UIBezierPath.roundedRect(size)
     }
 
     func getArrowPath(size: CGFloat) -> UIBezierPath {

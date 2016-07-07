@@ -16,6 +16,7 @@ class Gradient {
     static let Try = [Color.TryLight.CGColor, Color.TryDark.CGColor]
 
     static let Background = [Color.BackgroundLight.CGColor, Color.BackgroundDark.CGColor]
+    static let BackgroundMenu = [Color.BackgroundLight.CGColor, Color.BackgroundMid.CGColor]
 
     static func getStarGradientByDifficulty(difficulty: CipherDifficulty) -> [CGColor] {
         switch difficulty {
