@@ -170,7 +170,7 @@
                                 </constraints>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mEJ-Vt-nA5" customClass="LvlCollectionView" customModule="WTFChat" customModuleProvider="target">
-                                <rect key="frame" x="20" y="78" width="560" height="522"/>
+                                <rect key="frame" x="20" y="86" width="560" height="514"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2VN-2l-qiT">
                                     <size key="itemSize" width="45" height="45"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -210,7 +210,7 @@
                             <constraint firstItem="mEJ-Vt-nA5" firstAttribute="leading" secondItem="dNT-lM-ziv" secondAttribute="leading" constant="20" id="6kF-gQ-zu8"/>
                             <constraint firstItem="YPY-mH-iMb" firstAttribute="leading" secondItem="DVh-hw-hz3" secondAttribute="trailing" constant="8" id="7k0-xg-vFA"/>
                             <constraint firstItem="qEG-Lo-Uyx" firstAttribute="top" secondItem="mEJ-Vt-nA5" secondAttribute="bottom" id="FxU-6d-ghv"/>
-                            <constraint firstItem="mEJ-Vt-nA5" firstAttribute="top" secondItem="DVh-hw-hz3" secondAttribute="bottom" constant="8" id="K34-Lc-0ZQ"/>
+                            <constraint firstItem="mEJ-Vt-nA5" firstAttribute="top" secondItem="DVh-hw-hz3" secondAttribute="bottom" constant="16" id="K34-Lc-0ZQ"/>
                             <constraint firstItem="6t3-TS-5K0" firstAttribute="centerY" secondItem="DVh-hw-hz3" secondAttribute="centerY" id="Q4h-8t-X2s"/>
                             <constraint firstItem="YPY-mH-iMb" firstAttribute="centerY" secondItem="3hv-QJ-EyM" secondAttribute="centerY" id="QXt-aq-1E7"/>
                             <constraint firstItem="6t3-TS-5K0" firstAttribute="leading" secondItem="dNT-lM-ziv" secondAttribute="leading" constant="20" id="eiK-5q-AOZ"/>

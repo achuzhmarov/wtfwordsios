@@ -3,7 +3,6 @@ import Foundation
 class SingleModeViewController: BaseUIViewController {
     @IBOutlet weak var menuBorder: UIView!
     @IBOutlet weak var menuBackground: UIView!
-    @IBOutlet weak var cipherViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var pageControlTopPaddingConstraint: NSLayoutConstraint!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var exitGesture: UIGestureRecognizer!
@@ -56,11 +55,9 @@ class SingleModeViewController: BaseUIViewController {
         if (isInLandscapeMode) {
             updateLandscapeCipherHeightIfNeeded()
             pageControlTopPaddingConstraint.constant = landscapeCipherHeight + PageControlAdditionalPadding
-            //cipherViewHeightConstraint.constant = landscapeCipherHeight
         } else {
             updatePortraitCipherHeightIfNeeded()
             pageControlTopPaddingConstraint.constant = portraitCipherHeight + PageControlAdditionalPadding
-            //cipherViewHeightConstraint.constant = portraitCipherHeight
         }
     }
 
