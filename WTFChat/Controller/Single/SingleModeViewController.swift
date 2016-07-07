@@ -8,7 +8,7 @@ class SingleModeViewController: BaseUIViewController {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var exitGesture: UIGestureRecognizer!
 
-    let PageControlAdditionalPadding: CGFloat = 8
+    let PageControlAdditionalPadding: CGFloat = 28
 
     var handleOffstagePanComputer: ((pan: UIPanGestureRecognizer) -> Void)?
 
