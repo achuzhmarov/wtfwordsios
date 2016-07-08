@@ -22,11 +22,7 @@ class BaseUIViewController: UIViewController {
     }
 
     func updateBackgroundGradient() {
-        if let existsingGradient = gradientLayer {
-            existsingGradient.colors = Gradient.Background
-            return
-        }
-
+        gradientLayer?.removeFromSuperlayer()
         gradientLayer = self.view.addDiagonalGradient(Gradient.Background)
     }
 
