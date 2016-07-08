@@ -19,7 +19,7 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
     var activeCipherIndex = 0
     var cipherViewAppearedNotifier: CipherViewAppearedNotifier?
 
-    private let DECIPHER_SEGUE_ID = "showDecipher"
+    private let LEVEL_PREVIEW_SEGUE_ID = "showLevelPreview"
     private let LVL_CELL_SPACING: CGFloat = 10.0
     private let LVL_VIEW_WIDTH_PADDING: CGFloat = 8.0 * 2
     private let VERTICAL_PADDING: CGFloat = 20 + 16
@@ -53,8 +53,8 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         UIHelper.clearBackButton(navigationItem)
 
-        if segue.identifier == DECIPHER_SEGUE_ID {
-            let targetController = segue.destinationViewController as! SingleDecipherViewController
+        if segue.identifier == LEVEL_PREVIEW_SEGUE_ID {
+            let targetController = segue.destinationViewController as! LevelPreviewViewController
             targetController.level = selectedLevel
         }
     }
@@ -74,7 +74,7 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
         if (singleModeService.isLevelAvailable(level)) {
             if (singleMessageService.hasTextCategoryForLevel(level)) {
                 selectedLevel = level
-                self.performSegueWithIdentifier(DECIPHER_SEGUE_ID, sender: self)
+                self.performSegueWithIdentifier(LEVEL_PREVIEW_SEGUE_ID, sender: self)
             } else {
                 WTFOneButtonAlert.show("Not available yet",
                         message: "This level is not available yet. Please, wait for the next release!",

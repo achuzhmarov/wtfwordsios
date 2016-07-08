@@ -61,7 +61,7 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
         let tapView: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherViewController.viewTapped))
         view.addGestureRecognizer(tapView)
 
-        startView.hidden = false
+        startView?.hidden = false
         bottomView.hidden = true
         topTimerLabel.hidden = true
         wordsTableView.hidden = true
@@ -288,7 +288,7 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
         topTimerLabel.hidden = false
         wordsTableView.hidden = false
 
-        startView.removeFromSuperview()
+        startView?.removeFromSuperview()
 
         wordsTableView.updateMessage(message)
 
@@ -394,7 +394,7 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
     }
 
     func setViewOnlyStage() {
-        startView.removeFromSuperview()
+        startView?.removeFromSuperview()
         wordsTableView.updateMessage(message)
         wordsTableView.hidden = false
 

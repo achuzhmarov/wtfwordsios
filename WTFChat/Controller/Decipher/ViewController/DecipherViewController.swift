@@ -19,7 +19,7 @@ class DecipherViewController: BaseDecipherViewController {
         } else {
             UIView.animateWithDuration(1, delay: 0,
                     options: [.Repeat, .Autoreverse], animations: {
-                self.startView.alpha = 0
+                self.startView?.alpha = 0
             }, completion: nil)
         }
     }
