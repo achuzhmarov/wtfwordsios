@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E37C018463F3EF316020713 /* BaseTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C27500C5496ED3C07DC2 /* BaseTransitionManager.swift */; };
 		3E37C01A1D83343DB2B9F192 /* LeftCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C0D41AF12BC7DDE9977F /* LeftCutterCipher.swift */; };
 		3E37C05032226280542E7FAB /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CCE7F85D3B25FC789326 /* MessageService.swift */; };
 		3E37C0608D8F704273F9224E /* AuthNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CEEE214DEDE08C287D6E /* AuthNetworkService.swift */; };
@@ -66,6 +67,7 @@
 		3E37C4A65CAA433F21B331CD /* SingleMessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF45362C75741955A6F2 /* SingleMessageService.swift */; };
 		3E37C4B39DAC6C3A9C09222D /* ServiceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CB627C8C45BBD8C82592 /* ServiceInitializer.swift */; };
 		3E37C4B5D4BF98ED40A2C130 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF47929B32484447BAE2 /* UIImage+Extension.swift */; };
+		3E37C4F333BB53A0CA427D0A /* FadeTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C129CC15BD6B96F253B6 /* FadeTransitionManager.swift */; };
 		3E37C5061E1B18C7DD11DC3E /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CFEEAC9762C3361A9C50 /* Weak.swift */; };
 		3E37C548C008F4F4535FF9DD /* SingleMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C174D58D33F0F69B5070 /* SingleMessageCell.swift */; };
 		3E37C556299DA54151F82083 /* HintsShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CEAFAD5645723457C239 /* HintsShopViewController.swift */; };
@@ -200,6 +202,7 @@
 		3E37C0F2EE17D9A710A8713B /* RightCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightCutterCipher.swift; sourceTree = "<group>"; };
 		3E37C106D7CA0FD89102CE33 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
 		3E37C11DB362BD6C3B9FFFE2 /* BaseMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMessageViewController.swift; sourceTree = "<group>"; };
+		3E37C129CC15BD6B96F253B6 /* FadeTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeTransitionManager.swift; sourceTree = "<group>"; };
 		3E37C131EF321BA3531C5804 /* CipherType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherType.swift; sourceTree = "<group>"; };
 		3E37C140CF13E7D63DFC1DDD /* WindowService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowService.swift; sourceTree = "<group>"; };
 		3E37C1492DBCD215B040B6DA /* PassAndPlayDecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassAndPlayDecipherViewController.swift; sourceTree = "<group>"; };
@@ -217,6 +220,7 @@
 		3E37C21BBEC0C55C79B7473F /* SingleTalk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTalk.swift; sourceTree = "<group>"; };
 		3E37C24DE3323E553F227BA7 /* BaseLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseLoginViewController.swift; sourceTree = "<group>"; };
 		3E37C26F571173D1A34B84C0 /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
+		3E37C27500C5496ED3C07DC2 /* BaseTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTransitionManager.swift; sourceTree = "<group>"; };
 		3E37C27838218C4F22B21722 /* NSError+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Extension.swift"; sourceTree = "<group>"; };
 		3E37C283CC6663C54ADE8296 /* CoreDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		3E37C2D33F7F90C9D9EEA66B /* PanTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanTransitionManager.swift; sourceTree = "<group>"; };
@@ -604,6 +608,8 @@
 			isa = PBXGroup;
 			children = (
 				3E37C2D33F7F90C9D9EEA66B /* PanTransitionManager.swift */,
+				3E37C129CC15BD6B96F253B6 /* FadeTransitionManager.swift */,
+				3E37C27500C5496ED3C07DC2 /* BaseTransitionManager.swift */,
 			);
 			path = Transition;
 			sourceTree = "<group>";
@@ -1239,6 +1245,8 @@
 				3E37C424A54E2B5F0C6D3478 /* PanTransitionManager.swift in Sources */,
 				3E37C342824B452903005630 /* MenuButton.swift in Sources */,
 				3E37C31002E00B23871ED52B /* LevelPreviewViewController.swift in Sources */,
+				3E37C4F333BB53A0CA427D0A /* FadeTransitionManager.swift in Sources */,
+				3E37C018463F3EF316020713 /* BaseTransitionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

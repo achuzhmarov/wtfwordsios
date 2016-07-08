@@ -51,8 +51,6 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        UIHelper.clearBackButton(navigationItem)
-
         if segue.identifier == LEVEL_PREVIEW_SEGUE_ID {
             let targetController = segue.destinationViewController as! LevelPreviewViewController
             targetController.level = selectedLevel
