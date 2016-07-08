@@ -1,9 +1,9 @@
 import Foundation
 
 extension UIView {
-    func addLinearGradient(colors: [CGColor]) -> CAGradientLayer {
+    func addLinearGradient(colors: [CGColor], size: CGSize? = nil) -> CAGradientLayer {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.frame.size = self.frame.size
+        gradientLayer.frame.size = size ?? self.frame.size
         gradientLayer.frame.origin = CGPointZero
         gradientLayer.cornerRadius = layer.cornerRadius
 
@@ -16,9 +16,9 @@ extension UIView {
         return gradientLayer
     }
 
-    func addDiagonalGradient(colors: [CGColor]) -> CAGradientLayer {
+    func addDiagonalGradient(colors: [CGColor], size: CGSize? = nil) -> CAGradientLayer {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.frame.size = self.frame.size
+        gradientLayer.frame.size = size ?? self.frame.size
         gradientLayer.frame.origin = CGPointZero
         gradientLayer.cornerRadius = layer.cornerRadius
 

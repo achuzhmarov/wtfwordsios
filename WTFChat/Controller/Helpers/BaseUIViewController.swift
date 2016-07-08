@@ -18,12 +18,12 @@ class BaseUIViewController: UIViewController {
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
 
-        updateBackgroundGradient()
+        updateBackgroundGradient(size)
     }
 
-    func updateBackgroundGradient() {
+    func updateBackgroundGradient(size: CGSize? = nil) {
         gradientLayer?.removeFromSuperlayer()
-        gradientLayer = self.view.addDiagonalGradient(Gradient.Background)
+        gradientLayer = self.view.addDiagonalGradient(Gradient.Background, size: size)
     }
 
     override func prefersStatusBarHidden() -> Bool {
