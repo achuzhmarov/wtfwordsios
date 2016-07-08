@@ -102,15 +102,4 @@ extension CipherPageViewController: UIPageViewControllerDataSource {
         }
         return nil
     }
-
-
-
-    // MARK: UIPageControl
-    /*func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return cipherTypes.count
-    }
-
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return activeCipherIndex ?? 0
-    }*/
 }

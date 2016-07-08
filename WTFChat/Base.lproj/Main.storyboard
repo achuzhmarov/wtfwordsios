@@ -142,35 +142,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cipher Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6t3-TS-5K0">
-                                <rect key="frame" x="20" y="44" width="93" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3hv-QJ-EyM" customClass="StarImage" customModule="WTFChat" customModuleProvider="target">
-                                <rect key="frame" x="550" y="40" width="30" height="30"/>
+                                <rect key="frame" x="540" y="40" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="KnF-fF-Hta"/>
-                                    <constraint firstAttribute="width" constant="30" id="rhB-e5-JMi"/>
+                                    <constraint firstAttribute="height" constant="40" id="KnF-fF-Hta"/>
+                                    <constraint firstAttribute="width" constant="40" id="rhB-e5-JMi"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YPY-mH-iMb" customClass="StarImage" customModule="WTFChat" customModuleProvider="target">
-                                <rect key="frame" x="512" y="40" width="30" height="30"/>
+                                <rect key="frame" x="492" y="40" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="6hU-Ko-Ee7"/>
-                                    <constraint firstAttribute="height" constant="30" id="BUq-d9-1rq"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DVh-hw-hz3" customClass="StarImage" customModule="WTFChat" customModuleProvider="target">
-                                <rect key="frame" x="474" y="40" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="B1E-cM-qQ7"/>
-                                    <constraint firstAttribute="height" constant="30" id="OkG-a1-vXy"/>
+                                    <constraint firstAttribute="width" constant="40" id="6hU-Ko-Ee7"/>
+                                    <constraint firstAttribute="height" constant="40" id="BUq-d9-1rq"/>
                                 </constraints>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mEJ-Vt-nA5" customClass="LvlCollectionView" customModule="WTFChat" customModuleProvider="target">
-                                <rect key="frame" x="20" y="86" width="560" height="514"/>
+                                <rect key="frame" x="20" y="96" width="560" height="504"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2VN-2l-qiT">
                                     <size key="itemSize" width="45" height="45"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -204,19 +191,32 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DVh-hw-hz3" customClass="StarImage" customModule="WTFChat" customModuleProvider="target">
+                                <rect key="frame" x="444" y="40" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="B1E-cM-qQ7"/>
+                                    <constraint firstAttribute="height" constant="40" id="OkG-a1-vXy"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cipher Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6t3-TS-5K0">
+                                <rect key="frame" x="20" y="48" width="109" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="3hv-QJ-EyM" secondAttribute="trailing" constant="20" id="0kR-hQ-YRO"/>
-                            <constraint firstItem="mEJ-Vt-nA5" firstAttribute="leading" secondItem="dNT-lM-ziv" secondAttribute="leading" constant="20" id="6kF-gQ-zu8"/>
                             <constraint firstItem="YPY-mH-iMb" firstAttribute="leading" secondItem="DVh-hw-hz3" secondAttribute="trailing" constant="8" id="7k0-xg-vFA"/>
-                            <constraint firstItem="qEG-Lo-Uyx" firstAttribute="top" secondItem="mEJ-Vt-nA5" secondAttribute="bottom" id="FxU-6d-ghv"/>
-                            <constraint firstItem="mEJ-Vt-nA5" firstAttribute="top" secondItem="DVh-hw-hz3" secondAttribute="bottom" constant="16" id="K34-Lc-0ZQ"/>
                             <constraint firstItem="6t3-TS-5K0" firstAttribute="centerY" secondItem="DVh-hw-hz3" secondAttribute="centerY" id="Q4h-8t-X2s"/>
                             <constraint firstItem="YPY-mH-iMb" firstAttribute="centerY" secondItem="3hv-QJ-EyM" secondAttribute="centerY" id="QXt-aq-1E7"/>
+                            <constraint firstItem="mEJ-Vt-nA5" firstAttribute="top" secondItem="DVh-hw-hz3" secondAttribute="bottom" constant="16" id="bUJ-CY-mYg"/>
                             <constraint firstItem="6t3-TS-5K0" firstAttribute="leading" secondItem="dNT-lM-ziv" secondAttribute="leading" constant="20" id="eiK-5q-AOZ"/>
                             <constraint firstItem="3hv-QJ-EyM" firstAttribute="top" secondItem="3YM-2h-k3P" secondAttribute="bottom" constant="20" id="gI1-su-pDj"/>
                             <constraint firstAttribute="trailing" secondItem="mEJ-Vt-nA5" secondAttribute="trailing" constant="20" id="mVT-Cn-SaA"/>
+                            <constraint firstItem="qEG-Lo-Uyx" firstAttribute="top" secondItem="mEJ-Vt-nA5" secondAttribute="bottom" id="pm2-du-M8U"/>
                             <constraint firstItem="DVh-hw-hz3" firstAttribute="centerY" secondItem="YPY-mH-iMb" secondAttribute="centerY" id="qlU-6z-ej3"/>
+                            <constraint firstItem="mEJ-Vt-nA5" firstAttribute="leading" secondItem="dNT-lM-ziv" secondAttribute="leading" constant="20" id="ss6-Tf-zCR"/>
                             <constraint firstItem="3hv-QJ-EyM" firstAttribute="leading" secondItem="YPY-mH-iMb" secondAttribute="trailing" constant="8" id="vfU-13-OHS"/>
                         </constraints>
                     </view>
@@ -2570,7 +2570,7 @@
                                 </connections>
                             </button>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="gG1-Hw-UNQ">
-                                <rect key="frame" x="265" y="345" width="71" height="37"/>
+                                <rect key="frame" x="265" y="543" width="71" height="37"/>
                                 <color key="pageIndicatorTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -2586,6 +2586,7 @@
                             <constraint firstItem="iFS-Hq-JCO" firstAttribute="top" secondItem="x7k-ET-xND" secondAttribute="bottom" id="OUZ-p2-eEw"/>
                             <constraint firstItem="x7k-ET-xND" firstAttribute="top" secondItem="gsK-Me-ycK" secondAttribute="bottom" constant="8" id="RNt-Lq-JQU"/>
                             <constraint firstItem="iFS-Hq-JCO" firstAttribute="top" secondItem="pC1-zZ-Qza" secondAttribute="bottom" id="S8c-ck-7gc"/>
+                            <constraint firstItem="x7k-ET-xND" firstAttribute="top" secondItem="gG1-Hw-UNQ" secondAttribute="bottom" id="U8I-3h-P1o"/>
                             <constraint firstItem="gsK-Me-ycK" firstAttribute="leading" secondItem="hf0-JX-BRq" secondAttribute="leading" id="eMO-f0-sf8"/>
                             <constraint firstItem="pC1-zZ-Qza" firstAttribute="leading" secondItem="hf0-JX-BRq" secondAttribute="leading" id="ewF-oo-kD4"/>
                             <constraint firstAttribute="trailing" secondItem="pC1-zZ-Qza" secondAttribute="trailing" id="iXH-I2-OLE"/>
@@ -2593,7 +2594,6 @@
                             <constraint firstItem="pC1-zZ-Qza" firstAttribute="top" secondItem="YMS-n6-eny" secondAttribute="bottom" id="jlX-by-kRI"/>
                             <constraint firstAttribute="trailing" secondItem="YMS-n6-eny" secondAttribute="trailing" id="nPd-yK-enb"/>
                             <constraint firstItem="gsK-Me-ycK" firstAttribute="top" secondItem="fvw-YL-OjZ" secondAttribute="bottom" id="oyQ-gh-S03"/>
-                            <constraint firstItem="gG1-Hw-UNQ" firstAttribute="top" secondItem="fvw-YL-OjZ" secondAttribute="bottom" constant="325" id="w0b-fB-1Iy"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="3Mg-pR-iQY" appends="YES" id="efj-dL-0QY"/>
@@ -2607,7 +2607,6 @@
                         <outlet property="menuBackground" destination="pC1-zZ-Qza" id="4as-qv-sNh"/>
                         <outlet property="menuBorder" destination="YMS-n6-eny" id="eXO-bn-qgd"/>
                         <outlet property="pageControl" destination="gG1-Hw-UNQ" id="bz0-Sj-3T7"/>
-                        <outlet property="pageControlTopPaddingConstraint" destination="w0b-fB-1Iy" id="lt6-xe-I6n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="doQ-qh-6Bg" userLabel="First Responder" sceneMemberID="firstResponder"/>

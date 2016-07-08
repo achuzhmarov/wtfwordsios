@@ -9,10 +9,12 @@ class LvlCell: UICollectionViewCell {
 
     private var gradientLayer: CAGradientLayer?
 
+    private let CORNER_RADIUS_COEFF: CGFloat = 0.25
+
     private func initStyle() {
         titleLabel.textColor = Color.Text
 
-        layer.cornerRadius = 12.0
+        layer.cornerRadius = self.bounds.size.width * CORNER_RADIUS_COEFF
 
         layer.masksToBounds = false
         layer.shouldRasterize = true

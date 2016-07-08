@@ -1,48 +1,32 @@
 import Foundation
 
 class BaseUIViewController: UIViewController {
-    private var baseIsInLandscapeMode = false
     private var gradientLayer: CAGradientLayer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = Color.BackgroundDark
-
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BaseUIViewController.baseRotated(_:)),
-                name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        computeOrientation()
+        updateBackgroundGradient()
     }
 
-    func baseRotated(notification: NSNotification) {
-        if (UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
-            if (!baseIsInLandscapeMode) {
-                computeOrientation()
-            }
-        } else if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
-            if (baseIsInLandscapeMode) {
-                computeOrientation()
-            }
-        }
-    }
-
-    func computeOrientation() {
-        if (UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
-            baseIsInLandscapeMode = true
-        } else {
-            baseIsInLandscapeMode = false
-        }
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
 
         updateBackgroundGradient()
     }
 
     func updateBackgroundGradient() {
-        gradientLayer?.removeFromSuperlayer()
+        if let existsingGradient = gradientLayer {
+            existsingGradient.colors = Gradient.Background
+            return
+        }
+
         gradientLayer = self.view.addDiagonalGradient(Gradient.Background)
     }
 

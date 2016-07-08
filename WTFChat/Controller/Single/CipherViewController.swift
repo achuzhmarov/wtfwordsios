@@ -21,9 +21,8 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
 
     private let DECIPHER_SEGUE_ID = "showDecipher"
     private let LVL_CELL_SPACING: CGFloat = 10.0
-    private let LVL_CELL_SIZE: CGFloat = 45.0
     private let LVL_VIEW_WIDTH_PADDING: CGFloat = 8.0 * 2
-    private let VERTICAL_PADDING: CGFloat = 8.0 * 2
+    private let VERTICAL_PADDING: CGFloat = 20 + 16
 
     private let cipherTypes = CipherType.getAll()
     private var selectedLevel: Level?
@@ -38,8 +37,15 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
         reloadData()
     }
 
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        reloadData()
+
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    }
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+
         reloadData()
         cipherViewAppearedNotifier?.cipherViewAppeared(self)
     }
@@ -81,39 +87,12 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
     }
 
     func getFullHeight() -> CGFloat {
-        let lvlCollectionHeight = getCollectionViewHeight()
+        lvlCollectionView.reloadData()
+
+        let collectionViewSize = lvlCollectionView.collectionViewLayout.collectionViewContentSize()
+        let lvlCollectionHeight = collectionViewSize.height
+
         return lvlCollectionHeight + VERTICAL_PADDING + easyStarImage.bounds.height
-    }
-
-    private func getCollectionViewHeight() -> CGFloat {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSizeMake(LVL_CELL_SIZE, LVL_CELL_SIZE)
-
-        // Set left and right margins
-        flowLayout.minimumInteritemSpacing = LVL_CELL_SPACING
-
-        // Set top and bottom margins
-        flowLayout.minimumLineSpacing = LVL_CELL_SPACING
-
-        let size = CGSize(
-            width: view.bounds.width - LVL_VIEW_WIDTH_PADDING,
-            height: view.bounds.height
-        )
-
-        let frame = CGRect(
-            origin: view.bounds.origin,
-            size: size
-        )
-
-        let sizingLvlCollectionView = LvlCollectionView(frame: frame, collectionViewLayout: flowLayout)
-
-        let category = getCurrentCategory()
-        sizingLvlCollectionView.updateCategory(category)
-        sizingLvlCollectionView.dataSource = lvlCollectionView
-
-        let collectionViewSize = sizingLvlCollectionView.collectionViewLayout.collectionViewContentSize()
-
-        return collectionViewSize.height
     }
 
     private func getCurrentCategory() -> SingleModeCategory {
