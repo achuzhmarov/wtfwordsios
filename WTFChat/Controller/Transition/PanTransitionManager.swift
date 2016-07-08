@@ -50,6 +50,7 @@ class PanTransitionManager: UIPercentDrivenInteractiveTransition,
 
         // fix for bug in iOS 9 - if rotated after transition
         toView.frame.size = transitionContext.finalFrameForViewController(screens.to).size
+        (screens.to as! BaseUIViewController).updateBackgroundGradient(toView.frame.size)
 
         let offScreenBack = CGAffineTransformMakeTranslation(0, -container.frame.height)
         let offScreenForward = CGAffineTransformMakeTranslation(0, container.frame.height)
