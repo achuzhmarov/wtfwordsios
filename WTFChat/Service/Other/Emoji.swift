@@ -13,4 +13,5 @@ class Emoji {
     static let CIRCLE = "⚪"
     static let SMALL_SQUARE = "▫️"
     static let SQUARE = "◻️"
+    static let HAMSTER = "🐹"
 }

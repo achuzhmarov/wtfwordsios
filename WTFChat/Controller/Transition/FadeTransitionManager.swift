@@ -27,4 +27,8 @@ class FadeTransitionManager: BaseTransitionManager  {
             fromView.alpha = 0
         }
     }
+
+    override func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+        return 0.3
+    }
 }

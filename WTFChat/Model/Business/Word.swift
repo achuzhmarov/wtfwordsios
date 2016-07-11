@@ -65,19 +65,23 @@ class Word: NSObject {
             textToHide = text
         }
 
-        for _ in 0..<textToHide.characters.count {
-            result += Word.HIDE_SYMBOL
+        for char in textToHide.characters {
+            result += getHidedChar(char)
         }
 
         for char in additional.characters {
-            if (Word.NOT_HIDED_SYMBOLS.contains(char)) {
-                result += String(char)
-            } else {
-                result += Word.HIDE_SYMBOL
-            }
+            result += getHidedChar(char)
         }
 
         return result
+    }
+
+    func getHidedChar(char: Character) -> String {
+        if (Word.NOT_HIDED_SYMBOLS.contains(char)) {
+            return String(char)
+        } else {
+            return Word.HIDE_SYMBOL
+        }
     }
 
     private func hasText() -> Bool {

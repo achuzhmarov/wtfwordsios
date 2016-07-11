@@ -8,8 +8,12 @@ class LevelPreviewViewController: UIViewController {
     @IBOutlet weak var difficultySelector: UISegmentedControl!
     @IBOutlet weak var startTimerLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var textPreviewLabel: UILabel!
+    //@IBOutlet weak var textPreviewLabel: UILabel!
+    @IBOutlet weak var lvlLabel: UILabel!
+    @IBOutlet weak var lvlView: UIView!
     @IBOutlet weak var backgroundView: UIView!
+
+    @IBOutlet weak var backgroundViewWidthConstraint: NSLayoutConstraint!
 
     private let DECIPHER_SEGUE_ID = "showDecipher"
 
@@ -23,6 +27,8 @@ class LevelPreviewViewController: UIViewController {
 
     private let transitionManager = FadeTransitionManager()
 
+    private var gradientLayer: CAGradientLayer?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,8 +39,10 @@ class LevelPreviewViewController: UIViewController {
         messageText = messageCategory.getRandomText()
         updateMessage()
 
-        textPreviewLabel.font = UIFont(name: textPreviewLabel.font.fontName, size: 20)
-        textPreviewLabel.numberOfLines = 0
+        //textPreviewLabel.font = UIFont(name: textPreviewLabel.font.fontName, size: 20)
+        //textPreviewLabel.numberOfLines = 0
+
+        updateLvlView()
 
         updateSelectedDifficultyInGUI()
 
@@ -42,7 +50,15 @@ class LevelPreviewViewController: UIViewController {
         view.layoutIfNeeded()
 
         backgroundView.layer.cornerRadius = 12
-        backgroundView.addDiagonalGradient(Gradient.Background)
+        backgroundView.layer.masksToBounds = true
+
+        updateBackgroundGradient()
+    }
+
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+
+        updateBackgroundGradient()
     }
 
     @IBAction func difficultyChanged(sender: AnyObject) {
@@ -56,6 +72,17 @@ class LevelPreviewViewController: UIViewController {
             let targetController = segue.destinationViewController as! SingleDecipherViewController
             targetController.message = message
         }
+    }
+
+    private func updateBackgroundGradient() {
+        gradientLayer?.removeFromSuperlayer()
+
+        let size = CGSize(
+            width: backgroundViewWidthConstraint.constant,
+            height: backgroundView.frame.size.height
+        )
+
+        gradientLayer = backgroundView.addDiagonalGradient(Gradient.Background, size: size)
     }
 
     private func updateMessage() {
@@ -75,7 +102,7 @@ class LevelPreviewViewController: UIViewController {
     }
 
     private func updateMessagePreview() {
-        textPreviewLabel.text = message.text()
+        //textPreviewLabel.text = message.text()
     }
 
     private func updateSelectedDifficultyInGUI() {
@@ -89,5 +116,17 @@ class LevelPreviewViewController: UIViewController {
         }
 
         difficultySelector.selectedSegmentIndex = index
+    }
+
+    private func updateLvlView() {
+        lvlLabel.text = String(level.id)
+        lvlView.layer.cornerRadius = 8
+
+        if (level.cleared) {
+            let gradient = Gradient.getLevelGradientByDifficulty(level.clearedDifficulty!)
+            lvlView.addDiagonalGradient(gradient)
+        } else {
+            lvlView.addDiagonalGradient(Gradient.Ciphered)
+        }
     }
 }
