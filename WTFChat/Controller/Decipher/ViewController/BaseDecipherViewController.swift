@@ -16,6 +16,8 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
     @IBOutlet weak var guessTextField: UITextField!
     @IBOutlet weak var tryButton: UIButton!
 
+    @IBOutlet weak var bottomButtonsView: UIView!
+
     @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewHeightConstraint: NSLayoutConstraint!
 
@@ -65,6 +67,8 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
         bottomView.hidden = true
         topTimerLabel.hidden = true
         wordsTableView.hidden = true
+        bottomButtonsView.hidden = true
+
         isStarted = false
         isOvered = false
 
@@ -348,6 +352,7 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
 
         bottomView.hidden = true
         bottomViewHeightConstraint.constant = 0
+        bottomButtonsView.hidden = false
 
         wordsTableView.updateMessage(message)
 
@@ -359,9 +364,6 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
             audioService.playSound("lose")
         }
 
-        self.navigationItem.setHidesBackButton(false, animated:true)
-        self.title = VIEW_TITLE
-
         isOvered = true
 
         showExpView()
@@ -372,7 +374,13 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
     }
 
     func showExpView() {
-        if message.hasSuccessWords() {
+        //init exp gain
+        timer.seconds = 0
+        topTimerLabel.text = ""
+        topViewHeightContraint.constant = initialTopViewHeightConstraintConstant
+        self.expGainView.initView(self.topView)
+
+        /*if message.hasSuccessWords() {
             //init exp gain
             timer.seconds = 0
             topTimerLabel.text = ""
@@ -380,7 +388,7 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
             self.expGainView.initView(self.topView)
         } else {
             self.hideTopLayer()
-        }
+        }*/
     }
 
     func hideTopLayer() {
@@ -399,6 +407,7 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
         wordsTableView.hidden = false
 
         bottomViewHeightConstraint.constant = 0
+        bottomButtonsView.hidden = false
 
         self.hideTopLayer()
 

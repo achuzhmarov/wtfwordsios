@@ -19,6 +19,10 @@ class BaseUIViewController: UIViewController {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
 
         updateBackgroundGradient(size)
+
+        /*coordinator.animateAlongsideTransition(nil, completion: { context in
+            self.updateBackgroundGradient(size)
+        })*/
     }
 
     func updateBackgroundGradient(size: CGSize? = nil) {

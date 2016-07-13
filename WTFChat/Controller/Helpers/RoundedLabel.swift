@@ -71,6 +71,8 @@ class RoundedLabel: UILabel {
 
         gradientLayer = self.addDiagonalGradient(gradient)
         newLabelView = newLabel
+
+        //self.insertSubview(newLabel, atIndex: 0)
         self.addSubview(newLabel)
     }
 }

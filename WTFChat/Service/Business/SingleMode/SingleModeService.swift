@@ -38,6 +38,9 @@ class SingleModeService: Service {
     }
 
     func isLevelAvailable(level: Level) -> Bool {
+        //TODO - for testing
+        return true
+
         if let previousLevel = levelService.getPreviousLevel(level) {
             return previousLevel.cleared
         } else if let previousCategory = categoryService.getPreviousCategory(level.category) {

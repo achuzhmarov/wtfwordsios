@@ -2,7 +2,9 @@ import Foundation
 
 class WordLabelContainer {
     var label = RoundedLabel()
-    
+    var fontSize: CGFloat
+    var isHidedText: Bool
+
     var originalWord: Word
 
     var word: Word {
@@ -16,29 +18,22 @@ class WordLabelContainer {
     
     var wasAddedToCell = false
     
-    init (word: Word, useCipherText: Bool = false, selfAuthor: Bool = false) {
+    init (word: Word, useCipherText: Bool, selfAuthor: Bool, isHidedText: Bool, fontSize: CGFloat) {
         self.originalWord = word
         self.word = Word(word: word)
         self.useCipherText = useCipherText
         self.selfAuthor = selfAuthor
+        self.isHidedText = isHidedText
+        self.fontSize = fontSize
+
         updateLabel()
     }
     
     func updateLabel() {
-        if (useCipherText) {
-            if (word.type != WordType.Ignore) {
-                label.text = word.getCipheredText()
-            } else {
-                label.text = word.getTextForDecipher()
-            }
-        } else if (selfAuthor) {
-            label.text = word.getClearText()
-        } else {
-            label.text = word.getTextForDecipher()
-        }
+        label.text = getLabelText()
         
         label.textColor = UIColor.whiteColor()
-        label.font = UIFont(name: label.font.fontName, size: 17)
+        label.font = UIFont(name: label.font.fontName, size: fontSize)
 
         label.layer.cornerRadius = 8.0
 
@@ -68,6 +63,26 @@ class WordLabelContainer {
         label.sizeToFit()
         
         label.tagObject = self
+    }
+
+    private func getLabelText() -> String {
+        if (isHidedText) {
+            return word.getHidedText()
+        }
+
+        if (useCipherText) {
+            if (word.type != WordType.Ignore) {
+                return word.getCipheredText()
+            } else {
+                return word.getTextForDecipher()
+            }
+        }
+
+        if (selfAuthor) {
+            return word.getClearText()
+        }
+
+        return word.getTextForDecipher()
     }
     
     func getWidth() -> CGFloat {

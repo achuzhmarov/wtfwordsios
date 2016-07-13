@@ -18,8 +18,10 @@ class SingleDecipherViewController: BaseDecipherViewController {
 
         singleModeService.finishDecipher(singleMessage)
 
-        if (message.exp > 0) {
+        self.expGainView.runProgress(message.exp)
+
+        /*if (message.exp > 0) {
             self.expGainView.runProgress(message.exp)
-        }
+        }*/
     }
 }

@@ -95,9 +95,14 @@ class ExpGainView: NSObject {
             NSLog("call to runProgress while no initView")
             return
         }
-        
+
+        if (earnedExp == 0) {
+            setFinishedProgress()
+            return
+        }
+
         self.userExp += earnedExp
-        
+
         dispatch_async(dispatch_get_main_queue(), {
             self.progressBarTimer?.invalidate()
             
@@ -107,17 +112,28 @@ class ExpGainView: NSObject {
 
         self.expLabel?.text = "+\(String(earnedExp))XP"
     }
-    
+
+    private func setFinishedProgress() {
+        let targetProgress = getTargetProgress()
+        self.progressView?.setProgress(targetProgress, animated: false)
+    }
+
+    private func getTargetProgress() -> Float {
+        var targetProgress = Float(userExp) / Float(nextLvlExp)
+        if (targetProgress > 1) {
+            targetProgress = 1.0
+        }
+
+        return targetProgress
+    }
+
     func updateProgress() {
         if (progressView == nil) {
             NSLog("call to updateProgress while no myInit")
             return
         }
 
-        var targetProgress = Float(userExp) / Float(nextLvlExp)
-        if (targetProgress > 1) {
-            targetProgress = 1.0
-        }
+        let targetProgress = getTargetProgress()
         
         if (progressView!.progress >= targetProgress) {
             self.progressBarTimer?.invalidate()

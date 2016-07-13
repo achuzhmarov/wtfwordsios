@@ -15,6 +15,8 @@ class LevelPreviewViewController: UIViewController {
 
     @IBOutlet weak var backgroundViewWidthConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var messageWordsView: WordsViewController!
+
     private let DECIPHER_SEGUE_ID = "showDecipher"
 
     private let cipherDifficulties = CipherDifficulty.getAll()
@@ -34,13 +36,16 @@ class LevelPreviewViewController: UIViewController {
 
         self.transitioningDelegate = transitionManager
 
+        messageWordsView.dataSource = messageWordsView
+        messageWordsView.delegate = messageWordsView
+        messageWordsView.backgroundColor = UIColor.clearColor()
+        messageWordsView.isHidedText = true
+        messageWordsView.fontSize = 12
+
         selectedDifficulty = currentUserService.getLastSelectedDifficulty()
         messageCategory = singleMessageService.getTextCategoryForLevel(level)
         messageText = messageCategory.getRandomText()
         updateMessage()
-
-        //textPreviewLabel.font = UIFont(name: textPreviewLabel.font.fontName, size: 20)
-        //textPreviewLabel.numberOfLines = 0
 
         updateLvlView()
 
@@ -102,6 +107,8 @@ class LevelPreviewViewController: UIViewController {
     }
 
     private func updateMessagePreview() {
+        messageWordsView.setNewMessage(message)
+
         //textPreviewLabel.text = message.text()
     }
 
@@ -128,5 +135,9 @@ class LevelPreviewViewController: UIViewController {
         } else {
             lvlView.addDiagonalGradient(Gradient.Ciphered)
         }
+    }
+
+    @IBAction func backToNextLevel(segue:UIStoryboardSegue) {
+
     }
 }

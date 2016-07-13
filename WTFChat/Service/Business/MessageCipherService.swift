@@ -12,7 +12,7 @@ class MessageCipherService: Service {
     private let WORD_SPECIAL_SYMBOLS = ["'"]//, "-"]
 
     //дефис и длинное тире
-    private let ADDITIONAL_EXCEPTIONS = ["-","—","/","«","»"]
+    private let ADDITIONAL_EXCEPTIONS = ["-","—","/","«","»", "(", ")", "\""]
 
     private let DELIMITERS = NSCharacterSet(charactersInString: "  ")
 

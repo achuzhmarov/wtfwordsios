@@ -40,9 +40,6 @@ class CurrentUserService: Service {
     override func initService() {
         if (isUserExists()) {
             updateUserFromLocalStorage()
-
-            //TODO - for testing
-            user.hints = 10
         } else {
             createUserInLocalStorage()
         }

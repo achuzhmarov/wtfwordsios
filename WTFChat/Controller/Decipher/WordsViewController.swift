@@ -23,6 +23,9 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     //for use in viewOnly
     var useCipherText = false
     var selfAuthor = false
+
+    var fontSize: CGFloat = 17
+    var isHidedText = false
     
     weak var hintComputer: HintComputer?
     
@@ -213,7 +216,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     }
     
     func createLabelForWord(word: Word) -> WordLabelContainer {
-        let wordContainer = WordLabelContainer(word: word, useCipherText: useCipherText, selfAuthor: selfAuthor)
+        let wordContainer = WordLabelContainer(word: word, useCipherText: useCipherText, selfAuthor: selfAuthor, isHidedText: isHidedText, fontSize: fontSize)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WordsViewController.useSuggestion(_:)))
         wordContainer.label.addGestureRecognizer(tap)

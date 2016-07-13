@@ -5,7 +5,10 @@ enum WordType: Int {
 }
 
 class Word: NSObject {
+    //static let HIDE_SYMBOL = "’"
+    //static let HIDE_SYMBOL = "·"
     static let HIDE_SYMBOL = "*"
+
     static let NOT_HIDED_SYMBOLS: [Character] = [".", ",", "!", "?", "(", ")", " ", "\n"]
 
     var text: String
@@ -59,7 +62,7 @@ class Word: NSObject {
 
         if (cipheredText != "") {
             textToHide = cipheredText
-                .replace(".", with: "")
+                //.replace(".", with: "")
                 .replace(additional, with: "")
         } else {
             textToHide = text
