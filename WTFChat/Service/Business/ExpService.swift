@@ -42,13 +42,15 @@ class ExpService: Service {
             }
         }
 
-        return lvlStage * LVL_EXP_STEP + lvlStep - 1
+        return lvlStage * LVL_EXP_STEP + lvlStep
     }
 
     private func getExpByLvl(lvl: Int) -> Int {
-        let leftMultiplier = intPow(2, power: lvl / LVL_EXP_STEP) - 1
-        let rightMultiplier = intPow(2, power: lvl / LVL_EXP_STEP + 1)
-        return leftMultiplier * 10 * BASE_LVL_EXP / 2 + rightMultiplier * (lvl % LVL_EXP_STEP) * BASE_LVL_EXP / 2
+        let expLvl = lvl - 1
+
+        let leftMultiplier = intPow(2, power: expLvl / LVL_EXP_STEP) - 1
+        let rightMultiplier = intPow(2, power: expLvl / LVL_EXP_STEP + 1)
+        return leftMultiplier * 10 * BASE_LVL_EXP / 2 + rightMultiplier * (expLvl % LVL_EXP_STEP) * BASE_LVL_EXP / 2
     }
 
     private func intPow(radix: Int, power: Int) -> Int {

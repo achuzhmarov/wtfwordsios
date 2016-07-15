@@ -20,12 +20,14 @@ class LevelPreviewViewController: UIViewController {
     private let DECIPHER_SEGUE_ID = "showDecipher"
 
     private let cipherDifficulties = CipherDifficulty.getAll()
-    private var selectedDifficulty = CipherDifficulty.Normal
 
     var level: Level!
+    var message: Message!
+
+    private var selectedDifficulty = CipherDifficulty.Normal
+
     private var messageText: String!
     private var messageCategory: TextCategory!
-    private var message: Message!
 
     private let transitionManager = FadeTransitionManager()
 
@@ -70,13 +72,6 @@ class LevelPreviewViewController: UIViewController {
         selectedDifficulty = cipherDifficulties[difficultySelector.selectedSegmentIndex]
         currentUserService.updateLastSelectedDifficulty(selectedDifficulty)
         updateMessage()
-    }
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == DECIPHER_SEGUE_ID {
-            let targetController = segue.destinationViewController as! SingleDecipherViewController
-            targetController.message = message
-        }
     }
 
     private func updateBackgroundGradient() {
@@ -139,5 +134,14 @@ class LevelPreviewViewController: UIViewController {
 
     @IBAction func backToNextLevel(segue:UIStoryboardSegue) {
 
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == DECIPHER_SEGUE_ID {
+            let targetController = segue.destinationViewController as! SingleDecipherViewController
+            targetController.message = message
+
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
 }

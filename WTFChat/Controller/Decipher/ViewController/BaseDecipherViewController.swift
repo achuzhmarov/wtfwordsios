@@ -6,13 +6,15 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
     private let audioService: AudioService = serviceLocator.get(AudioService)
 
     @IBOutlet weak var topTimerLabel: UILabel!
+    @IBOutlet weak var resultLabel: RoundedLabel!
 
     @IBOutlet weak var startView: UIView!
-    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var timerView: UIView!
 
     @IBOutlet weak var wordsTableView: WordsViewController!
 
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var resultView: UIView!
     @IBOutlet weak var guessTextField: UITextField!
     @IBOutlet weak var tryButton: UIButton!
 
@@ -21,9 +23,12 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
     @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewHeightConstraint: NSLayoutConstraint!
 
-    @IBOutlet weak var topViewHeightContraint: NSLayoutConstraint!
+    @IBOutlet weak var timerViewHeightContraint: NSLayoutConstraint!
 
-    let VIEW_TITLE = "Decipher"
+    @IBOutlet weak var resultViewHeightConstraint: NSLayoutConstraint!
+
+    let SUCCESS_TEXT = "Success"
+    let FAILED_TEXT = "Failed"
 
     var message: Message!
     var isStarted = false
@@ -43,15 +48,16 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
     var isInLandscapeMode = false
     var initialTopViewHeightConstraintConstant = CGFloat(0)
 
+    var resultViewHeightConstraintConstant: CGFloat = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initialTopViewHeightConstraintConstant = topViewHeightContraint.constant
+        initialTopViewHeightConstraintConstant = timerViewHeightContraint.constant
+        resultViewHeightConstraintConstant = resultViewHeightConstraint.constant
 
         let nav = self.navigationController?.navigationBar
         nav?.translucent = false
-
-        self.title = VIEW_TITLE
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DecipherViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DecipherViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
@@ -68,6 +74,9 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
         topTimerLabel.hidden = true
         wordsTableView.hidden = true
         bottomButtonsView.hidden = true
+
+        resultView.hidden = true
+        resultViewHeightConstraint.constant = 0
 
         isStarted = false
         isOvered = false
@@ -256,7 +265,7 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
     }
 
     private func hideTopTimer() {
-        topViewHeightContraint.constant = 0
+        timerViewHeightContraint.constant = 0
         topTimerLabel.text = ""
 
         if (isStarted) {
@@ -265,9 +274,8 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
     }
 
     private func showTopTimer() {
-        topViewHeightContraint.constant = initialTopViewHeightConstraintConstant
+        timerViewHeightContraint.constant = initialTopViewHeightConstraintConstant
         topTimerLabel.text = timer.getTimeString()
-        self.title = VIEW_TITLE
     }
 
     func start() {
@@ -352,17 +360,14 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
 
         bottomView.hidden = true
         bottomViewHeightConstraint.constant = 0
+
         bottomButtonsView.hidden = false
 
         wordsTableView.updateMessage(message)
 
-        dismissKeyboard()
+        showResult()
 
-        if (message.getMessageStatus() == .Success) {
-            audioService.playSound("win")
-        } else {
-            audioService.playSound("lose")
-        }
+        dismissKeyboard()
 
         isOvered = true
 
@@ -373,12 +378,30 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
         navigationItem.rightBarButtonItem = nil
     }
 
+    private func showResult() {
+        resultView.hidden = false
+        resultViewHeightConstraint.constant = resultViewHeightConstraintConstant
+
+        resultLabel.layer.cornerRadius = 12
+        resultLabel.textColor = Color.Text
+
+        if (message.getMessageStatus() == .Success) {
+            resultLabel.text = SUCCESS_TEXT
+            resultLabel.addGradientToLabel(Gradient.Success)
+            audioService.playSound("win")
+        } else {
+            resultLabel.text = FAILED_TEXT
+            resultLabel.addGradientToLabel(Gradient.Failed)
+            audioService.playSound("lose")
+        }
+    }
+
     func showExpView() {
         //init exp gain
         timer.seconds = 0
         topTimerLabel.text = ""
-        topViewHeightContraint.constant = initialTopViewHeightConstraintConstant
-        self.expGainView.initView(self.topView)
+        timerViewHeightContraint.constant = initialTopViewHeightConstraintConstant
+        self.expGainView.initView(self.timerView)
 
         /*if message.hasSuccessWords() {
             //init exp gain
@@ -395,7 +418,7 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
         timer.seconds = 0
         topTimerLabel.text = ""
 
-        topViewHeightContraint.constant = 0
+        timerViewHeightContraint.constant = 0
 
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()

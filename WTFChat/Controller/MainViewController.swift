@@ -2,19 +2,21 @@ import Foundation
 
 class MainViewController: BaseUIViewController {
 
+    let navigationDelegate = NavigationControllerDelegate()
     let transitionManager = PanTransitionManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.navigationBarHidden = true
+        navigationDelegate.transitionManager = transitionManager
+        self.navigationController!.delegate = navigationDelegate
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let toViewController = segue.destinationViewController as? SingleModeViewController {
-            toViewController.transitioningDelegate = self.transitionManager
+            //toViewController.transitioningDelegate = self.transitionManager
             toViewController.handleOffstagePanComputer = self.transitionManager.handleOffstagePan
-            self.transitionManager.unwindSegue = toViewController.unwindSegue
+            transitionManager.unwindSegue = toViewController.unwindSegue
         }
     }
 

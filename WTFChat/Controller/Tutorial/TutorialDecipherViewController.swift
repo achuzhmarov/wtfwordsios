@@ -42,8 +42,8 @@ class TutorialDecipherViewController: DecipherViewController {
         super.gameOver()
         
         if (currentTutorialStage == .DecipherRest) {
-            topViewHeightContraint.constant = initialTopViewHeightConstraintConstant
-            self.expGainView.initView(self.topView)
+            timerViewHeightContraint.constant = initialTopViewHeightConstraintConstant
+            self.expGainView.initView(self.timerView)
             
             //just some random exp value
             self.expGainView.runProgress(55)

@@ -59,6 +59,9 @@ class CurrentUserService: Service {
             hints: getIntField(KEY.HINTS)
         )
 
+        //TODO for testing
+        user.hints = 10
+
         user.lastUpdate = getDateField(KEY.LAST_UPDATE)
         user.exp = getIntField(KEY.EXP)
         user.singleExp = getIntField(KEY.SINGLE_EXP)
