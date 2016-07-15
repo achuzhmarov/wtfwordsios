@@ -48,7 +48,9 @@ class WTFTwoButtonsAlert: NSObject, UIAlertViewDelegate {
                 cancelButtonAction?()
             }))
 
-            viewPresenter?.presentViewController(alert, animated: true, completion: nil)
+            let rootViewController: UIViewController = UIApplication.sharedApplication().windows.last!.rootViewController!
+            rootViewController.presentViewController(alert, animated: true, completion: nil)
+            //viewPresenter?.presentViewController(alert, animated: true, completion: nil)
         /*} else {
             let alert = AlertWithDelegate()
             alert.title = title

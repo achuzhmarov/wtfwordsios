@@ -1,6 +1,18 @@
 import UIKit
 
 class FadeTransitionManager: BaseTransitionManager  {
+    override init() {
+        super.init()
+
+        animationDuration = 0.3
+    }
+
+    init(duration: Double) {
+        super.init()
+
+        self.animationDuration = duration
+    }
+
     override func addViewsToContainer() {
         //add modal window after main
 
@@ -26,9 +38,5 @@ class FadeTransitionManager: BaseTransitionManager  {
         } else {
             fromView.alpha = 0
         }
-    }
-
-    override func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
-        return 0.3
     }
 }

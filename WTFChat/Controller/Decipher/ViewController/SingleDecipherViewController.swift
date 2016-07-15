@@ -26,7 +26,15 @@ class SingleDecipherViewController: BaseDecipherViewController {
     }
 
     @IBAction func backTapped(sender: AnyObject) {
-        self.presentingViewController!.view.hidden = true
-        self.presentingViewController!.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+        let levelPreviewController = self.presentingViewController as! LevelPreviewViewController
+        let singleModeViewController = levelPreviewController.presentingViewController!
+
+        levelPreviewController.view.hidden = true
+        levelPreviewController.decipherTransitionManager.animationDuration = 0.3
+        levelPreviewController.selfTransitionManager.animationDuration = 0
+
+        levelPreviewController.dismissViewControllerAnimated(true) {
+            singleModeViewController.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
 }

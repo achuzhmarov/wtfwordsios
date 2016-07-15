@@ -49,11 +49,11 @@ class DecipherViewController: BaseDecipherViewController {
         }
     }
 
-    override func viewTapped() {
+    /*override func viewTapped() {
         super.viewTapped()
 
         if (!isStarted) {
             start()
         }
-    }
+    }*/
 }

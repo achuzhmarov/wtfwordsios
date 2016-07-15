@@ -29,9 +29,6 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
     private var selectedLevel: Level?
     private var messageForDecipher: Message?
 
-    private let modalTransitionManager = FadeTransitionManager()
-    private let topDownTransitionManager = TopDownTransitionManager()
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -59,12 +56,6 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
         if segue.identifier == LEVEL_PREVIEW_SEGUE_ID {
             let targetController = segue.destinationViewController as! LevelPreviewViewController
             targetController.level = selectedLevel
-            targetController.transitioningDelegate = modalTransitionManager
-
-        }  else if segue.identifier == DECIPHER_SEGUE_ID {
-            let targetController = segue.destinationViewController as! SingleDecipherViewController
-            targetController.message = messageForDecipher
-            targetController.transitioningDelegate = topDownTransitionManager
         }
     }
 
@@ -107,16 +98,6 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
     private func getCurrentCategory() -> SingleModeCategory {
         let cipherType = cipherTypes[activeCipherIndex]
         return singleModeCategoryService.getCategory(cipherType)!
-    }
-
-    @IBAction func startDecipher(segue:UIStoryboardSegue) {
-        if let levelPreviewViewController = segue.sourceViewController as? LevelPreviewViewController {
-            messageForDecipher = levelPreviewViewController.message
-
-            modalTransitionManager.externalCompletionHandler = {
-                self.performSegueWithIdentifier(self.DECIPHER_SEGUE_ID, sender: self)
-            }
-        }
     }
 
     @IBAction func backToNextLevel(segue:UIStoryboardSegue) {

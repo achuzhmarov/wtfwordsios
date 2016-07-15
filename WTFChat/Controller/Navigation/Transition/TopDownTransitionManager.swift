@@ -19,8 +19,4 @@ class TopDownTransitionManager: BaseTransitionManager  {
         fromView.transform = presenting ? offScreenForward : offScreenBack
         toView.transform = CGAffineTransformIdentity
     }
-
-    override func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
-        return 0.5
-    }
 }

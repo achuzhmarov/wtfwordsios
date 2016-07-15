@@ -31,10 +31,13 @@ class LevelPreviewViewController: UIViewController {
 
     private var gradientLayer: CAGradientLayer?
 
-    private let modalTransitionManager = FadeTransitionManager()
+    let selfTransitionManager = FadeTransitionManager()
+    let decipherTransitionManager = FadeTransitionManager(duration: 0.5)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.transitioningDelegate = selfTransitionManager
 
         messageWordsView.dataSource = messageWordsView
         messageWordsView.delegate = messageWordsView
@@ -132,7 +135,7 @@ class LevelPreviewViewController: UIViewController {
         if segue.identifier == DECIPHER_SEGUE_ID {
             let targetController = segue.destinationViewController as! SingleDecipherViewController
             targetController.message = message
-            targetController.transitioningDelegate = modalTransitionManager
+            targetController.transitioningDelegate = decipherTransitionManager
         }
     }
 }

@@ -22,6 +22,7 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
 
     @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomViewWordsPaddingContraint: NSLayoutConstraint!
 
     @IBOutlet weak var timerViewHeightContraint: NSLayoutConstraint!
 
@@ -46,7 +47,7 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
     var expGainView = ExpGainView()
 
     var isInLandscapeMode = false
-    var initialTopViewHeightConstraintConstant = CGFloat(0)
+    var initialTopViewHeightConstraintConstant: CGFloat = 0
 
     var resultViewHeightConstraintConstant: CGFloat = 0
 
@@ -63,11 +64,8 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DecipherViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DecipherViewController.rotated(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
 
-        let tapDismiss: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherViewController.dismissKeyboard))
-        view.addGestureRecognizer(tapDismiss)
-
         let tapView: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherViewController.viewTapped))
-        view.addGestureRecognizer(tapView)
+        wordsTableView.addGestureRecognizer(tapView)
 
         startView?.hidden = false
         bottomView.hidden = true
@@ -91,6 +89,7 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
         self.wordsTableView.backgroundColor = UIColor.clearColor()
 
         guessTextField.delegate = self
+        guessTextField.autocorrectionType = .No
 
         self.initialViewFrame = self.view.frame
 
@@ -127,7 +126,7 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
         isPaused = true
     }
 
-    func viewTapped() {
+    @IBAction func viewTapped() {
         if (isOvered) {
             changeCipherStateForViewOnly()
         }
@@ -151,6 +150,10 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
     func textFieldShouldReturn(textField: UITextField) -> Bool {   //delegate method
         tryButtonPressed(tryButton)
         return true
+    }
+
+    func textFieldDidBeginEditing(textField: UITextField) {   //delegate method
+        UIView.setAnimationsEnabled(false)
     }
 
     @IBAction func guessTextChanged(sender: AnyObject) {
@@ -193,6 +196,8 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
     func keyboardWillShow(notification: NSNotification) {
         var info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+
+        UIView.setAnimationsEnabled(true)
 
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.bottomViewConstraint.constant = keyboardFrame.size.height
@@ -306,9 +311,6 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
 
         guessTextField.becomeFirstResponder()
 
-        let giveUpButton = UIBarButtonItem(title: "Give Up", style: .Plain, target: self, action: #selector(DecipherViewController.giveUpButtonPressed(_:)))
-        navigationItem.rightBarButtonItem = giveUpButton
-
         isStarted = true
     }
 
@@ -362,12 +364,14 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
         bottomViewHeightConstraint.constant = 0
 
         bottomButtonsView.hidden = false
+        NSLayoutConstraint.deactivateConstraints([bottomViewWordsPaddingContraint])
+        dismissKeyboard()
+
+        UIView.setAnimationsEnabled(true)
 
         wordsTableView.updateMessage(message)
 
         showResult()
-
-        dismissKeyboard()
 
         isOvered = true
 

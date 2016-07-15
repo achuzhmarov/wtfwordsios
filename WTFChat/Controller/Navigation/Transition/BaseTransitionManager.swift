@@ -10,6 +10,8 @@ class BaseTransitionManager: UIPercentDrivenInteractiveTransition,
     var fromView: UIView!
     var toView: UIView!
 
+    var animationDuration = 0.5
+
     private var transitionContext: UIViewControllerContextTransitioning!
 
     var externalCompletionHandler: (() -> Void)?
@@ -80,7 +82,7 @@ class BaseTransitionManager: UIPercentDrivenInteractiveTransition,
 
     // return how many seconds the transiton animation will take
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
-        return 0.5
+        return animationDuration
     }
 
     // MARK: UIViewControllerTransitioningDelegate protocol methods
