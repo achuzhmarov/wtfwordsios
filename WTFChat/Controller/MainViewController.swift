@@ -14,7 +14,6 @@ class MainViewController: BaseUIViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let toViewController = segue.destinationViewController as? SingleModeViewController {
-            //toViewController.transitioningDelegate = self.transitionManager
             toViewController.handleOffstagePanComputer = self.transitionManager.handleOffstagePan
             transitionManager.unwindSegue = toViewController.unwindSegue
         }

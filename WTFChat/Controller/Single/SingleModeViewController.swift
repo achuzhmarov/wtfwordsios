@@ -8,7 +8,6 @@ class SingleModeViewController: BaseUIViewController {
     @IBOutlet weak var exitGesture: UIGestureRecognizer!
 
     private let PageControlAdditionalPadding: CGFloat = 8
-    private let DECIPHER_SEGUE_ID = "showDecipher"
 
     var handleOffstagePanComputer: ((pan: UIPanGestureRecognizer) -> Void)?
 
@@ -17,8 +16,6 @@ class SingleModeViewController: BaseUIViewController {
     private var currentCipherView: CipherViewController?
 
     private let cipherTypes = CipherType.getAll()
-
-    private var messageForDecipher: Message?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,9 +49,6 @@ class SingleModeViewController: BaseUIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let cipherPageViewController = segue.destinationViewController as? CipherPageViewController {
             self.cipherPageViewController = cipherPageViewController
-        } else if segue.identifier == DECIPHER_SEGUE_ID {
-            let targetController = segue.destinationViewController as! SingleDecipherViewController
-            targetController.message = messageForDecipher
         }
     }
 
@@ -64,14 +58,6 @@ class SingleModeViewController: BaseUIViewController {
 
     func handleOffstagePan(pan: UIPanGestureRecognizer) {
         handleOffstagePanComputer?(pan: pan)
-    }
-
-    @IBAction func startDecipher(segue:UIStoryboardSegue) {
-        if let levelPreviewViewController = segue.sourceViewController as? LevelPreviewViewController {
-            messageForDecipher = levelPreviewViewController.message
-            levelPreviewViewController.dismissViewControllerAnimated(false, completion: nil)
-            self.performSegueWithIdentifier(DECIPHER_SEGUE_ID, sender: self)
-        }
     }
 
     @IBAction func backToCiphers(segue:UIStoryboardSegue) {

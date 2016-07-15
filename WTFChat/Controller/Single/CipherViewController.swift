@@ -20,12 +20,17 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
     var cipherViewAppearedNotifier: CipherViewAppearedNotifier?
 
     private let LEVEL_PREVIEW_SEGUE_ID = "showLevelPreview"
+    private let DECIPHER_SEGUE_ID = "showDecipher"
     private let LVL_CELL_SPACING: CGFloat = 10.0
     private let LVL_VIEW_WIDTH_PADDING: CGFloat = 8.0 * 2
     private let VERTICAL_PADDING: CGFloat = 20 + 16
 
     private let cipherTypes = CipherType.getAll()
     private var selectedLevel: Level?
+    private var messageForDecipher: Message?
+
+    private let modalTransitionManager = FadeTransitionManager()
+    private let topDownTransitionManager = TopDownTransitionManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +59,12 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
         if segue.identifier == LEVEL_PREVIEW_SEGUE_ID {
             let targetController = segue.destinationViewController as! LevelPreviewViewController
             targetController.level = selectedLevel
+            targetController.transitioningDelegate = modalTransitionManager
+
+        }  else if segue.identifier == DECIPHER_SEGUE_ID {
+            let targetController = segue.destinationViewController as! SingleDecipherViewController
+            targetController.message = messageForDecipher
+            targetController.transitioningDelegate = topDownTransitionManager
         }
     }
 
@@ -96,5 +107,19 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
     private func getCurrentCategory() -> SingleModeCategory {
         let cipherType = cipherTypes[activeCipherIndex]
         return singleModeCategoryService.getCategory(cipherType)!
+    }
+
+    @IBAction func startDecipher(segue:UIStoryboardSegue) {
+        if let levelPreviewViewController = segue.sourceViewController as? LevelPreviewViewController {
+            messageForDecipher = levelPreviewViewController.message
+
+            modalTransitionManager.externalCompletionHandler = {
+                self.performSegueWithIdentifier(self.DECIPHER_SEGUE_ID, sender: self)
+            }
+        }
+    }
+
+    @IBAction func backToNextLevel(segue:UIStoryboardSegue) {
+
     }
 }

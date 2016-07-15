@@ -24,4 +24,9 @@ class SingleDecipherViewController: BaseDecipherViewController {
             self.expGainView.runProgress(message.exp)
         }*/
     }
+
+    @IBAction func backTapped(sender: AnyObject) {
+        self.presentingViewController!.view.hidden = true
+        self.presentingViewController!.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+    }
 }

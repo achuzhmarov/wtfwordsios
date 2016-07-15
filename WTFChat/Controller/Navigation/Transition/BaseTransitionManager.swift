@@ -12,6 +12,8 @@ class BaseTransitionManager: UIPercentDrivenInteractiveTransition,
 
     private var transitionContext: UIViewControllerContextTransitioning!
 
+    var externalCompletionHandler: (() -> Void)?
+
     // MARK: UIViewControllerAnimatedTransitioning protocol methods
 
     // animate a change from one viewcontroller to another
@@ -60,14 +62,20 @@ class BaseTransitionManager: UIPercentDrivenInteractiveTransition,
         // tell our transitionContext object that we've finished animating
         if(transitionContext.transitionWasCancelled()){
             transitionContext.completeTransition(false)
-            // bug: we have to manually add our 'to view' back http://openradar.appspot.com/radar?id=5320103646199808
+
+            // bug: we have to manually add our 'from view' back http://openradar.appspot.com/radar?id=5320103646199808
             UIApplication.sharedApplication().keyWindow!.addSubview(fromView)
         }
         else {
             transitionContext.completeTransition(true)
+
             // bug: we have to manually add our 'to view' back http://openradar.appspot.com/radar?id=5320103646199808
             UIApplication.sharedApplication().keyWindow!.addSubview(toView)
         }
+
+        //oneTime use only
+        externalCompletionHandler?()
+        externalCompletionHandler = nil
     }
 
     // return how many seconds the transiton animation will take

@@ -29,14 +29,12 @@ class LevelPreviewViewController: UIViewController {
     private var messageText: String!
     private var messageCategory: TextCategory!
 
-    private let transitionManager = FadeTransitionManager()
-
     private var gradientLayer: CAGradientLayer?
+
+    private let modalTransitionManager = FadeTransitionManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.transitioningDelegate = transitionManager
 
         messageWordsView.dataSource = messageWordsView
         messageWordsView.delegate = messageWordsView
@@ -103,8 +101,6 @@ class LevelPreviewViewController: UIViewController {
 
     private func updateMessagePreview() {
         messageWordsView.setNewMessage(message)
-
-        //textPreviewLabel.text = message.text()
     }
 
     private func updateSelectedDifficultyInGUI() {
@@ -132,16 +128,11 @@ class LevelPreviewViewController: UIViewController {
         }
     }
 
-    @IBAction func backToNextLevel(segue:UIStoryboardSegue) {
-
-    }
-
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == DECIPHER_SEGUE_ID {
             let targetController = segue.destinationViewController as! SingleDecipherViewController
             targetController.message = message
-
-            self.dismissViewControllerAnimated(true, completion: nil)
+            targetController.transitioningDelegate = modalTransitionManager
         }
     }
 }

@@ -131,6 +131,7 @@
 		3E37CC9F6175F2C1C7605DC8 /* WordsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CEC9575B52D804AFFD17 /* WordsField.swift */; };
 		3E37CCC601BAF12B31AA3FA4 /* NavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C949EF6B581125DDEFA0 /* NavigationControllerDelegate.swift */; };
 		3E37CCC79CCB88CE22EBC0D1 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE7F2302746304A4DB4D /* UIView+Extension.swift */; };
+		3E37CCCEEE0EB4792716BB5D /* TopDownTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE25D37CBCEF4F8B3EB5 /* TopDownTransitionManager.swift */; };
 		3E37CCD10CCDC3AFF402D48E /* ExpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C45E28B9FC22DDA15406 /* ExpService.swift */; };
 		3E37CCDF07BF1A4334EAC5DA /* NameEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C2D873FA507A19AD8B4E /* NameEditViewController.swift */; };
 		3E37CCE6BCAC93E1CA45166D /* TutorialSendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C153F3D2B31763619A6D /* TutorialSendMessageViewController.swift */; };
@@ -331,6 +332,7 @@
 		3E37CE047F561F77F917AC33 /* MessageNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageNetworkService.swift; sourceTree = "<group>"; };
 		3E37CE11FB42D287E2CBBC28 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		3E37CE1FEB6473D153DA3909 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		3E37CE25D37CBCEF4F8B3EB5 /* TopDownTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopDownTransitionManager.swift; sourceTree = "<group>"; };
 		3E37CE3CB1F5474963443512 /* SingleModeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleModeViewController.swift; sourceTree = "<group>"; };
 		3E37CE4C5020ACF6542CC3C0 /* RatingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
 		3E37CE6082F2F1A3F3447039 /* MessageCipherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCipherService.swift; sourceTree = "<group>"; };
@@ -571,6 +573,7 @@
 				3E37C61DFE53A61DD4EE8686 /* PanTransitionManager.swift */,
 				3E37C055C2030CF9CB938BF4 /* FadeTransitionManager.swift */,
 				3E37CED9042DF857125F0842 /* BaseTransitionManager.swift */,
+				3E37CE25D37CBCEF4F8B3EB5 /* TopDownTransitionManager.swift */,
 			);
 			path = Transition;
 			sourceTree = "<group>";
@@ -1271,6 +1274,7 @@
 				3E37CD8522D9563A6AF14675 /* FadeTransitionManager.swift in Sources */,
 				3E37CD9A0F03B8D2327EEF66 /* BaseTransitionManager.swift in Sources */,
 				3E37CCC601BAF12B31AA3FA4 /* NavigationControllerDelegate.swift in Sources */,
+				3E37CCCEEE0EB4792716BB5D /* TopDownTransitionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
