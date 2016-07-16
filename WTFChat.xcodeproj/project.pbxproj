@@ -67,6 +67,7 @@
 		3E37C4B39DAC6C3A9C09222D /* ServiceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CB627C8C45BBD8C82592 /* ServiceInitializer.swift */; };
 		3E37C4B5D4BF98ED40A2C130 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF47929B32484447BAE2 /* UIImage+Extension.swift */; };
 		3E37C5061E1B18C7DD11DC3E /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CFEEAC9762C3361A9C50 /* Weak.swift */; };
+		3E37C514BB2B04E4B824DF8A /* StopImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C2D1E0401C16DCF763EC /* StopImage.swift */; };
 		3E37C548C008F4F4535FF9DD /* SingleMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C174D58D33F0F69B5070 /* SingleMessageCell.swift */; };
 		3E37C556299DA54151F82083 /* HintsShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CEAFAD5645723457C239 /* HintsShopViewController.swift */; };
 		3E37C5632ECD4344FDE27FAA /* UserNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C391067751E01AB11640 /* UserNetworkService.swift */; };
@@ -226,6 +227,7 @@
 		3E37C26F571173D1A34B84C0 /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		3E37C27838218C4F22B21722 /* NSError+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Extension.swift"; sourceTree = "<group>"; };
 		3E37C283CC6663C54ADE8296 /* CoreDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		3E37C2D1E0401C16DCF763EC /* StopImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopImage.swift; sourceTree = "<group>"; };
 		3E37C2D873FA507A19AD8B4E /* NameEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameEditViewController.swift; sourceTree = "<group>"; };
 		3E37C30F426379E0470AF162 /* Cipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cipher.swift; sourceTree = "<group>"; };
 		3E37C320AE4961869792586B /* IosNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IosNetworkService.swift; sourceTree = "<group>"; };
@@ -526,6 +528,7 @@
 			children = (
 				3E37C5AA6581A96B2546C466 /* StarImage.swift */,
 				3E37CBA4DD18B422E8A274EF /* ArrowImage.swift */,
+				3E37C2D1E0401C16DCF763EC /* StopImage.swift */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1275,6 +1278,7 @@
 				3E37CD9A0F03B8D2327EEF66 /* BaseTransitionManager.swift in Sources */,
 				3E37CCC601BAF12B31AA3FA4 /* NavigationControllerDelegate.swift in Sources */,
 				3E37CCCEEE0EB4792716BB5D /* TopDownTransitionManager.swift in Sources */,
+				3E37C514BB2B04E4B824DF8A /* StopImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

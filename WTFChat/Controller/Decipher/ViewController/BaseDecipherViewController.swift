@@ -24,7 +24,7 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
     @IBOutlet weak var bottomViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewWordsPaddingContraint: NSLayoutConstraint!
 
-    @IBOutlet weak var timerViewHeightContraint: NSLayoutConstraint!
+    @IBOutlet weak var topPaddingConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var resultViewHeightConstraint: NSLayoutConstraint!
 
@@ -47,15 +47,15 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
     var expGainView = ExpGainView()
 
     var isInLandscapeMode = false
-    var initialTopViewHeightConstraintConstant: CGFloat = 0
+    var initialTopPaddingConstraintConstant: CGFloat = 0
 
     var resultViewHeightConstraintConstant: CGFloat = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initialTopViewHeightConstraintConstant = timerViewHeightContraint.constant
         resultViewHeightConstraintConstant = resultViewHeightConstraint.constant
+        initialTopPaddingConstraintConstant = topPaddingConstraint.constant
 
         let nav = self.navigationController?.navigationBar
         nav?.translucent = false
@@ -213,25 +213,18 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
     func rotated(notification: NSNotification) {
         if (UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
             if (!isInLandscapeMode) {
+                isInLandscapeMode = true
                 redrawWordsView()
-
-                if (!isOvered) {
-                    hideTopTimer()
-                }
+                layoutTopView()
             }
-
-            isInLandscapeMode = true
-
         } else if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
             if (isInLandscapeMode) {
+                isInLandscapeMode = false
                 redrawWordsView()
-
-                if (!isOvered) {
-                    showTopTimer()
-                }
+                layoutTopView()
             }
 
-            isInLandscapeMode = false
+
         }
     }
 
@@ -269,18 +262,16 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
         self.wordsTableView.setNewMessage(message, useCipherText: useCipherText, selfAuthor: selfAuthor)
     }
 
-    private func hideTopTimer() {
-        timerViewHeightContraint.constant = 0
-        topTimerLabel.text = ""
-
-        if (isStarted) {
-            self.title = timer.getTimeString()
+    private func layoutTopView() {
+        if (isOvered) {
+            return
         }
-    }
 
-    private func showTopTimer() {
-        timerViewHeightContraint.constant = initialTopViewHeightConstraintConstant
-        topTimerLabel.text = timer.getTimeString()
+        if (isInLandscapeMode) {
+            topPaddingConstraint.constant = 4
+        } else {
+            topPaddingConstraint.constant = initialTopPaddingConstraintConstant
+        }
     }
 
     func start() {
@@ -292,11 +283,7 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
             timer.seconds = message.timerSecs
         }
 
-        if (isInLandscapeMode) {
-            hideTopTimer()
-        } else {
-            showTopTimer()
-        }
+        layoutTopView()
 
         NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
                 selector: #selector(DecipherViewController.tick), userInfo: nil, repeats: false)
@@ -328,11 +315,7 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
 
         timer.tick()
 
-        if (isInLandscapeMode) {
-            self.title = timer.getTimeString()
-        } else {
-            topTimerLabel.text = timer.getTimeString()
-        }
+        topTimerLabel.text = timer.getTimeString()
 
         if (timer.isFinished()) {
             dispatch_async(dispatch_get_main_queue(), {
@@ -362,6 +345,8 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
 
         bottomView.hidden = true
         bottomViewHeightConstraint.constant = 0
+
+        topPaddingConstraint.constant = initialTopPaddingConstraintConstant
 
         bottomButtonsView.hidden = false
         NSLayoutConstraint.deactivateConstraints([bottomViewWordsPaddingContraint])
@@ -401,31 +386,16 @@ class BaseDecipherViewController: BaseUIViewController, HintComputer, UITextFiel
     }
 
     func showExpView() {
-        //init exp gain
+        //TODO - What to do with existing layer? Maybe add another for exp?
         timer.seconds = 0
         topTimerLabel.text = ""
-        timerViewHeightContraint.constant = initialTopViewHeightConstraintConstant
-        self.expGainView.initView(self.timerView)
 
-        /*if message.hasSuccessWords() {
-            //init exp gain
-            timer.seconds = 0
-            topTimerLabel.text = ""
-            topViewHeightContraint.constant = initialTopViewHeightConstraintConstant
-            self.expGainView.initView(self.topView)
-        } else {
-            self.hideTopLayer()
-        }*/
+        //init exp gain
+        self.expGainView.initView(self.timerView)
     }
 
     func hideTopLayer() {
-        timer.seconds = 0
-        topTimerLabel.text = ""
-
-        timerViewHeightContraint.constant = 0
-
-        self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
+        //TODO - add when needed
     }
 
     func setViewOnlyStage() {
