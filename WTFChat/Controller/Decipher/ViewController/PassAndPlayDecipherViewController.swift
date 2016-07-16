@@ -1,6 +1,6 @@
 import Foundation
 
-class PassAndPlayDecipherViewController: BaseDecipherViewController {
+class PassAndPlayDecipherViewController: DecipherViewController {
     private let coreMessageService: CoreMessageService = serviceLocator.get(CoreMessageService)
 
     private let WORDS_FOR_HINT = 5

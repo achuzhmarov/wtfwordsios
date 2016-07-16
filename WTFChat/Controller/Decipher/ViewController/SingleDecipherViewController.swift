@@ -1,6 +1,6 @@
 import Foundation
 
-class SingleDecipherViewController: BaseDecipherViewController {
+class SingleDecipherViewController: DecipherViewController {
     private let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
 
     override func viewDidLoad() {

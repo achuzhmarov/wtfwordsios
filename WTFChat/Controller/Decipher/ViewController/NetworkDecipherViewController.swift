@@ -1,14 +1,6 @@
-//
-//  DecipherViewController.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 07/09/15.
-//  Copyright (c) 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import UIKit
 
-class DecipherViewController: BaseDecipherViewController {
+class NetworkDecipherViewController: DecipherViewController {
     private let messageService: MessageService = serviceLocator.get(MessageService)
 
     override func viewDidLoad() {
