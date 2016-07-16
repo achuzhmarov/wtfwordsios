@@ -1,11 +1,14 @@
 import Foundation
 
 class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
-    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
-    private let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
-    private let audioService: AudioService = serviceLocator.get(AudioService)
+    let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
+    let audioService: AudioService = serviceLocator.get(AudioService)
 
     @IBOutlet weak var topTimerLabel: UILabel!
+    @IBOutlet weak var topCategoryLabel: UILabel!
+    @IBOutlet weak var topStopImage: UIImageView!
+
     @IBOutlet weak var resultLabel: RoundedLabel!
 
     @IBOutlet weak var startView: UIView!
@@ -64,8 +67,14 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DecipherViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DecipherViewController.rotated(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
 
-        let tapView: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherViewController.viewTapped))
-        wordsTableView.addGestureRecognizer(tapView)
+        let wordsTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherViewController.viewTapped))
+        wordsTableView.addGestureRecognizer(wordsTap)
+
+        let giveUpTimerTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherViewController.giveUpButtonPressed))
+        topTimerLabel.addGestureRecognizer(giveUpTimerTap)
+
+        let giveUpImageTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherViewController.giveUpButtonPressed))
+        topStopImage.addGestureRecognizer(giveUpImageTap)
 
         startView?.hidden = false
         bottomView.hidden = true
@@ -82,6 +91,12 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
         view.setNeedsLayout()
         view.layoutIfNeeded()
 
+        if (view.frame.width > view.frame.height) {
+            isInLandscapeMode = true
+        } else {
+            isInLandscapeMode = false
+        }
+
         wordsTableView.hintComputer = self
 
         self.wordsTableView.delegate = self.wordsTableView
@@ -94,6 +109,19 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
         self.initialViewFrame = self.view.frame
 
         calcInitialHints()
+        updateTimer()
+
+        layoutTopView()
+    }
+
+    private func updateTimer() {
+        if (message.guessIsNotStarted()) {
+            timer.seconds = messageCipherService.getTimerSeconds(message)
+        } else {
+            timer.seconds = message.timerSecs
+        }
+
+        topTimerLabel.text = timer.getTimeString()
     }
 
     deinit {
@@ -106,7 +134,7 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
         isPaused = false
     }
 
-    override func viewDidAppear(animated: Bool) {
+    /*override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
         if (UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
@@ -114,7 +142,7 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
         } else if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
             isInLandscapeMode = false
         }
-    }
+    }*/
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
@@ -222,7 +250,7 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
 
-    private func changeCipherStateForViewOnly() {
+    func changeCipherStateForViewOnly() {
         useCipherText = !useCipherText
         self.wordsTableView.setNewMessage(message, useCipherText: useCipherText, selfAuthor: selfAuthor)
     }
@@ -244,126 +272,6 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
         }
     }
 
-    func start() {
-        self.navigationItem.setHidesBackButton(true, animated:true)
-
-        if (message.guessIsNotStarted()) {
-            timer.seconds = messageCipherService.getTimerSeconds(message)
-        } else {
-            timer.seconds = message.timerSecs
-        }
-
-        layoutTopView()
-
-        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
-                selector: #selector(DecipherViewController.tick), userInfo: nil, repeats: false)
-
-        bottomView.hidden = false
-        topTimerLabel.hidden = false
-        wordsTableView.hidden = false
-
-        startView?.removeFromSuperview()
-
-        wordsTableView.updateMessage(message)
-
-        guessTextField.becomeFirstResponder()
-
-        isStarted = true
-    }
-
-    func tick() {
-        if (isOvered) {
-            return
-        }
-
-        if (isPaused) {
-            NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
-                    selector: #selector(DecipherViewController.tick), userInfo: nil, repeats: false)
-
-            return
-        }
-
-        timer.tick()
-
-        topTimerLabel.text = timer.getTimeString()
-
-        if (timer.isFinished()) {
-            dispatch_async(dispatch_get_main_queue(), {
-                self.gameOver()
-            })
-        } else {
-            NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
-                    selector: #selector(DecipherViewController.tick), userInfo: nil, repeats: false)
-
-            if (timer.isRunningOfTime()) {
-                topTimerLabel.textColor = UIColor.redColor()
-
-                UIView.animateWithDuration(0.5, delay: 0,
-                        options: [.Autoreverse, .Repeat, .AllowUserInteraction], animations: {
-                    self.topTimerLabel.alpha = 0.1
-                }, completion: nil)
-            } else if (timer.isLastSecond()) {
-                topTimerLabel.layer.removeAllAnimations()
-                topTimerLabel.alpha = 1
-            }
-        }
-    }
-
-    func gameOver() {
-        messageCipherService.failed(message)
-        message.timerSecs = timer.seconds
-
-        bottomView.hidden = true
-        bottomViewHeightConstraint.constant = 0
-
-        topPaddingConstraint.constant = initialTopPaddingConstraintConstant
-
-        bottomButtonsView.hidden = false
-        NSLayoutConstraint.deactivateConstraints([bottomViewWordsPaddingContraint])
-        dismissKeyboard()
-
-        UIView.setAnimationsEnabled(true)
-
-        wordsTableView.updateMessage(message)
-
-        showResult()
-
-        isOvered = true
-
-        showExpView()
-
-        sendMessageDecipher()
-
-        navigationItem.rightBarButtonItem = nil
-    }
-
-    private func showResult() {
-        resultView.hidden = false
-        resultViewHeightConstraint.constant = resultViewHeightConstraintConstant
-
-        resultLabel.layer.cornerRadius = 12
-        resultLabel.textColor = Color.Text
-
-        if (message.getMessageStatus() == .Success) {
-            resultLabel.text = SUCCESS_TEXT
-            resultLabel.addGradientToLabel(Gradient.Success)
-            audioService.playSound("win")
-        } else {
-            resultLabel.text = FAILED_TEXT
-            resultLabel.addGradientToLabel(Gradient.Failed)
-            audioService.playSound("lose")
-        }
-    }
-
-    func showExpView() {
-        //TODO - What to do with existing layer? Maybe add another for exp?
-        timer.seconds = 0
-        topTimerLabel.text = ""
-
-        //init exp gain
-        self.expGainView.initView(self.timerView)
-    }
-
     func hideTopLayer() {
         //TODO - add when needed
     }
@@ -382,7 +290,7 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
         isOvered = true
     }
 
-    private func updateMessage() {
+    func updateMessage() {
         if (isOvered) {
             return
         }

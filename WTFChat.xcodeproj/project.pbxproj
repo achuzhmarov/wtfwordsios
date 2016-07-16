@@ -66,6 +66,7 @@
 		3E37C4A65CAA433F21B331CD /* SingleMessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF45362C75741955A6F2 /* SingleMessageService.swift */; };
 		3E37C4B39DAC6C3A9C09222D /* ServiceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CB627C8C45BBD8C82592 /* ServiceInitializer.swift */; };
 		3E37C4B5D4BF98ED40A2C130 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF47929B32484447BAE2 /* UIImage+Extension.swift */; };
+		3E37C4F3AC2B62A932C9B8C1 /* DecipherViewController+Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CFEB8410D279912DF8BC /* DecipherViewController+Game.swift */; };
 		3E37C5061E1B18C7DD11DC3E /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CFEEAC9762C3361A9C50 /* Weak.swift */; };
 		3E37C514BB2B04E4B824DF8A /* StopImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C2D1E0401C16DCF763EC /* StopImage.swift */; };
 		3E37C548C008F4F4535FF9DD /* SingleMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C174D58D33F0F69B5070 /* SingleMessageCell.swift */; };
@@ -361,6 +362,7 @@
 		3E37CF6963D91364EF83A207 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		3E37CF958614B2A9CDBCC806 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		3E37CFDFD39EB65F6E0470F0 /* warning.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = warning.wav; sourceTree = "<group>"; };
+		3E37CFEB8410D279912DF8BC /* DecipherViewController+Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DecipherViewController+Game.swift"; sourceTree = "<group>"; };
 		3E37CFEEAC9762C3361A9C50 /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		481BDD981C58FE5D00ABD558 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		483676481C2048200092C703 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -772,6 +774,7 @@
 				3E37C7669C3130760DBC69CD /* SingleDecipherViewController.swift */,
 				3E37C1492DBCD215B040B6DA /* PassAndPlayDecipherViewController.swift */,
 				3E37C38A3A2F07E690380CFA /* DecipherViewController+Hints.swift */,
+				3E37CFEB8410D279912DF8BC /* DecipherViewController+Game.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1283,6 +1286,7 @@
 				3E37CCCEEE0EB4792716BB5D /* TopDownTransitionManager.swift in Sources */,
 				3E37C514BB2B04E4B824DF8A /* StopImage.swift in Sources */,
 				3E37CB9C08788D889AEDDDC4 /* DecipherViewController+Hints.swift in Sources */,
+				3E37C4F3AC2B62A932C9B8C1 /* DecipherViewController+Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

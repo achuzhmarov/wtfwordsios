@@ -2,9 +2,14 @@ import Foundation
 
 class SingleDecipherViewController: DecipherViewController {
     private let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
+    private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let singleMessage = message as! SingleMessage
+        let messageCategory = singleMessageService.getTextCategoryForLevel(singleMessage.level)
+        topCategoryLabel.text = messageCategory.title
 
         start()
     }

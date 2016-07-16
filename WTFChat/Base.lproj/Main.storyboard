@@ -2855,30 +2855,6 @@
                                             <constraint firstAttribute="height" constant="25" id="jOx-NM-Zqw"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGg-TS-ZFP">
-                                        <rect key="frame" x="33" y="0.0" width="43" height="27"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZiW-pu-TNb">
-                                        <rect key="frame" x="0.0" y="1" width="25" height="25"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="42" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PT5-O6-bo3">
-                                                <rect key="frame" x="3" y="4" width="19" height="18"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="PT5-O6-bo3" firstAttribute="centerX" secondItem="ZiW-pu-TNb" secondAttribute="centerX" id="BtZ-EP-aLd"/>
-                                            <constraint firstItem="PT5-O6-bo3" firstAttribute="centerY" secondItem="ZiW-pu-TNb" secondAttribute="centerY" id="XIh-tQ-YbJ"/>
-                                            <constraint firstAttribute="height" constant="25" id="eiJ-r6-7r5"/>
-                                            <constraint firstAttribute="width" constant="25" id="ud9-3w-LGE"/>
-                                        </constraints>
-                                    </view>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:32" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4L-D7-KeN">
                                         <rect key="frame" x="476" y="0.0" width="59" height="27"/>
                                         <gestureRecognizers/>
@@ -2886,15 +2862,19 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGg-TS-ZFP">
+                                        <rect key="frame" x="0.0" y="0.0" width="43" height="27"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="ZiW-pu-TNb" firstAttribute="leading" secondItem="irN-JP-MaA" secondAttribute="leading" id="PID-Jf-ghi"/>
                                     <constraint firstItem="IOS-A3-BQL" firstAttribute="centerY" secondItem="irN-JP-MaA" secondAttribute="centerY" id="TlH-KP-1tQ"/>
                                     <constraint firstItem="IOS-A3-BQL" firstAttribute="leading" secondItem="g4L-D7-KeN" secondAttribute="trailing" constant="8" id="WDx-g4-z01"/>
-                                    <constraint firstItem="TGg-TS-ZFP" firstAttribute="leading" secondItem="ZiW-pu-TNb" secondAttribute="trailing" constant="8" id="YB9-aF-W6Z"/>
                                     <constraint firstAttribute="trailing" secondItem="IOS-A3-BQL" secondAttribute="trailing" id="ZD4-aZ-Fon"/>
-                                    <constraint firstItem="ZiW-pu-TNb" firstAttribute="centerY" secondItem="irN-JP-MaA" secondAttribute="centerY" id="fC4-7Y-z1R"/>
                                     <constraint firstAttribute="centerY" secondItem="g4L-D7-KeN" secondAttribute="centerY" id="l6h-xQ-bwp"/>
+                                    <constraint firstItem="TGg-TS-ZFP" firstAttribute="leading" secondItem="irN-JP-MaA" secondAttribute="leading" id="lmi-D9-PCI"/>
                                     <constraint firstItem="TGg-TS-ZFP" firstAttribute="centerY" secondItem="irN-JP-MaA" secondAttribute="centerY" id="n5n-oT-fOB"/>
                                     <constraint firstAttribute="height" constant="27" id="sLg-7P-WF1"/>
                                 </constraints>
@@ -3005,7 +2985,9 @@
                         <outlet property="resultView" destination="hax-hx-WPJ" id="ZWs-iN-3cN"/>
                         <outlet property="resultViewHeightConstraint" destination="P4a-Zk-GdD" id="SzV-ds-52m"/>
                         <outlet property="timerView" destination="irN-JP-MaA" id="Vvi-SP-0Xg"/>
+                        <outlet property="topCategoryLabel" destination="TGg-TS-ZFP" id="DCP-qk-NaZ"/>
                         <outlet property="topPaddingConstraint" destination="oBR-gU-vh6" id="guL-nU-Sxp"/>
+                        <outlet property="topStopImage" destination="IOS-A3-BQL" id="M9F-GB-lKE"/>
                         <outlet property="topTimerLabel" destination="g4L-D7-KeN" id="Noq-ft-Xzj"/>
                         <outlet property="tryButton" destination="asD-ZR-q5d" id="f06-br-HM9"/>
                         <outlet property="wordsTableView" destination="tuq-h9-gT4" id="5He-O1-HGQ"/>
