@@ -9,7 +9,7 @@
 import Foundation
 
 class TutorialDecipherViewController: DecipherViewController {
-    override func viewDidAppear(animated: Bool) {
+    /*override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         if (currentTutorialStage == .ResponseAquired) {
@@ -219,5 +219,5 @@ class TutorialDecipherViewController: DecipherViewController {
             message: "You have used all hints",
             firstButtonTitle: "Ok",
             viewPresenter: self)
-    }
+    }*/
 }

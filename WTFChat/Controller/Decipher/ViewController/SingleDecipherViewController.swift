@@ -1,6 +1,7 @@
 import Foundation
 
 class SingleDecipherViewController: DecipherViewController {
+    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
     private let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
     //private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
     private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
@@ -15,7 +16,7 @@ class SingleDecipherViewController: DecipherViewController {
         singleMessage = message as! SingleMessage
         messageCategory = singleMessageService.getTextCategoryForLevel(singleMessage.level)
 
-        topCategoryLabel.text = messageCategory.title
+        inProgressVC.topCategoryLabel.text = messageCategory.title
 
         start()
     }
@@ -26,10 +27,10 @@ class SingleDecipherViewController: DecipherViewController {
 
     override func sendMessageDecipher() {
         singleModeService.finishDecipher(singleMessage)
-        self.expGainView.runProgress(message.exp)
+        resultVC.expGainView.runProgress(message.exp)
     }
 
-    @IBAction func backTapped(sender: AnyObject) {
+    override func backTapped() {
         let levelPreviewController = self.presentingViewController as! LevelPreviewViewController
         let singleModeViewController = levelPreviewController.presentingViewController!
 
@@ -42,7 +43,7 @@ class SingleDecipherViewController: DecipherViewController {
         }
     }
 
-    @IBAction func continuePressed(sender: AnyObject) {
+    override func continuePressed() {
         if (message.getMessageStatus() == .Failed) {
             restartCurrentLevel()
         } else if let nextLevel = levelService.getNextLevel(singleMessage.level) {
@@ -59,8 +60,6 @@ class SingleDecipherViewController: DecipherViewController {
         message = singleMessageService.getMessageForLevel(
             singleMessage.level, difficulty: selectedDifficulty, text: messageText
         )
-
-        setTimer()
 
         start()
     }

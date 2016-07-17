@@ -1,6 +1,6 @@
 import Foundation
 
-extension DecipherViewController: UITextFieldDelegate {
+extension DecipherInProgressVC: UITextFieldDelegate {
 
     //delegate enterPressed for guessField
     func textFieldShouldReturn(textField: UITextField) -> Bool {   //delegate method

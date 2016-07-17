@@ -1,7 +1,7 @@
 import Foundation
 
 class PassAndPlayDecipherViewController: DecipherViewController {
-    private let coreMessageService: CoreMessageService = serviceLocator.get(CoreMessageService)
+    /*private let coreMessageService: CoreMessageService = serviceLocator.get(CoreMessageService)
 
     private let WORDS_FOR_HINT = 5
 
@@ -26,9 +26,5 @@ class PassAndPlayDecipherViewController: DecipherViewController {
 
     override func sendMessageDecipher() {
         coreMessageService.updateMessage(message as! RemoteMessage)
-    }
-
-    override func showExpView() {
-        hideTopLayer()
-    }
+    }*/
 }

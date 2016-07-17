@@ -1,6 +1,6 @@
 import Foundation
 
-extension DecipherViewController: HintComputer {
+extension DecipherInProgressVC: HintComputer {
     func calcInitialHints() {
         hints = currentUserService.getUserHints() - message.hintsUsed
     }
@@ -9,13 +9,7 @@ extension DecipherViewController: HintComputer {
         hints = currentUserService.getUserHints() - message.hintsUsed
     }
 
-    //HintComputer delegate
     func hintTapped(word: Word) {
-        if (isOvered) {
-            changeCipherStateForViewOnly()
-            return
-        }
-
         if (word.type == WordType.New) {
             if (word.wasCloseTry) {
                 showCloseTryHintConfirm(word)
@@ -61,7 +55,7 @@ extension DecipherViewController: HintComputer {
     }
 
     func useHint(word: Word) {
-        if (isOvered) {
+        if (message.getMessageStatus() != .Ciphered) {
             return
         }
 

@@ -171,7 +171,7 @@ class ExpGainView: NSObject {
         }
     }
 
-    func removeView() {
+    func clearView() {
         progressView?.removeFromSuperview()
         expLabel?.removeFromSuperview()
         lvlLabel?.removeFromSuperview()

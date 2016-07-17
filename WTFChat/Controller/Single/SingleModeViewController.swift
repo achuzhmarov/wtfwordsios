@@ -22,7 +22,7 @@ class SingleModeViewController: BaseUIViewController {
 
         configurePageControl()
 
-        cipherPageViewController.view.backgroundColor = UIColor.clearColor()
+        //cipherPageViewController.view.backgroundColor = UIColor.clearColor()
 
         exitGesture.addTarget(self, action: #selector(SingleModeViewController.handleOffstagePan(_:)))
 

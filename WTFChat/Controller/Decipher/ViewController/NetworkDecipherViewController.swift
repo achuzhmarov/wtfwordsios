@@ -1,7 +1,7 @@
 import UIKit
 
 class NetworkDecipherViewController: DecipherViewController {
-    private let messageService: MessageService = serviceLocator.get(MessageService)
+    /*private let messageService: MessageService = serviceLocator.get(MessageService)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,7 @@ class NetworkDecipherViewController: DecipherViewController {
         }
     }
 
-    /*override func viewTapped() {
+    override func viewTapped() {
         super.viewTapped()
 
         if (!isStarted) {

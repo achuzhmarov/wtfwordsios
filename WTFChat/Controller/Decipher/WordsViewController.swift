@@ -70,7 +70,9 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
             
             let verticalConstraint = wordContainer.getVerticalConstraint(cell.contentView)
             cell.contentView.addConstraint(verticalConstraint)
-            
+
+            cell.selectionStyle = .None
+
             previousContainer = wordContainer
         }
         
