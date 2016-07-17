@@ -134,8 +134,6 @@ class DecipherInProgressVC: UIViewController {
     }
 
     func start() {
-        setTimer()
-
         NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
                 selector: #selector(DecipherInProgressVC.tick), userInfo: nil, repeats: false)
 
@@ -145,6 +143,10 @@ class DecipherInProgressVC: UIViewController {
     }
 
     func tick() {
+        if (message.getMessageStatus() != .Ciphered) {
+            return
+        }
+
         if (isPaused) {
             NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
                     selector: #selector(DecipherInProgressVC.tick), userInfo: nil, repeats: false)

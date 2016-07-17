@@ -2824,7 +2824,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <action selector="guessTextChanged:" destination="xNb-Jc-w6b" eventType="valueChanged" id="9U3-ej-GtJ"/>
+                                            <action selector="guessTextChanged:" destination="xNb-Jc-w6b" eventType="editingChanged" id="jsI-EZ-9lf"/>
                                         </connections>
                                     </textField>
                                 </subviews>

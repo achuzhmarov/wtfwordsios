@@ -18,7 +18,7 @@ class DecipherViewController: BaseUIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        resultVC.view.hidden = true
+        resultContainer.hidden = true
 
         inProgressVC.initView(message)
     }
@@ -36,6 +36,7 @@ class DecipherViewController: BaseUIViewController {
         resultContainer.hidden = true
         view.bringSubviewToFront(inProgressContainer)
 
+        inProgressVC.initView(message)
         inProgressVC.start()
 
         UIView.setAnimationsEnabled(true)
@@ -64,7 +65,7 @@ class DecipherViewController: BaseUIViewController {
 
         resultContainer.alpha = 0
 
-        UIView.animateWithDuration(0.3, delay: 0,
+        UIView.animateWithDuration(0.5, delay: 0,
                 options: [], animations: {
             self.resultContainer.alpha = 1
         }, completion: nil)
