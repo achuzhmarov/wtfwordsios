@@ -48,9 +48,6 @@ class DecipherInProgressVC: UIViewController {
         let giveUpImageTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherInProgressVC.giveUpPressed))
         topStopImage.addGestureRecognizer(giveUpImageTap)
 
-        view.setNeedsLayout()
-        view.layoutIfNeeded()
-
         wordsTableView.hintComputer = self
         wordsTableView.delegate = wordsTableView
         wordsTableView.dataSource = wordsTableView
@@ -68,6 +65,7 @@ class DecipherInProgressVC: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+
         isPaused = false
     }
 

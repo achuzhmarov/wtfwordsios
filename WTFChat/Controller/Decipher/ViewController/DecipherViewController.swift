@@ -18,6 +18,9 @@ class DecipherViewController: BaseUIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
+
         resultContainer.hidden = true
 
         inProgressVC.initView(message)
