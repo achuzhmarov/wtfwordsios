@@ -2878,6 +2878,7 @@
                         <outlet property="topTimerLabel" destination="g4L-D7-KeN" id="WpF-4G-oeu"/>
                         <outlet property="tryButton" destination="asD-ZR-q5d" id="QCs-tK-zA9"/>
                         <outlet property="wordsTableView" destination="tuq-h9-gT4" id="IZg-Sj-rBP"/>
+                        <outlet property="wordsViewHorizontalConstraint" destination="A4l-D1-IA5" id="ojg-IE-mwZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2of-sz-XmD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2993,6 +2994,7 @@
                         <outlet property="levelView" destination="lWW-ht-I5W" id="JuG-ZV-fUp"/>
                         <outlet property="resultLabel" destination="VnZ-hh-2Sw" id="eNj-u4-Ivt"/>
                         <outlet property="wordsTableView" destination="inO-De-nDi" id="Naw-PR-JaU"/>
+                        <outlet property="wordsViewHorizontalConstraint" destination="J9p-8a-uG6" id="iga-Pr-U9i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y4a-BU-Y4N" userLabel="First Responder" sceneMemberID="firstResponder"/>

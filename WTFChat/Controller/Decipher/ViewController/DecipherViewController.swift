@@ -43,7 +43,7 @@ class DecipherViewController: BaseUIViewController {
 
         inProgressContainer.alpha = 0
 
-        UIView.animateWithDuration(0.3, delay: 0,
+        UIView.animateWithDuration(0.5, delay: 0,
                 options: [], animations: {
             self.inProgressContainer.alpha = 1
         }, completion: nil)

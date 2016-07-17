@@ -264,7 +264,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         return maxWidth
     }
     
-    func updateMaxWidth() {
-        maxWidth = self.bounds.width
+    func updateMaxWidth(width: CGFloat? = nil) {
+        maxWidth = width ?? self.bounds.width
     }
 }

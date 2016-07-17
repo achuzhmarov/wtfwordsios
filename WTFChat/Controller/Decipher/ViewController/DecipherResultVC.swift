@@ -11,6 +11,8 @@ class DecipherResultVC: UIViewController, HintComputer {
 
     @IBOutlet weak var continueButton: UIButton!
 
+    @IBOutlet weak var wordsViewHorizontalConstraint: NSLayoutConstraint!
+
     let SUCCESS_TEXT = "Success"
     let FAILED_TEXT = "Failed"
 
@@ -46,7 +48,17 @@ class DecipherResultVC: UIViewController, HintComputer {
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
 
-        redrawWordsView()
+        if (parent.resultContainer.hidden) {
+            return
+        }
+
+        redrawWordsView(size)
+
+        wordsTableView.alpha = 0
+        UIView.animateWithDuration(0.6, delay: 0,
+                options: [], animations: {
+            self.wordsTableView.alpha = 1
+        }, completion: nil)
     }
 
     func viewTapped() {
@@ -64,12 +76,19 @@ class DecipherResultVC: UIViewController, HintComputer {
     func changeCipherStateForViewOnly() {
         parent.useCipherText = !parent.useCipherText
         wordsTableView.setNewMessage(message, useCipherText: parent.useCipherText, selfAuthor: parent.selfAuthor)
+
+        wordsTableView.alpha = 0
+        UIView.animateWithDuration(0.3, delay: 0,
+                options: [], animations: {
+            self.wordsTableView.alpha = 1
+        }, completion: nil)
     }
 
-    private func redrawWordsView() {
-        wordsTableView.updateMaxWidth()
-        wordsTableView.setNewMessage(message)
-        //wordsTableView.setNewMessage(message, useCipherText: useCipherText, selfAuthor: selfAuthor)
+    private func redrawWordsView(size: CGSize) {
+        let size = size ?? view.frame.size
+
+        wordsTableView.updateMaxWidth(size.width - wordsViewHorizontalConstraint.constant * 2)
+        wordsTableView.setNewMessage(message, useCipherText: parent.useCipherText, selfAuthor: parent.selfAuthor)
     }
 
     func initView(resultMessage: Message) {

@@ -17,6 +17,7 @@ class DecipherInProgressVC: UIViewController {
 
     @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var topPaddingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var wordsViewHorizontalConstraint: NSLayoutConstraint!
 
     var message: Message!
 
@@ -78,8 +79,14 @@ class DecipherInProgressVC: UIViewController {
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
 
-        redrawWordsView()
-        layoutTopView()
+        redrawWordsView(size)
+        layoutTopView(size)
+
+        wordsTableView.alpha = 0
+        UIView.animateWithDuration(0.6, delay: 0,
+                options: [], animations: {
+            self.wordsTableView.alpha = 1
+        }, completion: nil)
     }
 
     func initView(messageToDecipher: Message) {
@@ -103,8 +110,10 @@ class DecipherInProgressVC: UIViewController {
         }
     }
 
-    private func redrawWordsView() {
-        wordsTableView.updateMaxWidth()
+    private func redrawWordsView(size: CGSize? = nil) {
+        let size = size ?? view.frame.size
+
+        wordsTableView.updateMaxWidth(size.width - wordsViewHorizontalConstraint.constant * 2)
         wordsTableView.setNewMessage(message)
     }
 
