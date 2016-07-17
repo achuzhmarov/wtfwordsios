@@ -161,7 +161,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     func createView() {
         rows = WordsField()
         updateViewHelper(rows)
-        rows.showContainers()
+        showContainers(false)
         
         self.reloadData()
     }
@@ -173,9 +173,20 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         rows.clearFromView()
         rows = tempRows
         tempRows = WordsField()
-        rows.showContainers()
+        showContainers()
         
         self.reloadData()
+    }
+
+    private func showContainers(animated: Bool = true) {
+        if (animated) {
+            alpha = 0
+
+            UIView.animateWithDuration(0.3, delay: 0,
+                    options: [], animations: {
+                self.alpha = 1
+            }, completion: nil)
+        }
     }
     
     private func updateViewHelper(targetRows: WordsField) {

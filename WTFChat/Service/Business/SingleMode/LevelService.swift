@@ -18,4 +18,10 @@ class LevelService: Service {
         let previousLevelId = level.id - 1
         return category.getLevelById(previousLevelId)
     }
+
+    func getNextLevel(level: Level) -> Level? {
+        let category = level.category
+        let nextLevelId = level.id + 1
+        return category.getLevelById(nextLevelId)
+    }
 }

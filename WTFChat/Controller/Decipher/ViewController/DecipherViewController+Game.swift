@@ -3,22 +3,47 @@ import Foundation
 extension DecipherViewController {
 
     func start() {
+        bottomButtonsView.hidden = true
+        resultView.hidden = true
+        resultViewHeightConstraint.constant = 0
+        expGainView.removeView()
+
+        NSLayoutConstraint.activateConstraints([bottomViewWordsPaddingContraint])
+
         self.navigationItem.setHidesBackButton(true, animated:true)
 
         NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
                 selector: #selector(DecipherViewController.tick), userInfo: nil, repeats: false)
 
         bottomView.hidden = false
+        bottomViewHeightConstraint.constant = initialBottomViewHeightConstraint
+
         topTimerLabel.hidden = false
-        wordsTableView.hidden = false
+        topStopImage.hidden = false
+        topCategoryLabel.hidden = false
+        //wordsTableView.hidden = false
 
-        startView?.removeFromSuperview()
-
-        wordsTableView.updateMessage(message)
+        wordsTableView.setNewMessage(message)
 
         guessTextField.becomeFirstResponder()
 
+        layoutTopView()
+
         isStarted = true
+        isOvered = false
+
+        UIView.setAnimationsEnabled(true)
+
+        wordsTableView.alpha = 0
+        timerView.alpha = 0
+        bottomView.alpha = 0
+
+        UIView.animateWithDuration(0.3, delay: 0,
+                options: [], animations: {
+            self.wordsTableView.alpha = 1
+            self.timerView.alpha = 1
+            self.bottomView.alpha = 1
+        }, completion: nil)
     }
 
     func tick() {
@@ -84,7 +109,18 @@ extension DecipherViewController {
 
         sendMessageDecipher()
 
-        navigationItem.rightBarButtonItem = nil
+        wordsTableView.alpha = 0
+        timerView.alpha = 0
+        resultView.alpha = 0
+        bottomButtonsView.alpha = 0
+
+        UIView.animateWithDuration(0.3, delay: 0,
+                options: [], animations: {
+            self.wordsTableView.alpha = 1
+            self.timerView.alpha = 1
+            self.resultView.alpha = 1
+            self.bottomButtonsView.alpha = 1
+        }, completion: nil)
     }
 
     func showExpView() {
@@ -108,10 +144,14 @@ extension DecipherViewController {
         if (message.getMessageStatus() == .Success) {
             resultLabel.text = SUCCESS_TEXT
             resultLabel.addGradientToLabel(Gradient.Success)
+            continueButton.setTitle("Continue", forState: .Normal)
+
             audioService.playSound("win")
         } else {
             resultLabel.text = FAILED_TEXT
             resultLabel.addGradientToLabel(Gradient.Failed)
+            continueButton.setTitle("Retry", forState: .Normal)
+
             audioService.playSound("lose")
         }
     }

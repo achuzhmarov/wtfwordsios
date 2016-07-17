@@ -43,7 +43,7 @@ class CipherPickerViewController: UIPickerView, UIPickerViewDataSource, UIPicker
             titleData = cipherDifficulties[row].description
         }
         
-        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Verdana", size: 18.0)!])
+        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont.init(name: "Verdana", size: 18.0)!])
         
         let pickerLabel = UILabel()
         pickerLabel.textAlignment = NSTextAlignment.Center

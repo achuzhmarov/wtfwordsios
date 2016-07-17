@@ -52,14 +52,14 @@ class WordsField {
     func append(wordContainer: WordLabelContainer) {
         rows[rows.count - 1].append(wordContainer)
     }
-    
-    func showContainers() {
+
+    /*func showContainers(animated: Bool = true) {
         for row in rows {
             for wordContainer in row {
-                wordContainer.show()
+                wordContainer.show(animated)
             }
         }
-    }
+    }*/
     
     func getContainerByIndex(index: Int) -> WordLabelContainer? {
         var i = 0

@@ -66,17 +66,28 @@ class SingleModeCategoryService: Service {
             return nil
         }
 
-        var previousCategory = firstCategory
-
-        for category in categories {
-            if (category.cipherType == targetCategory.cipherType) {
-                break
+        for i in 0 ..< categories.count {
+            if (categories[i].cipherType == targetCategory.cipherType) {
+                return categories[i-1]
             }
-
-            previousCategory = category
         }
 
-        return previousCategory
+        return nil
+    }
+
+    func getNextCategory(targetCategory: SingleModeCategory) -> SingleModeCategory? {
+        let lastCategory = categories.last!
+        if targetCategory.cipherType == lastCategory.cipherType {
+            return nil
+        }
+
+        for i in 0 ..< categories.count {
+            if (categories[i].cipherType == targetCategory.cipherType) {
+                return categories[i+1]
+            }
+        }
+
+        return nil
     }
 
     /*func updateSingleModeCategory(category: SingleModeCategory) {

@@ -115,7 +115,8 @@ class ServiceInitializer {
 
         //core based
         serviceLocator.add(
-            singleModeCategoryService
+            singleModeCategoryService,
+            levelService
         )
 
         serviceLocator.add(

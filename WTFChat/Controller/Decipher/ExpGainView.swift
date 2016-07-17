@@ -21,7 +21,7 @@ class ExpGainView: NSObject {
     let lvlTopMargin = CGFloat(8)
     let progressUpdateInterval = 0.1
     let progressUpdateMaxStep = Float(0.125)
-    
+
     func initView(superView: UIView) {
         self.lvlLabel = createLvlLabel(superView, userLvl: currentUserService.getUserLvl())
         self.expLabel = createExpLabel(superView)
@@ -35,7 +35,7 @@ class ExpGainView: NSObject {
         //create gauge view
         let lvlLabel = UILabel()
         lvlLabel.text = "LEVEL \(String(userLvl))"
-        lvlLabel.font = UIFont(name: lvlLabel.font.fontName, size: 14)
+        lvlLabel.font = UIFont.init(name: lvlLabel.font.fontName, size: 14)
         lvlLabel.translatesAutoresizingMaskIntoConstraints = false
         lvlLabel.numberOfLines = 1
         lvlLabel.sizeToFit()
@@ -55,7 +55,7 @@ class ExpGainView: NSObject {
     private func createExpLabel(rootView: UIView) -> UILabel {
         //create gauge view
         let expLabel = UILabel()
-        expLabel.font = UIFont(name: expLabel.font.fontName, size: 14)
+        expLabel.font = UIFont.init(name: expLabel.font.fontName, size: 14)
         expLabel.translatesAutoresizingMaskIntoConstraints = false
         expLabel.numberOfLines = 1
         expLabel.sizeToFit()
@@ -169,5 +169,11 @@ class ExpGainView: NSObject {
                 )
             }
         }
+    }
+
+    func removeView() {
+        progressView?.removeFromSuperview()
+        expLabel?.removeFromSuperview()
+        lvlLabel?.removeFromSuperview()
     }
 }

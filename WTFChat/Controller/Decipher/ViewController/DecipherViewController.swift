@@ -1,6 +1,6 @@
 import Foundation
 
-class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
+class DecipherViewController: BaseUIViewController {
     let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
     let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
     let audioService: AudioService = serviceLocator.get(AudioService)
@@ -20,12 +20,13 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
     @IBOutlet weak var resultView: UIView!
     @IBOutlet weak var guessTextField: UITextField!
     @IBOutlet weak var tryButton: UIButton!
+    @IBOutlet weak var continueButton: UIButton!
 
     @IBOutlet weak var bottomButtonsView: UIView!
 
     @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomViewWordsPaddingContraint: NSLayoutConstraint!
+    @IBOutlet var bottomViewWordsPaddingContraint: NSLayoutConstraint!
 
     @IBOutlet weak var topPaddingConstraint: NSLayoutConstraint!
 
@@ -51,7 +52,7 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
 
     var isInLandscapeMode = false
     var initialTopPaddingConstraintConstant: CGFloat = 0
-
+    var initialBottomViewHeightConstraint: CGFloat = 0
     var resultViewHeightConstraintConstant: CGFloat = 0
 
     override func viewDidLoad() {
@@ -59,6 +60,7 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
 
         resultViewHeightConstraintConstant = resultViewHeightConstraint.constant
         initialTopPaddingConstraintConstant = topPaddingConstraint.constant
+        initialBottomViewHeightConstraint = bottomViewHeightConstraint.constant
 
         let nav = self.navigationController?.navigationBar
         nav?.translucent = false
@@ -75,18 +77,6 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
 
         let giveUpImageTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherViewController.giveUpButtonPressed))
         topStopImage.addGestureRecognizer(giveUpImageTap)
-
-        startView?.hidden = false
-        bottomView.hidden = true
-        topTimerLabel.hidden = true
-        wordsTableView.hidden = true
-        bottomButtonsView.hidden = true
-
-        resultView.hidden = true
-        resultViewHeightConstraint.constant = 0
-
-        isStarted = false
-        isOvered = false
 
         view.setNeedsLayout()
         view.layoutIfNeeded()
@@ -109,12 +99,11 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
         self.initialViewFrame = self.view.frame
 
         calcInitialHints()
-        updateTimer()
-
+        setTimer()
         layoutTopView()
     }
 
-    private func updateTimer() {
+    func setTimer() {
         if (message.guessIsNotStarted()) {
             timer.seconds = messageCipherService.getTimerSeconds(message)
         } else {
@@ -133,16 +122,6 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
 
         isPaused = false
     }
-
-    /*override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-
-        if (UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
-            isInLandscapeMode = true
-        } else if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
-            isInLandscapeMode = false
-        }
-    }*/
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
@@ -170,66 +149,6 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
         }
     }
 
-    //delegate enterPressed for guessField
-    func textFieldShouldReturn(textField: UITextField) -> Bool {   //delegate method
-        tryButtonPressed(tryButton)
-        return true
-    }
-
-    func textFieldDidBeginEditing(textField: UITextField) {   //delegate method
-        UIView.setAnimationsEnabled(false)
-    }
-
-    @IBAction func guessTextChanged(sender: AnyObject) {
-        if (guessTextField.text?.characters.count > 0) {
-            tryButton.enabled = true
-        } else {
-            tryButton.enabled = false
-        }
-    }
-
-    @IBAction func tryButtonPressed(sender: AnyObject) {
-        if (guessTextField.text!.characters.count > 1024) {
-            WTFOneButtonAlert.show("Too many characters",
-                message: "Your guess should be less than 1024 characters",
-                firstButtonTitle: "Ok",
-                viewPresenter: self)
-
-            return
-        }
-
-        messageCipherService.decipher(message, guessText: guessTextField.text!)
-
-        let guessWords = guessTextField.text!.characters.split {$0 == " "}.map { String($0) }
-
-        wordsTableView.updateMessage(message, tries: guessWords)
-        guessTextField.text = ""
-        tryButton.enabled = false
-
-        if (message.deciphered) {
-            gameOver()
-        } else {
-            updateMessage()
-        }
-    }
-
-    func keyboardWillShow(notification: NSNotification) {
-        var info = notification.userInfo!
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
-
-        UIView.setAnimationsEnabled(true)
-
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.bottomViewConstraint.constant = keyboardFrame.size.height
-        })
-    }
-
-    func keyboardWillHide(notification: NSNotification) {
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.bottomViewConstraint.constant = 0
-        })
-    }
-
     func rotated(notification: NSNotification) {
         if (UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
             if (!isInLandscapeMode) {
@@ -246,10 +165,6 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
         }
     }
 
-    func dismissKeyboard(){
-        view.endEditing(true)
-    }
-
     func changeCipherStateForViewOnly() {
         useCipherText = !useCipherText
         self.wordsTableView.setNewMessage(message, useCipherText: useCipherText, selfAuthor: selfAuthor)
@@ -260,7 +175,7 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
         self.wordsTableView.setNewMessage(message, useCipherText: useCipherText, selfAuthor: selfAuthor)
     }
 
-    private func layoutTopView() {
+    func layoutTopView() {
         if (isOvered) {
             return
         }
@@ -279,7 +194,7 @@ class DecipherViewController: BaseUIViewController, UITextFieldDelegate {
     func setViewOnlyStage() {
         startView?.removeFromSuperview()
         wordsTableView.updateMessage(message)
-        wordsTableView.hidden = false
+        //wordsTableView.hidden = false
 
         bottomViewHeightConstraint.constant = 0
         bottomButtonsView.hidden = false

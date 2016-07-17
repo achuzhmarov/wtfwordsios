@@ -33,7 +33,7 @@ class WordLabelContainer {
         label.text = getLabelText()
         
         label.textColor = UIColor.whiteColor()
-        label.font = UIFont(name: label.font.fontName, size: fontSize)
+        label.font = UIFont.init(name: label.font.fontName, size: fontSize)
 
         label.layer.cornerRadius = 8.0
 
@@ -55,7 +55,7 @@ class WordLabelContainer {
         label.translatesAutoresizingMaskIntoConstraints = false
         
         label.numberOfLines = 0
-        label.hidden = true
+        //label.hidden = true
         
         //to use taps for suggestions
         label.userInteractionEnabled = true
@@ -92,16 +92,21 @@ class WordLabelContainer {
     func getWidthWithMargin() -> CGFloat {
         return label.getWidth() + labelHorizontalMargin
     }
-    
-    func show() {
-        label.alpha = 0
+
+    /*func show() {
         label.hidden = false
-        
-        UIView.animateWithDuration(0.5, delay: 0,
-            options: [], animations: {
+
+        if (animated) {
+            label.alpha = 0
+
+            UIView.animateWithDuration(0.3, delay: 0,
+                    options: [], animations: {
                 self.label.alpha = 1
             }, completion: nil)
-    }
+        } else {
+            label.alpha = 1
+        }
+    }*/
     
     func animateWarning() {
         UIView.animateWithDuration(0.3, delay: 0,

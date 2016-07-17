@@ -45,8 +45,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0GV-dn-lgG">
                                             <rect key="frame" x="58" y="9" width="13" height="15"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pH-K1-H7T" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="2" width="12" height="12"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pH-K1-H7T" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="3" width="8" height="12"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -227,7 +227,6 @@
                         <outlet property="lvlCollectionView" destination="mEJ-Vt-nA5" id="Gks-44-i6n"/>
                         <outlet property="normalStarImage" destination="YPY-mH-iMb" id="hKz-0r-JLo"/>
                         <segue destination="kyO-Aw-Bsu" kind="presentation" identifier="showLevelPreview" modalPresentationStyle="overFullScreen" id="Yuw-1e-ypj"/>
-                        <segue destination="I8r-Zw-u53" kind="presentation" identifier="showDecipher" id="UI7-iR-dZ4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6gt-fz-ZxF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -310,7 +309,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x73-uy-YBt">
                                         <rect key="frame" x="46" y="11" width="39" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="30" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3UJ-TB-Npe" customClass="WordsViewController" customModule="WTFChat" customModuleProvider="target">
@@ -2810,8 +2809,8 @@
                                             <constraint firstAttribute="height" constant="1" id="5Hk-nD-fX4"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asD-ZR-q5d">
-                                        <rect key="frame" x="538" y="3" width="54" height="36"/>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asD-ZR-q5d">
+                                        <rect key="frame" x="538" y="2" width="54" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="54" id="Zzn-NM-E4R"/>
                                             <constraint firstAttribute="height" constant="36" id="oaJ-ci-WCp"/>
@@ -2824,8 +2823,8 @@
                                             <action selector="tryButtonPressed:" destination="I8r-Zw-u53" eventType="touchUpInside" id="AGe-Ie-XVx"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your guess here" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ot7-VD-0hV">
-                                        <rect key="frame" x="16" y="6" width="514" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your guess here" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ot7-VD-0hV">
+                                        <rect key="frame" x="16" y="5" width="514" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
@@ -2865,7 +2864,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGg-TS-ZFP">
                                         <rect key="frame" x="0.0" y="0.0" width="43" height="27"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -2893,7 +2892,7 @@
                                             <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="WNR-1L-kva" kind="unwind" unwindAction="backToNextLevel:" id="nvg-af-j1R"/>
+                                            <action selector="continuePressed:" destination="I8r-Zw-u53" eventType="touchUpInside" id="CUr-ON-p6a"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ID-9E-j3b" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
@@ -2927,7 +2926,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Success" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VnZ-hh-2Sw" customClass="RoundedLabel" customModule="WTFChat" customModuleProvider="target">
                                         <rect key="frame" x="237" y="0.0" width="95" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -2980,6 +2979,7 @@
                         <outlet property="bottomViewConstraint" destination="kGk-JK-IBL" id="OVw-te-azo"/>
                         <outlet property="bottomViewHeightConstraint" destination="kSC-je-6U9" id="zon-Qy-Kt0"/>
                         <outlet property="bottomViewWordsPaddingContraint" destination="DqN-tl-TuX" id="701-wY-8rn"/>
+                        <outlet property="continueButton" destination="EaJ-2p-S0u" id="sDk-fr-1HV"/>
                         <outlet property="guessTextField" destination="Ot7-VD-0hV" id="V0j-1Y-MCm"/>
                         <outlet property="resultLabel" destination="VnZ-hh-2Sw" id="1fu-go-lGw"/>
                         <outlet property="resultView" destination="hax-hx-WPJ" id="ZWs-iN-3cN"/>
@@ -2995,7 +2995,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nrv-Nz-Ayt" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="WNR-1L-kva" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3569" y="-456"/>
         </scene>
@@ -3046,7 +3045,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WTFWords" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuN-dm-VSq">
                                 <rect key="frame" x="238" y="169" width="124" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -3078,6 +3077,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Zfz-7X-dGB"/>
-        <segue reference="zYa-nS-c8T"/>
     </inferredMetricsTieBreakers>
 </document>

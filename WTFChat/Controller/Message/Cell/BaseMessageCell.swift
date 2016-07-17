@@ -15,7 +15,7 @@ class BaseMessageCell: UITableViewCell {
         self.selectionStyle = .None;
 
         messageText.textColor = Color.Text
-        messageText.font = UIFont(name: messageText.font.fontName, size: 16)
+        messageText.font = UIFont.init(name: messageText.font.fontName, size: 16)
         messageText.layer.cornerRadius = 10.0
     }
 

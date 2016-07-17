@@ -2,13 +2,19 @@ import Foundation
 
 class SingleDecipherViewController: DecipherViewController {
     private let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
+    //private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
     private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
+    private let levelService: LevelService = serviceLocator.get(LevelService)
+
+    private var singleMessage: SingleMessage!
+    private var messageCategory: TextCategory!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let singleMessage = message as! SingleMessage
-        let messageCategory = singleMessageService.getTextCategoryForLevel(singleMessage.level)
+        singleMessage = message as! SingleMessage
+        messageCategory = singleMessageService.getTextCategoryForLevel(singleMessage.level)
+
         topCategoryLabel.text = messageCategory.title
 
         start()
@@ -19,15 +25,8 @@ class SingleDecipherViewController: DecipherViewController {
     }
 
     override func sendMessageDecipher() {
-        let singleMessage = message as! SingleMessage
-
         singleModeService.finishDecipher(singleMessage)
-
         self.expGainView.runProgress(message.exp)
-
-        /*if (message.exp > 0) {
-            self.expGainView.runProgress(message.exp)
-        }*/
     }
 
     @IBAction func backTapped(sender: AnyObject) {
@@ -41,5 +40,36 @@ class SingleDecipherViewController: DecipherViewController {
         levelPreviewController.dismissViewControllerAnimated(true) {
             singleModeViewController.dismissViewControllerAnimated(true, completion: nil)
         }
+    }
+
+    @IBAction func continuePressed(sender: AnyObject) {
+        if (message.getMessageStatus() == .Failed) {
+            restartCurrentLevel()
+        } else if let nextLevel = levelService.getNextLevel(singleMessage.level) {
+            startNextLevel(nextLevel)
+        } else {
+            chapterFinished()
+        }
+    }
+
+    func restartCurrentLevel() {
+        let selectedDifficulty = currentUserService.getLastSelectedDifficulty()
+        let messageText = messageCategory.getRandomText()
+
+        message = singleMessageService.getMessageForLevel(
+            singleMessage.level, difficulty: selectedDifficulty, text: messageText
+        )
+
+        setTimer()
+
+        start()
+    }
+
+    func startNextLevel(level: Level) {
+        print("nextLevel")
+    }
+
+    func chapterFinished() {
+        print("chapterFinished")
     }
 }
