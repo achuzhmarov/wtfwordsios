@@ -60,6 +60,10 @@ class SingleModeViewController: BaseUIViewController {
         handleOffstagePanComputer?(pan: pan)
     }
 
+    func reloadData() {
+        cipherPageViewController.reloadData()
+    }
+
     @IBAction func backToCiphers(segue:UIStoryboardSegue) {
 
     }

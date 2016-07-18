@@ -74,6 +74,10 @@ class CipherPageViewController: UIPageViewController, CipherViewAppearedNotifier
             setViewControllers(viewControllers, direction: direction, animated: animated, completion: nil)
         }
     }
+
+    func reloadData() {
+        currentCipherViewController.reloadData()
+    }
 }
 
 //MARK: implementation of UIPageViewControllerDataSource

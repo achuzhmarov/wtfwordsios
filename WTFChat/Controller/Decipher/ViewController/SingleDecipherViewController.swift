@@ -38,6 +38,8 @@ class SingleDecipherViewController: DecipherViewController {
         levelPreviewController.decipherTransitionManager.animationDuration = 0.3
         levelPreviewController.selfTransitionManager.animationDuration = 0
 
+        singleModeViewController
+
         levelPreviewController.dismissViewControllerAnimated(true) {
             singleModeViewController.dismissViewControllerAnimated(true, completion: nil)
         }
@@ -65,7 +67,18 @@ class SingleDecipherViewController: DecipherViewController {
     }
 
     func startNextLevel(level: Level) {
-        print("nextLevel")
+        let selectedDifficulty = currentUserService.getLastSelectedDifficulty()
+
+        messageCategory = singleMessageService.getTextCategoryForLevel(level)
+        let messageText = messageCategory.getRandomText()
+
+        message = singleMessageService.getMessageForLevel(
+            singleMessage.level, difficulty: selectedDifficulty, text: messageText
+        )
+
+        inProgressVC.topCategoryLabel.text = messageCategory.title
+
+        start()
     }
 
     func chapterFinished() {

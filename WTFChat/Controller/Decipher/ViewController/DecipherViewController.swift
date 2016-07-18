@@ -60,8 +60,6 @@ class DecipherViewController: BaseUIViewController {
         message = inProgressVC.message
         messageCipherService.failed(message)
 
-        sendMessageDecipher()
-
         resultVC.initView(message)
 
         UIView.setAnimationsEnabled(true)
@@ -72,6 +70,8 @@ class DecipherViewController: BaseUIViewController {
                 options: [], animations: {
             self.resultContainer.alpha = 1
         }, completion: nil)
+
+        sendMessageDecipher()
     }
 
     func sendMessageDecipher() {

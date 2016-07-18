@@ -28,8 +28,17 @@ class SingleModeService: Service {
 
         if (singleMessage.getMessageStatus() == .Success) {
             let level = singleMessage.level
-            level.cleared = true
-            level.clearedDifficulty = singleMessage.cipherDifficulty
+
+            if (level.cleared) {
+                if (level.clearedDifficulty!.rawValue < singleMessage.cipherDifficulty.rawValue) {
+                    level.clearedDifficulty = singleMessage.cipherDifficulty
+                }
+            } else {
+                level.cleared = true
+                level.clearedDifficulty = singleMessage.cipherDifficulty
+            }
+
+
             levelService.updateLevel(level)
         }
 
