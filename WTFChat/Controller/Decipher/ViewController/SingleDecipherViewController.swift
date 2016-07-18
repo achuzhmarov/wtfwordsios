@@ -31,17 +31,17 @@ class SingleDecipherViewController: DecipherViewController {
     }
 
     override func backTapped() {
-        let levelPreviewController = self.presentingViewController as! LevelPreviewViewController
-        let singleModeViewController = levelPreviewController.presentingViewController!
+        let levelPreviewVC = self.presentingViewController as! LevelPreviewViewController
+        let singleModeVC = levelPreviewVC.presentingViewController as! SingleModeViewController
 
-        levelPreviewController.view.hidden = true
-        levelPreviewController.decipherTransitionManager.animationDuration = 0.3
-        levelPreviewController.selfTransitionManager.animationDuration = 0
+        singleModeVC.reloadData()
 
-        singleModeViewController
+        levelPreviewVC.view.hidden = true
+        levelPreviewVC.decipherTransitionManager.animationDuration = 0.3
+        levelPreviewVC.selfTransitionManager.animationDuration = 0
 
-        levelPreviewController.dismissViewControllerAnimated(true) {
-            singleModeViewController.dismissViewControllerAnimated(true, completion: nil)
+        levelPreviewVC.dismissViewControllerAnimated(true) {
+            singleModeVC.dismissViewControllerAnimated(true, completion: nil)
         }
     }
 

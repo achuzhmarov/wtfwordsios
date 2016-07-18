@@ -59,7 +59,7 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
         }
     }
 
-    private func reloadData() {
+    func reloadData() {
         let category = getCurrentCategory()
         cipherText.text = category.cipherType.description
 
