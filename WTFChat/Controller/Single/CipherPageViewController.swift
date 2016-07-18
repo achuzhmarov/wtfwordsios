@@ -76,7 +76,7 @@ class CipherPageViewController: UIPageViewController, CipherViewAppearedNotifier
     }
 
     func reloadData() {
-        currentCipherViewController.reloadData()
+        currentCipherViewController?.reloadData()
     }
 }
 
