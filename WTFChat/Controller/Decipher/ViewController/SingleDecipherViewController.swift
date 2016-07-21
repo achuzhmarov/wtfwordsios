@@ -27,6 +27,7 @@ class SingleDecipherViewController: DecipherViewController {
     override func sendMessageDecipher() {
         singleModeService.finishDecipher(singleMessage)
         resultVC.expGainView.runProgress(message.exp)
+        messageCategory.updateMessage()
     }
 
     override func backTapped() {
@@ -58,7 +59,7 @@ class SingleDecipherViewController: DecipherViewController {
 
     func restartCurrentLevel() {
         let selectedDifficulty = guiDataService.getLastSelectedDifficulty()
-        let messageText = messageCategory.getRandomText()
+        let messageText = messageCategory.getMessage()
 
         message = singleMessageService.getMessageForLevel(
             singleMessage.level, difficulty: selectedDifficulty, text: messageText
@@ -71,7 +72,7 @@ class SingleDecipherViewController: DecipherViewController {
         let selectedDifficulty = guiDataService.getLastSelectedDifficulty()
 
         messageCategory = singleMessageService.getTextCategoryForLevel(level)
-        let messageText = messageCategory.getRandomText()
+        let messageText = messageCategory.getMessage()
 
         message = singleMessageService.getMessageForLevel(
             singleMessage.level, difficulty: selectedDifficulty, text: messageText

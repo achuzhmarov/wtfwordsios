@@ -50,7 +50,7 @@ class LevelPreviewViewController: UIViewController {
         checkHardAvailability()
 
         messageCategory = singleMessageService.getTextCategoryForLevel(level)
-        messageText = messageCategory.getRandomText()
+        messageText = messageCategory.getMessage()
         updateMessage()
 
         updateLvlView()

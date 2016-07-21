@@ -3,14 +3,41 @@ import Foundation
 class TextCategory {
     var title: String = ""
     private var texts = [String]()
+    private var currentMessage: String? = nil
+    private var usedIndexes = Set<Int>()
 
     func appendText(text: String) {
         self.texts.append(text)
     }
 
-    func getRandomText() -> String {
-        let randomIndex = Int(arc4random_uniform(UInt32(texts.count)))
-        return texts[randomIndex]
+    func getMessage() -> String {
+        if let message = currentMessage {
+            return message
+        } else {
+            updateMessage()
+            return currentMessage!
+        }
+    }
+
+    func updateMessage() {
+        //clear usedIndexes if full
+        if (usedIndexes.count == texts.count) {
+            usedIndexes = Set<Int>()
+        }
+
+        var textIndex = getRandomIndex()
+
+        while usedIndexes.contains(textIndex) {
+            textIndex = getRandomIndex()
+        }
+
+        usedIndexes.insert(textIndex)
+
+        currentMessage = texts[textIndex]
+    }
+
+    private func getRandomIndex() -> Int {
+        return Int(arc4random_uniform(UInt32(texts.count)))
     }
 }
 
@@ -89,36 +116,51 @@ class TextCategoryService: Service {
     }
 
     private func loadTextCategory(basePath: String, fileName: String, cipherType: CipherType) {
-        let newCategory = TextCategory()
-
         let url = getFileUrl(basePath, fileName: fileName)
-
-        //print(fileName)
 
         if let loadedData = Url.open(url) {
             let texts = loadedData.componentsSeparatedByString("\n")
             var index = 0
 
+            var messages = [String]()
+            var title = ""
+
             for text in texts {
                 if (index == WIKI_TITLE_INDEX) {
                     //do nothing
                 } else if (index == TITLE_INDEX) {
-                    newCategory.title = text
+                    title = text
                 } else {
-                    newCategory.appendText(text)
+                    messages.append(text)
                 }
 
                 index += 1
             }
 
+            messages = messages.sort({$0.characters.count < $1.characters.count})
+
             let lvlIds = getLvlIdsFromFileName(fileName)
+            let step = messages.count / lvlIds.count
 
-            for lvlId in lvlIds {
-                //print(lvlId)
-                textsMap[cipherType]![lvlId] = newCategory
+            for i in 0 ..< lvlIds.count {
+                let newCategory = TextCategory()
+                newCategory.title = title
+
+                let leftBorder = step * i
+
+                let rightBorder: Int
+                if (i == lvlIds.count - 1) {
+                    rightBorder = messages.count
+                } else {
+                    rightBorder = step * (i + 1)
+                }
+
+                for i in leftBorder ..< rightBorder {
+                    newCategory.appendText(messages[i])
+                }
+
+                textsMap[cipherType]![lvlIds[i]] = newCategory
             }
-
-            //print(texts)
         } else {
             print("error reading file \(url.path)")
         }
