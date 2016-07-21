@@ -73,8 +73,7 @@ class WindowService: Service {
         if (currentUserService.getUserNewSuggestions() != 0) {
             WTFOneButtonAlert.show("Daily free hints!",
                     message: "You have just received \(String(currentUserService.getUserNewSuggestions()))",
-                    firstButtonTitle: "Ok",
-                    viewPresenter: currentController)
+                    firstButtonTitle: "Ok")
 
             currentUserService.clearUserNewSuggestions()
         }

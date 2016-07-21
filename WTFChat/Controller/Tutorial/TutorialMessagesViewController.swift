@@ -45,7 +45,6 @@ class TutorialMessagesViewController: MessagesViewController {
                 message: "Hi! It is your first time, would you like to start a tutorial?",
                 firstButtonTitle: "Start",
                 secondButtonTitle: "Skip",
-                viewPresenter: self,
                 alertButtonAction: { () -> Void in
                     self.beginTutorial()
                 },
@@ -57,35 +56,30 @@ class TutorialMessagesViewController: MessagesViewController {
         case .Deciphered:
             WTFOneButtonAlert.show("",
                 message: "So far so good! Try to send a message. Type any text you want and press 'Send' button.",
-                firstButtonTitle: "Ok",
-                viewPresenter: self) { () -> Void in
+                firstButtonTitle: "Ok") { () -> Void in
                     currentTutorialStage = .SendMessage
             }
         case .SelectCipher:
             WTFOneButtonAlert.show("",
                 message: "You have not sent your message. Please, tap 'Send' button. After you have selected a cipher, please, tap 'Send' again on the 'Preview' screen.",
-                firstButtonTitle: "Ok",
-                viewPresenter: self)
+                firstButtonTitle: "Ok")
         case .MessageSended:
             WTFOneButtonAlert.show("",
                 message: "Yay! You have successfully sent your first message! You see? Wait a sec, I will soon decipher it.",
-                firstButtonTitle: "Ok",
-                viewPresenter: self) { () -> Void in
+                firstButtonTitle: "Ok") { () -> Void in
                     sleep(1)
                     self.decipherSendedMessage()
                     
                     WTFOneButtonAlert.show("",
                         message: "See? It was fast. In a real conversation you will have to wait some more before your friend decipher it. As you see, it is red! That means I had some difficulties deciphering it. Please, tap on a message to view details.",
-                        firstButtonTitle: "Ok",
-                        viewPresenter: self) { () -> Void in
+                        firstButtonTitle: "Ok") { () -> Void in
                             currentTutorialStage = .ResponseAquired
                     }
             }
         case .DetailsViewed:
             WTFOneButtonAlert.show("Finished",
                 message: "Yahooo! You have finished the tutorial! I'll give you some more messages to practice. But feel free to ignore them. Now you can play with someone sitting next to you in 'Pass and play' mode or SignUp for an online account to chat with people all over the world! Exciting, isn't it?",
-                firstButtonTitle: "Ok",
-                viewPresenter: self) { () -> Void in
+                firstButtonTitle: "Ok") { () -> Void in
                     currentTutorialStage = .Finished
                     self.endTutorial()
             }
@@ -97,8 +91,7 @@ class TutorialMessagesViewController: MessagesViewController {
         if (currentTutorialStage == .Started) {
             WTFOneButtonAlert.show("Tutorial",
                 message: "Please, tap on a blue bubble with question marks to decipher it!",
-                firstButtonTitle: "Ok",
-                viewPresenter: self)
+                firstButtonTitle: "Ok")
         } else {
             self.performSegueWithIdentifier("showMessagePreview", sender: messageText.text)
         }
@@ -132,8 +125,7 @@ class TutorialMessagesViewController: MessagesViewController {
         
         WTFOneButtonAlert.show("New message",
             message: "You have just recieved your first message. Tap on it to decipher!",
-            firstButtonTitle: "Ok",
-            viewPresenter: self)
+            firstButtonTitle: "Ok")
         
         self.title = "Tutorial"
     }

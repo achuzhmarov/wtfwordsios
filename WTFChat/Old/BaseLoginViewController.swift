@@ -17,9 +17,9 @@ class BaseLoginViewController: UIViewController {
             dispatch_async(dispatch_get_main_queue(), {
                 if let requestError = error {
                     if (requestError.code == HTTP_UNAUTHORIZED) {
-                        WTFOneButtonAlert.show("Error", message: "Invalid credentials", firstButtonTitle: "Ok", viewPresenter: self)
+                        WTFOneButtonAlert.show("Error", message: "Invalid credentials", firstButtonTitle: "Ok")
                     } else {
-                        WTFOneButtonAlert.show("Error", message: WTFOneButtonAlert.CON_ERR, firstButtonTitle: "Ok", viewPresenter: self)
+                        WTFOneButtonAlert.show("Error", message: WTFOneButtonAlert.CON_ERR, firstButtonTitle: "Ok")
                     }
                 } else {
                     self.windowService.showMainScreen()

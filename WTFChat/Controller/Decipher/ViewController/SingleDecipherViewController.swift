@@ -1,9 +1,8 @@
 import Foundation
 
 class SingleDecipherViewController: DecipherViewController {
-    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
     private let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
-    //private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
     private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
     private let levelService: LevelService = serviceLocator.get(LevelService)
 
@@ -41,7 +40,9 @@ class SingleDecipherViewController: DecipherViewController {
         levelPreviewVC.selfTransitionManager.animationDuration = 0
 
         levelPreviewVC.dismissViewControllerAnimated(true) {
-            singleModeVC.dismissViewControllerAnimated(true, completion: nil)
+            singleModeVC.dismissViewControllerAnimated(true) {
+                singleModeVC.checkCategoryCleared()
+            }
         }
     }
 
@@ -56,7 +57,7 @@ class SingleDecipherViewController: DecipherViewController {
     }
 
     func restartCurrentLevel() {
-        let selectedDifficulty = currentUserService.getLastSelectedDifficulty()
+        let selectedDifficulty = guiDataService.getLastSelectedDifficulty()
         let messageText = messageCategory.getRandomText()
 
         message = singleMessageService.getMessageForLevel(
@@ -67,7 +68,7 @@ class SingleDecipherViewController: DecipherViewController {
     }
 
     func startNextLevel(level: Level) {
-        let selectedDifficulty = currentUserService.getLastSelectedDifficulty()
+        let selectedDifficulty = guiDataService.getLastSelectedDifficulty()
 
         messageCategory = singleMessageService.getTextCategoryForLevel(level)
         let messageText = messageCategory.getRandomText()
@@ -82,6 +83,6 @@ class SingleDecipherViewController: DecipherViewController {
     }
 
     func chapterFinished() {
-        print("chapterFinished")
+        backTapped()
     }
 }

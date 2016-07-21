@@ -4,6 +4,10 @@ class SingleModeCategory {
     var cipherType: CipherType
     var levels: [Level]
 
+    var hasJustClearedOnEasy = false
+    var hasJustClearedOnNormal = false
+    var hasJustClearedOnHard = false
+
     private var coreSingleModeCategory: CoreSingleModeCategory!
 
     init(cipherType: CipherType, levels: [Level] = [Level]()) {

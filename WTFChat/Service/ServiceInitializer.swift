@@ -145,7 +145,8 @@ class ServiceInitializer {
             TimeService(),
             AudioService(),
             cipherService,
-                    textCategoryService
+            textCategoryService,
+            GuiDataService()
         )
     }
 }

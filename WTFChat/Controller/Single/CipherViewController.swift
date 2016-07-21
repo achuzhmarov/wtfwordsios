@@ -8,6 +8,7 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
     private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
     private let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
     private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
+    private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
 
     @IBOutlet weak var easyStarImage: StarImage!
     @IBOutlet weak var normalStarImage: StarImage!
@@ -50,6 +51,7 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
 
         reloadData()
         cipherViewAppearedNotifier?.cipherViewAppeared(self)
+        guiDataService.updateLastSelectedCategoryType(getCurrentCategory().cipherType)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -78,8 +80,7 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
             } else {
                 WTFOneButtonAlert.show("Not available yet",
                         message: "This level is not available yet. Please, wait for the next release!",
-                        firstButtonTitle: "Ok",
-                        viewPresenter: self)
+                        firstButtonTitle: "Ok")
 
                 return
             }
@@ -95,7 +96,7 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
         return lvlCollectionHeight + VERTICAL_PADDING + easyStarImage.bounds.height
     }
 
-    private func getCurrentCategory() -> SingleModeCategory {
+    func getCurrentCategory() -> SingleModeCategory {
         let cipherType = cipherTypes[activeCipherIndex]
         return singleModeCategoryService.getCategory(cipherType)!
     }

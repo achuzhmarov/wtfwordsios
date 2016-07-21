@@ -55,7 +55,7 @@ class RatingViewController: UIViewController, UITableViewDataSource, UITableView
         userService.getFriendsRating() { (users, error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if let requestError = error {
-                    WTFOneButtonAlert.show("Error", message: WTFOneButtonAlert.CON_ERR, firstButtonTitle: "Ok", viewPresenter: self)
+                    WTFOneButtonAlert.show("Error", message: WTFOneButtonAlert.CON_ERR, firstButtonTitle: "Ok")
                     
                     NSLog(requestError.localizedDescription)
                 } else {
@@ -73,7 +73,7 @@ class RatingViewController: UIViewController, UITableViewDataSource, UITableView
         userService.getTopRatings() { (users, error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if let requestError = error {
-                    WTFOneButtonAlert.show("Error", message: WTFOneButtonAlert.CON_ERR, firstButtonTitle: "Ok", viewPresenter: self)
+                    WTFOneButtonAlert.show("Error", message: WTFOneButtonAlert.CON_ERR, firstButtonTitle: "Ok")
                     
                     NSLog(requestError.localizedDescription)
                 } else {

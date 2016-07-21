@@ -102,8 +102,7 @@ class DecipherInProgressVC: UIViewController {
         WTFTwoButtonsAlert.show("Stop deciphering?",
                 message: "",
                 firstButtonTitle: "Give Up",
-                secondButtonTitle: "Cancel",
-                viewPresenter: self) { () -> Void in
+                secondButtonTitle: "Cancel") { () -> Void in
             self.gameOver()
         }
     }

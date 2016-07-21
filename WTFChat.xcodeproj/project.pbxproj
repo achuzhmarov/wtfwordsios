@@ -32,6 +32,7 @@
 		3E37C19182FB55501F45A16F /* TutorialDecipherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C7567924686F83EB2112 /* TutorialDecipherViewController.swift */; };
 		3E37C1B20738B57285D7ABE7 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CEF4103C59A60EA465BB /* NotificationService.swift */; };
 		3E37C1BCF1C940EFC4E4397C /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE63F3AB49391E2AB456 /* CurrentUserService.swift */; };
+		3E37C1BDE9DCC42FC8A25448 /* NSUserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF41BA4821A442D3FC81 /* NSUserDefaults+Extension.swift */; };
 		3E37C1D6F1E272F79B23753A /* ExpGainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C4B0E41355EE8EB15D15 /* ExpGainView.swift */; };
 		3E37C1E5BC3A2D27B471435A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C73CF0E1728E0C36BAC1 /* NetworkService.swift */; };
 		3E37C1E8AB87E77D756C490E /* warning.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E37CFDFD39EB65F6E0470F0 /* warning.wav */; };
@@ -44,6 +45,7 @@
 		3E37C26DF1D21CF031912277 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C26F571173D1A34B84C0 /* UIHelper.swift */; };
 		3E37C2772DE28B94A5E838AB /* SingleTalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C21BBEC0C55C79B7473F /* SingleTalk.swift */; };
 		3E37C285C1CFAF974C9F1A2A /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C368983046E969358AC8 /* Gradient.swift */; };
+		3E37C28687CAB861016DF223 /* CurrentUserService+Setters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C2DAC9B9B5633D2C4302 /* CurrentUserService+Setters.swift */; };
 		3E37C2896D9872CC4F6D3135 /* BaseLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C24DE3323E553F227BA7 /* BaseLoginViewController.swift */; };
 		3E37C28B94556CE89AA844B3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C9FFF4C7ECE06047CCC5 /* MainViewController.swift */; };
 		3E37C2A7EF6201A559B94DC8 /* DoubleCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C7A3DF5F77D8BB21ACF2 /* DoubleCutterCipher.swift */; };
@@ -97,6 +99,7 @@
 		3E37C7904E15A41C440D1D33 /* lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E37C9A3614141DC5B51F768 /* lose.wav */; };
 		3E37C7C669159E1179202F10 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C6E654A52598D1504630 /* UIColor+Extension.swift */; };
 		3E37C7DF5B97C966D2012E03 /* Cipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C30F426379E0470AF162 /* Cipher.swift */; };
+		3E37C7F90BA4A38645273C2D /* CurrentUserService+Getters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C659BF770984773312E8 /* CurrentUserService+Getters.swift */; };
 		3E37C8314F6CDF3F3FEAD191 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF3BEC0537DEBCF86D60 /* MessagesViewController.swift */; };
 		3E37C840254F6AB3FFF9E844 /* AudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CC18034686E90B6C6BC8 /* AudioService.swift */; };
 		3E37C85D3E39EADB0DBE3DB9 /* RoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C950EF592E3489F22F2A /* RoundedLabel.swift */; };
@@ -153,6 +156,7 @@
 		3E37CE3F38C74E5401872C02 /* TimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CC3BCE2D521EC38F21E1 /* TimeService.swift */; };
 		3E37CE438AEE9F1DD92C5DDC /* LvlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C7E7C827EF8FECBCAC2D /* LvlCell.swift */; };
 		3E37CE6131D217E89E92FFB8 /* Url.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CA143C1ABE143F423AC5 /* Url.swift */; };
+		3E37CE9186B091E02B8E8465 /* GuiDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF57D011111B34C76B77 /* GuiDataService.swift */; };
 		3E37CE9249522003E406A452 /* TextCategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C4AC96F9D6F7719268D2 /* TextCategoryService.swift */; };
 		3E37CE95F6D266FC3E2C86E7 /* WindowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C140CF13E7D63DFC1DDD /* WindowService.swift */; };
 		3E37CE9D843E851046E44D46 /* MessageNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE047F561F77F917AC33 /* MessageNetworkService.swift */; };
@@ -234,6 +238,7 @@
 		3E37C283CC6663C54ADE8296 /* CoreDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		3E37C2D1E0401C16DCF763EC /* StopImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopImage.swift; sourceTree = "<group>"; };
 		3E37C2D873FA507A19AD8B4E /* NameEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameEditViewController.swift; sourceTree = "<group>"; };
+		3E37C2DAC9B9B5633D2C4302 /* CurrentUserService+Setters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CurrentUserService+Setters.swift"; sourceTree = "<group>"; };
 		3E37C309D678937A0BD83AB6 /* DecipherResultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecipherResultVC.swift; sourceTree = "<group>"; };
 		3E37C30F426379E0470AF162 /* Cipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cipher.swift; sourceTree = "<group>"; };
 		3E37C320AE4961869792586B /* IosNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IosNetworkService.swift; sourceTree = "<group>"; };
@@ -267,6 +272,7 @@
 		3E37C61DFE53A61DD4EE8686 /* PanTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanTransitionManager.swift; sourceTree = "<group>"; };
 		3E37C63E89380D93121CA96F /* DecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecipherViewController.swift; sourceTree = "<group>"; };
 		3E37C659ABA1CBA0BD66C8BC /* TutorialMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialMessagesViewController.swift; sourceTree = "<group>"; };
+		3E37C659BF770984773312E8 /* CurrentUserService+Getters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CurrentUserService+Getters.swift"; sourceTree = "<group>"; };
 		3E37C661DC1DA76D3A02A49C /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		3E37C68FC994889C5F99557F /* WTFAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTFAlert.swift; sourceTree = "<group>"; };
 		3E37C6A2A4D0A075DFE4342B /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -360,10 +366,12 @@
 		3E37CF3BEC0537DEBCF86D60 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		3E37CF3DB0A554D2E8147AE6 /* JSQMessagesAvatarImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesAvatarImage.h; sourceTree = "<group>"; };
 		3E37CF3E05D6CC07532749A2 /* WordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsViewController.swift; sourceTree = "<group>"; };
+		3E37CF41BA4821A442D3FC81 /* NSUserDefaults+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		3E37CF41FF729B01C20A331C /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		3E37CF444956F635D14AB33E /* TalkNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkNetworkService.swift; sourceTree = "<group>"; };
 		3E37CF45362C75741955A6F2 /* SingleMessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleMessageService.swift; sourceTree = "<group>"; };
 		3E37CF47929B32484447BAE2 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		3E37CF57D011111B34C76B77 /* GuiDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuiDataService.swift; sourceTree = "<group>"; };
 		3E37CF6963D91364EF83A207 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		3E37CF958614B2A9CDBCC806 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		3E37CFDFD39EB65F6E0470F0 /* warning.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = warning.wav; sourceTree = "<group>"; };
@@ -446,6 +454,9 @@
 				3E37CA0E47FE8053178B1840 /* CipherService.swift */,
 				3E37C4AC96F9D6F7719268D2 /* TextCategoryService.swift */,
 				3E37CEA07F3A6F4B456B9E2B /* SingleMode */,
+				3E37C659BF770984773312E8 /* CurrentUserService+Getters.swift */,
+				3E37C2DAC9B9B5633D2C4302 /* CurrentUserService+Setters.swift */,
+				3E37CF57D011111B34C76B77 /* GuiDataService.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -846,6 +857,7 @@
 				3E37CF47929B32484447BAE2 /* UIImage+Extension.swift */,
 				3E37CE7F2302746304A4DB4D /* UIView+Extension.swift */,
 				3E37C7907201437918DB3E8A /* UIBezierPath+Extension.swift */,
+				3E37CF41BA4821A442D3FC81 /* NSUserDefaults+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1295,6 +1307,10 @@
 				3E37CC00150D41768814968F /* DecipherInProgressVC+Guess.swift in Sources */,
 				3E37CC386DE3F7F5EE1B60C8 /* DecipherInProgressVC.swift in Sources */,
 				3E37CB6A910BE40A55855DC2 /* DecipherResultVC.swift in Sources */,
+				3E37C7F90BA4A38645273C2D /* CurrentUserService+Getters.swift in Sources */,
+				3E37C28687CAB861016DF223 /* CurrentUserService+Setters.swift in Sources */,
+				3E37CE9186B091E02B8E8465 /* GuiDataService.swift in Sources */,
+				3E37C1BDE9DCC42FC8A25448 /* NSUserDefaults+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

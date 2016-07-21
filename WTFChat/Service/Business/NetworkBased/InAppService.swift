@@ -109,7 +109,6 @@ class InAppService: Service {
             message: productDescription!,
             firstButtonTitle: "Ok",
             secondButtonTitle: "Cancel",
-            viewPresenter: viewPresenter,
             alertButtonAction: { () -> Void in
                 self.purchaseProduct(productId)
             }, cancelButtonAction: { () -> Void in

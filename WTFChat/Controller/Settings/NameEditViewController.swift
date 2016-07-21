@@ -30,7 +30,7 @@ class NameEditViewController: UITableViewController, UITextFieldDelegate {
         userService.updateName(nameText.text!) { (error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if (error != nil) {
-                    WTFOneButtonAlert.show("Error", message: "Can't update user info. \(WTFOneButtonAlert.CON_ERR)", firstButtonTitle: "Ok", viewPresenter: self)
+                    WTFOneButtonAlert.show("Error", message: "Can't update user info. \(WTFOneButtonAlert.CON_ERR)", firstButtonTitle: "Ok")
                 } else {
                     self.navigationController?.popViewControllerAnimated(true)
                 }

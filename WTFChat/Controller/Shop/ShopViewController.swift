@@ -46,8 +46,7 @@ class ShopViewController: BaseShopViewController {
         WTFTwoButtonsAlert.show("Restore purchased",
             message: "Are you sure you want to restore purchased content?",
             firstButtonTitle: "Ok",
-            secondButtonTitle: "Cancel",
-            viewPresenter: self) { () -> Void in
+            secondButtonTitle: "Cancel") { () -> Void in
                 self.isRestoreInProgress = true
                 self.inAppService.restorePurchased()
         }
@@ -62,8 +61,7 @@ class ShopViewController: BaseShopViewController {
                 
                 WTFOneButtonAlert.show("Success",
                     message: "Restored successfully",
-                    firstButtonTitle: "Ok",
-                    viewPresenter: self)
+                    firstButtonTitle: "Ok")
             }
         })
     }
@@ -80,8 +78,7 @@ class ShopViewController: BaseShopViewController {
                     
                     WTFOneButtonAlert.show("Error",
                         message: "\(productTitle) can't be restored",
-                        firstButtonTitle: "Ok",
-                        viewPresenter: self)
+                        firstButtonTitle: "Ok")
                 }
             })
         }

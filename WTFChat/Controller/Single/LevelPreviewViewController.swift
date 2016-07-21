@@ -2,8 +2,9 @@ import Foundation
 
 class LevelPreviewViewController: UIViewController {
     private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
+    private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
     private let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
-    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
 
     @IBOutlet weak var difficultySelector: UISegmentedControl!
     @IBOutlet weak var startTimerLabel: UILabel!
@@ -45,7 +46,9 @@ class LevelPreviewViewController: UIViewController {
         messageWordsView.isHidedText = true
         messageWordsView.fontSize = 12
 
-        selectedDifficulty = currentUserService.getLastSelectedDifficulty()
+        selectedDifficulty = guiDataService.getLastSelectedDifficulty()
+        checkHardAvailability()
+
         messageCategory = singleMessageService.getTextCategoryForLevel(level)
         messageText = messageCategory.getRandomText()
         updateMessage()
@@ -63,6 +66,20 @@ class LevelPreviewViewController: UIViewController {
         updateBackgroundGradient()
     }
 
+    private func checkHardAvailability() {
+        let hardIndex = CipherDifficulty.Hard.rawValue
+
+        if (singleModeCategoryService.isCategoryCleared(level.category, difficulty: .Normal)) {
+            difficultySelector.setEnabled(true, forSegmentAtIndex: hardIndex)
+        } else {
+            difficultySelector.setEnabled(false, forSegmentAtIndex: hardIndex)
+
+            if (selectedDifficulty == .Hard) {
+                selectedDifficulty = .Normal
+            }
+        }
+    }
+
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
 
@@ -71,7 +88,7 @@ class LevelPreviewViewController: UIViewController {
 
     @IBAction func difficultyChanged(sender: AnyObject) {
         selectedDifficulty = cipherDifficulties[difficultySelector.selectedSegmentIndex]
-        currentUserService.updateLastSelectedDifficulty(selectedDifficulty)
+        guiDataService.updateLastSelectedDifficulty(selectedDifficulty)
         updateMessage()
     }
 

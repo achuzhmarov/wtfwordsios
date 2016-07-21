@@ -55,18 +55,34 @@ class MessageCipherService: Service {
         if (guessWords == nil) {
             return false
         }
-        
+
+        let closeDistance = getCloseDistanceForWord(word)
+
         for guessWord in guessWords! {
             let guesses = parseGuessForCompare(guessWord)
             
             for guess in guesses {
-                if Tools.calcStringDistance(getCompareString(word.text), bStr: guess) == 1 {
+                if Tools.calcStringDistance(getCompareString(word.text), bStr: guess) <= closeDistance {
                     return true
                 }
             }
         }
         
         return false
+    }
+
+    private func getCloseDistanceForWord(word: Word) -> Int {
+        let charactersCount = word.text.characters.count
+
+        if (charactersCount < 4) {
+            return 0
+        } else if (charactersCount < 8) {
+            return 1
+        } else if (charactersCount < 12) {
+            return 2
+        } else {
+            return 3
+        }
     }
     
     func parseGuessForCompare(guessWord: String) -> [String] {

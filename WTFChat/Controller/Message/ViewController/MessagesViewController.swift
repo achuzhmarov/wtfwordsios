@@ -105,8 +105,7 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
         if (messageText.text.characters.count > 1024) {
             WTFOneButtonAlert.show("Too many characters",
                 message: "Your text should be less than 1024 characters",
-                firstButtonTitle: "Ok",
-                viewPresenter: self)
+                firstButtonTitle: "Ok")
             return
         }
         
@@ -154,7 +153,7 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
         dispatch_async(dispatch_get_main_queue(), {
             if let requestError = error {
                 if (!self.wasSuccessfullUpdate) {
-                    WTFOneButtonAlert.show("Error", message: "Can't load messages. \(WTFOneButtonAlert.CON_ERR)", firstButtonTitle: "Ok", viewPresenter: self)
+                    WTFOneButtonAlert.show("Error", message: "Can't load messages. \(WTFOneButtonAlert.CON_ERR)", firstButtonTitle: "Ok")
                 }
                 
                 NSLog(requestError.localizedDescription)
@@ -175,7 +174,7 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
     func loadEarlierCompleteHandler(talk: FriendTalk?, newMessagesCount: Int, error: NSError?) {
         dispatch_async(dispatch_get_main_queue(), {
             if let requestError = error {
-                WTFOneButtonAlert.show("Error", message: "Can't load earlier messages. \(WTFOneButtonAlert.CON_ERR)", firstButtonTitle: "Ok", viewPresenter: self)
+                WTFOneButtonAlert.show("Error", message: "Can't load earlier messages. \(WTFOneButtonAlert.CON_ERR)", firstButtonTitle: "Ok")
 
                 NSLog(requestError.localizedDescription)
             } else {
@@ -191,11 +190,10 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
     func messageSended(talk: FriendTalk?, error: NSError?) {
         dispatch_async(dispatch_get_main_queue(), {
             if let requestError = error {
-                //TODO - show error to user
                 print(requestError)
             } else {
                 self.talk = talk
-                //TODO - now without send=true (because input text field was cleared early)
+                //now without send=true (because input text field was cleared early)
                 self.updateView()
             }
         })

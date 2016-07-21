@@ -70,8 +70,7 @@ class BaseShopViewController: UITableViewController {
                     
                     WTFOneButtonAlert.show("Error",
                         message: "\(productTitle) purchase error. \(self.connectionErrorMessage)",
-                        firstButtonTitle: "Ok",
-                        viewPresenter: self)
+                        firstButtonTitle: "Ok")
                 })
             }
         } else {
@@ -80,8 +79,7 @@ class BaseShopViewController: UITableViewController {
                 
                 WTFOneButtonAlert.show("Error",
                     message: "Unknown error occured. \(self.connectionErrorMessage)",
-                    firstButtonTitle: "Ok",
-                    viewPresenter: self)
+                    firstButtonTitle: "Ok")
             })
         }
     }
@@ -130,8 +128,7 @@ class BaseShopViewController: UITableViewController {
                 dispatch_async(dispatch_get_main_queue(), {
                     WTFOneButtonAlert.show("Free hint",
                         message: "You have just received a free hint",
-                        firstButtonTitle: "Ok",
-                        viewPresenter: self) { () -> Void in
+                        firstButtonTitle: "Ok") { () -> Void in
                             self.productPurchased(nil)
                         }
                 })
@@ -139,8 +136,7 @@ class BaseShopViewController: UITableViewController {
         } else {
             WTFOneButtonAlert.show("No more ads",
                 message: "Try again tomorrow",
-                firstButtonTitle: "Ok",
-                viewPresenter: self) { () -> Void in
+                firstButtonTitle: "Ok") { () -> Void in
                     self.updateTable()
                 }
         }

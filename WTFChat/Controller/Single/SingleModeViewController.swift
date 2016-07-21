@@ -1,6 +1,9 @@
 import Foundation
 
 class SingleModeViewController: BaseUIViewController {
+    private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
+    private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
+
     @IBOutlet weak var menuBorder: UIView!
     @IBOutlet weak var menuBackground: UIView!
     @IBOutlet weak var pageControlTopPaddingConstraint: NSLayoutConstraint!
@@ -22,8 +25,6 @@ class SingleModeViewController: BaseUIViewController {
 
         configurePageControl()
 
-        //cipherPageViewController.view.backgroundColor = UIColor.clearColor()
-
         exitGesture.addTarget(self, action: #selector(SingleModeViewController.handleOffstagePan(_:)))
 
         menuBorder.backgroundColor = Color.BackgroundDark
@@ -37,7 +38,7 @@ class SingleModeViewController: BaseUIViewController {
 
     private func configurePageControl() {
         pageControl.numberOfPages = cipherTypes.count
-        pageControl.currentPage = currentCipherView?.activeCipherIndex ?? 0
+        pageControl.currentPage = currentCipherView?.activeCipherIndex ?? guiDataService.getLastSelectedCategoryType().rawValue
         pageControl.pageIndicatorTintColor = UIColor.blackColor()
         pageControl.currentPageIndicatorTintColor = Color.CipheredDark
     }
@@ -62,6 +63,43 @@ class SingleModeViewController: BaseUIViewController {
 
     func reloadData() {
         cipherPageViewController.reloadData()
+    }
+
+    func checkCategoryCleared() {
+        let currentCategory = currentCipherView!.getCurrentCategory()
+        let nextCategory = singleModeCategoryService.getNextCategory(currentCategory)
+
+        var message = ""
+
+        if (currentCategory.hasJustClearedOnHard) {
+            currentCategory.hasJustClearedOnHard = false
+
+            message = "You have finished the" + " \"" + currentCategory.cipherType.description + "\" " + "on hard difficulty."
+        } else if (currentCategory.hasJustClearedOnNormal) {
+            currentCategory.hasJustClearedOnNormal = false
+
+            message = "You have finished the" + " \"" + currentCategory.cipherType.description + "\". " + "Hard difficulty unlocked."
+        } else if (currentCategory.hasJustClearedOnEasy) {
+            currentCategory.hasJustClearedOnEasy = false
+
+            message = "You have finished the" + " \"" + currentCategory.cipherType.description + "\". " + "Complete all levels on Normal difficulty to unlock Hard."
+        } else {
+            //no need for alert
+            return
+        }
+
+        if (nextCategory != nil) {
+            WTFTwoButtonsAlert.show("Congratulations!",
+                    message: message,
+                    firstButtonTitle: "Next Chapter",
+                    secondButtonTitle: "Stay here") { () -> Void in
+
+                self.pageControl.currentPage = self.pageControl.currentPage + 1
+                self.cipherPageViewController.showPage(self.pageControl.currentPage)
+            }
+        } else {
+            WTFOneButtonAlert.show("Congratulations!", message: message, firstButtonTitle: "Ok")
+        }
     }
 
     @IBAction func backToCiphers(segue:UIStoryboardSegue) {

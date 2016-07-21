@@ -90,6 +90,20 @@ class SingleModeCategoryService: Service {
         return nil
     }
 
+    func isCategoryCleared(category: SingleModeCategory, difficulty: CipherDifficulty) -> Bool {
+        for level in category.levels {
+            if (!level.cleared) {
+                return false
+            }
+
+            if (level.clearedDifficulty!.rawValue < difficulty.rawValue) {
+                return false
+            }
+        }
+
+        return true
+    }
+
     /*func updateSingleModeCategory(category: SingleModeCategory) {
         coreSingleModeCategoryService.updateSingleModeCategory(category)
     }*/

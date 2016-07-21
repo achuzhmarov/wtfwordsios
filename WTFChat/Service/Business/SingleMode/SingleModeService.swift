@@ -24,11 +24,15 @@ class SingleModeService: Service {
     }
 
     func finishDecipher(singleMessage: SingleMessage) {
+        let level = singleMessage.level
+        let category = level.category
+        let wasCategoryClearedOnEasy = categoryService.isCategoryCleared(category, difficulty: .Easy)
+        let wasCategoryClearedOnNormal = categoryService.isCategoryCleared(category, difficulty: .Normal)
+        let wasCategoryClearedOnHard = categoryService.isCategoryCleared(category, difficulty: .Hard)
+
         singleMessage.exp = expService.calculateExpForMessage(singleMessage)
 
         if (singleMessage.getMessageStatus() == .Success) {
-            let level = singleMessage.level
-
             if (level.cleared) {
                 if (level.clearedDifficulty!.rawValue < singleMessage.cipherDifficulty.rawValue) {
                     level.clearedDifficulty = singleMessage.cipherDifficulty
@@ -44,12 +48,21 @@ class SingleModeService: Service {
 
         currentUserService.earnSingleExp(singleMessage.exp)
         currentUserService.useHints(singleMessage.hintsUsed)
+
+        let categoryClearedOnEasy = categoryService.isCategoryCleared(category, difficulty: .Easy)
+        let categoryClearedOnNormal = categoryService.isCategoryCleared(category, difficulty: .Normal)
+        let categoryClearedOnHard = categoryService.isCategoryCleared(category, difficulty: .Hard)
+
+        if (categoryClearedOnHard && !wasCategoryClearedOnHard) {
+            category.hasJustClearedOnHard = true
+        } else if (categoryClearedOnNormal && !wasCategoryClearedOnNormal) {
+            category.hasJustClearedOnNormal = true
+        } else if (categoryClearedOnEasy && !wasCategoryClearedOnEasy) {
+            category.hasJustClearedOnEasy = true
+        }
     }
 
     func isLevelAvailable(level: Level) -> Bool {
-        //TODO - for testing
-        return true
-
         if let previousLevel = levelService.getPreviousLevel(level) {
             return previousLevel.cleared
         } else if let previousCategory = categoryService.getPreviousCategory(level.category) {

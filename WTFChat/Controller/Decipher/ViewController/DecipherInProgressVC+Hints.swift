@@ -27,8 +27,7 @@ extension DecipherInProgressVC: HintComputer {
         WTFTwoButtonsAlert.show("Hints remained: 0",
                 message: "You have used all hints. Want to get more?",
                 firstButtonTitle: "Get more",
-                secondButtonTitle: "Cancel",
-                viewPresenter: self) { () -> Void in
+                secondButtonTitle: "Cancel") { () -> Void in
 
             self.performSegueWithIdentifier("getMoreHints", sender: self)
         }
@@ -38,8 +37,7 @@ extension DecipherInProgressVC: HintComputer {
         WTFTwoButtonsAlert.show("Hints remained: \(String(hints))",
                 message: "",
                 firstButtonTitle: "Use a Hint",
-                secondButtonTitle: "Cancel",
-                viewPresenter: self) { () -> Void in
+                secondButtonTitle: "Cancel") { () -> Void in
             self.useHint(word)
         }
     }
@@ -48,8 +46,7 @@ extension DecipherInProgressVC: HintComputer {
         WTFTwoButtonsAlert.show("Open this word?",
                 message: "",
                 firstButtonTitle: "Open",
-                secondButtonTitle: "Cancel",
-                viewPresenter: self) { () -> Void in
+                secondButtonTitle: "Cancel") { () -> Void in
             self.useHint(word)
         }
     }

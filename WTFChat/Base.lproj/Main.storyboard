@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="e39-50-PAo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Wft-8G-zQQ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -2688,22 +2688,6 @@
             </objects>
             <point key="canvasLocation" x="3569" y="-456"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="ewj-VQ-mS6">
-            <objects>
-                <navigationController navigationBarHidden="YES" id="e39-50-PAo" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="00A-Z3-Tny">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Wft-8G-zQQ" kind="relationship" relationship="rootViewController" id="9Ap-jK-xXp"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hAx-sM-WBf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="166" y="-1221"/>
-        </scene>
         <!--WTFWords-->
         <scene sceneID="8wB-Na-XZx">
             <objects>
@@ -2757,6 +2741,10 @@
         <scene sceneID="cgK-RH-W7X">
             <objects>
                 <viewController id="xNb-Jc-w6b" customClass="DecipherInProgressVC" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nVe-FY-0rt"/>
+                        <viewControllerLayoutGuide type="bottom" id="CwX-hR-hKo"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="svi-kf-dtP">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2889,6 +2877,10 @@
         <scene sceneID="zvh-6k-0de">
             <objects>
                 <viewController id="ryS-pj-BlL" customClass="DecipherResultVC" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oy0-nD-v6L"/>
+                        <viewControllerLayoutGuide type="bottom" id="YjW-9U-XcN"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Tt8-kx-A9O">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

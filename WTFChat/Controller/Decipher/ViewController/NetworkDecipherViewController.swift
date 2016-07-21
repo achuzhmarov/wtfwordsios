@@ -30,7 +30,6 @@ class NetworkDecipherViewController: DecipherViewController {
         messageService.decipherMessage(message as! RemoteMessage) { (message, error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if let requestError = error {
-                    //TODO - show error to user
                     print(requestError)
                 } else {
                     if (message!.exp > 0) {

@@ -24,8 +24,7 @@ extension DecipherInProgressVC: UITextFieldDelegate {
         if (guessTextField.text!.characters.count > 1024) {
             WTFOneButtonAlert.show("Too many characters",
                     message: "Your guess should be less than 1024 characters",
-                    firstButtonTitle: "Ok",
-                    viewPresenter: self)
+                    firstButtonTitle: "Ok")
 
             return
         }

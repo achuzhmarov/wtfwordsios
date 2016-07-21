@@ -1,6 +1,8 @@
 import Foundation
 
 class CipherPageViewController: UIPageViewController, CipherViewAppearedNotifier {
+    private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
+
     private let cipherTypes = CipherType.getAll()
     private var viewControllersCache = [Int: CipherViewController]()
 
@@ -15,7 +17,7 @@ class CipherPageViewController: UIPageViewController, CipherViewAppearedNotifier
 
         initViewControllers()
 
-        showPage(0)
+        showPage(guiDataService.getLastSelectedCategoryType().rawValue)
     }
 
     override func viewWillAppear(animated: Bool) {

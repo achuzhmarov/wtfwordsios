@@ -84,7 +84,7 @@ class DecipherResultVC: UIViewController, HintComputer {
         }, completion: nil)
     }
 
-    private func redrawWordsView(size: CGSize) {
+    private func redrawWordsView(size: CGSize? = nil) {
         let size = size ?? view.frame.size
 
         wordsTableView.updateMaxWidth(size.width - wordsViewHorizontalConstraint.constant * 2)
@@ -94,7 +94,7 @@ class DecipherResultVC: UIViewController, HintComputer {
     func initView(resultMessage: Message) {
         message = resultMessage
 
-        wordsTableView.updateMessage(message)
+        redrawWordsView()
         showResult()
 
         expGainView.clearView()
