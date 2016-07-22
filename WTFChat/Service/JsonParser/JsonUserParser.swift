@@ -31,8 +31,6 @@ class JsonUserParser {
 
         var rating: Int = 0
 
-        var buyNonConsum = [String]()
-
         var freeHintsGained: Int = 0
 
         if let value = json["login"].string {
@@ -119,18 +117,6 @@ class JsonUserParser {
             throw error
         }
 
-        if let value = json["buy_non_consum"].array {
-            for buyNonConsumJson in value {
-                if let item = buyNonConsumJson.string {
-                    buyNonConsum.append(item)
-                }
-            }
-        } else if (json["buy_non_consum"].isEmpty) {
-            //do nothing
-        } else if let error = json["buy_non_consum"].error {
-            throw error
-        }
-
         if let value = json["free_hints_gained"].int {
             freeHintsGained = value
         } else if let error = json["free_hints_gained"].error {
@@ -150,7 +136,6 @@ class JsonUserParser {
             pushNew: pushNew,
             pushDeciphered: pushDeciphered,
             rating: rating,
-            buyNonConsum: buyNonConsum,
             freeHintsGained: freeHintsGained
         )
     }

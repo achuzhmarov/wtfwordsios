@@ -25,7 +25,6 @@ public class InAppHelper: NSObject  {
   
     private let inAppNetworkService: InAppNetworkService
     private let currentUserService: CurrentUserService
-    private let userService: UserService
 
     // Used to keep track of the possible products and which ones have been purchased.
     private let productIdentifiers: Set<ProductIdentifier>
@@ -38,10 +37,9 @@ public class InAppHelper: NSObject  {
     /// MARK: - User facing API
   
     /// Initialize the helper.  Pass in the set of ProductIdentifiers supported by the app.
-    init(inAppNetworkService: InAppNetworkService, currentUserService: CurrentUserService, userService: UserService, productIdentifiers: Set<ProductIdentifier>) {
+    init(inAppNetworkService: InAppNetworkService, currentUserService: CurrentUserService, productIdentifiers: Set<ProductIdentifier>) {
         self.inAppNetworkService = inAppNetworkService
         self.currentUserService = currentUserService
-        self.userService = userService
 
         self.productIdentifiers = productIdentifiers
         for productIdentifier in productIdentifiers {
@@ -49,9 +47,9 @@ public class InAppHelper: NSObject  {
             
             if purchased {
                 purchasedProductIdentifiers.insert(productIdentifier)
-                //print("Previously purchased: \(productIdentifier)")
+                print("Previously purchased: \(productIdentifier)")
             } else {
-                //print("Not purchased: \(productIdentifier)")
+                print("Not purchased: \(productIdentifier)")
             }
         }
         
@@ -99,11 +97,6 @@ extension InAppHelper: SKProductsRequestDelegate {
         let products = response.products
         completionHandler?(success: true, products: products)
         clearRequest()
-
-        // debug printing
-        /*for p in products {
-          print("Found product: \(p.productIdentifier) \(p.localizedTitle) \(p.price.floatValue) \(p.localizedDescription)")
-        }*/
     }
 
     public func request(request: SKRequest, didFailWithError error: NSError) {
@@ -147,7 +140,6 @@ extension InAppHelper: SKPaymentTransactionObserver {
         let productId = transaction.payment.productIdentifier
         print("completeTransaction... \(productId)")
         validateReceiptForTransaction(transaction, isRestore: false)
-        //SKPaymentQueue.defaultQueue().finishTransaction(transaction)
     }
   
     private func restoreTransaction(transaction: SKPaymentTransaction) {
@@ -155,7 +147,6 @@ extension InAppHelper: SKPaymentTransactionObserver {
         //let productId = transaction.originalTransaction!.payment.productIdentifier
         print("restoreTransaction... \(productId)")
         validateReceiptForTransaction(transaction, isRestore: true)
-        //SKPaymentQueue.defaultQueue().finishTransaction(transaction)
     }
     
     private func validateReceiptForTransaction(transaction: SKPaymentTransaction, isRestore: Bool) {
@@ -165,20 +156,18 @@ extension InAppHelper: SKPaymentTransactionObserver {
                 let productId = transaction.payment.productIdentifier
                 
                 inAppNetworkService.verifyInAppPurchase(receiptString, productId: productId, completion:
-                {(userInfo, error) -> Void in
+                {(valid, error) -> Void in
                     
                     if (error != nil) {
                         print(error)
                         self.saveError(transaction, isRestore: isRestore)
-                    } else {
+                    } else if (valid!) {
                         print("Successfully verified receipt!")
 
-                        if (userInfo != nil) {
-                            self.userService.updateUserInfo(userInfo)
-                        }
-                        
                         self.provideContentForProduct(transaction.payment.productIdentifier, isRestore: isRestore)
                         SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+                    } else {
+                        print("Server validation error")
                     }
                 })
             } else {
@@ -204,14 +193,15 @@ extension InAppHelper: SKPaymentTransactionObserver {
     // Helper: Saves the fact that the product has been purchased and posts a notification.
     private func provideContentForProduct(productId: String, isRestore: Bool) {
         if (IAPProducts.isConsumable(productId)) {
-            //save buy fact to server
-        
+            let hintsBought = IAPProducts.getHintsCount(productId)
+
+            if (hintsBought > 0) {
+                currentUserService.addHints(hintsBought)
+            }
         } else if (IAPProducts.isNonConsumbale(productId)) {
             purchasedProductIdentifiers.insert(productId)
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: productId)
             NSUserDefaults.standardUserDefaults().synchronize()
-        
-            //save buy fact to server
         }
     
         if (isRestore) {

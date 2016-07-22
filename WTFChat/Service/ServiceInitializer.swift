@@ -63,16 +63,16 @@ class ServiceInitializer {
         let inAppHelper = InAppHelper(
             inAppNetworkService: inAppNetworkService,
             currentUserService: currentUserService,
-            userService: userService,
             productIdentifiers: IAPProducts.ALL
+        )
+
+        let inAppService = InAppService(
+            inAppHelper: inAppHelper
         )
 
         //network
         serviceLocator.add(
-            InAppService(
-                inAppHelper: inAppHelper,
-                currentUserService: currentUserService
-            ),
+            inAppService,
             iosService,
             userService,
             messageService,
@@ -146,7 +146,11 @@ class ServiceInitializer {
             AudioService(),
             cipherService,
             textCategoryService,
-            GuiDataService()
+            GuiDataService(),
+            DailyHintsService(
+                inAppService: inAppService,
+                currentUserService: currentUserService
+            )
         )
     }
 }

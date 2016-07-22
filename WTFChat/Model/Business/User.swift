@@ -6,6 +6,7 @@ class User: NSObject {
     var talks = [FriendTalk]()
 
     var lastUpdate: NSDate = NSDate.defaultPast()
+    var lastLogin: NSDate = NSDate.defaultPast()
     var exp: Int = 0
     var singleExp: Int = 0
     var newHints: Int = 0
@@ -16,8 +17,6 @@ class User: NSObject {
     var pushDeciphered: Bool = true
 
     var rating: Int = 0
-
-    var buyNonConsum = [String]()
 
     var freeHintsGained: Int = 0
 
@@ -32,8 +31,7 @@ class User: NSObject {
 
     init(login: String, hints: Int, talks: [FriendTalk], lastUpdate: NSDate,
          exp: Int, singleExp: Int, newHints: Int, friends: [FriendInfo],
-         name: String, pushNew: Bool, pushDeciphered: Bool, rating: Int,
-         buyNonConsum: [String], freeHintsGained: Int)
+         name: String, pushNew: Bool, pushDeciphered: Bool, rating: Int, freeHintsGained: Int)
     {
         self.login = login
         self.hints = hints
@@ -49,8 +47,6 @@ class User: NSObject {
         self.pushDeciphered = pushDeciphered
 
         self.rating = rating
-
-        self.buyNonConsum = buyNonConsum
 
         self.freeHintsGained = freeHintsGained
     }
@@ -71,12 +67,6 @@ class User: NSObject {
 
         for friendLvl in user.friends {
             updateFriendLvlInArray(friendLvl)
-        }
-
-        for item in user.buyNonConsum {
-            if !self.buyNonConsum.contains(item) {
-                self.buyNonConsum.append(item)
-            }
         }
     }
 

@@ -47,4 +47,14 @@ extension CurrentUserService {
             saveUserInLocalStorage()
         }
     }
+
+    func addHints(hints: Int) {
+        user.hints += hints
+        saveUserInLocalStorage()
+    }
+
+    func updateLastLogin(lastLogin: NSDate) {
+        user.lastLogin = lastLogin
+        saveUserInLocalStorage()
+    }
 }

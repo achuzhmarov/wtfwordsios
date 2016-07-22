@@ -984,7 +984,7 @@
                         <outlet property="hints5Label" destination="8C7-3D-Tc7" id="rlZ-XP-dre"/>
                         <outlet property="hints6BuyLabel" destination="UL3-pf-zjv" id="Zv8-tb-MGD"/>
                         <outlet property="hints6Label" destination="qMN-8A-uGV" id="EkP-x3-spX"/>
-                        <segue destination="4AX-JW-O27" kind="unwind" identifier="hintsBought" unwindAction="hintsBought:" id="92E-fu-xtZ"/>
+                        <segue destination="4AX-JW-O27" kind="unwind" identifier="hintsBought" unwindAction="addHints" id="92E-fu-xtZ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ka-cv-y30" userLabel="First Responder" sceneMemberID="firstResponder"/>

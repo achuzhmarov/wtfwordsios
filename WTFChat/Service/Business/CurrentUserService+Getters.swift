@@ -5,6 +5,10 @@ extension CurrentUserService {
         return user.lastUpdate
     }
 
+    func getLastLogin() -> NSDate {
+        return user.lastLogin
+    }
+
     func getUserName() -> String {
         return user.name
     }
@@ -61,14 +65,6 @@ extension CurrentUserService {
 
     func getFriends() -> [FriendInfo] {
         return user.friends
-    }
-
-    func isContainBuyNonConsum(productId: ProductIdentifier) -> Bool {
-        if let productRef = IAPProducts.getProductRef(productId) {
-            return user.buyNonConsum.contains(productRef)
-        }
-
-        return false
     }
 
     func canAddFreeAdHint() -> Bool {

@@ -117,8 +117,7 @@ class TutorialMessagesViewController: MessagesViewController {
     private func beginTutorial() {
         currentTutorialStage = .Started
         
-        let noviceUser = User(login: "Novice", hints: 4)
-        noviceUser.buyNonConsum.append(IAPProducts.getProductRef(IAPProducts.CIPHER_ALL)!)
+        //let noviceUser = User(login: "Novice", hints: 4)
         //currentUserService.setNewUser(noviceUser)
         
         setTutorialTalk()

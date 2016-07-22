@@ -11,13 +11,11 @@ import StoreKit
 
 class InAppService: Service {
     private let inAppHelper: InAppHelper
-    private let currentUserService: CurrentUserService
     
     private var products = [SKProduct]()
 
-    init(inAppHelper: InAppHelper, currentUserService: CurrentUserService) {
+    init(inAppHelper: InAppHelper) {
         self.inAppHelper = inAppHelper
-        self.currentUserService = currentUserService
     }
 
     override func initService() {
@@ -83,15 +81,7 @@ class InAppService: Service {
     }
     
     func isPurchased(productId: ProductIdentifier) -> Bool {
-        if (IAPProducts.CONSUMABLE.contains(productId)) {
-            return false
-        }
-        
-        if (IAPProducts.OTHER.contains(productId)) {
-            return currentUserService.isContainBuyNonConsum(productId)
-        }
-        
-        return false
+        return inAppHelper.isProductPurchased(productId)
     }
     
     func showBuyAlert(productId: ProductIdentifier, viewPresenter: UIViewController,

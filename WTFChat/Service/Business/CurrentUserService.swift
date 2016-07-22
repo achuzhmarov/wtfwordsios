@@ -15,6 +15,7 @@ class CurrentUserService: Service {
         static let PUSH_DECIPHERED = "USER_PUSH_DECIPHERED"
         static let RATING = "USER_RATING"
         static let FREE_HINTS_GAINED = "USER_FREE_HINTS_GAINED"
+        static let LAST_LOGIN = "USER_LAST_LOGIN"
     }
 
     var user: User!
@@ -48,6 +49,7 @@ class CurrentUserService: Service {
         user.pushDeciphered = storage.getBoolField(KEY.PUSH_DECIPHERED)
         user.rating = storage.getIntField(KEY.RATING)
         user.freeHintsGained = storage.getIntField(KEY.FREE_HINTS_GAINED)
+        user.lastLogin = storage.getDateField(KEY.LAST_LOGIN)
     }
 
     private func createUserInLocalStorage() {
@@ -72,5 +74,6 @@ class CurrentUserService: Service {
         storage.saveField(KEY.PUSH_DECIPHERED, value: user.pushDeciphered)
         storage.saveField(KEY.RATING, value: user.rating)
         storage.saveField(KEY.FREE_HINTS_GAINED, value: user.freeHintsGained)
+        storage.saveField(KEY.LAST_LOGIN, value: user.lastLogin)
     }
 }
