@@ -1,6 +1,6 @@
 import Foundation
 
-class LevelPreviewViewController: UIViewController {
+class LevelPreviewViewController: BaseModalVC {
     private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
     private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
     private let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
@@ -9,12 +9,8 @@ class LevelPreviewViewController: UIViewController {
     @IBOutlet weak var difficultySelector: UISegmentedControl!
     @IBOutlet weak var startTimerLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    //@IBOutlet weak var textPreviewLabel: UILabel!
     @IBOutlet weak var lvlLabel: UILabel!
     @IBOutlet weak var lvlView: UIView!
-    @IBOutlet weak var backgroundView: UIView!
-
-    @IBOutlet weak var backgroundViewWidthConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var messageWordsView: WordsViewController!
 
@@ -30,15 +26,10 @@ class LevelPreviewViewController: UIViewController {
     private var messageText: String!
     private var messageCategory: TextCategory!
 
-    private var gradientLayer: CAGradientLayer?
-
-    let selfTransitionManager = FadeTransitionManager()
     let decipherTransitionManager = FadeTransitionManager(duration: 0.5)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.transitioningDelegate = selfTransitionManager
 
         messageWordsView.dataSource = messageWordsView
         messageWordsView.delegate = messageWordsView
@@ -56,14 +47,6 @@ class LevelPreviewViewController: UIViewController {
         updateLvlView()
 
         updateSelectedDifficultyInGUI()
-
-        view.setNeedsLayout()
-        view.layoutIfNeeded()
-
-        backgroundView.layer.cornerRadius = 12
-        backgroundView.layer.masksToBounds = true
-
-        updateBackgroundGradient()
     }
 
     private func checkHardAvailability() {
@@ -80,27 +63,10 @@ class LevelPreviewViewController: UIViewController {
         }
     }
 
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-
-        updateBackgroundGradient()
-    }
-
     @IBAction func difficultyChanged(sender: AnyObject) {
         selectedDifficulty = cipherDifficulties[difficultySelector.selectedSegmentIndex]
         guiDataService.updateLastSelectedDifficulty(selectedDifficulty)
         updateMessage()
-    }
-
-    private func updateBackgroundGradient() {
-        gradientLayer?.removeFromSuperlayer()
-
-        let size = CGSize(
-            width: backgroundViewWidthConstraint.constant,
-            height: backgroundView.frame.size.height
-        )
-
-        gradientLayer = backgroundView.addDiagonalGradient(Gradient.Background, size: size)
     }
 
     private func updateMessage() {

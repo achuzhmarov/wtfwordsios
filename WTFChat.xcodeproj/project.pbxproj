@@ -122,6 +122,7 @@
 		3E37CAD76575F4FCF506839B /* CoreWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C9ED2D4796D1E2A18168 /* CoreWord.swift */; };
 		3E37CAD97E41E445A3F3BBD0 /* JSQMessagesTimestampFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CDBCEF2D8B93E65D48F4 /* JSQMessagesTimestampFormatter.m */; };
 		3E37CAE111B6ACDC2340E014 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C98636554709D1F080F3 /* KeychainWrapper.m */; };
+		3E37CB01D0F35992E0EE911B /* BaseModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C0AE948C28DF4830B588 /* BaseModalVC.swift */; };
 		3E37CB125F0FB440E82DFA23 /* SingleDecipherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C7669C3130760DBC69CD /* SingleDecipherViewController.swift */; };
 		3E37CB1FF29DA0858EA53A11 /* TalkNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C35183B090258C83DB42 /* TalkNetworkService.swift */; };
 		3E37CB6A910BE40A55855DC2 /* DecipherResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C309D678937A0BD83AB6 /* DecipherResultVC.swift */; };
@@ -151,6 +152,7 @@
 		3E37CD8522D9563A6AF14675 /* FadeTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C055C2030CF9CB938BF4 /* FadeTransitionManager.swift */; };
 		3E37CD8F6ACB9AAFE7EB1FF5 /* PanTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C61DFE53A61DD4EE8686 /* PanTransitionManager.swift */; };
 		3E37CD9A0F03B8D2327EEF66 /* BaseTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CED9042DF857125F0842 /* BaseTransitionManager.swift */; };
+		3E37CD9AAD63C1B2ECD29569 /* ShopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C77CA86567BA8D48081C /* ShopVC.swift */; };
 		3E37CD9B65744FC3AE100E93 /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E37CA9049DA3801F0F07E0F /* error.wav */; };
 		3E37CDC66A4CA01F05B90265 /* RemoteMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C98DB01429284B1E0CCC /* RemoteMessage.swift */; };
 		3E37CE2828A4F691CF812C2B /* TutorialMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C659ABA1CBA0BD66C8BC /* TutorialMessagesViewController.swift */; };
@@ -212,6 +214,7 @@
 		3E37C022DD561335965BFC72 /* DecipherInProgressVC+Guess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DecipherInProgressVC+Guess.swift"; sourceTree = "<group>"; };
 		3E37C0548C494772D904E1E7 /* SingleMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleMessageViewController.swift; sourceTree = "<group>"; };
 		3E37C055C2030CF9CB938BF4 /* FadeTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeTransitionManager.swift; sourceTree = "<group>"; };
+		3E37C0AE948C28DF4830B588 /* BaseModalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModalVC.swift; sourceTree = "<group>"; };
 		3E37C0BA72DA4018F543AF1A /* AvatarService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarService.swift; sourceTree = "<group>"; };
 		3E37C0D41AF12BC7DDE9977F /* LeftCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftCutterCipher.swift; sourceTree = "<group>"; };
 		3E37C0E641E8486597514592 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -287,6 +290,7 @@
 		3E37C74708BBD30FFD80F3D8 /* NetworkDecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDecipherViewController.swift; sourceTree = "<group>"; };
 		3E37C7567924686F83EB2112 /* TutorialDecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialDecipherViewController.swift; sourceTree = "<group>"; };
 		3E37C7669C3130760DBC69CD /* SingleDecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleDecipherViewController.swift; sourceTree = "<group>"; };
+		3E37C77CA86567BA8D48081C /* ShopVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopVC.swift; sourceTree = "<group>"; };
 		3E37C7907201437918DB3E8A /* UIBezierPath+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extension.swift"; sourceTree = "<group>"; };
 		3E37C7A3DF5F77D8BB21ACF2 /* DoubleCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleCutterCipher.swift; sourceTree = "<group>"; };
 		3E37C7B3CA8FB6461A10A098 /* CipherDifficulty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherDifficulty.swift; sourceTree = "<group>"; };
@@ -484,6 +488,7 @@
 				3E37C4BEDF2AA2D749F18C4A /* ShopViewController.swift */,
 				3E37CDCE1C95DD4AD3A62436 /* BaseShopViewController.swift */,
 				3E37CEAFAD5645723457C239 /* HintsShopViewController.swift */,
+				3E37C77CA86567BA8D48081C /* ShopVC.swift */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -932,6 +937,7 @@
 				3E37C368983046E969358AC8 /* Gradient.swift */,
 				3E37C1B261A338164240EE80 /* BaseUIViewController.swift */,
 				3E37CB2FC358D2A3081CF9EE /* MenuButton.swift */,
+				3E37C0AE948C28DF4830B588 /* BaseModalVC.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1327,6 +1333,8 @@
 				3E37C9BA13555D14D25651BE /* InAppNetworkService.swift in Sources */,
 				3E37C64787A2CCBABBC903A3 /* NetworkService.swift in Sources */,
 				3E37C3D1D971F9EC61677C96 /* DailyHintsService.swift in Sources */,
+				3E37CD9AAD63C1B2ECD29569 /* ShopVC.swift in Sources */,
+				3E37CB01D0F35992E0EE911B /* BaseModalVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

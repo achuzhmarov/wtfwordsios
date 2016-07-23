@@ -101,8 +101,4 @@ class SingleModeViewController: BaseUIViewController {
             WTFOneButtonAlert.show("Congratulations!", message: message, firstButtonTitle: "Ok")
         }
     }
-
-    @IBAction func backToCiphers(segue:UIStoryboardSegue) {
-
-    }
 }

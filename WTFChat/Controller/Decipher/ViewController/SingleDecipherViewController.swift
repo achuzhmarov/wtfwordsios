@@ -38,7 +38,7 @@ class SingleDecipherViewController: DecipherViewController {
 
         levelPreviewVC.view.hidden = true
         levelPreviewVC.decipherTransitionManager.animationDuration = 0.3
-        levelPreviewVC.selfTransitionManager.animationDuration = 0
+        levelPreviewVC.transitionManager.animationDuration = 0
 
         levelPreviewVC.dismissViewControllerAnimated(true) {
             singleModeVC.dismissViewControllerAnimated(true) {

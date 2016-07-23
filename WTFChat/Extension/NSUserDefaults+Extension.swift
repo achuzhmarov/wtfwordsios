@@ -10,7 +10,11 @@ extension NSUserDefaults {
     }
 
     func getDateField(key: String) -> NSDate {
-        return self.objectForKey(key) as! NSDate
+        if let date = self.objectForKey(key) as? NSDate {
+            return date
+        } else {
+            return NSDate()
+        }
     }
 
     func getBoolField(key: String) -> Bool {
