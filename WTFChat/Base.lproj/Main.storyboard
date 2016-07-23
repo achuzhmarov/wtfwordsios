@@ -2658,20 +2658,20 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JRg-tN-G5k">
                                 <rect key="frame" x="140" y="155" width="320" height="290"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zr-z2-OiM">
-                                        <rect key="frame" x="8" y="156" width="40" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zr-z2-OiM">
+                                        <rect key="frame" x="8" y="156" width="25" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mP7-Rd-QEC">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mP7-Rd-QEC">
                                         <rect key="frame" x="184" y="156" width="40" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2p-hg-0Zd">
-                                        <rect key="frame" x="8" y="194" width="40" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2p-hg-0Zd">
+                                        <rect key="frame" x="8" y="194" width="25" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2688,8 +2688,11 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbf-rm-tqX">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbf-rm-tqX">
                                         <rect key="frame" x="184" y="118" width="40" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="coY-uN-GLo"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2707,7 +2710,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eag-A4-6va" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="56" y="119" width="80" height="28"/>
+                                        <rect key="frame" x="41" y="119" width="80" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="0.99$">
@@ -2718,15 +2721,15 @@
                                         <rect key="frame" x="232" y="119" width="80" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="1.99$">
+                                        <state key="normal" title="3.99$">
                                             <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBa-9V-tiJ" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="56" y="157" width="80" height="28"/>
+                                        <rect key="frame" x="41" y="157" width="80" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="2.99$">
+                                        <state key="normal" title="1.99$">
                                             <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
@@ -2734,15 +2737,15 @@
                                         <rect key="frame" x="232" y="157" width="80" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="3.99$">
+                                        <state key="normal" title="4.99$">
                                             <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHm-Rw-TDc" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="56" y="195" width="80" height="28"/>
+                                        <rect key="frame" x="41" y="195" width="80" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="4.99$">
+                                        <state key="normal" title="2.99$">
                                             <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
@@ -2783,9 +2786,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elE-Vg-N0C">
-                                        <rect key="frame" x="8" y="118" width="40" height="30"/>
+                                        <rect key="frame" x="8" y="118" width="25" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="om7-tr-FJt"/>
+                                            <constraint firstAttribute="width" constant="25" id="om7-tr-FJt"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2814,7 +2817,6 @@
                                     <constraint firstItem="2zr-z2-OiM" firstAttribute="top" secondItem="elE-Vg-N0C" secondAttribute="bottom" constant="8" id="79d-va-QwG"/>
                                     <constraint firstItem="4WN-BV-Pk8" firstAttribute="leading" secondItem="mP7-Rd-QEC" secondAttribute="trailing" constant="8" id="8VO-M3-YIL"/>
                                     <constraint firstItem="2fS-jF-f5s" firstAttribute="leading" secondItem="6Md-3z-TJO" secondAttribute="leading" id="BRX-kC-d4p"/>
-                                    <constraint firstItem="Qbf-rm-tqX" firstAttribute="width" secondItem="elE-Vg-N0C" secondAttribute="width" id="C1c-LG-6ZW"/>
                                     <constraint firstItem="h2p-hg-0Zd" firstAttribute="leading" secondItem="6Md-3z-TJO" secondAttribute="leading" id="CY0-rd-R1C"/>
                                     <constraint firstItem="6Md-3z-TJO" firstAttribute="top" secondItem="JRg-tN-G5k" secondAttribute="top" constant="8" id="CeU-Np-MGn"/>
                                     <constraint firstItem="bXG-YJ-xdb" firstAttribute="trailing" secondItem="VAy-Eg-p5z" secondAttribute="trailing" id="ChJ-dw-UHl"/>
@@ -2823,8 +2825,8 @@
                                     <constraint firstItem="iHm-Rw-TDc" firstAttribute="leading" secondItem="KBa-9V-tiJ" secondAttribute="leading" id="HVB-WQ-6ZV"/>
                                     <constraint firstItem="2zr-z2-OiM" firstAttribute="leading" secondItem="6Md-3z-TJO" secondAttribute="leading" id="Hkz-wC-oEW"/>
                                     <constraint firstItem="5kZ-lT-Qws" firstAttribute="leading" secondItem="JRg-tN-G5k" secondAttribute="leading" constant="8" id="IcM-D5-Mkl"/>
+                                    <constraint firstItem="mP7-Rd-QEC" firstAttribute="height" secondItem="Qbf-rm-tqX" secondAttribute="height" id="MQS-bz-N23"/>
                                     <constraint firstItem="8T4-A9-BKY" firstAttribute="trailing" secondItem="VAy-Eg-p5z" secondAttribute="trailing" id="MUH-bB-lKu"/>
-                                    <constraint firstItem="daE-zG-77V" firstAttribute="width" secondItem="elE-Vg-N0C" secondAttribute="width" id="Ngx-xt-3HK"/>
                                     <constraint firstItem="KBa-9V-tiJ" firstAttribute="leading" secondItem="eag-A4-6va" secondAttribute="leading" id="OnV-rL-ygk"/>
                                     <constraint firstItem="h2p-hg-0Zd" firstAttribute="width" secondItem="elE-Vg-N0C" secondAttribute="width" id="PWu-Is-ALo"/>
                                     <constraint firstItem="2fS-jF-f5s" firstAttribute="height" secondItem="6Md-3z-TJO" secondAttribute="height" id="RGM-bT-D0J"/>
@@ -2845,14 +2847,12 @@
                                     <constraint firstItem="iHm-Rw-TDc" firstAttribute="centerY" secondItem="h2p-hg-0Zd" secondAttribute="centerY" id="el6-G8-Yga"/>
                                     <constraint firstItem="8T4-A9-BKY" firstAttribute="height" secondItem="VAy-Eg-p5z" secondAttribute="height" id="evi-pM-eE6"/>
                                     <constraint firstItem="bXG-YJ-xdb" firstAttribute="leading" secondItem="daE-zG-77V" secondAttribute="trailing" constant="8" id="f7X-xr-uNL"/>
-                                    <constraint firstItem="mP7-Rd-QEC" firstAttribute="width" secondItem="elE-Vg-N0C" secondAttribute="width" id="feB-Lu-PWM"/>
                                     <constraint firstItem="iHm-Rw-TDc" firstAttribute="width" secondItem="VAy-Eg-p5z" secondAttribute="width" id="g3e-mK-CAv"/>
                                     <constraint firstItem="daE-zG-77V" firstAttribute="height" secondItem="6Md-3z-TJO" secondAttribute="height" id="hi0-qH-k6V"/>
                                     <constraint firstItem="TfL-S7-WYM" firstAttribute="top" secondItem="2fS-jF-f5s" secondAttribute="bottom" constant="8" id="i60-DP-4Yj"/>
                                     <constraint firstAttribute="trailing" secondItem="5kZ-lT-Qws" secondAttribute="trailing" constant="8" id="k0G-QO-dUC"/>
                                     <constraint firstItem="6Md-3z-TJO" firstAttribute="leading" secondItem="JRg-tN-G5k" secondAttribute="leading" constant="8" id="nnZ-hA-1Q4"/>
                                     <constraint firstItem="elE-Vg-N0C" firstAttribute="top" secondItem="TfL-S7-WYM" secondAttribute="bottom" constant="8" id="oZE-bJ-xpi"/>
-                                    <constraint firstItem="mP7-Rd-QEC" firstAttribute="height" secondItem="6Md-3z-TJO" secondAttribute="height" id="omx-Bf-3g1"/>
                                     <constraint firstItem="iHm-Rw-TDc" firstAttribute="height" secondItem="VAy-Eg-p5z" secondAttribute="height" id="ow0-FL-be3"/>
                                     <constraint firstItem="eag-A4-6va" firstAttribute="centerY" secondItem="elE-Vg-N0C" secondAttribute="centerY" id="plD-26-V3P"/>
                                     <constraint firstAttribute="height" constant="290" id="r8k-IS-aWm"/>
@@ -2860,7 +2860,9 @@
                                     <constraint firstAttribute="width" priority="990" constant="320" id="tXt-yA-0vR"/>
                                     <constraint firstItem="bXG-YJ-xdb" firstAttribute="height" secondItem="VAy-Eg-p5z" secondAttribute="height" id="ttt-Dy-6hA"/>
                                     <constraint firstItem="4WN-BV-Pk8" firstAttribute="width" secondItem="VAy-Eg-p5z" secondAttribute="width" id="vKH-82-4IQ"/>
+                                    <constraint firstItem="mP7-Rd-QEC" firstAttribute="width" secondItem="Qbf-rm-tqX" secondAttribute="width" id="va3-Jq-Iho"/>
                                     <constraint firstItem="bXG-YJ-xdb" firstAttribute="centerY" secondItem="daE-zG-77V" secondAttribute="centerY" id="wCi-6J-XBn"/>
+                                    <constraint firstItem="daE-zG-77V" firstAttribute="width" secondItem="Qbf-rm-tqX" secondAttribute="width" id="wLo-mv-ao3"/>
                                     <constraint firstItem="TfL-S7-WYM" firstAttribute="centerX" secondItem="JRg-tN-G5k" secondAttribute="centerX" id="wNh-X2-XmZ"/>
                                     <constraint firstItem="2zr-z2-OiM" firstAttribute="height" secondItem="6Md-3z-TJO" secondAttribute="height" id="wU4-bm-j4p"/>
                                     <constraint firstAttribute="trailing" secondItem="VAy-Eg-p5z" secondAttribute="trailing" constant="8" id="wbs-R6-LRn"/>
