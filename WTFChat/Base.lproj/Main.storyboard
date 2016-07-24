@@ -2656,40 +2656,40 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JRg-tN-G5k">
-                                <rect key="frame" x="140" y="155" width="320" height="290"/>
+                                <rect key="frame" x="140" y="142" width="320" height="316"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zr-z2-OiM">
-                                        <rect key="frame" x="8" y="156" width="25" height="30"/>
+                                        <rect key="frame" x="8" y="190" width="25" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mP7-Rd-QEC">
-                                        <rect key="frame" x="184" y="156" width="40" height="30"/>
+                                        <rect key="frame" x="184" y="190" width="40" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2p-hg-0Zd">
-                                        <rect key="frame" x="8" y="194" width="25" height="30"/>
+                                        <rect key="frame" x="8" y="228" width="25" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daE-zG-77V">
-                                        <rect key="frame" x="184" y="194" width="40" height="30"/>
+                                        <rect key="frame" x="184" y="228" width="40" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X2 Free Daily Hints" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fS-jF-f5s">
-                                        <rect key="frame" x="8" y="46" width="146" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X2 Daily Hints" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fS-jF-f5s">
+                                        <rect key="frame" x="8" y="80" width="107" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbf-rm-tqX">
-                                        <rect key="frame" x="184" y="118" width="40" height="30"/>
+                                        <rect key="frame" x="184" y="152" width="40" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="coY-uN-GLo"/>
                                         </constraints>
@@ -2697,76 +2697,64 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VAy-Eg-p5z" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="232" y="9" width="80" height="28"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="O4d-D5-DQU"/>
-                                            <constraint firstAttribute="height" constant="28" id="rkZ-ru-rSc"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="View Ad">
-                                            <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eag-A4-6va" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="41" y="119" width="80" height="28"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="41" y="153" width="80" height="28"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="0.99$">
                                             <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vdS-fr-OLm" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="232" y="119" width="80" height="28"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="232" y="153" width="80" height="28"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="3.99$">
                                             <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBa-9V-tiJ" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="41" y="157" width="80" height="28"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="41" y="191" width="80" height="28"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="1.99$">
                                             <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4WN-BV-Pk8" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="232" y="157" width="80" height="28"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="232" y="191" width="80" height="28"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="4.99$">
                                             <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHm-Rw-TDc" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="41" y="195" width="80" height="28"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="41" y="229" width="80" height="28"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="2.99$">
                                             <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXG-YJ-xdb" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="232" y="195" width="80" height="28"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="232" y="229" width="80" height="28"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="9.99$">
                                             <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8T4-A9-BKY" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="232" y="47" width="80" height="28"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="232" y="81" width="80" height="28"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="2.99$">
                                             <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kZ-lT-Qws" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="240" width="304" height="42"/>
+                                        <rect key="frame" x="8" y="266" width="304" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="aA7-M8-haO"/>
                                         </constraints>
@@ -2779,14 +2767,8 @@
                                             <action selector="closeWindow:" destination="12F-tA-1Q8" eventType="touchUpInside" id="0RB-e1-XRc"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buy Hints" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TfL-S7-WYM">
-                                        <rect key="frame" x="115" y="84" width="91" height="26"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elE-Vg-N0C">
-                                        <rect key="frame" x="8" y="118" width="25" height="30"/>
+                                        <rect key="frame" x="8" y="152" width="25" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="om7-tr-FJt"/>
                                         </constraints>
@@ -2795,7 +2777,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get Free Hint" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Md-3z-TJO">
-                                        <rect key="frame" x="8" y="8" width="102" height="30"/>
+                                        <rect key="frame" x="8" y="42" width="102" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="fI2-z5-3bi"/>
                                         </constraints>
@@ -2803,10 +2785,49 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBQ-Yn-HRy" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
+                                        <rect key="frame" x="144" y="81" width="80" height="28"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Restore">
+                                            <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buy Hints" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TfL-S7-WYM">
+                                        <rect key="frame" x="115" y="118" width="91" height="26"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hints: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqn-Zv-mmi">
+                                        <rect key="frame" x="115" y="8" width="60" height="26"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="255" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Kb-aW-f4e">
+                                        <rect key="frame" x="175" y="8" width="38" height="26"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VAy-Eg-p5z" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
+                                        <rect key="frame" x="232" y="43" width="80" height="28"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="O4d-D5-DQU"/>
+                                            <constraint firstAttribute="height" constant="28" id="rkZ-ru-rSc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="View Ad">
+                                            <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="eag-A4-6va" firstAttribute="leading" secondItem="elE-Vg-N0C" secondAttribute="trailing" constant="8" id="0kU-vh-Rvg"/>
+                                    <constraint firstItem="3Kb-aW-f4e" firstAttribute="top" secondItem="JRg-tN-G5k" secondAttribute="top" constant="8" id="315-uw-rrs"/>
                                     <constraint firstItem="eag-A4-6va" firstAttribute="height" secondItem="VAy-Eg-p5z" secondAttribute="height" id="4OJ-tw-gdG"/>
                                     <constraint firstItem="vdS-fr-OLm" firstAttribute="centerY" secondItem="Qbf-rm-tqX" secondAttribute="centerY" id="4XR-Bb-GBc"/>
                                     <constraint firstItem="daE-zG-77V" firstAttribute="centerY" secondItem="h2p-hg-0Zd" secondAttribute="centerY" id="5Bu-2I-kkl"/>
@@ -2818,25 +2839,29 @@
                                     <constraint firstItem="4WN-BV-Pk8" firstAttribute="leading" secondItem="mP7-Rd-QEC" secondAttribute="trailing" constant="8" id="8VO-M3-YIL"/>
                                     <constraint firstItem="2fS-jF-f5s" firstAttribute="leading" secondItem="6Md-3z-TJO" secondAttribute="leading" id="BRX-kC-d4p"/>
                                     <constraint firstItem="h2p-hg-0Zd" firstAttribute="leading" secondItem="6Md-3z-TJO" secondAttribute="leading" id="CY0-rd-R1C"/>
-                                    <constraint firstItem="6Md-3z-TJO" firstAttribute="top" secondItem="JRg-tN-G5k" secondAttribute="top" constant="8" id="CeU-Np-MGn"/>
                                     <constraint firstItem="bXG-YJ-xdb" firstAttribute="trailing" secondItem="VAy-Eg-p5z" secondAttribute="trailing" id="ChJ-dw-UHl"/>
                                     <constraint firstItem="4WN-BV-Pk8" firstAttribute="centerY" secondItem="mP7-Rd-QEC" secondAttribute="centerY" id="EOY-7M-MJb"/>
                                     <constraint firstItem="elE-Vg-N0C" firstAttribute="leading" secondItem="6Md-3z-TJO" secondAttribute="leading" id="EfI-Nv-Hhw"/>
+                                    <constraint firstItem="8T4-A9-BKY" firstAttribute="leading" secondItem="kBQ-Yn-HRy" secondAttribute="trailing" constant="8" id="FvT-nc-hHh"/>
                                     <constraint firstItem="iHm-Rw-TDc" firstAttribute="leading" secondItem="KBa-9V-tiJ" secondAttribute="leading" id="HVB-WQ-6ZV"/>
                                     <constraint firstItem="2zr-z2-OiM" firstAttribute="leading" secondItem="6Md-3z-TJO" secondAttribute="leading" id="Hkz-wC-oEW"/>
                                     <constraint firstItem="5kZ-lT-Qws" firstAttribute="leading" secondItem="JRg-tN-G5k" secondAttribute="leading" constant="8" id="IcM-D5-Mkl"/>
                                     <constraint firstItem="mP7-Rd-QEC" firstAttribute="height" secondItem="Qbf-rm-tqX" secondAttribute="height" id="MQS-bz-N23"/>
                                     <constraint firstItem="8T4-A9-BKY" firstAttribute="trailing" secondItem="VAy-Eg-p5z" secondAttribute="trailing" id="MUH-bB-lKu"/>
+                                    <constraint firstItem="3Kb-aW-f4e" firstAttribute="leading" secondItem="iqn-Zv-mmi" secondAttribute="trailing" id="OcM-2R-Ueb"/>
                                     <constraint firstItem="KBa-9V-tiJ" firstAttribute="leading" secondItem="eag-A4-6va" secondAttribute="leading" id="OnV-rL-ygk"/>
                                     <constraint firstItem="h2p-hg-0Zd" firstAttribute="width" secondItem="elE-Vg-N0C" secondAttribute="width" id="PWu-Is-ALo"/>
+                                    <constraint firstItem="iqn-Zv-mmi" firstAttribute="leading" secondItem="TfL-S7-WYM" secondAttribute="leading" id="Q0J-Hb-S4l"/>
                                     <constraint firstItem="2fS-jF-f5s" firstAttribute="height" secondItem="6Md-3z-TJO" secondAttribute="height" id="RGM-bT-D0J"/>
                                     <constraint firstItem="KBa-9V-tiJ" firstAttribute="centerY" secondItem="2zr-z2-OiM" secondAttribute="centerY" id="Roh-co-gub"/>
                                     <constraint firstItem="vdS-fr-OLm" firstAttribute="height" secondItem="VAy-Eg-p5z" secondAttribute="height" id="S7g-SA-ekc"/>
                                     <constraint firstItem="2fS-jF-f5s" firstAttribute="top" secondItem="6Md-3z-TJO" secondAttribute="bottom" constant="8" id="SOg-qm-qb3"/>
+                                    <constraint firstItem="6Md-3z-TJO" firstAttribute="top" secondItem="iqn-Zv-mmi" secondAttribute="bottom" constant="8" id="TMR-VF-l9V"/>
                                     <constraint firstItem="mP7-Rd-QEC" firstAttribute="centerY" secondItem="2zr-z2-OiM" secondAttribute="centerY" id="Uo8-cj-sKT"/>
                                     <constraint firstItem="KBa-9V-tiJ" firstAttribute="height" secondItem="VAy-Eg-p5z" secondAttribute="height" id="VT5-l4-PRy"/>
                                     <constraint firstItem="8T4-A9-BKY" firstAttribute="centerY" secondItem="2fS-jF-f5s" secondAttribute="centerY" id="WUG-o4-DzS"/>
                                     <constraint firstItem="vdS-fr-OLm" firstAttribute="leading" secondItem="Qbf-rm-tqX" secondAttribute="trailing" constant="8" id="ZeF-yy-eHQ"/>
+                                    <constraint firstItem="kBQ-Yn-HRy" firstAttribute="width" secondItem="VAy-Eg-p5z" secondAttribute="width" id="aFU-BY-n9n"/>
                                     <constraint firstItem="4WN-BV-Pk8" firstAttribute="trailing" secondItem="VAy-Eg-p5z" secondAttribute="trailing" id="aUH-Nr-tZM"/>
                                     <constraint firstAttribute="bottom" secondItem="5kZ-lT-Qws" secondAttribute="bottom" constant="8" id="bHp-Bs-grG"/>
                                     <constraint firstItem="Qbf-rm-tqX" firstAttribute="centerY" secondItem="elE-Vg-N0C" secondAttribute="centerY" id="bVs-24-sqB"/>
@@ -2849,13 +2874,15 @@
                                     <constraint firstItem="bXG-YJ-xdb" firstAttribute="leading" secondItem="daE-zG-77V" secondAttribute="trailing" constant="8" id="f7X-xr-uNL"/>
                                     <constraint firstItem="iHm-Rw-TDc" firstAttribute="width" secondItem="VAy-Eg-p5z" secondAttribute="width" id="g3e-mK-CAv"/>
                                     <constraint firstItem="daE-zG-77V" firstAttribute="height" secondItem="6Md-3z-TJO" secondAttribute="height" id="hi0-qH-k6V"/>
+                                    <constraint firstItem="kBQ-Yn-HRy" firstAttribute="height" secondItem="VAy-Eg-p5z" secondAttribute="height" id="hix-SG-vbS"/>
                                     <constraint firstItem="TfL-S7-WYM" firstAttribute="top" secondItem="2fS-jF-f5s" secondAttribute="bottom" constant="8" id="i60-DP-4Yj"/>
                                     <constraint firstAttribute="trailing" secondItem="5kZ-lT-Qws" secondAttribute="trailing" constant="8" id="k0G-QO-dUC"/>
+                                    <constraint firstItem="kBQ-Yn-HRy" firstAttribute="centerY" secondItem="2fS-jF-f5s" secondAttribute="centerY" id="lrN-tM-VDV"/>
                                     <constraint firstItem="6Md-3z-TJO" firstAttribute="leading" secondItem="JRg-tN-G5k" secondAttribute="leading" constant="8" id="nnZ-hA-1Q4"/>
                                     <constraint firstItem="elE-Vg-N0C" firstAttribute="top" secondItem="TfL-S7-WYM" secondAttribute="bottom" constant="8" id="oZE-bJ-xpi"/>
                                     <constraint firstItem="iHm-Rw-TDc" firstAttribute="height" secondItem="VAy-Eg-p5z" secondAttribute="height" id="ow0-FL-be3"/>
                                     <constraint firstItem="eag-A4-6va" firstAttribute="centerY" secondItem="elE-Vg-N0C" secondAttribute="centerY" id="plD-26-V3P"/>
-                                    <constraint firstAttribute="height" constant="290" id="r8k-IS-aWm"/>
+                                    <constraint firstAttribute="height" constant="316" id="r8k-IS-aWm"/>
                                     <constraint firstItem="KBa-9V-tiJ" firstAttribute="width" secondItem="VAy-Eg-p5z" secondAttribute="width" id="sTC-nc-bQj"/>
                                     <constraint firstAttribute="width" priority="990" constant="320" id="tXt-yA-0vR"/>
                                     <constraint firstItem="bXG-YJ-xdb" firstAttribute="height" secondItem="VAy-Eg-p5z" secondAttribute="height" id="ttt-Dy-6hA"/>
@@ -2867,6 +2894,7 @@
                                     <constraint firstItem="2zr-z2-OiM" firstAttribute="height" secondItem="6Md-3z-TJO" secondAttribute="height" id="wU4-bm-j4p"/>
                                     <constraint firstAttribute="trailing" secondItem="VAy-Eg-p5z" secondAttribute="trailing" constant="8" id="wbs-R6-LRn"/>
                                     <constraint firstItem="elE-Vg-N0C" firstAttribute="height" secondItem="6Md-3z-TJO" secondAttribute="height" id="wiS-xa-bjk"/>
+                                    <constraint firstItem="iqn-Zv-mmi" firstAttribute="top" secondItem="JRg-tN-G5k" secondAttribute="top" constant="8" id="xhB-kN-jWf"/>
                                     <constraint firstItem="Qbf-rm-tqX" firstAttribute="height" secondItem="6Md-3z-TJO" secondAttribute="height" id="xzj-ce-Bmp"/>
                                     <constraint firstItem="4WN-BV-Pk8" firstAttribute="height" secondItem="VAy-Eg-p5z" secondAttribute="height" id="zGY-xc-eJA"/>
                                     <constraint firstItem="8T4-A9-BKY" firstAttribute="width" secondItem="VAy-Eg-p5z" secondAttribute="width" id="zos-gw-8kg"/>
@@ -2889,6 +2917,22 @@
                     <connections>
                         <outlet property="backgroundView" destination="JRg-tN-G5k" id="FA6-9B-43L"/>
                         <outlet property="backgroundViewWidthConstraint" destination="tXt-yA-0vR" id="dmT-Um-NKg"/>
+                        <outlet property="dailyHintsBuyButton" destination="8T4-A9-BKY" id="aFr-BD-9Po"/>
+                        <outlet property="dailyHintsRestoreButton" destination="kBQ-Yn-HRy" id="xMq-lK-cRC"/>
+                        <outlet property="freeHintsBuyButton" destination="VAy-Eg-p5z" id="Fzw-z1-F5T"/>
+                        <outlet property="hints1BuyButton" destination="eag-A4-6va" id="HKu-Fk-TKJ"/>
+                        <outlet property="hints1Title" destination="elE-Vg-N0C" id="VhY-az-uTh"/>
+                        <outlet property="hints2BuyButton" destination="KBa-9V-tiJ" id="Ii4-iR-Ikv"/>
+                        <outlet property="hints2Title" destination="2zr-z2-OiM" id="6gC-Bq-u0F"/>
+                        <outlet property="hints3BuyButton" destination="iHm-Rw-TDc" id="5CV-g3-m2T"/>
+                        <outlet property="hints3Title" destination="h2p-hg-0Zd" id="Hlj-jv-ZVN"/>
+                        <outlet property="hints4BuyButton" destination="vdS-fr-OLm" id="SlP-JW-MDk"/>
+                        <outlet property="hints4Title" destination="Qbf-rm-tqX" id="MlQ-Ew-6F3"/>
+                        <outlet property="hints5BuyButton" destination="4WN-BV-Pk8" id="RCk-cJ-3dh"/>
+                        <outlet property="hints5Title" destination="mP7-Rd-QEC" id="GJV-S8-cQq"/>
+                        <outlet property="hints6BuyButton" destination="bXG-YJ-xdb" id="ZB3-fp-vTM"/>
+                        <outlet property="hints6Title" destination="daE-zG-77V" id="3U2-EN-N3d"/>
+                        <outlet property="userHintsCount" destination="3Kb-aW-f4e" id="6xX-HG-7bR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7l-Qe-iY7" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -42,7 +42,8 @@ class InAppService: Service {
     
     func getProductTitle(productId: ProductIdentifier) -> String? {
         if let product = getProduct(productId) {
-            return product.localizedTitle
+            let titleParts = product.localizedTitle.componentsSeparatedByString(" ")
+            return titleParts[0]
         }
         
         return nil
@@ -84,8 +85,7 @@ class InAppService: Service {
         return inAppHelper.isProductPurchased(productId)
     }
     
-    func showBuyAlert(productId: ProductIdentifier, viewPresenter: UIViewController,
-            cancelFunc: (() -> Void)? = nil) {
+    func showBuyAlert(productId: ProductIdentifier, cancelFunc: (() -> Void)? = nil) {
                 
         if (!canPurchase(productId) || isPurchased(productId)) {
             return

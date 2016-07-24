@@ -1,8 +1,10 @@
 import Foundation
 
 class BorderedButton: UIButton {
-    let BORDER_WIDTH: CGFloat = 2
-    let CORNER_RADIUS: CGFloat = 8
+    private let BORDER_WIDTH: CGFloat = 2
+    private let CORNER_RADIUS: CGFloat = 8
+
+    private var gradientLayer: CAGradientLayer?
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -15,6 +17,10 @@ class BorderedButton: UIButton {
         setTitleColor(Color.Text, forState: .Normal)
         setTitleColor(Color.Text, forState: .Highlighted)
 
-        addDiagonalGradient(Gradient.Ciphered)
+        gradientLayer = addDiagonalGradient(Gradient.Ciphered)
+    }
+
+    func updateGradient(colors: [CGColor]) {
+        gradientLayer?.colors = colors
     }
 }

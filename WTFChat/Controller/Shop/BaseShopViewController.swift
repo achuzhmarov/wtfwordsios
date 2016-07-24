@@ -117,7 +117,7 @@ class BaseShopViewController: UITableViewController {
     }
     
     func showPurchaseAlert(productId: ProductIdentifier) {
-        inAppService.showBuyAlert(productId, viewPresenter: self)
+        inAppService.showBuyAlert(productId)
     }
     
     func showAdAlert() {
