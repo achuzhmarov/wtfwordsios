@@ -22,5 +22,6 @@ class BorderedButton: UIButton {
 
     func updateGradient(colors: [CGColor]) {
         gradientLayer?.colors = colors
+        layer.borderColor = colors[1]
     }
 }

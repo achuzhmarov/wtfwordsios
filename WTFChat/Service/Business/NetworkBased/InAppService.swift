@@ -39,11 +39,19 @@ class InAppService: Service {
             inAppHelper.purchaseProduct(product)
         }
     }
-    
-    func getProductTitle(productId: ProductIdentifier) -> String? {
+
+    func getHintsProductTitle(productId: ProductIdentifier) -> String? {
         if let product = getProduct(productId) {
             let titleParts = product.localizedTitle.componentsSeparatedByString(" ")
             return titleParts[0]
+        }
+
+        return nil
+    }
+
+    func getProductTitle(productId: ProductIdentifier) -> String? {
+        if let product = getProduct(productId) {
+            return product.localizedTitle
         }
         
         return nil

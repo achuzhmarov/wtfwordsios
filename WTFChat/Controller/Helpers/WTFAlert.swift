@@ -1,11 +1,22 @@
 import Foundation
 
-class WTFOneButtonAlert: NSObject, UIAlertViewDelegate  {
+class WTFBaseAlert: NSObject, UIAlertViewDelegate  {
+    class func presentAlert(alert: UIAlertController) {
+        let rootViewController: UIViewController = UIApplication.sharedApplication().windows.last!.rootViewController!
+
+        if let childController = rootViewController.presentedViewController {
+            childController.presentViewController(alert, animated: true, completion: nil)
+        } else {
+            rootViewController.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+}
+
+class WTFOneButtonAlert: WTFBaseAlert  {
     static let CON_ERR = "%conError%"
     private static let connectionErrorDescription = "Internet connection problem"
 
     class func show(title: String, message: String, firstButtonTitle: String, alertButtonAction:(() -> Void)? = nil) {
-        
         //if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
                 message: message.replace(CON_ERR, with: connectionErrorDescription),
@@ -15,8 +26,8 @@ class WTFOneButtonAlert: NSObject, UIAlertViewDelegate  {
                 alertButtonAction?()
             }))
 
-            let rootViewController: UIViewController = UIApplication.sharedApplication().windows.last!.rootViewController!
-            rootViewController.presentViewController(alert, animated: true, completion: nil)
+            presentAlert(alert)
+
         /*} else {
             let alert = AlertWithDelegate()
             alert.title = title
@@ -28,14 +39,12 @@ class WTFOneButtonAlert: NSObject, UIAlertViewDelegate  {
     }
 }
 
-class WTFTwoButtonsAlert: NSObject, UIAlertViewDelegate {
+class WTFTwoButtonsAlert: WTFBaseAlert {
     class func show(title: String, message: String, firstButtonTitle: String, secondButtonTitle: String, alertButtonAction:(() -> Void)?) {
-        
         return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: secondButtonTitle, alertButtonAction: alertButtonAction, cancelButtonAction: nil)
     }
     
     class func show(title: String, message: String, firstButtonTitle: String, secondButtonTitle: String, alertButtonAction:(() -> Void)?, cancelButtonAction:(() -> Void)?) {
-        
         //if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
                 message: message,
@@ -49,8 +58,8 @@ class WTFTwoButtonsAlert: NSObject, UIAlertViewDelegate {
                 cancelButtonAction?()
             }))
 
-            let rootViewController: UIViewController = UIApplication.sharedApplication().windows.last!.rootViewController!
-            rootViewController.presentViewController(alert, animated: true, completion: nil)
+            presentAlert(alert)
+
         /*} else {
             let alert = AlertWithDelegate()
             alert.title = title
@@ -61,6 +70,10 @@ class WTFTwoButtonsAlert: NSObject, UIAlertViewDelegate {
             alert.setCancelFunction(cancelButtonAction)
             alert.show()
         }*/
+    }
+
+    private func presentAlert() {
+
     }
 }
 

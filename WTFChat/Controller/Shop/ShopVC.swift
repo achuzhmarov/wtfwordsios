@@ -55,14 +55,6 @@ class ShopVC: BaseModalVC {
 
         addPressedHandlersForProducts()
 
-        // Subscribe to a notification that fires when a product is purchased.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ShopVC.productPurchased(_:)), name: IAPHelperProductPurchasedNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ShopVC.productPurchasedError(_:)), name: IAPHelperProductPurchasedErrorNotification, object: nil)
-
-        // Subscribe to a notification that fires when a product is restored.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ShopVC.productRestore(_:)), name: IAPHelperProductRestoreNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ShopVC.productRestoreError(_:)), name: IAPHelperProductRestoreErrorNotification, object: nil)
-
         updateTable()
     }
 
@@ -72,6 +64,18 @@ class ShopVC: BaseModalVC {
 
     override func viewWillAppear(animated: Bool) {
         updateTable()
+
+        // Subscribe to a notification that fires when a product is purchased.
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ShopVC.productPurchased(_:)), name: IAPHelperProductPurchasedNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ShopVC.productPurchasedError(_:)), name: IAPHelperProductPurchasedErrorNotification, object: nil)
+
+        // Subscribe to a notification that fires when a product is restored.
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ShopVC.productRestore(_:)), name: IAPHelperProductRestoreNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ShopVC.productRestoreError(_:)), name: IAPHelperProductRestoreErrorNotification, object: nil)
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self);
     }
 
     private func addPressedHandlersForProducts() {
@@ -82,6 +86,7 @@ class ShopVC: BaseModalVC {
         }
 
         dailyHintsRestoreButton.addTarget(self, action: #selector(ShopVC.restoreButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        freeHintsBuyButton.addTarget(self, action: #selector(ShopVC.showAdAlert(_:)), forControlEvents: .TouchUpInside)
     }
 
     func buyButtonPressed(sender: BorderedButton) {
@@ -110,6 +115,8 @@ class ShopVC: BaseModalVC {
     }
 
     func updateTable() {
+        userHintsCount.text = String(currentUserService.getUserHints())
+
         updateProductTitles()
         updateProductButtons()
         updateFreeHints()
@@ -118,7 +125,7 @@ class ShopVC: BaseModalVC {
 
     private func updateProductTitles() {
         for (productId, productTitle) in productTitles {
-            productTitle.text = inAppService.getProductTitle(productId)
+            productTitle.text = inAppService.getHintsProductTitle(productId)
         }
     }
 
@@ -157,7 +164,7 @@ class ShopVC: BaseModalVC {
         }
     }
 
-    func showAdAlert() {
+    func showAdAlert(sender: BorderedButton) {
         if currentUserService.canAddFreeAdHint() && adColonyService.hasAd() {
             adColonyService.showAd({ () -> Void in
                 self.userService.addFreeAdHint()
