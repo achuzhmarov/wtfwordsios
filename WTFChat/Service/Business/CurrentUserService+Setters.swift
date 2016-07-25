@@ -53,6 +53,14 @@ extension CurrentUserService {
         saveUserInLocalStorage()
     }
 
+    func addHintsForLvlUp() -> Int {
+        let hintsForLvl = expService.getHintsForLvl(getUserLvl())
+        user.hints += hintsForLvl
+        saveUserInLocalStorage()
+
+        return hintsForLvl
+    }
+
     func updateLastLogin(lastLogin: NSDate) {
         user.lastLogin = lastLogin
         saveUserInLocalStorage()

@@ -17,6 +17,10 @@ class WTFOneButtonAlert: WTFBaseAlert  {
     private static let connectionErrorDescription = "Internet connection problem"
 
     class func show(title: String, message: String?, firstButtonTitle: String, alertButtonAction:(() -> Void)? = nil) {
+        show(title, message: message, firstButtonTitle: firstButtonTitle, viewPresenter: nil, alertButtonAction: alertButtonAction)
+    }
+
+    class func show(title: String, message: String?, firstButtonTitle: String, viewPresenter: UIViewController? = nil, alertButtonAction:(() -> Void)? = nil) {
         //if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
                 message: message?.replace(CON_ERR, with: connectionErrorDescription),
@@ -26,7 +30,11 @@ class WTFOneButtonAlert: WTFBaseAlert  {
                 alertButtonAction?()
             }))
 
-            presentAlert(alert)
+            if let presenter = viewPresenter {
+                presenter.presentViewController(alert, animated: true, completion: nil)
+            } else {
+                presentAlert(alert)
+            }
 
         /*} else {
             let alert = AlertWithDelegate()

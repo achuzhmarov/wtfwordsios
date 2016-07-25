@@ -12,6 +12,13 @@ class ExpService: Service {
     private let BASE_LVL_EXP = 1000
     private let LVL_EXP_STEP = 5
 
+    private let LVL_HINTS_STEP = 5
+    private let HINTS_PER_STEP = 5
+
+    func getHintsForLvl(lvl: Int) -> Int {
+        return ((lvl / LVL_HINTS_STEP) + 1) * HINTS_PER_STEP
+    }
+
     func getCurrentLvlExp(exp: Int) -> Int {
         let currentLvl = getLvl(exp)
         return exp - getExpByLvl(currentLvl)

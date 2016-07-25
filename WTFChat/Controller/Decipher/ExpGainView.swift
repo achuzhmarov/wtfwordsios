@@ -17,7 +17,8 @@ class ExpGainView: NSObject {
     var progressBarTimer: NSTimer?
     var userExp: Int = 0
     var nextLvlExp: Int = 0
-    
+    var userLvl: Int = 0
+
     let lvlTopMargin = CGFloat(8)
     let progressUpdateInterval = 0.1
     let progressUpdateMaxStep = Float(0.125)
@@ -29,6 +30,7 @@ class ExpGainView: NSObject {
         
         userExp = currentUserService.getCurrentLvlExp()
         nextLvlExp = currentUserService.getNextLvlExp()
+        userLvl = currentUserService.getUserLvl()
     }
     
     private func createLvlLabel(rootView: UIView, userLvl: Int) -> UILabel {
@@ -101,7 +103,7 @@ class ExpGainView: NSObject {
             return
         }
 
-        self.userExp += earnedExp
+        userExp += earnedExp
 
         dispatch_async(dispatch_get_main_queue(), {
             self.progressBarTimer?.invalidate()
@@ -110,7 +112,7 @@ class ExpGainView: NSObject {
                 selector: #selector(ExpGainView.updateProgress), userInfo: nil, repeats: true)
         })
 
-        self.expLabel?.text = "+\(String(earnedExp))XP"
+        expLabel?.text = "+\(String(earnedExp))XP"
     }
 
     private func setFinishedProgress() {
@@ -139,14 +141,14 @@ class ExpGainView: NSObject {
             self.progressBarTimer?.invalidate()
             
             if (progressView!.progress == 1) {
-                let userLvl = String(currentUserService.getUserLvl())
-                
+                let newUserLvl = currentUserService.getUserLvl()
+
                 dispatch_async(dispatch_get_main_queue()) {
                     usleep(1000 * 500)
                     
                     UIView.animateWithDuration(1,
                         animations: {
-                            self.lvlLabel?.text = "LEVEL \(userLvl)"
+                            self.lvlLabel?.text = "LEVEL \(String(newUserLvl))"
                         },
                         completion: nil
                     )

@@ -5,6 +5,7 @@ class SingleDecipherViewController: DecipherViewController {
     private let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
     private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
     private let levelService: LevelService = serviceLocator.get(LevelService)
+    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
 
     private var singleMessage: SingleMessage!
     private var messageCategory: TextCategory!
@@ -25,9 +26,25 @@ class SingleDecipherViewController: DecipherViewController {
     }
 
     override func sendMessageDecipher() {
+        let previousUserLvl = currentUserService.getUserLvl()
+
         singleModeService.finishDecipher(singleMessage)
         resultVC.expGainView.runProgress(message.exp)
         messageCategory.updateMessage()
+
+        let currentUserLvl = currentUserService.getUserLvl()
+
+        if (currentUserLvl > previousUserLvl) {
+            let hintsForLvl = currentUserService.addHintsForLvlUp()
+
+            let title = "Level " + String(currentUserLvl) + "!"
+            let message = "You got " + String(hintsForLvl) + " free hints"
+
+            WTFOneButtonAlert.show(title,
+                    message: message,
+                    firstButtonTitle: "Ok",
+                    viewPresenter: self)
+        }
     }
 
     override func backTapped() {
