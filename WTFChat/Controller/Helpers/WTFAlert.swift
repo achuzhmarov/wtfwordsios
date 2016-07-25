@@ -20,7 +20,7 @@ class WTFOneButtonAlert: WTFBaseAlert  {
         show(title, message: message, firstButtonTitle: firstButtonTitle, viewPresenter: nil, alertButtonAction: alertButtonAction)
     }
 
-    class func show(title: String, message: String?, firstButtonTitle: String, viewPresenter: UIViewController? = nil, alertButtonAction:(() -> Void)? = nil) {
+    class func show(title: String, message: String?, firstButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:(() -> Void)? = nil) {
         //if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
                 message: message?.replace(CON_ERR, with: connectionErrorDescription),

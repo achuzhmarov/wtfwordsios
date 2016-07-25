@@ -145,6 +145,7 @@ class DecipherInProgressVC: UIViewController {
                 selector: #selector(DecipherInProgressVC.tick), userInfo: nil, repeats: false)
 
         wordsTableView.setNewMessage(message)
+        guessTextField.text = ""
         guessTextField.becomeFirstResponder()
         layoutTopView()
     }

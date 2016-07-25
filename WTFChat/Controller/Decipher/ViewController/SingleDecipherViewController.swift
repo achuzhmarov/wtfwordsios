@@ -78,9 +78,10 @@ class SingleDecipherViewController: DecipherViewController {
         let selectedDifficulty = guiDataService.getLastSelectedDifficulty()
         let messageText = messageCategory.getMessage()
 
-        message = singleMessageService.getMessageForLevel(
+        singleMessage = singleMessageService.getMessageForLevel(
             singleMessage.level, difficulty: selectedDifficulty, text: messageText
         )
+        message = singleMessage
 
         start()
     }
@@ -91,9 +92,10 @@ class SingleDecipherViewController: DecipherViewController {
         messageCategory = singleMessageService.getTextCategoryForLevel(level)
         let messageText = messageCategory.getMessage()
 
-        message = singleMessageService.getMessageForLevel(
-            singleMessage.level, difficulty: selectedDifficulty, text: messageText
+        singleMessage = singleMessageService.getMessageForLevel(
+            level, difficulty: selectedDifficulty, text: messageText
         )
+        message = singleMessage
 
         inProgressVC.topCategoryLabel.text = messageCategory.title
 

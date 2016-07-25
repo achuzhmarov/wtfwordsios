@@ -13,7 +13,7 @@ class ExpService: Service {
     private let LVL_EXP_STEP = 5
 
     private let LVL_HINTS_STEP = 5
-    private let HINTS_PER_STEP = 5
+    private let HINTS_PER_STEP = 3
 
     func getHintsForLvl(lvl: Int) -> Int {
         return ((lvl / LVL_HINTS_STEP) + 1) * HINTS_PER_STEP
