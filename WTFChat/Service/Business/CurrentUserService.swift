@@ -32,8 +32,6 @@ class CurrentUserService: Service {
     override func initService() {
         if (storage.isFieldExists(KEY.LOGIN)) {
             updateUserFromLocalStorage()
-
-            user.hints = 0
         } else {
             createUserInLocalStorage()
         }
