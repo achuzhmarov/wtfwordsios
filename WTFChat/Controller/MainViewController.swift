@@ -20,7 +20,7 @@ class MainViewController: BaseUIViewController {
     }
 
     @IBAction func tutorialTapped(sender: AnyObject) {
-        WTFOneButtonAlert.show("Under development",
+        WTFOneButtonAlert.show("Not implemented yet",
                 message: nil,
                 firstButtonTitle: "Ok")
     }
