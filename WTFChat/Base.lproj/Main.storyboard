@@ -2113,6 +2113,9 @@
                                         <state key="normal" title="Tutorial">
                                             <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="tutorialTapped:" destination="Wft-8G-zQQ" eventType="touchUpInside" id="mMi-qQ-AUx"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ZP-7H-hpk" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="58" width="200" height="42"/>
@@ -2735,6 +2738,6 @@
         <image name="settings filled" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RRm-LN-v38"/>
+        <segue reference="5fm-V2-gKc"/>
     </inferredMetricsTieBreakers>
 </document>
