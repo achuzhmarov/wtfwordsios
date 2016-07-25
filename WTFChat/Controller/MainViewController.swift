@@ -1,14 +1,14 @@
 import Foundation
 
 class MainViewController: BaseUIViewController {
-    //let navigationDelegate = NavigationControllerDelegate()
+    private let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService)
+
     let transitionManager = PanTransitionManager()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
 
-        //navigationDelegate.transitionManager = transitionManager
-        //self.navigationController!.delegate = navigationDelegate
+        dailyHintsService.computeDailyHints()
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

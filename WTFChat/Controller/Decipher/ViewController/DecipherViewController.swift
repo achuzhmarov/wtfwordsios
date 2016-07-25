@@ -74,6 +74,10 @@ class DecipherViewController: BaseUIViewController {
         sendMessageDecipher()
     }
 
+    func hintsBought() {
+        inProgressVC.hintsBought()
+    }
+
     func sendMessageDecipher() {
         fatalError("This method must be overridden")
     }

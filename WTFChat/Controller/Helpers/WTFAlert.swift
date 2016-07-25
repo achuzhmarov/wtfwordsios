@@ -16,10 +16,10 @@ class WTFOneButtonAlert: WTFBaseAlert  {
     static let CON_ERR = "%conError%"
     private static let connectionErrorDescription = "Internet connection problem"
 
-    class func show(title: String, message: String, firstButtonTitle: String, alertButtonAction:(() -> Void)? = nil) {
+    class func show(title: String, message: String?, firstButtonTitle: String, alertButtonAction:(() -> Void)? = nil) {
         //if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
-                message: message.replace(CON_ERR, with: connectionErrorDescription),
+                message: message?.replace(CON_ERR, with: connectionErrorDescription),
                 preferredStyle: UIAlertControllerStyle.Alert)
             
             alert.addAction(UIAlertAction(title: firstButtonTitle, style: .Default, handler: { (action: UIAlertAction) in
@@ -40,11 +40,11 @@ class WTFOneButtonAlert: WTFBaseAlert  {
 }
 
 class WTFTwoButtonsAlert: WTFBaseAlert {
-    class func show(title: String, message: String, firstButtonTitle: String, secondButtonTitle: String, alertButtonAction:(() -> Void)?) {
+    class func show(title: String, message: String?, firstButtonTitle: String, secondButtonTitle: String, alertButtonAction:(() -> Void)?) {
         return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: secondButtonTitle, alertButtonAction: alertButtonAction, cancelButtonAction: nil)
     }
     
-    class func show(title: String, message: String, firstButtonTitle: String, secondButtonTitle: String, alertButtonAction:(() -> Void)?, cancelButtonAction:(() -> Void)?) {
+    class func show(title: String, message: String?, firstButtonTitle: String, secondButtonTitle: String, alertButtonAction:(() -> Void)?, cancelButtonAction:(() -> Void)?) {
         //if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
                 message: message,

@@ -8,6 +8,8 @@ class BaseModalVC: UIViewController {
 
     let transitionManager = FadeTransitionManager()
 
+    weak var presentingVC: UIViewController?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,6 +22,12 @@ class BaseModalVC: UIViewController {
         backgroundView.layer.masksToBounds = true
 
         updateBackgroundGradient()
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        presentingVC = presentingViewController
     }
 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -40,15 +48,15 @@ class BaseModalVC: UIViewController {
     }
 
     @IBAction func closeWindow(sender: AnyObject) {
-        windowWillClose()
-        presentingViewController?.dismissViewControllerAnimated(true, completion: windowClosed)
+        modalWillClose()
+        presentingViewController?.dismissViewControllerAnimated(true, completion: modalClosed)
     }
 
-    func windowWillClose() {
+    func modalWillClose() {
         //do nothing by default
     }
 
-    func windowClosed() {
+    func modalClosed() {
         //do nothing by default
     }
 }

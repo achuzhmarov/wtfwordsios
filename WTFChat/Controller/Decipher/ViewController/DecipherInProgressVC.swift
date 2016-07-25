@@ -71,6 +71,7 @@ class DecipherInProgressVC: UIViewController {
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+
         isPaused = true
     }
 
@@ -90,7 +91,7 @@ class DecipherInProgressVC: UIViewController {
     func initView(messageToDecipher: Message) {
         message = messageToDecipher
 
-        calcInitialHints()
+        updateHintsCount()
         setTimer()
     }
 
@@ -190,5 +191,11 @@ class DecipherInProgressVC: UIViewController {
         message.timerSecs = timer.seconds
         dismissKeyboard()
         parent.gameOver()
+    }
+
+    func hintsBought() {
+        updateHintsCount()
+        isPaused = false
+        guessTextField.becomeFirstResponder()
     }
 }

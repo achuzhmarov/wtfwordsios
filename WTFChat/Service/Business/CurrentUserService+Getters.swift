@@ -68,7 +68,11 @@ extension CurrentUserService {
     }
 
     func canAddFreeAdHint() -> Bool {
-        return true
+        if (user.adHintsGained < DAILY_MAX_AD_HINTS) {
+            return true
+        } else {
+            return false
+        }
     }
 
     func getSelfUserInfo() -> FriendInfo? {

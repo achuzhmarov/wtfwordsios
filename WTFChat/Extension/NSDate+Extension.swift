@@ -23,6 +23,12 @@ extension NSDate
     class func defaultPast() -> NSDate {
         return NSDate().addYears(-1)
     }
+
+    func addDays(daysToAdd : Int) -> NSDate
+    {
+        let calendar = NSCalendar.currentCalendar()
+        return calendar.dateByAddingUnit(.Day, value: daysToAdd, toDate: self, options: NSCalendarOptions())!
+    }
     
     func addYears(yearsToAdd : Int) -> NSDate
     {

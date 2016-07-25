@@ -1,14 +1,6 @@
 import Foundation
 
 extension DecipherInProgressVC: HintComputer {
-    func calcInitialHints() {
-        hints = currentUserService.getUserHints() - message.hintsUsed
-    }
-
-    @IBAction func hintsBought(segue:UIStoryboardSegue) {
-        hints = currentUserService.getUserHints() - message.hintsUsed
-    }
-
     func hintTapped(word: Word) {
         if (word.type == WordType.New) {
             if (word.wasCloseTry) {
@@ -29,6 +21,7 @@ extension DecipherInProgressVC: HintComputer {
                 firstButtonTitle: "Get more",
                 secondButtonTitle: "Cancel") { () -> Void in
 
+            self.isPaused = true
             self.performSegueWithIdentifier("getMoreHints", sender: self)
         }
     }
@@ -76,6 +69,11 @@ extension DecipherInProgressVC: HintComputer {
 
     func updateHintsUsed() {
         message.hintsUsed += 1
-        hints = currentUserService.getUserHints() - message.hintsUsed
+        currentUserService.useHints(1)
+        updateHintsCount()
+    }
+
+    func updateHintsCount() {
+        hints = currentUserService.getUserHints() // - message.hintsUsed
     }
 }

@@ -8,8 +8,8 @@ import Foundation
 let serviceLocator = ServiceLocator()
 
 class ServiceInitializer {
-    //private static let BASE_URL = "https://127.0.0.1:5000/"
-    private static let BASE_URL = "https://dev.wtfchat.wtf:42043/"
+    //private static let BASE_URL = "http://127.0.0.1:5000/"
+    private static let BASE_URL = "https://dev.wtfchat.wtf:41041/"
 
     static func initServices() {
         //network

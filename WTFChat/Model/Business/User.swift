@@ -18,7 +18,7 @@ class User: NSObject {
 
     var rating: Int = 0
 
-    var freeHintsGained: Int = 0
+    var adHintsGained: Int = 0
 
     init(login: String) {
         self.login = login
@@ -48,7 +48,7 @@ class User: NSObject {
 
         self.rating = rating
 
-        self.freeHintsGained = freeHintsGained
+        self.adHintsGained = freeHintsGained
     }
 
     func updateInfo(user: User) {
@@ -63,7 +63,7 @@ class User: NSObject {
         self.pushDeciphered = user.pushDeciphered
         self.rating = user.rating
 
-        self.freeHintsGained = user.freeHintsGained
+        self.adHintsGained = user.adHintsGained
 
         for friendLvl in user.friends {
             updateFriendLvlInArray(friendLvl)

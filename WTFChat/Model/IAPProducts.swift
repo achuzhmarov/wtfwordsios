@@ -20,15 +20,6 @@ public class IAPProducts {
     public static let HINTS_5 = "\(PREFIX)Hints200"
     public static let HINTS_6 = "\(PREFIX)Hints1000"
 
-    public static let HINTS_COUNT: [ProductIdentifier: Int] = [
-            HINTS_1: 10,
-            HINTS_2: 30,
-            HINTS_3: 60,
-            HINTS_4: 100,
-            HINTS_5: 200,
-            HINTS_6: 1000
-    ]
-
     public static let CONSUMABLE: Set<ProductIdentifier> = [
         HINTS_1,
         HINTS_2,
@@ -64,9 +55,5 @@ public class IAPProducts {
     
     public static func isNonConsumbale(productId: ProductIdentifier) -> Bool {
         return NON_CONSUMABLE.contains(productId)
-    }
-
-    public static func getHintsCount(productId: ProductIdentifier) -> Int {
-        return HINTS_COUNT[productId] ?? 0
     }
 }

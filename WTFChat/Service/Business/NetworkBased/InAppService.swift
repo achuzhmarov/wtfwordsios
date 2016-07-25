@@ -1,11 +1,3 @@
-//
-//  InAppService.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 14/12/15.
-//  Copyright © 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import Foundation
 import StoreKit
 
@@ -35,13 +27,13 @@ class InAppService: Service {
             return
         }
         
-        if let product = getProduct(productId) {
+        if let product = inAppHelper.getProduct(productId) {
             inAppHelper.purchaseProduct(product)
         }
     }
 
     func getHintsProductTitle(productId: ProductIdentifier) -> String? {
-        if let product = getProduct(productId) {
+        if let product = inAppHelper.getProduct(productId) {
             let titleParts = product.localizedTitle.componentsSeparatedByString(" ")
             return titleParts[0]
         }
@@ -50,7 +42,7 @@ class InAppService: Service {
     }
 
     func getProductTitle(productId: ProductIdentifier) -> String? {
-        if let product = getProduct(productId) {
+        if let product = inAppHelper.getProduct(productId) {
             return product.localizedTitle
         }
         
@@ -58,7 +50,7 @@ class InAppService: Service {
     }
     
     func getProductDescription(productId: ProductIdentifier) -> String? {
-        if let product = getProduct(productId) {
+        if let product = inAppHelper.getProduct(productId) {
             return product.localizedDescription
         }
         
@@ -74,7 +66,7 @@ class InAppService: Service {
             return "Owned"
         }
         
-        if let product = getProduct(productId) {
+        if let product = inAppHelper.getProduct(productId) {
             return product.localizedPrice()
         }
         
@@ -114,18 +106,8 @@ class InAppService: Service {
         })
     }
     
-    private func getProduct(productId: ProductIdentifier) -> SKProduct? {
-        for product in products {
-            if (product.productIdentifier == productId) {
-                return product
-            }
-        }
-        
-        return nil
-    }
-    
     private func isProductExists(productId: ProductIdentifier) -> Bool {
-        if getProduct(productId) != nil {
+        if inAppHelper.getProduct(productId) != nil {
             return true
         }
         

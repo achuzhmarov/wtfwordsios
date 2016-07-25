@@ -16,7 +16,7 @@ class InAppNetworkService: Service {
 
         let postJSON = JSON(request)
 
-        networkService.post(postJSON, relativeUrl: "/ios_inapp") {json, error -> Void in
+        networkService.post(postJSON, relativeUrl: "ios_inapp") {json, error -> Void in
             if let requestError = error {
                 completion(valid: false, error: requestError)
             } else {

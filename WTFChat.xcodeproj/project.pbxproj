@@ -14,7 +14,6 @@
 		3E37C08F0E72B51E34C34C0C /* MessageCipherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE6082F2F1A3F3447039 /* MessageCipherService.swift */; };
 		3E37C0B2CA5925AE2757629B /* TutorialCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CC38BBB78EEC291E5537 /* TutorialCell.swift */; };
 		3E37C0B2DD34BF70C03C3CCE /* TalkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C494AB274D00A123AD98 /* TalkService.swift */; };
-		3E37C0B7F0483844F4878858 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C4BEDF2AA2D749F18C4A /* ShopViewController.swift */; };
 		3E37C0C2481BAFA3396B4EDB /* Talk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CEE51055E5CCFF2F152E /* Talk.swift */; };
 		3E37C0C776AB9D180181C4A1 /* AuthNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C9345E8EF8761C913D7F /* AuthNetworkService.swift */; };
 		3E37C0CF3D7BFE34B1D8B1BB /* CipherType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C131EF321BA3531C5804 /* CipherType.swift */; };
@@ -37,7 +36,6 @@
 		3E37C1E8AB87E77D756C490E /* warning.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E37CFDFD39EB65F6E0470F0 /* warning.wav */; };
 		3E37C1FB4438650E6343E7DC /* LvlCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C5BD84BCC0DFF33BB6A1 /* LvlCollectionView.swift */; };
 		3E37C2146C03104E4D13EF25 /* BaseMessageTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C5C4514B1C85700FD701 /* BaseMessageTableView.swift */; };
-		3E37C218D6A69440E4B6BB14 /* BaseShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CDCE1C95DD4AD3A62436 /* BaseShopViewController.swift */; };
 		3E37C232A669DDBFD4D7BA81 /* WTFChat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CEF039C3B4D79D370CA8 /* WTFChat.xcdatamodeld */; };
 		3E37C259C39CBA1D3230FBD8 /* MessageTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CBC272EAAF55FCEC9D1B /* MessageTableView.swift */; };
 		3E37C259CAE06BD0793EE82B /* InAppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C1F9700AC20414BB119D /* InAppHelper.swift */; };
@@ -71,7 +69,6 @@
 		3E37C5061E1B18C7DD11DC3E /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CFEEAC9762C3361A9C50 /* Weak.swift */; };
 		3E37C514BB2B04E4B824DF8A /* StopImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C2D1E0401C16DCF763EC /* StopImage.swift */; };
 		3E37C548C008F4F4535FF9DD /* SingleMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C174D58D33F0F69B5070 /* SingleMessageCell.swift */; };
-		3E37C556299DA54151F82083 /* HintsShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CEAFAD5645723457C239 /* HintsShopViewController.swift */; };
 		3E37C5741BA48E54DC6F3CB4 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C38B9A8A13C8A590A5BD /* String+Extension.swift */; };
 		3E37C584E8B166324813C3BE /* CipherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CA0E47FE8053178B1840 /* CipherService.swift */; };
 		3E37C59C0020A7E295BFF00F /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E37CA45A72832DD44521244 /* win.wav */; };
@@ -105,6 +102,7 @@
 		3E37C9092F90E27F56CA4C73 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E37C106D7CA0FD89102CE33 /* success.wav */; };
 		3E37C9170CEDDB622FEA4B53 /* MessageNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CBED2471146CEB043198 /* MessageNetworkService.swift */; };
 		3E37C9258D5D04AAEE2FBAB0 /* NetworkDecipherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C74708BBD30FFD80F3D8 /* NetworkDecipherViewController.swift */; };
+		3E37C9274A6F42DD86FB1963 /* ShopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C44E5DCEFC4774786B3B /* ShopVC.swift */; };
 		3E37C94D62B614FB6314994E /* BaseUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C1B261A338164240EE80 /* BaseUIViewController.swift */; };
 		3E37C9583AAE1C00A03A3C1F /* FriendTalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CA604DD381FD27CBE5E3 /* FriendTalk.swift */; };
 		3E37C99932B963E82129A66D /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C53DCD55B39A905F6D14 /* Emoji.swift */; };
@@ -152,7 +150,6 @@
 		3E37CD8522D9563A6AF14675 /* FadeTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C055C2030CF9CB938BF4 /* FadeTransitionManager.swift */; };
 		3E37CD8F6ACB9AAFE7EB1FF5 /* PanTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C61DFE53A61DD4EE8686 /* PanTransitionManager.swift */; };
 		3E37CD9A0F03B8D2327EEF66 /* BaseTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CED9042DF857125F0842 /* BaseTransitionManager.swift */; };
-		3E37CD9AAD63C1B2ECD29569 /* ShopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C77CA86567BA8D48081C /* ShopVC.swift */; };
 		3E37CD9B65744FC3AE100E93 /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E37CA9049DA3801F0F07E0F /* error.wav */; };
 		3E37CDC66A4CA01F05B90265 /* RemoteMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C98DB01429284B1E0CCC /* RemoteMessage.swift */; };
 		3E37CE2828A4F691CF812C2B /* TutorialMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C659ABA1CBA0BD66C8BC /* TutorialMessagesViewController.swift */; };
@@ -259,6 +256,7 @@
 		3E37C3FA72998EEEB660929C /* JSQMessagesAvatarImageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesAvatarImageFactory.h; sourceTree = "<group>"; };
 		3E37C40A9EFCE6528396684C /* AdColonyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdColonyService.swift; sourceTree = "<group>"; };
 		3E37C43AF8FAE39CECC48749 /* RandomCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomCutterCipher.swift; sourceTree = "<group>"; };
+		3E37C44E5DCEFC4774786B3B /* ShopVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopVC.swift; sourceTree = "<group>"; };
 		3E37C45E28B9FC22DDA15406 /* ExpService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpService.swift; sourceTree = "<group>"; };
 		3E37C48EB596F7289C6C456C /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		3E37C494AB274D00A123AD98 /* TalkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkService.swift; sourceTree = "<group>"; };
@@ -266,7 +264,6 @@
 		3E37C49D18DB2FD017226F88 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3E37C4AC96F9D6F7719268D2 /* TextCategoryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCategoryService.swift; sourceTree = "<group>"; };
 		3E37C4B0E41355EE8EB15D15 /* ExpGainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpGainView.swift; sourceTree = "<group>"; };
-		3E37C4BEDF2AA2D749F18C4A /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		3E37C4FD95144695C0B33C1E /* WordLabelContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordLabelContainer.swift; sourceTree = "<group>"; };
 		3E37C53DCD55B39A905F6D14 /* Emoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		3E37C55F6CB09A955B097EED /* ServiceLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
@@ -290,7 +287,6 @@
 		3E37C74708BBD30FFD80F3D8 /* NetworkDecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDecipherViewController.swift; sourceTree = "<group>"; };
 		3E37C7567924686F83EB2112 /* TutorialDecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialDecipherViewController.swift; sourceTree = "<group>"; };
 		3E37C7669C3130760DBC69CD /* SingleDecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleDecipherViewController.swift; sourceTree = "<group>"; };
-		3E37C77CA86567BA8D48081C /* ShopVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopVC.swift; sourceTree = "<group>"; };
 		3E37C7907201437918DB3E8A /* UIBezierPath+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extension.swift"; sourceTree = "<group>"; };
 		3E37C7A3DF5F77D8BB21ACF2 /* DoubleCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleCutterCipher.swift; sourceTree = "<group>"; };
 		3E37C7B3CA8FB6461A10A098 /* CipherDifficulty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherDifficulty.swift; sourceTree = "<group>"; };
@@ -354,7 +350,6 @@
 		3E37CD49D043FD1DAE73F194 /* InAppNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppNetworkService.swift; sourceTree = "<group>"; };
 		3E37CD4B1B909D08C2C5A635 /* FriendInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendInfo.swift; sourceTree = "<group>"; };
 		3E37CDBCEF2D8B93E65D48F4 /* JSQMessagesTimestampFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesTimestampFormatter.m; sourceTree = "<group>"; };
-		3E37CDCE1C95DD4AD3A62436 /* BaseShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseShopViewController.swift; sourceTree = "<group>"; };
 		3E37CE029AD123AE5EF6DD30 /* LevelPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelPreviewViewController.swift; sourceTree = "<group>"; };
 		3E37CE11FB42D287E2CBBC28 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		3E37CE1FEB6473D153DA3909 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
@@ -366,7 +361,6 @@
 		3E37CE6D4476B6C48D36ABD1 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		3E37CE7F2302746304A4DB4D /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		3E37CE8CEA89F836412E7B01 /* CipherPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherPickerViewController.swift; sourceTree = "<group>"; };
-		3E37CEAFAD5645723457C239 /* HintsShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HintsShopViewController.swift; sourceTree = "<group>"; };
 		3E37CEC9575B52D804AFFD17 /* WordsField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsField.swift; sourceTree = "<group>"; };
 		3E37CED9042DF857125F0842 /* BaseTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTransitionManager.swift; sourceTree = "<group>"; };
 		3E37CEE51055E5CCFF2F152E /* Talk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Talk.swift; sourceTree = "<group>"; };
@@ -482,17 +476,6 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
-		3E37C056482E63FCCA3D5029 /* Shop */ = {
-			isa = PBXGroup;
-			children = (
-				3E37C4BEDF2AA2D749F18C4A /* ShopViewController.swift */,
-				3E37CDCE1C95DD4AD3A62436 /* BaseShopViewController.swift */,
-				3E37CEAFAD5645723457C239 /* HintsShopViewController.swift */,
-				3E37C77CA86567BA8D48081C /* ShopVC.swift */,
-			);
-			path = Shop;
-			sourceTree = "<group>";
-		};
 		3E37C06E7B82E14017BCACE4 /* SendMessage */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,7 +514,6 @@
 		3E37C1FFDA283D4E52B54F7C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				3E37C056482E63FCCA3D5029 /* Shop */,
 				3E37C8A836211143FA22FC0F /* Rating */,
 				3E37CF12C6FDC0AE07C9E999 /* Helpers */,
 				3E37CA872F174E5E8792B9B8 /* Settings */,
@@ -544,6 +526,7 @@
 				3E37C9FFF4C7ECE06047CCC5 /* MainViewController.swift */,
 				3E37C24EB1481A1502DFBF52 /* Images */,
 				3E37C99E3EADF9A5C305BCC0 /* Navigation */,
+				3E37C44E5DCEFC4774786B3B /* ShopVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1208,9 +1191,6 @@
 				3E37C232A669DDBFD4D7BA81 /* WTFChat.xcdatamodeld in Sources */,
 				3E37C463BFB724BA46AE0287 /* CoreWord+CoreDataProperties.swift in Sources */,
 				3E37CB72D2D8091C6A7C4D32 /* CoreMessage+CoreDataProperties.swift in Sources */,
-				3E37C0B7F0483844F4878858 /* ShopViewController.swift in Sources */,
-				3E37C218D6A69440E4B6BB14 /* BaseShopViewController.swift in Sources */,
-				3E37C556299DA54151F82083 /* HintsShopViewController.swift in Sources */,
 				3E37C4862DC1BC584ED264EC /* RatingCell.swift in Sources */,
 				3E37C08A3F51A2132170D34F /* RatingViewController.swift in Sources */,
 				3E37CAB6D7ECD63A50DCD40D /* Timer.swift in Sources */,
@@ -1333,8 +1313,8 @@
 				3E37C9BA13555D14D25651BE /* InAppNetworkService.swift in Sources */,
 				3E37C64787A2CCBABBC903A3 /* NetworkService.swift in Sources */,
 				3E37C3D1D971F9EC61677C96 /* DailyHintsService.swift in Sources */,
-				3E37CD9AAD63C1B2ECD29569 /* ShopVC.swift in Sources */,
 				3E37CB01D0F35992E0EE911B /* BaseModalVC.swift in Sources */,
+				3E37C9274A6F42DD86FB1963 /* ShopVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

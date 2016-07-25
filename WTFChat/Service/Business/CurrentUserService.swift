@@ -4,6 +4,8 @@ class CurrentUserService: Service {
     let iosService: IosService
     let expService: ExpService
 
+    let DAILY_MAX_AD_HINTS = 10
+
     private struct KEY {
         static let LOGIN = "USER_LOGIN"
         static let HINTS = "USER_HINTS"
@@ -14,7 +16,7 @@ class CurrentUserService: Service {
         static let PUSH_NEW = "USER_PUSH_NEW"
         static let PUSH_DECIPHERED = "USER_PUSH_DECIPHERED"
         static let RATING = "USER_RATING"
-        static let FREE_HINTS_GAINED = "USER_FREE_HINTS_GAINED"
+        static let AD_HINTS_GAINED = "USER_AD_HINTS_GAINED"
         static let LAST_LOGIN = "USER_LAST_LOGIN"
     }
 
@@ -30,6 +32,8 @@ class CurrentUserService: Service {
     override func initService() {
         if (storage.isFieldExists(KEY.LOGIN)) {
             updateUserFromLocalStorage()
+
+            user.hints = 0
         } else {
             createUserInLocalStorage()
         }
@@ -48,7 +52,7 @@ class CurrentUserService: Service {
         user.pushNew = storage.getBoolField(KEY.PUSH_NEW)
         user.pushDeciphered = storage.getBoolField(KEY.PUSH_DECIPHERED)
         user.rating = storage.getIntField(KEY.RATING)
-        user.freeHintsGained = storage.getIntField(KEY.FREE_HINTS_GAINED)
+        user.adHintsGained = storage.getIntField(KEY.AD_HINTS_GAINED)
         user.lastLogin = storage.getDateField(KEY.LAST_LOGIN)
     }
 
@@ -73,7 +77,7 @@ class CurrentUserService: Service {
         storage.saveField(KEY.PUSH_NEW, value: user.pushNew)
         storage.saveField(KEY.PUSH_DECIPHERED, value: user.pushDeciphered)
         storage.saveField(KEY.RATING, value: user.rating)
-        storage.saveField(KEY.FREE_HINTS_GAINED, value: user.freeHintsGained)
+        storage.saveField(KEY.AD_HINTS_GAINED, value: user.adHintsGained)
         storage.saveField(KEY.LAST_LOGIN, value: user.lastLogin)
     }
 }

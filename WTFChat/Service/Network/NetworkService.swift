@@ -1,11 +1,3 @@
-//
-//  NetworkHelper.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 23/09/15.
-//  Copyright © 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import Foundation
 
 class NetworkService: Service, NSURLSessionDelegate {

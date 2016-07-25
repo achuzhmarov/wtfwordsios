@@ -43,7 +43,7 @@ extension CurrentUserService {
     func addFreeHint() {
         if canAddFreeAdHint() {
             user.hints += 1
-            user.freeHintsGained += 1
+            user.adHintsGained += 1
             saveUserInLocalStorage()
         }
     }
@@ -55,6 +55,11 @@ extension CurrentUserService {
 
     func updateLastLogin(lastLogin: NSDate) {
         user.lastLogin = lastLogin
+        saveUserInLocalStorage()
+    }
+
+    func clearAdHintsLimit() {
+        user.adHintsGained = 0
         saveUserInLocalStorage()
     }
 }

@@ -47,7 +47,7 @@ class SingleModeService: Service {
         }
 
         currentUserService.earnSingleExp(singleMessage.exp)
-        currentUserService.useHints(singleMessage.hintsUsed)
+        //currentUserService.useHints(singleMessage.hintsUsed)
 
         let categoryClearedOnEasy = categoryService.isCategoryCleared(category, difficulty: .Easy)
         let categoryClearedOnNormal = categoryService.isCategoryCleared(category, difficulty: .Normal)

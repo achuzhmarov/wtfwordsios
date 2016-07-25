@@ -9,20 +9,19 @@ class DailyHintsService: Service {
         self.currentUserService = currentUserService
     }
 
-    override func initService() {
+    func computeDailyHints() {
         let now = NSDate()
         let lastLogin = currentUserService.getLastLogin()
 
         if (checkDailyHints(now, lastLogin: lastLogin)) {
             addDailyHints()
+            currentUserService.clearAdHintsLimit()
         }
 
         currentUserService.updateLastLogin(now)
     }
 
     private func checkDailyHints(now: NSDate, lastLogin: NSDate) -> Bool {
-        print("checked")
-
         if (lastLogin.getYear() < now.getYear()
                 || lastLogin.getMonth() < now.getMonth()
                 || lastLogin.getDay() < now.getDay()) {
@@ -39,8 +38,8 @@ class DailyHintsService: Service {
 
         currentUserService.addHints(hints)
 
-        WTFOneButtonAlert.show("Daily free hints!",
-                message: "You have just received \(String(hints))",
+        WTFOneButtonAlert.show("Daily free hints!\nToday you got \(hints)",
+                message: nil,
                 firstButtonTitle: "Ok")
     }
 
@@ -48,19 +47,11 @@ class DailyHintsService: Service {
         var twoBorder: Int
         var threeBorder: Int
 
-        //calculate probability border - max 60
-        if userLvl <= 30 {
-            twoBorder = 40 - userLvl
-            threeBorder = 50
-        } else if userLvl <= 60 {
-            twoBorder = 10
-            threeBorder = 80 - userLvl
-        } else {
-            twoBorder = 10
-            threeBorder = 20
-        }
+        //calculate probability border - max 100
+        twoBorder = 70 - userLvl / 2
+        threeBorder = 100 - userLvl / 4
 
-        let randomNumber = Int(arc4random_uniform(UInt32(60)))
+        let randomNumber = Int(arc4random_uniform(UInt32(100)))
         var hints: Int
 
         if randomNumber < twoBorder {

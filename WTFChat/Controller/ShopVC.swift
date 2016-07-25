@@ -2,7 +2,6 @@ import Foundation
 
 class ShopVC: BaseModalVC {
     private let inAppService: InAppService = serviceLocator.get(InAppService)
-    private let userService: UserService = serviceLocator.get(UserService)
     private let adColonyService: AdColonyService = serviceLocator.get(AdColonyService)
     private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
 
@@ -55,7 +54,7 @@ class ShopVC: BaseModalVC {
 
         addPressedHandlersForProducts()
 
-        updateTable()
+        reloadData()
     }
 
     deinit {
@@ -63,7 +62,7 @@ class ShopVC: BaseModalVC {
     }
 
     override func viewWillAppear(animated: Bool) {
-        updateTable()
+        reloadData()
 
         // Subscribe to a notification that fires when a product is purchased.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ShopVC.productPurchased(_:)), name: IAPHelperProductPurchasedNotification, object: nil)
@@ -114,12 +113,11 @@ class ShopVC: BaseModalVC {
         fatalError("Button must be in productButtons")
     }
 
-    func updateTable() {
+    func reloadData() {
         userHintsCount.text = String(currentUserService.getUserHints())
 
         updateProductTitles()
         updateProductButtons()
-        updateFreeHints()
         updateRestoreButtonVisibility()
     }
 
@@ -145,15 +143,6 @@ class ShopVC: BaseModalVC {
         }
     }
 
-    private func updateFreeHints() {
-        if currentUserService.canAddFreeAdHint() && adColonyService.hasAd() {
-            freeHintsBuyButton.updateGradient(Gradient.Ciphered)
-        } else {
-            freeHintsBuyButton.setTitle("No ads", forState: .Normal)
-            freeHintsBuyButton.updateGradient(Gradient.Ignored)
-        }
-    }
-
     private func updateRestoreButtonVisibility() {
         let dailyHintsProductId = IAPProducts.HINTS_X2
 
@@ -167,28 +156,21 @@ class ShopVC: BaseModalVC {
     func showAdAlert(sender: BorderedButton) {
         if currentUserService.canAddFreeAdHint() && adColonyService.hasAd() {
             adColonyService.showAd({ () -> Void in
-                self.userService.addFreeAdHint()
-
-                dispatch_async(dispatch_get_main_queue(), {
-                    WTFOneButtonAlert.show("Free hint",
-                            message: "You have just received a free hint",
-                            firstButtonTitle: "Ok") { () -> Void in
-                        self.productPurchased(nil)
-                    }
-                })
+                self.currentUserService.addFreeHint()
+                self.reloadData()
             })
         } else {
             WTFOneButtonAlert.show("No more ads",
-                    message: "Try again tomorrow",
+                    message: "Try again later",
                     firstButtonTitle: "Ok") { () -> Void in
-                self.updateTable()
+                self.reloadData()
             }
         }
     }
 
     func productPurchased(notification: NSNotification?) {
         dispatch_async(dispatch_get_main_queue(), {
-            self.updateTable()
+            self.reloadData()
         })
     }
 
@@ -200,7 +182,7 @@ class ShopVC: BaseModalVC {
 
             if let productTitle = inAppService.getProductTitle(productIdentifier) {
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.updateTable()
+                    self.reloadData()
 
                     WTFOneButtonAlert.show("Error",
                             message: "\(productTitle) purchase error. \(self.connectionErrorMessage)",
@@ -209,7 +191,7 @@ class ShopVC: BaseModalVC {
             }
         } else {
             dispatch_async(dispatch_get_main_queue(), {
-                self.updateTable()
+                self.reloadData()
 
                 WTFOneButtonAlert.show("Error",
                         message: "Unknown error occured. \(self.connectionErrorMessage)",
@@ -220,7 +202,7 @@ class ShopVC: BaseModalVC {
 
     func productRestore(notification: NSNotification) {
         dispatch_async(dispatch_get_main_queue(), {
-            self.updateTable()
+            self.reloadData()
 
             if (self.isRestoreInProgress) {
                 self.isRestoreInProgress = false
@@ -237,7 +219,7 @@ class ShopVC: BaseModalVC {
 
         if let productTitle = inAppService.getProductTitle(productIdentifier) {
             dispatch_async(dispatch_get_main_queue(), {
-                self.updateTable()
+                self.reloadData()
 
                 if (self.isRestoreInProgress) {
                     self.isRestoreInProgress = false
@@ -247,6 +229,12 @@ class ShopVC: BaseModalVC {
                             firstButtonTitle: "Ok")
                 }
             })
+        }
+    }
+
+    override func modalClosed() {
+        if let decipherVC = presentingVC as? DecipherViewController {
+            decipherVC.hintsBought()
         }
     }
 }

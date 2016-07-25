@@ -3,6 +3,7 @@ import Foundation
 class SingleModeViewController: BaseUIViewController {
     private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
     private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
+    private let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService)
 
     @IBOutlet weak var menuBorder: UIView!
     @IBOutlet weak var menuBackground: UIView!
@@ -29,6 +30,12 @@ class SingleModeViewController: BaseUIViewController {
 
         menuBorder.backgroundColor = Color.BackgroundDark
         menuBackground.addLinearGradient(Gradient.BackgroundMenu)
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        dailyHintsService.computeDailyHints()
     }
 
     func cipherViewUpdated(newController: CipherViewController) {

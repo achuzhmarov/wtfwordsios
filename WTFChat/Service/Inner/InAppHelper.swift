@@ -21,8 +21,6 @@ public typealias RequestProductsCompletionHandler = (success: Bool, products: [S
 /// A Helper class for In-App-Purchases, it can fetch products, tell you if a product has been purchased,
 /// purchase products, and restore purchases.  Uses NSUserDefaults to cache if a product has been purchased.
 public class InAppHelper: NSObject  {
-    /// MARK: - Private Properties
-  
     private let inAppNetworkService: InAppNetworkService
     private let currentUserService: CurrentUserService
 
@@ -33,7 +31,9 @@ public class InAppHelper: NSObject  {
     // Used by SKProductsRequestDelegate
     private var productsRequest: SKProductsRequest?
     private var completionHandler: RequestProductsCompletionHandler?
-  
+
+    private var products = [SKProduct]()
+
     /// MARK: - User facing API
   
     /// Initialize the helper.  Pass in the set of ProductIdentifiers supported by the app.
@@ -54,6 +54,7 @@ public class InAppHelper: NSObject  {
         }
         
         super.init()
+
         SKPaymentQueue.defaultQueue().addTransactionObserver(self)
     }
   
@@ -94,7 +95,7 @@ public class InAppHelper: NSObject  {
 extension InAppHelper: SKProductsRequestDelegate {
     public func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
         print("Loaded list of products...")
-        let products = response.products
+        products = response.products
         completionHandler?(success: true, products: products)
         clearRequest()
     }
@@ -193,7 +194,7 @@ extension InAppHelper: SKPaymentTransactionObserver {
     // Helper: Saves the fact that the product has been purchased and posts a notification.
     private func provideContentForProduct(productId: String, isRestore: Bool) {
         if (IAPProducts.isConsumable(productId)) {
-            let hintsBought = IAPProducts.getHintsCount(productId)
+            let hintsBought = getHintsCount(productId)
 
             if (hintsBought > 0) {
                 currentUserService.addHints(hintsBought)
@@ -209,6 +210,25 @@ extension InAppHelper: SKPaymentTransactionObserver {
         } else {
             NSNotificationCenter.defaultCenter().postNotificationName(IAPHelperProductPurchasedNotification, object: productId)
         }
+    }
+
+    private func getHintsCount(productId: ProductIdentifier) -> Int {
+        if let product = getProduct(productId) {
+            let titleParts = product.localizedTitle.componentsSeparatedByString(" ")
+            return Int(titleParts[0])!
+        }
+
+        return 0
+    }
+
+    func getProduct(productId: ProductIdentifier) -> SKProduct? {
+        for product in products {
+            if (product.productIdentifier == productId) {
+                return product
+            }
+        }
+
+        return nil
     }
     
     private func failedTransaction(transaction: SKPaymentTransaction) {
