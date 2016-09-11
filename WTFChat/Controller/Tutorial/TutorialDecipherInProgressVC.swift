@@ -3,7 +3,7 @@ import Foundation
 class TutorialDecipherInProgressVC: DecipherInProgressVC {
     private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
 
-    private let GUESS_MESSAGE = "Let's start! Try to type 'to' and press either 'Try' or 'Enter' button."
+    private let GUESS_MESSAGE = "Let's start! Try to type 'to' and press either 'Try' or 'return' button."
     private let CLOSE_TRY_MESSAGE = "Congratulations! Now, enter 'her' as your next guess."
     private let CLOSE_TRY_HINT_MESSAGE = "Oh! You were close! See how the word 'He...' has changed color. Try tapping it to decipher!"
     private let HINT_MESSAGE = "Wow, it worked! Try to use a similar action to get a hint for any blue word."
