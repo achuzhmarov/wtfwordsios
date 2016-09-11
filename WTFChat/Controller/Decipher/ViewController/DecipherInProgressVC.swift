@@ -8,6 +8,7 @@ class DecipherInProgressVC: UIViewController {
     @IBOutlet weak var topTimerLabel: UILabel!
     @IBOutlet weak var topCategoryLabel: UILabel!
     @IBOutlet weak var topStopImage: UIImageView!
+    @IBOutlet weak var topGiveUpView: UIView!
 
     @IBOutlet weak var wordsTableView: WordsViewController!
 
@@ -42,11 +43,10 @@ class DecipherInProgressVC: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DecipherInProgressVC.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DecipherInProgressVC.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
 
-        let giveUpTimerTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherInProgressVC.giveUpPressed))
-        topTimerLabel.addGestureRecognizer(giveUpTimerTap)
-
-        let giveUpImageTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherInProgressVC.giveUpPressed))
-        topStopImage.addGestureRecognizer(giveUpImageTap)
+        let giveUpTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherInProgressVC.giveUpPressed))
+        topTimerLabel.addGestureRecognizer(giveUpTap)
+        topStopImage.addGestureRecognizer(giveUpTap)
+        topGiveUpView.addGestureRecognizer(giveUpTap)
 
         wordsTableView.hintComputer = self
         wordsTableView.delegate = wordsTableView

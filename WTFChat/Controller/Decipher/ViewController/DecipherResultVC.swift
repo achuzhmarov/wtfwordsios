@@ -105,7 +105,7 @@ class DecipherResultVC: UIViewController, HintComputer {
         changeCipherStateForViewOnly()
     }
 
-    private func showResult() {
+    func showResult() {
         if (message.getMessageStatus() == .Success) {
             resultLabel.text = SUCCESS_TEXT
             resultLabel.addGradientToLabel(Gradient.Success)

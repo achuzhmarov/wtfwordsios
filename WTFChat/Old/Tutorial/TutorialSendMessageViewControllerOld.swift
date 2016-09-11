@@ -1,14 +1,6 @@
-//
-//  TutorialSendMessageViewController.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 14/01/16.
-//  Copyright © 2016 Artem Chuzhmarov. All rights reserved.
-//
-
 import Foundation
 
-class TutorialSendMessageViewController: SendMessageViewController {
+class TutorialSendMessageViewControllerOld: SendMessageViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         

@@ -1,20 +1,12 @@
-//
-//  TutorialMessagesViewController.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 12/01/16.
-//  Copyright © 2016 Artem Chuzhmarov. All rights reserved.
-//
-
 import UIKit
 
-enum TutorialStage: Int {
+enum TutorialStageOld: Int {
     case Never = 0, Started, DecipherGuess, DecipherCloseTry, DecipherCloseTryHint, DecipherHint, DecipherRest, Deciphered, SendMessage, SelectCipher, MessageSended, ResponseAquired, DetailsViewed, Skipped, Finished
 }
 
-var currentTutorialStage: TutorialStage = .Never
+var currentTutorialStage: TutorialStageOld = .Never
 
-class TutorialMessagesViewController: MessagesViewController {
+class TutorialMessagesViewControllerOld: MessagesViewController {
     private let talkService: TalkService = serviceLocator.get(TalkService)
     private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
     private let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
@@ -36,7 +28,7 @@ class TutorialMessagesViewController: MessagesViewController {
         //if it is first init, look for saved stage value
         if (currentTutorialStage == .Never) {
             let savedTutorialStage = nsUserDefaults.integerForKey(TUTORIAL_STAGE_PROPERTY_KEY)
-            currentTutorialStage = TutorialStage(rawValue: savedTutorialStage)!
+            currentTutorialStage = TutorialStageOld(rawValue: savedTutorialStage)!
         }
         
         switch currentTutorialStage {

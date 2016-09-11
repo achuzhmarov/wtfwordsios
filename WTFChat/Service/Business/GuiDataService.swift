@@ -1,9 +1,14 @@
 import Foundation
 
+enum TutorialStage: Int {
+    case Never = 0, DecipherGuess, DecipherCloseTry, DecipherCloseTryHint, DecipherHint, DecipherRest, Finished
+}
+
 class GuiDataService: Service {
     private struct KEY {
         static let LAST_SELECTED_DIFFICULTY = "USER_LAST_SELECTED_DIFFICULTY"
         static let LAST_SELECTED_CATEGORY = "USER_LAST_SELECTED_CATEGORY"
+        static let TUTORIAL_STAGE = "USER_TUTORIAL_STAGE"
     }
 
     private let storage = NSUserDefaults.standardUserDefaults()
@@ -15,6 +20,10 @@ class GuiDataService: Service {
 
         if (!storage.isFieldExists(KEY.LAST_SELECTED_CATEGORY)) {
             updateLastSelectedCategoryType(.RightCutter)
+        }
+
+        if (!storage.isFieldExists(KEY.TUTORIAL_STAGE)) {
+            updateTutorialStage(.Never)
         }
     }
 
@@ -32,5 +41,13 @@ class GuiDataService: Service {
 
     func updateLastSelectedCategoryType(cipherType: CipherType) {
         storage.saveField(KEY.LAST_SELECTED_CATEGORY, value: cipherType.rawValue)
+    }
+
+    func getTutorialStage() -> TutorialStage {
+        return TutorialStage(rawValue: storage.getIntField(KEY.TUTORIAL_STAGE))!
+    }
+
+    func updateTutorialStage(tutorialStage: TutorialStage) {
+        storage.saveField(KEY.TUTORIAL_STAGE, value: tutorialStage.rawValue)
     }
 }
