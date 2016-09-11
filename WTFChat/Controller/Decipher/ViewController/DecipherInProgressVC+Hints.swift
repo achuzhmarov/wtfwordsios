@@ -31,7 +31,10 @@ extension DecipherInProgressVC: HintComputer {
                 message: "",
                 firstButtonTitle: "Use a Hint",
                 secondButtonTitle: "Cancel") { () -> Void in
-            self.useHint(word)
+
+            dispatch_async(dispatch_get_main_queue(), {
+                self.useHint(word)
+            })
         }
     }
 
@@ -40,7 +43,10 @@ extension DecipherInProgressVC: HintComputer {
                 message: "",
                 firstButtonTitle: "Open",
                 secondButtonTitle: "Cancel") { () -> Void in
-            self.useHint(word)
+
+            dispatch_async(dispatch_get_main_queue(), {
+                self.useHint(word)
+            })
         }
     }
 
