@@ -6,9 +6,9 @@
 enum CipherType : Int, CustomStringConvertible {
     case RightCutter = 0
     case LeftCutter
+    case Shuffle
     case DoubleCutter
     case RandomCutter
-    case Shuffle
 
     var description : String {
         get {
@@ -17,17 +17,17 @@ enum CipherType : Int, CustomStringConvertible {
                 return "Right Cutter"
             case CipherType.LeftCutter:
                 return "Left Cutter"
+            case CipherType.Shuffle:
+                return "Shuffle"
             case CipherType.DoubleCutter:
                 return "Double Cutter"
             case CipherType.RandomCutter:
                 return "Random Cutter"
-            case CipherType.Shuffle:
-                return "Shuffle"
             }
         }
     }
 
     static func getAll() -> [CipherType] {
-        return [.RightCutter, .LeftCutter, .DoubleCutter, .RandomCutter, .Shuffle]
+        return [.RightCutter, .LeftCutter, .Shuffle, .DoubleCutter, .RandomCutter]
     }
 }
