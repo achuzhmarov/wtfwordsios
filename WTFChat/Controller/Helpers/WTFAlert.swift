@@ -23,6 +23,10 @@ class WTFOneButtonAlert: WTFBaseAlert  {
         show(title, message: message, firstButtonTitle: OK_TEXT, viewPresenter: nil, alertButtonAction: alertButtonAction)
     }
 
+    static func show(title: String, message: String?, viewPresenter: UIViewController?, alertButtonAction:(() -> Void)? = nil) {
+        show(title, message: message, firstButtonTitle: OK_TEXT, viewPresenter: viewPresenter, alertButtonAction: alertButtonAction)
+    }
+
     static func show(title: String, message: String?, firstButtonTitle: String, alertButtonAction:(() -> Void)? = nil) {
         show(title, message: message, firstButtonTitle: firstButtonTitle, viewPresenter: nil, alertButtonAction: alertButtonAction)
     }

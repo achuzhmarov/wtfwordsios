@@ -41,7 +41,7 @@ class DailyHintsService: Service {
 
         currentUserService.addHints(hints)
 
-        WTFOneButtonAlert.show(DAILY_HINTS_TEXT + " " + hints, message: nil)
+        WTFOneButtonAlert.show(DAILY_HINTS_TEXT + " " + String(hints), message: nil)
     }
 
     func getRandomDailyHints(userLvl: Int) -> Int {

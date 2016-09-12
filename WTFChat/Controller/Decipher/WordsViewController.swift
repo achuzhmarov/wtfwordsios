@@ -1,11 +1,3 @@
-//
-//  WordsViewController.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 03/10/15.
-//  Copyright © 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import UIKit
 
 protocol HintComputer: class {

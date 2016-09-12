@@ -1,4 +1,5 @@
 import Foundation
+import Localize_Swift
 
 class ShopVC: BaseModalVC {
     private let inAppService: InAppService = serviceLocator.get(InAppService)
@@ -25,7 +26,19 @@ class ShopVC: BaseModalVC {
     @IBOutlet weak var hints6Title: UILabel!
     @IBOutlet weak var hints6BuyButton: BorderedButton!
 
-    private let CONNECTION_ERROR_TEXT = "Please, check if you have a stable internet connection. Then use 'Restore' button. If you still don't get your purchase, please, restart the app."
+    private let CONNECTION_ERROR_TEXT = "Please, check if you have a stable internet connection. Then use 'Restore' button. If you still don't get your purchase, please, restart the app.".localized()
+    private let RESTORE_TITLE = "Restore purchased".localized()
+    private let RESTORE_MESSAGE = "Are you sure you want to restore purchased content?".localized()
+    private let RESTORE_BUTTON_TITLE = "Restore".localized()
+    private let PAID_TITLE = "Paid".localized()
+    private let NO_ADS_TITLE = "No more ads".localized()
+    private let NO_ADS_MESSAGE = "Try again later".localized()
+    private let ERROR_TITLE = "Error".localized()
+    private let SUCCESS_TTITLE = "Success".localized()
+    private let UNKNOWN_ERROR_TEXT = "Unknown error occured.".localized()
+    private let BUY_ERROR_TEXT = "Can't buy".localized()
+    private let RESTORED_SUCCESSFULLY_TEXT = "Restored successfully".localized()
+    private let RESTORED_ERROR_TEXT = "can't be restored".localized()
 
     private var productTitles = [ProductIdentifier: UILabel]()
     private var productButtons = [ProductIdentifier: BorderedButton]()
@@ -96,9 +109,9 @@ class ShopVC: BaseModalVC {
     }
 
     func restoreButtonPressed(sender: BorderedButton) {
-        WTFTwoButtonsAlert.show("Restore purchased",
-                message: "Are you sure you want to restore purchased content?",
-                firstButtonTitle: "Restore") { () -> Void in
+        WTFTwoButtonsAlert.show(RESTORE_TITLE,
+                message: RESTORE_MESSAGE,
+                firstButtonTitle: RESTORE_BUTTON_TITLE) { () -> Void in
             self.isRestoreInProgress = true
             self.inAppService.restorePurchased()
         }
@@ -131,7 +144,7 @@ class ShopVC: BaseModalVC {
     private func updateProductButtons() {
         for (productId, productButton) in productButtons {
             if (inAppService.isPurchased(productId)) {
-                productButton.setTitle("Paid", forState: .Normal)
+                productButton.setTitle(PAID_TITLE, forState: .Normal)
                 productButton.updateGradient(Gradient.Success)
             } else if inAppService.canPurchase(productId) {
                 let priceString = inAppService.getProductPrice(productId)
@@ -161,7 +174,7 @@ class ShopVC: BaseModalVC {
                 self.reloadData()
             })
         } else {
-            WTFOneButtonAlert.show("No more ads", message: "Try again later") { () -> Void in
+            WTFOneButtonAlert.show(NO_ADS_TITLE, message: NO_ADS_MESSAGE) { () -> Void in
                 self.reloadData()
             }
         }
@@ -180,13 +193,13 @@ class ShopVC: BaseModalVC {
             if let productTitle = inAppService.getProductTitle(productIdentifier) {
                 dispatch_async(dispatch_get_main_queue(), {
                     self.reloadData()
-                    WTFOneButtonAlert.show("Error", message: "\(productTitle) purchase error. \(self.CONNECTION_ERROR_TEXT)")
+                    WTFOneButtonAlert.show(self.ERROR_TITLE, message: self.BUY_ERROR_TEXT + " " + productTitle + ". " + self.CONNECTION_ERROR_TEXT)
                 })
             }
         } else {
             dispatch_async(dispatch_get_main_queue(), {
                 self.reloadData()
-                WTFOneButtonAlert.show("Error", message: "Unknown error occured. \(self.CONNECTION_ERROR_TEXT)")
+                WTFOneButtonAlert.show(self.ERROR_TITLE, message: self.UNKNOWN_ERROR_TEXT + " " + self.CONNECTION_ERROR_TEXT)
             })
         }
     }
@@ -197,7 +210,7 @@ class ShopVC: BaseModalVC {
 
             if (self.isRestoreInProgress) {
                 self.isRestoreInProgress = false
-                WTFOneButtonAlert.show("Success", message: "Restored successfully")
+                WTFOneButtonAlert.show(self.SUCCESS_TTITLE, message: self.RESTORED_SUCCESSFULLY_TEXT)
             }
         })
     }
@@ -211,7 +224,7 @@ class ShopVC: BaseModalVC {
 
                 if (self.isRestoreInProgress) {
                     self.isRestoreInProgress = false
-                    WTFOneButtonAlert.show("Error", message: "\(productTitle) can't be restored")
+                    WTFOneButtonAlert.show(self.ERROR_TITLE, message: productTitle + " " + self.RESTORED_ERROR_TEXT)
                 }
             })
         }

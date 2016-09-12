@@ -1,4 +1,5 @@
 import Foundation
+import Localize_Swift
 
 class SingleModeViewController: BaseUIViewController {
     private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
@@ -10,6 +11,16 @@ class SingleModeViewController: BaseUIViewController {
     @IBOutlet weak var pageControlTopPaddingConstraint: NSLayoutConstraint!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var exitGesture: UIGestureRecognizer!
+
+    private let FINISHED_TITLE = "Congratulations!".localized()
+    private let FINISHED_TEXT = "You have finished the".localized()
+
+    private let FINISHED_HARD_TEXT = "on hard difficulty.".localized()
+    private let FINISHED_NORMAL_TEXT = "Hard difficulty unlocked.".localized()
+    private let FINISHED_EASY_TEXT = "Complete all levels on Normal difficulty to unlock Hard.".localized()
+
+    private let NEXT_CHAPTER_TEXT = "Next Chapter".localized()
+    private let STAY_HERE_TEXT = "Stay here".localized()
 
     private let PageControlAdditionalPadding: CGFloat = 8
 
@@ -81,31 +92,31 @@ class SingleModeViewController: BaseUIViewController {
         if (currentCategory.hasJustClearedOnHard) {
             currentCategory.hasJustClearedOnHard = false
 
-            message = "You have finished the" + " \"" + currentCategory.cipherType.description + "\" " + "on hard difficulty."
+            message = FINISHED_TEXT + " \"" + currentCategory.cipherType.description + "\" " + FINISHED_HARD_TEXT
         } else if (currentCategory.hasJustClearedOnNormal) {
             currentCategory.hasJustClearedOnNormal = false
 
-            message = "You have finished the" + " \"" + currentCategory.cipherType.description + "\". " + "Hard difficulty unlocked."
+            message = FINISHED_TEXT + " \"" + currentCategory.cipherType.description + "\". " + FINISHED_NORMAL_TEXT
         } else if (currentCategory.hasJustClearedOnEasy) {
             currentCategory.hasJustClearedOnEasy = false
 
-            message = "You have finished the" + " \"" + currentCategory.cipherType.description + "\". " + "Complete all levels on Normal difficulty to unlock Hard."
+            message = FINISHED_TEXT + " \"" + currentCategory.cipherType.description + "\". " + FINISHED_EASY_TEXT
         } else {
             //no need for alert
             return
         }
 
         if (nextCategory != nil) {
-            WTFTwoButtonsAlert.show("Congratulations!",
+            WTFTwoButtonsAlert.show(FINISHED_TITLE,
                     message: message,
-                    firstButtonTitle: "Next Chapter",
-                    secondButtonTitle: "Stay here") { () -> Void in
+                    firstButtonTitle: NEXT_CHAPTER_TEXT,
+                    secondButtonTitle: STAY_HERE_TEXT) { () -> Void in
 
                 self.pageControl.currentPage = self.pageControl.currentPage + 1
                 self.cipherPageViewController.showPage(self.pageControl.currentPage)
             }
         } else {
-            WTFOneButtonAlert.show("Congratulations!", message: message, firstButtonTitle: "Ok")
+            WTFOneButtonAlert.show(FINISHED_TITLE, message: message)
         }
     }
 }

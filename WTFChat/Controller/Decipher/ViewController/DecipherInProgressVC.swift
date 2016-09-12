@@ -1,4 +1,5 @@
 import Foundation
+import Localize_Swift
 
 class DecipherInProgressVC: UIViewController {
     let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
@@ -19,6 +20,9 @@ class DecipherInProgressVC: UIViewController {
     @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var topPaddingConstraint: NSLayoutConstraint!
     @IBOutlet weak var wordsViewHorizontalConstraint: NSLayoutConstraint!
+
+    private let GIVE_UP_TITLE_TEXT = "Stop deciphering?".localized()
+    private let GIVE_UP_BUTTON_TEXT = "Give Up".localized()
 
     var message: Message!
 
@@ -100,10 +104,7 @@ class DecipherInProgressVC: UIViewController {
             return
         }
 
-        WTFTwoButtonsAlert.show("Stop deciphering?",
-                message: "",
-                firstButtonTitle: "Give Up",
-                secondButtonTitle: "Cancel") { () -> Void in
+        WTFTwoButtonsAlert.show(GIVE_UP_TITLE_TEXT, message: "", firstButtonTitle: GIVE_UP_BUTTON_TEXT) { () -> Void in
             self.gameOver()
         }
     }

@@ -1,4 +1,5 @@
 import Foundation
+import Localize_Swift
 
 class DecipherResultVC: UIViewController, HintComputer {
     let audioService: AudioService = serviceLocator.get(AudioService)
@@ -9,8 +10,10 @@ class DecipherResultVC: UIViewController, HintComputer {
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var wordsViewHorizontalConstraint: NSLayoutConstraint!
 
-    let SUCCESS_TEXT = "Success"
-    let FAILED_TEXT = "Failed"
+    private let SUCCESS_TEXT = "Success".localized()
+    private let FAILED_TEXT = "Failed".localized()
+    private let CONTINUE_TEXT = "Continue".localized()
+    private let RETRY_TEXT = "Retry".localized()
 
     private var message: Message!
 
@@ -105,13 +108,13 @@ class DecipherResultVC: UIViewController, HintComputer {
         if (message.getMessageStatus() == .Success) {
             resultLabel.text = SUCCESS_TEXT
             resultLabel.addGradientToLabel(Gradient.Success)
-            continueButton.setTitle("Continue", forState: .Normal)
+            continueButton.setTitle(CONTINUE_TEXT, forState: .Normal)
 
             audioService.playSound("win")
         } else {
             resultLabel.text = FAILED_TEXT
             resultLabel.addGradientToLabel(Gradient.Failed)
-            continueButton.setTitle("Retry", forState: .Normal)
+            continueButton.setTitle(RETRY_TEXT, forState: .Normal)
 
             audioService.playSound("lose")
         }

@@ -5,7 +5,7 @@ import Localize_Swift
 class InAppService: Service {
     private let inAppHelper: InAppHelper
 
-    private let OWNED_TITLE = "Owned".localized()
+    private let PAID_TITLE = "Paid".localized()
     private let BUY_TEXT = "Buy".localized()
     private let FOR_TEXT = "for".localized()
 
@@ -68,7 +68,7 @@ class InAppService: Service {
         }
         
         if isPurchased(productId) {
-            return OWNED_TITLE
+            return PAID_TITLE
         }
         
         if let product = inAppHelper.getProduct(productId) {

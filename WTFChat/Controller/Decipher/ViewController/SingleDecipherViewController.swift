@@ -1,4 +1,5 @@
 import Foundation
+import Localize_Swift
 
 class SingleDecipherViewController: DecipherViewController {
     private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
@@ -6,6 +7,10 @@ class SingleDecipherViewController: DecipherViewController {
     private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
     private let levelService: LevelService = serviceLocator.get(LevelService)
     private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+
+    private let LEVEL_TEXT = "Level".localized()
+    private let GOT_HINTS_BEGIN_TEXT = "You got".localized()
+    private let GOT_HINTS_END_TEXT = "free hints".localized()
 
     private var singleMessage: SingleMessage!
     private var messageCategory: TextCategory!
@@ -37,13 +42,10 @@ class SingleDecipherViewController: DecipherViewController {
         if (currentUserLvl > previousUserLvl) {
             let hintsForLvl = currentUserService.addHintsForLvlUp()
 
-            let title = "Level " + String(currentUserLvl) + "!"
-            let message = "You got " + String(hintsForLvl) + " free hints"
+            let title = LEVEL_TEXT + " " + String(currentUserLvl) + "!"
+            let message = GOT_HINTS_BEGIN_TEXT + " " + String(hintsForLvl) + " " + GOT_HINTS_END_TEXT
 
-            WTFOneButtonAlert.show(title,
-                    message: message,
-                    firstButtonTitle: "Ok",
-                    viewPresenter: self)
+            WTFOneButtonAlert.show(title, message: message, viewPresenter: self)
         }
     }
 

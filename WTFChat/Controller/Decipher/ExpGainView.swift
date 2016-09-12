@@ -1,15 +1,10 @@
-//
-//  ExpGainView.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 29/10/15.
-//  Copyright © 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import Foundation
+import Localize_Swift
 
 class ExpGainView: NSObject {
     private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+
+    private let LEVEL_TEXT = "LEVEL".localized()
 
     var progressView: UIProgressView?
     var expLabel: UILabel?
@@ -36,7 +31,7 @@ class ExpGainView: NSObject {
     private func createLvlLabel(rootView: UIView, userLvl: Int) -> UILabel {
         //create gauge view
         let lvlLabel = UILabel()
-        lvlLabel.text = "LEVEL \(String(userLvl))"
+        lvlLabel.text = LEVEL_TEXT + " " + String(userLvl)
         lvlLabel.font = UIFont.init(name: lvlLabel.font.fontName, size: 14)
         lvlLabel.translatesAutoresizingMaskIntoConstraints = false
         lvlLabel.numberOfLines = 1
@@ -148,7 +143,7 @@ class ExpGainView: NSObject {
                     
                     UIView.animateWithDuration(1,
                         animations: {
-                            self.lvlLabel?.text = "LEVEL \(String(newUserLvl))"
+                            self.lvlLabel?.text = LEVEL_TEXT + " " + String(newUserLvl)
                         },
                         completion: nil
                     )

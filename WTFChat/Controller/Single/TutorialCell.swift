@@ -1,11 +1,3 @@
-//
-//  TutorialCell.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 16/11/15.
-//  Copyright © 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import UIKit
 
 class TutorialCell: UITableViewCell {

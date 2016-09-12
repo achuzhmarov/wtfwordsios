@@ -78,11 +78,7 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
                 selectedLevel = level
                 self.performSegueWithIdentifier(LEVEL_PREVIEW_SEGUE_ID, sender: self)
             } else {
-                WTFOneButtonAlert.show("Not available yet",
-                        message: "This level is not available yet. Please, wait for the next release!",
-                        firstButtonTitle: "Ok")
-
-                return
+                //do nothing
             }
         }
     }
