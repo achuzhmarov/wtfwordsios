@@ -1,7 +1,4 @@
-//
-// Created by Artem Chuzhmarov on 31/05/16.
-// Copyright (c) 2016 Artem Chuzhmarov. All rights reserved.
-//
+import Localize_Swift
 
 enum CipherType : Int, CustomStringConvertible {
     case RightCutter = 0
@@ -14,15 +11,15 @@ enum CipherType : Int, CustomStringConvertible {
         get {
             switch self {
             case CipherType.RightCutter:
-                return "Right Cutter"
+                return "Right Cutter".localized()
             case CipherType.LeftCutter:
-                return "Left Cutter"
+                return "Left Cutter".localized()
             case CipherType.Shuffle:
-                return "Shuffle"
+                return "Shuffle".localized()
             case CipherType.DoubleCutter:
-                return "Double Cutter"
+                return "Double Cutter".localized()
             case CipherType.RandomCutter:
-                return "Random Cutter"
+                return "Random Cutter".localized()
             }
         }
     }

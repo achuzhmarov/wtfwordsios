@@ -1,11 +1,3 @@
-//
-//  MessageCipherService.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 24/09/15.
-//  Copyright © 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import Foundation
 
 class MessageCipherService: Service {
@@ -16,7 +8,6 @@ class MessageCipherService: Service {
 
     private let DELIMITERS = NSCharacterSet(charactersInString: "  ")
 
-    private let EXAMPLE_TEXT = "Example"
     private let ROMAN_LETTERS = ["X","V","I"]
 
     private let currentUserService: CurrentUserService
@@ -179,10 +170,6 @@ class MessageCipherService: Service {
         talk.appendMessage(newMessage)
         
         return newMessage
-    }
-
-    func createExampleMessage(cipherType: CipherType, cipherDifficulty: CipherDifficulty) -> Message {
-        return createMessage(EXAMPLE_TEXT, cipherType: cipherType, cipherDifficulty: cipherDifficulty)
     }
 
     func createMessage(text: String, cipherType: CipherType, cipherDifficulty: CipherDifficulty) -> Message {

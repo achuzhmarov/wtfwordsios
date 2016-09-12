@@ -30,12 +30,6 @@ class FriendsViewController: UITableViewController, TalkListener {
         talkService.friendsTalkListener = nil
     }
     
-    override func viewDidAppear(animated: Bool) {
-        if (currentUserService.getUserNewSuggestions() != 0) {
-            windowService.showNewSuggestionsAlert()
-        }
-    }
-    
     override func viewWillAppear(animated: Bool) {
         self.talks = talkService.talks
         self.updateView()

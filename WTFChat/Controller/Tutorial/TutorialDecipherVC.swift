@@ -1,10 +1,11 @@
 import Foundation
+import Localize_Swift
 
 class TutorialDecipherVC: DecipherViewController {
     private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
 
-    private let TUTORIAL_TITLE = "Welcome"
-    private let TUTORIAL_MESSAGE = "Welcome! Glad to see you here. Have a good time!"
+    private let TUTORIAL_TITLE = "Welcome".localized()
+    private let TUTORIAL_MESSAGE = "Welcome! Glad to see you here. Have a good time!".localized()
 
     let transitionManager = FadeTransitionManager()
 

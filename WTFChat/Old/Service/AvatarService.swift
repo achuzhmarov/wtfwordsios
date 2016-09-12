@@ -1,11 +1,3 @@
-//
-//  AvatarImageService.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 05/11/15.
-//  Copyright © 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import Foundation
 
 class AvatarService: Service {

@@ -1,11 +1,3 @@
-//
-//  RandomCutterCipher.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 19/10/15.
-//  Copyright © 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import Foundation
 
 class RandomCutterEasyCipher: Cipher {

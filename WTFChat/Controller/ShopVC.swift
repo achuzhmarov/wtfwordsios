@@ -25,6 +25,8 @@ class ShopVC: BaseModalVC {
     @IBOutlet weak var hints6Title: UILabel!
     @IBOutlet weak var hints6BuyButton: BorderedButton!
 
+    private let CONNECTION_ERROR_TEXT = "Please, check if you have a stable internet connection. Then use 'Restore' button. If you still don't get your purchase, please, restart the app."
+
     private var productTitles = [ProductIdentifier: UILabel]()
     private var productButtons = [ProductIdentifier: BorderedButton]()
 
@@ -96,8 +98,7 @@ class ShopVC: BaseModalVC {
     func restoreButtonPressed(sender: BorderedButton) {
         WTFTwoButtonsAlert.show("Restore purchased",
                 message: "Are you sure you want to restore purchased content?",
-                firstButtonTitle: "Ok",
-                secondButtonTitle: "Cancel") { () -> Void in
+                firstButtonTitle: "Restore") { () -> Void in
             self.isRestoreInProgress = true
             self.inAppService.restorePurchased()
         }
@@ -160,9 +161,7 @@ class ShopVC: BaseModalVC {
                 self.reloadData()
             })
         } else {
-            WTFOneButtonAlert.show("No more ads",
-                    message: "Try again later",
-                    firstButtonTitle: "Ok") { () -> Void in
+            WTFOneButtonAlert.show("No more ads", message: "Try again later") { () -> Void in
                 self.reloadData()
             }
         }
@@ -174,8 +173,6 @@ class ShopVC: BaseModalVC {
         })
     }
 
-    let connectionErrorMessage = "Please, check if you have a stable internet connection. Then use 'Restore' button. If you still don't get your purchase, please, restart the app."
-
     func productPurchasedError(notification: NSNotification) {
         if (notification.object != nil) {
             let productIdentifier = notification.object as! String
@@ -183,19 +180,13 @@ class ShopVC: BaseModalVC {
             if let productTitle = inAppService.getProductTitle(productIdentifier) {
                 dispatch_async(dispatch_get_main_queue(), {
                     self.reloadData()
-
-                    WTFOneButtonAlert.show("Error",
-                            message: "\(productTitle) purchase error. \(self.connectionErrorMessage)",
-                            firstButtonTitle: "Ok")
+                    WTFOneButtonAlert.show("Error", message: "\(productTitle) purchase error. \(self.CONNECTION_ERROR_TEXT)")
                 })
             }
         } else {
             dispatch_async(dispatch_get_main_queue(), {
                 self.reloadData()
-
-                WTFOneButtonAlert.show("Error",
-                        message: "Unknown error occured. \(self.connectionErrorMessage)",
-                        firstButtonTitle: "Ok")
+                WTFOneButtonAlert.show("Error", message: "Unknown error occured. \(self.CONNECTION_ERROR_TEXT)")
             })
         }
     }
@@ -206,10 +197,7 @@ class ShopVC: BaseModalVC {
 
             if (self.isRestoreInProgress) {
                 self.isRestoreInProgress = false
-
-                WTFOneButtonAlert.show("Success",
-                        message: "Restored successfully",
-                        firstButtonTitle: "Ok")
+                WTFOneButtonAlert.show("Success", message: "Restored successfully")
             }
         })
     }
@@ -223,10 +211,7 @@ class ShopVC: BaseModalVC {
 
                 if (self.isRestoreInProgress) {
                     self.isRestoreInProgress = false
-
-                    WTFOneButtonAlert.show("Error",
-                            message: "\(productTitle) can't be restored",
-                            firstButtonTitle: "Ok")
+                    WTFOneButtonAlert.show("Error", message: "\(productTitle) can't be restored")
                 }
             })
         }

@@ -1,9 +1,14 @@
 import Foundation
 import StoreKit
+import Localize_Swift
 
 class InAppService: Service {
     private let inAppHelper: InAppHelper
-    
+
+    private let OWNED_TITLE = "Owned".localized()
+    private let BUY_TEXT = "Buy".localized()
+    private let FOR_TEXT = "for".localized()
+
     private var products = [SKProduct]()
 
     init(inAppHelper: InAppHelper) {
@@ -43,7 +48,7 @@ class InAppService: Service {
 
     func getProductTitle(productId: ProductIdentifier) -> String? {
         if let product = inAppHelper.getProduct(productId) {
-            return product.localizedTitle
+            return product.localizedTitle.localized()
         }
         
         return nil
@@ -51,7 +56,7 @@ class InAppService: Service {
     
     func getProductDescription(productId: ProductIdentifier) -> String? {
         if let product = inAppHelper.getProduct(productId) {
-            return product.localizedDescription
+            return product.localizedDescription.localized()
         }
         
         return nil
@@ -59,15 +64,15 @@ class InAppService: Service {
     
     func getProductPrice(productId: ProductIdentifier) -> String? {
         if !canMakePayments() {
-            return "Not available"
+            return "-"
         }
         
         if isPurchased(productId) {
-            return "Owned"
+            return OWNED_TITLE
         }
         
         if let product = inAppHelper.getProduct(productId) {
-            return product.localizedPrice()
+            return product.localizedPrice().localized()
         }
         
         return nil
@@ -95,10 +100,9 @@ class InAppService: Service {
         let productPrice = getProductPrice(productId)
         let productDescription = getProductDescription(productId)
         
-        WTFTwoButtonsAlert.show("Buy \(productName!) for \(productPrice!)",
+        WTFTwoButtonsAlert.show(BUY_TEXT + " " + productName! + FOR_TEXT + " " + productPrice!,
             message: productDescription!,
-            firstButtonTitle: "Ok",
-            secondButtonTitle: "Cancel",
+            firstButtonTitle: BUY_TEXT,
             alertButtonAction: { () -> Void in
                 self.purchaseProduct(productId)
             }, cancelButtonAction: { () -> Void in

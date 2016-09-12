@@ -1,8 +1,11 @@
 import Foundation
+import Localize_Swift
 
 class DailyHintsService: Service {
     let inAppService: InAppService
     let currentUserService: CurrentUserService
+
+    private let DAILY_HINTS_TEXT = "Daily free hints!\nToday you got".localized()
 
     init(inAppService: InAppService, currentUserService: CurrentUserService) {
         self.inAppService = inAppService
@@ -38,9 +41,7 @@ class DailyHintsService: Service {
 
         currentUserService.addHints(hints)
 
-        WTFOneButtonAlert.show("Daily free hints!\nToday you got \(hints)",
-                message: nil,
-                firstButtonTitle: "Ok")
+        WTFOneButtonAlert.show(DAILY_HINTS_TEXT + " " + hints, message: nil)
     }
 
     func getRandomDailyHints(userLvl: Int) -> Int {

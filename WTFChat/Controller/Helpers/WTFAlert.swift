@@ -1,7 +1,8 @@
 import Foundation
+import Localize_Swift
 
 class WTFBaseAlert: NSObject, UIAlertViewDelegate  {
-    class func presentAlert(alert: UIAlertController) {
+    static func presentAlert(alert: UIAlertController) {
         let rootViewController: UIViewController = UIApplication.sharedApplication().windows.last!.rootViewController!
 
         if let childController = rootViewController.presentedViewController {
@@ -14,16 +15,22 @@ class WTFBaseAlert: NSObject, UIAlertViewDelegate  {
 
 class WTFOneButtonAlert: WTFBaseAlert  {
     static let CON_ERR = "%conError%"
-    private static let connectionErrorDescription = "Internet connection problem"
 
-    class func show(title: String, message: String?, firstButtonTitle: String, alertButtonAction:(() -> Void)? = nil) {
+    private static let CONNECTION_ERROR_TEXT = "Internet connection problem".localized()
+    private static let OK_TEXT = "Ok".localized()
+
+    static func show(title: String, message: String?, alertButtonAction:(() -> Void)? = nil) {
+        show(title, message: message, firstButtonTitle: OK_TEXT, viewPresenter: nil, alertButtonAction: alertButtonAction)
+    }
+
+    static func show(title: String, message: String?, firstButtonTitle: String, alertButtonAction:(() -> Void)? = nil) {
         show(title, message: message, firstButtonTitle: firstButtonTitle, viewPresenter: nil, alertButtonAction: alertButtonAction)
     }
 
-    class func show(title: String, message: String?, firstButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:(() -> Void)? = nil) {
+    static func show(title: String, message: String?, firstButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:(() -> Void)? = nil) {
         //if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
-                message: message?.replace(CON_ERR, with: connectionErrorDescription),
+                message: message?.replace(CON_ERR, with: CONNECTION_ERROR_TEXT),
                 preferredStyle: UIAlertControllerStyle.Alert)
             
             alert.addAction(UIAlertAction(title: firstButtonTitle, style: .Default, handler: { (action: UIAlertAction) in
@@ -48,11 +55,21 @@ class WTFOneButtonAlert: WTFBaseAlert  {
 }
 
 class WTFTwoButtonsAlert: WTFBaseAlert {
-    class func show(title: String, message: String?, firstButtonTitle: String, secondButtonTitle: String, alertButtonAction:(() -> Void)?) {
+    private static let CANCEL_TEXT = "Cancel".localized()
+
+    static func show(title: String, message: String?, firstButtonTitle: String, alertButtonAction:(() -> Void)?) {
+        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: CANCEL_TEXT, alertButtonAction: alertButtonAction, cancelButtonAction: nil)
+    }
+
+    static func show(title: String, message: String?, firstButtonTitle: String, alertButtonAction:(() -> Void)?, cancelButtonAction:(() -> Void)?) {
+        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: CANCEL_TEXT, alertButtonAction: alertButtonAction, cancelButtonAction: cancelButtonAction)
+    }
+
+    static func show(title: String, message: String?, firstButtonTitle: String, secondButtonTitle: String, alertButtonAction:(() -> Void)?) {
         return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: secondButtonTitle, alertButtonAction: alertButtonAction, cancelButtonAction: nil)
     }
-    
-    class func show(title: String, message: String?, firstButtonTitle: String, secondButtonTitle: String, alertButtonAction:(() -> Void)?, cancelButtonAction:(() -> Void)?) {
+
+    static func show(title: String, message: String?, firstButtonTitle: String, secondButtonTitle: String, alertButtonAction:(() -> Void)?, cancelButtonAction:(() -> Void)?) {
         //if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
                 message: message,

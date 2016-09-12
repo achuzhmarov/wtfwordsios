@@ -4,13 +4,9 @@ class DecipherResultVC: UIViewController, HintComputer {
     let audioService: AudioService = serviceLocator.get(AudioService)
 
     @IBOutlet weak var resultLabel: RoundedLabel!
-
     @IBOutlet weak var levelView: UIView!
-
     @IBOutlet weak var wordsTableView: WordsViewController!
-
     @IBOutlet weak var continueButton: UIButton!
-
     @IBOutlet weak var wordsViewHorizontalConstraint: NSLayoutConstraint!
 
     let SUCCESS_TEXT = "Success"

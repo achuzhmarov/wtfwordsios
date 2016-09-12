@@ -1,21 +1,25 @@
 import Foundation
+import Localize_Swift
 
 class TutorialDecipherInProgressVC: DecipherInProgressVC {
     private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
 
-    private let GUESS_MESSAGE = "Let's start! Try to type 'to' and press either 'Try' or 'return' button."
-    private let CLOSE_TRY_MESSAGE = "Congratulations! Now, enter 'her' as your next guess."
-    private let CLOSE_TRY_HINT_MESSAGE = "Oh! You were close! See how the word 'He...' has changed color. Try tapping it to decipher!"
-    private let HINT_MESSAGE = "Wow, it worked! Try to use a similar action to get a hint for any blue word."
-    private let DECIPHER_REST_MESSAGE = "Well done! Now you can decipher the rest of the message by yourself."
+    private let GUESS_MESSAGE = "Let's start! Try to type 'to' and press either 'Try' or 'return' button.".localized()
+    private let CLOSE_TRY_MESSAGE = "Congratulations! Now, enter 'her' as your next guess.".localized()
+    private let CLOSE_TRY_HINT_MESSAGE = "Oh! You were close! See how the word 'He...' has changed color. Try tapping it to decipher!".localized()
+    private let HINT_MESSAGE = "Wow, it worked! Try to use a similar action to get a hint for any blue word.".localized()
+    private let DECIPHER_REST_MESSAGE = "Well done! Now you can decipher the rest of the message by yourself.".localized()
 
-    private let GUESS_ERROR = "Please, type 'to' and press 'Try'!"
-    private let CLOSE_TRY_ERROR = "Please, type 'her' and press 'Try'!"
-    private let CLOSE_TRY_HINT_ERROR = "Please, tap on the orange word bubble to open it!"
-    private let HINT_ERROR = "Please, tap on any blue word bubble and use a hint!"
+    private let GUESS_ERROR = "Please, type 'to' and press 'Try'!".localized()
+    private let CLOSE_TRY_ERROR = "Please, type 'her' and press 'Try'!".localized()
+    private let CLOSE_TRY_HINT_ERROR = "Please, tap on the orange word bubble to open it!".localized()
+    private let HINT_ERROR = "Please, tap on any blue word bubble and use a hint!".localized()
 
-    private let GUESS_TEXT = "TO"
-    private let CLOSE_TRY_TEXT = "HER"
+    private let GUESS_TEXT = "TO".localized()
+    private let CLOSE_TRY_TEXT = "HER".localized()
+
+    private let ZERO_HINTS_TITLE = "Hints remained: 0".localized()
+    private let ZERO_HINTS_MESSAGE = "You have used all hints.".localized()
 
     private let TUTORIAL_HINTS = 3
 
@@ -26,9 +30,7 @@ class TutorialDecipherInProgressVC: DecipherInProgressVC {
     }
 
     override func showNoHintsDialog() {
-        WTFOneButtonAlert.show("Hints remained: 0",
-                message: "You have used all hints",
-                firstButtonTitle: "Ok")
+        WTFOneButtonAlert.show(ZERO_HINTS_TITLE, message: ZERO_HINTS_MESSAGE)
     }
 
     override func updateHintsUsed() {
@@ -111,10 +113,7 @@ class TutorialDecipherInProgressVC: DecipherInProgressVC {
     private func showMessageAlert(message: String, tutorialStage: TutorialStage? = nil) {
         isPaused = true
 
-        WTFOneButtonAlert.show(message,
-                message: "",
-                firstButtonTitle: "Ok") { () -> Void in
-
+        WTFOneButtonAlert.show(message, message: "") { () -> Void in
             self.isPaused = false
 
             if let tutorialStage = tutorialStage {

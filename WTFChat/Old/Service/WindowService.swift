@@ -1,8 +1,3 @@
-//
-// Created by Artem Chuzhmarov on 31/05/16.
-// Copyright (c) 2016 Artem Chuzhmarov. All rights reserved.
-//
-
 import Foundation
 
 class WindowService: Service {
@@ -60,22 +55,5 @@ class WindowService: Service {
         }
 
         return nil
-    }
-
-    func showNewSuggestionsAlert() {
-        let currentController = getCurrentController()
-
-        if let _ = currentController as? DecipherViewController {
-            //don't show alert if deciphering
-            return
-        }
-
-        if (currentUserService.getUserNewSuggestions() != 0) {
-            WTFOneButtonAlert.show("Daily free hints!",
-                    message: "You have just received \(String(currentUserService.getUserNewSuggestions()))",
-                    firstButtonTitle: "Ok")
-
-            currentUserService.clearUserNewSuggestions()
-        }
     }
 }

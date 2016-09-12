@@ -1,11 +1,3 @@
-//
-//  UserService.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 08/11/15.
-//  Copyright © 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import Foundation
 
 class UserService: Service {
@@ -69,12 +61,6 @@ class UserService: Service {
         }
         
         currentUserService.updateInfo(userInfo!)
-        
-        if (userInfo!.newHints != 0) {
-            dispatch_async(dispatch_get_main_queue(), {
-                self.windowService.showNewSuggestionsAlert()
-            })
-        }
     }
     
     func getNewFriends(searchString: String, completion:(friends: [FriendInfo]?, error: NSError?) -> Void) {

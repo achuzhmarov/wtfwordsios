@@ -2159,6 +2159,9 @@
                     <navigationItem key="navigationItem" title="WTFWords" id="nWF-9P-Gaz"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="shopButton" destination="Ch5-KJ-n19" id="Ioh-g5-BXe"/>
+                        <outlet property="singleModeButton" destination="0ZP-7H-hpk" id="PDE-JO-p8G"/>
+                        <outlet property="tutorialButton" destination="sH4-kK-kNv" id="TRv-m0-TDG"/>
                         <segue destination="c9g-0d-Ip0" kind="presentation" identifier="startSingleMode" id="d12-yQ-WoZ"/>
                     </connections>
                 </viewController>
@@ -3070,6 +3073,6 @@
         <image name="settings filled" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RRm-LN-v38"/>
+        <segue reference="5fm-V2-gKc"/>
     </inferredMetricsTieBreakers>
 </document>

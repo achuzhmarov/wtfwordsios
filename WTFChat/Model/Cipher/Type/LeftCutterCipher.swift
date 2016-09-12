@@ -1,11 +1,3 @@
-//
-//  LeftCutterCipher.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 05/10/15.
-//  Copyright © 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import Foundation
 
 class LeftCutterEasyCipher: Cipher {

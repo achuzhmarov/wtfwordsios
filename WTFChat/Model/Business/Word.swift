@@ -5,8 +5,6 @@ enum WordType: Int {
 }
 
 class Word: NSObject {
-    //static let HIDE_SYMBOL = "’"
-    //static let HIDE_SYMBOL = "·"
     static let HIDE_SYMBOL = "*"
 
     static let NOT_HIDED_SYMBOLS: [Character] = [".", ",", "!", "?", "(", ")", " ", "\n"]

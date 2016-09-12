@@ -1,7 +1,4 @@
-//
-// Created by Artem Chuzhmarov on 31/05/16.
-// Copyright (c) 2016 Artem Chuzhmarov. All rights reserved.
-//
+import Localize_Swift
 
 enum CipherDifficulty : Int, CustomStringConvertible {
     case Easy = 0
@@ -12,11 +9,11 @@ enum CipherDifficulty : Int, CustomStringConvertible {
         get {
             switch self {
             case CipherDifficulty.Easy:
-                return "Easy"
+                return "Easy".localized()
             case CipherDifficulty.Normal:
-                return "Normal"
+                return "Normal".localized()
             case CipherDifficulty.Hard:
-                return "Hard"
+                return "Hard".localized()
             }
         }
     }
