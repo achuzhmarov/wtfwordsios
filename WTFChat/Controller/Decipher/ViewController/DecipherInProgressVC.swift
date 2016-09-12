@@ -23,6 +23,8 @@ class DecipherInProgressVC: UIViewController {
 
     private let GIVE_UP_TITLE_TEXT = "Stop deciphering?".localized()
     private let GIVE_UP_BUTTON_TEXT = "Give Up".localized()
+    private let TRY_TEXT = "Try".localized()
+    private let GUESS_PLACEHOLDER_TEXT = "Enter your guess here".localized()
 
     var message: Message!
 
@@ -61,6 +63,11 @@ class DecipherInProgressVC: UIViewController {
         guessTextField.autocorrectionType = .No
 
         layoutTopView()
+
+        tryButton.setTitle(TRY_TEXT, forState: .Normal)
+
+        let placeholder = NSAttributedString(string: GUESS_PLACEHOLDER_TEXT, attributes: [NSForegroundColorAttributeName : UIColor.lightGrayColor()])
+        guessTextField.attributedPlaceholder = placeholder
     }
 
     deinit {

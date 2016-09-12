@@ -8,12 +8,14 @@ class DecipherResultVC: UIViewController, HintComputer {
     @IBOutlet weak var levelView: UIView!
     @IBOutlet weak var wordsTableView: WordsViewController!
     @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var wordsViewHorizontalConstraint: NSLayoutConstraint!
 
     private let SUCCESS_TEXT = "Success".localized()
     private let FAILED_TEXT = "Failed".localized()
     private let CONTINUE_TEXT = "Continue".localized()
     private let RETRY_TEXT = "Retry".localized()
+    private let BACK_TEXT = "Back".localized()
 
     private var message: Message!
 
@@ -38,6 +40,8 @@ class DecipherResultVC: UIViewController, HintComputer {
 
         resultLabel.layer.cornerRadius = 12
         resultLabel.textColor = Color.Text
+
+        backButton.setTitle(BACK_TEXT, forState: .Normal)
     }
 
     deinit {

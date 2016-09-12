@@ -143,7 +143,7 @@ class ExpGainView: NSObject {
                     
                     UIView.animateWithDuration(1,
                         animations: {
-                            self.lvlLabel?.text = LEVEL_TEXT + " " + String(newUserLvl)
+                            self.lvlLabel?.text = self.LEVEL_TEXT + " " + String(newUserLvl)
                         },
                         completion: nil
                     )

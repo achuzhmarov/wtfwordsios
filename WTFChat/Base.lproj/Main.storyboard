@@ -376,12 +376,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="zl7-sC-Qbi" id="sZN-HB-ICr"/>
                         <outlet property="backgroundView" destination="9jF-QE-Iin" id="X0j-OF-Dmn"/>
                         <outlet property="backgroundViewWidthConstraint" destination="fnJ-Rv-HuG" id="pg3-5m-yp4"/>
                         <outlet property="difficultySelector" destination="BiT-f0-7pE" id="tzD-DO-xz2"/>
                         <outlet property="lvlLabel" destination="UJ2-Lp-87J" id="YBs-hB-Skj"/>
                         <outlet property="lvlView" destination="ZVj-D8-Yal" id="k5d-wq-Vvp"/>
                         <outlet property="messageWordsView" destination="3UJ-TB-Npe" id="3uy-Ce-BfV"/>
+                        <outlet property="startButton" destination="EzZ-5e-UAr" id="WID-Ri-vRU"/>
                         <outlet property="startTimerLabel" destination="boU-H3-fpO" id="Adi-8a-qFa"/>
                         <outlet property="titleLabel" destination="x73-uy-YBt" id="4x2-H4-djJ"/>
                     </connections>
@@ -2003,6 +2005,7 @@
                         <outlet property="exitGesture" destination="3Mg-pR-iQY" id="lKd-HV-fkJ"/>
                         <outlet property="menuBackground" destination="pC1-zZ-Qza" id="4as-qv-sNh"/>
                         <outlet property="menuBorder" destination="YMS-n6-eny" id="eXO-bn-qgd"/>
+                        <outlet property="menuButton" destination="x7k-ET-xND" id="NP8-2D-ytH"/>
                         <outlet property="pageControl" destination="gG1-Hw-UNQ" id="bz0-Sj-3T7"/>
                     </connections>
                 </viewController>
@@ -2428,6 +2431,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="8ID-9E-j3b" id="3b0-Ul-QVf"/>
                         <outlet property="continueButton" destination="EaJ-2p-S0u" id="JfS-sa-3Y9"/>
                         <outlet property="levelView" destination="lWW-ht-I5W" id="JuG-ZV-fUp"/>
                         <outlet property="resultLabel" destination="VnZ-hh-2Sw" id="eNj-u4-Ivt"/>
@@ -2718,11 +2722,15 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="5kZ-lT-Qws" id="ZYC-41-wOE"/>
                         <outlet property="backgroundView" destination="JRg-tN-G5k" id="FA6-9B-43L"/>
                         <outlet property="backgroundViewWidthConstraint" destination="tXt-yA-0vR" id="dmT-Um-NKg"/>
+                        <outlet property="buyHintsTitle" destination="TfL-S7-WYM" id="Hib-TY-Kgf"/>
                         <outlet property="dailyHintsBuyButton" destination="8T4-A9-BKY" id="aFr-BD-9Po"/>
                         <outlet property="dailyHintsRestoreButton" destination="kBQ-Yn-HRy" id="xMq-lK-cRC"/>
+                        <outlet property="dailyHintsTitle" destination="2fS-jF-f5s" id="3ck-WA-omy"/>
                         <outlet property="freeHintsBuyButton" destination="VAy-Eg-p5z" id="Fzw-z1-F5T"/>
+                        <outlet property="freeHintsTitle" destination="6Md-3z-TJO" id="piq-vC-82U"/>
                         <outlet property="hints1BuyButton" destination="eag-A4-6va" id="HKu-Fk-TKJ"/>
                         <outlet property="hints1Title" destination="elE-Vg-N0C" id="VhY-az-uTh"/>
                         <outlet property="hints2BuyButton" destination="KBa-9V-tiJ" id="Ii4-iR-Ikv"/>
@@ -2735,6 +2743,7 @@
                         <outlet property="hints5Title" destination="mP7-Rd-QEC" id="GJV-S8-cQq"/>
                         <outlet property="hints6BuyButton" destination="bXG-YJ-xdb" id="ZB3-fp-vTM"/>
                         <outlet property="hints6Title" destination="daE-zG-77V" id="3U2-EN-N3d"/>
+                        <outlet property="hintsTitle" destination="iqn-Zv-mmi" id="Y4r-k7-ji9"/>
                         <outlet property="userHintsCount" destination="3Kb-aW-f4e" id="6xX-HG-7bR"/>
                     </connections>
                 </viewController>
@@ -3052,6 +3061,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="GG1-nY-pHE" id="9te-By-vC7"/>
                         <outlet property="continueButton" destination="K3l-ET-2Kr" id="ZLq-6j-iwI"/>
                         <outlet property="levelView" destination="UAi-wI-zFJ" id="oH9-dN-5Z5"/>
                         <outlet property="resultLabel" destination="an6-Xv-s5g" id="5zX-mL-Da8"/>

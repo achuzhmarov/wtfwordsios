@@ -8,19 +8,19 @@ class SingleModeViewController: BaseUIViewController {
 
     @IBOutlet weak var menuBorder: UIView!
     @IBOutlet weak var menuBackground: UIView!
+    @IBOutlet weak var menuButton: MenuButton!
     @IBOutlet weak var pageControlTopPaddingConstraint: NSLayoutConstraint!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var exitGesture: UIGestureRecognizer!
 
     private let FINISHED_TITLE = "Congratulations!".localized()
     private let FINISHED_TEXT = "You have finished the".localized()
-
     private let FINISHED_HARD_TEXT = "on hard difficulty.".localized()
     private let FINISHED_NORMAL_TEXT = "Hard difficulty unlocked.".localized()
     private let FINISHED_EASY_TEXT = "Complete all levels on Normal difficulty to unlock Hard.".localized()
-
     private let NEXT_CHAPTER_TEXT = "Next Chapter".localized()
     private let STAY_HERE_TEXT = "Stay here".localized()
+    private let MENU_TEXT = "menu".localized()
 
     private let PageControlAdditionalPadding: CGFloat = 8
 
@@ -41,6 +41,7 @@ class SingleModeViewController: BaseUIViewController {
 
         menuBorder.backgroundColor = Color.BackgroundDark
         menuBackground.addLinearGradient(Gradient.BackgroundMenu)
+        menuButton.setTitle(MENU_TEXT, forState: .Normal)
     }
 
     override func viewDidAppear(animated: Bool) {

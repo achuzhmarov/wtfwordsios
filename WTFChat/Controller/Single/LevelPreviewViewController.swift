@@ -1,4 +1,5 @@
 import Foundation
+import Localize_Swift
 
 class LevelPreviewViewController: BaseModalVC {
     private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
@@ -11,8 +12,13 @@ class LevelPreviewViewController: BaseModalVC {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var lvlLabel: UILabel!
     @IBOutlet weak var lvlView: UIView!
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
 
     @IBOutlet weak var messageWordsView: WordsViewController!
+
+    private let BACK_BUTTON_TITLE = "Back".localized()
+    private let START_BUTTON_TITLE = "Start".localized()
 
     private let DECIPHER_SEGUE_ID = "showDecipher"
 
@@ -47,6 +53,13 @@ class LevelPreviewViewController: BaseModalVC {
         updateLvlView()
 
         updateSelectedDifficultyInGUI()
+
+        difficultySelector.setTitle(CipherDifficulty.Easy.description, forSegmentAtIndex: CipherDifficulty.Easy.rawValue)
+        difficultySelector.setTitle(CipherDifficulty.Normal.description, forSegmentAtIndex: CipherDifficulty.Normal.rawValue)
+        difficultySelector.setTitle(CipherDifficulty.Hard.description, forSegmentAtIndex: CipherDifficulty.Hard.rawValue)
+
+        backButton.setTitle(BACK_BUTTON_TITLE, forState: .Normal)
+        startButton.setTitle(START_BUTTON_TITLE, forState: .Normal)
     }
 
     private func checkHardAvailability() {

@@ -6,10 +6,16 @@ class ShopVC: BaseModalVC {
     private let adColonyService: AdColonyService = serviceLocator.get(AdColonyService)
     private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
 
-    @IBOutlet weak var userHintsCount: UILabel!
+    @IBOutlet weak var backButton: BorderedButton!
 
+    @IBOutlet weak var userHintsCount: UILabel!
+    @IBOutlet weak var hintsTitle: UILabel!
+    @IBOutlet weak var buyHintsTitle: UILabel!
+
+    @IBOutlet weak var freeHintsTitle: UILabel!
     @IBOutlet weak var freeHintsBuyButton: BorderedButton!
 
+    @IBOutlet weak var dailyHintsTitle: UILabel!
     @IBOutlet weak var dailyHintsBuyButton: BorderedButton!
     @IBOutlet weak var dailyHintsRestoreButton: BorderedButton!
 
@@ -39,6 +45,12 @@ class ShopVC: BaseModalVC {
     private let BUY_ERROR_TEXT = "Can't buy".localized()
     private let RESTORED_SUCCESSFULLY_TEXT = "Restored successfully".localized()
     private let RESTORED_ERROR_TEXT = "can't be restored".localized()
+    private let VIEW_AD_TITLE = "View Ad".localized()
+    private let BACK_TEXT = "Back".localized()
+    private let HINTS_TEXT = "Hints:".localized()
+    private let BUY_HINTS_TEXT = "Buy Hints".localized()
+    private let FREE_HINTS_TEXT = "Get Free Hint".localized()
+    private let DAILY_HINTS_TEXT = "X2 Daily Hints".localized()
 
     private var productTitles = [ProductIdentifier: UILabel]()
     private var productButtons = [ProductIdentifier: BorderedButton]()
@@ -68,6 +80,15 @@ class ShopVC: BaseModalVC {
         ]
 
         addPressedHandlersForProducts()
+
+        freeHintsBuyButton.setTitle(VIEW_AD_TITLE, forState: .Normal)
+        dailyHintsRestoreButton.setTitle(RESTORE_BUTTON_TITLE, forState: .Normal)
+        backButton.setTitle(BACK_TEXT, forState: .Normal)
+
+        hintsTitle.text = HINTS_TEXT + " "
+        buyHintsTitle.text = BUY_HINTS_TEXT
+        freeHintsTitle.text = FREE_HINTS_TEXT
+        dailyHintsTitle.text = DAILY_HINTS_TEXT
 
         reloadData()
     }
