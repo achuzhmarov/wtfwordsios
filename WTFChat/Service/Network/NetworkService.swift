@@ -1,4 +1,5 @@
 import Foundation
+import SwiftyJSON
 
 class NetworkService: Service, NSURLSessionDelegate {
     private var baseUrl: String

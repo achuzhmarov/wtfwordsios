@@ -1,9 +1,5 @@
-//
-// Created by Artem Chuzhmarov on 30/05/16.
-// Copyright (c) 2016 Artem Chuzhmarov. All rights reserved.
-//
-
 import Foundation
+import SwiftyJSON
 
 class IosNetworkService: Service {
     private let networkService: NetworkService

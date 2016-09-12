@@ -1,4 +1,5 @@
 import Foundation
+import SwiftyJSON
 
 class JsonFriendInfoParser {
     class func fromJson(json: JSON) throws -> FriendInfo {

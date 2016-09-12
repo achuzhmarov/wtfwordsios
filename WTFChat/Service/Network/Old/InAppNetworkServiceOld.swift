@@ -1,4 +1,5 @@
 import Foundation
+import SwiftyJSON
 
 class InAppNetworkServiceOld: Service {
     private let networkService: NetworkService

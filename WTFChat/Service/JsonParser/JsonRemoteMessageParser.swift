@@ -1,4 +1,5 @@
 import Foundation
+import SwiftyJSON
 
 class JsonRemoteMessageParser {
     class func arrayFromJson(json: JSON) throws -> [RemoteMessage] {

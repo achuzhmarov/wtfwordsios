@@ -1,4 +1,5 @@
 import Foundation
+import SwiftyJSON
 
 class JsonWordParser {
     class func fromWord(word: Word) -> JSON {

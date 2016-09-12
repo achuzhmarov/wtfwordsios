@@ -23,7 +23,6 @@
 		3E37C1133C5E08DA63EDD707 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CAC67CD3944E4BBD3AAC /* Word.swift */; };
 		3E37C150C84BB5935FF38A7A /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CBBDBF1FE0CA7AFB58BF /* Level.swift */; };
 		3E37C15134610CE8CA184D79 /* ArrowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CBA4DD18B422E8A274EF /* ArrowImage.swift */; };
-		3E37C171F2B2B6C7B82FDE2B /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C8C94FDE3C085500AD3A /* SwiftyJSON.swift */; };
 		3E37C1767BCB23EE740A1F12 /* InAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C5E0D3BB7755C97ABFBA /* InAppService.swift */; };
 		3E37C17ACC2F2ED06AED6521 /* ReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C1DA55FF29C403586C78 /* ReplaceSegue.swift */; };
 		3E37C1B20738B57285D7ABE7 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CEF4103C59A60EA465BB /* NotificationService.swift */; };
@@ -59,6 +58,7 @@
 		3E37C45745918E00B792E32C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C148137D8E7C0B83F226 /* SettingsViewController.swift */; };
 		3E37C463BFB724BA46AE0287 /* CoreWord+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C3BDFC67DEBF5216B419 /* CoreWord+CoreDataProperties.swift */; };
 		3E37C46678ABCB5A406734D2 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF6868AF68C06FC669E6 /* MessageCell.swift */; };
+		3E37C496ADA241382B017B3A /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 3E37C2E2E3C2F4A76412E732 /* Cartfile */; };
 		3E37C4A65CAA433F21B331CD /* SingleMessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF45362C75741955A6F2 /* SingleMessageService.swift */; };
 		3E37C4B39DAC6C3A9C09222D /* ServiceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CB627C8C45BBD8C82592 /* ServiceInitializer.swift */; };
 		3E37C4B5D4BF98ED40A2C130 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF47929B32484447BAE2 /* UIImage+Extension.swift */; };
@@ -196,6 +196,8 @@
 		4896669D1B9B640400F769D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4896669B1B9B640400F769D1 /* Main.storyboard */; };
 		4896669F1B9B640400F769D1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4896669E1B9B640400F769D1 /* Images.xcassets */; };
 		489666AE1B9B640400F769D1 /* WTFChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489666AD1B9B640400F769D1 /* WTFChatTests.swift */; };
+		48CAFF7F1D86EFE6000BFFA1 /* Localize_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48CAFF7D1D86EFE6000BFFA1 /* Localize_Swift.framework */; };
+		48CAFF801D86EFE6000BFFA1 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48CAFF7E1D86EFE6000BFFA1 /* SwiftyJSON.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -243,6 +245,7 @@
 		3E37C283CC6663C54ADE8296 /* CoreDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		3E37C2D1E0401C16DCF763EC /* StopImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopImage.swift; sourceTree = "<group>"; };
 		3E37C2DAC9B9B5633D2C4302 /* CurrentUserService+Setters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CurrentUserService+Setters.swift"; sourceTree = "<group>"; };
+		3E37C2E2E3C2F4A76412E732 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
 		3E37C2F706C0F9122722CD66 /* SendMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMessageViewController.swift; sourceTree = "<group>"; };
 		3E37C309D678937A0BD83AB6 /* DecipherResultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecipherResultVC.swift; sourceTree = "<group>"; };
 		3E37C30F315D3B8F4CCD804D /* SingleMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleMessageCell.swift; sourceTree = "<group>"; };
@@ -303,7 +306,6 @@
 		3E37C8826F6A30EDA4A04CB2 /* TutorialDecipherResultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialDecipherResultVC.swift; sourceTree = "<group>"; };
 		3E37C890E5A751082A2A8251 /* JSQMessageAvatarImageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessageAvatarImageDataSource.h; sourceTree = "<group>"; };
 		3E37C89724177FD827960FEB /* InAppNetworkServiceOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppNetworkServiceOld.swift; sourceTree = "<group>"; };
-		3E37C8C94FDE3C085500AD3A /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		3E37C8F59166B827856A746E /* IosNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IosNetworkService.swift; sourceTree = "<group>"; };
 		3E37C901829DA46415047CD7 /* NameEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameEditViewController.swift; sourceTree = "<group>"; };
 		3E37C926E5C0E77FF7317639 /* BorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
@@ -408,6 +410,8 @@
 		489666A71B9B640400F769D1 /* WTFChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WTFChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		489666AC1B9B640400F769D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		489666AD1B9B640400F769D1 /* WTFChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WTFChatTests.swift; sourceTree = "<group>"; };
+		48CAFF7D1D86EFE6000BFFA1 /* Localize_Swift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Localize_Swift.framework; path = Carthage/Build/iOS/Localize_Swift.framework; sourceTree = "<group>"; };
+		48CAFF7E1D86EFE6000BFFA1 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		48ECC8EE1B9DA0F900A15B47 /* WTFChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WTFChat-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -416,6 +420,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48CAFF7F1D86EFE6000BFFA1 /* Localize_Swift.framework in Frameworks */,
+				48CAFF801D86EFE6000BFFA1 /* SwiftyJSON.framework in Frameworks */,
 				483676491C2048200092C703 /* StoreKit.framework in Frameworks */,
 				484EC36D1C2E71FA00C65F94 /* AdSupport.framework in Frameworks */,
 				484EC3511C2E714900C65F94 /* libz.1.2.5.tbd in Frameworks */,
@@ -753,7 +759,6 @@
 			isa = PBXGroup;
 			children = (
 				3E37C1EDBAAF1C35CFAFA2F2 /* JSQMessages */,
-				3E37C8C94FDE3C085500AD3A /* SwiftyJSON.swift */,
 				3E37C94384F16DE3D06549E7 /* KeychainWrapper.h */,
 				3E37C98636554709D1F080F3 /* KeychainWrapper.m */,
 			);
@@ -995,6 +1000,7 @@
 				3E37C4B8DB56155FBF44C14C /* Service */,
 				3E37C1FFDA283D4E52B54F7C /* Controller */,
 				3E37CB8CFE8EF0DFBCAE83EA /* Texts */,
+				3E37C2E2E3C2F4A76412E732 /* Cartfile */,
 			);
 			path = WTFChat;
 			sourceTree = "<group>";
@@ -1039,6 +1045,8 @@
 		49D7C70BCF12E2F6E166B7B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				48CAFF7D1D86EFE6000BFFA1 /* Localize_Swift.framework */,
+				48CAFF7E1D86EFE6000BFFA1 /* SwiftyJSON.framework */,
 				484EC3751C2E8B8B00C65F94 /* AdColony.framework */,
 				484EC36C1C2E71FA00C65F94 /* AdSupport.framework */,
 				484EC36A1C2E71A400C65F94 /* WebKit.framework */,
@@ -1070,6 +1078,7 @@
 				4896668E1B9B640400F769D1 /* Sources */,
 				4896668F1B9B640400F769D1 /* Frameworks */,
 				489666901B9B640400F769D1 /* Resources */,
+				48CAFF811D86EFFB000BFFA1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1160,6 +1169,7 @@
 				3E37C9092F90E27F56CA4C73 /* success.wav in Resources */,
 				3E37C1E8AB87E77D756C490E /* warning.wav in Resources */,
 				3E37CBF1CDB9F5937B9F151A /* Texts in Resources */,
+				3E37C496ADA241382B017B3A /* Cartfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1171,6 +1181,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		48CAFF811D86EFFB000BFFA1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Localize_Swift.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4896668E1B9B640400F769D1 /* Sources */ = {
@@ -1190,7 +1218,6 @@
 				3E37C34B4DF113739B00FF37 /* JSQMessagesAvatarImage.m in Sources */,
 				3E37C33BC340BC8E08C1FEC0 /* JSQMessagesAvatarImageFactory.m in Sources */,
 				3E37CAD97E41E445A3F3BBD0 /* JSQMessagesTimestampFormatter.m in Sources */,
-				3E37C171F2B2B6C7B82FDE2B /* SwiftyJSON.swift in Sources */,
 				3E37CAE111B6ACDC2340E014 /* KeychainWrapper.m in Sources */,
 				3E37C259CAE06BD0793EE82B /* InAppHelper.swift in Sources */,
 				3E37C077492EE60ADD851740 /* IosService.swift in Sources */,
@@ -1471,6 +1498,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = WTFChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -1494,6 +1522,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = WTFChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;

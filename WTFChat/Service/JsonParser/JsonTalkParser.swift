@@ -1,4 +1,5 @@
 import Foundation
+import SwiftyJSON
 
 class JsonTalkParser {
     class func arrayFromJson(json: JSON) throws -> [FriendTalk] {

@@ -1,12 +1,5 @@
-//
-//  AuthNetworkService.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 21/01/16.
-//  Copyright © 2016 Artem Chuzhmarov. All rights reserved.
-//
-
 import Foundation
+import SwiftyJSON
 
 class AuthNetworkService: Service {
     private let networkService: NetworkService
