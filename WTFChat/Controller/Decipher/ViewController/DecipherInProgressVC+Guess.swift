@@ -1,4 +1,5 @@
 import Foundation
+import Localize_Swift
 
 extension DecipherInProgressVC: UITextFieldDelegate {
 
@@ -22,9 +23,8 @@ extension DecipherInProgressVC: UITextFieldDelegate {
 
     @IBAction func tryButtonPressed(sender: AnyObject) {
         if (guessTextField.text!.characters.count > 1024) {
-            WTFOneButtonAlert.show("Too many characters",
-                    message: "Your guess should be less than 1024 characters",
-                    firstButtonTitle: "Ok")
+            WTFOneButtonAlert.show("Too many characters".localized(),
+                    message: "Your guess should be less than 1024 characters".localized())
 
             return
         }

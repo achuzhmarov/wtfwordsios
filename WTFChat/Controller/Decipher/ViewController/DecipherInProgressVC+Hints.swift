@@ -1,4 +1,5 @@
 import Foundation
+import Localize_Swift
 
 extension DecipherInProgressVC: HintComputer {
     func hintTapped(word: Word) {
@@ -16,10 +17,9 @@ extension DecipherInProgressVC: HintComputer {
     }
 
     func showNoHintsDialog() {
-        WTFTwoButtonsAlert.show("Hints remained: 0",
-                message: "You have used all hints. Want to get more?",
-                firstButtonTitle: "Get more",
-                secondButtonTitle: "Cancel") { () -> Void in
+        WTFTwoButtonsAlert.show("Hints remained: 0".localized(),
+                message: "You have used all hints. Want to get more?".localized(),
+                firstButtonTitle: "Get more".localized()) { () -> Void in
 
             self.isPaused = true
             self.performSegueWithIdentifier("getMoreHints", sender: self)
@@ -27,10 +27,9 @@ extension DecipherInProgressVC: HintComputer {
     }
 
     private func showHintConfirm(word: Word) {
-        WTFTwoButtonsAlert.show("Hints remained: \(String(hints))",
+        WTFTwoButtonsAlert.show("Hints remained:".localized() + " " + String(hints),
                 message: "",
-                firstButtonTitle: "Use a Hint",
-                secondButtonTitle: "Cancel") { () -> Void in
+                firstButtonTitle: "Use a Hint".localized()) { () -> Void in
 
             dispatch_async(dispatch_get_main_queue(), {
                 self.useHint(word)
@@ -39,10 +38,9 @@ extension DecipherInProgressVC: HintComputer {
     }
 
     private func showCloseTryHintConfirm(word: Word) {
-        WTFTwoButtonsAlert.show("Open this word?",
+        WTFTwoButtonsAlert.show("Open this word?".localized(),
                 message: "",
-                firstButtonTitle: "Open",
-                secondButtonTitle: "Cancel") { () -> Void in
+                firstButtonTitle: "Open".localized()) { () -> Void in
 
             dispatch_async(dispatch_get_main_queue(), {
                 self.useHint(word)
