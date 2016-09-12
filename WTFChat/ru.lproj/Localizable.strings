@@ -1,6 +1,103 @@
-"Hi! It is your first time, would you like to start a tutorial?" = "Привет! Рекомендую пройти простое обучение перед игрой.";
-"Shop" = "Магазин";
+//Common
+"Back" = "Назад";
+"Cancel" = "Отмена";
+"Error" = "Ошибка";
+"Ok" = "Ок";
+
+// Menu
+"Tutorial" = "Обучение";
 "Single mode" = "Одиночная игра";
+"Shop" = "Магазин";
+"menu" = "меню";
+
+//Chapter finished
+"Congratulations!" = "Глава пройдена!";
+"Complete all levels on Normal difficulty to unlock Hard." = "Пройдите все уровни на средней сложности чтобы открыть тяжелую.";
+"Hard difficulty unlocked." = "Доступна тяжелая сложность.";
+"You have finished the" = "Вы прошли";
+"on hard difficulty." = "на тяжелой сложности.";
+"Next Chapter" = "Следующая глава";
+"Stay here" = "Остаться здесь";
+
+//Hints
+"Hints remained:" = "Осталось подсказок:";
+"Hints remained: 0" = "Осталось подсказок: 0";
+"Hints:" = "Подсказки:";
+"Get more" = "Получить еще";
+"Use a Hint" = "Использовать подсказку";
+"You have used all hints." = "Вы использовали все подсказки.";
+"You have used all hints. Want to get more?" = "Вы использовали все подсказки. Нужно больше?";
+
+//Deciphering
+"Try" = "Ввод";
+"Enter your guess here" = "Введите свой вариант здесь";
+"Too many characters" = "Слишком много символов";
+"Your guess should be less than 1024 characters" = "Нельзя вводить более 1024 символов за раз";
+"Open this word?" = "Открыть это слово?";
+"Open" = "Открыть";
+"Stop deciphering?" = "Прекратить отгадывание?";
+"Give Up" = "Сдаться";
+"Success" = "Успех";
+"Failed" = "Поражение";
+"LEVEL" = "УРОВЕНЬ";
+"Level" = "Уровень";
+"You got" = "Вы получили";
+"free hints" = "подсказок";
+"Continue" = "Продолжить";
+"Retry" = "Повторить";
+
+//Shop
+"Buy" = "Купить";
+"for" = "за";
+"Paid" = "Куплено";
+"Restore" = "Восстановить";
+"View Ad" = "Реклама";
+"Buy Hints" = "Купить подсказки";
+"Can't buy" = "Не получилось купить";
+"Get Free Hint" = "Получить бесплатную подсказку";
+"X2 Daily Hints" = "X2 ежедневных подсказок";
+"No more ads" = "Вы просмотрели всю доступную рекламу";
+"Try again later" = "Попробуйте еще раз позже";
+"Restore purchased content?" = "Восстановить приобритенные ранее покупки?";
+"Restored successfully" = "Покупки восстановлены успешно";
+"Unknown error occured." = "Произошла неожиданная ошибка.";
+"Please, check if you have a stable internet connection. Then use 'Restore' button. If you still don't get your purchase, please, restart the app." = "Пожалуйста, проверьте наличие стабильного соединения с интернетом. Затем нажмите кнопку 'Восстановить'. Есои ошибка не пропала, перезапустите приложение.";
+"can't be restored" = "не удалось восстановить";
+
+//Daily Hints
+"Daily free hints!\nToday you got" = "Ежедневные подсказки!\nСегодня вы получили";
+
+//Difficulties
+"Easy" = "Легко";
+"Normal" = "Средне";
+"Hard" = "Тяжело";
+
+//Ciphers
+"Right Cutter" = "Режем справа";
+"Left Cutter" = "Режем слева";
+"Shuffle" = "Перемешка";
+"Random Cutter" = "Случайные буквы";
+"Double Cutter" = "Режем дважды";
+
+//Tutorial
 "Skip" = "Пропустить";
 "Start" = "Начать";
-"Tutorial" = "Обучение";
+"Welcome" = "Приветствие";
+"Welcome! Glad to see you here. Have a good time!" = "Welcome! Glad to see you here. Have a good time!";
+"Hi! It is your first time, would you like to start a tutorial?" = "Привет! Рекомендую пройти простое обучение перед игрой.";
+"Let's start! Try to type 'to' and press either 'Try' or 'return' button." = "Let's start! Try to type 'to' and press either 'Try' or 'return' button.";
+"Please, type 'to' and press 'Try'!" = "Please, type 'to' and press 'Try'!";
+"TO" = "TO";
+"Congratulations! Now, enter 'her' as your next guess." = "Congratulations! Now, enter 'her' as your next guess.";
+"Please, type 'her' and press 'Try'!" = "Please, type 'her' and press 'Try'!";
+"HER" = "HER";
+"Oh! You were close! See how the word 'He...' has changed color. Try tapping it to decipher!" = "Oh! You were close! See how the word 'He...' has changed color. Try tapping it to decipher!";
+"Please, tap on the orange word bubble to open it!" = "Please, tap on the orange word bubble to open it!";
+"Wow, it worked! Try to use a similar action to get a hint for any blue word." = "Wow, it worked! Try to use a similar action to get a hint for any blue word.";
+"Please, tap on any blue word bubble and use a hint!" = "Please, tap on any blue word bubble and use a hint!";
+"Well done! Now you can decipher the rest of the message by yourself." = "Well done! Now you can decipher the rest of the message by yourself.";
+"You have finished tutorial! Also you can tap the message area to see its ciphered form." = "You have finished tutorial! Also you can tap the message area to see its ciphered form.";
+"Finish" = "Завершить";
+
+//Errors
+"Internet connection problem" = "Потерена связь с интернетом";

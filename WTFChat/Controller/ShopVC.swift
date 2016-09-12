@@ -33,8 +33,7 @@ class ShopVC: BaseModalVC {
     @IBOutlet weak var hints6BuyButton: BorderedButton!
 
     private let CONNECTION_ERROR_TEXT = "Please, check if you have a stable internet connection. Then use 'Restore' button. If you still don't get your purchase, please, restart the app.".localized()
-    private let RESTORE_TITLE = "Restore purchased".localized()
-    private let RESTORE_MESSAGE = "Are you sure you want to restore purchased content?".localized()
+    private let RESTORE_TITLE = "Restore purchased content?".localized()
     private let RESTORE_BUTTON_TITLE = "Restore".localized()
     private let PAID_TITLE = "Paid".localized()
     private let NO_ADS_TITLE = "No more ads".localized()
@@ -131,7 +130,7 @@ class ShopVC: BaseModalVC {
 
     func restoreButtonPressed(sender: BorderedButton) {
         WTFTwoButtonsAlert.show(RESTORE_TITLE,
-                message: RESTORE_MESSAGE,
+                message: "",
                 firstButtonTitle: RESTORE_BUTTON_TITLE) { () -> Void in
             self.isRestoreInProgress = true
             self.inAppService.restorePurchased()
