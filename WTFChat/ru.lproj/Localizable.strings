@@ -80,23 +80,23 @@
 "Double Cutter" = "Режем дважды";
 
 //Tutorial
+"Hi! It is your first time, would you like to start a tutorial?" = "Привет! Рекомендую пройти простое обучение перед игрой.";
 "Skip" = "Пропустить";
 "Start" = "Начать";
 "Welcome" = "Приветствие";
-"Welcome! Glad to see you here. Have a good time!" = "Welcome! Glad to see you here. Have a good time!";
-"Hi! It is your first time, would you like to start a tutorial?" = "Привет! Рекомендую пройти простое обучение перед игрой.";
-"Let's start! Try to type 'to' and press either 'Try' or 'return' button." = "Let's start! Try to type 'to' and press either 'Try' or 'return' button.";
-"Please, type 'to' and press 'Try'!" = "Please, type 'to' and press 'Try'!";
-"TO" = "TO";
-"Congratulations! Now, enter 'her' as your next guess." = "Congratulations! Now, enter 'her' as your next guess.";
-"Please, type 'her' and press 'Try'!" = "Please, type 'her' and press 'Try'!";
-"HER" = "HER";
-"Oh! You were close! See how the word 'He...' has changed color. Try tapping it to decipher!" = "Oh! You were close! See how the word 'He...' has changed color. Try tapping it to decipher!";
-"Please, tap on the orange word bubble to open it!" = "Please, tap on the orange word bubble to open it!";
-"Wow, it worked! Try to use a similar action to get a hint for any blue word." = "Wow, it worked! Try to use a similar action to get a hint for any blue word.";
-"Please, tap on any blue word bubble and use a hint!" = "Please, tap on any blue word bubble and use a hint!";
-"Well done! Now you can decipher the rest of the message by yourself." = "Well done! Now you can decipher the rest of the message by yourself.";
-"You have finished tutorial! Also you can tap the message area to see its ciphered form." = "You have finished tutorial! Also you can tap the message area to see its ciphered form.";
+"Welcome! Glad to see you here. Have a good time!" = "Добро пожаловать! Рад вас здесь видеть. Приятной игры!";
+"Let's start! Try to type 'to' and press either 'Try' or 'return' button." = "Сразу к делу! Введите 'рад' в поле ввода и нажмите 'Ввод'.";
+"Please, type 'to' and press 'Try'!" = "Введите 'рад' в поле ввода и нажмите 'Ввод'!";
+"TO" = "РАД";
+"Congratulations! Now, enter 'her' as your next guess." = "Поздравляю! А теперь введите слово 'приятно'.";
+"Please, type 'her' and press 'Try'!" = "Введите 'приятно' в поле ввода и нажмите 'Ввод'!";
+"HER" = "ПРИЯТНО";
+"Oh! You were close! See how the word 'He...' has changed color. Try tapping it to decipher!" = "Ооо! Почти угадали! Слово 'Прия...' поменяло цвет. Попробуйте нажать на него и открыть.";
+"Please, tap on the orange word bubble to open it!" = "Нажмите на оранжевое слово чтобы открыть его!";
+"Wow, it worked! Try to use a similar action to get a hint for any blue word." = "Ура, сработало! А теперь попробуйте нажать на любое синие слово и использовать подсказку.";
+"Please, tap on any blue word bubble and use a hint!" = "Нажмите на любое синие слово и используйте подсказку!";
+"Well done! Now you can decipher the rest of the message by yourself." = "Отлично! Теперь попробуйте расшифровать оставшееся сообщение самостоятельно.";
+"You have finished tutorial! Also you can tap the message area to see its ciphered form." = "Обучение завершено! Кстати, если нажать на область сообщения, то можно увидеть его зашифрованный вид.";
 "Finish" = "Завершить";
 
 //Errors
