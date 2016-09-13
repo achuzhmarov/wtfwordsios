@@ -150,7 +150,7 @@
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YPY-mH-iMb" customClass="StarImage" customModule="WTFChat" customModuleProvider="target">
-                                <rect key="frame" x="492" y="40" width="40" height="40"/>
+                                <rect key="frame" x="496" y="40" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="6hU-Ko-Ee7"/>
                                     <constraint firstAttribute="height" constant="40" id="BUq-d9-1rq"/>
@@ -191,23 +191,23 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cipher Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6t3-TS-5K0">
+                                <rect key="frame" x="20" y="49" width="98" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DVh-hw-hz3" customClass="StarImage" customModule="WTFChat" customModuleProvider="target">
-                                <rect key="frame" x="444" y="40" width="40" height="40"/>
+                                <rect key="frame" x="452" y="40" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="B1E-cM-qQ7"/>
                                     <constraint firstAttribute="height" constant="40" id="OkG-a1-vXy"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cipher Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6t3-TS-5K0">
-                                <rect key="frame" x="20" y="48" width="109" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="3hv-QJ-EyM" secondAttribute="trailing" constant="20" id="0kR-hQ-YRO"/>
-                            <constraint firstItem="YPY-mH-iMb" firstAttribute="leading" secondItem="DVh-hw-hz3" secondAttribute="trailing" constant="8" id="7k0-xg-vFA"/>
+                            <constraint firstItem="YPY-mH-iMb" firstAttribute="leading" secondItem="DVh-hw-hz3" secondAttribute="trailing" constant="4" id="7k0-xg-vFA"/>
                             <constraint firstItem="6t3-TS-5K0" firstAttribute="centerY" secondItem="DVh-hw-hz3" secondAttribute="centerY" id="Q4h-8t-X2s"/>
                             <constraint firstItem="YPY-mH-iMb" firstAttribute="centerY" secondItem="3hv-QJ-EyM" secondAttribute="centerY" id="QXt-aq-1E7"/>
                             <constraint firstItem="mEJ-Vt-nA5" firstAttribute="top" secondItem="DVh-hw-hz3" secondAttribute="bottom" constant="16" id="bUJ-CY-mYg"/>
@@ -217,7 +217,7 @@
                             <constraint firstItem="qEG-Lo-Uyx" firstAttribute="top" secondItem="mEJ-Vt-nA5" secondAttribute="bottom" id="pm2-du-M8U"/>
                             <constraint firstItem="DVh-hw-hz3" firstAttribute="centerY" secondItem="YPY-mH-iMb" secondAttribute="centerY" id="qlU-6z-ej3"/>
                             <constraint firstItem="mEJ-Vt-nA5" firstAttribute="leading" secondItem="dNT-lM-ziv" secondAttribute="leading" constant="20" id="ss6-Tf-zCR"/>
-                            <constraint firstItem="3hv-QJ-EyM" firstAttribute="leading" secondItem="YPY-mH-iMb" secondAttribute="trailing" constant="8" id="vfU-13-OHS"/>
+                            <constraint firstItem="3hv-QJ-EyM" firstAttribute="leading" secondItem="YPY-mH-iMb" secondAttribute="trailing" constant="4" id="vfU-13-OHS"/>
                         </constraints>
                     </view>
                     <connections>
@@ -2090,10 +2090,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xP2-Br-Wub">
-                                <rect key="frame" x="200" y="221" width="200" height="158"/>
+                                <rect key="frame" x="175" y="221" width="250" height="158"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ch5-KJ-n19" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="116" width="200" height="42"/>
+                                        <rect key="frame" x="0.0" y="116" width="250" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="tCo-H9-W5w"/>
                                         </constraints>
@@ -2107,7 +2107,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sH4-kK-kNv" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="200" height="42"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="5rH-A8-GjA"/>
                                         </constraints>
@@ -2117,11 +2117,11 @@
                                             <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="pfk-i2-Eh6" kind="presentation" identifier="startTutorial" id="RmJ-aP-Aij"/>
+                                            <action selector="tutorialPressed:" destination="Wft-8G-zQQ" eventType="touchUpInside" id="buh-E5-PbZ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ZP-7H-hpk" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="58" width="200" height="42"/>
+                                        <rect key="frame" x="0.0" y="58" width="250" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="uIc-cl-7LJ"/>
                                         </constraints>
@@ -2144,7 +2144,7 @@
                                     <constraint firstItem="Ch5-KJ-n19" firstAttribute="leading" secondItem="xP2-Br-Wub" secondAttribute="leading" id="dKg-fh-tJ1"/>
                                     <constraint firstItem="Ch5-KJ-n19" firstAttribute="top" secondItem="0ZP-7H-hpk" secondAttribute="bottom" constant="16" id="fuc-yN-CFy"/>
                                     <constraint firstItem="0ZP-7H-hpk" firstAttribute="leading" secondItem="xP2-Br-Wub" secondAttribute="leading" id="fwl-G7-4Cq"/>
-                                    <constraint firstAttribute="width" constant="200" id="g54-iG-p57"/>
+                                    <constraint firstAttribute="width" constant="250" id="g54-iG-p57"/>
                                     <constraint firstAttribute="height" constant="158" id="q1S-Fo-tvK"/>
                                     <constraint firstItem="sH4-kK-kNv" firstAttribute="leading" secondItem="xP2-Br-Wub" secondAttribute="leading" id="tcP-iC-hOf"/>
                                     <constraint firstAttribute="trailing" secondItem="sH4-kK-kNv" secondAttribute="trailing" id="xgl-mc-no7"/>
@@ -2166,6 +2166,7 @@
                         <outlet property="singleModeButton" destination="0ZP-7H-hpk" id="PDE-JO-p8G"/>
                         <outlet property="tutorialButton" destination="sH4-kK-kNv" id="TRv-m0-TDG"/>
                         <segue destination="c9g-0d-Ip0" kind="presentation" identifier="startSingleMode" id="d12-yQ-WoZ"/>
+                        <segue destination="pfk-i2-Eh6" kind="presentation" identifier="startTutorial" id="jmN-YH-ERg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6av-An-Jy9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2594,7 +2595,7 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBQ-Yn-HRy" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
                                         <rect key="frame" x="144" y="81" width="80" height="28"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Restore">
                                             <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -2984,9 +2985,9 @@
                                 <rect key="frame" x="16" y="530" width="568" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K3l-ET-2Kr" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="438" y="0.0" width="130" height="50"/>
+                                        <rect key="frame" x="418" y="0.0" width="150" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="130" id="aeN-29-HJ5"/>
+                                            <constraint firstAttribute="width" constant="150" id="aeN-29-HJ5"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -2998,9 +2999,9 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GG1-nY-pHE" customClass="BorderedButton" customModule="WTFChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="130" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="130" id="gow-V8-qHn"/>
+                                            <constraint firstAttribute="width" constant="50" id="gow-V8-qHn"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>

@@ -55,6 +55,10 @@ class InAppService: Service {
     }
     
     func getProductDescription(productId: ProductIdentifier) -> String? {
+        if (IAPProducts.CONSUMABLE.contains(productId)) {
+            return ""
+        }
+
         if let product = inAppHelper.getProduct(productId) {
             return product.localizedDescription.localized()
         }
@@ -91,7 +95,6 @@ class InAppService: Service {
     }
     
     func showBuyAlert(productId: ProductIdentifier, cancelFunc: (() -> Void)? = nil) {
-                
         if (!canPurchase(productId) || isPurchased(productId)) {
             return
         }
@@ -100,7 +103,7 @@ class InAppService: Service {
         let productPrice = getProductPrice(productId)
         let productDescription = getProductDescription(productId)
         
-        WTFTwoButtonsAlert.show(BUY_TEXT + " " + productName! + FOR_TEXT + " " + productPrice!,
+        WTFTwoButtonsAlert.show(BUY_TEXT + " " + productName! + " " + FOR_TEXT + " " + productPrice!,
             message: productDescription!,
             firstButtonTitle: BUY_TEXT,
             alertButtonAction: { () -> Void in

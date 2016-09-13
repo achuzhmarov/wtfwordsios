@@ -6,7 +6,7 @@ class User: NSObject {
     var talks = [FriendTalk]()
 
     var lastUpdate: NSDate = NSDate.defaultPast()
-    var lastLogin: NSDate = NSDate.defaultPast()
+    var lastLogin: NSDate = NSDate()
     var exp: Int = 0
     var singleExp: Int = 0
     var newHints: Int = 0

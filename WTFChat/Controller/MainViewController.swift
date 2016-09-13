@@ -10,6 +10,7 @@ class MainViewController: BaseUIViewController {
     private let SHOP_TITLE = "Shop".localized()
 
     private let TUTORIAL_MESSAGE = "Hi! It is your first time, would you like to start a tutorial?".localized()
+    private let TUTORIAL_REPEAT_MESSAGE = "You have finished tutorial already, do you want to start it again?".localized()
     private let START_TUTORIAL_TEXT = "Start".localized()
     private let SKIP_TUTORIAL_TEXT = "Skip".localized()
 
@@ -41,6 +42,31 @@ class MainViewController: BaseUIViewController {
         }
     }
 
+    @IBAction func tutorialPressed(sender: AnyObject) {
+        if (guiDataService.getTutorialStage() == .Never) {
+            self.performSegueWithIdentifier("startTutorial", sender: self)
+        } else {
+            showTutorialConfirmDialog()
+        }
+    }
+
+    private func showTutorialConfirmDialog() {
+        WTFTwoButtonsAlert.show(TUTORIAL_TITLE,
+                message: TUTORIAL_REPEAT_MESSAGE,
+                firstButtonTitle: START_TUTORIAL_TEXT,
+                alertButtonAction: { () -> Void in
+                    self.performSegueWithIdentifier("startTutorial", sender: self)
+                })
+    }
+
+    @IBAction func singleModePressed(sender: AnyObject) {
+        if (guiDataService.getTutorialStage() == .Never) {
+            showTutorialDialog()
+        } else {
+            self.performSegueWithIdentifier("startSingleMode", sender: self)
+        }
+    }
+
     private func showTutorialDialog() {
         WTFTwoButtonsAlert.show(TUTORIAL_TITLE,
                 message: TUTORIAL_MESSAGE,
@@ -53,14 +79,6 @@ class MainViewController: BaseUIViewController {
                     self.guiDataService.updateTutorialStage(.Finished)
                     self.performSegueWithIdentifier("startSingleMode", sender: self)
                 })
-    }
-
-    @IBAction func singleModePressed(sender: AnyObject) {
-        if (guiDataService.getTutorialStage() == .Never) {
-            showTutorialDialog()
-        } else {
-            self.performSegueWithIdentifier("startSingleMode", sender: self)
-        }
     }
 
     @IBAction func backToMenu(segue:UIStoryboardSegue) {

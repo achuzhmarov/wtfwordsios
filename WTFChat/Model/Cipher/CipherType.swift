@@ -4,8 +4,8 @@ enum CipherType : Int, CustomStringConvertible {
     case RightCutter = 0
     case LeftCutter
     case Shuffle
-    case DoubleCutter
     case RandomCutter
+    case DoubleCutter
 
     var description : String {
         get {
@@ -16,15 +16,15 @@ enum CipherType : Int, CustomStringConvertible {
                 return "Left Cutter".localized()
             case CipherType.Shuffle:
                 return "Shuffle".localized()
-            case CipherType.DoubleCutter:
-                return "Double Cutter".localized()
             case CipherType.RandomCutter:
                 return "Random Cutter".localized()
+            case CipherType.DoubleCutter:
+                return "Double Cutter".localized()
             }
         }
     }
 
     static func getAll() -> [CipherType] {
-        return [.RightCutter, .LeftCutter, .Shuffle, .DoubleCutter, .RandomCutter]
+        return [.RightCutter, .LeftCutter, .Shuffle, .RandomCutter, .DoubleCutter]
     }
 }
