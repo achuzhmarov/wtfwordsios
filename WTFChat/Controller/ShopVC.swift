@@ -3,7 +3,7 @@ import Localize_Swift
 
 class ShopVC: BaseModalVC {
     private let inAppService: InAppService = serviceLocator.get(InAppService)
-    private let adColonyService: AdColonyService = serviceLocator.get(AdColonyService)
+    private let adService: AdService = serviceLocator.get(AdService)
     private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
 
     @IBOutlet weak var backButton: BorderedButton!
@@ -188,8 +188,8 @@ class ShopVC: BaseModalVC {
     }
 
     func showAdAlert(sender: BorderedButton) {
-        if currentUserService.canAddFreeAdHint() && adColonyService.hasAd() {
-            adColonyService.showAd({ () -> Void in
+        if currentUserService.canAddFreeAdHint() && adService.hasAd() {
+            adService.showAd({ () -> Void in
                 self.currentUserService.addFreeHint()
                 self.reloadData()
             })

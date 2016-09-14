@@ -5,7 +5,13 @@ class ServiceLocator {
 
     func add(services: Service...) {
         for service in services {
-            service.initService()
+            let backgroundQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
+            dispatch_async(backgroundQueue, {
+                service.initService()
+            })
+
+            service.initServiceOnMain()
+
             s[typeName(service)] = service
         }
     }

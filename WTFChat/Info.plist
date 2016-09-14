@@ -55,15 +55,17 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>BUNDLE_IDENTIFIER</key>
+	<string>${BUNDLE_IDENTIFIER}</string>
 	<key>WEB_SERVICE_URL</key>
 	<string>${WEB_SERVICE_URL}</string>
 	<key>AD_COLONY_APP_ID</key>
 	<string>${AD_COLONY_APP_ID}</string>
 	<key>AD_COLONY_REWARD_ZONE</key>
 	<string>${AD_COLONY_REWARD_ZONE}</string>
-	<key>AD_COLONY_INTER_ZONE</key>
-	<string>${AD_COLONY_INTER_ZONE}</string>
-	<key>BUNDLE_IDENTIFIER</key>
-	<string>${BUNDLE_IDENTIFIER}</string>
+	<key>CHARTBOOST_APP_ID</key>
+	<string>${CHARTBOOST_APP_ID}</string>
+	<key>CHARTBOOST_APP_SIGNATURE</key>
+	<string>${CHARTBOOST_APP_SIGNATURE}</string>
 </dict>
 </plist>

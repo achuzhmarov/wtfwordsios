@@ -134,7 +134,7 @@ class ServiceInitializer {
                 talkService: talkService
             ),
             currentUserService,
-            AdColonyService(),
+            AdService(),
             AvatarService(),
             TimeService(),
             AudioService(),
