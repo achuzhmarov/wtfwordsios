@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<string>${BUNDLE_IDENTIFIER}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -55,5 +55,15 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>WEB_SERVICE_URL</key>
+	<string>${WEB_SERVICE_URL}</string>
+	<key>AD_COLONY_APP_ID</key>
+	<string>${AD_COLONY_APP_ID}</string>
+	<key>AD_COLONY_REWARD_ZONE</key>
+	<string>${AD_COLONY_REWARD_ZONE}</string>
+	<key>AD_COLONY_INTER_ZONE</key>
+	<string>${AD_COLONY_INTER_ZONE}</string>
+	<key>BUNDLE_IDENTIFIER</key>
+	<string>${BUNDLE_IDENTIFIER}</string>
 </dict>
 </plist>

@@ -1,9 +1,9 @@
 import Foundation
 
 class AdColonyService: Service, AdColonyDelegate, AdColonyAdDelegate {
-    private let APP_ID = "appd77cbb2311044ee891"
-    private let ZONE_INTER_ID = "vz4af259c3f86548debc"
-    private let ZONE_REWARDED_ID = "vz87332b6313114a238d"
+    private let APP_ID = NSBundle.mainBundle().objectForInfoDictionaryKey("AD_COLONY_APP_ID") as! String
+    private let ZONE_INTER_ID = NSBundle.mainBundle().objectForInfoDictionaryKey("AD_COLONY_INTER_ZONE") as! String
+    private let ZONE_REWARDED_ID = NSBundle.mainBundle().objectForInfoDictionaryKey("AD_COLONY_REWARD_ZONE") as! String
 
     private var isInterAvailable = false
     private var isRewardedAvailable = false

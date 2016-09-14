@@ -3,8 +3,7 @@ import Foundation
 let serviceLocator = ServiceLocator()
 
 class ServiceInitializer {
-    //private static let BASE_URL = "http://127.0.0.1:5000/"
-    private static let BASE_URL = "https://dev.wtfchat.wtf:41041/"
+    private static let BASE_URL = NSBundle.mainBundle().objectForInfoDictionaryKey("WEB_SERVICE_URL") as! String
 
     static func initServices() {
         //network

@@ -4,21 +4,15 @@ import Foundation
 public typealias ProductIdentifier = String
 
 public class IAPProducts {
-    private static let PREFIX = "wtf.wtfchat.wtfchatdev."
-
-    public static let CIPHER_ALL = "\(PREFIX)CipherAll"
-    public static let CIPHER_DOUBLE_CUTTER = "\(PREFIX)CipherDoubleCutter"
-    public static let CIPHER_LEFT_CUTTER = "\(PREFIX)CipherLeftCutter"
-    public static let CIPHER_RANDOM_CUTTER = "\(PREFIX)CipherRandomCutter"
-    public static let CIPHER_SHUFFLE = "\(PREFIX)CipherShuffle"
+    private static let PREFIX = NSBundle.mainBundle().objectForInfoDictionaryKey("BUNDLE_IDENTIFIER") as! String + "."
     
-    public static let HINTS_X2 = "\(PREFIX)HintsX2"
-    public static let HINTS_1 = "\(PREFIX)Hints10"
-    public static let HINTS_2 = "\(PREFIX)Hints30"
-    public static let HINTS_3 = "\(PREFIX)Hints60"
-    public static let HINTS_4 = "\(PREFIX)Hints100"
-    public static let HINTS_5 = "\(PREFIX)Hints200"
-    public static let HINTS_6 = "\(PREFIX)Hints1000"
+    public static let HINTS_X2 = "\(PREFIX)hintsX2"
+    public static let HINTS_1 = "\(PREFIX)hints1"
+    public static let HINTS_2 = "\(PREFIX)hints2"
+    public static let HINTS_3 = "\(PREFIX)hints3"
+    public static let HINTS_4 = "\(PREFIX)hints4"
+    public static let HINTS_5 = "\(PREFIX)hints5"
+    public static let HINTS_6 = "\(PREFIX)hints6"
 
     public static let CONSUMABLE: Set<ProductIdentifier> = [
         HINTS_1,
@@ -29,19 +23,11 @@ public class IAPProducts {
         HINTS_6
     ]
     
-    public static let CIPHERS: Set<ProductIdentifier> = [
-        CIPHER_ALL,
-        CIPHER_DOUBLE_CUTTER,
-        CIPHER_LEFT_CUTTER,
-        CIPHER_RANDOM_CUTTER,
-        CIPHER_SHUFFLE
-    ]
-    
     public static let OTHER: Set<ProductIdentifier> = [
         HINTS_X2
     ]
     
-    public static let NON_CONSUMABLE: Set<ProductIdentifier> = CIPHERS.union(OTHER)
+    public static let NON_CONSUMABLE: Set<ProductIdentifier> = OTHER
     
     public static let ALL: Set<ProductIdentifier> = NON_CONSUMABLE.union(CONSUMABLE)
 

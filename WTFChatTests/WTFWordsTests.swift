@@ -9,7 +9,7 @@
 import UIKit
 import XCTest
 
-class WTFChatTests: XCTestCase {
+class WTFWordsTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
