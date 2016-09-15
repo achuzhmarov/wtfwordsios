@@ -177,7 +177,6 @@
 		3E37CFFBFDAAC4913EC3B77E /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C1426B7D1EBA185A77E4 /* RatingCell.swift */; };
 		3E37CFFCEA088FF37D8F591E /* InAppNetworkServiceOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C89724177FD827960FEB /* InAppNetworkServiceOld.swift */; };
 		481BDD991C58FE5D00ABD558 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 481BDD981C58FE5D00ABD558 /* LaunchScreen.storyboard */; };
-		483676491C2048200092C703 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483676481C2048200092C703 /* StoreKit.framework */; };
 		484EC3511C2E714900C65F94 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3501C2E714900C65F94 /* libz.1.2.5.tbd */; };
 		484EC3531C2E715000C65F94 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3521C2E715000C65F94 /* AudioToolbox.framework */; };
 		484EC3551C2E715B00C65F94 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3541C2E715B00C65F94 /* AVFoundation.framework */; };
@@ -194,9 +193,7 @@
 		484EC36B1C2E71A400C65F94 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC36A1C2E71A400C65F94 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		484EC36D1C2E71FA00C65F94 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC36C1C2E71FA00C65F94 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		484EC3761C2E8B8B00C65F94 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3751C2E8B8B00C65F94 /* AdColony.framework */; };
-		486E42651D89CB010012E299 /* Chartboost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486E42641D89CB010012E299 /* Chartboost.framework */; };
-		486E42671D89D3080012E299 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486E42661D89D3080012E299 /* Foundation.framework */; };
-		486E42691D89D3180012E299 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486E42681D89D3180012E299 /* UIKit.framework */; };
+		486E42A61D8AD0530012E299 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483676481C2048200092C703 /* StoreKit.framework */; };
 		489666981B9B640400F769D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489666971B9B640400F769D1 /* AppDelegate.swift */; };
 		4896669D1B9B640400F769D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4896669B1B9B640400F769D1 /* Main.storyboard */; };
 		4896669F1B9B640400F769D1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4896669E1B9B640400F769D1 /* Images.xcassets */; };
@@ -410,7 +407,6 @@
 		484EC36A1C2E71A400C65F94 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		484EC36C1C2E71FA00C65F94 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		484EC3751C2E8B8B00C65F94 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdColony.framework; path = Frameworks/AdColony.framework; sourceTree = "<group>"; };
-		486E42641D89CB010012E299 /* Chartboost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Chartboost.framework; sourceTree = "<group>"; };
 		486E42661D89D3080012E299 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		486E42681D89D3180012E299 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		489666921B9B640400F769D1 /* WTFWords.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WTFWords.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -432,14 +428,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				486E42A61D8AD0530012E299 /* StoreKit.framework in Frameworks */,
 				48CAFF7F1D86EFE6000BFFA1 /* Localize_Swift.framework in Frameworks */,
 				48CAFF801D86EFE6000BFFA1 /* SwiftyJSON.framework in Frameworks */,
-				486E42691D89D3180012E299 /* UIKit.framework in Frameworks */,
-				486E42671D89D3080012E299 /* Foundation.framework in Frameworks */,
-				483676491C2048200092C703 /* StoreKit.framework in Frameworks */,
 				484EC36D1C2E71FA00C65F94 /* AdSupport.framework in Frameworks */,
 				484EC3511C2E714900C65F94 /* libz.1.2.5.tbd in Frameworks */,
-				486E42651D89CB010012E299 /* Chartboost.framework in Frameworks */,
 				484EC3531C2E715000C65F94 /* AudioToolbox.framework in Frameworks */,
 				484EC3551C2E715B00C65F94 /* AVFoundation.framework in Frameworks */,
 				484EC3571C2E716100C65F94 /* CoreGraphics.framework in Frameworks */,
@@ -1075,7 +1068,6 @@
 			children = (
 				486E42681D89D3180012E299 /* UIKit.framework */,
 				486E42661D89D3080012E299 /* Foundation.framework */,
-				486E42641D89CB010012E299 /* Chartboost.framework */,
 				48CAFF7D1D86EFE6000BFFA1 /* Localize_Swift.framework */,
 				48CAFF7E1D86EFE6000BFFA1 /* SwiftyJSON.framework */,
 				484EC3751C2E8B8B00C65F94 /* AdColony.framework */,
@@ -1473,8 +1465,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wtfwords.wtfwords.rus;
 				PROVISIONING_PROFILE = "ba8e5e71-586f-494b-8ce5-8cb1e09c9ae3";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1489,12 +1482,11 @@
 				AD_COLONY_REWARD_ZONE = vz87332b6313114a238d;
 				APP_ICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_IDENTIFIER = com.wtfwords.wtfwords.rus;
 				CHARTBOOST_APP_ID = 57d9947f04b01621d3af6d5d;
 				CHARTBOOST_APP_SIGNATURE = c928ccd82608066eb374f392d700f3c56afb8ad9;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1504,7 +1496,7 @@
 				INFOPLIST_FILE = WTFChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wtfwords.wtfwords.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wtfwords.wtfwords.rus;
 				PRODUCT_NAME = WTFWords;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WTFChat/WTFWords-Bridging-Header.h";
@@ -1567,9 +1559,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wtfwords.wtfwords.dev;
 				PROVISIONING_PROFILE = "ba8e5e71-586f-494b-8ce5-8cb1e09c9ae3";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1608,8 +1601,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wtfwords.wtfwords.dev;
 				PROVISIONING_PROFILE = "ba8e5e71-586f-494b-8ce5-8cb1e09c9ae3";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1624,7 +1618,6 @@
 				AD_COLONY_REWARD_ZONE = vz87332b6313114a238d;
 				APP_ICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_IDENTIFIER = com.wtfwords.wtfwords.dev;
 				CHARTBOOST_APP_ID = 57d99457f6cd452c71513a5a;
 				CHARTBOOST_APP_SIGNATURE = 4f7f3169e14e7225a98f5ef19d0036e5618f1d93;
 				CLANG_ENABLE_MODULES = YES;
@@ -1655,9 +1648,8 @@
 				AD_COLONY_REWARD_ZONE = vz87332b6313114a238d;
 				APP_ICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_IDENTIFIER = com.wtfwords.wtfwords.rus;
-				CHARTBOOST_APP_ID = 57d9947f04b01621d3af6d5d;
-				CHARTBOOST_APP_SIGNATURE = c928ccd82608066eb374f392d700f3c56afb8ad9;
+				CHARTBOOST_APP_ID = 57d99457f6cd452c71513a5a;
+				CHARTBOOST_APP_SIGNATURE = 4f7f3169e14e7225a98f5ef19d0036e5618f1d93;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1675,7 +1667,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WTFChat/WTFWords-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				WEB_SERVICE_URL = "https://wtfchat.wtf:41041/";
+				WEB_SERVICE_URL = "https://dev.wtfchat.wtf:41041/";
 			};
 			name = Release;
 		};

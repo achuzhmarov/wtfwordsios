@@ -1,4 +1,4 @@
-import Foundation
+/*import Foundation
 
 class CharBoostAdProvider: NSObject, AdProvider, ChartboostDelegate {
     private let APP_ID = NSBundle.mainBundle().objectForInfoDictionaryKey("CHARTBOOST_APP_ID") as! String
@@ -30,4 +30,4 @@ class CharBoostAdProvider: NSObject, AdProvider, ChartboostDelegate {
     func didCompleteRewardedVideo(location: String!, withReward reward: Int32) {
         delegateFunc?()
     }
-}
+}*/

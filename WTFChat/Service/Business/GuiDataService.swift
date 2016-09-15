@@ -1,7 +1,7 @@
 import Foundation
 
 enum TutorialStage: Int {
-    case Never = 0, DecipherGuess, DecipherCloseTry, DecipherCloseTryHint, DecipherHint, DecipherRest, Finished
+    case Never = 0, DecipherGuess, DecipherCloseTry, DecipherCloseTryHint, DecipherHint, DecipherRest, Finished, Skipped
 }
 
 class GuiDataService: Service {

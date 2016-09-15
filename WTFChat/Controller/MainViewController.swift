@@ -43,7 +43,7 @@ class MainViewController: BaseUIViewController {
     }
 
     @IBAction func tutorialPressed(sender: AnyObject) {
-        if (guiDataService.getTutorialStage() == .Never) {
+        if (guiDataService.getTutorialStage() == .Never || guiDataService.getTutorialStage() == .Skipped) {
             self.performSegueWithIdentifier("startTutorial", sender: self)
         } else {
             showTutorialConfirmDialog()
@@ -76,7 +76,7 @@ class MainViewController: BaseUIViewController {
                     self.performSegueWithIdentifier("startTutorial", sender: self)
                 },
                 cancelButtonAction: { () -> Void in
-                    self.guiDataService.updateTutorialStage(.Finished)
+                    self.guiDataService.updateTutorialStage(.Skipped)
                     self.performSegueWithIdentifier("startSingleMode", sender: self)
                 })
     }

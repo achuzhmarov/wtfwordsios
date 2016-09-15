@@ -2,12 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AD_COLONY_APP_ID</key>
+	<string>${AD_COLONY_APP_ID}</string>
+	<key>AD_COLONY_REWARD_ZONE</key>
+	<string>${AD_COLONY_REWARD_ZONE}</string>
+	<key>BUNDLE_IDENTIFIER</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>${BUNDLE_IDENTIFIER}</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -15,11 +21,15 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.7</string>
+	<string>0.9</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>CHARTBOOST_APP_ID</key>
+	<string>${CHARTBOOST_APP_ID}</string>
+	<key>CHARTBOOST_APP_SIGNATURE</key>
+	<string>${CHARTBOOST_APP_SIGNATURE}</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fb</string>
@@ -55,17 +65,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>BUNDLE_IDENTIFIER</key>
-	<string>${BUNDLE_IDENTIFIER}</string>
 	<key>WEB_SERVICE_URL</key>
 	<string>${WEB_SERVICE_URL}</string>
-	<key>AD_COLONY_APP_ID</key>
-	<string>${AD_COLONY_APP_ID}</string>
-	<key>AD_COLONY_REWARD_ZONE</key>
-	<string>${AD_COLONY_REWARD_ZONE}</string>
-	<key>CHARTBOOST_APP_ID</key>
-	<string>${CHARTBOOST_APP_ID}</string>
-	<key>CHARTBOOST_APP_SIGNATURE</key>
-	<string>${CHARTBOOST_APP_SIGNATURE}</string>
 </dict>
 </plist>
