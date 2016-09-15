@@ -15,6 +15,7 @@ class CharBoostAdProvider: NSObject, AdProvider, ChartboostDelegate {
         if (Chartboost.hasRewardedVideo(CBLocationMainMenu)) {
             return true
         } else {
+            print("Chartboost cache request")
             Chartboost.cacheRewardedVideo(CBLocationMainMenu)
             return false
         }
@@ -22,6 +23,7 @@ class CharBoostAdProvider: NSObject, AdProvider, ChartboostDelegate {
     
     func showAd(delegateFunc: (() -> Void)) {
         self.delegateFunc = delegateFunc
+        print("Chartboost show ad")
         Chartboost.showRewardedVideo(CBLocationMainMenu)
     }
 
