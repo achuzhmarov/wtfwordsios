@@ -25,7 +25,7 @@ class CharBoostAdProvider: NSObject, AdProvider, ChartboostDelegate {
         Chartboost.showRewardedVideo(CBLocationMainMenu)
     }
 
-    func didCompleteRewardedVideo(location: CBLocation, withReward reward: Int?) {
+    func didCompleteRewardedVideo(location: String!, withReward reward: Int32) {
         delegateFunc?()
     }
 }
