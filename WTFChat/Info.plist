@@ -25,7 +25,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>CHARTBOOST_APP_ID</key>
 	<string>${CHARTBOOST_APP_ID}</string>
 	<key>CHARTBOOST_APP_SIGNATURE</key>
