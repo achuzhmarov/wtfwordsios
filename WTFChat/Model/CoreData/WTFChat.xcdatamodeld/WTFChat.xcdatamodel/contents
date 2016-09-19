@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15F34" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15G1004" minimumToolsVersion="Xcode 7.0">
     <entity name="CoreLevel" representedClassName=".CoreLevel" syncable="YES">
         <attribute name="cleared" attributeType="Boolean" syncable="YES"/>
         <attribute name="clearedDifficulty" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -45,10 +45,10 @@
         <attribute name="wordType" attributeType="Integer 16" defaultValueString="1" syncable="YES"/>
     </entity>
     <elements>
+        <element name="CoreLevel" positionX="-72" positionY="270" width="128" height="88"/>
         <element name="CoreMessage" positionX="-281" positionY="-9" width="128" height="253"/>
         <element name="CoreSingleMessage" positionX="124" positionY="14" width="128" height="193"/>
         <element name="CoreSingleModeCategory" positionX="-288" positionY="270" width="128" height="73"/>
         <element name="CoreWord" positionX="-72" positionY="-9" width="128" height="118"/>
-        <element name="CoreLevel" positionX="-72" positionY="270" width="128" height="88"/>
     </elements>
 </model>

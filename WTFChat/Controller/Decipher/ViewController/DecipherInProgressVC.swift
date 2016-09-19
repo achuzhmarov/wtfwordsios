@@ -189,15 +189,18 @@ class DecipherInProgressVC: UIViewController {
                         options: [.Autoreverse, .Repeat, .AllowUserInteraction], animations: {
                     self.topTimerLabel.alpha = 0.1
                 }, completion: nil)
-            } else if (timer.isLastSecond()) {
-                topTimerLabel.layer.removeAllAnimations()
-                topTimerLabel.alpha = 1
             }
         }
     }
 
     func gameOver() {
         message.timerSecs = timer.seconds
+
+        //stop timer animation if any
+        topTimerLabel.layer.removeAllAnimations()
+        topTimerLabel.alpha = 1
+        topTimerLabel.textColor = UIColor.blackColor()
+
         dismissKeyboard()
         parent.gameOver()
     }

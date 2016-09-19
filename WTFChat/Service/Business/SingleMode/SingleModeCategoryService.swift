@@ -13,7 +13,7 @@ class SingleModeCategoryService: Service {
         self.coreLevelService = coreLevelService
     }
 
-    override func initService() {
+    override func initServiceOnMain() {
         self.categories = coreSingleModeCategoryService.getAll()
 
         for cipherType in CipherType.getAll() {
