@@ -79,12 +79,12 @@ class WTFTwoButtonsAlert: WTFBaseAlert {
                 message: message,
                 preferredStyle: UIAlertControllerStyle.Alert)
             
-            alert.addAction(UIAlertAction(title: firstButtonTitle, style: .Default, handler: { (action: UIAlertAction) in
-                alertButtonAction?()
-            }))
-            
             alert.addAction(UIAlertAction(title: secondButtonTitle, style: .Default, handler: { (action: UIAlertAction) in
                 cancelButtonAction?()
+            }))
+            
+            alert.addAction(UIAlertAction(title: firstButtonTitle, style: .Default, handler: { (action: UIAlertAction) in
+                alertButtonAction?()
             }))
 
             presentAlert(alert)

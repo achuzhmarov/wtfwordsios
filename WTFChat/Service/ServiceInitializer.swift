@@ -107,6 +107,8 @@ class ServiceInitializer {
             messageCipherService: messageCipherService
         )
 
+        let guiDataService = GuiDataService()
+
         //core based
         serviceLocator.add(
             singleModeCategoryService,
@@ -140,7 +142,8 @@ class ServiceInitializer {
             AudioService(),
             cipherService,
             textCategoryService,
-            GuiDataService(),
+            guiDataService,
+            RatingService(guiDataService: guiDataService),
             DailyHintsService(
                 inAppService: inAppService,
                 currentUserService: currentUserService

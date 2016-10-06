@@ -127,6 +127,7 @@
 		3E37CB125F0FB440E82DFA23 /* SingleDecipherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C7669C3130760DBC69CD /* SingleDecipherViewController.swift */; };
 		3E37CB1FF29DA0858EA53A11 /* TalkNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C35183B090258C83DB42 /* TalkNetworkService.swift */; };
 		3E37CB31505823C64029A4F5 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C92A0A33E7071CBD987E /* FriendsViewController.swift */; };
+		3E37CB5FE34D23C573995D0A /* RatingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C5EB90C6010D863BF458 /* RatingService.swift */; };
 		3E37CB6A910BE40A55855DC2 /* DecipherResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C309D678937A0BD83AB6 /* DecipherResultVC.swift */; };
 		3E37CB72D2D8091C6A7C4D32 /* CoreMessage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C36B4FCFE7E98ECF47C9 /* CoreMessage+CoreDataProperties.swift */; };
 		3E37CB90CD7BE8932C6217C6 /* RandomCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C43AF8FAE39CECC48749 /* RandomCutterCipher.swift */; };
@@ -284,6 +285,7 @@
 		3E37C5AA6581A96B2546C466 /* StarImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarImage.swift; sourceTree = "<group>"; };
 		3E37C5BD84BCC0DFF33BB6A1 /* LvlCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LvlCollectionView.swift; sourceTree = "<group>"; };
 		3E37C5E0D3BB7755C97ABFBA /* InAppService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppService.swift; sourceTree = "<group>"; };
+		3E37C5EB90C6010D863BF458 /* RatingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingService.swift; sourceTree = "<group>"; };
 		3E37C61DFE53A61DD4EE8686 /* PanTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanTransitionManager.swift; sourceTree = "<group>"; };
 		3E37C63E89380D93121CA96F /* DecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecipherViewController.swift; sourceTree = "<group>"; };
 		3E37C659BF770984773312E8 /* CurrentUserService+Getters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CurrentUserService+Getters.swift"; sourceTree = "<group>"; };
@@ -487,6 +489,7 @@
 				3E37CF57D011111B34C76B77 /* GuiDataService.swift */,
 				3E37C10850734F59F4702593 /* DailyHintsService.swift */,
 				3E37CDF410BD9805DEDD1089 /* Ads */,
+				3E37C5EB90C6010D863BF458 /* RatingService.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -1429,6 +1432,7 @@
 				3E37C0FD1755E434AE9C8C13 /* AdColonyAdProvider.swift in Sources */,
 				3E37CCD746C90D0677E5E0E2 /* ChartboostAdProvider.swift in Sources */,
 				3E37CB08F1313ABAB04754F0 /* AdService.swift in Sources */,
+				3E37CB5FE34D23C573995D0A /* RatingService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1517,6 +1521,7 @@
 				AD_COLONY_APP_ID = appd77cbb2311044ee891;
 				AD_COLONY_REWARD_ZONE = vz87332b6313114a238d;
 				APP_ICON_NAME = AppIcon;
+				APP_STORE_ID = 1162194082;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CHARTBOOST_APP_ID = 57d9947f04b01621d3af6d5d;
 				CHARTBOOST_APP_SIGNATURE = c928ccd82608066eb374f392d700f3c56afb8ad9;
@@ -1532,9 +1537,10 @@
 				INFOPLIST_FILE = WTFChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wtfwords.wtfwords.rus;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wtfwords.wtfwords.rus2;
 				PRODUCT_NAME = WTFWords;
 				PROVISIONING_PROFILE = "";
+				SUPPORT_EMAIL = "ios.wtfwords@gmail.com";
 				SWIFT_OBJC_BRIDGING_HEADER = "WTFChat/WTFWords-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				WEB_SERVICE_URL = "https://wtfwords.com:41041/";
@@ -1653,6 +1659,7 @@
 				AD_COLONY_APP_ID = appd77cbb2311044ee891;
 				AD_COLONY_REWARD_ZONE = vz87332b6313114a238d;
 				APP_ICON_NAME = AppIcon;
+				APP_STORE_ID = 1162194082;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CHARTBOOST_APP_ID = 57d99457f6cd452c71513a5a;
 				CHARTBOOST_APP_SIGNATURE = 4f7f3169e14e7225a98f5ef19d0036e5618f1d93;
@@ -1671,6 +1678,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wtfwords.wtfwords.dev;
 				PRODUCT_NAME = WTFWords;
 				PROVISIONING_PROFILE = "";
+				SUPPORT_EMAIL = "ios.wtfwords@gmail.com";
 				SWIFT_OBJC_BRIDGING_HEADER = "WTFChat/WTFWords-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WEB_SERVICE_URL = "https://dev.wtfwords.com:41041/";
@@ -1683,6 +1691,7 @@
 				AD_COLONY_APP_ID = appd77cbb2311044ee891;
 				AD_COLONY_REWARD_ZONE = vz87332b6313114a238d;
 				APP_ICON_NAME = AppIcon;
+				APP_STORE_ID = 1162194082;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CHARTBOOST_APP_ID = 57d99457f6cd452c71513a5a;
 				CHARTBOOST_APP_SIGNATURE = 4f7f3169e14e7225a98f5ef19d0036e5618f1d93;
@@ -1701,6 +1710,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wtfwords.wtfwords.dev;
 				PRODUCT_NAME = WTFWords;
 				PROVISIONING_PROFILE = "";
+				SUPPORT_EMAIL = "ios.wtfwords@gmail.com";
 				SWIFT_OBJC_BRIDGING_HEADER = "WTFChat/WTFWords-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				WEB_SERVICE_URL = "https://dev.wtfwords.com:41041/";

@@ -7,6 +7,7 @@ class SingleDecipherViewController: DecipherViewController {
     private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
     private let levelService: LevelService = serviceLocator.get(LevelService)
     private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    private let ratingService: RatingService = serviceLocator.get(RatingService)
 
     private let LEVEL_TEXT = "Level".localized()
     private let GOT_HINTS_BEGIN_TEXT = "You got".localized()
@@ -45,7 +46,11 @@ class SingleDecipherViewController: DecipherViewController {
             let title = LEVEL_TEXT + " " + String(currentUserLvl) + "!"
             let message = GOT_HINTS_BEGIN_TEXT + " " + String(hintsForLvl) + " " + GOT_HINTS_END_TEXT
 
-            WTFOneButtonAlert.show(title, message: message, viewPresenter: self)
+            WTFOneButtonAlert.show(title, message: message, viewPresenter: self) {
+                if (self.singleMessage.getMessageStatus() == .Success) {
+                    self.ratingService.askUserForAppRate()
+                }
+            }
         }
     }
 

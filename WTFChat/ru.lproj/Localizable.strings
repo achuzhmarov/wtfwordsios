@@ -110,5 +110,14 @@
 "Finish" = "Завершить";
 "You have finished tutorial already, do you want to start it again?" = "Вы уже прошли обучение, повторить?";
 
+//App review
+"Enjoying WTFWords" = "Нравится WTFWords";
+"Yes" = "Да";
+"Not Really" = "Нет, не особо";
+"How about a rating on the App Store then" = "Тогда может оставите отзыв в AppStore";
+"Would you mind giving us some feedback" = "Не могли бы вы написать, что вам не понравилось";
+"Ok, Sure" = "Да, конечно";
+"No, thanks" = "Нет, спасибо";
+
 //Errors
 "Internet connection problem" = "Потерена связь с интернетом";
