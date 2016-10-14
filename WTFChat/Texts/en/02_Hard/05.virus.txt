@@ -1,0 +1,36 @@
+Virus
+Virus
+A virus is a small infectious agent that replicates only inside the living cells of other organisms.
+Viruses can infect all types of life forms, from animals and plants to microorganisms, including bacteria and archaea.
+Viruses are found in almost every ecosystem on Earth and are the most abundant type of biological entity.
+The study of viruses is known as virology, a sub-speciality of microbiology.
+While not inside an infected cell or in the process of infecting a cell, viruses exist in the form of independent particles.
+Most virus species have virions that are too small to be seen with an optical microscope.
+In evolution, viruses are an important means of horizontal gene transfer, which increases genetic diversity.
+Viruses are considered by some to be a life form, because they carry genetic material, reproduce, and evolve through natural selection.
+Viruses in plants are often transmitted from plant to plant by insects that feed on plant sap, such as aphids.
+Viruses in animals can be carried by blood-sucking insects. These disease-bearing organisms are known as vectors.
+Influenza viruses are spread by coughing and sneezing.
+The range of host cells that a virus can infect is called its "host range".
+Viral infections in animals provoke an immune response that usually eliminates the infecting virus.
+Antibiotics have no effect on viruses, but several antiviral drugs have been developed.
+Viruses are found wherever there is life and have probably existed since living cells first evolved.
+The origin of viruses is unclear because they do not form fossils.
+Viruses display a wide diversity of shapes and sizes, called morphologies.
+In general, viruses are much smaller than bacteria.
+Most viruses that have been studied have a diameter between 20 and 300 nanometres.
+Some filoviruses have a total length of up to 1400 nm; their diameters are only about 80 nm.
+Most viruses cannot be seen with an optical microscope so scanning and transmission electron microscopes are used to visualise virions.
+A complete virus particle, known as a virion, consists of nucleic acid surrounded by a protective coat of protein called a capsid.
+Viruses can have a lipid "envelope" derived from the host cell membrane.
+A virus has either a DNA or an RNA genome and is called a DNA virus or an RNA virus, respectively.
+The vast majority of viruses have RNA genomes.
+Plant viruses tend to have single-stranded RNA genomes and bacteriophages tend to have double-stranded DNA genomes.
+Among RNA viruses and certain DNA viruses, the genome is often divided up into separate parts, in which case it is called segmented.
+Replication of viruses involves primarily multiplication of the genome.
+The range of structural and biochemical effects that viruses have on the host cell is extensive.
+Some viruses cause no apparent changes to the infected cell.
+Cells in which the virus is latent and inactive show few signs of infection and often function normally.
+Viruses are by far the most abundant biological entities on Earth and they outnumber all the others put together.
+Examples of common human diseases caused by viruses include the common cold, influenza, chickenpox, and cold sores.
+Viruses have different mechanisms by which they produce disease in an organism, which depends largely on the viral species.

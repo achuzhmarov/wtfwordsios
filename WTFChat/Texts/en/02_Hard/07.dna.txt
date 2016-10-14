@@ -1,0 +1,50 @@
+DNA
+DNA
+DNA is a molecule that carries the genetic instructions used in the growth, development, functioning and reproduction of all known living organisms and many viruses.
+DNA and RNA are one of the four major types of macromolecules that are essential for all known forms of life.
+Most DNA molecules consist of two biopolymer strands coiled around each other to form a double helix.
+The two DNA strands are termed polynucleotides since they are composed of simpler monomer units called nucleotides.
+DNA stores biological information.
+The DNA backbone is resistant to cleavage, and both strands of the double-stranded structure store the same biological information.
+A large part of DNA (more than 98% for humans) is non-coding, meaning that these sections do not serve as patterns for protein sequences.
+The two strands of DNA run in opposite directions to each other and are thus antiparallel.
+RNA strands are created using DNA strands as a template in a process called transcription.
+Within eukaryotic cells, DNA is organized into long structures called chromosomes.
+During cell division chromosomes are duplicated in the process of DNA replication, providing each cell its own complete set of chromosomes.
+DNA is used by researchers as a molecular tool to explore physical laws and theories, such as the ergodic theorem and the theory of elasticity.
+The unique material properties of DNA have made it an attractive molecule for material scientists and engineers interested in micro- and nano-fabrication.
+DNA is a long polymer made from repeating units called nucleotides.
+In living organisms DNA does not usually exist as a single molecule, but instead as a pair of molecules that are held tightly together.
+The backbone of the DNA strand is made from alternating phosphate and sugar residues.
+The DNA double helix is stabilized primarily by two forces: hydrogen bonds between nucleotides and base-stacking interactions among aromatic nucleobases.
+In addition to RNA and DNA, many artificial nucleic acid analogues have been created to study the properties of nucleic acids, or for use in biotechnology.
+In a DNA double helix, each type of nucleobase on one strand bonds with just one type of nucleobase on the other strand.
+The two strands of DNA in a double helix can be pulled apart like a zipper, either by a mechanical force or high temperature.
+DNA can be twisted like a rope in a process called DNA supercoiling.
+If the DNA is twisted in the direction of the helix, this is positive supercoiling, and the bases are held more tightly together.
+At the ends of the linear chromosomes are specialized regions of DNA called telomeres.
+Branched DNA can be used in nanotechnology to construct geometric shapes.
+The expression of genes is influenced by how the DNA is packaged in chromosomes, in a structure called chromatin.
+DNA can be damaged by many sorts of mutagens, which change the DNA sequence.
+DNA usually occurs as linear chromosomes in eukaryotes, and circular chromosomes in prokaryotes.
+The set of chromosomes in a cell makes up its genome; the human genome has approximately 3 billion base pairs of DNA arranged into 46 chromosomes.
+The information carried by DNA is held in the sequence of pieces of DNA called genes.
+Genomic DNA is tightly and orderly packed in the process called DNA condensation, to fit the small available volumes of the cell.
+In eukaryotes, DNA is located in the cell nucleus, with small amounts in mitochondria and chloroplasts.
+In prokaryotes, the DNA is held within an irregularly shaped body in the cytoplasm called the nucleoid.
+A gene is a unit of heredity and is a region of DNA that influences a particular characteristic in an organism.
+Only about 1.5% of the human genome consists of protein-coding exons, with over 50% of human DNA consisting of non-coding repetitive sequences.
+Some noncoding DNA sequences play structural roles in chromosomes.
+An abundant form of noncoding DNA in humans are pseudogenes, which are copies of genes that have been disabled by mutation.
+A gene is a sequence of DNA that contains genetic information and can influence the phenotype of an organism.
+Within a gene, the sequence of bases along a DNA strand defines a messenger RNA sequence, which then defines one or more protein sequences.
+All the functions of DNA depend on interactions with proteins.
+Structural proteins that bind DNA are well-understood examples of non-specific DNA-protein interactions.
+Within chromosomes, DNA is held in complexes with structural proteins. These proteins organize the DNA into a compact structure called chromatin.
+Enzymes called DNA ligases can rejoin cut or broken DNA strands. They are also used in DNA repair and genetic recombination.
+In DNA replication, DNA-dependent DNA polymerases make copies of DNA polynucleotide chains.
+Many DNA polymerases have a proofreading activity.
+Chromosomal crossover is when two DNA helices break, swap a section and then rejoin.
+Genetic recombination can be involved in DNA repair, particularly in the cell's response to double-strand breaks.
+DNA contains the genetic information that allows all modern living things to function, grow and reproduce.
+Forensic scientists can use DNA in blood, skin, saliva or hair found at a crime scene to identify a matching DNA of an individual, such as a perpetrator.

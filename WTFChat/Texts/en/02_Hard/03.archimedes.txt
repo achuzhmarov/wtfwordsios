@@ -1,0 +1,39 @@
+Archimedes
+Archimedes
+Archimedes was an Ancient Greek mathematician, physicist, engineer, inventor, and astronomer.
+Although few details of Archimedes life are known, he is regarded as one of the leading scientists in classical antiquity.
+Archimedes was one of the first to apply mathematics to physical phenomena, founding hydrostatics and statics, including an explanation of the principle of the lever.
+Archimedes is credited with designing innovative machines, such as his screw pump, compound pulleys, and defensive war machines to protect his native Syracuse from invasion.
+Archimedes died during the Siege of Syracuse when he was killed by a Roman soldier despite orders that he should not be harmed.
+Unlike his inventions, the mathematical writings of Archimedes were little known in antiquity.
+The relatively few copies of Archimedes' written work that survived through the Middle Ages were an influential source of ideas for scientists during the Renaissance.
+Archimedes was born c. 287 BC in the seaport city of Syracuse, Sicily.
+A biography of Archimedes was written by his friend Heracleides but this work has been lost, leaving the details of his life obscure.
+It is unknown, for instance, whether Archimedes ever married or had children.
+During his youth, Archimedes may have studied in Alexandria, Egypt.
+According to the popular account given by Plutarch, Archimedes was contemplating a mathematical diagram when the city was captured.
+The last words attributed to Archimedes are "Do not disturb my circles".
+The tomb of Archimedes carried a sculpture illustrating his favorite mathematical proof, consisting of a sphere and a cylinder of the same height and diameter.
+Archimedes had proven that the volume and surface area of the sphere are two thirds that of the cylinder including its bases.
+The standard versions of the life of Archimedes were written long after his death by the historians of Ancient Rome.
+The account of the siege of Syracuse given by Polybius in his Universal History was written around seventy years after Archimedes' death.
+The most widely known anecdote about Archimedes tells of how he invented a method for determining the volume of an object with an irregular shape.
+A large part of Archimedes' work in engineering arose from fulfilling the needs of his home city of Syracuse.
+The Archimedes' screw is still in use today for pumping liquids and granulated solids such as coal and grain.
+The Claw of Archimedes is a weapon that he is said to have designed in order to defend the city of Syracuse.
+Archimedes may have used mirrors acting collectively as a parabolic reflector to burn ships attacking Syracuse.
+The 2nd century AD author Lucian wrote that during the Siege of Syracuse (c. 214–212 BC), Archimedes destroyed enemy ships with fire.
+While Archimedes did not invent the lever, he gave an explanation of the principle involved in his work On the Equilibrium of Planes.
+According to Pappus of Alexandria, Archimedes' work on levers caused him to remark: "Give me a place to stand on, and I will move the Earth."
+Plutarch describes how Archimedes designed block-and-tackle pulley systems, allowing sailors to use the principle of leverage to lift objects that would otherwise have been too heavy to move.
+Archimedes has been credited with improving the power and accuracy of the catapult, and with inventing the odometer.
+While he is often regarded as a designer of mechanical devices, Archimedes also made contributions to the field of mathematics.
+Archimedes proved that the area of a circle was equal to π multiplied by the square of the radius of the circle.
+In On the Sphere and Cylinder, Archimedes postulates that any magnitude when added to itself enough times will exceed any given magnitude.
+In Measurement of a Circle, Archimedes gives the value of the square root of 3 as lying between 265/153 and 1351/780. This a very accurate estimate.
+In The Sand Reckoner, Archimedes set out to calculate the number of grains of sand that the universe could contain.
+The works of Archimedes were written in Doric Greek, the dialect of ancient Syracuse.
+The written work of Archimedes has not survived as well as that of Euclid, and seven of his treatises are known to have existed only through other references.
+During his lifetime, Archimedes made his work known through correspondence with the mathematicians in Alexandria.
+Archimedes' Book of Lemmas is a treatise with fifteen propositions on the nature of circles.
+It has also been claimed that Heron's formula for calculating the area of a triangle from the length of its sides was known to Archimedes.

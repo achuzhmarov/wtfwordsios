@@ -1,0 +1,48 @@
+Atom
+Atom
+An atom is the smallest constituent unit of ordinary matter that has the properties of a chemical element.
+Every solid, liquid, gas, and plasma is composed of neutral or ionized atoms.
+Atoms are very small; typical sizes are around 100 pm (a ten-billionth of a meter, in the short scale).
+Atoms do not have well-defined boundaries, and there are different ways to define their size that give different but close values.
+Through the development of physics, atomic models have incorporated quantum principles to better explain and predict the behavior.
+Every atom is composed of a nucleus and one or more electrons bound to the nucleus.
+Protons and neutrons are called nucleons. More than 99.94% of an atom's mass is in the nucleus.
+If the number of protons and electrons are equal, that atom is electrically neutral.
+If an atom has more or fewer electrons than protons, then it has an overall negative or positive charge, respectively, and it is called an ion.
+The electrons of an atom are attracted to the protons in an atomic nucleus by this electromagnetic force.
+The number of protons in the nucleus defines to what chemical element the atom belongs: for example, all copper atoms contain 29 protons.
+The number of electrons influences the magnetic properties of an atom.
+Atoms can attach to one or more other atoms by chemical bonds to form chemical compounds such as molecules.
+The word "atom" was coined by ancient Greek philosophers.
+The development of the mass spectrometer allowed the mass of atoms to be measured with increased accuracy.
+The constituent particles of an atom are the electron, the proton and the neutron; all three are fermions.
+The number of protons in an atom is called its atomic number.
+All the bound protons and neutrons in an atom make up a tiny atomic nucleus, and are collectively called nucleons.
+The number of protons and neutrons in the atomic nucleus can be modified, although this can require very high energies because of the strong force.
+Nuclear fusion occurs when multiple atomic particles join to form a heavier nucleus, such as through the energetic collision of two nuclei.
+The electrons in an atom are attracted to the protons in the nucleus by the electromagnetic force.
+Each atomic orbital corresponds to a particular energy level of the electron.
+Atoms are electrically neutral if they have an equal number of protons and electrons.
+Atoms that have either a deficit or a surplus of electrons are called ions.
+Electrons that are farthest from the nucleus may be transferred to other nearby atoms or shared between atoms.
+Atoms are able to bond into molecules and other types of chemical compounds like ionic and covalent network crystals.
+By definition, any two atoms with an identical number of protons in their nuclei belong to the same chemical element.
+Atoms with equal numbers of protons but a different number of neutrons are different isotopes of the same element.
+The large majority of an atom's mass comes from the protons and neutrons that make it up.
+The total number of these particles (called "nucleons") in a given atom is called the mass number.
+As even the most massive atoms are far too light to work with directly, chemists instead use the unit of moles.
+One mole of atoms of any element always has the same number of atoms.
+Atoms lack a well-defined outer boundary, so their dimensions are usually described in terms of an atomic radius.
+When subjected to external forces, like electrical fields, the shape of an atom may deviate from spherical symmetry.
+Atomic dimensions are thousands of times smaller than the wavelengths of light (400–700 nm) so they cannot be viewed using an optical microscope.
+Individual atoms can be observed using a scanning tunneling microscope.
+To visualize the minuteness of the atom, consider that a typical human hair is about 1 million carbon atoms in width.
+A single drop of water contains about 2 sextillion atoms of oxygen, and twice the number of hydrogen atoms.
+If an apple were magnified to the size of the Earth, then the atoms in the apple would be approximately the size of the original apple.
+Some atoms can have multiple electron configurations with the same energy level, which thus appear as a single spectral line.
+Atoms tend to chemically react with each other in a manner that fills (or empties) their outer valence shells.
+The scanning tunneling microscope is a device for viewing surfaces at the atomic level.
+An atom can be ionized by removing one of its electrons.
+The electric charge causes the trajectory of an atom to bend when it passes through a magnetic field.
+The radius by which the trajectory of a moving ion is turned by the magnetic field is determined by the mass of the atom.
+Atoms can combine to create materials that do not consist of discrete molecules, including crystals and liquid or solid metals.

@@ -1,0 +1,51 @@
+Star
+Star
+A star is a luminous sphere of plasma held together by its own gravity.
+The nearest star to Earth is the Sun.
+Astronomers have assembled star catalogues that identify the known stars and provide standardized stellar designations.
+Most of the stars in the Universe, including all stars outside our galaxy, the Milky Way, are invisible to the naked eye from Earth.
+The total mass of a star is the main factor that determines its evolution and eventual fate.
+The star's internal pressure prevents it from collapsing further under its own gravity.
+A star with mass greater than 0.4 times the Sun's will expand to become a red giant when the hydrogen fuel in its core is exhausted.
+As the star expands it throws a part of its mass, enriched with those heavier elements, into the interstellar environment, to be recycled later as new stars.
+Binary and multi-star systems consist of two or more stars that are gravitationally bound and generally move around each other in stable orbits.
+Stars can form part of a much larger gravitationally bound structure, such as a star cluster or a galaxy.
+Historically, stars have been important to civilizations throughout the world.
+Stars have been part of religious practices and used for celestial navigation and orientation.
+Many ancient astronomers believed that stars were permanently affixed to a heavenly sphere and that they were immutable.
+Many of the constellations and star names in use today derive from Greek astronomy.
+Parallax measurements demonstrated the vast separation of the stars in the heavens.
+Observation of double stars gained increasing importance during the 19th century.
+Important theoretical work on the physical structure of stars occurred during the first decades of the twentieth century.
+Successful models were developed to explain the interiors of stars and stellar evolution.
+Stars condense from regions of space of higher density, yet those regions are less dense than within a vacuum chamber.
+Most stars form in groups of dozens to hundreds of thousands of stars.
+All stars spend the majority of their existence as main sequence stars, fueled primarily by the nuclear fusion of hydrogen into helium within their cores.
+Stars of different masses have markedly different properties at various stages of their development.
+The ultimate fate of more massive stars differs from that of less massive stars, as do their luminosities and the impact they have on their environment.
+Most stars are observed to be members of binary star systems, and the properties of those binaries are the result of the conditions in which they formed.
+A gas cloud must lose its angular momentum in order to collapse and form a star.
+Stars spend about 90% of their existence fusing hydrogen into helium in high-temperature and high-pressure reactions near the core.
+Every star generates a stellar wind of particles that causes a continual outflow of gas into space.
+The time a star spends on the main sequence depends primarily on the amount of fuel it has and the rate at which it fuses it.
+Massive stars consume their fuel very rapidly and are short-lived. Low mass stars consume their fuel very slowly.
+During their helium-burning phase, stars of more than nine solar masses expand to form red supergiants.
+The blown-off outer layers of dying stars include heavy elements, which may be recycled during the formation of new stars.
+Most stars are between 1 billion and 10 billion years old.
+The more massive the star, the shorter its lifespan, primarily because massive stars have greater pressure on their cores, causing them to burn hydrogen more rapidly.
+The most massive stars last an average of a few million years, while stars of minimum mass (red dwarfs) can last tens to hundreds of billions of years.
+The magnetic field of a star is generated within regions of the interior where convective circulation occurs.
+Young, rapidly rotating stars tend to have high levels of surface activity because of their magnetic field.
+The magnetic field can act upon a star's stellar wind, functioning as a brake to gradually slow the rate of rotation with time.
+The combination of the radius and the mass of a star determines its surface gravity.
+Young stars can have a rotation greater than 100 km/s at the equator.
+The luminosity of a star is the amount of light and other forms of radiant energy it radiates per unit of time. It has units of power.
+The luminosity of a star is determined by its radius and surface temperature.
+Many stars do not radiate uniformly across their entire surface.
+Patches of the star's surface with a lower temperature and luminosity than average are known as starspots.
+Variable stars have periodic or random changes in luminosity because of intrinsic or extrinsic properties.
+The interior of a stable star is in a state of hydrostatic equilibrium: the forces on any small volume almost exactly counterbalance each other.
+Stars with several times the mass of the Sun have a convection zone deep within the interior and a radiative zone in the outer layers.
+The photosphere is that portion of a star that is visible to an observer.
+From the corona, a stellar wind of plasma particles expands outward from the star, until it interacts with the interstellar medium.
+A variety of nuclear fusion reactions take place in the cores of stars, that depend upon their mass and composition.

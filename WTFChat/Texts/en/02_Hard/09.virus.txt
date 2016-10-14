@@ -1,0 +1,37 @@
+Virus
+Virus
+Although viruses cause disruption of healthy homeostasis, resulting in disease, they may exist relatively harmlessly within an organism.
+Viral epidemiology is the branch of medical science that deals with the transmission and control of virus infections in humans.
+Transmission of viruses can be vertical, which means from mother to child, or horizontal, which means from person to person.
+Horizontal transmission is the most common mechanism of spread of viruses in populations.
+The body's first line of defence against viruses is the innate immune system.
+RNA interference is an important innate defence against viruses.
+When the adaptive immune system of a vertebrate encounters a virus, it produces specific antibodies that bind to the virus and often render it non-infectious.
+Vaccination is a cheap and effective way of preventing infections by viruses.
+Vaccines were used to prevent viral infections long before the discovery of the actual viruses.
+Viruses infect all cellular life and, although viruses occur universally, each cellular species has its own specific range that often infect only that species.
+Some viruses, called satellites, can replicate only within cells that have already been infected by another virus.
+There are many types of plant virus, but often they cause only a loss of yield, and it is not economically viable to try to control them.
+Plant viruses are often spread from plant to plant by organisms, known as vectors.
+Plant viruses cannot infect humans and other animals because they can reproduce only in living plant cells.
+Plants have elaborate and effective defence mechanisms against viruses. One of the most effective is the presence of so-called resistance (R) genes.
+When they are infected, plants often produce natural disinfectants that kill viruses, such as salicylic acid, nitric oxide, and reactive oxygen molecules.
+Plant virus particles or virus-like particles (VLPs) have applications in both biotechnology and nanotechnology.
+A teaspoon of seawater contains about one million viruses.
+Viruses are the main agents responsible for the rapid destruction of harmful algal blooms, which often kill other marine life.
+The number of viruses in the oceans decreases further offshore and deeper into the water, where there are fewer host organisms.
+Viruses are an important natural means of transferring genes between different species, which increases genetic diversity and drives evolution.
+It is thought that viruses played a central role in the early evolution, at the time of the last universal common ancestor of life on Earth.
+Viruses are still one of the largest reservoirs of unexplored genetic diversity on Earth.
+Viruses are important to the study of molecular and cell biology as they provide simple systems that can be used to manipulate and investigate the functions of cells.
+The study and use of viruses have provided valuable information about aspects of cell biology.
+Viruses have been useful in the study of genetics and helped our understanding of the basic mechanisms of molecular genetics.
+Geneticists often use viruses as vectors to introduce genes into cells that they are studying.
+Virotherapy involves the use of genetically modified viruses to treat diseases.
+Viruses have been modified by scientists to reproduce in cancer cells and destroy them but not infect healthy cells.
+Current trends in nanotechnology promise to make much more versatile use of viruses.
+From the viewpoint of a materials scientist, viruses can be regarded as organic nanoparticles.
+Viruses are commonly used in materials science as scaffolds for covalently linked surface modifications.
+A particular quality of viruses is that they can be tailored by directed evolution.
+Because of their size, shape, and well-defined chemical structures, viruses have been used as templates for organising materials on the nanoscale.
+The ability of viruses to cause devastating epidemics in human societies has led to the concern that viruses could be weaponised for biological warfare.
