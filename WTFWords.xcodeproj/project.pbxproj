@@ -152,6 +152,7 @@
 		3E37CCD10CCDC3AFF402D48E /* ExpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C45E28B9FC22DDA15406 /* ExpService.swift */; };
 		3E37CCD746C90D0677E5E0E2 /* ChartboostAdProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C83D03B7F377E465B900 /* ChartboostAdProvider.swift */; };
 		3E37CCE2FA4D7324A66D67ED /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CB2141F23363A1896FB5 /* AuthService.swift */; };
+		3E37CD03FA24253851076388 /* build_prod_eng.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3E37C12C357320DCD83E292B /* build_prod_eng.sh */; };
 		3E37CD11061EBDC21555125A /* CipherPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C7C4785C6927ABDD11B2 /* CipherPageViewController.swift */; };
 		3E37CD11D54EDDB6421DD6E4 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C661DC1DA76D3A02A49C /* Service.swift */; };
 		3E37CD79E8AA8B2DB0B847B7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C32E245D5A7A5F352C51 /* User.swift */; };
@@ -231,6 +232,7 @@
 		3E37C0F2EE17D9A710A8713B /* RightCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightCutterCipher.swift; sourceTree = "<group>"; };
 		3E37C106D7CA0FD89102CE33 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
 		3E37C10850734F59F4702593 /* DailyHintsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyHintsService.swift; sourceTree = "<group>"; };
+		3E37C12C357320DCD83E292B /* build_prod_eng.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build_prod_eng.sh; sourceTree = "<group>"; };
 		3E37C131EF321BA3531C5804 /* CipherType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherType.swift; sourceTree = "<group>"; };
 		3E37C13BB77B4C55ECFAACA0 /* IosService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IosService.swift; sourceTree = "<group>"; };
 		3E37C1426B7D1EBA185A77E4 /* RatingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
@@ -583,6 +585,7 @@
 				3E37CD9AF7E90662FCC9A538 /* build_dev.sh */,
 				3E37CAC0DAD101EBDDF5D22C /* Options */,
 				3E37C84CAD62F3EC95EBFF16 /* build_prod.sh */,
+				3E37C12C357320DCD83E292B /* build_prod_eng.sh */,
 			);
 			path = Build;
 			sourceTree = "<group>";
@@ -1233,6 +1236,7 @@
 				3E37C4F337FEE0171DAB2E1C /* options_dev.plist in Resources */,
 				3E37C795288B897AF2DA1EA0 /* options_prod.plist in Resources */,
 				3E37C7934A4558AABF22A433 /* build_prod.sh in Resources */,
+				3E37CD03FA24253851076388 /* build_prod_eng.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
