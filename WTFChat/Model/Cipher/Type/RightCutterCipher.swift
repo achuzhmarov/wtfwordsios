@@ -3,7 +3,7 @@ import Foundation
 class RightCutterEasyCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
         let letterCount = word.getCharCount() / 2 + word.getCharCount() % 2 - 1
-        return "\(word.getCapitalized()[0...letterCount])...\(word.additional)"
+        return "\(word.text[0...letterCount])...\(word.additional)"
     }
 }
 
@@ -16,12 +16,12 @@ class RightCutterNormalCipher: Cipher {
             letterCount = 4
         }
         
-        return "\(word.getCapitalized()[0...letterCount])...\(word.additional)"
+        return "\(word.text[0...letterCount])...\(word.additional)"
     }
 }
 
 class RightCutterHardCipher: Cipher {
     func getTextForDecipher(word: Word) -> String {
-        return "\(word.getCapitalized()[0])...\(word.additional)"
+        return "\(word.text[0])...\(word.additional)"
     }
 }

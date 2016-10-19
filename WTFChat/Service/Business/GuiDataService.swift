@@ -1,4 +1,5 @@
 import Foundation
+import Localize_Swift
 
 enum TutorialStage: Int {
     case Never = 0, DecipherGuess, DecipherCloseTry, DecipherCloseTryHint, DecipherHint, DecipherRest, Finished, Skipped
@@ -14,6 +15,7 @@ class GuiDataService: Service {
         static let LAST_SELECTED_CATEGORY = "USER_LAST_SELECTED_CATEGORY"
         static let TUTORIAL_STAGE = "USER_TUTORIAL_STAGE"
         static let APPRATE_STATUS = "USER_APPRATE_STATUS"
+        static let USER_LANGUAGE = "USER_LANGUAGE"
     }
 
     private let storage = NSUserDefaults.standardUserDefaults()
@@ -33,6 +35,10 @@ class GuiDataService: Service {
 
         if (!storage.isFieldExists(KEY.APPRATE_STATUS)) {
             updateAppRateStatus(.Never)
+        }
+
+        if (!storage.isFieldExists(KEY.USER_LANGUAGE)) {
+            updateUserLanguage(Localize.currentLanguage())
         }
     }
 
@@ -66,5 +72,13 @@ class GuiDataService: Service {
 
     func updateAppRateStatus(appRateStatus: AppRateStatus) {
         storage.saveField(KEY.APPRATE_STATUS, value: appRateStatus.rawValue)
+    }
+
+    func getUserLanguage() -> String {
+        return storage.getStringField(KEY.USER_LANGUAGE)
+    }
+
+    func updateUserLanguage(language: String) {
+        storage.saveField(KEY.USER_LANGUAGE, value: language)
     }
 }

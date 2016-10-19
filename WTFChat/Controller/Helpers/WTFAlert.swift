@@ -16,15 +16,12 @@ class WTFBaseAlert: NSObject, UIAlertViewDelegate  {
 class WTFOneButtonAlert: WTFBaseAlert  {
     static let CON_ERR = "%conError%"
 
-    private static let CONNECTION_ERROR_TEXT = "Internet connection problem".localized()
-    private static let OK_TEXT = "Ok".localized()
-
     static func show(title: String, message: String?, alertButtonAction:(() -> Void)? = nil) {
-        show(title, message: message, firstButtonTitle: OK_TEXT, viewPresenter: nil, alertButtonAction: alertButtonAction)
+        show(title, message: message, firstButtonTitle: "Ok".localized(), viewPresenter: nil, alertButtonAction: alertButtonAction)
     }
 
     static func show(title: String, message: String?, viewPresenter: UIViewController?, alertButtonAction:(() -> Void)? = nil) {
-        show(title, message: message, firstButtonTitle: OK_TEXT, viewPresenter: viewPresenter, alertButtonAction: alertButtonAction)
+        show(title, message: message, firstButtonTitle: "Ok".localized(), viewPresenter: viewPresenter, alertButtonAction: alertButtonAction)
     }
 
     static func show(title: String, message: String?, firstButtonTitle: String, alertButtonAction:(() -> Void)? = nil) {
@@ -34,7 +31,7 @@ class WTFOneButtonAlert: WTFBaseAlert  {
     static func show(title: String, message: String?, firstButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:(() -> Void)? = nil) {
         //if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
-                message: message?.replace(CON_ERR, with: CONNECTION_ERROR_TEXT),
+                message: message?.replace(CON_ERR, with: "Internet connection problem".localized()),
                 preferredStyle: UIAlertControllerStyle.Alert)
             
             alert.addAction(UIAlertAction(title: firstButtonTitle, style: .Default, handler: { (action: UIAlertAction) in
@@ -59,14 +56,12 @@ class WTFOneButtonAlert: WTFBaseAlert  {
 }
 
 class WTFTwoButtonsAlert: WTFBaseAlert {
-    private static let CANCEL_TEXT = "Cancel".localized()
-
     static func show(title: String, message: String?, firstButtonTitle: String, alertButtonAction:(() -> Void)?) {
-        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: CANCEL_TEXT, alertButtonAction: alertButtonAction, cancelButtonAction: nil)
+        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: "Cancel".localized(), alertButtonAction: alertButtonAction, cancelButtonAction: nil)
     }
 
     static func show(title: String, message: String?, firstButtonTitle: String, alertButtonAction:(() -> Void)?, cancelButtonAction:(() -> Void)?) {
-        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: CANCEL_TEXT, alertButtonAction: alertButtonAction, cancelButtonAction: cancelButtonAction)
+        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: "Cancel".localized(), alertButtonAction: alertButtonAction, cancelButtonAction: cancelButtonAction)
     }
 
     static func show(title: String, message: String?, firstButtonTitle: String, secondButtonTitle: String, alertButtonAction:(() -> Void)?) {

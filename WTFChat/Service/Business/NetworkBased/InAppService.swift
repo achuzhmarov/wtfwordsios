@@ -5,10 +5,6 @@ import Localize_Swift
 class InAppService: Service {
     private let inAppHelper: InAppHelper
 
-    private let PAID_TITLE = "Paid".localized()
-    private let BUY_TEXT = "Buy".localized()
-    private let FOR_TEXT = "for".localized()
-
     private var products = [SKProduct]()
 
     init(inAppHelper: InAppHelper) {
@@ -72,7 +68,7 @@ class InAppService: Service {
         }
         
         if isPurchased(productId) {
-            return PAID_TITLE
+            return "Paid".localized()
         }
         
         if let product = inAppHelper.getProduct(productId) {
@@ -103,9 +99,9 @@ class InAppService: Service {
         let productPrice = getProductPrice(productId)
         let productDescription = getProductDescription(productId)
         
-        WTFTwoButtonsAlert.show(BUY_TEXT + " " + productName! + " " + FOR_TEXT + " " + productPrice!,
+        WTFTwoButtonsAlert.show("Buy".localized() + " " + productName! + " " + "for".localized() + " " + productPrice!,
             message: productDescription!,
-            firstButtonTitle: BUY_TEXT,
+            firstButtonTitle: "Buy".localized(),
             alertButtonAction: { () -> Void in
                 self.purchaseProduct(productId)
             }, cancelButtonAction: { () -> Void in

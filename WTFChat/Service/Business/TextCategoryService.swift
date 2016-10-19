@@ -1,4 +1,5 @@
 import Foundation
+import Localize_Swift
 
 enum TextDifficulty : Int {
     case Easy = 0
@@ -52,6 +53,75 @@ enum TextLength : Int {
     }
 }
 
+enum TextLanguage : Int {
+    case En = 0
+    case Ru
+
+    static func getAll() -> [TextLanguage] {
+        return [.En, .Ru]
+    }
+
+    var description : String {
+        get {
+            switch self {
+            case .En:
+                return "en"
+            case .Ru:
+                return "ru"
+            }
+        }
+    }
+
+    var textPath : String {
+        get {
+            switch self {
+            case .En:
+                return "/Texts/en/"
+            case .Ru:
+                return "/Texts/ru/"
+            }
+        }
+    }
+
+    static func getCurrentLanguage() -> TextLanguage {
+        return getLanguageByString(Localize.currentLanguage())
+    }
+
+    static func getNextLanguage() -> TextLanguage {
+        let currentLanguage = getLanguageByString(Localize.currentLanguage())
+        var wasPrevious = false
+
+        for language in TextLanguage.getAll() {
+            if (wasPrevious) {
+                return language
+            } else if (language == currentLanguage) {
+                wasPrevious = true
+            }
+        }
+
+        return TextLanguage.getAll()[0]
+    }
+
+    private static func getLanguageByString(langString: String) -> TextLanguage {
+        if (langString == "ru") {
+            return .Ru
+        } else {
+            return .En
+        }
+    }
+
+    var buttonTitle : String {
+        get {
+            switch self {
+            case .En:
+                return "Language: English"
+            case .Ru:
+                return "Язык: Русский"
+            }
+        }
+    }
+}
+
 class TextCategory {
     var title: String = ""
     private var texts = [String]()
@@ -96,16 +166,23 @@ class TextCategory {
 class TextCategoryService: Service {
     private let WIKI_TITLE_INDEX = 0
     private let TITLE_INDEX = 1
-    private let BASE_RU_TEXT_PATH = "/Texts/ru/"
 
-    private var textsMap = [TextDifficulty: [TextLength: [TextCategory]]]()
+    private var textsMap = [TextLanguage: [TextDifficulty: [TextLength: [TextCategory]]]]()
 
     private let textLengths = TextLength.getAll()
 
     override func initService() {
-        if let difficultyFolders = getFilesList(BASE_RU_TEXT_PATH) {
+        for language in TextLanguage.getAll() {
+            loadTextsForLanguage(language)
+        }
+    }
+
+    private func loadTextsForLanguage(language: TextLanguage) {
+        textsMap[language] = [TextDifficulty: [TextLength: [TextCategory]]]()
+
+        if let difficultyFolders = getFilesList(language.textPath) {
             for difficultyFolder in difficultyFolders {
-                loadDifficultyTexts(BASE_RU_TEXT_PATH, difficultyFolder: difficultyFolder)
+                loadDifficultyTexts(language.textPath, difficultyFolder: difficultyFolder, language: language)
             }
         }
     }
@@ -123,19 +200,19 @@ class TextCategoryService: Service {
         }
     }
 
-    private func loadDifficultyTexts(basePath: String, difficultyFolder: String) {
+    private func loadDifficultyTexts(basePath: String, difficultyFolder: String, language: TextLanguage) {
         let difficulty = getDifficultyFromFolderName(difficultyFolder)
         if (difficulty == nil) {
             return
         }
 
-        textsMap[difficulty!] = [TextLength: [TextCategory]]()
+        textsMap[language]![difficulty!] = [TextLength: [TextCategory]]()
 
         let textCategoriesFilesPath = basePath + difficultyFolder + "/"
 
         if let textCategoriesFiles = getFilesList(textCategoriesFilesPath) {
             for textCategoryFile in textCategoriesFiles {
-                loadTextCategory(textCategoriesFilesPath, fileName: textCategoryFile, textDifficulty: difficulty!)
+                loadTextCategory(textCategoriesFilesPath, fileName: textCategoryFile, textDifficulty: difficulty!, language: language)
             }
         }
     }
@@ -158,7 +235,7 @@ class TextCategoryService: Service {
         return difficulty
     }
 
-    private func loadTextCategory(basePath: String, fileName: String, textDifficulty: TextDifficulty) {
+    private func loadTextCategory(basePath: String, fileName: String, textDifficulty: TextDifficulty, language: TextLanguage) {
         let url = getFileUrl(basePath, fileName: fileName)
 
         if let loadedData = Url.open(url) {
@@ -201,11 +278,11 @@ class TextCategoryService: Service {
                     newCategory.appendText(messages[i])
                 }
 
-                if (textsMap[textDifficulty]![textLengths[i]] == nil) {
-                    textsMap[textDifficulty]![textLengths[i]] = [TextCategory]()
+                if (textsMap[language]![textDifficulty]![textLengths[i]] == nil) {
+                    textsMap[language]![textDifficulty]![textLengths[i]] = [TextCategory]()
                 }
 
-                textsMap[textDifficulty]![textLengths[i]]!.append(newCategory)
+                textsMap[language]![textDifficulty]![textLengths[i]]!.append(newCategory)
             }
         } else {
             print("error reading file \(url.path)")
@@ -218,13 +295,15 @@ class TextCategoryService: Service {
     }
 
     func getTextCategoryForLevel(level: Level) -> TextCategory? {
+        let currentLanguage = TextLanguage.getCurrentLanguage()
+
         let textDifficulty = getTextDifficultyForLevel(level)
         let textLength = getTextLengthForLevel(level, textDifficulty: textDifficulty)
 
-        let texts = textsMap[textDifficulty]![textLength]!
+        let texts = textsMap[currentLanguage]![textDifficulty]![textLength]!
         let textIndex = getTextIndexForLevel(level, textDifficulty: textDifficulty, textCount: texts.count)
 
-        print(String(textDifficulty) + " " + String(textLength) + " " + String(textIndex))
+        //print(String(textDifficulty) + " " + String(textLength) + " " + String(textIndex))
 
         return texts[textIndex]
     }

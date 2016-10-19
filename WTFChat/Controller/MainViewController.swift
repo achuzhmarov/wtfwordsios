@@ -5,27 +5,51 @@ class MainViewController: BaseUIViewController {
     private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
     private let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService)
 
-    private let TUTORIAL_TITLE = "Tutorial".localized()
-    private let SINGLE_MODE_TITLE = "Single mode".localized()
-    private let SHOP_TITLE = "Shop".localized()
+    private var TUTORIAL_TITLE: String!
+    private var SINGLE_MODE_TITLE: String!
+    private var SHOP_TITLE: String!
 
-    private let TUTORIAL_MESSAGE = "Hi! It is your first time, would you like to start a tutorial?".localized()
-    private let TUTORIAL_REPEAT_MESSAGE = "You have finished tutorial already, do you want to start it again?".localized()
-    private let START_TUTORIAL_TEXT = "Start".localized()
-    private let SKIP_TUTORIAL_TEXT = "Skip".localized()
+    private var TUTORIAL_MESSAGE: String!
+    private var TUTORIAL_REPEAT_MESSAGE: String!
+    private var START_TUTORIAL_TEXT: String!
+    private var SKIP_TUTORIAL_TEXT: String!
 
     @IBOutlet weak var tutorialButton: UIButton!
     @IBOutlet weak var singleModeButton: UIButton!
     @IBOutlet weak var shopButton: UIButton!
+    @IBOutlet weak var languageButton: UIButton!
 
     let singleModeTransitionManager = PanTransitionManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let currentLanguage = guiDataService.getUserLanguage()
+        Localize.setCurrentLanguage(currentLanguage)
+
+        initTitles()
+    }
+
+    private func initTitles() {
+        initLanguageStrings()
+
         tutorialButton.setTitle(TUTORIAL_TITLE, forState: .Normal)
         singleModeButton.setTitle(SINGLE_MODE_TITLE, forState: .Normal)
         shopButton.setTitle(SHOP_TITLE, forState: .Normal)
+
+        let currentLanguage = TextLanguage.getCurrentLanguage()
+        languageButton.setTitle(currentLanguage.buttonTitle, forState: .Normal)
+    }
+
+    private func initLanguageStrings() {
+        TUTORIAL_TITLE = "Tutorial".localized()
+        SINGLE_MODE_TITLE = "Single mode".localized()
+        SHOP_TITLE = "Shop".localized()
+
+        TUTORIAL_MESSAGE = "Hi! It is your first time, would you like to start a tutorial?".localized()
+        TUTORIAL_REPEAT_MESSAGE = "You have finished tutorial already, do you want to start it again?".localized()
+        START_TUTORIAL_TEXT = "Start".localized()
+        SKIP_TUTORIAL_TEXT = "Skip".localized()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -79,6 +103,13 @@ class MainViewController: BaseUIViewController {
                     self.guiDataService.updateTutorialStage(.Skipped)
                     self.performSegueWithIdentifier("startSingleMode", sender: self)
                 })
+    }
+
+    @IBAction func languageChanged(sender: AnyObject) {
+        let currentLanguage = TextLanguage.getNextLanguage()
+        Localize.setCurrentLanguage(currentLanguage.description)
+        guiDataService.updateUserLanguage(currentLanguage.description)
+        initTitles()
     }
 
     @IBAction func backToMenu(segue:UIStoryboardSegue) {

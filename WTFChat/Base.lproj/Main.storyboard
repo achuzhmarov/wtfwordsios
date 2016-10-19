@@ -2084,13 +2084,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WTFWords" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuN-dm-VSq">
-                                <rect key="frame" x="238" y="161" width="124" height="30"/>
+                                <rect key="frame" x="238" y="132" width="124" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xP2-Br-Wub">
-                                <rect key="frame" x="175" y="221" width="250" height="158"/>
+                                <rect key="frame" x="175" y="192" width="250" height="216"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ch5-KJ-n19" customClass="BorderedButton" customModule="WTFWords" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="250" height="42"/>
@@ -2134,18 +2134,35 @@
                                             <action selector="singleModePressed:" destination="Wft-8G-zQQ" eventType="touchUpInside" id="mxM-gG-QlR"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qpn-o7-exl" customClass="BorderedButton" customModule="WTFWords" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="174" width="250" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="42" id="xeN-jr-Q4o"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Language: English">
+                                            <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="languageChanged:" destination="Wft-8G-zQQ" eventType="touchUpInside" id="6Id-xX-YuI"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Ch5-KJ-n19" secondAttribute="trailing" id="0mG-5j-ocN"/>
                                     <constraint firstItem="sH4-kK-kNv" firstAttribute="top" secondItem="xP2-Br-Wub" secondAttribute="top" id="5A9-56-rZe"/>
-                                    <constraint firstAttribute="bottom" secondItem="Ch5-KJ-n19" secondAttribute="bottom" id="Ak8-ts-xZf"/>
+                                    <constraint firstItem="Qpn-o7-exl" firstAttribute="leading" secondItem="xP2-Br-Wub" secondAttribute="leading" id="AHZ-kb-wqZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qpn-o7-exl" secondAttribute="trailing" id="I3s-hN-gfT"/>
                                     <constraint firstItem="0ZP-7H-hpk" firstAttribute="top" secondItem="sH4-kK-kNv" secondAttribute="bottom" constant="16" id="ORZ-ve-HxA"/>
+                                    <constraint firstAttribute="bottom" secondItem="Qpn-o7-exl" secondAttribute="bottom" id="QDO-RB-dBD"/>
+                                    <constraint firstItem="Qpn-o7-exl" firstAttribute="top" secondItem="Ch5-KJ-n19" secondAttribute="bottom" constant="16" id="WTN-lB-NEB"/>
                                     <constraint firstAttribute="trailing" secondItem="0ZP-7H-hpk" secondAttribute="trailing" id="ZHj-zP-Xtg"/>
                                     <constraint firstItem="Ch5-KJ-n19" firstAttribute="leading" secondItem="xP2-Br-Wub" secondAttribute="leading" id="dKg-fh-tJ1"/>
                                     <constraint firstItem="Ch5-KJ-n19" firstAttribute="top" secondItem="0ZP-7H-hpk" secondAttribute="bottom" constant="16" id="fuc-yN-CFy"/>
                                     <constraint firstItem="0ZP-7H-hpk" firstAttribute="leading" secondItem="xP2-Br-Wub" secondAttribute="leading" id="fwl-G7-4Cq"/>
                                     <constraint firstAttribute="width" constant="250" id="g54-iG-p57"/>
-                                    <constraint firstAttribute="height" constant="158" id="q1S-Fo-tvK"/>
+                                    <constraint firstAttribute="height" constant="216" id="q1S-Fo-tvK"/>
                                     <constraint firstItem="sH4-kK-kNv" firstAttribute="leading" secondItem="xP2-Br-Wub" secondAttribute="leading" id="tcP-iC-hOf"/>
                                     <constraint firstAttribute="trailing" secondItem="sH4-kK-kNv" secondAttribute="trailing" id="xgl-mc-no7"/>
                                 </constraints>
@@ -2162,6 +2179,7 @@
                     <navigationItem key="navigationItem" title="WTFWords" id="nWF-9P-Gaz"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="languageButton" destination="Qpn-o7-exl" id="s0W-wt-cUi"/>
                         <outlet property="shopButton" destination="Ch5-KJ-n19" id="Ioh-g5-BXe"/>
                         <outlet property="singleModeButton" destination="0ZP-7H-hpk" id="PDE-JO-p8G"/>
                         <outlet property="tutorialButton" destination="sH4-kK-kNv" id="TRv-m0-TDG"/>

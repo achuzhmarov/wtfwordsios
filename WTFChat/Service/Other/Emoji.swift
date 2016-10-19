@@ -14,4 +14,7 @@ class Emoji {
     static let SMALL_SQUARE = "▫️"
     static let SQUARE = "◻️"
     static let HAMSTER = "🐹"
+    static let LANG_EN = "🇬🇧"
+    static let LANG_US = "🇺🇸"
+    static let LANG_RU = "🇷🇺"
 }

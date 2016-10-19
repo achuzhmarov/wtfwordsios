@@ -23,9 +23,9 @@ class StopImage: UIImageView {
                 colors: backgroundGradient
         )
 
-        UIColor.blackColor().setStroke()
+        /*UIColor.blackColor().setStroke()
         backgroundPath.lineWidth = 2
-        backgroundPath.stroke()
+        backgroundPath.stroke()*/
 
         addGradient(context!,
                 clipPath: getStopPath(size),
