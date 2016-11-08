@@ -7,10 +7,10 @@ enum TutorialStageOld: Int {
 var currentTutorialStage: TutorialStageOld = .never
 
 class TutorialMessagesViewControllerOld: MessagesViewController {
-    fileprivate let talkService: TalkService = serviceLocator.get(TalkService)
-    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
-    fileprivate let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
-    fileprivate let coreMessageService: CoreMessageService = serviceLocator.get(CoreMessageService)
+    fileprivate let talkService: TalkService = serviceLocator.get(TalkService.self)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
+    fileprivate let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService.self)
+    fileprivate let coreMessageService: CoreMessageService = serviceLocator.get(CoreMessageService.self)
 
     fileprivate let TUTORIAL_MESSAGE_MAIN = "Welcome to the chat! I am glad to see you here. Have a good time!"
     fileprivate let TUTORIAL_TIP1 = "So, I see you are interested. Let me give you some more advice on leveling up!"

@@ -5,8 +5,8 @@ protocol HintComputer: class {
 }
 
 class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelegate {
-    fileprivate let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
-    fileprivate let audioService: AudioService = serviceLocator.get(AudioService)
+    fileprivate let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService.self)
+    fileprivate let audioService: AudioService = serviceLocator.get(AudioService.self)
 
     var message: Message?
     var rows = WordsField()

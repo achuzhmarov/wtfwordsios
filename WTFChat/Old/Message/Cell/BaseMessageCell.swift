@@ -1,7 +1,7 @@
 import Foundation
 
 class BaseMessageCell: UITableViewCell {
-    fileprivate let timeService: TimeService = serviceLocator.get(TimeService)
+    fileprivate let timeService: TimeService = serviceLocator.get(TimeService.self)
 
     @IBOutlet weak var friendImage: UIImageView!
     @IBOutlet weak var messageText: RoundedLabel!

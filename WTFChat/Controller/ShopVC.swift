@@ -2,9 +2,9 @@ import Foundation
 import Localize_Swift
 
 class ShopVC: BaseModalVC {
-    fileprivate let inAppService: InAppService = serviceLocator.get(InAppService)
-    fileprivate let adService: AdService = serviceLocator.get(AdService)
-    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    fileprivate let inAppService: InAppService = serviceLocator.get(InAppService.self)
+    fileprivate let adService: AdService = serviceLocator.get(AdService.self)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
 
     @IBOutlet weak var backButton: BorderedButton!
 

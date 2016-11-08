@@ -2,10 +2,10 @@ import Foundation
 import Localize_Swift
 
 class LevelPreviewViewController: BaseModalVC {
-    fileprivate let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
-    fileprivate let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
-    fileprivate let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
-    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
+    fileprivate let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService.self)
+    fileprivate let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService.self)
+    fileprivate let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService.self)
+    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
 
     @IBOutlet weak var difficultySelector: UISegmentedControl!
     @IBOutlet weak var startTimerLabel: UILabel!
@@ -121,9 +121,9 @@ class LevelPreviewViewController: BaseModalVC {
 
         if (level.cleared) {
             let gradient = Gradient.getLevelGradientByDifficulty(level.clearedDifficulty!)
-            lvlView.addDiagonalGradient(gradient)
+            _ = lvlView.addDiagonalGradient(gradient)
         } else {
-            lvlView.addDiagonalGradient(Gradient.Ciphered)
+            _ = lvlView.addDiagonalGradient(Gradient.Ciphered)
         }
     }
 

@@ -22,9 +22,9 @@ class NavigationControllerDelegate: NSObject, UINavigationControllerDelegate {
 
     func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         if (transitionManager.presenting) {
-            return transitionManager.interactionControllerForPresentation(animator: animationController)
+            return transitionManager.interactionControllerForPresentation(using: animationController)
         } else {
-            return transitionManager.interactionControllerForDismissal(animator: animationController)
+            return transitionManager.interactionControllerForDismissal(using: animationController)
         }
     }
 }

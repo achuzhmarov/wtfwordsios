@@ -63,24 +63,24 @@ class UserService: Service {
         currentUserService.updateInfo(userInfo!)
     }
     
-    func getNewFriends(_ searchString: String, completion:(_ friends: [FriendInfo]?, _ error: NSError?) -> Void) {
+    func getNewFriends(_ searchString: String, completion:@escaping (_ friends: [FriendInfo]?, _ error: NSError?) -> Void) {
         userNetworkService.getNewFriends(searchString, completion: completion)
     }
     
-    func getTopRatings(_ completion:(_ friends: [FriendInfo]?, _ error: NSError?) -> Void) {
+    func getTopRatings(_ completion:@escaping (_ friends: [FriendInfo]?, _ error: NSError?) -> Void) {
         userNetworkService.getTopRatings(completion)
     }
     
-    func getFriendsRating(_ completion:(_ friends: [FriendInfo]?, _ error: NSError?) -> Void) {
+    func getFriendsRating(_ completion:@escaping (_ friends: [FriendInfo]?, _ error: NSError?) -> Void) {
         userNetworkService.getFriendsRating(completion)
     }
     
-    func makeFriends(_ friend: FriendInfo, completion:(_ talk: FriendTalk?, _ error: NSError?) -> Void) {
+    func makeFriends(_ friend: FriendInfo, completion:@escaping (_ talk: FriendTalk?, _ error: NSError?) -> Void) {
         currentUserService.addFriend(friend)
         userNetworkService.makeFriends(friend.login, completion: completion)
     }
     
-    func updatePassword(_ oldPassword: String, newPassword: String, completion:(_ error: NSError?) -> Void) {
+    func updatePassword(_ oldPassword: String, newPassword: String, completion:@escaping (_ error: NSError?) -> Void) {
         userNetworkService.updatePassword(oldPassword, newPassword: newPassword, completion: completion)
     }
     
@@ -90,7 +90,7 @@ class UserService: Service {
                 self.currentUserService.updateName(name)
             }
             
-            completion(error: error)
+            completion(error)
         }
     }
     
@@ -100,7 +100,7 @@ class UserService: Service {
                 self.currentUserService.updatePushNew(pushNew)
             }
             
-            completion(error: error)
+            completion(error)
         }
     }
     
@@ -110,7 +110,7 @@ class UserService: Service {
                 self.currentUserService.updatePushDeciphered(pushDeciphered)
             }
             
-            completion(error: error)
+            completion(error)
         }
     }
     

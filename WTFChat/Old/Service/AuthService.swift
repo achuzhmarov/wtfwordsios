@@ -35,29 +35,29 @@ class AuthService: Service {
     func login(_ login: String, password: String, completion: @escaping (_ user: User?, _ error: NSError?) -> Void) {
         authNetworkService.login(login, password: password) {user, error in
             if let requestError = error {
-                completion(user: nil, error: requestError)
+                completion(nil, requestError)
             } else {
                 //self.userService.setNewUser(user!, password: password)
-                completion(user: user, error: nil)
+                completion(user, nil)
             }
         }
     }
     
     func logoutNetworkRequest(_ completion: @escaping (_ error: NSError?) -> Void) {
         authNetworkService.logout(DEVICE_TOKEN) {error in
-            completion(error: error)
+            completion(error)
         }
     }
     
-    func register(_ login: String, password: String, email: String, completion:(_ error: NSError?) -> Void) {
+    func register(_ login: String, password: String, email: String, completion:@escaping (_ error: NSError?) -> Void) {
         authNetworkService.register(login, password: password, email: email, completion: completion)
     }
     
-    func restorePassword(_ login: String, completion:(_ error: NSError?) -> Void) {
+    func restorePassword(_ login: String, completion:@escaping (_ error: NSError?) -> Void) {
         authNetworkService.restorePassword(login, completion: completion)
     }
     
-    func changePassword(_ login: String, password: String, code: String, completion:(_ error: NSError?) -> Void) {
+    func changePassword(_ login: String, password: String, code: String, completion:@escaping (_ error: NSError?) -> Void) {
         authNetworkService.changePassword(login, password: password, code: code, completion: completion)
     }
 }

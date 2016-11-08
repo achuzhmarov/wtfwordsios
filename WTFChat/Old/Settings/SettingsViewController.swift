@@ -9,9 +9,9 @@
 import UIKit
 
 class SettingsViewController: UITableViewController {
-    fileprivate let userService: UserService = serviceLocator.get(UserService)
-    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
-    fileprivate let avatarService: AvatarService = serviceLocator.get(AvatarService)
+    fileprivate let userService: UserService = serviceLocator.get(UserService.self)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
+    fileprivate let avatarService: AvatarService = serviceLocator.get(AvatarService.self)
 
     @IBOutlet weak var userImage: UIImageView!
     

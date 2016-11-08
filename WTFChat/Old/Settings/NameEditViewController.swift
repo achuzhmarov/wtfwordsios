@@ -9,8 +9,8 @@
 import Foundation
 
 class NameEditViewController: UITableViewController, UITextFieldDelegate {
-    fileprivate let userService: UserService = serviceLocator.get(UserService)
-    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    fileprivate let userService: UserService = serviceLocator.get(UserService.self)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
 
     @IBOutlet weak var nameText: UITextField!
     
@@ -32,7 +32,7 @@ class NameEditViewController: UITableViewController, UITextFieldDelegate {
                 if (error != nil) {
                     WTFOneButtonAlert.show("Error", message: "Can't update user info. \(WTFOneButtonAlert.CON_ERR)", firstButtonTitle: "Ok")
                 } else {
-                    self.navigationController?.popViewController(animated: true)
+                    _ = self.navigationController?.popViewController(animated: true)
                 }
             })
         }

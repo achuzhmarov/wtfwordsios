@@ -2,7 +2,7 @@ import Foundation
 import Localize_Swift
 
 class TutorialDecipherInProgressVC: DecipherInProgressVC {
-    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
+    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
 
     fileprivate let GUESS_MESSAGE = "Let's start! Try to type 'to' and press either 'Try' or 'return' button.".localized()
     fileprivate let CLOSE_TRY_MESSAGE = "Congratulations! Now, enter 'her' as your next guess.".localized()

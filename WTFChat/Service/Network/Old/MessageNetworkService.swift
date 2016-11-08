@@ -10,20 +10,20 @@ class MessageNetworkService: Service {
 
     func markTalkAsReaded(_ talk: FriendTalk, completion:@escaping (_ error: NSError?) -> Void) {
         networkService.post(nil, relativeUrl: "messages/read/\(talk.id)") { (json, error) -> Void in
-            completion(error: error)
+            completion(error)
         }
     }
     
     func getMessagesByTalk(_ talk: FriendTalk, completion: @escaping (_ messages: [RemoteMessage]?, _ error: NSError?) -> Void) {
         networkService.get("messages/\(talk.id)") { (json, error) -> Void in
             if let requestError = error {
-                completion(messages: nil, error: requestError)
+                completion(nil, requestError)
             } else {
                 do {
                     let messages = try JsonRemoteMessageParser.arrayFromJson(json!)
-                    completion(messages: messages, error: nil)
+                    completion(messages, nil)
                 } catch let error as NSError {
-                    completion(messages: nil, error: error)
+                    completion(nil, error)
                 }
                 
             }
@@ -43,17 +43,17 @@ class MessageNetworkService: Service {
         
         networkService.post(postJSON, relativeUrl: "messages/new/\(talk.id)") { (json, error) -> Void in
             if let requestError = error {
-                completion(messages: nil, error: requestError)
+                completion(nil, requestError)
             } else {
                 if let messagesJson = json {
                     do {
                         let messages = try JsonRemoteMessageParser.arrayFromJson(messagesJson)
-                        completion(messages: messages, error: nil)
+                        completion(messages, nil)
                     } catch let error as NSError {
-                        completion(messages: nil, error: error)
+                        completion(nil, error)
                     }
                 } else {
-                    completion(messages: nil, error: nil)
+                    completion(nil, nil)
                 }
             }
         }
@@ -66,17 +66,17 @@ class MessageNetworkService: Service {
     {
         networkService.get("messages/earlier/\(talk.id)/\(String(skip))") { (json, error) -> Void in
             if let requestError = error {
-                completion(messages: nil, error: requestError)
+                completion(nil, requestError)
             } else {
                 if let messagesJson = json {
                     do {
                         let messages = try JsonRemoteMessageParser.arrayFromJson(messagesJson)
-                        completion(messages: messages, error: nil)
+                        completion(messages, nil)
                     } catch let error as NSError {
-                        completion(messages: nil, error: error)
+                        completion(nil, error)
                     }
                 } else {
-                    completion(messages: nil, error: nil)
+                    completion(nil, nil)
                 }
             }
         }
@@ -87,17 +87,17 @@ class MessageNetworkService: Service {
         
         networkService.post(postJSON, relativeUrl: "messages/add") {json, error -> Void in
             if let requestError = error {
-                completion(message: nil, error: requestError)
+                completion(nil, requestError)
             } else {
                 if let messageJson = json {
                     do {
                         let message = try JsonRemoteMessageParser.fromJson(messageJson)
-                        completion(message: message, error: nil)
+                        completion(message, nil)
                     } catch let error as NSError {
-                        completion(message: nil, error: error)
+                        completion(nil, error)
                     }
                 } else {
-                    completion(message: nil, error: nil)
+                    completion(nil, nil)
                 }
             }
         }
@@ -108,17 +108,17 @@ class MessageNetworkService: Service {
         
         networkService.post(postJSON, relativeUrl: "messages/decipher") {json, error -> Void in
             if let requestError = error {
-                completion(message: nil, error: requestError)
+                completion(nil, requestError)
             } else {
                 if let messageJson = json {
                     do {
                         let message = try JsonRemoteMessageParser.fromJson(messageJson)
-                        completion(message: message, error: nil)
+                        completion(message, nil)
                     } catch let error as NSError {
-                        completion(message: nil, error: error)
+                        completion(nil, error)
                     }
                 } else {
-                    completion(message: nil, error: nil)
+                    completion(nil, nil)
                 }
             }
         }

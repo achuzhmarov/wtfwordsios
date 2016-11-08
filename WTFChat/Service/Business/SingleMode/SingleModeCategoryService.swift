@@ -37,7 +37,7 @@ class SingleModeCategoryService: Service {
         coreSingleModeCategoryService.createSingleModeCategory(category)
 
         for lvlId in 1...LVLS_PER_CATEGORY {
-            createLevelInCategory(category, id: lvlId)
+            _ = createLevelInCategory(category, id: lvlId)
         }
 
         self.categories.append(category)

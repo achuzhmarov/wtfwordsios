@@ -2,7 +2,7 @@ import Foundation
 import Localize_Swift
 
 class TutorialDecipherVC: DecipherViewController {
-    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
+    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
 
     fileprivate let TUTORIAL_TITLE = "Welcome".localized()
     fileprivate let TUTORIAL_MESSAGE = "Welcome! Glad to see you here. Have a good time!".localized()

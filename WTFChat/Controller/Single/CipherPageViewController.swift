@@ -1,7 +1,7 @@
 import Foundation
 
 class CipherPageViewController: UIPageViewController, CipherViewAppearedNotifier {
-    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
+    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
 
     fileprivate let cipherTypes = CipherType.getAll()
     fileprivate var viewControllersCache = [Int: CipherViewController]()
@@ -29,7 +29,7 @@ class CipherPageViewController: UIPageViewController, CipherViewAppearedNotifier
 
     fileprivate func initViewControllers() {
         for i in 0..<cipherTypes.count {
-            singleModeViewController(i)
+            _ = singleModeViewController(i)
         }
     }
 

@@ -1,11 +1,11 @@
 import UIKit
 
 class MessagesViewController: BaseMessageViewController, MessageListener {
-    fileprivate let messageService: MessageService = serviceLocator.get(MessageService)
-    fileprivate let talkService: TalkService = serviceLocator.get(TalkService)
-    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
-    fileprivate let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
-    fileprivate let coreMessageService: CoreMessageService = serviceLocator.get(CoreMessageService)
+    fileprivate let messageService: MessageService = serviceLocator.get(MessageService.self)
+    fileprivate let talkService: TalkService = serviceLocator.get(TalkService.self)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
+    fileprivate let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService.self)
+    fileprivate let coreMessageService: CoreMessageService = serviceLocator.get(CoreMessageService.self)
 
     @IBOutlet weak var messageText: UITextView!
     @IBOutlet weak var messageTextHeightConstraint: NSLayoutConstraint!

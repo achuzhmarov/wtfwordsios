@@ -152,7 +152,7 @@ extension InAppHelper: SKPaymentTransactionObserver {
                 {(valid, error) -> Void in
                     
                     if (error != nil) {
-                        print(error)
+                        print(error!)
                         self.saveError(transaction, isRestore: isRestore)
                     } else if (valid!) {
                         print("Successfully verified receipt!")
@@ -226,10 +226,12 @@ extension InAppHelper: SKPaymentTransactionObserver {
     fileprivate func failedTransaction(_ transaction: SKPaymentTransaction) {
         print("failedTransaction...")
         
-        if transaction.error!.code != SKError.paymentCancelled.rawValue {
-            print("Transaction error: \(transaction.error!.localizedDescription)")
-            
-            NotificationCenter.default.post(name: Notification.Name(rawValue: IAPHelperProductPurchasedErrorNotification), object: nil)
+        if let transactionError = transaction.error as? NSError {
+            if transactionError.code != SKError.Code.paymentCancelled.rawValue {
+                print("Transaction error: \(transaction.error!.localizedDescription)")
+                
+                NotificationCenter.default.post(name: Notification.Name(rawValue: IAPHelperProductPurchasedErrorNotification), object: nil)
+            }
         }
         
         SKPaymentQueue.default().finishTransaction(transaction)

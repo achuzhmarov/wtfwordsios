@@ -2,9 +2,9 @@ import Foundation
 import Localize_Swift
 
 class DecipherInProgressVC: UIViewController {
-    let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
-    let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
-    let audioService: AudioService = serviceLocator.get(AudioService)
+    let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
+    let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService.self)
+    let audioService: AudioService = serviceLocator.get(AudioService.self)
 
     @IBOutlet weak var topTimerLabel: UILabel!
     @IBOutlet weak var topCategoryLabel: UILabel!
@@ -35,8 +35,8 @@ class DecipherInProgressVC: UIViewController {
 
     var initialTopPaddingConstraintConstant: CGFloat = 0
 
-    var parent: DecipherViewController {
-        return parent 
+    var parentVC: DecipherViewController {
+        return parent as! DecipherViewController
     }
 
     override func viewDidLoad() {
@@ -145,7 +145,7 @@ class DecipherInProgressVC: UIViewController {
 
     func updateMessage() {
         message.timerSecs = timer.seconds
-        parent.sendMessageUpdate()
+        parentVC.sendMessageUpdate()
     }
 
     func start() {
@@ -170,7 +170,7 @@ class DecipherInProgressVC: UIViewController {
             return
         }
 
-        timer.tick()
+        _ = timer.tick()
 
         topTimerLabel.text = timer.getTimeString()
 
@@ -202,7 +202,7 @@ class DecipherInProgressVC: UIViewController {
         topTimerLabel.textColor = UIColor.black
 
         dismissKeyboard()
-        parent.gameOver()
+        parentVC.gameOver()
     }
 
     func hintsBought() {

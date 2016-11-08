@@ -12,7 +12,7 @@ extension UIBezierPath {
         let tailLength = length - headLength
 
         func p(_ x: CGFloat, _ y: CGFloat) -> CGPoint { return CGPoint(x: x, y: y) }
-        var points: [CGPoint] = [
+        let points: [CGPoint] = [
                 p(0, tailWidth / 2),
                 p(tailLength, tailWidth / 2),
                 p(tailLength, headWidth / 2),
@@ -24,10 +24,10 @@ extension UIBezierPath {
 
         let cosine = (end.x - start.x) / length
         let sine = (end.y - start.y) / length
-        var transform = CGAffineTransform(a: cosine, b: sine, c: -sine, d: cosine, tx: start.x, ty: start.y)
+        let transform = CGAffineTransform(a: cosine, b: sine, c: -sine, d: cosine, tx: start.x, ty: start.y)
 
         let path = CGMutablePath()
-        CGPathAddLines(path, &transform, &points, points.count)
+        path.addLines(between: points, transform: transform)
         path.closeSubpath()
 
         return UIBezierPath(cgPath: path)

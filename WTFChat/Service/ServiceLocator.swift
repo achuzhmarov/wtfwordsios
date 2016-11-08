@@ -17,11 +17,11 @@ class ServiceLocator {
     }
 
     func get<T>(_: T.Type) -> T {
-        if s[typeName(T)] != nil {
-            return s[typeName(T)] as! T
+        if s[typeName(T.self)] != nil {
+            return s[typeName(T.self)] as! T
         } else {
             ServiceInitializer.initServices()
-            return s[typeName(T)] as! T
+            return s[typeName(T.self)] as! T
         }
     }
 

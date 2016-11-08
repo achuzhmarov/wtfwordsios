@@ -36,7 +36,7 @@ class AuthNetworkService: Service {
         }
         
         networkService.post(postJSON, relativeUrl: "logout") { (json, error) -> Void in
-            completion(error: error)
+            completion(error)
         }
     }
     
@@ -51,9 +51,9 @@ class AuthNetworkService: Service {
         
         networkService.post(postJSON, relativeUrl: "user/add") {json, error -> Void in
             if let requestError = error {
-                completion(error: requestError)
+                completion(requestError)
             } else {
-                completion(error: nil)
+                completion(nil)
             }
         }
     }
@@ -68,7 +68,7 @@ class AuthNetworkService: Service {
         let postJSON = JSON(userData)
         
         networkService.post(postJSON, relativeUrl: "restore") {json, error -> Void in
-            completion(error: error)
+            completion(error)
         }
     }
     
@@ -83,9 +83,9 @@ class AuthNetworkService: Service {
         
         networkService.post(postJSON, relativeUrl: "change_password") {json, error -> Void in
             if let requestError = error {
-                completion(error: requestError)
+                completion(requestError)
             } else {
-                completion(error: nil)
+                completion(nil)
             }
         }
     }
@@ -110,7 +110,7 @@ class AuthNetworkService: Service {
         
         networkService.post(postJSON, relativeUrl: "login") {json, error -> Void in
             if let requestError = error {
-                completion(error: requestError)
+                completion(requestError)
             } else if let token = json!["token"].string {
                 let config = self.networkService.getDefaultConfiguration()
                 let authString = "Bearer \(token)"
@@ -118,9 +118,9 @@ class AuthNetworkService: Service {
                 
                 self.networkService.updateSessionConfiguration(config)
                 
-                completion(error: nil)
+                completion(nil)
             } else {
-                completion(error: json!["token"].error)
+                completion(json!["token"].error)
             }
         }
     }
@@ -128,13 +128,13 @@ class AuthNetworkService: Service {
     fileprivate func getUserInfo(_ completion:@escaping (_ user: User?, _ error: NSError?) -> Void) {
         networkService.get("user") { (json, error) -> Void in
             if let requestError = error {
-                completion(user: nil, error: requestError)
+                completion(nil, requestError)
             } else if let userJson = json {
                 do {
                     let user = try JsonUserParser.fromJson(userJson)
-                    completion(user: user, error: nil)
+                    completion(user, nil)
                 } catch let error as NSError {
-                    completion(user: nil, error: error)
+                    completion(nil, error)
                 }
             }
         }

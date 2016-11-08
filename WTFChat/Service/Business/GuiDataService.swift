@@ -47,7 +47,7 @@ class GuiDataService: Service {
     }
 
     func updateLastSelectedDifficulty(_ cipherDifficulty: CipherDifficulty) {
-        storage.saveField(KEY.LAST_SELECTED_DIFFICULTY, value: cipherDifficulty.rawValue)
+        storage.saveField(KEY.LAST_SELECTED_DIFFICULTY, value: cipherDifficulty.rawValue as AnyObject)
     }
 
     func getLastSelectedCategoryType() -> CipherType {
@@ -55,7 +55,7 @@ class GuiDataService: Service {
     }
 
     func updateLastSelectedCategoryType(_ cipherType: CipherType) {
-        storage.saveField(KEY.LAST_SELECTED_CATEGORY, value: cipherType.rawValue)
+        storage.saveField(KEY.LAST_SELECTED_CATEGORY, value: cipherType.rawValue as AnyObject)
     }
 
     func getTutorialStage() -> TutorialStage {
@@ -63,7 +63,7 @@ class GuiDataService: Service {
     }
 
     func updateTutorialStage(_ tutorialStage: TutorialStage) {
-        storage.saveField(KEY.TUTORIAL_STAGE, value: tutorialStage.rawValue)
+        storage.saveField(KEY.TUTORIAL_STAGE, value: tutorialStage.rawValue as AnyObject)
     }
 
     func getAppRateStatus() -> AppRateStatus {
@@ -71,7 +71,7 @@ class GuiDataService: Service {
     }
 
     func updateAppRateStatus(_ appRateStatus: AppRateStatus) {
-        storage.saveField(KEY.APPRATE_STATUS, value: appRateStatus.rawValue)
+        storage.saveField(KEY.APPRATE_STATUS, value: appRateStatus.rawValue as AnyObject)
     }
 
     func getUserLanguage() -> String {
@@ -79,6 +79,6 @@ class GuiDataService: Service {
     }
 
     func updateUserLanguage(_ language: String) {
-        storage.saveField(KEY.USER_LANGUAGE, value: language)
+        storage.saveField(KEY.USER_LANGUAGE, value: language as AnyObject)
     }
 }

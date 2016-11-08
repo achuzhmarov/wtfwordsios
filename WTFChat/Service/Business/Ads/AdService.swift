@@ -3,7 +3,7 @@ import Foundation
 protocol AdProvider {
     func initProvider()
     func hasAd() -> Bool
-    func showAd(_ delegateFunc: (() -> Void))
+    func showAd(_ delegateFunc: @escaping (() -> Void))
 }
 
 class AdService: Service {
@@ -25,7 +25,7 @@ class AdService: Service {
         return false
     }
 
-    func showAd(_ delegateFunc: (() -> Void)) {
+    func showAd(_ delegateFunc: @escaping (() -> Void)) {
         for adProvider in adProviders {
             if adProvider.hasAd() {
                 adProvider.showAd(delegateFunc)

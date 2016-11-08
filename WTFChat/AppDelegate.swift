@@ -20,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        notificationService = serviceLocator.get(NotificationService)
-        coreDataService = serviceLocator.get(CoreDataService)
+        notificationService = serviceLocator.get(NotificationService.self)
+        coreDataService = serviceLocator.get(CoreDataService.self)
 
         /*if (iosService.haveUserCredentials()) {
             authService.loginWithKeychain() { user, error -> Void in

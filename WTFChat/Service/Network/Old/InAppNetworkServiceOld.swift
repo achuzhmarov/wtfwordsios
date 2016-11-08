@@ -20,14 +20,14 @@ class InAppNetworkServiceOld: Service {
         
         networkService.post(postJSON, relativeUrl: "apple/buy") {json, error -> Void in
             if let requestError = error {
-                completion(userInfo: nil, error: requestError)
+                completion(nil, requestError)
             } else {
                 if let userJson = json {
                     do {
                         let user = try JsonUserParser.fromJson(userJson)
-                        completion(userInfo: user, error: nil)
+                        completion(user, nil)
                     } catch let error as NSError {
-                        completion(userInfo: nil, error: error)
+                        completion(nil, error)
                     }
                 }
             }

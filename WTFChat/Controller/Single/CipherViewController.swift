@@ -5,10 +5,10 @@ protocol CipherViewAppearedNotifier {
 }
 
 class CipherViewController: UIViewController, LevelSelectedComputer {
-    fileprivate let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
-    fileprivate let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
-    fileprivate let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
-    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
+    fileprivate let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService.self)
+    fileprivate let singleModeService: SingleModeService = serviceLocator.get(SingleModeService.self)
+    fileprivate let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService.self)
+    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
 
     @IBOutlet weak var easyStarImage: StarImage!
     @IBOutlet weak var normalStarImage: StarImage!

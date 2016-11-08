@@ -152,7 +152,7 @@ class MessageService: Service {
                 } else {
                     if let newMessages = messages {
                         for message in newMessages {
-                            self.updateOrCreateMessageInArray(talk, message: message)
+                            _ = self.updateOrCreateMessageInArray(talk, message: message)
                         }
                         
                         self.talkService.updateTalkInArray(talk, withMessages: true)
@@ -179,7 +179,7 @@ class MessageService: Service {
                     self.coreMessageService.deleteMessageIfExists(newMessage)
                     
                     if let responseMessage = message {
-                        self.updateOrCreateMessageInArray(talk, message: responseMessage)
+                        _ = self.updateOrCreateMessageInArray(talk, message: responseMessage)
                         self.talkService.updateTalkInArray(talk, withMessages: true)
                         
                         listener?.messageSended(talk, error: nil)
@@ -199,7 +199,7 @@ class MessageService: Service {
                     self.coreMessageService.deleteMessageIfExists(decipheredMessage)
                 }
                 
-                completion?(message: message, error: error)
+                completion?(message, error)
             })
         }
     }
@@ -210,7 +210,7 @@ class MessageService: Service {
             talk.cipheredNum -= 1
         }
 
-        updateOrCreateMessageInArray(talk, message: message)
+        _ = updateOrCreateMessageInArray(talk, message: message)
         talkService.updateTalkInArray(talk, withMessages: true)
     }
     

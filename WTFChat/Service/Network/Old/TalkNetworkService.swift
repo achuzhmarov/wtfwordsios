@@ -17,17 +17,17 @@ class TalkNetworkService: Service {
 
         networkService.post(postJSON, relativeUrl: "user/new_talks_by_time") { (json, error) -> Void in
             if let requestError = error {
-                completion(talks: nil, error: requestError)
+                completion(nil, requestError)
             } else {
                 if let talksJson = json {
                     do {
                         let talks = try JsonTalkParser.arrayFromJson(talksJson)
-                        completion(talks: talks, error: nil)
+                        completion(talks, nil)
                     } catch let error as NSError {
-                        completion(talks: nil, error: error)
+                        completion(nil, error)
                     }
                 } else {
-                    completion(talks: nil, error: nil)
+                    completion(nil, nil)
                 }
             }
         }

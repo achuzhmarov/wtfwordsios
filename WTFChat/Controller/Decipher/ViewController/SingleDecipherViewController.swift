@@ -2,12 +2,12 @@ import Foundation
 import Localize_Swift
 
 class SingleDecipherViewController: DecipherViewController {
-    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
-    fileprivate let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
-    fileprivate let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
-    fileprivate let levelService: LevelService = serviceLocator.get(LevelService)
-    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
-    fileprivate let ratingService: RatingService = serviceLocator.get(RatingService)
+    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
+    fileprivate let singleModeService: SingleModeService = serviceLocator.get(SingleModeService.self)
+    fileprivate let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService.self)
+    fileprivate let levelService: LevelService = serviceLocator.get(LevelService.self)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
+    fileprivate let ratingService: RatingService = serviceLocator.get(RatingService.self)
 
     fileprivate let LEVEL_TEXT = "Level".localized()
     fileprivate let GOT_HINTS_BEGIN_TEXT = "You got".localized()

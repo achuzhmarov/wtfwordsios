@@ -19,17 +19,17 @@ class InAppNetworkService: Service {
 
         networkService.post(postJSON, relativeUrl: "ios_inapp") {json, error -> Void in
             if let requestError = error {
-                completion(valid: false, error: requestError)
+                completion(false, requestError)
             } else {
                 if let responseJson = json {
                     do {
                         if let valid = responseJson["valid"].bool {
-                            completion(valid: valid, error: nil)
+                            completion(valid, nil)
                         } else {
                             throw responseJson["valid"].error!
                         }
                     } catch let error as NSError {
-                        completion(valid: false, error: error)
+                        completion(false, error)
                     }
                 }
             }

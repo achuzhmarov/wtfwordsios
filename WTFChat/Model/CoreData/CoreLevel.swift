@@ -3,7 +3,7 @@ import CoreData
 
 class CoreLevel: NSManagedObject {
     func updateFromLevel(_ level: Level) {
-        self.id = NSNumber(level.id)
+        self.id = level.id as NSNumber
         self.cleared = level.cleared as NSNumber
         self.clearedDifficulty = level.clearedDifficulty?.rawValue as NSNumber?
     }

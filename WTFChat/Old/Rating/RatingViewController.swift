@@ -1,16 +1,8 @@
-//
-//  RatingViewController.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 16/11/15.
-//  Copyright © 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import UIKit
 
 class RatingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    fileprivate let userService: UserService = serviceLocator.get(UserService)
-    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    fileprivate let userService: UserService = serviceLocator.get(UserService.self)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
 
     @IBOutlet weak var categorySegment: UISegmentedControl!
     @IBOutlet weak var usersView: UITableView!

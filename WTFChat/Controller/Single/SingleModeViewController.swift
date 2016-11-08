@@ -2,9 +2,9 @@ import Foundation
 import Localize_Swift
 
 class SingleModeViewController: BaseUIViewController {
-    fileprivate let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
-    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
-    fileprivate let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService)
+    fileprivate let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService.self)
+    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
+    fileprivate let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService.self)
 
     @IBOutlet weak var menuBorder: UIView!
     @IBOutlet weak var menuBackground: UIView!
@@ -40,7 +40,7 @@ class SingleModeViewController: BaseUIViewController {
         exitGesture.addTarget(self, action: #selector(SingleModeViewController.handleOffstagePan(_:)))
 
         menuBorder.backgroundColor = Color.BackgroundDark
-        menuBackground.addLinearGradient(Gradient.BackgroundMenu)
+        _ = menuBackground.addLinearGradient(Gradient.BackgroundMenu)
         menuButton.setTitle(MENU_TEXT, for: UIControlState())
     }
 

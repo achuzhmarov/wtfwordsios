@@ -66,16 +66,16 @@ class CurrentUserService: Service {
     }
 
     func saveUserInLocalStorage() {
-        storage.saveField(KEY.LOGIN, value: user.login)
-        storage.saveField(KEY.HINTS, value: user.hints)
-        storage.saveField(KEY.LAST_UPDATE, value: user.lastUpdate)
-        storage.saveField(KEY.EXP, value: user.exp)
-        storage.saveField(KEY.SINGLE_EXP, value: user.singleExp)
-        storage.saveField(KEY.NAME, value: user.name)
-        storage.saveField(KEY.PUSH_NEW, value: user.pushNew)
-        storage.saveField(KEY.PUSH_DECIPHERED, value: user.pushDeciphered)
-        storage.saveField(KEY.RATING, value: user.rating)
-        storage.saveField(KEY.AD_HINTS_GAINED, value: user.adHintsGained)
-        storage.saveField(KEY.LAST_LOGIN, value: user.lastLogin)
+        storage.saveField(KEY.LOGIN, value: user.login as AnyObject)
+        storage.saveField(KEY.HINTS, value: user.hints as AnyObject)
+        storage.saveField(KEY.LAST_UPDATE, value: user.lastUpdate as AnyObject)
+        storage.saveField(KEY.EXP, value: user.exp as AnyObject)
+        storage.saveField(KEY.SINGLE_EXP, value: user.singleExp as AnyObject)
+        storage.saveField(KEY.NAME, value: user.name as AnyObject)
+        storage.saveField(KEY.PUSH_NEW, value: user.pushNew as AnyObject)
+        storage.saveField(KEY.PUSH_DECIPHERED, value: user.pushDeciphered as AnyObject)
+        storage.saveField(KEY.RATING, value: user.rating as AnyObject)
+        storage.saveField(KEY.AD_HINTS_GAINED, value: user.adHintsGained as AnyObject)
+        storage.saveField(KEY.LAST_LOGIN, value: user.lastLogin as AnyObject)
     }
 }

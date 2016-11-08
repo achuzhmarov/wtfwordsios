@@ -9,8 +9,8 @@
 import Foundation
 
 class BaseLoginViewController: UIViewController {
-    fileprivate let authService: AuthService = serviceLocator.get(AuthService)
-    fileprivate let windowService: WindowService = serviceLocator.get(WindowService)
+    fileprivate let authService: AuthService = serviceLocator.get(AuthService.self)
+    fileprivate let windowService: WindowService = serviceLocator.get(WindowService.self)
 
     func login(_ login: String, password: String) {
         authService.login(login, password: password) { user, error -> Void in

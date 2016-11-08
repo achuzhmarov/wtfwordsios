@@ -2,8 +2,8 @@ import Foundation
 import Localize_Swift
 
 class MainViewController: BaseUIViewController {
-    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
-    fileprivate let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService)
+    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
+    fileprivate let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService.self)
 
     fileprivate var TUTORIAL_TITLE: String!
     fileprivate var SINGLE_MODE_TITLE: String!

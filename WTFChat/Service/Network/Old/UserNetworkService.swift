@@ -17,14 +17,14 @@ class UserNetworkService: Service {
         
         networkService.post(postJSON, relativeUrl: "user/new_info") { (json, error) -> Void in
             if let requestError = error {
-                completion(userInfo: nil, error: requestError)
+                completion(nil, requestError)
             } else {
                 if let userJson = json {
                     do {
                         let user = try JsonUserParser.fromJson(userJson)
-                        completion(userInfo: user, error: nil)
+                        completion(user, nil)
                     } catch let error as NSError {
-                        completion(userInfo: nil, error: error)
+                        completion(nil, error)
                     }
                 }
             }
@@ -40,17 +40,17 @@ class UserNetworkService: Service {
         
         networkService.get(url) { (json, error) -> Void in
             if let requestError = error {
-                completion(friends: nil, error: requestError)
+                completion(nil, requestError)
             } else {
                 if let friendsJson = json {
                     do {
                         let friends = try JsonUserParser.friendsFromJson(friendsJson)
-                        completion(friends: friends, error: nil)
+                        completion(friends, nil)
                     } catch let error as NSError {
-                        completion(friends: nil, error: error)
+                        completion(nil, error)
                     }
                 } else {
-                    completion(friends: nil, error: nil)
+                    completion(nil, nil)
                 }
             }
         }
@@ -59,17 +59,17 @@ class UserNetworkService: Service {
     func getTopRatings(_ completion:@escaping (_ friends: [FriendInfo]?, _ error: NSError?) -> Void) {
         networkService.get("user/top") { (json, error) -> Void in
             if let requestError = error {
-                completion(friends: nil, error: requestError)
+                completion(nil, requestError)
             } else {
                 if let friendsJson = json {
                     do {
                         let friends = try JsonUserParser.friendsFromJson(friendsJson)
-                        completion(friends: friends, error: nil)
+                        completion(friends, nil)
                     } catch let error as NSError {
-                        completion(friends: nil, error: error)
+                        completion(nil, error)
                     }
                 } else {
-                    completion(friends: nil, error: nil)
+                    completion(nil, nil)
                 }
             }
         }
@@ -78,17 +78,17 @@ class UserNetworkService: Service {
     func getFriendsRating(_ completion:@escaping (_ friends: [FriendInfo]?, _ error: NSError?) -> Void) {
         networkService.get("user/friendsRating") { (json, error) -> Void in
             if let requestError = error {
-                completion(friends: nil, error: requestError)
+                completion(nil, requestError)
             } else {
                 if let friendsJson = json {
                     do {
                         let friends = try JsonUserParser.friendsFromJson(friendsJson)
-                        completion(friends: friends, error: nil)
+                        completion(friends, nil)
                     } catch let error as NSError {
-                        completion(friends: nil, error: error)
+                        completion(nil, error)
                     }
                 } else {
-                    completion(friends: nil, error: nil)
+                    completion(nil, nil)
                 }
             }
         }
@@ -97,17 +97,17 @@ class UserNetworkService: Service {
     func makeFriends(_ friendLogin: String, completion:@escaping (_ talk: FriendTalk?, _ error: NSError?) -> Void) {
         networkService.post(nil, relativeUrl:"user/friend/\(friendLogin.escapeForUrl()!)") { (json, error) -> Void in
             if let requestError = error {
-                completion(talk: nil, error: requestError)
+                completion(nil, requestError)
             } else {
                 if let talkJson = json {
                     do {
                         let talk = try JsonTalkParser.fromJson(talkJson)
-                        completion(talk: talk, error: nil)
+                        completion(talk, nil)
                     } catch let error as NSError {
-                        completion(talk: nil, error: error)
+                        completion(nil, error)
                     }
                 } else {
-                    completion(talk: nil, error: nil)
+                    completion(nil, nil)
                 }
             }
         }
@@ -123,9 +123,9 @@ class UserNetworkService: Service {
         
         networkService.post(postJSON, relativeUrl: "user/password") { (json, error) -> Void in
             if let requestError = error {
-                completion(error: requestError)
+                completion(requestError)
             } else {
-                completion(error: nil)
+                completion(nil)
             }
         }
     }
@@ -139,9 +139,9 @@ class UserNetworkService: Service {
         
         networkService.post(postJSON, relativeUrl: "user/name") { (json, error) -> Void in
             if let requestError = error {
-                completion(error: requestError)
+                completion(requestError)
             } else {
-                completion(error: nil)
+                completion(nil)
             }
         }
     }
@@ -155,9 +155,9 @@ class UserNetworkService: Service {
         
         networkService.post(postJSON, relativeUrl: "user/push_new") { (json, error) -> Void in
             if let requestError = error {
-                completion(error: requestError)
+                completion(requestError)
             } else {
-                completion(error: nil)
+                completion(nil)
             }
         }
     }
@@ -171,9 +171,9 @@ class UserNetworkService: Service {
         
         networkService.post(postJSON, relativeUrl: "user/push_deciphered") { (json, error) -> Void in
             if let requestError = error {
-                completion(error: requestError)
+                completion(requestError)
             } else {
-                completion(error: nil)
+                completion(nil)
             }
         }
     }
@@ -183,14 +183,14 @@ class UserNetworkService: Service {
         
         networkService.post(nil, relativeUrl: url) { (json, error) -> Void in
             if let requestError = error {
-                completion(userInfo: nil, error: requestError)
+                completion(nil, requestError)
             } else {
                 if let userJson = json {
                     do {
                         let user = try JsonUserParser.fromJson(userJson)
-                        completion(userInfo: user, error: nil)
+                        completion(user, nil)
                     } catch let error as NSError {
-                        completion(userInfo: nil, error: error)
+                        completion(nil, error)
                     }
                 }
             }

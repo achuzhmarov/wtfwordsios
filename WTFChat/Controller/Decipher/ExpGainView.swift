@@ -2,7 +2,7 @@ import Foundation
 import Localize_Swift
 
 class ExpGainView: NSObject {
-    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
 
     fileprivate let LEVEL_TEXT = "LEVEL".localized()
 

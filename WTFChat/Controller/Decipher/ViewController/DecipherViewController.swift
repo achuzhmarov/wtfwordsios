@@ -1,7 +1,7 @@
 import Foundation
 
 class DecipherViewController: BaseUIViewController {
-    let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
+    let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService.self)
 
     var message: Message!
 

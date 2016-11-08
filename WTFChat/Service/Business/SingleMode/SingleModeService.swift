@@ -26,9 +26,9 @@ class SingleModeService: Service {
     func finishDecipher(_ singleMessage: SingleMessage) {
         let level = singleMessage.level
         let category = level?.category
-        let wasCategoryClearedOnEasy = categoryService.isCategoryCleared(category, difficulty: .easy)
-        let wasCategoryClearedOnNormal = categoryService.isCategoryCleared(category, difficulty: .normal)
-        let wasCategoryClearedOnHard = categoryService.isCategoryCleared(category, difficulty: .hard)
+        let wasCategoryClearedOnEasy = categoryService.isCategoryCleared(category!, difficulty: .easy)
+        let wasCategoryClearedOnNormal = categoryService.isCategoryCleared(category!, difficulty: .normal)
+        let wasCategoryClearedOnHard = categoryService.isCategoryCleared(category!, difficulty: .hard)
 
         singleMessage.exp = expService.calculateExpForMessage(singleMessage)
 
@@ -43,15 +43,15 @@ class SingleModeService: Service {
             }
 
 
-            levelService.updateLevel(level)
+            levelService.updateLevel(level!)
         }
 
         currentUserService.earnSingleExp(singleMessage.exp)
         //currentUserService.useHints(singleMessage.hintsUsed)
 
-        let categoryClearedOnEasy = categoryService.isCategoryCleared(category, difficulty: .easy)
-        let categoryClearedOnNormal = categoryService.isCategoryCleared(category, difficulty: .normal)
-        let categoryClearedOnHard = categoryService.isCategoryCleared(category, difficulty: .hard)
+        let categoryClearedOnEasy = categoryService.isCategoryCleared(category!, difficulty: .easy)
+        let categoryClearedOnNormal = categoryService.isCategoryCleared(category!, difficulty: .normal)
+        let categoryClearedOnHard = categoryService.isCategoryCleared(category!, difficulty: .hard)
 
         if (categoryClearedOnHard && !wasCategoryClearedOnHard) {
             category?.hasJustClearedOnHard = true

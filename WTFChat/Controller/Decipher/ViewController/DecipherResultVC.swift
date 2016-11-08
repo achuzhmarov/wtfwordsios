@@ -2,7 +2,7 @@ import Foundation
 import Localize_Swift
 
 class DecipherResultVC: UIViewController, HintComputer {
-    let audioService: AudioService = serviceLocator.get(AudioService)
+    let audioService: AudioService = serviceLocator.get(AudioService.self)
 
     @IBOutlet weak var resultLabel: RoundedLabel!
     @IBOutlet weak var levelView: UIView!
@@ -21,8 +21,8 @@ class DecipherResultVC: UIViewController, HintComputer {
 
     var expGainView = ExpGainView()
 
-    var parent: DecipherViewController {
-        return parent 
+    var parentVC: DecipherViewController {
+        return parent as! DecipherViewController
     }
 
     override func viewDidLoad() {
@@ -51,7 +51,7 @@ class DecipherResultVC: UIViewController, HintComputer {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
-        if (parent.resultContainer.isHidden) {
+        if (parentVC.resultContainer.isHidden) {
             return
         }
 
@@ -69,16 +69,16 @@ class DecipherResultVC: UIViewController, HintComputer {
     }
 
     @IBAction func backTapped(_ sender: AnyObject) {
-        parent.backTapped()
+        parentVC.backTapped()
     }
 
     @IBAction func continuePressed(_ sender: AnyObject) {
-        parent.continuePressed()
+        parentVC.continuePressed()
     }
 
     func changeCipherStateForViewOnly() {
-        parent.useCipherText = !parent.useCipherText
-        wordsTableView.setNewMessage(message, useCipherText: parent.useCipherText, selfAuthor: parent.selfAuthor)
+        parentVC.useCipherText = !parentVC.useCipherText
+        wordsTableView.setNewMessage(message, useCipherText: parentVC.useCipherText, selfAuthor: parentVC.selfAuthor)
 
         wordsTableView.alpha = 0
         UIView.animate(withDuration: 0.3, delay: 0,
@@ -91,7 +91,7 @@ class DecipherResultVC: UIViewController, HintComputer {
         let size = size ?? view.frame.size
 
         wordsTableView.updateMaxWidth(size.width - wordsViewHorizontalConstraint.constant * 2)
-        wordsTableView.setNewMessage(message, useCipherText: parent.useCipherText, selfAuthor: parent.selfAuthor)
+        wordsTableView.setNewMessage(message, useCipherText: parentVC.useCipherText, selfAuthor: parentVC.selfAuthor)
     }
 
     func initView(_ resultMessage: Message) {

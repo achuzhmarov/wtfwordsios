@@ -1,7 +1,7 @@
 import Foundation
 
 class LvlCell: UICollectionViewCell {
-    fileprivate let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
+    fileprivate let singleModeService: SingleModeService = serviceLocator.get(SingleModeService.self)
 
     @IBOutlet weak var titleLabel: UILabel!
 

@@ -9,7 +9,7 @@
 import UIKit
 
 class SendMessageViewController: UIViewController, CipherPickedComputer {
-    fileprivate let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
+    fileprivate let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService.self)
 
     @IBOutlet weak var messageWordsView: WordsViewController!
     

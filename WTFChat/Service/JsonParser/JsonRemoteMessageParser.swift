@@ -52,7 +52,7 @@ class JsonRemoteMessageParser {
 
         for i in 0..<message.tries.count {
             let tryJson = JSON(message.tries[i])
-            triesJson.append(tryJson.rawValue)
+            triesJson.append(tryJson.rawValue as AnyObject)
         }
 
         return triesJson
@@ -63,7 +63,7 @@ class JsonRemoteMessageParser {
 
         for i in 0..<message.words!.count {
             let wordJson = JsonWordParser.fromWord(message.words![i])
-            wordsJson.append(wordJson.rawValue)
+            wordsJson.append(wordJson.rawValue as AnyObject)
         }
 
         return wordsJson

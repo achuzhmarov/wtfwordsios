@@ -1,17 +1,9 @@
-//
-//  FriendsViewController.swift
-//  wttc
-//
-//  Created by Artem Chuzhmarov on 05/09/15.
-//  Copyright (c) 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import UIKit
 
 class FriendsViewController: UITableViewController, TalkListener {
-    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
-    fileprivate let talkService: TalkService = serviceLocator.get(TalkService)
-    fileprivate let windowService: WindowService = serviceLocator.get(WindowService)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
+    fileprivate let talkService: TalkService = serviceLocator.get(TalkService.self)
+    fileprivate let windowService: WindowService = serviceLocator.get(WindowService.self)
 
     var talks = [FriendTalk]()
     
