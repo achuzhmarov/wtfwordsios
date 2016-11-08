@@ -2,7 +2,7 @@ import Foundation
 import SwiftyJSON
 
 class JsonWordParser {
-    class func fromWord(word: Word) -> JSON {
+    class func fromWord(_ word: Word) -> JSON {
         let json: JSON =  [
                 "text": word.text,
                 "additional": word.additional,
@@ -13,7 +13,7 @@ class JsonWordParser {
         return json
     }
 
-    class func fromJson(json: JSON) throws -> Word {
+    class func fromJson(_ json: JSON) throws -> Word {
         var text: String
         var additional: String
         var cipheredText: String

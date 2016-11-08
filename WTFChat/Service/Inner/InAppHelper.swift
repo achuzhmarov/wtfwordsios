@@ -8,23 +8,23 @@ public let IAPHelperProductRestoreNotification = "IAPHelperProductRestoreNotific
 public let IAPHelperProductRestoreErrorNotification = "IAPHelperProductRestoreErrorNotification"
 
 /// Completion handler called when products are fetched.
-public typealias RequestProductsCompletionHandler = (success: Bool, products: [SKProduct]) -> ()
+public typealias RequestProductsCompletionHandler = (_ success: Bool, _ products: [SKProduct]) -> ()
 
 /// A Helper class for In-App-Purchases, it can fetch products, tell you if a product has been purchased,
 /// purchase products, and restore purchases.  Uses NSUserDefaults to cache if a product has been purchased.
-public class InAppHelper: NSObject  {
-    private let inAppNetworkService: InAppNetworkService
-    private let currentUserService: CurrentUserService
+open class InAppHelper: NSObject  {
+    fileprivate let inAppNetworkService: InAppNetworkService
+    fileprivate let currentUserService: CurrentUserService
 
     // Used to keep track of the possible products and which ones have been purchased.
-    private let productIdentifiers: Set<ProductIdentifier>
-    private var purchasedProductIdentifiers = Set<ProductIdentifier>()
+    fileprivate let productIdentifiers: Set<ProductIdentifier>
+    fileprivate var purchasedProductIdentifiers = Set<ProductIdentifier>()
   
     // Used by SKProductsRequestDelegate
-    private var productsRequest: SKProductsRequest?
-    private var completionHandler: RequestProductsCompletionHandler?
+    fileprivate var productsRequest: SKProductsRequest?
+    fileprivate var completionHandler: RequestProductsCompletionHandler?
 
-    private var products = [SKProduct]()
+    fileprivate var products = [SKProduct]()
 
     /// MARK: - User facing API
   
@@ -35,7 +35,7 @@ public class InAppHelper: NSObject  {
 
         self.productIdentifiers = productIdentifiers
         for productIdentifier in productIdentifiers {
-            let purchased = NSUserDefaults.standardUserDefaults().boolForKey(productIdentifier)
+            let purchased = UserDefaults.standard.bool(forKey: productIdentifier)
             
             if purchased {
                 purchasedProductIdentifiers.insert(productIdentifier)
@@ -47,11 +47,11 @@ public class InAppHelper: NSObject  {
         
         super.init()
 
-        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
+        SKPaymentQueue.default().add(self)
     }
   
     /// Gets the list of SKProducts from the Apple server calls the handler with the list of products.
-    public func requestProductsWithCompletionHandler(handler: RequestProductsCompletionHandler) {
+    open func requestProductsWithCompletionHandler(_ handler: @escaping RequestProductsCompletionHandler) {
         completionHandler = handler
         productsRequest = SKProductsRequest(productIdentifiers: productIdentifiers)
         productsRequest?.delegate = self
@@ -59,24 +59,24 @@ public class InAppHelper: NSObject  {
     }
   
     /// Initiates purchase of a product.
-    public func purchaseProduct(product: SKProduct) {
+    open func purchaseProduct(_ product: SKProduct) {
         print("Buying \(product.productIdentifier)...")
         let payment = SKPayment(product: product)
-        SKPaymentQueue.defaultQueue().addPayment(payment)
+        SKPaymentQueue.default().add(payment)
     }
   
     /// Given the product identifier, returns true if that product has been purchased.
-    public func isProductPurchased(productIdentifier: ProductIdentifier) -> Bool {
+    open func isProductPurchased(_ productIdentifier: ProductIdentifier) -> Bool {
         return purchasedProductIdentifiers.contains(productIdentifier)
     }
   
     /// If the state of whether purchases have been made is lost  (e.g. the
     /// user deletes and reinstalls the app) this will recover the purchases.
-    public func restoreCompletedTransactions() {
-        SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
+    open func restoreCompletedTransactions() {
+        SKPaymentQueue.default().restoreCompletedTransactions()
     }
   
-    public class func canMakePayments() -> Bool {
+    open class func canMakePayments() -> Bool {
         return SKPaymentQueue.canMakePayments()
     }
 }
@@ -85,20 +85,20 @@ public class InAppHelper: NSObject  {
 // and prices from the Apple server.
 
 extension InAppHelper: SKProductsRequestDelegate {
-    public func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+    public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         print("Loaded list of products...")
         products = response.products
-        completionHandler?(success: true, products: products)
+        completionHandler?(true, products)
         clearRequest()
     }
 
-    public func request(request: SKRequest, didFailWithError error: NSError) {
+    public func request(_ request: SKRequest, didFailWithError error: Error) {
         print("Failed to load list of products.")
         print("Error: \(error)")
         clearRequest()
     }
 
-    private func clearRequest() {
+    fileprivate func clearRequest() {
         productsRequest = nil
         completionHandler = nil
     }
@@ -109,43 +109,43 @@ extension InAppHelper: SKPaymentTransactionObserver {
     /// This is a function called by the payment queue, not to be called directly.
     /// For each transaction act accordingly, save in the purchased cache, issue notifications,
     /// mark the transaction as complete.
-    public func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+    public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             switch (transaction.transactionState) {
-                case .Purchased:
+                case .purchased:
                     completeTransaction(transaction)
                     break
-                case .Failed:
+                case .failed:
                     failedTransaction(transaction)
                     break
-                case .Restored:
+                case .restored:
                     restoreTransaction(transaction)
                     break
-                case .Deferred:
+                case .deferred:
                     break
-                case .Purchasing:
+                case .purchasing:
                     break
             }
         }
     }
   
-    private func completeTransaction(transaction: SKPaymentTransaction) {
+    fileprivate func completeTransaction(_ transaction: SKPaymentTransaction) {
         let productId = transaction.payment.productIdentifier
         print("completeTransaction... \(productId)")
         validateReceiptForTransaction(transaction, isRestore: false)
     }
   
-    private func restoreTransaction(transaction: SKPaymentTransaction) {
+    fileprivate func restoreTransaction(_ transaction: SKPaymentTransaction) {
         let productId = transaction.payment.productIdentifier
         //let productId = transaction.originalTransaction!.payment.productIdentifier
         print("restoreTransaction... \(productId)")
         validateReceiptForTransaction(transaction, isRestore: true)
     }
     
-    private func validateReceiptForTransaction(transaction: SKPaymentTransaction, isRestore: Bool) {
-        if let receipt =  NSBundle.mainBundle().appStoreReceiptURL {
-            if let data = NSData(contentsOfURL: receipt) {
-                let receiptString = data.base64EncodedStringWithOptions([])
+    fileprivate func validateReceiptForTransaction(_ transaction: SKPaymentTransaction, isRestore: Bool) {
+        if let receipt =  Bundle.main.appStoreReceiptURL {
+            if let data = try? Data(contentsOf: receipt) {
+                let receiptString = data.base64EncodedString(options: [])
                 let productId = transaction.payment.productIdentifier
                 
                 inAppNetworkService.verifyInAppPurchase(receiptString, productId: productId, completion:
@@ -158,7 +158,7 @@ extension InAppHelper: SKPaymentTransactionObserver {
                         print("Successfully verified receipt!")
 
                         self.provideContentForProduct(transaction.payment.productIdentifier, isRestore: isRestore)
-                        SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+                        SKPaymentQueue.default().finishTransaction(transaction)
                     } else {
                         print("Server validation error")
                     }
@@ -171,20 +171,20 @@ extension InAppHelper: SKPaymentTransactionObserver {
         }
     }
     
-    private func saveError(transaction: SKPaymentTransaction, isRestore: Bool = false) {
+    fileprivate func saveError(_ transaction: SKPaymentTransaction, isRestore: Bool = false) {
         let productId = transaction.payment.productIdentifier
         
         print("Failed to validate receipt for \(productId)")
         
         if (isRestore) {
-            NSNotificationCenter.defaultCenter().postNotificationName(IAPHelperProductRestoreErrorNotification, object: productId)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: IAPHelperProductRestoreErrorNotification), object: productId)
         } else {
-            NSNotificationCenter.defaultCenter().postNotificationName(IAPHelperProductPurchasedErrorNotification, object: productId)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: IAPHelperProductPurchasedErrorNotification), object: productId)
         }
     }
   
     // Helper: Saves the fact that the product has been purchased and posts a notification.
-    private func provideContentForProduct(productId: String, isRestore: Bool) {
+    fileprivate func provideContentForProduct(_ productId: String, isRestore: Bool) {
         if (IAPProducts.isConsumable(productId)) {
             let hintsBought = getHintsCount(productId)
 
@@ -193,27 +193,27 @@ extension InAppHelper: SKPaymentTransactionObserver {
             }
         } else if (IAPProducts.isNonConsumbale(productId)) {
             purchasedProductIdentifiers.insert(productId)
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: productId)
-            NSUserDefaults.standardUserDefaults().synchronize()
+            UserDefaults.standard.set(true, forKey: productId)
+            UserDefaults.standard.synchronize()
         }
     
         if (isRestore) {
-            NSNotificationCenter.defaultCenter().postNotificationName(IAPHelperProductRestoreNotification, object: productId)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: IAPHelperProductRestoreNotification), object: productId)
         } else {
-            NSNotificationCenter.defaultCenter().postNotificationName(IAPHelperProductPurchasedNotification, object: productId)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: IAPHelperProductPurchasedNotification), object: productId)
         }
     }
 
-    private func getHintsCount(productId: ProductIdentifier) -> Int {
+    fileprivate func getHintsCount(_ productId: ProductIdentifier) -> Int {
         if let product = getProduct(productId) {
-            let titleParts = product.localizedTitle.componentsSeparatedByString(" ")
+            let titleParts = product.localizedTitle.components(separatedBy: " ")
             return Int(titleParts[0])!
         }
 
         return 0
     }
 
-    func getProduct(productId: ProductIdentifier) -> SKProduct? {
+    func getProduct(_ productId: ProductIdentifier) -> SKProduct? {
         for product in products {
             if (product.productIdentifier == productId) {
                 return product
@@ -223,24 +223,24 @@ extension InAppHelper: SKPaymentTransactionObserver {
         return nil
     }
     
-    private func failedTransaction(transaction: SKPaymentTransaction) {
+    fileprivate func failedTransaction(_ transaction: SKPaymentTransaction) {
         print("failedTransaction...")
         
-        if transaction.error!.code != SKErrorCode.PaymentCancelled.rawValue {
+        if transaction.error!.code != SKError.paymentCancelled.rawValue {
             print("Transaction error: \(transaction.error!.localizedDescription)")
             
-            NSNotificationCenter.defaultCenter().postNotificationName(IAPHelperProductPurchasedErrorNotification, object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: IAPHelperProductPurchasedErrorNotification), object: nil)
         }
         
-        SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+        SKPaymentQueue.default().finishTransaction(transaction)
     }
 }
 
 extension SKProduct {
     func localizedPrice() -> String {
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = .CurrencyStyle
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
         formatter.locale = self.priceLocale
-        return formatter.stringFromNumber(self.price)!
+        return formatter.string(from: self.price)!
     }
 }

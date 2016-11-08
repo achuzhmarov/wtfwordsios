@@ -2,8 +2,8 @@ import Foundation
 
 extension CoreSingleMessage {
 
-    @NSManaged var timestamp: NSDate?
-    @NSManaged var lastUpdate: NSDate?
+    @NSManaged var timestamp: Date?
+    @NSManaged var lastUpdate: Date?
     @NSManaged var deciphered: NSNumber?
     @NSManaged var cipherType: NSNumber?
     @NSManaged var cipherDifficulty: NSNumber?
@@ -14,8 +14,8 @@ extension CoreSingleMessage {
 
     @NSManaged var words: NSOrderedSet?
 
-    @NSManaged func addWordsObject(word: CoreWord)
-    @NSManaged func removeWordsObject(word: CoreWord)
-    @NSManaged func addWords(words: NSOrderedSet)
-    @NSManaged func removeWords(words: NSOrderedSet)
+    @NSManaged func addWordsObject(_ word: CoreWord)
+    @NSManaged func removeWordsObject(_ word: CoreWord)
+    @NSManaged func addWords(_ words: NSOrderedSet)
+    @NSManaged func removeWords(_ words: NSOrderedSet)
 }

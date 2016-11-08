@@ -1,7 +1,7 @@
 import Foundation
 
 class UIHelper {
-    static func clearBackButton(navigationItem: UINavigationItem) {
+    static func clearBackButton(_ navigationItem: UINavigationItem) {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem

@@ -5,7 +5,7 @@ class DailyHintsService: Service {
     let inAppService: InAppService
     let currentUserService: CurrentUserService
 
-    private let DAILY_HINTS_TEXT = "Daily free hints!\nToday you got".localized()
+    fileprivate let DAILY_HINTS_TEXT = "Daily free hints!\nToday you got".localized()
 
     init(inAppService: InAppService, currentUserService: CurrentUserService) {
         self.inAppService = inAppService
@@ -13,10 +13,10 @@ class DailyHintsService: Service {
     }
 
     func computeDailyHints() {
-        let now = NSDate()
+        let now = Date()
         let lastLogin = currentUserService.getLastLogin()
 
-        if (checkDailyHints(now, lastLogin: lastLogin)) {
+        if (checkDailyHints(now, lastLogin: lastLogin as Date)) {
             addDailyHints()
             currentUserService.clearAdHintsLimit()
         }
@@ -24,7 +24,7 @@ class DailyHintsService: Service {
         currentUserService.updateLastLogin(now)
     }
 
-    private func checkDailyHints(now: NSDate, lastLogin: NSDate) -> Bool {
+    fileprivate func checkDailyHints(_ now: Date, lastLogin: Date) -> Bool {
         if (lastLogin.getYear() < now.getYear()
                 || lastLogin.getMonth() < now.getMonth()
                 || lastLogin.getDay() < now.getDay()) {
@@ -35,7 +35,7 @@ class DailyHintsService: Service {
         return false
     }
 
-    private func addDailyHints() {
+    fileprivate func addDailyHints() {
         let userLvl = currentUserService.getUserLvl()
         let hints = getRandomDailyHints(userLvl)
 
@@ -44,7 +44,7 @@ class DailyHintsService: Service {
         WTFOneButtonAlert.show(DAILY_HINTS_TEXT + " " + String(hints), message: nil)
     }
 
-    func getRandomDailyHints(userLvl: Int) -> Int {
+    func getRandomDailyHints(_ userLvl: Int) -> Int {
         var twoBorder: Int
         var threeBorder: Int
 

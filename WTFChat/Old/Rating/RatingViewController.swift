@@ -9,8 +9,8 @@
 import UIKit
 
 class RatingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    private let userService: UserService = serviceLocator.get(UserService)
-    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    fileprivate let userService: UserService = serviceLocator.get(UserService)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
 
     @IBOutlet weak var categorySegment: UISegmentedControl!
     @IBOutlet weak var usersView: UITableView!
@@ -39,7 +39,7 @@ class RatingViewController: UIViewController, UITableViewDataSource, UITableView
         super.didReceiveMemoryWarning()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         if (firstLoad) {
             firstLoad = false
             return
@@ -53,7 +53,7 @@ class RatingViewController: UIViewController, UITableViewDataSource, UITableView
     
     func loadFriends() {
         userService.getFriendsRating() { (users, error) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 if let requestError = error {
                     WTFOneButtonAlert.show("Error", message: WTFOneButtonAlert.CON_ERR, firstButtonTitle: "Ok")
                     
@@ -71,7 +71,7 @@ class RatingViewController: UIViewController, UITableViewDataSource, UITableView
     
     func loadTopUsers() {
         userService.getTopRatings() { (users, error) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 if let requestError = error {
                     WTFOneButtonAlert.show("Error", message: WTFOneButtonAlert.CON_ERR, firstButtonTitle: "Ok")
                     
@@ -88,11 +88,11 @@ class RatingViewController: UIViewController, UITableViewDataSource, UITableView
     
     // MARK: - Table view data source
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (showFriendsOnly) {
             return friends.count
         } else {
@@ -100,16 +100,16 @@ class RatingViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell: RatingCell
         
         if (showFriendsOnly) {
-            cell = tableView.dequeueReusableCellWithIdentifier("GlobalRatingCell", forIndexPath: indexPath) as! RatingCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "GlobalRatingCell", for: indexPath) as! RatingCell
             //cell = tableView.dequeueReusableCellWithIdentifier("FriendRatingCell", forIndexPath: indexPath) as! RatingCell
             let friend = friends[indexPath.row]
             cell.updateUser(friend, num: indexPath.row + 1)
         } else {
-            cell = tableView.dequeueReusableCellWithIdentifier("GlobalRatingCell", forIndexPath: indexPath) as! RatingCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "GlobalRatingCell", for: indexPath) as! RatingCell
             let user = users[indexPath.row]
             cell.updateUser(user, num: indexPath.row + 1)
             return cell
@@ -118,7 +118,7 @@ class RatingViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
-    @IBAction func categoryChanged(sender: AnyObject) {
+    @IBAction func categoryChanged(_ sender: AnyObject) {
         switch categorySegment.selectedSegmentIndex
         {
         case 0:
@@ -133,8 +133,8 @@ class RatingViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func updateView() {
-        self.friends = self.friends.sort(FriendInfo.compareByExp)
-        self.users = self.users.sort(FriendInfo.compareByExp)
+        self.friends = self.friends.sorted(by: FriendInfo.compareByExp)
+        self.users = self.users.sorted(by: FriendInfo.compareByExp)
         self.usersView.reloadData()
     }
 }

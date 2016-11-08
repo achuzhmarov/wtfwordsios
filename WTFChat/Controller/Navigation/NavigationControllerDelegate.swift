@@ -7,24 +7,24 @@ class NavigationControllerDelegate: NSObject, UINavigationControllerDelegate {
         super.awakeFromNib()
     }
 
-    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         switch (operation) {
-            case .Push:
-                return transitionManager.animationControllerForPresentedController(
-                    navigationController, presentingController: toVC, sourceController: fromVC
+            case .push:
+                return transitionManager.animationController(
+                    forPresented: navigationController, presenting: toVC, source: fromVC
                 )
-            case .Pop:
-                return transitionManager.animationControllerForDismissedController(fromVC)
-            case .None:
+            case .pop:
+                return transitionManager.animationController(forDismissed: fromVC)
+            case .none:
                 return transitionManager
         }
     }
 
-    func navigationController(navigationController: UINavigationController, interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         if (transitionManager.presenting) {
-            return transitionManager.interactionControllerForPresentation(animationController)
+            return transitionManager.interactionControllerForPresentation(animator: animationController)
         } else {
-            return transitionManager.interactionControllerForDismissal(animationController)
+            return transitionManager.interactionControllerForDismissal(animator: animationController)
         }
     }
 }

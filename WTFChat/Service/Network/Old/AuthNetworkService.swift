@@ -2,29 +2,29 @@ import Foundation
 import SwiftyJSON
 
 class AuthNetworkService: Service {
-    private let networkService: NetworkService
+    fileprivate let networkService: NetworkService
 
     init(networkService: NetworkService) {
         self.networkService = networkService
     }
     
-    func login(login: String, password: String, completion: (user: User?, error: NSError?) -> Void) {
+    func login(_ login: String, password: String, completion: @escaping (_ user: User?, _ error: NSError?) -> Void) {
         self.authorize(login, password: password) { error -> Void in
             if let requestError = error {
-                completion(user: nil, error: requestError)
+                completion(nil, requestError)
             } else {
                 self.getUserInfo() { user, error -> Void in
                     if let requestError = error {
-                        completion(user: nil, error: requestError)
+                        completion(nil, requestError)
                     } else {
-                        completion(user: user, error: nil)
+                        completion(user, nil)
                     }
                 }
             }
         }
     }
     
-    func logout(deviceToken: NSString?, completion:(error: NSError?) -> Void) {
+    func logout(_ deviceToken: NSString?, completion:@escaping (_ error: NSError?) -> Void) {
         var postJSON: JSON? = nil
         
         if deviceToken != nil {
@@ -40,7 +40,7 @@ class AuthNetworkService: Service {
         }
     }
     
-    func register(login: String, password: String, email: String, completion:(error: NSError?) -> Void) {
+    func register(_ login: String, password: String, email: String, completion:@escaping (_ error: NSError?) -> Void) {
         let userData = [
             "login": login,
             "password": password,
@@ -58,11 +58,11 @@ class AuthNetworkService: Service {
         }
     }
     
-    func restorePassword(login: String, completion:(error: NSError?) -> Void) {
+    func restorePassword(_ login: String, completion:@escaping (_ error: NSError?) -> Void) {
         var userData: [String: NSString]
         
         userData = [
-            "login": login,
+            "login": login as NSString,
         ]
         
         let postJSON = JSON(userData)
@@ -72,7 +72,7 @@ class AuthNetworkService: Service {
         }
     }
     
-    func changePassword(login: String, password: String, code: String, completion:(error: NSError?) -> Void) {
+    func changePassword(_ login: String, password: String, code: String, completion:@escaping (_ error: NSError?) -> Void) {
         let userData = [
             "login": login,
             "password": password,
@@ -90,19 +90,19 @@ class AuthNetworkService: Service {
         }
     }
     
-    private func authorize(login: String, password: String, completion:(error: NSError?) -> Void) {
+    fileprivate func authorize(_ login: String, password: String, completion:@escaping (_ error: NSError?) -> Void) {
         var userData: [String: NSString]
         
         if let deviceToken = DEVICE_TOKEN {
             userData = [
-                "login": login,
-                "password": password,
+                "login": login as NSString,
+                "password": password as NSString,
                 "device_token": deviceToken
             ]
         } else {
             userData = [
-                "login": login,
-                "password": password
+                "login": login as NSString,
+                "password": password as NSString
             ]
         }
         
@@ -114,7 +114,7 @@ class AuthNetworkService: Service {
             } else if let token = json!["token"].string {
                 let config = self.networkService.getDefaultConfiguration()
                 let authString = "Bearer \(token)"
-                config.HTTPAdditionalHeaders = ["Authorization" : authString]
+                config.httpAdditionalHeaders = ["Authorization" : authString]
                 
                 self.networkService.updateSessionConfiguration(config)
                 
@@ -125,7 +125,7 @@ class AuthNetworkService: Service {
         }
     }
     
-    private func getUserInfo(completion:(user: User?, error: NSError?) -> Void) {
+    fileprivate func getUserInfo(_ completion:@escaping (_ user: User?, _ error: NSError?) -> Void) {
         networkService.get("user") { (json, error) -> Void in
             if let requestError = error {
                 completion(user: nil, error: requestError)

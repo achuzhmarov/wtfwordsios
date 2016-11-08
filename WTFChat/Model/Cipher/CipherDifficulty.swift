@@ -1,24 +1,24 @@
 import Localize_Swift
 
 enum CipherDifficulty : Int, CustomStringConvertible {
-    case Easy = 0
-    case Normal
-    case Hard
+    case easy = 0
+    case normal
+    case hard
 
     var description : String {
         get {
             switch self {
-            case CipherDifficulty.Easy:
+            case CipherDifficulty.easy:
                 return "Easy".localized()
-            case CipherDifficulty.Normal:
+            case CipherDifficulty.normal:
                 return "Normal".localized()
-            case CipherDifficulty.Hard:
+            case CipherDifficulty.hard:
                 return "Hard".localized()
             }
         }
     }
 
     static func getAll() -> [CipherDifficulty] {
-        return [.Easy, .Normal, .Hard]
+        return [.easy, .normal, .hard]
     }
 }

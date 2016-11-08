@@ -17,13 +17,13 @@ class FriendInfo: NSObject {
 
     func getDisplayName() -> String {
         if (name != "") {
-            return name.capitalizedString
+            return name.capitalized
         } else {
-            return login.capitalizedString
+            return login.capitalized
         }
     }
 
-    class func compareByLvl(user1: FriendInfo, user2: FriendInfo) -> Bool {
+    class func compareByLvl(_ user1: FriendInfo, user2: FriendInfo) -> Bool {
         if (user1.lvl > user2.lvl) {
             return true
         } else if (user1.lvl < user2.lvl) {
@@ -33,7 +33,7 @@ class FriendInfo: NSObject {
         }
     }
 
-    class func compareByExp(user1: FriendInfo, user2: FriendInfo) -> Bool {
+    class func compareByExp(_ user1: FriendInfo, user2: FriendInfo) -> Bool {
         if (user1.exp > user2.exp) {
             return true
         } else if (user1.exp < user2.exp) {

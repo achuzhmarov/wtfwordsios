@@ -9,9 +9,9 @@
 import UIKit
 
 class SettingsViewController: UITableViewController {
-    private let userService: UserService = serviceLocator.get(UserService)
-    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
-    private let avatarService: AvatarService = serviceLocator.get(AvatarService)
+    fileprivate let userService: UserService = serviceLocator.get(UserService)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    fileprivate let avatarService: AvatarService = serviceLocator.get(AvatarService)
 
     @IBOutlet weak var userImage: UIImageView!
     
@@ -30,7 +30,7 @@ class SettingsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        userImage.layer.borderColor = UIColor.whiteColor().CGColor
+        userImage.layer.borderColor = UIColor.white.cgColor
         userImage.layer.cornerRadius = userImage.bounds.width/2
         userImage.clipsToBounds = true
         
@@ -41,7 +41,7 @@ class SettingsViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         updateUserInfo()
     }
     
@@ -65,9 +65,9 @@ class SettingsViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    @IBAction func pushNewChanged(sender: AnyObject) {
-        userService.updatePushNew(pushNewSwitch.on) { (error) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
+    @IBAction func pushNewChanged(_ sender: AnyObject) {
+        userService.updatePushNew(pushNewSwitch.isOn) { (error) -> Void in
+            DispatchQueue.main.async(execute: {
                 if (error != nil) {
                     WTFOneButtonAlert.show("Error", message: "Can't update user info. \(WTFOneButtonAlert.CON_ERR)", firstButtonTitle: "Ok")
                 
@@ -77,9 +77,9 @@ class SettingsViewController: UITableViewController {
         }
     }
     
-    @IBAction func pushDecipherChanged(sender: AnyObject) {
-        userService.updatePushDeciphered(pushDecipherSwitch.on) { (error) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
+    @IBAction func pushDecipherChanged(_ sender: AnyObject) {
+        userService.updatePushDeciphered(pushDecipherSwitch.isOn) { (error) -> Void in
+            DispatchQueue.main.async(execute: {
                 if (error != nil) {
                     WTFOneButtonAlert.show("Error", message: "Can't update user info. \(WTFOneButtonAlert.CON_ERR)", firstButtonTitle: "Ok")
                 

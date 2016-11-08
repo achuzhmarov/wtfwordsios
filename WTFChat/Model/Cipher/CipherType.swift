@@ -1,30 +1,30 @@
 import Localize_Swift
 
 enum CipherType : Int, CustomStringConvertible {
-    case RightCutter = 0
-    case LeftCutter
-    case Shuffle
-    case RandomCutter
-    case DoubleCutter
+    case rightCutter = 0
+    case leftCutter
+    case shuffle
+    case randomCutter
+    case doubleCutter
 
     var description : String {
         get {
             switch self {
-            case CipherType.RightCutter:
+            case CipherType.rightCutter:
                 return "Right Cutter".localized()
-            case CipherType.LeftCutter:
+            case CipherType.leftCutter:
                 return "Left Cutter".localized()
-            case CipherType.Shuffle:
+            case CipherType.shuffle:
                 return "Shuffle".localized()
-            case CipherType.RandomCutter:
+            case CipherType.randomCutter:
                 return "Random Cutter".localized()
-            case CipherType.DoubleCutter:
+            case CipherType.doubleCutter:
                 return "Double Cutter".localized()
             }
         }
     }
 
     static func getAll() -> [CipherType] {
-        return [.RightCutter, .LeftCutter, .Shuffle, .RandomCutter, .DoubleCutter]
+        return [.rightCutter, .leftCutter, .shuffle, .randomCutter, .doubleCutter]
     }
 }

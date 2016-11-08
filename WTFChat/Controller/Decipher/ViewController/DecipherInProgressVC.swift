@@ -21,10 +21,10 @@ class DecipherInProgressVC: UIViewController {
     @IBOutlet weak var topPaddingConstraint: NSLayoutConstraint!
     @IBOutlet weak var wordsViewHorizontalConstraint: NSLayoutConstraint!
 
-    private let GIVE_UP_TITLE_TEXT = "Stop deciphering?".localized()
-    private let GIVE_UP_BUTTON_TEXT = "Give Up".localized()
-    private let TRY_TEXT = "Try".localized()
-    private let GUESS_PLACEHOLDER_TEXT = "Enter your guess here".localized()
+    fileprivate let GIVE_UP_TITLE_TEXT = "Stop deciphering?".localized()
+    fileprivate let GIVE_UP_BUTTON_TEXT = "Give Up".localized()
+    fileprivate let TRY_TEXT = "Try".localized()
+    fileprivate let GUESS_PLACEHOLDER_TEXT = "Enter your guess here".localized()
 
     var message: Message!
 
@@ -36,18 +36,18 @@ class DecipherInProgressVC: UIViewController {
     var initialTopPaddingConstraintConstant: CGFloat = 0
 
     var parent: DecipherViewController {
-        return parentViewController as! DecipherViewController
+        return parent 
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.clearColor()
+        view.backgroundColor = UIColor.clear
 
         initialTopPaddingConstraintConstant = topPaddingConstraint.constant
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DecipherInProgressVC.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DecipherInProgressVC.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(DecipherInProgressVC.keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(DecipherInProgressVC.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
 
         let giveUpTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherInProgressVC.giveUpPressed))
         topTimerLabel.addGestureRecognizer(giveUpTap)
@@ -57,57 +57,57 @@ class DecipherInProgressVC: UIViewController {
         wordsTableView.hintComputer = self
         wordsTableView.delegate = wordsTableView
         wordsTableView.dataSource = wordsTableView
-        wordsTableView.backgroundColor = UIColor.clearColor()
+        wordsTableView.backgroundColor = UIColor.clear
 
         guessTextField.delegate = self
-        guessTextField.autocorrectionType = .No
+        guessTextField.autocorrectionType = .no
 
         layoutTopView()
 
-        tryButton.setTitle(TRY_TEXT, forState: .Normal)
+        tryButton.setTitle(TRY_TEXT, for: UIControlState())
 
-        let placeholder = NSAttributedString(string: GUESS_PLACEHOLDER_TEXT, attributes: [NSForegroundColorAttributeName : UIColor.lightGrayColor()])
+        let placeholder = NSAttributedString(string: GUESS_PLACEHOLDER_TEXT, attributes: [NSForegroundColorAttributeName : UIColor.lightGray])
         guessTextField.attributedPlaceholder = placeholder
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self);
+        NotificationCenter.default.removeObserver(self);
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         isPaused = false
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         isPaused = true
     }
 
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
 
         redrawWordsView(size)
         layoutTopView(size)
 
         wordsTableView.alpha = 0
-        UIView.animateWithDuration(0.6, delay: 0,
+        UIView.animate(withDuration: 0.6, delay: 0,
                 options: [], animations: {
             self.wordsTableView.alpha = 1
         }, completion: nil)
     }
 
-    func initView(messageToDecipher: Message) {
+    func initView(_ messageToDecipher: Message) {
         message = messageToDecipher
 
         updateHintsCount()
         setTimer()
     }
 
-    func giveUpPressed(sender: AnyObject) {
-        if (message.getMessageStatus() != .Ciphered) {
+    func giveUpPressed(_ sender: AnyObject) {
+        if (message.getMessageStatus() != .ciphered) {
             return
         }
 
@@ -116,7 +116,7 @@ class DecipherInProgressVC: UIViewController {
         }
     }
 
-    private func redrawWordsView(size: CGSize? = nil) {
+    fileprivate func redrawWordsView(_ size: CGSize? = nil) {
         let size = size ?? view.frame.size
 
         wordsTableView.updateMaxWidth(size.width - wordsViewHorizontalConstraint.constant * 2)
@@ -133,7 +133,7 @@ class DecipherInProgressVC: UIViewController {
         topTimerLabel.text = timer.getTimeString()
     }
 
-    func layoutTopView(size: CGSize? = nil) {
+    func layoutTopView(_ size: CGSize? = nil) {
         let size = size ?? view.frame.size
 
         if (size.width > size.height) {
@@ -149,7 +149,7 @@ class DecipherInProgressVC: UIViewController {
     }
 
     func start() {
-        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
+        Foundation.Timer.scheduledTimer(timeInterval: 1.0, target: self,
                 selector: #selector(DecipherInProgressVC.tick), userInfo: nil, repeats: false)
 
         wordsTableView.setNewMessage(message)
@@ -159,12 +159,12 @@ class DecipherInProgressVC: UIViewController {
     }
 
     func tick() {
-        if (message.getMessageStatus() != .Ciphered) {
+        if (message.getMessageStatus() != .ciphered) {
             return
         }
 
         if (isPaused) {
-            NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
+            Foundation.Timer.scheduledTimer(timeInterval: 1.0, target: self,
                     selector: #selector(DecipherInProgressVC.tick), userInfo: nil, repeats: false)
 
             return
@@ -175,18 +175,18 @@ class DecipherInProgressVC: UIViewController {
         topTimerLabel.text = timer.getTimeString()
 
         if (timer.isFinished()) {
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.gameOver()
             })
         } else {
-            NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
+            Foundation.Timer.scheduledTimer(timeInterval: 1.0, target: self,
                     selector: #selector(DecipherInProgressVC.tick), userInfo: nil, repeats: false)
 
             if (timer.isRunningOfTime()) {
-                topTimerLabel.textColor = UIColor.redColor()
+                topTimerLabel.textColor = UIColor.red
 
-                UIView.animateWithDuration(0.5, delay: 0,
-                        options: [.Autoreverse, .Repeat, .AllowUserInteraction], animations: {
+                UIView.animate(withDuration: 0.5, delay: 0,
+                        options: [.autoreverse, .repeat, .allowUserInteraction], animations: {
                     self.topTimerLabel.alpha = 0.1
                 }, completion: nil)
             }
@@ -199,7 +199,7 @@ class DecipherInProgressVC: UIViewController {
         //stop timer animation if any
         topTimerLabel.layer.removeAllAnimations()
         topTimerLabel.alpha = 1
-        topTimerLabel.textColor = UIColor.blackColor()
+        topTimerLabel.textColor = UIColor.black
 
         dismissKeyboard()
         parent.gameOver()

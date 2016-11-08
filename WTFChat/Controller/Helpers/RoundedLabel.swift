@@ -3,8 +3,8 @@ import UIKit
 class RoundedLabel: UILabel {
     var tagObject: AnyObject?
 
-    private var gradientLayer: CAGradientLayer?
-    private var newLabelView: RoundedLabel?
+    fileprivate var gradientLayer: CAGradientLayer?
+    fileprivate var newLabelView: RoundedLabel?
 
     override var text: String? {
         didSet {
@@ -27,10 +27,10 @@ class RoundedLabel: UILabel {
         newLabelView?.frame = self.bounds
     }
 
-    private func initStyle() {
+    fileprivate func initStyle() {
         layer.masksToBounds = false
         layer.shouldRasterize = true
-        layer.rasterizationScale = UIScreen.mainScreen().scale
+        layer.rasterizationScale = UIScreen.main.scale
     }
 
     func getWidth() -> CGFloat {
@@ -39,21 +39,21 @@ class RoundedLabel: UILabel {
     
     var edgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 7, right: 10)
     
-    override func textRectForBounds(bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
+    override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
         var rect = edgeInsets.apply(bounds)
-        rect = super.textRectForBounds(rect, limitedToNumberOfLines: numberOfLines)
+        rect = super.textRect(forBounds: rect, limitedToNumberOfLines: numberOfLines)
         return edgeInsets.inverse.apply(rect)
     }
     
-    override func drawTextInRect(rect: CGRect) {
-        super.drawTextInRect(edgeInsets.apply(rect))
+    override func drawText(in rect: CGRect) {
+        super.drawText(in: edgeInsets.apply(rect))
     }
     
-    func setMargins(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
+    func setMargins(_ top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
         edgeInsets = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
     }
 
-    func addGradientToLabel(gradient: [CGColor]) {
+    func addGradientToLabel(_ gradient: [CGColor]) {
         if let existsingGradient = gradientLayer {
             existsingGradient.colors = gradient
             return
@@ -61,7 +61,7 @@ class RoundedLabel: UILabel {
 
         let newLabel = RoundedLabel()
         newLabel.frame = self.frame
-        newLabel.frame.origin = CGPointZero
+        newLabel.frame.origin = CGPoint.zero
         newLabel.bounds = self.bounds
 
         newLabel.text = self.text
@@ -81,7 +81,7 @@ extension UIEdgeInsets {
     var inverse : UIEdgeInsets {
         return UIEdgeInsets(top: -top, left: -left, bottom: -bottom, right: -right)
     }
-    func apply(rect: CGRect) -> CGRect {
+    func apply(_ rect: CGRect) -> CGRect {
         return UIEdgeInsetsInsetRect(rect, self)
     }
 }

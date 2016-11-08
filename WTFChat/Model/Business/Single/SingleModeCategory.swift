@@ -8,19 +8,19 @@ class SingleModeCategory {
     var hasJustClearedOnNormal = false
     var hasJustClearedOnHard = false
 
-    private var coreSingleModeCategory: CoreSingleModeCategory!
+    fileprivate var coreSingleModeCategory: CoreSingleModeCategory!
 
     init(cipherType: CipherType, levels: [Level] = [Level]()) {
         self.cipherType = cipherType
         self.levels = levels
     }
 
-    func appendLevel(level: Level) {
+    func appendLevel(_ level: Level) {
         levels.append(level)
         coreSingleModeCategory.addLevelsObject(level.getCoreLevel())
     }
 
-    func setCoreSingleModeCategory(coreSingleModeCategory: CoreSingleModeCategory) {
+    func setCoreSingleModeCategory(_ coreSingleModeCategory: CoreSingleModeCategory) {
         self.coreSingleModeCategory = coreSingleModeCategory
     }
 
@@ -28,7 +28,7 @@ class SingleModeCategory {
         self.coreSingleModeCategory.updateFromSingleModeCategoryWithoutLevels(self)
     }
 
-    func getLevelById(id: Int) -> Level? {
+    func getLevelById(_ id: Int) -> Level? {
         if (id < 1 || id > levels.count) {
             return nil
         }
@@ -40,7 +40,7 @@ class SingleModeCategory {
         return levels[levels.count - 1]
     }
 
-    func getProgress(difficulty: CipherDifficulty) -> Float {
+    func getProgress(_ difficulty: CipherDifficulty) -> Float {
         var completedLevels = 0
 
         for level in levels {

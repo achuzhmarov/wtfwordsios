@@ -1,12 +1,12 @@
 import Foundation
 import SwiftyJSON
 
-class NetworkService: Service, NSURLSessionDelegate {
-    private var baseUrl: String
-    private var session: NSURLSession!
+class NetworkService: Service, URLSessionDelegate {
+    fileprivate var baseUrl: String
+    fileprivate var session: Foundation.URLSession!
 
-    private let REQUEST_REPEAT_COUNT = 3
-    private let REQUEST_TIMEOUT_SECONDS = NSTimeInterval(30)
+    fileprivate let REQUEST_REPEAT_COUNT = 3
+    fileprivate let REQUEST_TIMEOUT_SECONDS = TimeInterval(30)
     
     init(baseUrl: String) {
         self.baseUrl = baseUrl
@@ -15,43 +15,43 @@ class NetworkService: Service, NSURLSessionDelegate {
         clearSession()
     }
     
-    func updateSessionConfiguration(config: NSURLSessionConfiguration) {
-        session = NSURLSession(
+    func updateSessionConfiguration(_ config: URLSessionConfiguration) {
+        session = Foundation.URLSession(
             configuration: config,
             delegate: self,
             delegateQueue: nil)
     }
     
     func clearSession() {
-        session = NSURLSession(
+        session = Foundation.URLSession(
             configuration: getDefaultConfiguration(),
             delegate: self,
             delegateQueue: nil)
     }
     
-    func getDefaultConfiguration() -> NSURLSessionConfiguration {
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+    func getDefaultConfiguration() -> URLSessionConfiguration {
+        let config = URLSessionConfiguration.default
         config.timeoutIntervalForResource = REQUEST_TIMEOUT_SECONDS
         return config
     }
     
-    func URLSession(session: NSURLSession, task: NSURLSessionTask, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void) {
+    func URLSession(_ session: Foundation.URLSession, task: URLSessionTask, didReceiveChallenge challenge: URLAuthenticationChallenge, completionHandler: (Foundation.URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-            let credential = NSURLCredential(trust: challenge.protectionSpace.serverTrust!)
-            completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential, credential)
+            let credential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
+            completionHandler(Foundation.URLSession.AuthChallengeDisposition.useCredential, credential)
         }
     }
     
-    func post(postJSON: JSON?, relativeUrl: String, completion:(json: JSON?, error: NSError?) -> Void) {
-        let url = NSURL(string: baseUrl + relativeUrl)!
+    func post(_ postJSON: JSON?, relativeUrl: String, completion:(_ json: JSON?, _ error: NSError?) -> Void) {
+        let url = URL(string: baseUrl + relativeUrl)!
         
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "POST"
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "POST"
         
         if let sendJson = postJSON {
             do {
-                request.HTTPBody = try sendJson.rawData()
+                request.httpBody = try sendJson.rawData()
             }
             catch let error as NSError {
                 completion(json: nil, error: error)
@@ -64,7 +64,7 @@ class NetworkService: Service, NSURLSessionDelegate {
         sendPostRequestWithRepeats(request, repeats: REQUEST_REPEAT_COUNT, completion: completion)
     }
     
-    private func sendPostRequestWithRepeats(request: NSMutableURLRequest, repeats: Int, completion:(json: JSON?, error: NSError?) -> Void) {
+    fileprivate func sendPostRequestWithRepeats(_ request: NSMutableURLRequest, repeats: Int, completion:(_ json: JSON?, _ error: NSError?) -> Void) {
         
         sendPostRequest(request) { (json, error) -> Void in
             if error != nil && repeats > 0 {
@@ -76,17 +76,17 @@ class NetworkService: Service, NSURLSessionDelegate {
         }
     }
     
-    private func sendPostRequest(request: NSMutableURLRequest, completion:(json: JSON?, error: NSError?) -> Void) {
-        let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+    fileprivate func sendPostRequest(_ request: NSMutableURLRequest, completion:(_ json: JSON?, _ error: NSError?) -> Void) {
+        let task = session.dataTask(with: request, completionHandler: {data, response, error -> Void in
             
             if let responseError = error {
                 completion(json: nil, error: responseError)
-            } else if let httpResponse = response as? NSHTTPURLResponse {
+            } else if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode != 200 {
                     let statusError = NSError(code:httpResponse.statusCode, message: "HTTP status code has unexpected value.")
                     
                     completion(json: nil, error: statusError)
-                } else if data!.length > 0 {
+                } else if data!.count > 0 {
                     completion(json: JSON(data: data!), error: nil)
                 } else {
                     completion(json: nil, error: nil)
@@ -97,13 +97,13 @@ class NetworkService: Service, NSURLSessionDelegate {
         task.resume()
     }
     
-    func get(relativeUrl: String, completion:(json: JSON?, error: NSError?) -> Void) {
-        let url = NSURL(string: baseUrl + relativeUrl)!
+    func get(_ relativeUrl: String, completion:(_ json: JSON?, _ error: NSError?) -> Void) {
+        let url = URL(string: baseUrl + relativeUrl)!
         
         sendGetRequestWithRepeats(url, repeats: REQUEST_REPEAT_COUNT, completion: completion)
     }
     
-    private func sendGetRequestWithRepeats(url: NSURL, repeats: Int, completion:(json: JSON?, error: NSError?) -> Void) {
+    fileprivate func sendGetRequestWithRepeats(_ url: URL, repeats: Int, completion:(_ json: JSON?, _ error: NSError?) -> Void) {
         
         sendGetRequest(url) { (json, error) -> Void in
             if error != nil && repeats > 0 {
@@ -115,23 +115,23 @@ class NetworkService: Service, NSURLSessionDelegate {
         }
     }
     
-    private func sendGetRequest(url: NSURL, completion:(json: JSON?, error: NSError?) -> Void) {
-        let loadDataTask = session.dataTaskWithURL(url) { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+    fileprivate func sendGetRequest(_ url: URL, completion:(_ json: JSON?, _ error: NSError?) -> Void) {
+        let loadDataTask = session.dataTask(with: url, completionHandler: { (data: Data?, response: URLResponse?, error: NSError?) -> Void in
             
             if let responseError = error {
                 completion(json: nil, error: responseError)
-            } else if let httpResponse = response as? NSHTTPURLResponse {
+            } else if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode != 200 {
                     let statusError = NSError(code:httpResponse.statusCode, message : "HTTP status code has unexpected value.")
                     
                     completion(json: nil, error: statusError)
-                } else if data!.length > 0 {
+                } else if data!.count > 0 {
                     completion(json: JSON(data: data!), error: nil)
                 } else {
                     completion(json: nil, error: nil)
                 }
             }
-        }
+        } as! (Data?, URLResponse?, Error?) -> Void) 
         
         loadDataTask.resume()
     }

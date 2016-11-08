@@ -2,18 +2,18 @@ import Foundation
 import Localize_Swift
 
 enum TextDifficulty : Int {
-    case Easy = 0
-    case Normal
-    case Hard
+    case easy = 0
+    case normal
+    case hard
 
     var levelsCount : Int {
         get {
             switch self {
-            case .Easy:
+            case .easy:
                 return 6
-            case .Normal:
+            case .normal:
                 return 12
-            case .Hard:
+            case .hard:
                 return 6
             }
         }
@@ -22,12 +22,12 @@ enum TextDifficulty : Int {
     var firstLevelId: Int {
         get {
             switch self {
-            case .Easy:
+            case .easy:
                 return 1
-            case .Normal:
-                return 1 + TextDifficulty.Easy.levelsCount
-            case .Hard:
-                return 1 + TextDifficulty.Easy.levelsCount + TextDifficulty.Normal.levelsCount
+            case .normal:
+                return 1 + TextDifficulty.easy.levelsCount
+            case .hard:
+                return 1 + TextDifficulty.easy.levelsCount + TextDifficulty.normal.levelsCount
             }
         }
     }
@@ -39,34 +39,34 @@ enum TextDifficulty : Int {
     }
 
     static func getAll() -> [TextDifficulty] {
-        return [.Easy, .Normal, .Hard]
+        return [.easy, .normal, .hard]
     }
 }
 
 enum TextLength : Int {
-    case Short = 0
-    case Medium
-    case Long
+    case short = 0
+    case medium
+    case long
 
     static func getAll() -> [TextLength] {
-        return [.Short, .Medium, .Long]
+        return [.short, .medium, .long]
     }
 }
 
 enum TextLanguage : Int {
-    case En = 0
-    case Ru
+    case en = 0
+    case ru
 
     static func getAll() -> [TextLanguage] {
-        return [.En, .Ru]
+        return [.en, .ru]
     }
 
     var description : String {
         get {
             switch self {
-            case .En:
+            case .en:
                 return "en"
-            case .Ru:
+            case .ru:
                 return "ru"
             }
         }
@@ -75,9 +75,9 @@ enum TextLanguage : Int {
     var textPath : String {
         get {
             switch self {
-            case .En:
+            case .en:
                 return "/Texts/en/"
-            case .Ru:
+            case .ru:
                 return "/Texts/ru/"
             }
         }
@@ -102,20 +102,20 @@ enum TextLanguage : Int {
         return TextLanguage.getAll()[0]
     }
 
-    private static func getLanguageByString(langString: String) -> TextLanguage {
+    fileprivate static func getLanguageByString(_ langString: String) -> TextLanguage {
         if (langString == "ru") {
-            return .Ru
+            return .ru
         } else {
-            return .En
+            return .en
         }
     }
 
     var buttonTitle : String {
         get {
             switch self {
-            case .En:
+            case .en:
                 return "Language: English"
-            case .Ru:
+            case .ru:
                 return "Язык: Русский"
             }
         }
@@ -124,11 +124,11 @@ enum TextLanguage : Int {
 
 class TextCategory {
     var title: String = ""
-    private var texts = [String]()
-    private var currentMessage: String? = nil
-    private var usedIndexes = Set<Int>()
+    fileprivate var texts = [String]()
+    fileprivate var currentMessage: String? = nil
+    fileprivate var usedIndexes = Set<Int>()
 
-    func appendText(text: String) {
+    func appendText(_ text: String) {
         self.texts.append(text)
     }
 
@@ -158,18 +158,18 @@ class TextCategory {
         currentMessage = texts[textIndex]
     }
 
-    private func getRandomIndex() -> Int {
+    fileprivate func getRandomIndex() -> Int {
         return Int(arc4random_uniform(UInt32(texts.count)))
     }
 }
 
 class TextCategoryService: Service {
-    private let WIKI_TITLE_INDEX = 0
-    private let TITLE_INDEX = 1
+    fileprivate let WIKI_TITLE_INDEX = 0
+    fileprivate let TITLE_INDEX = 1
 
-    private var textsMap = [TextLanguage: [TextDifficulty: [TextLength: [TextCategory]]]]()
+    fileprivate var textsMap = [TextLanguage: [TextDifficulty: [TextLength: [TextCategory]]]]()
 
-    private let textLengths = TextLength.getAll()
+    fileprivate let textLengths = TextLength.getAll()
 
     override func initService() {
         for language in TextLanguage.getAll() {
@@ -177,7 +177,7 @@ class TextCategoryService: Service {
         }
     }
 
-    private func loadTextsForLanguage(language: TextLanguage) {
+    fileprivate func loadTextsForLanguage(_ language: TextLanguage) {
         textsMap[language] = [TextDifficulty: [TextLength: [TextCategory]]]()
 
         if let difficultyFolders = getFilesList(language.textPath) {
@@ -187,12 +187,12 @@ class TextCategoryService: Service {
         }
     }
 
-    private func getFilesList(folderName: String) -> [String]? {
-        let cipherFoldersPath = NSBundle.mainBundle().resourcePath! + folderName
-        let fileManager = NSFileManager.defaultManager()
+    fileprivate func getFilesList(_ folderName: String) -> [String]? {
+        let cipherFoldersPath = Bundle.main.resourcePath! + folderName
+        let fileManager = FileManager.default
 
         do {
-            let folders = try fileManager.contentsOfDirectoryAtPath(cipherFoldersPath)
+            let folders = try fileManager.contentsOfDirectory(atPath: cipherFoldersPath)
             return folders
         } catch {
             print(error)
@@ -200,7 +200,7 @@ class TextCategoryService: Service {
         }
     }
 
-    private func loadDifficultyTexts(basePath: String, difficultyFolder: String, language: TextLanguage) {
+    fileprivate func loadDifficultyTexts(_ basePath: String, difficultyFolder: String, language: TextLanguage) {
         let difficulty = getDifficultyFromFolderName(difficultyFolder)
         if (difficulty == nil) {
             return
@@ -217,8 +217,8 @@ class TextCategoryService: Service {
         }
     }
 
-    private func getDifficultyFromFolderName(difficultyFolder: String) -> TextDifficulty? {
-        let difficultyFolderString = difficultyFolder.componentsSeparatedByString("_")[0]
+    fileprivate func getDifficultyFromFolderName(_ difficultyFolder: String) -> TextDifficulty? {
+        let difficultyFolderString = difficultyFolder.components(separatedBy: "_")[0]
 
         let difficultyRaw = Int(difficultyFolderString)
         if (difficultyRaw == nil) {
@@ -235,11 +235,11 @@ class TextCategoryService: Service {
         return difficulty
     }
 
-    private func loadTextCategory(basePath: String, fileName: String, textDifficulty: TextDifficulty, language: TextLanguage) {
+    fileprivate func loadTextCategory(_ basePath: String, fileName: String, textDifficulty: TextDifficulty, language: TextLanguage) {
         let url = getFileUrl(basePath, fileName: fileName)
 
         if let loadedData = Url.open(url) {
-            let texts = loadedData.componentsSeparatedByString("\n")
+            let texts = loadedData.components(separatedBy: "\n")
             var index = 0
 
             var messages = [String]()
@@ -257,7 +257,7 @@ class TextCategoryService: Service {
                 index += 1
             }
 
-            messages = messages.sort({$0.characters.count < $1.characters.count})
+            messages = messages.sorted(by: {$0.characters.count < $1.characters.count})
 
             let step = messages.count / textLengths.count
 
@@ -289,12 +289,12 @@ class TextCategoryService: Service {
         }
     }
 
-    private func getFileUrl(basePath: String, fileName: String) -> NSURL {
-        let urlpath = NSBundle.mainBundle().pathForResource(basePath + fileName, ofType: "")
-        return NSURL.fileURLWithPath(urlpath!)
+    fileprivate func getFileUrl(_ basePath: String, fileName: String) -> URL {
+        let urlpath = Bundle.main.path(forResource: basePath + fileName, ofType: "")
+        return URL(fileURLWithPath: urlpath!)
     }
 
-    func getTextCategoryForLevel(level: Level) -> TextCategory? {
+    func getTextCategoryForLevel(_ level: Level) -> TextCategory? {
         let currentLanguage = TextLanguage.getCurrentLanguage()
 
         let textDifficulty = getTextDifficultyForLevel(level)
@@ -308,22 +308,22 @@ class TextCategoryService: Service {
         return texts[textIndex]
     }
 
-    private func getTextDifficultyForLevel(level: Level) -> TextDifficulty {
-        if (level.id < TextDifficulty.Normal.firstLevelId) {
-            return .Easy
-        } else if (level.id < TextDifficulty.Hard.firstLevelId) {
-            return .Normal
+    fileprivate func getTextDifficultyForLevel(_ level: Level) -> TextDifficulty {
+        if (level.id < TextDifficulty.normal.firstLevelId) {
+            return .easy
+        } else if (level.id < TextDifficulty.hard.firstLevelId) {
+            return .normal
         } else {
-            return .Hard
+            return .hard
         }
     }
 
-    private func getTextLengthForLevel(level: Level, textDifficulty: TextDifficulty) -> TextLength {
+    fileprivate func getTextLengthForLevel(_ level: Level, textDifficulty: TextDifficulty) -> TextLength {
         let levelCategory: Int = (level.id - textDifficulty.firstLevelId) / textDifficulty.levelsPerLength
         return TextLength(rawValue: levelCategory)!
     }
 
-    private func getTextIndexForLevel(level: Level, textDifficulty: TextDifficulty, textCount: Int) -> Int {
+    fileprivate func getTextIndexForLevel(_ level: Level, textDifficulty: TextDifficulty, textCount: Int) -> Int {
         let cipherTypeRaw = level.category.cipherType.rawValue
         return (level.id - textDifficulty.firstLevelId + cipherTypeRaw * textDifficulty.levelsCount) % textCount
     }

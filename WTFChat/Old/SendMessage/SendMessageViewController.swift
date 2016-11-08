@@ -9,15 +9,15 @@
 import UIKit
 
 class SendMessageViewController: UIViewController, CipherPickedComputer {
-    private let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
+    fileprivate let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
 
     @IBOutlet weak var messageWordsView: WordsViewController!
     
     @IBOutlet weak var cipherPicker: CipherPickerViewController!
     
     var text = ""
-    var cipherType = CipherType.RightCutter
-    var cipherDifficulty = CipherDifficulty.Normal
+    var cipherType = CipherType.rightCutter
+    var cipherDifficulty = CipherDifficulty.normal
     var message: Message!
     var isSingleMode = false
     
@@ -46,7 +46,7 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
         // Dispose of any resources that can be recreated.
     }
     
-    func cipherPicked(type: CipherType, difficulty: CipherDifficulty) {
+    func cipherPicked(_ type: CipherType, difficulty: CipherDifficulty) {
         self.cipherType = type
         self.cipherDifficulty = difficulty
         
@@ -55,7 +55,7 @@ class SendMessageViewController: UIViewController, CipherPickedComputer {
         messageWordsView.setNewMessage(message)
     }
     
-    func sendTapped(sender: AnyObject) {
-        performSegueWithIdentifier("sendMessage", sender: self)
+    func sendTapped(_ sender: AnyObject) {
+        performSegue(withIdentifier: "sendMessage", sender: self)
     }
 }

@@ -1,33 +1,33 @@
 import Foundation
 
-extension NSUserDefaults {
-    func getStringField(key: String) -> String {
-        return self.stringForKey(key)!
+extension UserDefaults {
+    func getStringField(_ key: String) -> String {
+        return self.string(forKey: key)!
     }
 
-    func getIntField(key: String) -> Int {
-        return self.integerForKey(key)
+    func getIntField(_ key: String) -> Int {
+        return self.integer(forKey: key)
     }
 
-    func getDateField(key: String) -> NSDate {
-        if let date = self.objectForKey(key) as? NSDate {
+    func getDateField(_ key: String) -> Date {
+        if let date = self.object(forKey: key) as? Date {
             return date
         } else {
-            return NSDate()
+            return Date()
         }
     }
 
-    func getBoolField(key: String) -> Bool {
-        return self.boolForKey(key)
+    func getBoolField(_ key: String) -> Bool {
+        return self.bool(forKey: key)
     }
 
-    func saveField(key: String, value: AnyObject) {
+    func saveField(_ key: String, value: AnyObject) {
         self.setValue(value, forKey: key)
         self.synchronize()
     }
 
-    func isFieldExists(key: String) -> Bool {
-        if (self.stringForKey(key) != nil) {
+    func isFieldExists(_ key: String) -> Bool {
+        if (self.string(forKey: key) != nil) {
             return true
         } else {
             return false

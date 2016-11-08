@@ -6,7 +6,7 @@ class Level {
     var clearedDifficulty: CipherDifficulty?
     var category: SingleModeCategory!
 
-    private var coreLevel: CoreLevel!
+    fileprivate var coreLevel: CoreLevel!
 
     init(id: Int, cleared: Bool = false, clearedDifficulty: CipherDifficulty? = nil) {
         self.id = id
@@ -22,19 +22,19 @@ class Level {
         return self.coreLevel
     }
 
-    func setCoreLevel(coreLevel: CoreLevel) {
+    func setCoreLevel(_ coreLevel: CoreLevel) {
         self.coreLevel = coreLevel
     }
 
-    func isClearedForDifficulty(difficulty: CipherDifficulty) -> Bool {
+    func isClearedForDifficulty(_ difficulty: CipherDifficulty) -> Bool {
         if (cleared) {
             switch difficulty {
-                case .Easy:
+                case .easy:
                     return true
-                case .Normal:
-                    return clearedDifficulty == .Normal || clearedDifficulty == .Hard
-                case .Hard:
-                    return clearedDifficulty == .Hard
+                case .normal:
+                    return clearedDifficulty == .normal || clearedDifficulty == .hard
+                case .hard:
+                    return clearedDifficulty == .hard
             }
         } else {
             return false

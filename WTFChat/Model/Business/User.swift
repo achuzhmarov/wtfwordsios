@@ -5,8 +5,8 @@ class User: NSObject {
     var hints: Int = 10
     var talks = [FriendTalk]()
 
-    var lastUpdate: NSDate = NSDate.defaultPast()
-    var lastLogin: NSDate = NSDate()
+    var lastUpdate: Date = Date.defaultPast()
+    var lastLogin: Date = Date()
     var exp: Int = 0
     var singleExp: Int = 0
     var newHints: Int = 0
@@ -29,7 +29,7 @@ class User: NSObject {
         self.hints = hints
     }
 
-    init(login: String, hints: Int, talks: [FriendTalk], lastUpdate: NSDate,
+    init(login: String, hints: Int, talks: [FriendTalk], lastUpdate: Date,
          exp: Int, singleExp: Int, newHints: Int, friends: [FriendInfo],
          name: String, pushNew: Bool, pushDeciphered: Bool, rating: Int, freeHintsGained: Int)
     {
@@ -51,7 +51,7 @@ class User: NSObject {
         self.adHintsGained = freeHintsGained
     }
 
-    func updateInfo(user: User) {
+    func updateInfo(_ user: User) {
         self.lastUpdate = user.lastUpdate
         self.hints = user.hints
         self.newHints = user.newHints
@@ -70,7 +70,7 @@ class User: NSObject {
         }
     }
 
-    private func updateFriendLvlInArray(friend: FriendInfo) {
+    fileprivate func updateFriendLvlInArray(_ friend: FriendInfo) {
         for i in 0..<friends.count {
             if (friend.login == friends[i].login) {
                 friends[i] = friend

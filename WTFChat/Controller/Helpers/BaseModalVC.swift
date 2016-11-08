@@ -4,7 +4,7 @@ class BaseModalVC: UIViewController {
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var backgroundViewWidthConstraint: NSLayoutConstraint!
 
-    private var gradientLayer: CAGradientLayer?
+    fileprivate var gradientLayer: CAGradientLayer?
 
     let transitionManager = FadeTransitionManager()
 
@@ -24,19 +24,19 @@ class BaseModalVC: UIViewController {
         updateBackgroundGradient()
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         presentingVC = presentingViewController
     }
 
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
 
         updateBackgroundGradient()
     }
 
-    private func updateBackgroundGradient() {
+    fileprivate func updateBackgroundGradient() {
         gradientLayer?.removeFromSuperlayer()
 
         let size = CGSize(
@@ -47,9 +47,9 @@ class BaseModalVC: UIViewController {
         gradientLayer = backgroundView.addDiagonalGradient(Gradient.Background, size: size)
     }
 
-    @IBAction func closeWindow(sender: AnyObject) {
+    @IBAction func closeWindow(_ sender: AnyObject) {
         modalWillClose()
-        presentingViewController?.dismissViewControllerAnimated(true, completion: modalClosed)
+        presentingViewController?.dismiss(animated: true, completion: modalClosed)
     }
 
     func modalWillClose() {

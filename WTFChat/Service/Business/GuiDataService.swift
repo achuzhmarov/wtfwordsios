@@ -2,15 +2,15 @@ import Foundation
 import Localize_Swift
 
 enum TutorialStage: Int {
-    case Never = 0, DecipherGuess, DecipherCloseTry, DecipherCloseTryHint, DecipherHint, DecipherRest, Finished, Skipped
+    case never = 0, decipherGuess, decipherCloseTry, decipherCloseTryHint, decipherHint, decipherRest, finished, skipped
 }
 
 enum AppRateStatus: Int {
-    case Never = 0, Enjoyed, Rated, NotEnjoyed, Feedback
+    case never = 0, enjoyed, rated, notEnjoyed, feedback
 }
 
 class GuiDataService: Service {
-    private struct KEY {
+    fileprivate struct KEY {
         static let LAST_SELECTED_DIFFICULTY = "USER_LAST_SELECTED_DIFFICULTY"
         static let LAST_SELECTED_CATEGORY = "USER_LAST_SELECTED_CATEGORY"
         static let TUTORIAL_STAGE = "USER_TUTORIAL_STAGE"
@@ -18,23 +18,23 @@ class GuiDataService: Service {
         static let USER_LANGUAGE = "USER_LANGUAGE"
     }
 
-    private let storage = NSUserDefaults.standardUserDefaults()
+    fileprivate let storage = UserDefaults.standard
 
     override func initService() {
         if (!storage.isFieldExists(KEY.LAST_SELECTED_DIFFICULTY)) {
-            updateLastSelectedDifficulty(.Normal)
+            updateLastSelectedDifficulty(.normal)
         }
 
         if (!storage.isFieldExists(KEY.LAST_SELECTED_CATEGORY)) {
-            updateLastSelectedCategoryType(.RightCutter)
+            updateLastSelectedCategoryType(.rightCutter)
         }
 
         if (!storage.isFieldExists(KEY.TUTORIAL_STAGE)) {
-            updateTutorialStage(.Never)
+            updateTutorialStage(.never)
         }
 
         if (!storage.isFieldExists(KEY.APPRATE_STATUS)) {
-            updateAppRateStatus(.Never)
+            updateAppRateStatus(.never)
         }
 
         if (!storage.isFieldExists(KEY.USER_LANGUAGE)) {
@@ -46,7 +46,7 @@ class GuiDataService: Service {
         return CipherDifficulty(rawValue: storage.getIntField(KEY.LAST_SELECTED_DIFFICULTY))!
     }
 
-    func updateLastSelectedDifficulty(cipherDifficulty: CipherDifficulty) {
+    func updateLastSelectedDifficulty(_ cipherDifficulty: CipherDifficulty) {
         storage.saveField(KEY.LAST_SELECTED_DIFFICULTY, value: cipherDifficulty.rawValue)
     }
 
@@ -54,7 +54,7 @@ class GuiDataService: Service {
         return CipherType(rawValue: storage.getIntField(KEY.LAST_SELECTED_CATEGORY))!
     }
 
-    func updateLastSelectedCategoryType(cipherType: CipherType) {
+    func updateLastSelectedCategoryType(_ cipherType: CipherType) {
         storage.saveField(KEY.LAST_SELECTED_CATEGORY, value: cipherType.rawValue)
     }
 
@@ -62,7 +62,7 @@ class GuiDataService: Service {
         return TutorialStage(rawValue: storage.getIntField(KEY.TUTORIAL_STAGE))!
     }
 
-    func updateTutorialStage(tutorialStage: TutorialStage) {
+    func updateTutorialStage(_ tutorialStage: TutorialStage) {
         storage.saveField(KEY.TUTORIAL_STAGE, value: tutorialStage.rawValue)
     }
 
@@ -70,7 +70,7 @@ class GuiDataService: Service {
         return AppRateStatus(rawValue: storage.getIntField(KEY.APPRATE_STATUS))!
     }
 
-    func updateAppRateStatus(appRateStatus: AppRateStatus) {
+    func updateAppRateStatus(_ appRateStatus: AppRateStatus) {
         storage.saveField(KEY.APPRATE_STATUS, value: appRateStatus.rawValue)
     }
 
@@ -78,7 +78,7 @@ class GuiDataService: Service {
         return storage.getStringField(KEY.USER_LANGUAGE)
     }
 
-    func updateUserLanguage(language: String) {
+    func updateUserLanguage(_ language: String) {
         storage.saveField(KEY.USER_LANGUAGE, value: language)
     }
 }

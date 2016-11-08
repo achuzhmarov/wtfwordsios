@@ -1,9 +1,9 @@
 import Foundation
 
 class NotificationService: Service {
-    private let windowService: WindowService
-    private let messageService: MessageService
-    private let talkService: TalkService
+    fileprivate let windowService: WindowService
+    fileprivate let messageService: MessageService
+    fileprivate let talkService: TalkService
 
     init(windowService: WindowService, messageService: MessageService, talkService: TalkService) {
         self.windowService = windowService
@@ -11,7 +11,7 @@ class NotificationService: Service {
         self.talkService = talkService
     }
 
-    func computeActiveNotification(userInfo: [NSObject : AnyObject]) {
+    func computeActiveNotification(_ userInfo: [AnyHashable: Any]) {
         talkService.getNewUnreadTalks()
 
         let currentController = windowService.getCurrentController()
@@ -24,13 +24,13 @@ class NotificationService: Service {
         {
             let notification = UILocalNotification()
             notification.alertBody = info["alert"] as? String
-            notification.fireDate = NSDate()
+            notification.fireDate = Date()
 
-            UIApplication.sharedApplication().scheduleLocalNotification(notification)
+            UIApplication.shared.scheduleLocalNotification(notification)
         }
     }
 
-    func computeInactiveNotification(userInfo: [NSObject : AnyObject]) {
+    func computeInactiveNotification(_ userInfo: [AnyHashable: Any]) {
         //TODO - realize later
         /*if let author = userInfo["author"] as? String
         {

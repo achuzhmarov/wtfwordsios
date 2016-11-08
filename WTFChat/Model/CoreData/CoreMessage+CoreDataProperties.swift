@@ -3,9 +3,9 @@ import CoreData
 
 extension CoreMessage {
 
-    @NSManaged var timestamp: NSDate?
+    @NSManaged var timestamp: Date?
     @NSManaged var talkId: String?
-    @NSManaged var lastUpdate: NSDate?
+    @NSManaged var lastUpdate: Date?
     @NSManaged var author: String?
     @NSManaged var deciphered: NSNumber?
     @NSManaged var cipherType: NSNumber?
@@ -19,8 +19,8 @@ extension CoreMessage {
     
     @NSManaged var words: NSOrderedSet?
 
-    @NSManaged func addWordsObject(word: CoreWord)
-    @NSManaged func removeWordsObject(word: CoreWord)
-    @NSManaged func addWords(words: NSOrderedSet)
-    @NSManaged func removeWords(words: NSOrderedSet)
+    @NSManaged func addWordsObject(_ word: CoreWord)
+    @NSManaged func removeWordsObject(_ word: CoreWord)
+    @NSManaged func addWords(_ words: NSOrderedSet)
+    @NSManaged func removeWords(_ words: NSOrderedSet)
 }

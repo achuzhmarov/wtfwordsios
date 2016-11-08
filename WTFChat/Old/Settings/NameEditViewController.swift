@@ -9,8 +9,8 @@
 import Foundation
 
 class NameEditViewController: UITableViewController, UITextFieldDelegate {
-    private let userService: UserService = serviceLocator.get(UserService)
-    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    fileprivate let userService: UserService = serviceLocator.get(UserService)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
 
     @IBOutlet weak var nameText: UITextField!
     
@@ -28,22 +28,22 @@ class NameEditViewController: UITableViewController, UITextFieldDelegate {
     
     func saveName() {
         userService.updateName(nameText.text!) { (error) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 if (error != nil) {
                     WTFOneButtonAlert.show("Error", message: "Can't update user info. \(WTFOneButtonAlert.CON_ERR)", firstButtonTitle: "Ok")
                 } else {
-                    self.navigationController?.popViewControllerAnimated(true)
+                    self.navigationController?.popViewController(animated: true)
                 }
             })
         }
     }
     
-    @IBAction func saveTapped(sender: AnyObject) {
+    @IBAction func saveTapped(_ sender: AnyObject) {
         saveName()
     }
     
     //text field delegate method
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         saveName()
         return true
     }

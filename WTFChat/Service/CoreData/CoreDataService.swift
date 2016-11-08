@@ -2,31 +2,31 @@ import Foundation
 import CoreData
 
 class CoreDataService: Service {
-    private static let projectName = "WTFChat"
+    fileprivate static let projectName = "WTFChat"
 
-    private lazy var applicationDocumentsDirectory: NSURL = {
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+    fileprivate lazy var applicationDocumentsDirectory: URL = {
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return urls[urls.count-1]
     }()
 
-    private lazy var managedObjectModel: NSManagedObjectModel = {
-        let modelURL = NSBundle.mainBundle().URLForResource(projectName, withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
+    fileprivate lazy var managedObjectModel: NSManagedObjectModel = {
+        let modelURL = Bundle.main.url(forResource: projectName, withExtension: "momd")!
+        return NSManagedObjectModel(contentsOf: modelURL)!
     }()
 
-    private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+    fileprivate lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("\(projectName).sqlite")
+        let url = self.applicationDocumentsDirectory.appendingPathComponent("\(projectName).sqlite")
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
             let migrationOptions = [NSMigratePersistentStoresAutomaticallyOption: true,
                                     NSInferMappingModelAutomaticallyOption: true]
 
-            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: migrationOptions)
+            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: migrationOptions)
         } catch {
             var dict = [String: AnyObject]()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-            dict[NSLocalizedFailureReasonErrorKey] = failureReason
+            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data" as AnyObject?
+            dict[NSLocalizedFailureReasonErrorKey] = failureReason as AnyObject?
 
             dict[NSUnderlyingErrorKey] = error as NSError
             let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
@@ -39,9 +39,9 @@ class CoreDataService: Service {
         return coordinator
     }()
 
-    private lazy var managedObjectContext: NSManagedObjectContext = {
+    fileprivate lazy var managedObjectContext: NSManagedObjectContext = {
         let coordinator = self.persistentStoreCoordinator
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()
@@ -62,17 +62,17 @@ class CoreDataService: Service {
         }
     }
 
-    func createObject(className: String) -> NSManagedObject {
-        return NSEntityDescription.insertNewObjectForEntityForName(className, inManagedObjectContext: managedObjectContext)
+    func createObject(_ className: String) -> NSManagedObject {
+        return NSEntityDescription.insertNewObject(forEntityName: className, into: managedObjectContext)
     }
 
-    func createFetch(className: String) -> NSFetchRequest {
+    func createFetch(_ className: String) -> NSFetchRequest<NSFetchRequestResult> {
         return  NSFetchRequest(entityName: className)
     }
 
-    func executeFetch(fetchRequest: NSFetchRequest) -> [NSManagedObject] {
+    func executeFetch(_ fetchRequest: NSFetchRequest<NSFetchRequestResult>) -> [NSManagedObject] {
         do {
-            let results = try managedObjectContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
+            let results = try managedObjectContext.fetch(fetchRequest) as! [NSManagedObject]
             return results
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
@@ -80,8 +80,8 @@ class CoreDataService: Service {
         }
     }
 
-    func deleteObject(item: NSManagedObject) {
-        managedObjectContext.deleteObject(item)
+    func deleteObject(_ item: NSManagedObject) {
+        managedObjectContext.delete(item)
         saveContext()
     }
 }

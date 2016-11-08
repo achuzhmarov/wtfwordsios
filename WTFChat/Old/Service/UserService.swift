@@ -1,17 +1,17 @@
 import Foundation
 
 class UserService: Service {
-    private let USER_UPDATE_TIMER_INTERVAL = 10.0
+    fileprivate let USER_UPDATE_TIMER_INTERVAL = 10.0
 
-    private let userNetworkService: UserNetworkService
-    private let iosService: IosService
-    private let talkService: TalkService
-    private let currentUserService: CurrentUserService
-    private let windowService: WindowService
+    fileprivate let userNetworkService: UserNetworkService
+    fileprivate let iosService: IosService
+    fileprivate let talkService: TalkService
+    fileprivate let currentUserService: CurrentUserService
+    fileprivate let windowService: WindowService
 
-    private var updateTimer: NSTimer?
+    fileprivate var updateTimer: Foundation.Timer?
     
-    private var freeAdHintsNotAdded = 0
+    fileprivate var freeAdHintsNotAdded = 0
 
     init(userNetworkService: UserNetworkService, iosService: IosService, talkService: TalkService, currentUserService: CurrentUserService, windowService: WindowService) {
         self.userNetworkService = userNetworkService
@@ -55,7 +55,7 @@ class UserService: Service {
         }
     }
     
-    func updateUserInfo(userInfo: User?) {
+    func updateUserInfo(_ userInfo: User?) {
         if (userInfo == nil) {
             return
         }
@@ -63,28 +63,28 @@ class UserService: Service {
         currentUserService.updateInfo(userInfo!)
     }
     
-    func getNewFriends(searchString: String, completion:(friends: [FriendInfo]?, error: NSError?) -> Void) {
+    func getNewFriends(_ searchString: String, completion:(_ friends: [FriendInfo]?, _ error: NSError?) -> Void) {
         userNetworkService.getNewFriends(searchString, completion: completion)
     }
     
-    func getTopRatings(completion:(friends: [FriendInfo]?, error: NSError?) -> Void) {
+    func getTopRatings(_ completion:(_ friends: [FriendInfo]?, _ error: NSError?) -> Void) {
         userNetworkService.getTopRatings(completion)
     }
     
-    func getFriendsRating(completion:(friends: [FriendInfo]?, error: NSError?) -> Void) {
+    func getFriendsRating(_ completion:(_ friends: [FriendInfo]?, _ error: NSError?) -> Void) {
         userNetworkService.getFriendsRating(completion)
     }
     
-    func makeFriends(friend: FriendInfo, completion:(talk: FriendTalk?, error: NSError?) -> Void) {
+    func makeFriends(_ friend: FriendInfo, completion:(_ talk: FriendTalk?, _ error: NSError?) -> Void) {
         currentUserService.addFriend(friend)
         userNetworkService.makeFriends(friend.login, completion: completion)
     }
     
-    func updatePassword(oldPassword: String, newPassword: String, completion:(error: NSError?) -> Void) {
+    func updatePassword(_ oldPassword: String, newPassword: String, completion:(_ error: NSError?) -> Void) {
         userNetworkService.updatePassword(oldPassword, newPassword: newPassword, completion: completion)
     }
     
-    func updateName(name: String, completion:(error: NSError?) -> Void) {
+    func updateName(_ name: String, completion:@escaping (_ error: NSError?) -> Void) {
         userNetworkService.updateName(name) { error in
             if (error == nil) {
                 self.currentUserService.updateName(name)
@@ -94,7 +94,7 @@ class UserService: Service {
         }
     }
     
-    func updatePushNew(pushNew: Bool, completion:(error: NSError?) -> Void) {
+    func updatePushNew(_ pushNew: Bool, completion:@escaping (_ error: NSError?) -> Void) {
         userNetworkService.updatePushNew(pushNew) { error in
             if (error == nil) {
                 self.currentUserService.updatePushNew(pushNew)
@@ -104,7 +104,7 @@ class UserService: Service {
         }
     }
     
-    func updatePushDeciphered(pushDeciphered: Bool, completion:(error: NSError?) -> Void) {
+    func updatePushDeciphered(_ pushDeciphered: Bool, completion:@escaping (_ error: NSError?) -> Void) {
         userNetworkService.updatePushDeciphered(pushDeciphered) { error in
             if (error == nil) {
                 self.currentUserService.updatePushDeciphered(pushDeciphered)
@@ -120,7 +120,7 @@ class UserService: Service {
         addFreeAdHintRequest()
     }
     
-    private func addFreeAdHintRequest() {
+    fileprivate func addFreeAdHintRequest() {
         userNetworkService.addFreeAdHint { (userInfo, error) -> Void in
             if let requestError = error {
                 self.freeAdHintsNotAdded += 1

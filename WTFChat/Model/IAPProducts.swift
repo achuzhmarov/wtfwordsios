@@ -3,18 +3,18 @@ import Foundation
 /// Product identifiers are unique strings registered on the app store.
 public typealias ProductIdentifier = String
 
-public class IAPProducts {
-    private static let PREFIX = NSBundle.mainBundle().objectForInfoDictionaryKey("BUNDLE_IDENTIFIER") as! String + "."
+open class IAPProducts {
+    fileprivate static let PREFIX = Bundle.main.object(forInfoDictionaryKey: "BUNDLE_IDENTIFIER") as! String + "."
     
-    public static let HINTS_X2 = "\(PREFIX)hintsX2"
-    public static let HINTS_1 = "\(PREFIX)hints1"
-    public static let HINTS_2 = "\(PREFIX)hints2"
-    public static let HINTS_3 = "\(PREFIX)hints3"
-    public static let HINTS_4 = "\(PREFIX)hints4"
-    public static let HINTS_5 = "\(PREFIX)hints5"
-    public static let HINTS_6 = "\(PREFIX)hints6"
+    open static let HINTS_X2 = "\(PREFIX)hintsX2"
+    open static let HINTS_1 = "\(PREFIX)hints1"
+    open static let HINTS_2 = "\(PREFIX)hints2"
+    open static let HINTS_3 = "\(PREFIX)hints3"
+    open static let HINTS_4 = "\(PREFIX)hints4"
+    open static let HINTS_5 = "\(PREFIX)hints5"
+    open static let HINTS_6 = "\(PREFIX)hints6"
 
-    public static let CONSUMABLE: Set<ProductIdentifier> = [
+    open static let CONSUMABLE: Set<ProductIdentifier> = [
         HINTS_1,
         HINTS_2,
         HINTS_3,
@@ -23,23 +23,23 @@ public class IAPProducts {
         HINTS_6
     ]
     
-    public static let OTHER: Set<ProductIdentifier> = [
+    open static let OTHER: Set<ProductIdentifier> = [
         HINTS_X2
     ]
     
-    public static let NON_CONSUMABLE: Set<ProductIdentifier> = OTHER
+    open static let NON_CONSUMABLE: Set<ProductIdentifier> = OTHER
     
-    public static let ALL: Set<ProductIdentifier> = NON_CONSUMABLE.union(CONSUMABLE)
+    open static let ALL: Set<ProductIdentifier> = NON_CONSUMABLE.union(CONSUMABLE)
 
-    public static func getProductRef(productIdentifier: String) -> String? {
-        return productIdentifier.componentsSeparatedByString(".").last
+    open static func getProductRef(_ productIdentifier: String) -> String? {
+        return productIdentifier.components(separatedBy: ".").last
     }
     
-    public static func isConsumable(productId: ProductIdentifier) -> Bool {
+    open static func isConsumable(_ productId: ProductIdentifier) -> Bool {
         return CONSUMABLE.contains(productId)
     }
     
-    public static func isNonConsumbale(productId: ProductIdentifier) -> Bool {
+    open static func isNonConsumbale(_ productId: ProductIdentifier) -> Bool {
         return NON_CONSUMABLE.contains(productId)
     }
 }

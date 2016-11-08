@@ -2,13 +2,13 @@ import Foundation
 import SwiftyJSON
 
 class IosNetworkService: Service {
-    private let networkService: NetworkService
+    fileprivate let networkService: NetworkService
 
     init(networkService: NetworkService) {
         self.networkService = networkService
     }
 
-    func updateDeviceToken(deviceToken: NSString?) {
+    func updateDeviceToken(_ deviceToken: NSString?) {
         var postJSON: JSON? = nil
 
         if deviceToken != nil {

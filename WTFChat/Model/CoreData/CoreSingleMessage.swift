@@ -3,16 +3,16 @@ import CoreData
 
 class CoreSingleMessage: NSManagedObject {
 
-    func updateFromMessageWithoutWords(message: SingleMessage) {
+    func updateFromMessageWithoutWords(_ message: SingleMessage) {
         self.timestamp = message.timestamp
         self.lastUpdate = message.lastUpdate
-        self.deciphered = message.deciphered
-        self.cipherType = message.cipherType.rawValue
-        self.cipherDifficulty = message.cipherDifficulty.rawValue
-        self.exp = message.exp
+        self.deciphered = message.deciphered as NSNumber?
+        self.cipherType = message.cipherType.rawValue as NSNumber?
+        self.cipherDifficulty = message.cipherDifficulty.rawValue as NSNumber?
+        self.exp = message.exp as NSNumber?
         self.extId = message.extId
-        self.timerSecs = message.timerSecs
-        self.hintsUsed = message.hintsUsed
+        self.timerSecs = message.timerSecs as NSNumber?
+        self.hintsUsed = message.hintsUsed as NSNumber?
     }
 
     func getSingleMessage() -> SingleMessage? {

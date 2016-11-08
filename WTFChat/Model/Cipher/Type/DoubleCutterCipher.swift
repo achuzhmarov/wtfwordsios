@@ -1,7 +1,7 @@
 import Foundation
 
 class DoubleCutterEasyCipher: Cipher {
-    func getTextForDecipher(word: Word) -> String {
+    func getTextForDecipher(_ word: Word) -> String {
         if (word.getCharCount() == 2) {
             return "...\(word.getLowerCase()[1])...\(word.additional)"
         }
@@ -14,7 +14,7 @@ class DoubleCutterEasyCipher: Cipher {
 }
 
 class DoubleCutterNormalCipher: Cipher {
-    func getTextForDecipher(word: Word) -> String {
+    func getTextForDecipher(_ word: Word) -> String {
         if (word.getCharCount() == 2) {
             return "...\(word.getLowerCase()[1])...\(word.additional)"
         }
@@ -39,7 +39,7 @@ class DoubleCutterNormalCipher: Cipher {
 }
 
 class DoubleCutterHardCipher: Cipher {
-    func getTextForDecipher(word: Word) -> String {
+    func getTextForDecipher(_ word: Word) -> String {
         if (word.getCharCount() == 2) {
             return "...\(word.getLowerCase()[1])...\(word.additional)"
         }
@@ -55,7 +55,7 @@ class DoubleCutterHardCipher: Cipher {
 }
 
 private class DoubleCutterHelper {
-    class func cutIfTooManyLetters(word: String, odd: Bool, maxChars: Int) -> String {
+    class func cutIfTooManyLetters(_ word: String, odd: Bool, maxChars: Int) -> String {
         if (word.characters.count <= maxChars) {
             return word
         } else if (word.characters.count - maxChars == 1) {
@@ -75,7 +75,7 @@ private class DoubleCutterHelper {
         }
     }
     
-    class func cutWord(word: String, odd: Bool) -> String {
+    class func cutWord(_ word: String, odd: Bool) -> String {
         if (word.characters.count == 1) {
             return word
         } else if (word.characters.count == 2) {

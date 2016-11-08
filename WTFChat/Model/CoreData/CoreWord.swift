@@ -2,12 +2,12 @@ import Foundation
 import CoreData
 
 class CoreWord: NSManagedObject {
-    func updateFromWord(word: Word) {
+    func updateFromWord(_ word: Word) {
         self.text = word.text
         self.additional = word.additional
-        self.wordType = word.type.rawValue
+        self.wordType = word.type.rawValue as NSNumber?
         self.cipheredText = word.cipheredText
-        self.wasCloseTry = word.wasCloseTry
+        self.wasCloseTry = word.wasCloseTry as NSNumber?
     }
     
     func getWord() -> Word? {

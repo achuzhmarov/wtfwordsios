@@ -1,22 +1,22 @@
 import Foundation
 
 class CoreSingleModeCategoryService: Service {
-    private let CORE_SINGLE_MODE_CATEGORY_CLASS_NAME = "CoreSingleModeCategory"
+    fileprivate let CORE_SINGLE_MODE_CATEGORY_CLASS_NAME = "CoreSingleModeCategory"
 
-    private let coreDataService: CoreDataService
+    fileprivate let coreDataService: CoreDataService
 
     init(coreDataService: CoreDataService) {
         self.coreDataService = coreDataService
     }
 
-    func createSingleModeCategory(category: SingleModeCategory) {
+    func createSingleModeCategory(_ category: SingleModeCategory) {
         let newCoreCategory = coreDataService.createObject(CORE_SINGLE_MODE_CATEGORY_CLASS_NAME) as! CoreSingleModeCategory
         category.setCoreSingleModeCategory(newCoreCategory)
         category.updateCoreSingleModeCategory()
         coreDataService.saveContext()
     }
 
-    func updateSingleModeCategory(category: SingleModeCategory) {
+    func updateSingleModeCategory(_ category: SingleModeCategory) {
         category.updateCoreSingleModeCategory()
         coreDataService.saveContext()
     }

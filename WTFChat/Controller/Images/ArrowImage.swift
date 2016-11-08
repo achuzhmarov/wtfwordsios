@@ -1,25 +1,25 @@
 import Foundation
 
 class TopArrowImage: ArrowImage {
-    override func getArrowPath(size: CGFloat) -> UIBezierPath {
+    override func getArrowPath(_ size: CGFloat) -> UIBezierPath {
         return UIBezierPath.topArrow(size)
     }
 }
 
 class BottomArrowImage: ArrowImage {
-    override func getArrowPath(size: CGFloat) -> UIBezierPath {
+    override func getArrowPath(_ size: CGFloat) -> UIBezierPath {
         return UIBezierPath.bottomArrow(size)
     }
 }
 
 class RightArrowImage: ArrowImage {
-    override func getArrowPath(size: CGFloat) -> UIBezierPath {
+    override func getArrowPath(_ size: CGFloat) -> UIBezierPath {
         return UIBezierPath.rightArrow(size)
     }
 }
 
 class LeftArrowImage: ArrowImage {
-    override func getArrowPath(size: CGFloat) -> UIBezierPath {
+    override func getArrowPath(_ size: CGFloat) -> UIBezierPath {
         return UIBezierPath.leftArrow(size)
     }
 }
@@ -31,13 +31,13 @@ class ArrowImage: UIImageView {
         image = createArrowImage(Gradient.Background, backgroundGradient: Gradient.Ciphered)
     }
 
-    private func createArrowImage(arrowGradient: [CGColor], backgroundGradient: [CGColor]) -> UIImage {
+    fileprivate func createArrowImage(_ arrowGradient: [CGColor], backgroundGradient: [CGColor]) -> UIImage {
         let size = bounds.width
 
         UIGraphicsBeginImageContextWithOptions(CGSize(width: size, height: size), false, 0.0)
         let context = UIGraphicsGetCurrentContext()
 
-        CGContextSaveGState(context)
+        context?.saveGState()
 
         addGradient(context!,
                 clipPath: getBackPath(size),
@@ -54,20 +54,20 @@ class ArrowImage: UIImageView {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
-        return image
+        return image!
     }
 
-    private func addGradient(context: CGContext, clipPath: UIBezierPath, size: CGFloat, colors: [CGColor]) {
+    fileprivate func addGradient(_ context: CGContext, clipPath: UIBezierPath, size: CGFloat, colors: [CGColor]) {
         clipPath.addClip()
-        let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), colors, nil)
-        CGContextDrawLinearGradient(context, gradient, CGPointMake(0, 0), CGPointMake(size, size), [])
+        let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: colors as CFArray, locations: nil)
+        context.drawLinearGradient(gradient!, start: CGPoint(x: 0, y: 0), end: CGPoint(x: size, y: size), options: [])
     }
 
-    func getBackPath(size: CGFloat) -> UIBezierPath {
+    func getBackPath(_ size: CGFloat) -> UIBezierPath {
         return UIBezierPath.roundedRect(size)
     }
 
-    func getArrowPath(size: CGFloat) -> UIBezierPath {
+    func getArrowPath(_ size: CGFloat) -> UIBezierPath {
         fatalError("This method must be overridden")
     }
 }

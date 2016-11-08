@@ -1,7 +1,7 @@
 import Foundation
 
 enum WordType: Int {
-    case New = 1, Success, Failed, Delimiter, Ignore, LineBreak, CloseTry
+    case new = 1, success, failed, delimiter, ignore, lineBreak, closeTry
 }
 
 class Word: NSObject {
@@ -10,7 +10,7 @@ class Word: NSObject {
     static let NOT_HIDED_SYMBOLS: [Character] = [".", ",", "!", "?", "(", ")", " ", "\n"]
 
     var text: String
-    var type = WordType.New
+    var type = WordType.new
     var additional = ""
     var cipheredText = ""
     var wasCloseTry = false
@@ -77,7 +77,7 @@ class Word: NSObject {
         return result
     }
 
-    func getHidedChar(char: Character) -> String {
+    func getHidedChar(_ char: Character) -> String {
         if (Word.NOT_HIDED_SYMBOLS.contains(char)) {
             return String(char)
         } else {
@@ -85,13 +85,13 @@ class Word: NSObject {
         }
     }
 
-    private func hasText() -> Bool {
+    fileprivate func hasText() -> Bool {
         switch type {
-        case .Delimiter:
+        case .delimiter:
             return false
-        case .LineBreak:
+        case .lineBreak:
             return false
-        case .Ignore:
+        case .ignore:
             if (getCharCount() > 0) {
                 return true
             } else {
@@ -103,7 +103,7 @@ class Word: NSObject {
     }
 
     func hasCipheredText() -> Bool {
-        return hasText() && type != .Ignore
+        return hasText() && type != .ignore
     }
 
     func getCipheredText() -> String {
@@ -111,7 +111,7 @@ class Word: NSObject {
     }
 
     func getTextForDecipher() -> String {
-        if (self.type == WordType.New) {
+        if (self.type == WordType.new) {
             return cipheredText
         } else {
             return text + additional
@@ -123,26 +123,26 @@ class Word: NSObject {
     }
 
     func getCapitalized() -> String {
-        return text.capitalizedString
+        return text.capitalized
     }
 
     func getUpperCase() -> String {
-        return text.uppercaseString
+        return text.uppercased()
     }
 
     func getLowerCase() -> String {
-        return text.lowercaseString
+        return text.lowercased()
     }
 
     class func delimiterWord() -> Word {
-        return Word(text: "", additional: " ", type: WordType.Delimiter)
+        return Word(text: "", additional: " ", type: WordType.delimiter)
     }
 
     class func lineBreakWord() -> Word {
-        return Word(text: "", additional: "\n", type: WordType.LineBreak)
+        return Word(text: "", additional: "\n", type: WordType.lineBreak)
     }
 
-    func checkEquals(word: Word) -> Bool {
+    func checkEquals(_ word: Word) -> Bool {
         if (self.type != word.type ||
                 self.cipheredText != word.cipheredText ||
                 self.text != word.text ||

@@ -3,20 +3,20 @@ import CoreData
 
 class CoreMessage: NSManagedObject {
     
-    func updateFromMessageWithoutWords(message: RemoteMessage) {
+    func updateFromMessageWithoutWords(_ message: RemoteMessage) {
         self.id = message.id
         self.timestamp = message.timestamp
         self.lastUpdate = message.lastUpdate
         self.talkId = message.talkId
         self.author = message.author
-        self.deciphered = message.deciphered
-        self.cipherType = message.cipherType.rawValue
-        self.cipherDifficulty = message.cipherDifficulty.rawValue
-        self.exp = message.exp
-        self.isLocal = message.isLocal
+        self.deciphered = message.deciphered as NSNumber?
+        self.cipherType = message.cipherType.rawValue as NSNumber?
+        self.cipherDifficulty = message.cipherDifficulty.rawValue as NSNumber?
+        self.exp = message.exp as NSNumber?
+        self.isLocal = message.isLocal as NSNumber?
         self.extId = message.extId
-        self.timerSecs = message.timerSecs
-        self.hintsUsed = message.hintsUsed
+        self.timerSecs = message.timerSecs as NSNumber?
+        self.hintsUsed = message.hintsUsed as NSNumber?
     }
     
     func getMessage() -> RemoteMessage? {

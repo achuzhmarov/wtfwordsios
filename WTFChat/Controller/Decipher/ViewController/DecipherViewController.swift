@@ -21,23 +21,23 @@ class DecipherViewController: BaseUIViewController {
         view.setNeedsLayout()
         view.layoutIfNeeded()
 
-        resultContainer.hidden = true
+        resultContainer.isHidden = true
 
         inProgressVC.initView(message)
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let vc = segue.destinationViewController as? DecipherInProgressVC {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? DecipherInProgressVC {
             inProgressVC = vc
-        } else if let vc = segue.destinationViewController as? DecipherResultVC {
+        } else if let vc = segue.destination as? DecipherResultVC {
             resultVC = vc
         }
     }
 
     func start() {
-        inProgressContainer.hidden = false
-        resultContainer.hidden = true
-        view.bringSubviewToFront(inProgressContainer)
+        inProgressContainer.isHidden = false
+        resultContainer.isHidden = true
+        view.bringSubview(toFront: inProgressContainer)
 
         inProgressVC.initView(message)
         inProgressVC.start()
@@ -46,16 +46,16 @@ class DecipherViewController: BaseUIViewController {
 
         inProgressContainer.alpha = 0
 
-        UIView.animateWithDuration(0.5, delay: 0,
+        UIView.animate(withDuration: 0.5, delay: 0,
                 options: [], animations: {
             self.inProgressContainer.alpha = 1
         }, completion: nil)
     }
 
     func gameOver() {
-        inProgressContainer.hidden = true
-        resultContainer.hidden = false
-        view.bringSubviewToFront(resultContainer)
+        inProgressContainer.isHidden = true
+        resultContainer.isHidden = false
+        view.bringSubview(toFront: resultContainer)
 
         message = inProgressVC.message
         messageCipherService.failed(message)
@@ -66,7 +66,7 @@ class DecipherViewController: BaseUIViewController {
 
         resultContainer.alpha = 0
 
-        UIView.animateWithDuration(0.5, delay: 0,
+        UIView.animate(withDuration: 0.5, delay: 0,
                 options: [], animations: {
             self.resultContainer.alpha = 1
         }, completion: nil)

@@ -6,7 +6,7 @@ class CurrentUserService: Service {
 
     let DAILY_MAX_AD_HINTS = 10
 
-    private struct KEY {
+    fileprivate struct KEY {
         static let LOGIN = "USER_LOGIN"
         static let HINTS = "USER_HINTS"
         static let LAST_UPDATE = "USER_LAST_UPDATE"
@@ -22,7 +22,7 @@ class CurrentUserService: Service {
 
     var user: User!
 
-    private let storage = NSUserDefaults.standardUserDefaults()
+    fileprivate let storage = UserDefaults.standard
 
     init(iosService: IosService, expService: ExpService) {
         self.iosService = iosService
@@ -37,7 +37,7 @@ class CurrentUserService: Service {
         }
     }
 
-    private func updateUserFromLocalStorage() {
+    fileprivate func updateUserFromLocalStorage() {
         user = User(
             login: storage.getStringField(KEY.LOGIN),
             hints: storage.getIntField(KEY.HINTS)
@@ -54,9 +54,9 @@ class CurrentUserService: Service {
         user.lastLogin = storage.getDateField(KEY.LAST_LOGIN)
     }
 
-    private func createUserInLocalStorage() {
-        let login = NSUUID().UUIDString
-        let password = NSUUID().UUIDString
+    fileprivate func createUserInLocalStorage() {
+        let login = UUID().uuidString
+        let password = UUID().uuidString
 
         iosService.updateUserCredentials(login, password: password)
 

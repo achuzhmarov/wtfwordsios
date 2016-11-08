@@ -2,15 +2,15 @@ import Foundation
 import SwiftyJSON
 
 class TalkNetworkService: Service {
-    private let networkService: NetworkService
+    fileprivate let networkService: NetworkService
 
     init(networkService: NetworkService) {
         self.networkService = networkService
     }
 
-    func getNewUnreadTalks(lastUpdate: NSDate, completion: (talks: [FriendTalk]?, error: NSError?) -> Void) {
+    func getNewUnreadTalks(_ lastUpdate: Date, completion: @escaping (_ talks: [FriendTalk]?, _ error: NSError?) -> Void) {
         let lastUpdateData = [
-                "last_update": NSDate.parseStringJSONFromDate(lastUpdate)!
+                "last_update": Date.parseStringJSONFromDate(lastUpdate)!
         ]
 
         let postJSON = JSON(lastUpdateData)

@@ -1,28 +1,28 @@
 import Foundation
 
 class MessageCipherService: Service {
-    private let WORD_SPECIAL_SYMBOLS = ["'"]//, "-"]
+    fileprivate let WORD_SPECIAL_SYMBOLS = ["'"]//, "-"]
 
     //дефис и длинное тире
-    private let ADDITIONAL_EXCEPTIONS = ["-","—","/","«","»", "(", ")", "\""]
+    fileprivate let ADDITIONAL_EXCEPTIONS = ["-","—","/","«","»", "(", ")", "\""]
 
-    private let DELIMITERS = NSCharacterSet(charactersInString: "  ")
+    fileprivate let DELIMITERS = CharacterSet(charactersIn: "  ")
 
-    private let ROMAN_LETTERS = ["X","V","I"]
+    fileprivate let ROMAN_LETTERS = ["X","V","I"]
 
-    private let currentUserService: CurrentUserService
-    private let cipherService: CipherService
+    fileprivate let currentUserService: CurrentUserService
+    fileprivate let cipherService: CipherService
 
     init(currentUserService: CurrentUserService, cipherService: CipherService) {
         self.currentUserService = currentUserService
         self.cipherService = cipherService
     }
 
-    func getCompareString(string: String) -> String {
-        return string.uppercaseString.removeChars(WORD_SPECIAL_SYMBOLS).replace("Ё", with: "Е")
+    func getCompareString(_ string: String) -> String {
+        return string.uppercased().removeChars(WORD_SPECIAL_SYMBOLS).replace("Ё", with: "Е")
     }
     
-    func decipher(message: Message, guessText: String) {
+    func decipher(_ message: Message, guessText: String) {
         let guessWords = guessText.characters.split {$0 == " "}.map { String($0) }
         
         let words = message.words
@@ -32,8 +32,8 @@ class MessageCipherService: Service {
             
             for guess in guesses {
                 for word in words! {
-                    if (word.type == WordType.New && getCompareString(word.text) == guess) {
-                        word.type = WordType.Success
+                    if (word.type == WordType.new && getCompareString(word.text) == guess) {
+                        word.type = WordType.success
                     }
                 }
             }
@@ -42,7 +42,7 @@ class MessageCipherService: Service {
         checkDeciphered(message)
     }
     
-    func wasCloseTry(word: Word, guessWords: [String]?) -> Bool {
+    func wasCloseTry(_ word: Word, guessWords: [String]?) -> Bool {
         if (guessWords == nil) {
             return false
         }
@@ -62,7 +62,7 @@ class MessageCipherService: Service {
         return false
     }
 
-    private func getCloseDistanceForWord(word: Word) -> Int {
+    fileprivate func getCloseDistanceForWord(_ word: Word) -> Int {
         let charactersCount = word.text.characters.count
 
         if (charactersCount < 4) {
@@ -76,7 +76,7 @@ class MessageCipherService: Service {
         }
     }
     
-    func parseGuessForCompare(guessWord: String) -> [String] {
+    func parseGuessForCompare(_ guessWord: String) -> [String] {
         var result = [String]()
         var newWordText = ""
         var isLastLetter = true
@@ -113,30 +113,30 @@ class MessageCipherService: Service {
         return result
     }
     
-    func decipher(message: Message, hintedWord: Word, closeTry: Bool = false) {
+    func decipher(_ message: Message, hintedWord: Word, closeTry: Bool = false) {
         if (closeTry) {
-            hintedWord.type = WordType.CloseTry
+            hintedWord.type = WordType.closeTry
         } else {
-            hintedWord.type = WordType.Success
+            hintedWord.type = WordType.success
         }
         
         checkDeciphered(message)
     }
     
-    private func checkDeciphered(message: Message) {
+    fileprivate func checkDeciphered(_ message: Message) {
         if (message.countNew() == 0) {
             message.deciphered = true
-            message.lastUpdate = NSDate()
+            message.lastUpdate = Date()
         }
     }
     
-    func failed(message: Message) {
+    func failed(_ message: Message) {
         for word in message.words! {
-            if (word.type == WordType.New) {
+            if (word.type == WordType.new) {
                 if (word.wasCloseTry) {
-                    word.type = WordType.CloseTry
+                    word.type = WordType.closeTry
                 } else {
-                    word.type = WordType.Failed
+                    word.type = WordType.failed
                 }
             }
         }
@@ -144,12 +144,12 @@ class MessageCipherService: Service {
         message.deciphered = true
     }
     
-    func createMessage(talk: FriendTalk, text: String, cipherType: CipherType, cipherDifficulty: CipherDifficulty) -> RemoteMessage {
+    func createMessage(_ talk: FriendTalk, text: String, cipherType: CipherType, cipherDifficulty: CipherDifficulty) -> RemoteMessage {
         let generatedMessage = createMessage(text, cipherType: cipherType, cipherDifficulty: cipherDifficulty)
         return addNewMessageToTalk(generatedMessage, talk: talk)
     }
     
-    func addNewMessageToTalk(generatedMessage: Message, talk: FriendTalk) -> RemoteMessage {
+    func addNewMessageToTalk(_ generatedMessage: Message, talk: FriendTalk) -> RemoteMessage {
         var author: String
         
         if (talk.isSingleMode) {
@@ -172,7 +172,7 @@ class MessageCipherService: Service {
         return newMessage
     }
 
-    func createMessage(text: String, cipherType: CipherType, cipherDifficulty: CipherDifficulty) -> Message {
+    func createMessage(_ text: String, cipherType: CipherType, cipherDifficulty: CipherDifficulty) -> Message {
         var preparedText = text.replace("\r", with: "\n")
         preparedText = preparedText.replace("\n\n", with: "\n")
 
@@ -189,7 +189,7 @@ class MessageCipherService: Service {
                 words.append(Word.lineBreakWord())
             }
 
-            let textWords = curString.componentsSeparatedByCharactersInSet(DELIMITERS)
+            let textWords = curString.components(separatedBy: DELIMITERS)
             
             var firstWord = true
             
@@ -200,12 +200,12 @@ class MessageCipherService: Service {
                     words.append(Word.delimiterWord())
                 }
                 
-                words.appendContentsOf(createWords(textWord))
+                words.append(contentsOf: createWords(textWord))
             }
         }
         
         let newMessage = Message(
-            extId: NSUUID().UUIDString,
+            extId: UUID().uuidString,
             cipherType: cipherType,
             cipherDifficulty: cipherDifficulty,
             words: words
@@ -217,7 +217,7 @@ class MessageCipherService: Service {
         return newMessage
     }
     
-    private func createWords(textWord: String) -> [Word] {
+    fileprivate func createWords(_ textWord: String) -> [Word] {
         var words = [Word]()
         
         var newWordText = ""
@@ -263,17 +263,17 @@ class MessageCipherService: Service {
         return words
     }
     
-    private func getWordType(newWordText: String) -> WordType {
+    fileprivate func getWordType(_ newWordText: String) -> WordType {
         if (countLettersOnly(newWordText) <= 1) {
-            return WordType.Ignore
+            return WordType.ignore
         } else if isRomanDate(newWordText) {
-            return WordType.Ignore
+            return WordType.ignore
         } else {
-            return WordType.New
+            return WordType.new
         }
     }
 
-    private func isRomanDate(text: String) -> Bool {
+    fileprivate func isRomanDate(_ text: String) -> Bool {
         for char in text.characters {
             if ROMAN_LETTERS.contains(String(char)) {
                 continue
@@ -285,8 +285,8 @@ class MessageCipherService: Service {
         return true
     }
     
-    private let letters = NSCharacterSet.letterCharacterSet()
-    private func isLetter(unicodeChar: UnicodeScalar) -> Bool {
+    fileprivate let letters = CharacterSet.letters
+    fileprivate func isLetter(_ unicodeChar: UnicodeScalar) -> Bool {
         if isLetterOnly(unicodeChar) {
             return true
         } else {
@@ -300,15 +300,15 @@ class MessageCipherService: Service {
         return false
     }
     
-    private func isLetterOnly(unicodeChar: UnicodeScalar) -> Bool {
-        if letters.longCharacterIsMember(unicodeChar.value) {
+    fileprivate func isLetterOnly(_ unicodeChar: UnicodeScalar) -> Bool {
+        if letters.contains(UnicodeScalar(unicodeChar.value)!) {
             return true
         }
         
         return false
     }
     
-    private func countLettersOnly(string: String) -> Int {
+    fileprivate func countLettersOnly(_ string: String) -> Int {
         var result = 0
         
         for char in string.unicodeScalars {
@@ -320,11 +320,11 @@ class MessageCipherService: Service {
         return result
     }
 
-    private let SECONDS_PER_WORD = 20
-    private let HARD_SECONDS_PER_WORD = 30
+    fileprivate let SECONDS_PER_WORD = 20
+    fileprivate let HARD_SECONDS_PER_WORD = 30
 
-    func getTimerSeconds(message: Message) -> Int {
-        if (message.cipherDifficulty == .Hard) {
+    func getTimerSeconds(_ message: Message) -> Int {
+        if (message.cipherDifficulty == .hard) {
             return message.countNew() * HARD_SECONDS_PER_WORD
         } else {
             return message.countNew() * SECONDS_PER_WORD

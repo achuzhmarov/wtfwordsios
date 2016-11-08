@@ -9,12 +9,12 @@
 import Foundation
 
 class BaseLoginViewController: UIViewController {
-    private let authService: AuthService = serviceLocator.get(AuthService)
-    private let windowService: WindowService = serviceLocator.get(WindowService)
+    fileprivate let authService: AuthService = serviceLocator.get(AuthService)
+    fileprivate let windowService: WindowService = serviceLocator.get(WindowService)
 
-    func login(login: String, password: String) {
+    func login(_ login: String, password: String) {
         authService.login(login, password: password) { user, error -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 if let requestError = error {
                     if (requestError.code == HTTP_UNAUTHORIZED) {
                         WTFOneButtonAlert.show("Error", message: "Invalid credentials", firstButtonTitle: "Ok")

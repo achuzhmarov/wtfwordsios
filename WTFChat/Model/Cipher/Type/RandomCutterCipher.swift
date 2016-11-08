@@ -1,7 +1,7 @@
 import Foundation
 
 class RandomCutterEasyCipher: Cipher {
-    func getTextForDecipher(word: Word) -> String {
+    func getTextForDecipher(_ word: Word) -> String {
         let charsLeft = word.getCharCount() / 2 + word.getCharCount() % 2
         
         let ciphered = RandomCutterHelper.CutRandomLetters(word.text, charsLeft: charsLeft)
@@ -10,7 +10,7 @@ class RandomCutterEasyCipher: Cipher {
 }
 
 class RandomCutterNormalCipher: Cipher {
-    func getTextForDecipher(word: Word) -> String {
+    func getTextForDecipher(_ word: Word) -> String {
         var charsLeft = word.getCharCount() / 2
         
         if (word.getCharCount() > 5) {
@@ -23,7 +23,7 @@ class RandomCutterNormalCipher: Cipher {
 }
 
 class RandomCutterHardCipher: Cipher {
-    func getTextForDecipher(word: Word) -> String {
+    func getTextForDecipher(_ word: Word) -> String {
         var charsLeft = word.getCharCount() / 2
         
         if (word.getCharCount() > 5) {
@@ -37,7 +37,7 @@ class RandomCutterHardCipher: Cipher {
 
 
 private class RandomCutterHelper {
-    class func CutRandomLetter(word: String) -> String {
+    class func CutRandomLetter(_ word: String) -> String {
         let randomIndex = Int(arc4random_uniform(UInt32(word.characters.count)))
         
         if (word[randomIndex] != ".") {
@@ -58,7 +58,7 @@ private class RandomCutterHelper {
         }
     }
     
-    class func parseResultWord(word: String) -> String {
+    class func parseResultWord(_ word: String) -> String {
         var newWord = ""
         var isLastCharDot = false
         
@@ -80,7 +80,7 @@ private class RandomCutterHelper {
         return newWord
     }
     
-    class func CutRandomLetters(word: String, charsLeft: Int) -> String {
+    class func CutRandomLetters(_ word: String, charsLeft: Int) -> String {
         var result = word
         
         let charsToCut = word.characters.count - charsLeft

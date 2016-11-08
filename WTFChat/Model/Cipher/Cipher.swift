@@ -1,3 +1,3 @@
 protocol Cipher {
-    func getTextForDecipher(word: Word) -> String
+    func getTextForDecipher(_ word: Word) -> String
 }

@@ -1,7 +1,7 @@
 import Foundation
 
 protocol LevelSelectedComputer {
-    func levelSelected(level: Level)
+    func levelSelected(_ level: Level)
 }
 
 class LvlCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate { //UICollectionViewDelegateFlowLayout {
@@ -11,33 +11,33 @@ class LvlCollectionView: UICollectionView, UICollectionViewDataSource, UICollect
 
     var levelSelectedComputer: LevelSelectedComputer?
 
-    func updateCategory(category: SingleModeCategory) {
-        self.backgroundColor = UIColor.clearColor()
+    func updateCategory(_ category: SingleModeCategory) {
+        self.backgroundColor = UIColor.clear
 
         self.category = category
         reloadData()
     }
 
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return category.levels.count
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("LvlCell", forIndexPath: indexPath) as! LvlCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LvlCell", for: indexPath) as! LvlCell
 
         cell.updateLevel(category.levels[indexPath.item])
         return cell
     }
 
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         levelSelectedComputer?.levelSelected(category.levels[indexPath.item])
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         let cellWidth = getCellWidth()
         return CGSize(width: cellWidth, height: cellWidth)
     }
@@ -64,7 +64,7 @@ class LvlCollectionView: UICollectionView, UICollectionViewDataSource, UICollect
         }
     }
 
-    func getCellWidth(cellsPerRow: Int) -> CGFloat {
+    func getCellWidth(_ cellsPerRow: Int) -> CGFloat {
         return CGFloat((bounds.width - CGFloat(cellsPerRow - 1) * LVL_CELL_SPACING) / CGFloat(cellsPerRow))
     }
 }

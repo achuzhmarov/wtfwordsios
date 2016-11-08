@@ -9,23 +9,23 @@
 import UIKit
 
 protocol CipherPickedComputer {
-    func cipherPicked(type: CipherType, difficulty: CipherDifficulty)
+    func cipherPicked(_ type: CipherType, difficulty: CipherDifficulty)
 }
 
 class CipherPickerViewController: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
-    private let cipherTypes = CipherType.getAll()
-    private let cipherDifficulties = CipherDifficulty.getAll()
+    fileprivate let cipherTypes = CipherType.getAll()
+    fileprivate let cipherDifficulties = CipherDifficulty.getAll()
 
-    private var cipherType = CipherType.RightCutter
-    private var cipherDifficulty = CipherDifficulty.Normal
+    fileprivate var cipherType = CipherType.rightCutter
+    fileprivate var cipherDifficulty = CipherDifficulty.normal
 
     var cipherPickedComputer: CipherPickedComputer?
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if (component == 0) {
             return cipherTypes.count
         } else {
@@ -33,7 +33,7 @@ class CipherPickerViewController: UIPickerView, UIPickerViewDataSource, UIPicker
         }
     }
     
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         
         var titleData = ""
         
@@ -46,20 +46,20 @@ class CipherPickerViewController: UIPickerView, UIPickerViewDataSource, UIPicker
         let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont.init(name: "Verdana", size: 18.0)!])
         
         let pickerLabel = UILabel()
-        pickerLabel.textAlignment = NSTextAlignment.Center
+        pickerLabel.textAlignment = NSTextAlignment.center
         pickerLabel.attributedText = myTitle
         
         return pickerLabel
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let type = cipherTypes[self.selectedRowInComponent(0)]
-        let difficulty = cipherDifficulties[self.selectedRowInComponent(1)]
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let type = cipherTypes[self.selectedRow(inComponent: 0)]
+        let difficulty = cipherDifficulties[self.selectedRow(inComponent: 1)]
 
         cipherPickedComputer?.cipherPicked(type, difficulty: difficulty)
     }
     
-    func updateCipher(type: CipherType, difficulty: CipherDifficulty) {
+    func updateCipher(_ type: CipherType, difficulty: CipherDifficulty) {
         self.cipherType = type
         self.cipherDifficulty = difficulty
         

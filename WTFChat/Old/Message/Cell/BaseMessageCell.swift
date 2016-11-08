@@ -1,25 +1,25 @@
 import Foundation
 
 class BaseMessageCell: UITableViewCell {
-    private let timeService: TimeService = serviceLocator.get(TimeService)
+    fileprivate let timeService: TimeService = serviceLocator.get(TimeService)
 
     @IBOutlet weak var friendImage: UIImageView!
     @IBOutlet weak var messageText: RoundedLabel!
     @IBOutlet weak var timeText: UILabel!
 
-    private func initStyle() {
-        friendImage?.layer.borderColor = UIColor.whiteColor().CGColor
+    fileprivate func initStyle() {
+        friendImage?.layer.borderColor = UIColor.white.cgColor
         friendImage?.layer.cornerRadius = friendImage.bounds.width/2
         friendImage?.clipsToBounds = true
 
-        self.selectionStyle = .None;
+        self.selectionStyle = .none;
 
         messageText.textColor = Color.Text
         messageText.font = UIFont.init(name: messageText.font.fontName, size: 16)
         messageText.layer.cornerRadius = 10.0
     }
 
-    func updateMessage(message: Message, isOutcoming: Bool) {
+    func updateMessage(_ message: Message, isOutcoming: Bool) {
         initStyle()
 
         timeText?.attributedText = timeService.parseTime(message.timestamp)
@@ -27,13 +27,13 @@ class BaseMessageCell: UITableViewCell {
         messageText.tagObject = message
 
         switch message.getMessageStatus() {
-            case .Success:
+            case .success:
                 messageText.addGradientToLabel(Gradient.Success)
                 //messageText.layer.backgroundColor = Color.Success.CGColor
-            case .Failed:
+            case .failed:
                 messageText.addGradientToLabel(Gradient.Failed)
                 //messageText.layer.backgroundColor = Color.Failed.CGColor
-            case .Ciphered:
+            case .ciphered:
                 messageText.addGradientToLabel(Gradient.Ciphered)
                 //messageText.layer.backgroundColor = Color.Ciphered.CGColor
         }

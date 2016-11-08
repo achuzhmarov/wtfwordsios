@@ -2,10 +2,10 @@ import Foundation
 import Localize_Swift
 
 class LevelPreviewViewController: BaseModalVC {
-    private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
-    private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
-    private let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
-    private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
+    fileprivate let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
+    fileprivate let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
+    fileprivate let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
+    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
 
     @IBOutlet weak var difficultySelector: UISegmentedControl!
     @IBOutlet weak var startTimerLabel: UILabel!
@@ -17,20 +17,20 @@ class LevelPreviewViewController: BaseModalVC {
 
     @IBOutlet weak var messageWordsView: WordsViewController!
 
-    private let BACK_BUTTON_TITLE = "Back".localized()
-    private let START_BUTTON_TITLE = "Start".localized()
+    fileprivate let BACK_BUTTON_TITLE = "Back".localized()
+    fileprivate let START_BUTTON_TITLE = "Start".localized()
 
-    private let DECIPHER_SEGUE_ID = "showDecipher"
+    fileprivate let DECIPHER_SEGUE_ID = "showDecipher"
 
-    private let cipherDifficulties = CipherDifficulty.getAll()
+    fileprivate let cipherDifficulties = CipherDifficulty.getAll()
 
     var level: Level!
     var message: Message!
 
-    private var selectedDifficulty = CipherDifficulty.Normal
+    fileprivate var selectedDifficulty = CipherDifficulty.normal
 
-    private var messageText: String!
-    private var messageCategory: TextCategory!
+    fileprivate var messageText: String!
+    fileprivate var messageCategory: TextCategory!
 
     let decipherTransitionManager = FadeTransitionManager(duration: 0.5)
 
@@ -39,7 +39,7 @@ class LevelPreviewViewController: BaseModalVC {
 
         messageWordsView.dataSource = messageWordsView
         messageWordsView.delegate = messageWordsView
-        messageWordsView.backgroundColor = UIColor.clearColor()
+        messageWordsView.backgroundColor = UIColor.clear
         messageWordsView.isHidedText = true
         messageWordsView.fontSize = 12
 
@@ -54,55 +54,55 @@ class LevelPreviewViewController: BaseModalVC {
 
         updateSelectedDifficultyInGUI()
 
-        difficultySelector.setTitle(CipherDifficulty.Easy.description, forSegmentAtIndex: CipherDifficulty.Easy.rawValue)
-        difficultySelector.setTitle(CipherDifficulty.Normal.description, forSegmentAtIndex: CipherDifficulty.Normal.rawValue)
-        difficultySelector.setTitle(CipherDifficulty.Hard.description, forSegmentAtIndex: CipherDifficulty.Hard.rawValue)
+        difficultySelector.setTitle(CipherDifficulty.easy.description, forSegmentAt: CipherDifficulty.easy.rawValue)
+        difficultySelector.setTitle(CipherDifficulty.normal.description, forSegmentAt: CipherDifficulty.normal.rawValue)
+        difficultySelector.setTitle(CipherDifficulty.hard.description, forSegmentAt: CipherDifficulty.hard.rawValue)
 
-        backButton.setTitle(BACK_BUTTON_TITLE, forState: .Normal)
-        startButton.setTitle(START_BUTTON_TITLE, forState: .Normal)
+        backButton.setTitle(BACK_BUTTON_TITLE, for: UIControlState())
+        startButton.setTitle(START_BUTTON_TITLE, for: UIControlState())
     }
 
-    private func checkHardAvailability() {
-        let hardIndex = CipherDifficulty.Hard.rawValue
+    fileprivate func checkHardAvailability() {
+        let hardIndex = CipherDifficulty.hard.rawValue
 
-        if (singleModeCategoryService.isCategoryCleared(level.category, difficulty: .Normal)) {
-            difficultySelector.setEnabled(true, forSegmentAtIndex: hardIndex)
+        if (singleModeCategoryService.isCategoryCleared(level.category, difficulty: .normal)) {
+            difficultySelector.setEnabled(true, forSegmentAt: hardIndex)
         } else {
-            difficultySelector.setEnabled(false, forSegmentAtIndex: hardIndex)
+            difficultySelector.setEnabled(false, forSegmentAt: hardIndex)
 
-            if (selectedDifficulty == .Hard) {
-                selectedDifficulty = .Normal
+            if (selectedDifficulty == .hard) {
+                selectedDifficulty = .normal
             }
         }
     }
 
-    @IBAction func difficultyChanged(sender: AnyObject) {
+    @IBAction func difficultyChanged(_ sender: AnyObject) {
         selectedDifficulty = cipherDifficulties[difficultySelector.selectedSegmentIndex]
         guiDataService.updateLastSelectedDifficulty(selectedDifficulty)
         updateMessage()
     }
 
-    private func updateMessage() {
+    fileprivate func updateMessage() {
         message = singleMessageService.getMessageForLevel(level, difficulty: selectedDifficulty, text: messageText)
         updateTime()
         updateMessageTitle()
         updateMessagePreview()
     }
 
-    private func updateTime() {
+    fileprivate func updateTime() {
         let timer = Timer(seconds: messageCipherService.getTimerSeconds(message))
         startTimerLabel.text = timer.getTimeString()
     }
 
-    private func updateMessageTitle() {
+    fileprivate func updateMessageTitle() {
         titleLabel.text = messageCategory.title
     }
 
-    private func updateMessagePreview() {
+    fileprivate func updateMessagePreview() {
         messageWordsView.setNewMessage(message)
     }
 
-    private func updateSelectedDifficultyInGUI() {
+    fileprivate func updateSelectedDifficultyInGUI() {
         var index = 0
 
         for i in 0..<cipherDifficulties.count {
@@ -115,7 +115,7 @@ class LevelPreviewViewController: BaseModalVC {
         difficultySelector.selectedSegmentIndex = index
     }
 
-    private func updateLvlView() {
+    fileprivate func updateLvlView() {
         lvlLabel.text = String(level.id)
         lvlView.layer.cornerRadius = 8
 
@@ -127,9 +127,9 @@ class LevelPreviewViewController: BaseModalVC {
         }
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == DECIPHER_SEGUE_ID {
-            let targetController = segue.destinationViewController as! SingleDecipherViewController
+            let targetController = segue.destination as! SingleDecipherViewController
             targetController.message = message
             targetController.transitioningDelegate = decipherTransitionManager
         }

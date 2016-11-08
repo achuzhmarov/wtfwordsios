@@ -1,27 +1,27 @@
 import Foundation
 
 class ExpService: Service {
-    private let BASE_LVL_EXP = 1000
-    private let LVL_EXP_STEP = 5
+    fileprivate let BASE_LVL_EXP = 1000
+    fileprivate let LVL_EXP_STEP = 5
 
-    private let LVL_HINTS_STEP = 5
-    private let HINTS_PER_STEP = 5
+    fileprivate let LVL_HINTS_STEP = 5
+    fileprivate let HINTS_PER_STEP = 5
 
-    func getHintsForLvl(lvl: Int) -> Int {
+    func getHintsForLvl(_ lvl: Int) -> Int {
         return ((lvl / LVL_HINTS_STEP) + 1) * HINTS_PER_STEP
     }
 
-    func getCurrentLvlExp(exp: Int) -> Int {
+    func getCurrentLvlExp(_ exp: Int) -> Int {
         let currentLvl = getLvl(exp)
         return exp - getExpByLvl(currentLvl)
     }
 
-    func getNextLvlExp(exp: Int) -> Int {
+    func getNextLvlExp(_ exp: Int) -> Int {
         let currentLvl = getLvl(exp)
         return getExpByLvl(currentLvl + 1) - getExpByLvl(currentLvl)
     }
 
-    func getLvl(exp: Int) -> Int {
+    func getLvl(_ exp: Int) -> Int {
         //increment every LVL_EXP_STEP levels
         var lvlStage = 0
 
@@ -44,7 +44,7 @@ class ExpService: Service {
         return lvlStage * LVL_EXP_STEP + lvlStep
     }
 
-    private func getExpByLvl(lvl: Int) -> Int {
+    fileprivate func getExpByLvl(_ lvl: Int) -> Int {
         let expLvl = lvl - 1
 
         let leftMultiplier = intPow(2, power: expLvl / LVL_EXP_STEP) - 1
@@ -52,11 +52,11 @@ class ExpService: Service {
         return leftMultiplier * 10 * BASE_LVL_EXP / 2 + rightMultiplier * (expLvl % LVL_EXP_STEP) * BASE_LVL_EXP / 2
     }
 
-    private func intPow(radix: Int, power: Int) -> Int {
+    fileprivate func intPow(_ radix: Int, power: Int) -> Int {
         return Int(pow(Double(radix), Double(power)))
     }
 
-    func calculateExpForMessage(message: Message) -> Int {
+    func calculateExpForMessage(_ message: Message) -> Int {
         var dupWordsInMessage = Set<String>()
 
         var expResult = 0
@@ -71,15 +71,15 @@ class ExpService: Service {
             dupWordsInMessage.insert(word.text)
         }
 
-        if message.getMessageStatus() == .Success {
+        if message.getMessageStatus() == .success {
             expResult *= 3
         }
 
         return expResult
     }
 
-    private func calculateExpForWord(word: Word, wasInMessage: Bool, cipherDifficulty: CipherDifficulty) -> Int {
-        if word.type != .Success && word.type != .CloseTry {
+    fileprivate func calculateExpForWord(_ word: Word, wasInMessage: Bool, cipherDifficulty: CipherDifficulty) -> Int {
+        if word.type != .success && word.type != .closeTry {
             return 0
         }
 
@@ -88,7 +88,7 @@ class ExpService: Service {
         }
 
         if word.getCharCount() == 2 {
-            if word.type == .CloseTry {
+            if word.type == .closeTry {
                 return 0
             }
 
@@ -96,10 +96,10 @@ class ExpService: Service {
         }
 
         switch cipherDifficulty {
-            case .Easy:
+            case .easy:
                 return 1
-            case .Normal:
-                if word.type == .CloseTry {
+            case .normal:
+                if word.type == .closeTry {
                     return 1
                 }
 
@@ -108,8 +108,8 @@ class ExpService: Service {
                 }
 
                 return 3
-            case .Hard:
-                if word.type == .CloseTry {
+            case .hard:
+                if word.type == .closeTry {
                     if word.getCharCount() == 3 {
                         return 2
                     }

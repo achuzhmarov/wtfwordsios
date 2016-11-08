@@ -9,19 +9,19 @@
 import Foundation
 
 class IosService: Service {
-    private let iosNetworkService: IosNetworkService
+    fileprivate let iosNetworkService: IosNetworkService
 
-    private let keychain = KeychainWrapper()
+    fileprivate let keychain = KeychainWrapper()
 
     init(iosNetworkService: IosNetworkService) {
         self.iosNetworkService = iosNetworkService
     }
 
-    func updatePushBadge(talks: [FriendTalk]?) {
+    func updatePushBadge(_ talks: [FriendTalk]?) {
         //can only change badge from main_queue
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             if (talks == nil) {
-                UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+                UIApplication.shared.applicationIconBadgeNumber = 0
                 return
             }
             
@@ -35,12 +35,12 @@ class IosService: Service {
                 
                 badge += talk.cipheredNum
                     
-                if (talk.decipherStatus != .No) {
+                if (talk.decipherStatus != .no) {
                     badge += 1
                 }
             }
                 
-            UIApplication.sharedApplication().applicationIconBadgeNumber = badge
+            UIApplication.shared.applicationIconBadgeNumber = badge
         })
     }
     
@@ -49,16 +49,16 @@ class IosService: Service {
     }
     
     func getKeychainUser() -> String? {
-        return keychain.myObjectForKey(kSecAttrAccount) as? String
+        return keychain.myObject(forKey: kSecAttrAccount) as? String
     }
     
     func getKeychainPassword() -> String? {
-        return keychain.myObjectForKey(kSecValueData) as? String
+        return keychain.myObject(forKey: kSecValueData) as? String
     }
     
     func haveUserCredentials() -> Bool {
-        let username = keychain.myObjectForKey(kSecAttrAccount) as? String
-        let password = keychain.myObjectForKey(kSecValueData) as? String
+        let username = keychain.myObject(forKey: kSecAttrAccount) as? String
+        let password = keychain.myObject(forKey: kSecValueData) as? String
         
         if (username != nil && password != nil && username != "Not set") {
             return true
@@ -67,7 +67,7 @@ class IosService: Service {
         }
     }
     
-    func updateUserCredentials(login: String, password: String) {
+    func updateUserCredentials(_ login: String, password: String) {
         self.keychain.mySetObject(login, forKey:kSecAttrAccount)
         self.keychain.mySetObject(password, forKey:kSecValueData)
         self.keychain.writeToKeychain()

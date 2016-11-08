@@ -9,9 +9,9 @@
 import UIKit
 
 class FriendsViewController: UITableViewController, TalkListener {
-    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
-    private let talkService: TalkService = serviceLocator.get(TalkService)
-    private let windowService: WindowService = serviceLocator.get(WindowService)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    fileprivate let talkService: TalkService = serviceLocator.get(TalkService)
+    fileprivate let windowService: WindowService = serviceLocator.get(WindowService)
 
     var talks = [FriendTalk]()
     
@@ -20,17 +20,17 @@ class FriendsViewController: UITableViewController, TalkListener {
         talkService.friendsTalkListener = self
         
         let nav = self.navigationController?.navigationBar
-        nav?.translucent = false
+        nav?.isTranslucent = false
         
         let tab = self.tabBarController?.tabBar
-        tab?.translucent = false
+        tab?.isTranslucent = false
     }
     
     deinit {
         talkService.friendsTalkListener = nil
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.talks = talkService.talks
         self.updateView()
         talkService.getNewUnreadTalks()
@@ -42,8 +42,8 @@ class FriendsViewController: UITableViewController, TalkListener {
     }
     
     //delegate for TalkListener
-    func updateTalks(talks: [FriendTalk]?, error: NSError?) {
-        dispatch_async(dispatch_get_main_queue(), {
+    func updateTalks(_ talks: [FriendTalk]?, error: NSError?) {
+        DispatchQueue.main.async(execute: {
             if let requestError = error {
                 print(requestError)
             } else {
@@ -56,7 +56,7 @@ class FriendsViewController: UITableViewController, TalkListener {
     }
     
     func updateView() {
-        self.talks = self.talks.sort { (talk1, talk2) -> Bool in
+        self.talks = self.talks.sorted { (talk1, talk2) -> Bool in
             if (talk1.isSingleMode) {
                 return true
             } else if (talk2.isSingleMode) {
@@ -80,16 +80,16 @@ class FriendsViewController: UITableViewController, TalkListener {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return talks.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell", forIndexPath: indexPath) as! FriendCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath) as! FriendCell
 
         let talk = talks[indexPath.row]
         
@@ -100,9 +100,9 @@ class FriendsViewController: UITableViewController, TalkListener {
 
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showMessages" {
-            let targetController = segue.destinationViewController as! MessagesViewController
+            let targetController = segue.destination as! MessagesViewController
             
             if let rowIndex = tableView.indexPathForSelectedRow?.row {
                 targetController.talk = talks[rowIndex]

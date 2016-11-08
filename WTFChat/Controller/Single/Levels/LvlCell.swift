@@ -1,31 +1,31 @@
 import Foundation
 
 class LvlCell: UICollectionViewCell {
-    private let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
+    fileprivate let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
 
     @IBOutlet weak var titleLabel: UILabel!
 
-    private var level: Level!
+    fileprivate var level: Level!
 
-    private var gradientLayer: CAGradientLayer?
+    fileprivate var gradientLayer: CAGradientLayer?
 
-    private let CORNER_RADIUS_COEFF: CGFloat = 0.25
+    fileprivate let CORNER_RADIUS_COEFF: CGFloat = 0.25
 
-    private func initStyle() {
+    fileprivate func initStyle() {
         titleLabel.textColor = Color.Text
 
         layer.cornerRadius = self.bounds.size.width * CORNER_RADIUS_COEFF
 
         layer.masksToBounds = false
         layer.shouldRasterize = true
-        layer.rasterizationScale = UIScreen.mainScreen().scale
+        layer.rasterizationScale = UIScreen.main.scale
 
         gradientLayer?.removeFromSuperlayer()
 
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.clear
     }
 
-    func updateLevel(level: Level) {
+    func updateLevel(_ level: Level) {
         initStyle()
 
         self.level = level
@@ -39,20 +39,20 @@ class LvlCell: UICollectionViewCell {
         }
     }
 
-    private func setClearedState() {
+    fileprivate func setClearedState() {
         titleLabel.text = String(level.id)
 
         let gradient = Gradient.getLevelGradientByDifficulty(level.clearedDifficulty!)
         gradientLayer = addDiagonalGradient(gradient)
     }
 
-    private func setAvailableState() {
+    fileprivate func setAvailableState() {
         titleLabel.text = String(level.id)
 
         gradientLayer = addDiagonalGradient(Gradient.Ciphered)
     }
 
-    private func setIgnoredState() {
+    fileprivate func setIgnoredState() {
         titleLabel.text = Emoji.LOCK
 
         gradientLayer = addDiagonalGradient(Gradient.Ignored)

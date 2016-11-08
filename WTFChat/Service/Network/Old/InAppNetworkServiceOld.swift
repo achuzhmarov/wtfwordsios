@@ -2,18 +2,18 @@ import Foundation
 import SwiftyJSON
 
 class InAppNetworkServiceOld: Service {
-    private let networkService: NetworkService
+    fileprivate let networkService: NetworkService
 
     init(networkService: NetworkService) {
         self.networkService = networkService
     }
     
-    func verifyInAppPurchase(receipt: String, productId: ProductIdentifier,
-        completion:(userInfo: User?, error: NSError?) -> Void) {
+    func verifyInAppPurchase(_ receipt: String, productId: ProductIdentifier,
+        completion:@escaping (_ userInfo: User?, _ error: NSError?) -> Void) {
             
         let userData: [String: NSString] = [
-            "product_id": productId,
-            "receipt": receipt
+            "product_id": productId as NSString,
+            "receipt": receipt as NSString
         ]
         
         let postJSON = JSON(userData)

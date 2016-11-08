@@ -1,7 +1,7 @@
 import Foundation
 
 class BaseUIViewController: UIViewController {
-    private var gradientLayer: CAGradientLayer?
+    fileprivate var gradientLayer: CAGradientLayer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -9,14 +9,14 @@ class BaseUIViewController: UIViewController {
         self.view.backgroundColor = Color.BackgroundDark
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         updateBackgroundGradient()
     }
 
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
 
         updateBackgroundGradient(size)
 
@@ -25,12 +25,12 @@ class BaseUIViewController: UIViewController {
         })*/
     }
 
-    func updateBackgroundGradient(size: CGSize? = nil) {
+    func updateBackgroundGradient(_ size: CGSize? = nil) {
         gradientLayer?.removeFromSuperlayer()
         gradientLayer = self.view.addDiagonalGradient(Gradient.Background, size: size)
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 }

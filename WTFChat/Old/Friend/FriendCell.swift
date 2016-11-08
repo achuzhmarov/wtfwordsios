@@ -9,54 +9,54 @@
 import UIKit
 
 class FriendCell: UITableViewCell {
-    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
-    private let avatarService: AvatarService = serviceLocator.get(AvatarService)
-    private let timeService: TimeService = serviceLocator.get(TimeService)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    fileprivate let avatarService: AvatarService = serviceLocator.get(AvatarService)
+    fileprivate let timeService: TimeService = serviceLocator.get(TimeService)
 
-    @IBOutlet private weak var friendImage: UIImageView!
+    @IBOutlet fileprivate weak var friendImage: UIImageView!
     
-    @IBOutlet private weak var lastMessageAuthorImage: UIImageView!
-    @IBOutlet private weak var lastMessageAuthorImageWidth: NSLayoutConstraint!
-    @IBOutlet private weak var lastMessageAuthorImageMargin: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var lastMessageAuthorImage: UIImageView!
+    @IBOutlet fileprivate weak var lastMessageAuthorImageWidth: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var lastMessageAuthorImageMargin: NSLayoutConstraint!
     
-    @IBOutlet private weak var friendName: UILabel!
+    @IBOutlet fileprivate weak var friendName: UILabel!
     
-    @IBOutlet private weak var lastMessage: RoundedLabel!
+    @IBOutlet fileprivate weak var lastMessage: RoundedLabel!
     
-    @IBOutlet private weak var lastMessageTime: UILabel!
+    @IBOutlet fileprivate weak var lastMessageTime: UILabel!
     
-    @IBOutlet private weak var cipheredView: UIView!
-    @IBOutlet private weak var cipheredNum: RoundedLabel!
-    @IBOutlet private weak var cipheredNumWidthConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var cipheredView: UIView!
+    @IBOutlet fileprivate weak var cipheredNum: RoundedLabel!
+    @IBOutlet fileprivate weak var cipheredNumWidthConstraint: NSLayoutConstraint!
     
     var message: RemoteMessage?
 
-    private func initStyle() {
-        friendImage.layer.borderColor = UIColor.whiteColor().CGColor
+    fileprivate func initStyle() {
+        friendImage.layer.borderColor = UIColor.white.cgColor
         friendImage.layer.cornerRadius = friendImage.bounds.width/2
         friendImage.clipsToBounds = true
 
-        self.selectionStyle = .None;
+        self.selectionStyle = .none;
 
         cipheredNum.setMargins(0, left: 4, bottom: 0, right: 4)
         cipheredNum.layer.cornerRadius = 6.0;
-        cipheredNum.textColor = UIColor.whiteColor()
+        cipheredNum.textColor = UIColor.white
         cipheredNum.font = UIFont.init(name: lastMessage.font.fontName, size: 10)
         cipheredNum.numberOfLines = 1
 
         lastMessage.layer.cornerRadius = 8.0;
-        lastMessage.textColor = UIColor.whiteColor()
+        lastMessage.textColor = UIColor.white
         lastMessage.font = UIFont.init(name: lastMessage.font.fontName, size: 13)
         lastMessage.numberOfLines = 1
 
         friendName.adjustsFontSizeToFitWidth = true
     }
 
-    func updateTalk(talk: FriendTalk) {
+    func updateTalk(_ talk: FriendTalk) {
         initStyle()
 
         if (talk.isSingleMode) {
-            friendName.text = currentUserService.getFriendLogin(talk).capitalizedString
+            friendName.text = currentUserService.getFriendLogin(talk).capitalized
         } else {
             let friendInfo = currentUserService.getFriendInfoByTalk(talk)
             friendName.text = friendInfo!.getDisplayName()
@@ -82,12 +82,12 @@ class FriendCell: UITableViewCell {
             diameter: UInt(friendImage.bounds.height))
     }
     
-    private func hideLastAuthorImage() {
+    fileprivate func hideLastAuthorImage() {
         lastMessageAuthorImageWidth.constant = 0
         lastMessageAuthorImageMargin.constant = 0
     }
     
-    private func updateLastAuthorImage(name: String) {
+    fileprivate func updateLastAuthorImage(_ name: String) {
         lastMessageAuthorImage.image = avatarService.getImage(name,
             diameter: UInt(lastMessageAuthorImage.bounds.height))
         
@@ -95,9 +95,9 @@ class FriendCell: UITableViewCell {
         lastMessageAuthorImageMargin.constant = 4
     }
     
-    private func updateCiphered(talk: FriendTalk) {
+    fileprivate func updateCiphered(_ talk: FriendTalk) {
         cipheredNumWidthConstraint.constant = 13
-        cipheredNum.hidden = false
+        cipheredNum.isHidden = false
         cipheredNum.text = " "
         
         if (talk.cipheredNum > 0) {
@@ -109,10 +109,10 @@ class FriendCell: UITableViewCell {
 
             cipheredNum.addGradientToLabel(Gradient.Ciphered)
             //cipheredNum.layer.backgroundColor = Color.Ciphered.CGColor
-        } else if (talk.decipherStatus == .Success) {
+        } else if (talk.decipherStatus == .success) {
             cipheredNum.addGradientToLabel(Gradient.Success)
             //cipheredNum.layer.backgroundColor = Color.Success.CGColor
-        } else if (talk.decipherStatus == .Failed) {
+        } else if (talk.decipherStatus == .failed) {
             cipheredNum.addGradientToLabel(Gradient.Failed)
             //cipheredNum.layer.backgroundColor = Color.Failed.CGColor
         } else {
@@ -120,20 +120,20 @@ class FriendCell: UITableViewCell {
         }
     }
     
-    private func setEmptyCiphered() {
+    fileprivate func setEmptyCiphered() {
         cipheredNum.text = ""
-        cipheredNum.hidden = true
-        cipheredNum.layer.backgroundColor = UIColor.whiteColor().CGColor
+        cipheredNum.isHidden = true
+        cipheredNum.layer.backgroundColor = UIColor.white.cgColor
         cipheredNumWidthConstraint.constant = 0
     }
     
-    private func setEmptyMessage() {
+    fileprivate func setEmptyMessage() {
         lastMessage.text = ""
-        lastMessage.layer.backgroundColor = UIColor.whiteColor().CGColor
+        lastMessage.layer.backgroundColor = UIColor.white.cgColor
         lastMessageTime.text = ""
     }
     
-    private func updateMessage(message: RemoteMessage) {
+    fileprivate func updateMessage(_ message: RemoteMessage) {
         lastMessageTime.text = timeService.parseTime(message.timestamp).string
 
         if (message.author == currentUserService.getUserLogin()) {
@@ -143,13 +143,13 @@ class FriendCell: UITableViewCell {
         }
 
         switch message.getMessageStatus() {
-            case .Success:
+            case .success:
                 lastMessage.addGradientToLabel(Gradient.Success)
                 //lastMessage.layer.backgroundColor = Color.Success.CGColor
-            case .Failed:
+            case .failed:
                 lastMessage.addGradientToLabel(Gradient.Failed)
                 //lastMessage.layer.backgroundColor = Color.Failed.CGColor
-            case .Ciphered:
+            case .ciphered:
                 lastMessage.addGradientToLabel(Gradient.Ciphered)
                 //lastMessage.layer.backgroundColor = Color.Ciphered.CGColor
         }

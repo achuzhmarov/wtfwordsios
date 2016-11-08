@@ -14,19 +14,19 @@ class AudioService: Service {
     var audioPlayer:AVAudioPlayer!
     let defaultExt = "wav"
     
-    func playSound(fileName: String) {
+    func playSound(_ fileName: String) {
         playSound(fileName, ext: defaultExt)
     }
     
-    func playSound(fileName: String, ext: String) {
+    func playSound(_ fileName: String, ext: String) {
         
-        let audioFilePath = NSBundle.mainBundle().pathForResource(fileName, ofType: ext)
+        let audioFilePath = Bundle.main.path(forResource: fileName, ofType: ext)
         
         if audioFilePath != nil {
             
-            let audioFileUrl = NSURL.fileURLWithPath(audioFilePath!)
+            let audioFileUrl = URL(fileURLWithPath: audioFilePath!)
             
-            audioPlayer = try? AVAudioPlayer(contentsOfURL: audioFileUrl)
+            audioPlayer = try? AVAudioPlayer(contentsOf: audioFileUrl)
             audioPlayer.play()
             
         } else {

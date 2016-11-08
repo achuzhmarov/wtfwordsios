@@ -7,13 +7,13 @@ class StopImage: UIImageView {
         image = createStopImage(Gradient.Background, backgroundGradient: Gradient.Failed)
     }
 
-    private func createStopImage(stopGradient: [CGColor], backgroundGradient: [CGColor]) -> UIImage {
+    fileprivate func createStopImage(_ stopGradient: [CGColor], backgroundGradient: [CGColor]) -> UIImage {
         let size = bounds.width
 
         UIGraphicsBeginImageContextWithOptions(CGSize(width: size, height: size), false, 0.0)
         let context = UIGraphicsGetCurrentContext()
 
-        CGContextSaveGState(context)
+        context?.saveGState()
 
         let backgroundPath = getBackPath(size)
 
@@ -36,24 +36,24 @@ class StopImage: UIImageView {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
-        return image
+        return image!
     }
 
-    private func addGradient(context: CGContext, clipPath: UIBezierPath, size: CGFloat, colors: [CGColor]) {
+    fileprivate func addGradient(_ context: CGContext, clipPath: UIBezierPath, size: CGFloat, colors: [CGColor]) {
         clipPath.addClip()
-        let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), colors, nil)
-        CGContextDrawLinearGradient(context, gradient, CGPointMake(0, 0), CGPointMake(size, size), [])
+        let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: colors as CFArray, locations: nil)
+        context.drawLinearGradient(gradient!, start: CGPoint(x: 0, y: 0), end: CGPoint(x: size, y: size), options: [])
     }
 
-    private func getBackPath(size: CGFloat) -> UIBezierPath {
+    fileprivate func getBackPath(_ size: CGFloat) -> UIBezierPath {
         return UIBezierPath.roundedRect(size)
     }
 
-    private func getStopPath(size: CGFloat) -> UIBezierPath {
+    fileprivate func getStopPath(_ size: CGFloat) -> UIBezierPath {
         let padding = size * 0.28
         let stopSize = size - 2 * padding
 
-        let stopRect = CGRectMake(padding, padding, stopSize, stopSize)
+        let stopRect = CGRect(x: padding, y: padding, width: stopSize, height: stopSize)
 
         return UIBezierPath(rect: stopRect)
     }

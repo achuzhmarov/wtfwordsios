@@ -1,14 +1,14 @@
 import Foundation
 
 enum MessageStatus: Int {
-    case Ciphered = 1, Success, Failed
+    case ciphered = 1, success, failed
 }
 
 class Message: NSObject {
-    var timestamp: NSDate
-    var lastUpdate: NSDate
-    var cipherType = CipherType.RightCutter
-    var cipherDifficulty = CipherDifficulty.Normal
+    var timestamp: Date
+    var lastUpdate: Date
+    var cipherType = CipherType.rightCutter
+    var cipherDifficulty = CipherDifficulty.normal
 
     var extId: String = ""
     var deciphered: Bool = false
@@ -20,7 +20,7 @@ class Message: NSObject {
     var tries = [String]()
 
     override init() {
-        self.timestamp = NSDate()
+        self.timestamp = Date()
         self.lastUpdate = timestamp
     }
 
@@ -30,12 +30,12 @@ class Message: NSObject {
         self.cipherDifficulty = cipherDifficulty
         self.words = words
 
-        self.timestamp = NSDate()
+        self.timestamp = Date()
         self.lastUpdate = timestamp
     }
 
     init(extId: String, cipherType: CipherType, cipherDifficulty: CipherDifficulty, words: [Word],
-         deciphered: Bool, timestamp: NSDate, lastUpdate: NSDate, exp: Int, timerSecs: Int, hintsUsed: Int) {
+         deciphered: Bool, timestamp: Date, lastUpdate: Date, exp: Int, timerSecs: Int, hintsUsed: Int) {
 
         self.extId = extId
         self.cipherType = cipherType
@@ -54,7 +54,7 @@ class Message: NSObject {
         var result = [Word]()
 
         for word in words {
-            if (word.type != WordType.Delimiter) {
+            if (word.type != WordType.delimiter) {
                 result.append(word)
             }
         }
@@ -66,8 +66,8 @@ class Message: NSObject {
         var result = [Word]()
 
         for word in words {
-            if (word.type != WordType.Delimiter &&
-                    word.type != WordType.LineBreak) {
+            if (word.type != WordType.delimiter &&
+                    word.type != WordType.lineBreak) {
                 result.append(word)
             }
         }
@@ -80,28 +80,28 @@ class Message: NSObject {
     }
 
     func hasSuccessWords() -> Bool {
-        let successWordsCount = countWordsByStatus(WordType.Success) + countWordsByStatus(WordType.CloseTry)
+        let successWordsCount = countWordsByStatus(WordType.success) + countWordsByStatus(WordType.closeTry)
         return successWordsCount > 0
     }
 
     func countNew() -> Int {
-        return countWordsByStatus(WordType.New)
+        return countWordsByStatus(WordType.new)
     }
 
     func getMessageStatus() -> MessageStatus {
         if (deciphered) {
-            if (countWordsByStatus(WordType.Failed) == 0) {
-                return MessageStatus.Success
+            if (countWordsByStatus(WordType.failed) == 0) {
+                return MessageStatus.success
             } else {
-                return MessageStatus.Failed
+                return MessageStatus.failed
             }
         } else {
-            return MessageStatus.Ciphered
+            return MessageStatus.ciphered
         }
 
     }
 
-    private func countWordsByStatus(wordType: WordType) -> Int {
+    fileprivate func countWordsByStatus(_ wordType: WordType) -> Int {
         var result = 0
 
         for word in words {
@@ -151,7 +151,7 @@ class Message: NSObject {
         return result
     }
 
-    func checkEquals(message: Message) -> Bool {
+    func checkEquals(_ message: Message) -> Bool {
         if (self.words.count != message.words.count) {
             return false
         }

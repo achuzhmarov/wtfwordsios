@@ -9,7 +9,7 @@ class StarImageCache {
         }
     }
 
-    func getImage(difficulty: CipherDifficulty, progress: CGFloat) -> UIImage? {
+    func getImage(_ difficulty: CipherDifficulty, progress: CGFloat) -> UIImage? {
         let difficultyCache = cache[difficulty]!
 
         if let cachedImage = difficultyCache[progress] {
@@ -19,15 +19,15 @@ class StarImageCache {
         return nil
     }
 
-    func addImage(difficulty: CipherDifficulty, progress: CGFloat, image: UIImage) {
+    func addImage(_ difficulty: CipherDifficulty, progress: CGFloat, image: UIImage) {
         cache[difficulty]![progress] = image
     }
 }
 
 class StarImage: UIImageView {
-    private static var cache = StarImageCache()
+    fileprivate static var cache = StarImageCache()
 
-    func updateStarImage(difficulty: CipherDifficulty, progress: Float) {
+    func updateStarImage(_ difficulty: CipherDifficulty, progress: Float) {
         let gradientProgress = calculateGradientProgress(progress)
 
         if let cachedImage = StarImage.cache.getImage(difficulty, progress: gradientProgress) {
@@ -40,23 +40,22 @@ class StarImage: UIImageView {
         }
     }
 
-    private func createStarImage(gradientProgress: CGFloat, starGradient: [CGColor], borderColor: UIColor) -> UIImage {
+    fileprivate func createStarImage(_ gradientProgress: CGFloat, starGradient: [CGColor], borderColor: UIColor) -> UIImage {
         let size = CGSize(width: bounds.width, height: bounds.height)
 
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         let context = UIGraphicsGetCurrentContext()
 
         //Add Shadow
-        let shadow:UIColor = UIColor.blackColor().colorWithAlphaComponent(0.80)
-        let shadowOffset = CGSizeMake(1.0, 1.0)
+        let shadow:UIColor = UIColor.black.withAlphaComponent(0.80)
+        let shadowOffset = CGSize(width: 1.0, height: 1.0)
         let shadowBlurRadius: CGFloat = size.height / 10
 
-        CGContextSetShadowWithColor(context,
-                shadowOffset,
-                shadowBlurRadius,
-                shadow.CGColor)
+        context?.setShadow(offset: shadowOffset,
+                blur: shadowBlurRadius,
+                color: shadow.cgColor)
 
-        CGContextBeginTransparencyLayer(context, nil)
+        context?.beginTransparencyLayer(auxiliaryInfo: nil)
 
         let xCenter = CGFloat(size.width/2);
         let yCenter = CGFloat(size.height/2);
@@ -68,15 +67,15 @@ class StarImage: UIImageView {
         let theta = CGFloat(2.0 * M_PI * (2.0 / 5.0));
 
         let starPath = UIBezierPath()
-        starPath.moveToPoint(CGPointMake(xCenter, r * flip + yCenter))
+        starPath.move(to: CGPoint(x: xCenter, y: r * flip + yCenter))
 
         for i in 1..<5 {
             let x = r * sin(CGFloat(i) * theta);
             let y = r * cos(CGFloat(i) * theta);
-            starPath.addLineToPoint(CGPointMake(x + xCenter, y * flip + yCenter))
+            starPath.addLine(to: CGPoint(x: x + xCenter, y: y * flip + yCenter))
         }
 
-        starPath.closePath()
+        starPath.close()
 
         borderColor.setStroke()
         starPath.lineWidth = 1
@@ -84,43 +83,42 @@ class StarImage: UIImageView {
 
         //Gradient
 
-        CGContextSaveGState(context)
+        context?.saveGState()
         starPath.addClip()
 
         let firstColorLocation = 1 - gradientProgress
         let secondColorLocation = firstColorLocation + (gradientProgress / 2) + 0.01
 
-        let gradient = CGGradientCreateWithColors(
-            CGColorSpaceCreateDeviceRGB(),
-                starGradient,
+        let gradient = CGGradient(
+            colorsSpace: CGColorSpaceCreateDeviceRGB(),
+                colors: starGradient as CFArray,
 
-                [
+                locations: [
                     firstColorLocation,
                     secondColorLocation,
                     1
                 ]
         )
 
-        CGContextDrawLinearGradient(context,
-            gradient,
-            CGPointMake(0, 0),
-            CGPointMake(size.width, size.height),
-            []
+        context?.drawLinearGradient(gradient!,
+            start: CGPoint(x: 0, y: 0),
+            end: CGPoint(x: size.width, y: size.height),
+            options: []
         )
 
-        CGContextRestoreGState(context)
+        context?.restoreGState()
 
-        CGContextEndTransparencyLayer(context)
+        context?.endTransparencyLayer()
 
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
-        return image
+        return image!
     }
 
-    private static let gradientProgress: [CGFloat] = [0.1, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 1.0]
+    fileprivate static let gradientProgress: [CGFloat] = [0.1, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 1.0]
 
-    private func calculateGradientProgress(progress: Float) -> CGFloat {
+    fileprivate func calculateGradientProgress(_ progress: Float) -> CGFloat {
         let gradientIndex = Int(progress * 10)
 
         return StarImage.gradientProgress[gradientIndex]

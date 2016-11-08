@@ -17,10 +17,10 @@ class BaseMessageViewController: UIViewController, MessageTappedComputer, UIText
         self.messageTableView.alpha = 0
 
         let nav = self.navigationController?.navigationBar
-        nav?.translucent = false
+        nav?.isTranslucent = false
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         if (talk.messages.count > 0) {
@@ -35,7 +35,7 @@ class BaseMessageViewController: UIViewController, MessageTappedComputer, UIText
         }
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         if (firstTimeLoaded) {
@@ -45,16 +45,16 @@ class BaseMessageViewController: UIViewController, MessageTappedComputer, UIText
         }
     }
 
-    private func showMessages(duration: NSTimeInterval, delay: NSTimeInterval) {
-        UIView.animateWithDuration(duration, delay: delay,
+    fileprivate func showMessages(_ duration: TimeInterval, delay: TimeInterval) {
+        UIView.animate(withDuration: duration, delay: delay,
                 options: [], animations: {
             self.messageTableView.alpha = 1
         }, completion: nil)
     }
 
     //MessageTappedComputer delegate
-    func messageTapped(message: Message) {
-        performSegueWithIdentifier("showDecipher", sender: message)
+    func messageTapped(_ message: Message) {
+        performSegue(withIdentifier: "showDecipher", sender: message)
     }
 
     func updateView() {

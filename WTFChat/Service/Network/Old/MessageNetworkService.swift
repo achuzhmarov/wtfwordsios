@@ -2,19 +2,19 @@ import Foundation
 import SwiftyJSON
 
 class MessageNetworkService: Service {
-    private let networkService: NetworkService
+    fileprivate let networkService: NetworkService
 
     init(networkService: NetworkService) {
         self.networkService = networkService
     }
 
-    func markTalkAsReaded(talk: FriendTalk, completion:(error: NSError?) -> Void) {
+    func markTalkAsReaded(_ talk: FriendTalk, completion:@escaping (_ error: NSError?) -> Void) {
         networkService.post(nil, relativeUrl: "messages/read/\(talk.id)") { (json, error) -> Void in
             completion(error: error)
         }
     }
     
-    func getMessagesByTalk(talk: FriendTalk, completion: (messages: [RemoteMessage]?, error: NSError?) -> Void) {
+    func getMessagesByTalk(_ talk: FriendTalk, completion: @escaping (_ messages: [RemoteMessage]?, _ error: NSError?) -> Void) {
         networkService.get("messages/\(talk.id)") { (json, error) -> Void in
             if let requestError = error {
                 completion(messages: nil, error: requestError)
@@ -31,12 +31,12 @@ class MessageNetworkService: Service {
     }
     
     func getUnreadMessagesByTalk(
-        talk: FriendTalk,
-        lastUpdate: NSDate,
-        completion:(messages: [RemoteMessage]?, error: NSError?) -> Void)
+        _ talk: FriendTalk,
+        lastUpdate: Date,
+        completion:@escaping (_ messages: [RemoteMessage]?, _ error: NSError?) -> Void)
     {
         let lastUpdateData = [
-            "last_update": NSDate.parseStringJSONFromDate(lastUpdate)!
+            "last_update": Date.parseStringJSONFromDate(lastUpdate)!
         ]
         
         let postJSON = JSON(lastUpdateData)
@@ -60,9 +60,9 @@ class MessageNetworkService: Service {
     }
     
     func getEarlierMessagesByTalk(
-        talk: FriendTalk,
+        _ talk: FriendTalk,
         skip: Int,
-        completion:(messages: [RemoteMessage]?, error: NSError?) -> Void)
+        completion:@escaping (_ messages: [RemoteMessage]?, _ error: NSError?) -> Void)
     {
         networkService.get("messages/earlier/\(talk.id)/\(String(skip))") { (json, error) -> Void in
             if let requestError = error {
@@ -82,7 +82,7 @@ class MessageNetworkService: Service {
         }
     }
     
-    func saveMessage(message: RemoteMessage, completion:(message: RemoteMessage?, error: NSError?) -> Void) {
+    func saveMessage(_ message: RemoteMessage, completion:@escaping (_ message: RemoteMessage?, _ error: NSError?) -> Void) {
         let postJSON = JsonRemoteMessageParser.newFromMessage(message)
         
         networkService.post(postJSON, relativeUrl: "messages/add") {json, error -> Void in
@@ -103,7 +103,7 @@ class MessageNetworkService: Service {
         }
     }
     
-    func decipherMessage(message: RemoteMessage, completion:(message: RemoteMessage?, error: NSError?) -> Void) {
+    func decipherMessage(_ message: RemoteMessage, completion:@escaping (_ message: RemoteMessage?, _ error: NSError?) -> Void) {
         let postJSON = JsonRemoteMessageParser.decipherFromMessage(message)
         
         networkService.post(postJSON, relativeUrl: "messages/decipher") {json, error -> Void in

@@ -1,16 +1,16 @@
 import Foundation
 
 enum DecipherStatus: Int {
-    case No = 1, Success, Failed
+    case no = 1, success, failed
 }
 
 class FriendTalk: Talk {
     let id: String
     var users = [String]()
     var hasUnread: Bool = false
-    var decipherStatus = DecipherStatus.No
+    var decipherStatus = DecipherStatus.no
     var cipheredNum: Int = 0
-    var lastUpdate: NSDate = NSDate()
+    var lastUpdate: Date = Date()
     var messageCount: Int = 0
 
     var lastMessage: RemoteMessage?
@@ -22,7 +22,7 @@ class FriendTalk: Talk {
         super.init()
     }
 
-    init(id: String, hasUnread: Bool, cipheredNum: Int, lastMessage: RemoteMessage?, users: [String], decipherStatus: DecipherStatus, lastUpdate: NSDate, messageCount: Int) {
+    init(id: String, hasUnread: Bool, cipheredNum: Int, lastMessage: RemoteMessage?, users: [String], decipherStatus: DecipherStatus, lastUpdate: Date, messageCount: Int) {
         self.id = id;
         self.hasUnread = hasUnread
         self.cipheredNum = cipheredNum
@@ -35,7 +35,7 @@ class FriendTalk: Talk {
         super.init()
     }
 
-    func appendMessage(message: RemoteMessage) {
+    func appendMessage(_ message: RemoteMessage) {
         messages.append(message)
         lastMessage = message
     }

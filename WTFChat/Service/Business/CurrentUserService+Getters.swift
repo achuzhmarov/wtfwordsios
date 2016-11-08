@@ -1,12 +1,12 @@
 import Foundation
 
 extension CurrentUserService {
-    func getLastUpdate() -> NSDate {
-        return user.lastUpdate
+    func getLastUpdate() -> Date {
+        return user.lastUpdate as Date
     }
 
-    func getLastLogin() -> NSDate {
-        return user.lastLogin
+    func getLastLogin() -> Date {
+        return user.lastLogin as Date
     }
 
     func getUserName() -> String {
@@ -49,7 +49,7 @@ extension CurrentUserService {
         return expService.getNextLvlExp(user.getFullExp())
     }
 
-    func getFriendInfoByLogin(login: String) -> FriendInfo? {
+    func getFriendInfoByLogin(_ login: String) -> FriendInfo? {
         for friend in user.friends {
             if (friend.login == login) {
                 return friend
@@ -59,7 +59,7 @@ extension CurrentUserService {
         return nil
     }
 
-    func getFriendInfoByTalk(talk: FriendTalk) -> FriendInfo? {
+    func getFriendInfoByTalk(_ talk: FriendTalk) -> FriendInfo? {
         return getFriendInfoByLogin(getFriendLogin(talk))
     }
 
@@ -85,7 +85,7 @@ extension CurrentUserService {
         )
     }
 
-    func getFriendLogin(talk: FriendTalk) -> String {
+    func getFriendLogin(_ talk: FriendTalk) -> String {
         for user in talk.users {
             if (user != getUserLogin()) {
                 return user

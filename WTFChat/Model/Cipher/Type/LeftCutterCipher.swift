@@ -1,7 +1,7 @@
 import Foundation
 
 class LeftCutterEasyCipher: Cipher {
-    func getTextForDecipher(word: Word) -> String {
+    func getTextForDecipher(_ word: Word) -> String {
         let wordLength = word.getCharCount() - 1
         let letterCount = word.getCharCount() / 5 + 1
         
@@ -10,7 +10,7 @@ class LeftCutterEasyCipher: Cipher {
 }
 
 class LeftCutterNormalCipher: Cipher {
-    func getTextForDecipher(word: Word) -> String {
+    func getTextForDecipher(_ word: Word) -> String {
         let wordLength = word.getCharCount() - 1
         var letterCount = word.getCharCount() / 2 + word.getCharCount() % 2
         
@@ -24,7 +24,7 @@ class LeftCutterNormalCipher: Cipher {
 }
 
 class LeftCutterHardCipher: Cipher {
-    func getTextForDecipher(word: Word) -> String {
+    func getTextForDecipher(_ word: Word) -> String {
         let wordLength = word.getCharCount() - 1
         var letterCount = word.getCharCount() / 2 + word.getCharCount() % 2
         

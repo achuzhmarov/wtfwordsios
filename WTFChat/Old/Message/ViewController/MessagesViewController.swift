@@ -1,11 +1,11 @@
 import UIKit
 
 class MessagesViewController: BaseMessageViewController, MessageListener {
-    private let messageService: MessageService = serviceLocator.get(MessageService)
-    private let talkService: TalkService = serviceLocator.get(TalkService)
-    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
-    private let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
-    private let coreMessageService: CoreMessageService = serviceLocator.get(CoreMessageService)
+    fileprivate let messageService: MessageService = serviceLocator.get(MessageService)
+    fileprivate let talkService: TalkService = serviceLocator.get(TalkService)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    fileprivate let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
+    fileprivate let coreMessageService: CoreMessageService = serviceLocator.get(CoreMessageService)
 
     @IBOutlet weak var messageText: UITextView!
     @IBOutlet weak var messageTextHeightConstraint: NSLayoutConstraint!
@@ -14,9 +14,9 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
     
     var refreshControl:UIRefreshControl!
     
-    var timer: NSTimer?
-    var cipherType = CipherType.RightCutter
-    var cipherDifficulty = CipherDifficulty.Normal
+    var timer: Foundation.Timer?
+    var cipherType = CipherType.rightCutter
+    var cipherDifficulty = CipherDifficulty.normal
     var lastSendedMessage: Message?
 
     var defaultMessageTextHeightConstraint: CGFloat!
@@ -31,8 +31,8 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
 
         friendTalk = talk as! FriendTalk
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MessagesViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MessagesViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(MessagesViewController.keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(MessagesViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MessagesViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -43,12 +43,12 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
 
         messageService.initMessageListener(friendTalk, listener: self)
         
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             self.updateViewAfterGetNew()
         })
         
         messageText.layer.cornerRadius = 5
-        messageText.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.5).CGColor
+        messageText.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
         messageText.layer.borderWidth = 0.5
         messageText.clipsToBounds = true
         messageText.textContainerInset = UIEdgeInsets(top: 3.5, left: 5, bottom: 2, right: 5);
@@ -59,14 +59,14 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         messageService.removeListener(friendTalk)
     }
 
-    private func configureTitleView(title: String, navigationItem: UINavigationItem) {
+    fileprivate func configureTitleView(_ title: String, navigationItem: UINavigationItem) {
         let titleLabel = UILabel()
-        titleLabel.textAlignment = .Center
-        titleLabel.font = UIFont.boldSystemFontOfSize(17.0)
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 17.0)
         titleLabel.text = title
         navigationItem.titleView = titleLabel
         titleLabel.sizeToFit()
@@ -75,8 +75,8 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
     
     // MARK: - Navigation
     
-    @IBAction func sendMessage(segue:UIStoryboardSegue) {
-        if let sendMessageController = segue.sourceViewController as? SendMessageViewController {
+    @IBAction func sendMessage(_ segue:UIStoryboardSegue) {
+        if let sendMessageController = segue.source as? SendMessageViewController {
             //check for duplicates
             if (lastSendedMessage != nil) {
                 if (lastSendedMessage!.checkEquals(sendMessageController.message)) {
@@ -101,7 +101,7 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
         }
     }
     
-    @IBAction func sendButtonPressed(sender: AnyObject) {
+    @IBAction func sendButtonPressed(_ sender: AnyObject) {
         if (messageText.text.characters.count > 1024) {
             WTFOneButtonAlert.show("Too many characters",
                 message: "Your text should be less than 1024 characters",
@@ -109,33 +109,33 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
             return
         }
         
-        self.performSegueWithIdentifier("showMessagePreview", sender: messageText.text)
+        self.performSegue(withIdentifier: "showMessagePreview", sender: messageText.text)
     }
     
-    func textViewDidChange(textView: UITextView) {
-        if (messageText.text?.characters.count > 0) {
-            sendButton.enabled = true
+    func textViewDidChange(_ textView: UITextView) {
+        if let message = messageText.text {
+            sendButton.isEnabled = (message.characters.count > 0)
         } else {
-            sendButton.enabled = false
+            sendButton.isEnabled = false
         }
         
         let contentSize = self.messageText.sizeThatFits(self.messageText.bounds.size)
 
         let nav = self.navigationController!.navigationBar
-        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
+        let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
         let padding = self.bottomViewConstraint.constant + nav.bounds.height + statusBarHeight + 32
         
         let maxHeight = self.view.bounds.height - padding
         
         if (contentSize.height < maxHeight) {
-            messageText.scrollEnabled = false
+            messageText.isScrollEnabled = false
             messageTextHeightConstraint.constant = contentSize.height
         } else {
-            messageText.scrollEnabled = true
+            messageText.isScrollEnabled = true
         }
     }
     
-    private func updateLastCipherType() {
+    fileprivate func updateLastCipherType() {
         for message in talk.messages {
             if ((message as! RemoteMessage).author == currentUserService.getUserLogin() || friendTalk.isSingleMode) {
                 self.cipherType = message.cipherType
@@ -149,8 +149,8 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
     }
     
     //delegate for MessageListener
-    func updateMessages(talk: FriendTalk?, wasNew: Bool, error: NSError?) {
-        dispatch_async(dispatch_get_main_queue(), {
+    func updateMessages(_ talk: FriendTalk?, wasNew: Bool, error: NSError?) {
+        DispatchQueue.main.async(execute: {
             if let requestError = error {
                 if (!self.wasSuccessfullUpdate) {
                     WTFOneButtonAlert.show("Error", message: "Can't load messages. \(WTFOneButtonAlert.CON_ERR)", firstButtonTitle: "Ok")
@@ -171,8 +171,8 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
     }
     
     //delegate for MessageListener
-    func loadEarlierCompleteHandler(talk: FriendTalk?, newMessagesCount: Int, error: NSError?) {
-        dispatch_async(dispatch_get_main_queue(), {
+    func loadEarlierCompleteHandler(_ talk: FriendTalk?, newMessagesCount: Int, error: NSError?) {
+        DispatchQueue.main.async(execute: {
             if let requestError = error {
                 WTFOneButtonAlert.show("Error", message: "Can't load earlier messages. \(WTFOneButtonAlert.CON_ERR)", firstButtonTitle: "Ok")
 
@@ -187,8 +187,8 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
     }
     
     //delegate for MessageListener
-    func messageSended(talk: FriendTalk?, error: NSError?) {
-        dispatch_async(dispatch_get_main_queue(), {
+    func messageSended(_ talk: FriendTalk?, error: NSError?) {
+        DispatchQueue.main.async(execute: {
             if let requestError = error {
                 print(requestError)
             } else {
@@ -200,17 +200,17 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
     }
     
     //refreshControl delegate
-    func loadEarlier(sender:AnyObject) {
+    func loadEarlier(_ sender:AnyObject) {
         messageService.loadEarlier(friendTalk.id)
     }
     
-    func keyboardWillShow(notification: NSNotification) {
+    func keyboardWillShow(_ notification: Notification) {
         var info = notification.userInfo!
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let keyboardHeight = keyboardFrame.size.height
         
-        messageTableView.contentOffset = CGPointMake(messageTableView.contentOffset.x,
-            messageTableView.contentOffset.y + keyboardHeight)
+        messageTableView.contentOffset = CGPoint(x: messageTableView.contentOffset.x,
+            y: messageTableView.contentOffset.y + keyboardHeight)
         
         self.bottomViewConstraint.constant = keyboardHeight
         self.view.layoutIfNeeded()
@@ -218,13 +218,13 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
         self.isKeyboardShown = true
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    func keyboardWillHide(_ notification: Notification) {
         var info = notification.userInfo!
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let keyboardHeight = keyboardFrame.size.height
         
-        messageTableView.contentOffset = CGPointMake(messageTableView.contentOffset.x,
-            messageTableView.contentOffset.y - keyboardHeight)
+        messageTableView.contentOffset = CGPoint(x: messageTableView.contentOffset.x,
+            y: messageTableView.contentOffset.y - keyboardHeight)
         
         self.bottomViewConstraint.constant = 0
         self.view.layoutIfNeeded()
@@ -234,11 +234,11 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
         self.updateView()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super.prepareForSegue(segue, sender: sender)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
 
         if segue.identifier == "showDecipher" {
-            let targetController = segue.destinationViewController as! DecipherViewController
+            let targetController = segue.destination as! DecipherViewController
 
             let message = sender as! RemoteMessage
 
@@ -253,7 +253,7 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
                 }
             }
         } else if segue.identifier == "showMessagePreview" {
-            let targetController = segue.destinationViewController as! SendMessageViewController
+            let targetController = segue.destination as! SendMessageViewController
             
             let text = sender as! String
             updateLastCipherType()
@@ -269,7 +269,7 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
     override func updateView() {
         talk = talkService.getByTalkId(friendTalk.id)
 
-        if (talk.messages.count != 0 && friendTalk.messageCount > talk.messages.count) {
+        if ((talk.messages.count != 0) && (friendTalk.messageCount > talk.messages.count)) {
             createRefreshControl()
         } else {
             deleteRefreshControl()
@@ -289,14 +289,14 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
         dismissKeyboard()
 
         messageText.text = ""
-        sendButton.enabled = false
-        messageText.scrollEnabled = false
+        sendButton.isEnabled = false
+        messageText.isScrollEnabled = false
         messageTextHeightConstraint.constant = defaultMessageTextHeightConstraint
 
         messageTableView.scrollTableToBottom()
     }
 
-    func updateViewAfterGetEarlier(earlierLoaded: Int) {
+    func updateViewAfterGetEarlier(_ earlierLoaded: Int) {
         updateView()
 
         if  (!self.isKeyboardShown) {
@@ -310,17 +310,17 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
         messageTableView.scrollTableToBottom()
     }
 
-    private func createRefreshControl() {
+    fileprivate func createRefreshControl() {
         deleteRefreshControl()
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to load more")
-        refreshControl.addTarget(self, action: #selector(MessageService.loadEarlier(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(MessageService.loadEarlier(_:)), for: UIControlEvents.valueChanged)
         self.messageTableView.addSubview(refreshControl)
         //self.messageTableView.insertSubview(refreshControl, atIndex: 0)
     }
     
-    private func deleteRefreshControl() {
+    fileprivate func deleteRefreshControl() {
         self.refreshControl?.endRefreshing()
         self.refreshControl?.removeFromSuperview()
         self.refreshControl = nil

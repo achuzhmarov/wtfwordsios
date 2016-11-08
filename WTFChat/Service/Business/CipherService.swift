@@ -1,42 +1,42 @@
 import Foundation
 
 class CipherService: Service {
-    private let ciphers: [CipherSettings] = [
-            CipherSettings(type: .RightCutter, difficulty: .Easy, cipher: RightCutterEasyCipher()),
-            CipherSettings(type: .RightCutter, difficulty: .Normal, cipher: RightCutterNormalCipher()),
-            CipherSettings(type: .RightCutter, difficulty: .Hard, cipher: RightCutterHardCipher()),
+    fileprivate let ciphers: [CipherSettings] = [
+            CipherSettings(type: .rightCutter, difficulty: .easy, cipher: RightCutterEasyCipher()),
+            CipherSettings(type: .rightCutter, difficulty: .normal, cipher: RightCutterNormalCipher()),
+            CipherSettings(type: .rightCutter, difficulty: .hard, cipher: RightCutterHardCipher()),
 
-            CipherSettings(type: .LeftCutter, difficulty: .Easy, cipher: LeftCutterEasyCipher()),
-            CipherSettings(type: .LeftCutter, difficulty: .Normal, cipher: LeftCutterNormalCipher()),
-            CipherSettings(type: .LeftCutter, difficulty: .Hard, cipher: LeftCutterHardCipher()),
+            CipherSettings(type: .leftCutter, difficulty: .easy, cipher: LeftCutterEasyCipher()),
+            CipherSettings(type: .leftCutter, difficulty: .normal, cipher: LeftCutterNormalCipher()),
+            CipherSettings(type: .leftCutter, difficulty: .hard, cipher: LeftCutterHardCipher()),
 
-            CipherSettings(type: .DoubleCutter, difficulty: .Easy, cipher: DoubleCutterEasyCipher()),
-            CipherSettings(type: .DoubleCutter, difficulty: .Normal, cipher: DoubleCutterNormalCipher()),
-            CipherSettings(type: .DoubleCutter, difficulty: .Hard, cipher: DoubleCutterHardCipher()),
+            CipherSettings(type: .doubleCutter, difficulty: .easy, cipher: DoubleCutterEasyCipher()),
+            CipherSettings(type: .doubleCutter, difficulty: .normal, cipher: DoubleCutterNormalCipher()),
+            CipherSettings(type: .doubleCutter, difficulty: .hard, cipher: DoubleCutterHardCipher()),
 
-            CipherSettings(type: .RandomCutter, difficulty: .Easy, cipher: RandomCutterEasyCipher()),
-            CipherSettings(type: .RandomCutter, difficulty: .Normal, cipher: RandomCutterNormalCipher()),
-            CipherSettings(type: .RandomCutter, difficulty: .Hard, cipher: RandomCutterHardCipher()),
+            CipherSettings(type: .randomCutter, difficulty: .easy, cipher: RandomCutterEasyCipher()),
+            CipherSettings(type: .randomCutter, difficulty: .normal, cipher: RandomCutterNormalCipher()),
+            CipherSettings(type: .randomCutter, difficulty: .hard, cipher: RandomCutterHardCipher()),
 
-            CipherSettings(type: .Shuffle, difficulty: .Easy, cipher: ShuffleEasyCipher()),
-            CipherSettings(type: .Shuffle, difficulty: .Normal, cipher: ShuffleNormalCipher()),
-            CipherSettings(type: .Shuffle, difficulty: .Hard, cipher: ShuffleHardCipher())
+            CipherSettings(type: .shuffle, difficulty: .easy, cipher: ShuffleEasyCipher()),
+            CipherSettings(type: .shuffle, difficulty: .normal, cipher: ShuffleNormalCipher()),
+            CipherSettings(type: .shuffle, difficulty: .hard, cipher: ShuffleHardCipher())
     ]
 
-    func cipherMessage(message: Message) {
+    func cipherMessage(_ message: Message) {
         for word in message.words! {
-            if (word.type == WordType.New) {
+            if (word.type == WordType.new) {
                 word.cipheredText = cipherText(message.cipherType, difficulty: message.cipherDifficulty, word: word)
             }
         }
     }
 
-    private func cipherText(type: CipherType, difficulty: CipherDifficulty, word: Word) -> String {
+    fileprivate func cipherText(_ type: CipherType, difficulty: CipherDifficulty, word: Word) -> String {
         let cipher = getCipher(type, difficulty: difficulty)!
         return cipher.getTextForDecipher(word)
     }
 
-    private func getCipher(type: CipherType, difficulty: CipherDifficulty) -> Cipher? {
+    fileprivate func getCipher(_ type: CipherType, difficulty: CipherDifficulty) -> Cipher? {
         for cipherData in ciphers {
             if (cipherData.type == type && cipherData.difficulty == difficulty) {
                 return cipherData.cipher

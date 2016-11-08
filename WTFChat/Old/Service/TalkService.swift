@@ -9,21 +9,21 @@
 import Foundation
 
 protocol TalkListener: class {
-    func updateTalks(talks: [FriendTalk]?, error: NSError?)
+    func updateTalks(_ talks: [FriendTalk]?, error: NSError?)
 }
 
 class TalkService: Service {
     let TALKS_UPDATE_TIMER_INTERVAL = 10.0
 
-    private let talkNetworkService: TalkNetworkService
-    private let iosService: IosService
-    private let currentUserService: CurrentUserService
-    private let coreMessageService: CoreMessageService
+    fileprivate let talkNetworkService: TalkNetworkService
+    fileprivate let iosService: IosService
+    fileprivate let currentUserService: CurrentUserService
+    fileprivate let coreMessageService: CoreMessageService
 
     //TODO - JUST AWFUL
     var messageService: MessageService!
 
-    var updateTimer: NSTimer?
+    var updateTimer: Foundation.Timer?
     
     var talks = [FriendTalk]()
     
@@ -45,7 +45,7 @@ class TalkService: Service {
         self.coreMessageService = coreMessageService
     }
 
-    func getTalkByLogin(friend: String) -> FriendTalk? {
+    func getTalkByLogin(_ friend: String) -> FriendTalk? {
         for talk in talks {
             if (currentUserService.getFriendLogin(talk) == friend) {
                 return talk
@@ -65,7 +65,7 @@ class TalkService: Service {
         talks.append(singleModeTalk)
     }
     
-    func setTalksByNewUser(user: User) {
+    func setTalksByNewUser(_ user: User) {
         self.talks = user.talks
         let singleModeTalk = createSingleModeTalk()
         talks.append(singleModeTalk)
@@ -73,10 +73,10 @@ class TalkService: Service {
         iosService.updatePushBadge(talks)
         
         //timer worked only on main
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             self.updateTimer?.invalidate()
 
-            self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(self.TALKS_UPDATE_TIMER_INTERVAL, target: self, selector: #selector(TalkService.getNewUnreadTalks), userInfo: nil, repeats: true)
+            self.updateTimer = Foundation.Timer.scheduledTimer(timeInterval: self.TALKS_UPDATE_TIMER_INTERVAL, target: self, selector: #selector(TalkService.getNewUnreadTalks), userInfo: nil, repeats: true)
         })
 
         messageService.startUpdateTimer()
@@ -84,7 +84,7 @@ class TalkService: Service {
         fireUpdateTalksEvent()
     }
     
-    private func createSingleModeTalk() -> FriendTalk {
+    fileprivate func createSingleModeTalk() -> FriendTalk {
         //add singleModeTalk
         let singleModeTalk = FriendTalk(id: "0")
         singleModeTalk.isSingleMode = true
@@ -105,7 +105,7 @@ class TalkService: Service {
         let lastUpdate = self.getTalksLastUpdate()
 
         talkNetworkService.getNewUnreadTalks(lastUpdate) { (talks, error) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 if let requestError = error {
                     self.friendsTalkListener?.updateTalks(nil, error: requestError)
                 } else {
@@ -124,27 +124,27 @@ class TalkService: Service {
         }
     }
     
-    func addNewTalk(talk: FriendTalk) {
+    func addNewTalk(_ talk: FriendTalk) {
         talks.append(talk)
         fireUpdateTalksEvent()
     }
     
-    func updateTalkInArray(talk: FriendTalk, withMessages: Bool = false) {
+    func updateTalkInArray(_ talk: FriendTalk, withMessages: Bool = false) {
         updateOrCreateTalkInArray(talk, withMessages: withMessages)
         fireUpdateTalksEvent()
     }
     
-    func talkViewed(talkId: String) {
+    func talkViewed(_ talkId: String) {
         let talk = getByTalkId(talkId)!
         
-        if (talk.decipherStatus != DecipherStatus.No) {
-            talk.decipherStatus = DecipherStatus.No
+        if (talk.decipherStatus != DecipherStatus.no) {
+            talk.decipherStatus = DecipherStatus.no
             updateTalkInArray(talk)
             messageService.markTalkAsReaded(talk)
         }
     }
     
-    func getByTalkId(talkId: String) -> FriendTalk? {
+    func getByTalkId(_ talkId: String) -> FriendTalk? {
         for talk in talks {
             if (talkId == talk.id) {
                 return talk
@@ -165,18 +165,18 @@ class TalkService: Service {
         return nil
     }
     
-    private func fireUpdateTalksEvent() {
+    fileprivate func fireUpdateTalksEvent() {
         iosService.updatePushBadge(talks)
         self.friendsTalkListener?.updateTalks(talks, error: nil)
     }
     
-    private func updateOrCreateTalkInArray(talk: FriendTalk, withMessages: Bool = false) {
+    fileprivate func updateOrCreateTalkInArray(_ talk: FriendTalk, withMessages: Bool = false) {
         for i in 0..<talks.count {
             if (talk.id == talks[i].id) {
                 
                 if (withMessages) {
                     //update with messages
-                    talk.messages = talk.messages.sort { (message1, message2) -> Bool in
+                    talk.messages = talk.messages.sorted { (message1, message2) -> Bool in
                         return message1.timestamp.isLess(message2.timestamp)
                     }
                     talk.lastMessage = talk.messages.last as? RemoteMessage
@@ -193,8 +193,8 @@ class TalkService: Service {
         talks.append(talk)
     }
     
-    private func getTalksLastUpdate() -> NSDate {
-        var lastUpdate: NSDate?
+    fileprivate func getTalksLastUpdate() -> Date {
+        var lastUpdate: Date?
         
         for talk in talks {
             if (talk.isSingleMode) {
@@ -202,14 +202,14 @@ class TalkService: Service {
             }
             
             if (lastUpdate == nil || talk.lastUpdate.isGreater(lastUpdate!)) {
-                lastUpdate = talk.lastUpdate
+                lastUpdate = talk.lastUpdate as Date
             }
         }
         
         if (lastUpdate != nil) {
             return lastUpdate!
         } else {
-            return NSDate.defaultPast()
+            return Date.defaultPast()
         }
     }
 }

@@ -1,7 +1,7 @@
 import Foundation
 
 class SingleMessage: Message {
-    private var coreSingleMessage: CoreSingleMessage!
+    fileprivate var coreSingleMessage: CoreSingleMessage!
     var level: Level!
 
     init(message: Message) {
@@ -21,7 +21,7 @@ class SingleMessage: Message {
     }
 
     init(extId: String, cipherType: CipherType, cipherDifficulty: CipherDifficulty, words: [Word],
-            deciphered: Bool, timestamp: NSDate, lastUpdate: NSDate, exp: Int, timerSecs: Int, hintsUsed: Int,
+            deciphered: Bool, timestamp: Date, lastUpdate: Date, exp: Int, timerSecs: Int, hintsUsed: Int,
             coreSingleMessage: CoreSingleMessage) {
 
         super.init(
@@ -40,7 +40,7 @@ class SingleMessage: Message {
         self.coreSingleMessage = coreSingleMessage
     }
 
-    func setCoreSingleMessage(coreSingleMessage: CoreSingleMessage) {
+    func setCoreSingleMessage(_ coreSingleMessage: CoreSingleMessage) {
         self.coreSingleMessage = coreSingleMessage
     }
 

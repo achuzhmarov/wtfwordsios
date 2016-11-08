@@ -1,14 +1,14 @@
 import Foundation
 
 class TimeService: Service {
-    private var timesCache = [NSDate: NSAttributedString]()
+    fileprivate var timesCache = [Date: NSAttributedString]()
     
-    func parseTime(time: NSDate) -> NSAttributedString {
+    func parseTime(_ time: Date) -> NSAttributedString {
         if let parsedTime = timesCache[time] {
             return parsedTime
         }
         
-        timesCache[time] = JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(time)
+        timesCache[time] = JSQMessagesTimestampFormatter.shared().attributedTimestamp(for: time)
         
         return timesCache[time]!
     }

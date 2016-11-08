@@ -2,7 +2,7 @@ import Foundation
 import SwiftyJSON
 
 class JsonRemoteMessageParser {
-    class func arrayFromJson(json: JSON) throws -> [RemoteMessage] {
+    class func arrayFromJson(_ json: JSON) throws -> [RemoteMessage] {
         var messages = [RemoteMessage]()
 
         if let value = json.array {
@@ -16,15 +16,15 @@ class JsonRemoteMessageParser {
         return messages
     }
 
-    class func newFromMessage(message: RemoteMessage) -> JSON {
+    class func newFromMessage(_ message: RemoteMessage) -> JSON {
         var json: JSON = [
             "talk_id": message.talkId,
             "author": message.author,
             "deciphered": message.deciphered,
             "cipher_type": message.cipherType.rawValue,
             "cipher_difficulty": message.cipherDifficulty.rawValue,
-            "timestamp": NSDate.parseStringJSONFromDate(message.timestamp)!,
-            "last_update": NSDate.parseStringJSONFromDate(message.lastUpdate)!,
+            "timestamp": Date.parseStringJSONFromDate(message.timestamp)!,
+            "last_update": Date.parseStringJSONFromDate(message.lastUpdate)!,
             "ext_id": message.extId,
         ]
 
@@ -34,7 +34,7 @@ class JsonRemoteMessageParser {
         return json
     }
 
-    class func decipherFromMessage(message: RemoteMessage) -> JSON {
+    class func decipherFromMessage(_ message: RemoteMessage) -> JSON {
         var json: JSON = [
             "id": message.id,
             "timer_secs": message.timerSecs,
@@ -47,7 +47,7 @@ class JsonRemoteMessageParser {
         return json
     }
 
-    class func triesFromMessage(message: RemoteMessage) -> [AnyObject] {
+    class func triesFromMessage(_ message: RemoteMessage) -> [AnyObject] {
         var triesJson = [AnyObject]()
 
         for i in 0..<message.tries.count {
@@ -58,7 +58,7 @@ class JsonRemoteMessageParser {
         return triesJson
     }
 
-    class func wordsFromMessage(message: RemoteMessage) -> [AnyObject] {
+    class func wordsFromMessage(_ message: RemoteMessage) -> [AnyObject] {
         var wordsJson = [AnyObject]()
 
         for i in 0..<message.words!.count {
@@ -69,7 +69,7 @@ class JsonRemoteMessageParser {
         return wordsJson
     }
 
-    class func fromJson(json: JSON) throws -> RemoteMessage {
+    class func fromJson(_ json: JSON) throws -> RemoteMessage {
         var id: String
         var talkId: String
         var author: String
@@ -77,8 +77,8 @@ class JsonRemoteMessageParser {
         var deciphered: Bool
         var cipherType: CipherType
         var cipherDifficulty: CipherDifficulty
-        var timestamp: NSDate
-        var lastUpdate: NSDate
+        var timestamp: Date
+        var lastUpdate: Date
         var exp: Int = 0
         var extId: String
         var timerSecs: Int = 0
@@ -127,7 +127,7 @@ class JsonRemoteMessageParser {
         }
 
         if let value = json["timestamp"].string {
-            if let parsedTimestamp = NSDate.parseDateFromStringJSON(value) {
+            if let parsedTimestamp = Date.parseDateFromStringJSON(value) {
                 timestamp = parsedTimestamp
             } else {
                 throw NSError(code: 1, message: "Could not parse timestamp")
@@ -137,7 +137,7 @@ class JsonRemoteMessageParser {
         }
 
         if let value = json["last_update"].string {
-            if let parsedTimestamp = NSDate.parseDateFromStringJSON(value) {
+            if let parsedTimestamp = Date.parseDateFromStringJSON(value) {
                 lastUpdate = parsedTimestamp
             } else {
                 lastUpdate = timestamp

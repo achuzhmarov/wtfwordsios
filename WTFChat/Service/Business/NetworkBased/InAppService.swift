@@ -3,9 +3,9 @@ import StoreKit
 import Localize_Swift
 
 class InAppService: Service {
-    private let inAppHelper: InAppHelper
+    fileprivate let inAppHelper: InAppHelper
 
-    private var products = [SKProduct]()
+    fileprivate var products = [SKProduct]()
 
     init(inAppHelper: InAppHelper) {
         self.inAppHelper = inAppHelper
@@ -23,7 +23,7 @@ class InAppService: Service {
         inAppHelper.restoreCompletedTransactions()
     }
     
-    func purchaseProduct(productId: ProductIdentifier) {
+    func purchaseProduct(_ productId: ProductIdentifier) {
         if !canPurchase(productId) {
             return
         }
@@ -33,16 +33,16 @@ class InAppService: Service {
         }
     }
 
-    func getHintsProductTitle(productId: ProductIdentifier) -> String? {
+    func getHintsProductTitle(_ productId: ProductIdentifier) -> String? {
         if let product = inAppHelper.getProduct(productId) {
-            let titleParts = product.localizedTitle.componentsSeparatedByString(" ")
+            let titleParts = product.localizedTitle.components(separatedBy: " ")
             return titleParts[0]
         }
 
         return nil
     }
 
-    func getProductTitle(productId: ProductIdentifier) -> String? {
+    func getProductTitle(_ productId: ProductIdentifier) -> String? {
         if let product = inAppHelper.getProduct(productId) {
             return product.localizedTitle.localized()
         }
@@ -50,7 +50,7 @@ class InAppService: Service {
         return nil
     }
     
-    func getProductDescription(productId: ProductIdentifier) -> String? {
+    func getProductDescription(_ productId: ProductIdentifier) -> String? {
         if (IAPProducts.CONSUMABLE.contains(productId)) {
             return ""
         }
@@ -62,7 +62,7 @@ class InAppService: Service {
         return nil
     }
     
-    func getProductPrice(productId: ProductIdentifier) -> String? {
+    func getProductPrice(_ productId: ProductIdentifier) -> String? {
         if !canMakePayments() {
             return "-"
         }
@@ -78,7 +78,7 @@ class InAppService: Service {
         return nil
     }
     
-    func canPurchase(productId: ProductIdentifier) -> Bool {
+    func canPurchase(_ productId: ProductIdentifier) -> Bool {
         if canMakePayments() && isProductExists(productId) {
             return true
         }
@@ -86,11 +86,11 @@ class InAppService: Service {
         return false
     }
     
-    func isPurchased(productId: ProductIdentifier) -> Bool {
+    func isPurchased(_ productId: ProductIdentifier) -> Bool {
         return inAppHelper.isProductPurchased(productId)
     }
     
-    func showBuyAlert(productId: ProductIdentifier, cancelFunc: (() -> Void)? = nil) {
+    func showBuyAlert(_ productId: ProductIdentifier, cancelFunc: (() -> Void)? = nil) {
         if (!canPurchase(productId) || isPurchased(productId)) {
             return
         }
@@ -109,7 +109,7 @@ class InAppService: Service {
         })
     }
     
-    private func isProductExists(productId: ProductIdentifier) -> Bool {
+    fileprivate func isProductExists(_ productId: ProductIdentifier) -> Bool {
         if inAppHelper.getProduct(productId) != nil {
             return true
         }
@@ -117,7 +117,7 @@ class InAppService: Service {
         return false
     }
     
-    private func canMakePayments() -> Bool {
+    fileprivate func canMakePayments() -> Bool {
         return SKPaymentQueue.canMakePayments()
     }
 }

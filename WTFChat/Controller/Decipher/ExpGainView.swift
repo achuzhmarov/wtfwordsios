@@ -2,14 +2,14 @@ import Foundation
 import Localize_Swift
 
 class ExpGainView: NSObject {
-    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
 
-    private let LEVEL_TEXT = "LEVEL".localized()
+    fileprivate let LEVEL_TEXT = "LEVEL".localized()
 
     var progressView: UIProgressView?
     var expLabel: UILabel?
     var lvlLabel: UILabel?
-    var progressBarTimer: NSTimer?
+    var progressBarTimer: Foundation.Timer?
     var userExp: Int = 0
     var nextLvlExp: Int = 0
     var userLvl: Int = 0
@@ -18,7 +18,7 @@ class ExpGainView: NSObject {
     let progressUpdateInterval = 0.1
     let progressUpdateMaxStep = Float(0.125)
 
-    func initView(superView: UIView) {
+    func initView(_ superView: UIView) {
         self.lvlLabel = createLvlLabel(superView, userLvl: currentUserService.getUserLvl())
         self.expLabel = createExpLabel(superView)
         self.progressView = createProgressBar(superView)
@@ -28,7 +28,7 @@ class ExpGainView: NSObject {
         userLvl = currentUserService.getUserLvl()
     }
     
-    private func createLvlLabel(rootView: UIView, userLvl: Int) -> UILabel {
+    fileprivate func createLvlLabel(_ rootView: UIView, userLvl: Int) -> UILabel {
         //create gauge view
         let lvlLabel = UILabel()
         lvlLabel.text = LEVEL_TEXT + " " + String(userLvl)
@@ -40,16 +40,16 @@ class ExpGainView: NSObject {
         rootView.addSubview(lvlLabel)
         
         //add constraints
-        let leftConstraint = NSLayoutConstraint(item: lvlLabel, attribute: .Leading, relatedBy: .Equal, toItem: rootView, attribute: .Leading, multiplier: 1, constant: 0)
+        let leftConstraint = NSLayoutConstraint(item: lvlLabel, attribute: .leading, relatedBy: .equal, toItem: rootView, attribute: .leading, multiplier: 1, constant: 0)
         rootView.addConstraint(leftConstraint)
         
-        let yConstraint = NSLayoutConstraint(item: lvlLabel, attribute: .Top, relatedBy: .Equal, toItem: rootView, attribute: .Top, multiplier: 1, constant: lvlTopMargin)
+        let yConstraint = NSLayoutConstraint(item: lvlLabel, attribute: .top, relatedBy: .equal, toItem: rootView, attribute: .top, multiplier: 1, constant: lvlTopMargin)
         rootView.addConstraint(yConstraint)
         
         return lvlLabel
     }
 
-    private func createExpLabel(rootView: UIView) -> UILabel {
+    fileprivate func createExpLabel(_ rootView: UIView) -> UILabel {
         //create gauge view
         let expLabel = UILabel()
         expLabel.font = UIFont.init(name: expLabel.font.fontName, size: 14)
@@ -60,34 +60,34 @@ class ExpGainView: NSObject {
         rootView.addSubview(expLabel)
         
         //add constraints
-        let rightConstraint = NSLayoutConstraint(item: expLabel, attribute: .Trailing, relatedBy: .Equal, toItem: rootView, attribute: .Trailing, multiplier: 1, constant: 0)
+        let rightConstraint = NSLayoutConstraint(item: expLabel, attribute: .trailing, relatedBy: .equal, toItem: rootView, attribute: .trailing, multiplier: 1, constant: 0)
         rootView.addConstraint(rightConstraint)
         
-        let yConstraint = NSLayoutConstraint(item: expLabel, attribute: .Top, relatedBy: .Equal, toItem: rootView, attribute: .Top, multiplier: 1, constant: lvlTopMargin)
+        let yConstraint = NSLayoutConstraint(item: expLabel, attribute: .top, relatedBy: .equal, toItem: rootView, attribute: .top, multiplier: 1, constant: lvlTopMargin)
         rootView.addConstraint(yConstraint)
         
         return expLabel
     }
     
-    private func createProgressBar(rootView: UIView) -> UIProgressView {
-        let progressView = UIProgressView(progressViewStyle: UIProgressViewStyle.Default)
+    fileprivate func createProgressBar(_ rootView: UIView) -> UIProgressView {
+        let progressView = UIProgressView(progressViewStyle: UIProgressViewStyle.default)
         progressView.progress = 0
         progressView.translatesAutoresizingMaskIntoConstraints = false
         rootView.addSubview(progressView)
         
-        let leftConstraint = NSLayoutConstraint(item: progressView, attribute: .Leading, relatedBy: .Equal, toItem: rootView, attribute: .Leading, multiplier: 1, constant: 0)
+        let leftConstraint = NSLayoutConstraint(item: progressView, attribute: .leading, relatedBy: .equal, toItem: rootView, attribute: .leading, multiplier: 1, constant: 0)
         rootView.addConstraint(leftConstraint)
         
-        let rightConstraint = NSLayoutConstraint(item: progressView, attribute: .Trailing, relatedBy: .Equal, toItem: rootView, attribute: .Trailing, multiplier: 1, constant: 0)
+        let rightConstraint = NSLayoutConstraint(item: progressView, attribute: .trailing, relatedBy: .equal, toItem: rootView, attribute: .trailing, multiplier: 1, constant: 0)
         rootView.addConstraint(rightConstraint)
         
-        let yConstraint = NSLayoutConstraint(item: progressView, attribute: .Bottom, relatedBy: .Equal, toItem: rootView, attribute: .Bottom, multiplier: 1, constant: 0)
+        let yConstraint = NSLayoutConstraint(item: progressView, attribute: .bottom, relatedBy: .equal, toItem: rootView, attribute: .bottom, multiplier: 1, constant: 0)
         rootView.addConstraint(yConstraint)
 
         return progressView
     }
 
-    func runProgress(earnedExp: Int) {
+    func runProgress(_ earnedExp: Int) {
         if (progressView == nil) {
             NSLog("call to runProgress while no initView")
             return
@@ -100,22 +100,22 @@ class ExpGainView: NSObject {
 
         userExp += earnedExp
 
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             self.progressBarTimer?.invalidate()
             
-            self.progressBarTimer = NSTimer.scheduledTimerWithTimeInterval(self.progressUpdateInterval, target: self,
+            self.progressBarTimer = Foundation.Timer.scheduledTimer(timeInterval: self.progressUpdateInterval, target: self,
                 selector: #selector(ExpGainView.updateProgress), userInfo: nil, repeats: true)
         })
 
         expLabel?.text = "+\(String(earnedExp))XP"
     }
 
-    private func setFinishedProgress() {
+    fileprivate func setFinishedProgress() {
         let targetProgress = getTargetProgress()
         self.progressView?.setProgress(targetProgress, animated: false)
     }
 
-    private func getTargetProgress() -> Float {
+    fileprivate func getTargetProgress() -> Float {
         var targetProgress = Float(userExp) / Float(nextLvlExp)
         if (targetProgress > 1) {
             targetProgress = 1.0
@@ -138,10 +138,10 @@ class ExpGainView: NSObject {
             if (progressView!.progress == 1) {
                 let newUserLvl = currentUserService.getUserLvl()
 
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     usleep(1000 * 500)
                     
-                    UIView.animateWithDuration(1,
+                    UIView.animate(withDuration: 1,
                         animations: {
                             self.lvlLabel?.text = self.LEVEL_TEXT + " " + String(newUserLvl)
                         },
@@ -155,9 +155,9 @@ class ExpGainView: NSObject {
                 progressStep = self.progressUpdateMaxStep
             }
             
-            dispatch_async(dispatch_get_main_queue()) {
-                UIView.animateWithDuration(
-                    1,
+            DispatchQueue.main.async {
+                UIView.animate(
+                    withDuration: 1,
                     animations: {
                         self.progressView?.setProgress(
                             self.progressView!.progress + progressStep, animated: true

@@ -3,10 +3,10 @@ import Foundation
 class ServiceLocator {
     lazy var s = [String: Any]()
 
-    func add(services: Service...) {
+    func add(_ services: Service...) {
         for service in services {
-            let backgroundQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
-            dispatch_async(backgroundQueue, {
+            let backgroundQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
+            backgroundQueue.async(execute: {
                 service.initService()
             })
 
@@ -25,7 +25,7 @@ class ServiceLocator {
         }
     }
 
-    private func typeName(some: Any) -> String {
-        return (some is Any.Type) ? "\(some)" : "\(some.dynamicType)"
+    fileprivate func typeName(_ some: Any) -> String {
+        return (some is Any.Type) ? "\(some)" : "\(type(of: (some) as AnyObject))"
     }
 }

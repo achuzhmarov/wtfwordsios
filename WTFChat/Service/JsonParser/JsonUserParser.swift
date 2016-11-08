@@ -2,7 +2,7 @@ import Foundation
 import SwiftyJSON
 
 class JsonUserParser {
-    class func friendsFromJson(json: JSON) throws -> [FriendInfo] {
+    class func friendsFromJson(_ json: JSON) throws -> [FriendInfo] {
         var friends = [FriendInfo]()
 
         if let value = json.array {
@@ -16,11 +16,11 @@ class JsonUserParser {
         return friends
     }
 
-    class func fromJson(json: JSON) throws -> User {
+    class func fromJson(_ json: JSON) throws -> User {
         var login: String
         var hints: Int = 0
         var talks = [FriendTalk]()
-        var lastUpdate: NSDate = NSDate.defaultPast()
+        var lastUpdate: Date = Date.defaultPast()
         var exp: Int = 0
         var singleExp: Int = 0
         var newHints: Int = 0
@@ -57,7 +57,7 @@ class JsonUserParser {
         }
 
         if let value = json["last_update"].string {
-            if let parsedTimestamp = NSDate.parseDateFromStringJSON(value) {
+            if let parsedTimestamp = Date.parseDateFromStringJSON(value) {
                 lastUpdate = parsedTimestamp
             } else {
                 //throw NSError(code: 1, message: "Could not parse lastUpdate")

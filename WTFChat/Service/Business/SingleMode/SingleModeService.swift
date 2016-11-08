@@ -1,16 +1,16 @@
 import Foundation
 
 enum StarStatus : Int {
-    case NoChange = 0
-    case EarnStar
-    case Mastered
+    case noChange = 0
+    case earnStar
+    case mastered
 }
 
 class SingleModeService: Service {
-    private let categoryService: SingleModeCategoryService
-    private let levelService: LevelService
-    private let expService: ExpService
-    private let currentUserService: CurrentUserService
+    fileprivate let categoryService: SingleModeCategoryService
+    fileprivate let levelService: LevelService
+    fileprivate let expService: ExpService
+    fileprivate let currentUserService: CurrentUserService
 
     init(singleModeCategoryService: SingleModeCategoryService,
          expService: ExpService,
@@ -23,23 +23,23 @@ class SingleModeService: Service {
         self.levelService = levelService
     }
 
-    func finishDecipher(singleMessage: SingleMessage) {
+    func finishDecipher(_ singleMessage: SingleMessage) {
         let level = singleMessage.level
-        let category = level.category
-        let wasCategoryClearedOnEasy = categoryService.isCategoryCleared(category, difficulty: .Easy)
-        let wasCategoryClearedOnNormal = categoryService.isCategoryCleared(category, difficulty: .Normal)
-        let wasCategoryClearedOnHard = categoryService.isCategoryCleared(category, difficulty: .Hard)
+        let category = level?.category
+        let wasCategoryClearedOnEasy = categoryService.isCategoryCleared(category, difficulty: .easy)
+        let wasCategoryClearedOnNormal = categoryService.isCategoryCleared(category, difficulty: .normal)
+        let wasCategoryClearedOnHard = categoryService.isCategoryCleared(category, difficulty: .hard)
 
         singleMessage.exp = expService.calculateExpForMessage(singleMessage)
 
-        if (singleMessage.getMessageStatus() == .Success) {
-            if (level.cleared) {
-                if (level.clearedDifficulty!.rawValue < singleMessage.cipherDifficulty.rawValue) {
-                    level.clearedDifficulty = singleMessage.cipherDifficulty
+        if (singleMessage.getMessageStatus() == .success) {
+            if (level?.cleared)! {
+                if ((level?.clearedDifficulty!.rawValue)! < singleMessage.cipherDifficulty.rawValue) {
+                    level?.clearedDifficulty = singleMessage.cipherDifficulty
                 }
             } else {
-                level.cleared = true
-                level.clearedDifficulty = singleMessage.cipherDifficulty
+                level?.cleared = true
+                level?.clearedDifficulty = singleMessage.cipherDifficulty
             }
 
 
@@ -49,20 +49,20 @@ class SingleModeService: Service {
         currentUserService.earnSingleExp(singleMessage.exp)
         //currentUserService.useHints(singleMessage.hintsUsed)
 
-        let categoryClearedOnEasy = categoryService.isCategoryCleared(category, difficulty: .Easy)
-        let categoryClearedOnNormal = categoryService.isCategoryCleared(category, difficulty: .Normal)
-        let categoryClearedOnHard = categoryService.isCategoryCleared(category, difficulty: .Hard)
+        let categoryClearedOnEasy = categoryService.isCategoryCleared(category, difficulty: .easy)
+        let categoryClearedOnNormal = categoryService.isCategoryCleared(category, difficulty: .normal)
+        let categoryClearedOnHard = categoryService.isCategoryCleared(category, difficulty: .hard)
 
         if (categoryClearedOnHard && !wasCategoryClearedOnHard) {
-            category.hasJustClearedOnHard = true
+            category?.hasJustClearedOnHard = true
         } else if (categoryClearedOnNormal && !wasCategoryClearedOnNormal) {
-            category.hasJustClearedOnNormal = true
+            category?.hasJustClearedOnNormal = true
         } else if (categoryClearedOnEasy && !wasCategoryClearedOnEasy) {
-            category.hasJustClearedOnEasy = true
+            category?.hasJustClearedOnEasy = true
         }
     }
 
-    func isLevelAvailable(level: Level) -> Bool {
+    func isLevelAvailable(_ level: Level) -> Bool {
         if let previousLevel = levelService.getPreviousLevel(level) {
             return previousLevel.cleared
         } else if let previousCategory = categoryService.getPreviousCategory(level.category) {

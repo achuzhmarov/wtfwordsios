@@ -1,21 +1,21 @@
 import Foundation
 
 class TutorialSendMessageViewControllerOld: SendMessageViewController {
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if (currentTutorialStage == .SendMessage) {
+        if (currentTutorialStage == .sendMessage) {
             WTFOneButtonAlert.show("Choose a cipher",
                 message: "You can now choose cipher type and difficulty to cipher your message. Try different ones and see how your message transforms. Make a choice and press 'Send' button at the top right corner.",
                 firstButtonTitle: "Ok") { () -> Void in
-                    currentTutorialStage = .SelectCipher
+                    currentTutorialStage = .selectCipher
             }
         }
     }
     
-    override func sendTapped(sender: AnyObject) {
-        if (currentTutorialStage == .SelectCipher) {
-            currentTutorialStage = .MessageSended
+    override func sendTapped(_ sender: AnyObject) {
+        if (currentTutorialStage == .selectCipher) {
+            currentTutorialStage = .messageSended
         }
         
         super.sendTapped(sender)

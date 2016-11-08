@@ -1,7 +1,7 @@
 import Foundation
 
 extension CurrentUserService {
-    func earnSingleExp(earnedExp: Int) {
+    func earnSingleExp(_ earnedExp: Int) {
         user.singleExp += earnedExp
         saveUserInLocalStorage()
     }
@@ -11,31 +11,31 @@ extension CurrentUserService {
         saveUserInLocalStorage()
     }
 
-    func updateInfo(newUserInfo: User) {
+    func updateInfo(_ newUserInfo: User) {
         user.updateInfo(newUserInfo)
         saveUserInLocalStorage()
     }
 
-    func addFriend(friend: FriendInfo) {
+    func addFriend(_ friend: FriendInfo) {
         user.friends.append(friend)
     }
 
-    func updateName(name: String) {
+    func updateName(_ name: String) {
         user.name = name
         saveUserInLocalStorage()
     }
 
-    func updatePushNew(pushNew: Bool) {
+    func updatePushNew(_ pushNew: Bool) {
         user.pushNew = pushNew
         saveUserInLocalStorage()
     }
 
-    func updatePushDeciphered(pushDeciphered: Bool) {
+    func updatePushDeciphered(_ pushDeciphered: Bool) {
         user.pushDeciphered = pushDeciphered
         saveUserInLocalStorage()
     }
 
-    func useHints(hintsUsed: Int) {
+    func useHints(_ hintsUsed: Int) {
         user.hints -= hintsUsed
         saveUserInLocalStorage()
     }
@@ -48,7 +48,7 @@ extension CurrentUserService {
         }
     }
 
-    func addHints(hints: Int) {
+    func addHints(_ hints: Int) {
         user.hints += hints
         saveUserInLocalStorage()
     }
@@ -61,7 +61,7 @@ extension CurrentUserService {
         return hintsForLvl
     }
 
-    func updateLastLogin(lastLogin: NSDate) {
+    func updateLastLogin(_ lastLogin: Date) {
         user.lastLogin = lastLogin
         saveUserInLocalStorage()
     }

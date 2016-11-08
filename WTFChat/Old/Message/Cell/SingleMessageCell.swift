@@ -1,9 +1,9 @@
 import Foundation
 
 class SingleMessageCell: BaseMessageCell {
-    private let avatarService: AvatarService = serviceLocator.get(AvatarService)
+    fileprivate let avatarService: AvatarService = serviceLocator.get(AvatarService)
 
-    override func updateMessage(message: Message, isOutcoming: Bool) {
+    override func updateMessage(_ message: Message, isOutcoming: Bool) {
         super.updateMessage(message, isOutcoming: isOutcoming)
 
         messageText.text = message.text()

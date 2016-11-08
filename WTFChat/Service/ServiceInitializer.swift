@@ -3,7 +3,7 @@ import Foundation
 let serviceLocator = ServiceLocator()
 
 class ServiceInitializer {
-    private static let BASE_URL = NSBundle.mainBundle().objectForInfoDictionaryKey("WEB_SERVICE_URL") as! String
+    fileprivate static let BASE_URL = Bundle.main.object(forInfoDictionaryKey: "WEB_SERVICE_URL") as! String
 
     static func initServices() {
         //network

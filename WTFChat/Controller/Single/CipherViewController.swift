@@ -1,14 +1,14 @@
 import Foundation
 
 protocol CipherViewAppearedNotifier {
-    func cipherViewAppeared(viewController: CipherViewController)
+    func cipherViewAppeared(_ viewController: CipherViewController)
 }
 
 class CipherViewController: UIViewController, LevelSelectedComputer {
-    private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
-    private let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
-    private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
-    private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
+    fileprivate let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
+    fileprivate let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
+    fileprivate let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
+    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
 
     @IBOutlet weak var easyStarImage: StarImage!
     @IBOutlet weak var normalStarImage: StarImage!
@@ -20,15 +20,15 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
     var activeCipherIndex = 0
     var cipherViewAppearedNotifier: CipherViewAppearedNotifier?
 
-    private let LEVEL_PREVIEW_SEGUE_ID = "showLevelPreview"
-    private let DECIPHER_SEGUE_ID = "showDecipher"
-    private let LVL_CELL_SPACING: CGFloat = 10.0
-    private let LVL_VIEW_WIDTH_PADDING: CGFloat = 8.0 * 2
-    private let VERTICAL_PADDING: CGFloat = 20 + 16
+    fileprivate let LEVEL_PREVIEW_SEGUE_ID = "showLevelPreview"
+    fileprivate let DECIPHER_SEGUE_ID = "showDecipher"
+    fileprivate let LVL_CELL_SPACING: CGFloat = 10.0
+    fileprivate let LVL_VIEW_WIDTH_PADDING: CGFloat = 8.0 * 2
+    fileprivate let VERTICAL_PADDING: CGFloat = 20 + 16
 
-    private let cipherTypes = CipherType.getAll()
-    private var selectedLevel: Level?
-    private var messageForDecipher: Message?
+    fileprivate let cipherTypes = CipherType.getAll()
+    fileprivate var selectedLevel: Level?
+    fileprivate var messageForDecipher: Message?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,13 +40,13 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
         reloadData()
     }
 
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         reloadData()
 
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        super.viewWillTransition(to: size, with: coordinator)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         reloadData()
@@ -54,9 +54,9 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
         guiDataService.updateLastSelectedCategoryType(getCurrentCategory().cipherType)
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == LEVEL_PREVIEW_SEGUE_ID {
-            let targetController = segue.destinationViewController as! LevelPreviewViewController
+            let targetController = segue.destination as! LevelPreviewViewController
             targetController.level = selectedLevel
         }
     }
@@ -65,18 +65,18 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
         let category = getCurrentCategory()
         cipherText.text = category.cipherType.description
 
-        easyStarImage.updateStarImage(.Easy, progress: category.getProgress(.Easy))
-        normalStarImage.updateStarImage(.Normal, progress: category.getProgress(.Normal))
-        hardStarImage.updateStarImage(.Hard, progress: category.getProgress(.Hard))
+        easyStarImage.updateStarImage(.easy, progress: category.getProgress(.easy))
+        normalStarImage.updateStarImage(.normal, progress: category.getProgress(.normal))
+        hardStarImage.updateStarImage(.hard, progress: category.getProgress(.hard))
 
         lvlCollectionView.updateCategory(category)
     }
 
-    func levelSelected(level: Level) {
+    func levelSelected(_ level: Level) {
         if (singleModeService.isLevelAvailable(level)) {
             if (singleMessageService.hasTextCategoryForLevel(level)) {
                 selectedLevel = level
-                self.performSegueWithIdentifier(LEVEL_PREVIEW_SEGUE_ID, sender: self)
+                self.performSegue(withIdentifier: LEVEL_PREVIEW_SEGUE_ID, sender: self)
             } else {
                 //do nothing
             }
@@ -86,7 +86,7 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
     func getFullHeight() -> CGFloat {
         lvlCollectionView.reloadData()
 
-        let collectionViewSize = lvlCollectionView.collectionViewLayout.collectionViewContentSize()
+        let collectionViewSize = lvlCollectionView.collectionViewLayout.collectionViewContentSize
         let lvlCollectionHeight = collectionViewSize.height
 
         return lvlCollectionHeight + VERTICAL_PADDING + easyStarImage.bounds.height
@@ -97,7 +97,7 @@ class CipherViewController: UIViewController, LevelSelectedComputer {
         return singleModeCategoryService.getCategory(cipherType)!
     }
 
-    @IBAction func backToNextLevel(segue:UIStoryboardSegue) {
+    @IBAction func backToNextLevel(_ segue:UIStoryboardSegue) {
 
     }
 }

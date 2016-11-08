@@ -1,12 +1,12 @@
 import UIKit
 
 protocol HintComputer: class {
-    func hintTapped(word: Word)
+    func hintTapped(_ word: Word)
 }
 
 class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelegate {
-    private let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
-    private let audioService: AudioService = serviceLocator.get(AudioService)
+    fileprivate let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService)
+    fileprivate let audioService: AudioService = serviceLocator.get(AudioService)
 
     var message: Message?
     var rows = WordsField()
@@ -21,17 +21,17 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     
     weak var hintComputer: HintComputer?
     
-    @objc func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    @objc func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    @objc func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return rows.getRowsCount()
     }
     
-    @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("WordsRowCell", forIndexPath: indexPath) as UITableViewCell
-        cell.backgroundColor = UIColor.clearColor()
+    @objc func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WordsRowCell", for: indexPath) as UITableViewCell
+        cell.backgroundColor = UIColor.clear
 
         let row = rows.getRow(indexPath.row)
         
@@ -63,7 +63,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
             let verticalConstraint = wordContainer.getVerticalConstraint(cell.contentView)
             cell.contentView.addConstraint(verticalConstraint)
 
-            cell.selectionStyle = .None
+            cell.selectionStyle = .none
 
             previousContainer = wordContainer
         }
@@ -71,18 +71,18 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-    func setNewMessage(message: Message, useCipherText: Bool = false, selfAuthor: Bool = false) {
+    func setNewMessage(_ message: Message, useCipherText: Bool = false, selfAuthor: Bool = false) {
         self.message = message
         self.useCipherText = useCipherText
         self.selfAuthor = selfAuthor
         createView()
     }
     
-    func updateMessage(message: Message) {
+    func updateMessage(_ message: Message) {
         updateMessage(message, tries: nil)
     }
     
-    func updateMessage(message: Message, tries: [String]?) {
+    func updateMessage(_ message: Message, tries: [String]?) {
         if (self.message != nil) {
             self.message = message
             
@@ -115,9 +115,9 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         return false
     }
     
-    func animateWarning(guesses: [String]?) {
+    func animateWarning(_ guesses: [String]?) {
         for wordContainer in rows.getAllWordContainers() {
-            if (wordContainer.word.type == WordType.New) {
+            if (wordContainer.word.type == WordType.new) {
                 if (messageCipherService.wasCloseTry(wordContainer.word, guessWords: guesses)) {
                     wordContainer.animateWarning()
                     wordContainer.word.wasCloseTry = true
@@ -127,12 +127,12 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    func animateError(guesses: [String]?) {
+    func animateError(_ guesses: [String]?) {
         var wasWarning = false
         var wasError = false
         
         for wordContainer in rows.getAllWordContainers() {
-            if (wordContainer.word.type == WordType.New) {
+            if (wordContainer.word.type == WordType.new) {
                 if (messageCipherService.wasCloseTry(wordContainer.word, guessWords: guesses)) {
                     wordContainer.animateWarning()
                     wordContainer.word.wasCloseTry = true
@@ -172,22 +172,22 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         self.reloadData()
     }
 
-    private func showContainers(animated: Bool = true) {
+    fileprivate func showContainers(_ animated: Bool = true) {
         if (animated) {
             alpha = 0
 
-            UIView.animateWithDuration(0.3, delay: 0,
+            UIView.animate(withDuration: 0.3, delay: 0,
                     options: [], animations: {
                 self.alpha = 1
             }, completion: nil)
         }
     }
     
-    private func updateViewHelper(targetRows: WordsField) {
+    fileprivate func updateViewHelper(_ targetRows: WordsField) {
         var isNewRow = false
         
         for word in message!.getWordsWithoutSpaces() {
-            if (word.type == WordType.LineBreak) {
+            if (word.type == WordType.lineBreak) {
                 isNewRow = true
             } else {
                 addWord(word, targetRows: targetRows, isNewRow: isNewRow)
@@ -196,7 +196,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    func addWord(word: Word, targetRows: WordsField, isNewRow: Bool = false) {
+    func addWord(_ word: Word, targetRows: WordsField, isNewRow: Bool = false) {
         let wordContainer = createLabelForWord(word)
         
         if (targetRows.isEmpty() || isNewRow) {
@@ -220,7 +220,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    func createLabelForWord(word: Word) -> WordLabelContainer {
+    func createLabelForWord(_ word: Word) -> WordLabelContainer {
         let wordContainer = WordLabelContainer(word: word, useCipherText: useCipherText, selfAuthor: selfAuthor, isHidedText: isHidedText, fontSize: fontSize)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WordsViewController.useSuggestion(_:)))
@@ -229,14 +229,14 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         return wordContainer
     }
     
-    func useSuggestion(sender: UITapGestureRecognizer) {
+    func useSuggestion(_ sender: UITapGestureRecognizer) {
         let label = sender.view as! RoundedLabel
         let wordContainer = label.tagObject as! WordLabelContainer
         
         self.hintComputer?.hintTapped(wordContainer.originalWord)
     }
     
-    func getRowWidth(row: [WordLabelContainer]) -> CGFloat {
+    func getRowWidth(_ row: [WordLabelContainer]) -> CGFloat {
         var width = CGFloat(0)
         
         for wordContainer in row {
@@ -256,7 +256,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         return maxWidth
     }
     
-    func updateMaxWidth(width: CGFloat? = nil) {
+    func updateMaxWidth(_ width: CGFloat? = nil) {
         maxWidth = width ?? self.bounds.width
     }
 }

@@ -3,11 +3,11 @@ import Foundation
 protocol AdProvider {
     func initProvider()
     func hasAd() -> Bool
-    func showAd(delegateFunc: (() -> Void))
+    func showAd(_ delegateFunc: (() -> Void))
 }
 
 class AdService: Service {
-    private let adProviders: [AdProvider] = [AdColonyAdProvider()]
+    fileprivate let adProviders: [AdProvider] = [AdColonyAdProvider()]
 
     override func initServiceOnMain() {
         for adProvider in adProviders {
@@ -25,7 +25,7 @@ class AdService: Service {
         return false
     }
 
-    func showAd(delegateFunc: (() -> Void)) {
+    func showAd(_ delegateFunc: (() -> Void)) {
         for adProvider in adProviders {
             if adProvider.hasAd() {
                 adProvider.showAd(delegateFunc)

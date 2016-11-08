@@ -1,12 +1,12 @@
 import Foundation
 
 class SingleModeCategoryService: Service {
-    private let LVLS_PER_CATEGORY = 24
+    fileprivate let LVLS_PER_CATEGORY = 24
 
-    private let coreSingleModeCategoryService: CoreSingleModeCategoryService
-    private let coreLevelService: CoreLevelService
+    fileprivate let coreSingleModeCategoryService: CoreSingleModeCategoryService
+    fileprivate let coreLevelService: CoreLevelService
 
-    private var categories = [SingleModeCategory]()
+    fileprivate var categories = [SingleModeCategory]()
 
     init(coreSingleModeCategoryService: CoreSingleModeCategoryService, coreLevelService: CoreLevelService) {
         self.coreSingleModeCategoryService = coreSingleModeCategoryService
@@ -21,7 +21,7 @@ class SingleModeCategoryService: Service {
         }
     }
 
-    private func createSingleModeCategoryIfNotExists(cipherType: CipherType) {
+    fileprivate func createSingleModeCategoryIfNotExists(_ cipherType: CipherType) {
         for category in categories {
             if (category.cipherType == cipherType) {
                 return
@@ -31,7 +31,7 @@ class SingleModeCategoryService: Service {
         createSingleModeCategory(cipherType)
     }
 
-    private func createSingleModeCategory(cipherType: CipherType) {
+    fileprivate func createSingleModeCategory(_ cipherType: CipherType) {
         let category = SingleModeCategory(cipherType: cipherType)
 
         coreSingleModeCategoryService.createSingleModeCategory(category)
@@ -43,7 +43,7 @@ class SingleModeCategoryService: Service {
         self.categories.append(category)
     }
 
-    private func createLevelInCategory(category: SingleModeCategory, id: Int) -> Level {
+    fileprivate func createLevelInCategory(_ category: SingleModeCategory, id: Int) -> Level {
         let level = Level(id: id)
 
         //TODO - test code for screenshots
@@ -60,7 +60,7 @@ class SingleModeCategoryService: Service {
         return level
     }
 
-    func getCategory(cipherType: CipherType) -> SingleModeCategory? {
+    func getCategory(_ cipherType: CipherType) -> SingleModeCategory? {
         for category in categories {
             if (category.cipherType == cipherType) {
                 return category
@@ -70,7 +70,7 @@ class SingleModeCategoryService: Service {
         return nil
     }
 
-    func getPreviousCategory(targetCategory: SingleModeCategory) -> SingleModeCategory? {
+    func getPreviousCategory(_ targetCategory: SingleModeCategory) -> SingleModeCategory? {
         let firstCategory = categories[0]
         if targetCategory.cipherType == firstCategory.cipherType {
             return nil
@@ -85,7 +85,7 @@ class SingleModeCategoryService: Service {
         return nil
     }
 
-    func getNextCategory(targetCategory: SingleModeCategory) -> SingleModeCategory? {
+    func getNextCategory(_ targetCategory: SingleModeCategory) -> SingleModeCategory? {
         let lastCategory = categories.last!
         if targetCategory.cipherType == lastCategory.cipherType {
             return nil
@@ -100,7 +100,7 @@ class SingleModeCategoryService: Service {
         return nil
     }
 
-    func isCategoryCleared(category: SingleModeCategory, difficulty: CipherDifficulty) -> Bool {
+    func isCategoryCleared(_ category: SingleModeCategory, difficulty: CipherDifficulty) -> Bool {
         for level in category.levels {
             if (!level.cleared) {
                 return false

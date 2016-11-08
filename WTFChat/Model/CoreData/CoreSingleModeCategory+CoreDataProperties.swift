@@ -4,8 +4,8 @@ extension CoreSingleModeCategory {
     @NSManaged var cipherType: NSNumber?
     @NSManaged var levels: NSOrderedSet?
 
-    @NSManaged func addLevelsObject(level: CoreLevel)
-    @NSManaged func removeLevelsObject(level: CoreLevel)
-    @NSManaged func addLevels(messages: NSOrderedSet)
-    @NSManaged func removeLevels(messages: NSOrderedSet)
+    @NSManaged func addLevelsObject(_ level: CoreLevel)
+    @NSManaged func removeLevelsObject(_ level: CoreLevel)
+    @NSManaged func addLevels(_ messages: NSOrderedSet)
+    @NSManaged func removeLevels(_ messages: NSOrderedSet)
 }

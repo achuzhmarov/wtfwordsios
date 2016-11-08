@@ -6,10 +6,10 @@ class TutorialCell: UITableViewCell {
     func initStyle() {
         title.adjustsFontSizeToFitWidth = true
 
-        self.selectionStyle = .None;
+        self.selectionStyle = .none;
     }
     
-    func updateTitle(title: String) {
+    func updateTitle(_ title: String) {
         initStyle()
 
         self.title.text = title

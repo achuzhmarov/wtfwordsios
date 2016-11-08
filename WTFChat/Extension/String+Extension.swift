@@ -3,40 +3,40 @@ import Foundation
 extension String
 {
     func escapeForUrl() -> String? {
-        return stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
+        return addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
     }
     
-    func isGreater(stringToCompare : String) -> Bool
+    func isGreater(_ stringToCompare : String) -> Bool
     {
-        return self.compare(stringToCompare) == NSComparisonResult.OrderedDescending
+        return self.compare(stringToCompare) == ComparisonResult.orderedDescending
     }
     
-    func isLess(stringToCompare : String) -> Bool
+    func isLess(_ stringToCompare : String) -> Bool
     {
-        return self.compare(stringToCompare) == NSComparisonResult.OrderedAscending
+        return self.compare(stringToCompare) == ComparisonResult.orderedAscending
     }
     
-    func removeChars(chars: [String]) -> String {
+    func removeChars(_ chars: [String]) -> String {
         var result = self
         
         for char in chars {
-            result = result.stringByReplacingOccurrencesOfString(char, withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            result = result.replacingOccurrences(of: char, with: "", options: NSString.CompareOptions.literal, range: nil)
         }
         
         return result
     }
     
-    func replace(what: String, with: String) -> String {
-        return self.stringByReplacingOccurrencesOfString(what, withString: with, options: NSStringCompareOptions.LiteralSearch, range: nil)
+    func replace(_ what: String, with: String) -> String {
+        return self.replacingOccurrences(of: what, with: with, options: NSString.CompareOptions.literal, range: nil)
     }
     
     subscript (i: Int) -> String {
-        let char = self[self.startIndex.advancedBy(i)]
+        let char = self[self.characters.index(self.startIndex, offsetBy: i)]
         return String(char)
     }
     
     subscript (r: Range<Int>) -> String {
-        return substringWithRange(startIndex.advancedBy(r.startIndex)..<startIndex.advancedBy(r.endIndex))
+        return substring(with: characters.index(startIndex, offsetBy: r.lowerBound)..<characters.index(startIndex, offsetBy: r.upperBound))
     }
     
     var shuffle:String {

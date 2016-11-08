@@ -1,41 +1,41 @@
 import Foundation
 
 class Gradient {
-    private static let StarEasy = [Color.EasyLight.CGColor, Color.EasyMid.CGColor, Color.EasyDark.CGColor]
-    private static let StarNormal = [Color.NormalLight.CGColor, Color.NormalMid.CGColor, Color.NormalDark.CGColor]
-    private static let StarHard = [Color.HardLight.CGColor, Color.HardMid.CGColor, Color.HardDark.CGColor]
+    fileprivate static let StarEasy = [Color.EasyLight.cgColor, Color.EasyMid.cgColor, Color.EasyDark.cgColor]
+    fileprivate static let StarNormal = [Color.NormalLight.cgColor, Color.NormalMid.cgColor, Color.NormalDark.cgColor]
+    fileprivate static let StarHard = [Color.HardLight.cgColor, Color.HardMid.cgColor, Color.HardDark.cgColor]
 
-    private static let LevelEasy = [Color.EasyMid.CGColor, Color.EasyDark.CGColor]
-    private static let LevelNormal = [Color.NormalMid.CGColor, Color.NormalDark.CGColor]
-    private static let LevelHard = [Color.HardMid.CGColor, Color.HardDark.CGColor]
+    fileprivate static let LevelEasy = [Color.EasyMid.cgColor, Color.EasyDark.cgColor]
+    fileprivate static let LevelNormal = [Color.NormalMid.cgColor, Color.NormalDark.cgColor]
+    fileprivate static let LevelHard = [Color.HardMid.cgColor, Color.HardDark.cgColor]
 
-    static let Ciphered = [Color.CipheredLight.CGColor, Color.CipheredDark.CGColor]
-    static let Ignored = [Color.IgnoreLight.CGColor, Color.IgnoreDark.CGColor]
-    static let Failed = [Color.FailedLight.CGColor, Color.FailedDark.CGColor]
-    static let Success = [Color.SuccessLight.CGColor, Color.SuccessDark.CGColor]
-    static let Try = [Color.TryLight.CGColor, Color.TryDark.CGColor]
+    static let Ciphered = [Color.CipheredLight.cgColor, Color.CipheredDark.cgColor]
+    static let Ignored = [Color.IgnoreLight.cgColor, Color.IgnoreDark.cgColor]
+    static let Failed = [Color.FailedLight.cgColor, Color.FailedDark.cgColor]
+    static let Success = [Color.SuccessLight.cgColor, Color.SuccessDark.cgColor]
+    static let Try = [Color.TryLight.cgColor, Color.TryDark.cgColor]
 
-    static let Background = [Color.BackgroundLight.CGColor, Color.BackgroundDark.CGColor]
-    static let BackgroundMenu = [Color.BackgroundLight.CGColor, Color.BackgroundMid.CGColor]
+    static let Background = [Color.BackgroundLight.cgColor, Color.BackgroundDark.cgColor]
+    static let BackgroundMenu = [Color.BackgroundLight.cgColor, Color.BackgroundMid.cgColor]
 
-    static func getStarGradientByDifficulty(difficulty: CipherDifficulty) -> [CGColor] {
+    static func getStarGradientByDifficulty(_ difficulty: CipherDifficulty) -> [CGColor] {
         switch difficulty {
-            case .Easy:
+            case .easy:
                 return Gradient.StarEasy
-            case .Normal:
+            case .normal:
                 return Gradient.StarNormal
-            case .Hard:
+            case .hard:
                 return Gradient.StarHard
         }
     }
 
-    static func getLevelGradientByDifficulty(difficulty: CipherDifficulty) -> [CGColor] {
+    static func getLevelGradientByDifficulty(_ difficulty: CipherDifficulty) -> [CGColor] {
         switch difficulty {
-        case .Easy:
+        case .easy:
             return Gradient.LevelEasy
-        case .Normal:
+        case .normal:
             return Gradient.LevelNormal
-        case .Hard:
+        case .hard:
             return Gradient.LevelHard
         }
     }

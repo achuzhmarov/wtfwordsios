@@ -37,11 +37,11 @@ class WordsField {
         return rows.last!.last!
     }
     
-    func append(row: [WordLabelContainer]) {
+    func append(_ row: [WordLabelContainer]) {
         rows.append(row)
     }
     
-    func append(wordContainer: WordLabelContainer) {
+    func append(_ wordContainer: WordLabelContainer) {
         rows[rows.count - 1].append(wordContainer)
     }
 
@@ -53,7 +53,7 @@ class WordsField {
         }
     }*/
     
-    func getContainerByIndex(index: Int) -> WordLabelContainer? {
+    func getContainerByIndex(_ index: Int) -> WordLabelContainer? {
         var i = 0
         
         for row in rows {
@@ -83,7 +83,7 @@ class WordsField {
         return i
     }
     
-    func getRow(i: Int) -> [WordLabelContainer] {
+    func getRow(_ i: Int) -> [WordLabelContainer] {
         return rows[i]
     }
 }

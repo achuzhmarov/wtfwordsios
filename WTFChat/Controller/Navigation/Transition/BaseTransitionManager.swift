@@ -12,38 +12,38 @@ class BaseTransitionManager: UIPercentDrivenInteractiveTransition,
 
     var animationDuration = 0.5
 
-    private var transitionContext: UIViewControllerContextTransitioning!
+    fileprivate var transitionContext: UIViewControllerContextTransitioning!
 
     var externalCompletionHandler: (() -> Void)?
 
     // MARK: UIViewControllerAnimatedTransitioning protocol methods
 
     // animate a change from one viewcontroller to another
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         self.transitionContext = transitionContext
 
         // get reference to our fromView, toView and the container view that we should perform the transition in
-        container = transitionContext.containerView()!
+        container = transitionContext.containerView
 
         let screens : (from:UIViewController, to:UIViewController) = (
-            transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!,
-            transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
+            transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!,
+            transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
         )
 
         toView = screens.to.view
         fromView = screens.from.view
 
         // fix for bug in iOS 9 - if rotated after transition
-        toView.frame.size = transitionContext.finalFrameForViewController(screens.to).size
+        toView.frame.size = transitionContext.finalFrame(for: screens.to).size
         (screens.to as? BaseUIViewController)?.updateBackgroundGradient(toView.frame.size)
 
         addViewsToContainer()
 
         preAnimate()
 
-        let duration = self.transitionDuration(transitionContext)
+        let duration = self.transitionDuration(using: transitionContext)
 
-        UIView.animateWithDuration(duration, delay: 0, options: [], animations: animate, completion: completion)
+        UIView.animate(withDuration: duration, delay: 0, options: [], animations: animate, completion: completion)
     }
 
     func addViewsToContainer() {
@@ -60,19 +60,19 @@ class BaseTransitionManager: UIPercentDrivenInteractiveTransition,
         fatalError("This method must be overridden")
     }
 
-    func completion(finished: Bool) {
+    func completion(_ finished: Bool) {
         // tell our transitionContext object that we've finished animating
-        if(transitionContext.transitionWasCancelled()){
+        if(transitionContext.transitionWasCancelled){
             transitionContext.completeTransition(false)
 
             // bug: we have to manually add our 'from view' back http://openradar.appspot.com/radar?id=5320103646199808
-            UIApplication.sharedApplication().keyWindow!.addSubview(fromView)
+            UIApplication.shared.keyWindow!.addSubview(fromView)
         }
         else {
             transitionContext.completeTransition(true)
 
             // bug: we have to manually add our 'to view' back http://openradar.appspot.com/radar?id=5320103646199808
-            UIApplication.sharedApplication().keyWindow!.addSubview(toView)
+            UIApplication.shared.keyWindow!.addSubview(toView)
         }
 
         //oneTime use only
@@ -81,7 +81,7 @@ class BaseTransitionManager: UIPercentDrivenInteractiveTransition,
     }
 
     // return how many seconds the transiton animation will take
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return animationDuration
     }
 
@@ -89,27 +89,27 @@ class BaseTransitionManager: UIPercentDrivenInteractiveTransition,
 
     // return the animataor when presenting a viewcontroller
     // rememeber that an animator (or animation controller) is any object that aheres to the UIViewControllerAnimatedTransitioning protocol
-    func animationControllerForPresentedController(presented: UIViewController,
-                                                   presentingController presenting: UIViewController,
-                                                   sourceController source: UIViewController
+    func animationController(forPresented presented: UIViewController,
+                                                   presenting: UIViewController,
+                                                   source: UIViewController
     ) -> UIViewControllerAnimatedTransitioning? {
         self.presenting = true
         return self
     }
 
     // return the animator used when dismissing from a viewcontroller
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         self.presenting = false
         return self
     }
 
-    func interactionControllerForPresentation(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         // if our interactive flag is true, return the transition manager object
         // otherwise return nil
         return interactive ? self : nil
     }
 
-    func interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return interactive ? self : nil
     }
 }

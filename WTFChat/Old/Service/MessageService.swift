@@ -9,9 +9,9 @@
 import Foundation
 
 protocol MessageListener: class {
-    func updateMessages(talk: FriendTalk?, wasNew: Bool, error: NSError?)
-    func messageSended(talk: FriendTalk?, error: NSError?)
-    func loadEarlierCompleteHandler(talk: FriendTalk?, newMessagesCount: Int, error: NSError?)
+    func updateMessages(_ talk: FriendTalk?, wasNew: Bool, error: NSError?)
+    func messageSended(_ talk: FriendTalk?, error: NSError?)
+    func loadEarlierCompleteHandler(_ talk: FriendTalk?, newMessagesCount: Int, error: NSError?)
 }
 
 struct WeakListener {
@@ -23,16 +23,16 @@ struct WeakListener {
 }
 
 class MessageService: Service {
-    private let MESSAGES_UPDATE_TIMER_INTERVAL = 10.0
+    fileprivate let MESSAGES_UPDATE_TIMER_INTERVAL = 10.0
 
-    private let messageNetworkService: MessageNetworkService
-    private let talkService: TalkService
-    private let coreMessageService: CoreMessageService
+    fileprivate let messageNetworkService: MessageNetworkService
+    fileprivate let talkService: TalkService
+    fileprivate let coreMessageService: CoreMessageService
     
     var listeners = [String: WeakListener]()
     var talksToUpdate = Set<String>()
     
-    var updateTimer: NSTimer?
+    var updateTimer: Foundation.Timer?
 
     init(messageNetworkService: MessageNetworkService, talkService: TalkService, coreMessageService: CoreMessageService) {
         self.messageNetworkService = messageNetworkService
@@ -41,10 +41,10 @@ class MessageService: Service {
     }
 
     func startUpdateTimer() {
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             self.updateTimer?.invalidate()
             
-            self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(self.MESSAGES_UPDATE_TIMER_INTERVAL, target: self,
+            self.updateTimer = Foundation.Timer.scheduledTimer(timeInterval: self.MESSAGES_UPDATE_TIMER_INTERVAL, target: self,
                 selector: #selector(MessageService.updateMessages as (MessageService) -> () -> ()), userInfo: nil, repeats: true)
         })
     }
@@ -55,11 +55,11 @@ class MessageService: Service {
         self.talksToUpdate = Set<String>()
     }
     
-    func removeListener(talk: FriendTalk) {
+    func removeListener(_ talk: FriendTalk) {
         listeners[talk.id] = nil
     }
     
-    func initMessageListener(talk: FriendTalk, listener: MessageListener) {
+    func initMessageListener(_ talk: FriendTalk, listener: MessageListener) {
         listeners[talk.id] = WeakListener(listener: listener)
         talksToUpdate.insert(talk.id)
         
@@ -68,7 +68,7 @@ class MessageService: Service {
         }
     }
 
-    func fireMessagesUpdate(talkId: String) {
+    func fireMessagesUpdate(_ talkId: String) {
         if (talksToUpdate.contains(talkId)) {
             updateMessages(talkId)
         }
@@ -83,7 +83,7 @@ class MessageService: Service {
         }
     }
     
-    private func sendLocalMessages() {
+    fileprivate func sendLocalMessages() {
         let messages = coreMessageService.getAllWaiting()
         
         for message in messages {
@@ -95,7 +95,7 @@ class MessageService: Service {
         }
     }
     
-    func updateMessages(talkId: String) {
+    func updateMessages(_ talkId: String) {
         let talk = talkService.getByTalkId(talkId)!
         let lastUpdate = getMessagesLastUpdate(talk)
         let listener = listeners[talkId]?.listener
@@ -104,7 +104,7 @@ class MessageService: Service {
             getInitialMessagesForTalk(talk, listener: listener)
         } else {
             messageNetworkService.getUnreadMessagesByTalk(talk, lastUpdate: lastUpdate) { (messages, error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     if let requestError = error {
                         listener?.updateMessages(nil, wasNew: false, error: requestError)
                     } else {
@@ -126,9 +126,9 @@ class MessageService: Service {
         }
     }
     
-    private func getInitialMessagesForTalk(talk: FriendTalk, listener: MessageListener?) {
+    fileprivate func getInitialMessagesForTalk(_ talk: FriendTalk, listener: MessageListener?) {
         messageNetworkService.getMessagesByTalk(talk) { (messages, error) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 if let requestError = error {
                     listener?.updateMessages(nil, wasNew: false, error: requestError)
                 } else {
@@ -141,12 +141,12 @@ class MessageService: Service {
         }
     }
     
-    func loadEarlier(talkId: String) {
+    func loadEarlier(_ talkId: String) {
         let talk = talkService.getByTalkId(talkId)!
         let listener = listeners[talkId]?.listener
         
         messageNetworkService.getEarlierMessagesByTalk(talk, skip: talk.messages.count) { (messages, error) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 if let requestError = error {
                     listener?.loadEarlierCompleteHandler(nil, newMessagesCount: 0, error: requestError)
                 } else {
@@ -164,12 +164,12 @@ class MessageService: Service {
         }
     }
     
-    func createMessage(newMessage: RemoteMessage) {
+    func createMessage(_ newMessage: RemoteMessage) {
         let talk = talkService.getByTalkId(newMessage.talkId)!
         let listener = listeners[talk.id]?.listener
         
         messageNetworkService.saveMessage(newMessage) { (message, error) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 if let requestError = error {
                     listener?.messageSended(nil, error: requestError)
                     
@@ -189,9 +189,9 @@ class MessageService: Service {
         }
     }
     
-    func decipherMessage(decipheredMessage: RemoteMessage, completion:((message: RemoteMessage?, error: NSError?) -> Void)? = nil) {
+    func decipherMessage(_ decipheredMessage: RemoteMessage, completion:((_ message: RemoteMessage?, _ error: NSError?) -> Void)? = nil) {
         messageNetworkService.decipherMessage(decipheredMessage){ (message, error) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 if error != nil {
                     //save message in localStore
                     self.coreMessageService.createOrUpdateMessage(decipheredMessage)
@@ -204,7 +204,7 @@ class MessageService: Service {
         }
     }
     
-    func decipherMessageInTalk(message: RemoteMessage) {
+    func decipherMessageInTalk(_ message: RemoteMessage) {
         let talk = talkService.getByTalkId(message.talkId)!
         if (!talk.isSingleMode) {
             talk.cipheredNum -= 1
@@ -214,7 +214,7 @@ class MessageService: Service {
         talkService.updateTalkInArray(talk, withMessages: true)
     }
     
-    func markTalkAsReaded(talk: FriendTalk) {
+    func markTalkAsReaded(_ talk: FriendTalk) {
         messageNetworkService.markTalkAsReaded(talk) { (error) -> Void in
             if let requestError = error {
                 print(requestError)
@@ -224,8 +224,8 @@ class MessageService: Service {
         }
     }
     
-    private func getMessagesLastUpdate(talk: FriendTalk) -> NSDate {
-        var lastUpdate: NSDate?
+    fileprivate func getMessagesLastUpdate(_ talk: FriendTalk) -> Date {
+        var lastUpdate: Date?
         
         for message in talk.messages {
             //ignore local messages
@@ -234,18 +234,18 @@ class MessageService: Service {
             }
             
             if (lastUpdate == nil || message.lastUpdate.isGreater(lastUpdate!)) {
-                lastUpdate = message.lastUpdate
+                lastUpdate = message.lastUpdate as Date
             }
         }
         
         if (lastUpdate != nil) {
             return lastUpdate!
         } else {
-            return NSDate.defaultPast()
+            return Date.defaultPast()
         }
     }
     
-    private func updateOrCreateMessageInArray(talk: FriendTalk, message: RemoteMessage) -> Bool {
+    fileprivate func updateOrCreateMessageInArray(_ talk: FriendTalk, message: RemoteMessage) -> Bool {
         for i in 0..<talk.messages.count {
             let sameId = (message.id != "" && (message.id == (talk.messages[i] as! RemoteMessage).id))
             let wasSendedLocal = (message.extId != "" && (message.extId == talk.messages[i].extId))

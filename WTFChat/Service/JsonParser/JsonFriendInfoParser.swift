@@ -2,7 +2,7 @@ import Foundation
 import SwiftyJSON
 
 class JsonFriendInfoParser {
-    class func fromJson(json: JSON) throws -> FriendInfo {
+    class func fromJson(_ json: JSON) throws -> FriendInfo {
         var login: String
         var lvl: Int
         var name: String

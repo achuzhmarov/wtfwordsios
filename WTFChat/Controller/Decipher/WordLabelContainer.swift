@@ -32,21 +32,21 @@ class WordLabelContainer {
     func updateLabel() {
         label.text = getLabelText()
         
-        label.textColor = UIColor.whiteColor()
+        label.textColor = UIColor.white
         label.font = UIFont.init(name: label.font.fontName, size: fontSize)
 
         label.layer.cornerRadius = 8.0
 
         switch word.type {
-        case .New:
+        case .new:
             if (word.wasCloseTry) {
                 label.addGradientToLabel(Gradient.Try)
             } else {
                 label.addGradientToLabel(Gradient.Ciphered)
             }
-        case .Ignore:
+        case .ignore:
             label.addGradientToLabel(Gradient.Ignored)
-        case .Failed:
+        case .failed:
             label.addGradientToLabel(Gradient.Failed)
         default:
             label.addGradientToLabel(Gradient.Success)
@@ -58,20 +58,20 @@ class WordLabelContainer {
         //label.hidden = true
         
         //to use taps for suggestions
-        label.userInteractionEnabled = true
+        label.isUserInteractionEnabled = true
         
         label.sizeToFit()
         
         label.tagObject = self
     }
 
-    private func getLabelText() -> String {
+    fileprivate func getLabelText() -> String {
         if (isHidedText) {
             return word.getHidedText()
         }
 
         if (useCipherText) {
-            if (word.type != WordType.Ignore) {
+            if (word.type != WordType.ignore) {
                 return word.getCipheredText()
             } else {
                 return word.getTextForDecipher()
@@ -109,30 +109,30 @@ class WordLabelContainer {
     }*/
     
     func animateWarning() {
-        UIView.animateWithDuration(0.3, delay: 0,
+        UIView.animate(withDuration: 0.3, delay: 0,
             options: [], animations: {
                 self.label.center.y -= 3
                 self.label.addGradientToLabel(Gradient.Try)
             }, completion: animateWarningBack)
     }
 
-    private func animateWarningBack(completed: Bool) {
-        UIView.animateWithDuration(0.4, delay: 0,
+    fileprivate func animateWarningBack(_ completed: Bool) {
+        UIView.animate(withDuration: 0.4, delay: 0,
                 options: [], animations: {
             self.label.center.y += 3
         }, completion: nil)
     }
     
     func animateError() {
-        UIView.animateWithDuration(0.3, delay: 0,
+        UIView.animate(withDuration: 0.3, delay: 0,
             options: [], animations: {
                 self.label.center.y -= 3
                 self.label.addGradientToLabel(Gradient.Failed)
             }, completion: animateErrorBack)
     }
 
-    private func animateErrorBack(completed: Bool) {
-        UIView.animateWithDuration(0.4, delay: 0,
+    fileprivate func animateErrorBack(_ completed: Bool) {
+        UIView.animate(withDuration: 0.4, delay: 0,
                 options: [], animations: {
             self.label.center.y += 3
 
@@ -147,19 +147,19 @@ class WordLabelContainer {
     let labelHorizontalMargin = CGFloat(2)
     let labelVerticalMargin = CGFloat(2)
     
-    func getNextHorizontalConstraint(wordContainer: WordLabelContainer) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.Leading, relatedBy: NSLayoutRelation.Equal, toItem: wordContainer.label, attribute: NSLayoutAttribute.Trailing, multiplier: 1, constant: labelHorizontalMargin)
+    func getNextHorizontalConstraint(_ wordContainer: WordLabelContainer) -> NSLayoutConstraint {
+        return NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.leading, relatedBy: NSLayoutRelation.equal, toItem: wordContainer.label, attribute: NSLayoutAttribute.trailing, multiplier: 1, constant: labelHorizontalMargin)
     }
     
-    func getFirstHorizontalConstraint(parentView: UIView) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.Leading, relatedBy: NSLayoutRelation.Equal, toItem: parentView, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: 0)
+    func getFirstHorizontalConstraint(_ parentView: UIView) -> NSLayoutConstraint {
+        return NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.leading, relatedBy: NSLayoutRelation.equal, toItem: parentView, attribute: NSLayoutAttribute.leading, multiplier: 1, constant: 0)
     }
     
-    func getVerticalConstraint(parentView: UIView) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: parentView, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0)
+    func getVerticalConstraint(_ parentView: UIView) -> NSLayoutConstraint {
+        return NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: parentView, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0)
     }
     
-    func getFullRowHorizontalConstraint(parentView: UIView) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: parentView, attribute: NSLayoutAttribute.Trailing, multiplier: 1, constant: 0)
+    func getFullRowHorizontalConstraint(_ parentView: UIView) -> NSLayoutConstraint {
+        return NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: parentView, attribute: NSLayoutAttribute.trailing, multiplier: 1, constant: 0)
     }
 }

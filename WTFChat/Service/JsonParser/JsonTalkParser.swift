@@ -2,7 +2,7 @@ import Foundation
 import SwiftyJSON
 
 class JsonTalkParser {
-    class func arrayFromJson(json: JSON) throws -> [FriendTalk] {
+    class func arrayFromJson(_ json: JSON) throws -> [FriendTalk] {
         var talks = [FriendTalk]()
 
         if let value = json.array {
@@ -16,14 +16,14 @@ class JsonTalkParser {
         return talks
     }
 
-    class func fromJson(json: JSON) throws -> FriendTalk {
+    class func fromJson(_ json: JSON) throws -> FriendTalk {
         var id: String
         var hasUnread: Bool
         var cipheredNum: Int
         var lastMessage: RemoteMessage?
         var users = [String]()
         var decipherStatus: DecipherStatus
-        var lastUpdate: NSDate
+        var lastUpdate: Date
         var messageCount: Int
 
         if let value = json["id"].string {
@@ -52,12 +52,12 @@ class JsonTalkParser {
 
         if let value = json["has_deciphered"].int {
             if (value == 0) {
-                decipherStatus = DecipherStatus.No
+                decipherStatus = DecipherStatus.no
             } else {
                 decipherStatus = DecipherStatus(rawValue: value)!
             }
         } else {
-            decipherStatus = DecipherStatus.No
+            decipherStatus = DecipherStatus.no
             //throw json["has_deciphered"].error!
         }
 
@@ -78,14 +78,14 @@ class JsonTalkParser {
         }
 
         if let value = json["last_update"].string {
-            if let parsedTimestamp = NSDate.parseDateFromStringJSON(value) {
+            if let parsedTimestamp = Date.parseDateFromStringJSON(value) {
                 lastUpdate = parsedTimestamp
             } else {
-                lastUpdate = NSDate()
+                lastUpdate = Date()
                 //throw NSError(code: 1, message: "Could not parse lastUpdate")
             }
         } else {
-            lastUpdate = NSDate()
+            lastUpdate = Date()
             //throw json["last_update"].error!
         }
 

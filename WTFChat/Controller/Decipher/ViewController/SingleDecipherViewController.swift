@@ -2,19 +2,19 @@ import Foundation
 import Localize_Swift
 
 class SingleDecipherViewController: DecipherViewController {
-    private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
-    private let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
-    private let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
-    private let levelService: LevelService = serviceLocator.get(LevelService)
-    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
-    private let ratingService: RatingService = serviceLocator.get(RatingService)
+    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
+    fileprivate let singleModeService: SingleModeService = serviceLocator.get(SingleModeService)
+    fileprivate let singleMessageService: SingleMessageService = serviceLocator.get(SingleMessageService)
+    fileprivate let levelService: LevelService = serviceLocator.get(LevelService)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    fileprivate let ratingService: RatingService = serviceLocator.get(RatingService)
 
-    private let LEVEL_TEXT = "Level".localized()
-    private let GOT_HINTS_BEGIN_TEXT = "You got".localized()
-    private let GOT_HINTS_END_TEXT = "free hints".localized()
+    fileprivate let LEVEL_TEXT = "Level".localized()
+    fileprivate let GOT_HINTS_BEGIN_TEXT = "You got".localized()
+    fileprivate let GOT_HINTS_END_TEXT = "free hints".localized()
 
-    private var singleMessage: SingleMessage!
-    private var messageCategory: TextCategory!
+    fileprivate var singleMessage: SingleMessage!
+    fileprivate var messageCategory: TextCategory!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +47,7 @@ class SingleDecipherViewController: DecipherViewController {
             let message = GOT_HINTS_BEGIN_TEXT + " " + String(hintsForLvl) + " " + GOT_HINTS_END_TEXT
 
             WTFOneButtonAlert.show(title, message: message, viewPresenter: self) {
-                if (self.singleMessage.getMessageStatus() == .Success) {
+                if (self.singleMessage.getMessageStatus() == .success) {
                     self.ratingService.askUserForAppRate()
                 }
             }
@@ -60,19 +60,19 @@ class SingleDecipherViewController: DecipherViewController {
 
         singleModeVC.reloadData()
 
-        levelPreviewVC.view.hidden = true
+        levelPreviewVC.view.isHidden = true
         levelPreviewVC.decipherTransitionManager.animationDuration = 0.3
         levelPreviewVC.transitionManager.animationDuration = 0
 
-        levelPreviewVC.dismissViewControllerAnimated(true) {
-            singleModeVC.dismissViewControllerAnimated(true) {
+        levelPreviewVC.dismiss(animated: true) {
+            singleModeVC.dismiss(animated: true) {
                 singleModeVC.checkCategoryCleared()
             }
         }
     }
 
     override func continuePressed() {
-        if (message.getMessageStatus() == .Failed) {
+        if (message.getMessageStatus() == .failed) {
             restartCurrentLevel()
         } else if let nextLevel = levelService.getNextLevel(singleMessage.level) {
             startNextLevel(nextLevel)
@@ -93,7 +93,7 @@ class SingleDecipherViewController: DecipherViewController {
         start()
     }
 
-    func startNextLevel(level: Level) {
+    func startNextLevel(_ level: Level) {
         let selectedDifficulty = guiDataService.getLastSelectedDifficulty()
 
         messageCategory = singleMessageService.getTextCategoryForLevel(level)

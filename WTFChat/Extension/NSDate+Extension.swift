@@ -1,33 +1,33 @@
 import Foundation
 
-extension NSDate
+extension Date
 {
-    func isGreater(dateToCompare : NSDate) -> Bool
+    func isGreater(_ dateToCompare : Date) -> Bool
     {
-        return self.compare(dateToCompare) == NSComparisonResult.OrderedDescending
+        return self.compare(dateToCompare) == ComparisonResult.orderedDescending
     }
     
-    func isLess(dateToCompare : NSDate) -> Bool
+    func isLess(_ dateToCompare : Date) -> Bool
     {
-        return self.compare(dateToCompare) == NSComparisonResult.OrderedAscending
+        return self.compare(dateToCompare) == ComparisonResult.orderedAscending
     }
     
-    class func defaultPast() -> NSDate {
-        return NSDate().addYears(-1)
+    static func defaultPast() -> Date {
+        return Date().addYears(-1)
     }
 
-    func addDays(daysToAdd : Int) -> NSDate
+    func addDays(_ daysToAdd : Int) -> Date
     {
-        let calendar = NSCalendar.currentCalendar()
-        return calendar.dateByAddingUnit(.Day, value: daysToAdd, toDate: self, options: NSCalendarOptions())!
+        let calendar = Calendar.current
+        return (calendar as NSCalendar).date(byAdding: .day, value: daysToAdd, to: self, options: NSCalendar.Options())!
     }
     
-    func addYears(yearsToAdd : Int) -> NSDate
+    func addYears(_ yearsToAdd : Int) -> Date
     {
-        let calendar = NSCalendar.currentCalendar()
+        let calendar = Calendar.current
 
         //if #available(iOS 8.0, *) {
-            return calendar.dateByAddingUnit(.Year, value: yearsToAdd, toDate: self, options: NSCalendarOptions())!
+            return (calendar as NSCalendar).date(byAdding: .year, value: yearsToAdd, to: self, options: NSCalendar.Options())!
         /*} else {
             //approximation
             let secondsInYear : NSTimeInterval = Double(yearsToAdd) * 60 * 60 * 24 * 365
@@ -35,62 +35,62 @@ extension NSDate
         }*/
     }
     
-    class func parseDateFromStringJSON(string: String) -> NSDate? {
-        let dateFormatter = NSDateFormatter()
+    static func parseDateFromStringJSON(_ string: String) -> Date? {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
-        return dateFormatter.dateFromString(string)
+        return dateFormatter.date(from: string)
     }
     
-    class func parseStringJSONFromDate(date: NSDate) -> String? {
-        let dateFormatter = NSDateFormatter()
+    static func parseStringJSONFromDate(_ date: Date) -> String? {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
-        return dateFormatter.stringFromDate(date)
+        return dateFormatter.string(from: date)
     }
     
     func getYear() -> Int {
-        let calendar = NSCalendar.currentCalendar()
-        return calendar.components(.Year, fromDate: self).year
+        let calendar = Calendar.current
+        return (calendar as NSCalendar).components(.year, from: self).year!
     }
     
     func getMonth() -> Int {
-        let calendar = NSCalendar.currentCalendar()
-        return calendar.components(.Month, fromDate: self).month
+        let calendar = Calendar.current
+        return (calendar as NSCalendar).components(.month, from: self).month!
     }
     
     func getDay() -> Int {
-        let calendar = NSCalendar.currentCalendar()
-        return calendar.components(.Day, fromDate: self).day
+        let calendar = Calendar.current
+        return (calendar as NSCalendar).components(.day, from: self).day!
     }
 
-    func yearsFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar().components(.Year, fromDate: date, toDate: self, options: []).year
+    func yearsFrom(_ date: Date) -> Int {
+        return (Calendar.current as NSCalendar).components(.year, from: date, to: self, options: []).year!
     }
 
-    func monthsFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar().components(.Month, fromDate: date, toDate: self, options: []).month
+    func monthsFrom(_ date: Date) -> Int {
+        return (Calendar.current as NSCalendar).components(.month, from: date, to: self, options: []).month!
     }
 
-    func weeksFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar().components(.WeekOfYear, fromDate: date, toDate: self, options: []).weekOfYear
+    func weeksFrom(_ date: Date) -> Int {
+        return (Calendar.current as NSCalendar).components(.weekOfYear, from: date, to: self, options: []).weekOfYear!
     }
 
-    func daysFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar().components(.Day, fromDate: date, toDate: self, options: []).day
+    func daysFrom(_ date: Date) -> Int {
+        return (Calendar.current as NSCalendar).components(.day, from: date, to: self, options: []).day!
     }
 
-    func hoursFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar().components(.Hour, fromDate: date, toDate: self, options: []).hour
+    func hoursFrom(_ date: Date) -> Int {
+        return (Calendar.current as NSCalendar).components(.hour, from: date, to: self, options: []).hour!
     }
 
-    func minutesFrom(date: NSDate) -> Int{
-        return NSCalendar.currentCalendar().components(.Minute, fromDate: date, toDate: self, options: []).minute
+    func minutesFrom(_ date: Date) -> Int{
+        return (Calendar.current as NSCalendar).components(.minute, from: date, to: self, options: []).minute!
     }
 
-    func secondsFrom(date: NSDate) -> Int{
-        return NSCalendar.currentCalendar().components(.Second, fromDate: date, toDate: self, options: []).second
+    func secondsFrom(_ date: Date) -> Int{
+        return (Calendar.current as NSCalendar).components(.second, from: date, to: self, options: []).second!
     }
 
-    func offsetFrom(date: NSDate) -> String {
+    func offsetFrom(_ date: Date) -> String {
         if yearsFrom(date)   > 0 { return "\(yearsFrom(date))y"   }
         if monthsFrom(date)  > 0 { return "\(monthsFrom(date))M"  }
         if weeksFrom(date)   > 0 { return "\(weeksFrom(date))w"   }

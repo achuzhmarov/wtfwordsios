@@ -9,9 +9,9 @@ class MenuButton: UIButton {
         layer.cornerRadius = CORNER_RADIUS
         clipsToBounds = true
 
-        setTitleColor(UIColor.blackColor(), forState: .Normal)
-        setTitleColor(UIColor.blackColor(), forState: .Highlighted)
+        setTitleColor(UIColor.black, for: UIControlState())
+        setTitleColor(UIColor.black, for: .highlighted)
 
-        layer.backgroundColor = UIColor.whiteColor().CGColor
+        layer.backgroundColor = UIColor.white.cgColor
     }
 }

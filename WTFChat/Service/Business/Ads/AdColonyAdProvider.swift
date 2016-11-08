@@ -1,27 +1,27 @@
 import Foundation
 
 class AdColonyAdProvider: NSObject, AdProvider, AdColonyDelegate, AdColonyAdDelegate {
-    private let APP_ID = NSBundle.mainBundle().objectForInfoDictionaryKey("AD_COLONY_APP_ID") as! String
-    private let ZONE_REWARDED_ID = NSBundle.mainBundle().objectForInfoDictionaryKey("AD_COLONY_REWARD_ZONE") as! String
+    fileprivate let APP_ID = Bundle.main.object(forInfoDictionaryKey: "AD_COLONY_APP_ID") as! String
+    fileprivate let ZONE_REWARDED_ID = Bundle.main.object(forInfoDictionaryKey: "AD_COLONY_REWARD_ZONE") as! String
 
-    private var isAvailable = false
+    fileprivate var isAvailable = false
 
     var delegateFunc: (() -> Void)?
 
     func initProvider() {
-        AdColony.configureWithAppID(APP_ID, zoneIDs: [ZONE_REWARDED_ID], delegate: self, logging: true)
+        AdColony.configure(withAppID: APP_ID, zoneIDs: [ZONE_REWARDED_ID], delegate: self, logging: true)
     }
 
     func hasAd() -> Bool {
         return isAvailable
     }
     
-    func showAd(delegateFunc: (() -> Void)) {
+    func showAd(_ delegateFunc: @escaping (() -> Void)) {
         self.delegateFunc = delegateFunc
-        AdColony.playVideoAdForZone(ZONE_REWARDED_ID, withDelegate: self, withV4VCPrePopup: false, andV4VCPostPopup: false)
+        AdColony.playVideoAd(forZone: ZONE_REWARDED_ID, with: self, withV4VCPrePopup: false, andV4VCPostPopup: false)
     }
     
-    func onAdColonyV4VCReward(success: Bool, currencyName: String, currencyAmount amount: Int32, inZone zoneID: String)
+    func onAdColonyV4VCReward(_ success: Bool, currencyName: String, currencyAmount amount: Int32, inZone zoneID: String)
     {
         print("AdColony zone: %@ reward: %@ amount: %i", zoneID, success ? "YES" : "NO", amount)
         
@@ -30,14 +30,14 @@ class AdColonyAdProvider: NSObject, AdProvider, AdColonyDelegate, AdColonyAdDele
         }
     }
 
-    func onAdColonyAdAvailabilityChange(available: Bool, inZone zoneID: String)
+    func onAdColonyAdAvailabilityChange(_ available: Bool, inZone zoneID: String)
     {
         if zoneID == ZONE_REWARDED_ID {
             isAvailable = available
         }
     }
     
-    func onAdColonyAdAttemptFinished(shown: Bool, inZone zoneID: String)
+    func onAdColonyAdAttemptFinished(_ shown: Bool, inZone zoneID: String)
     {
         if shown {
             delegateFunc?()

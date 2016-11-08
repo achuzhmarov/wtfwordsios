@@ -2,8 +2,8 @@ import Foundation
 import CoreData
 
 class CoreSingleModeCategory: NSManagedObject {
-    func updateFromSingleModeCategoryWithoutLevels(singleModeCategory: SingleModeCategory) {
-        self.cipherType = singleModeCategory.cipherType.rawValue
+    func updateFromSingleModeCategoryWithoutLevels(_ singleModeCategory: SingleModeCategory) {
+        self.cipherType = singleModeCategory.cipherType.rawValue as NSNumber?
     }
 
     func getSingleModeCategory() -> SingleModeCategory? {

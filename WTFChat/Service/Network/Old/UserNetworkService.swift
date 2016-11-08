@@ -8,9 +8,9 @@ class UserNetworkService: Service {
         self.networkService = networkService
     }
 
-    func getNewInfo(lastUpdate: NSDate, completion:(userInfo: User?, error: NSError?) -> Void) {
+    func getNewInfo(_ lastUpdate: Date, completion:@escaping (_ userInfo: User?, _ error: NSError?) -> Void) {
         let lastUpdateData = [
-            "last_update": NSDate.parseStringJSONFromDate(lastUpdate)!
+            "last_update": Date.parseStringJSONFromDate(lastUpdate)!
         ]
         
         let postJSON = JSON(lastUpdateData)
@@ -31,7 +31,7 @@ class UserNetworkService: Service {
         }
     }
     
-    func getNewFriends(searchString: String, completion:(friends: [FriendInfo]?, error: NSError?) -> Void) {
+    func getNewFriends(_ searchString: String, completion:@escaping (_ friends: [FriendInfo]?, _ error: NSError?) -> Void) {
         var url = "user/friends"
         
         if (searchString != "") {
@@ -56,7 +56,7 @@ class UserNetworkService: Service {
         }
     }
     
-    func getTopRatings(completion:(friends: [FriendInfo]?, error: NSError?) -> Void) {
+    func getTopRatings(_ completion:@escaping (_ friends: [FriendInfo]?, _ error: NSError?) -> Void) {
         networkService.get("user/top") { (json, error) -> Void in
             if let requestError = error {
                 completion(friends: nil, error: requestError)
@@ -75,7 +75,7 @@ class UserNetworkService: Service {
         }
     }
     
-    func getFriendsRating(completion:(friends: [FriendInfo]?, error: NSError?) -> Void) {
+    func getFriendsRating(_ completion:@escaping (_ friends: [FriendInfo]?, _ error: NSError?) -> Void) {
         networkService.get("user/friendsRating") { (json, error) -> Void in
             if let requestError = error {
                 completion(friends: nil, error: requestError)
@@ -94,7 +94,7 @@ class UserNetworkService: Service {
         }
     }
     
-    func makeFriends(friendLogin: String, completion:(talk: FriendTalk?, error: NSError?) -> Void) {
+    func makeFriends(_ friendLogin: String, completion:@escaping (_ talk: FriendTalk?, _ error: NSError?) -> Void) {
         networkService.post(nil, relativeUrl:"user/friend/\(friendLogin.escapeForUrl()!)") { (json, error) -> Void in
             if let requestError = error {
                 completion(talk: nil, error: requestError)
@@ -113,7 +113,7 @@ class UserNetworkService: Service {
         }
     }
     
-    func updatePassword(oldPassword: String, newPassword: String, completion:(error: NSError?) -> Void) {
+    func updatePassword(_ oldPassword: String, newPassword: String, completion:@escaping (_ error: NSError?) -> Void) {
         let requestData = [
             "old_password": oldPassword,
             "new_password": newPassword
@@ -130,7 +130,7 @@ class UserNetworkService: Service {
         }
     }
     
-    func updateName(name: String, completion:(error: NSError?) -> Void) {
+    func updateName(_ name: String, completion:@escaping (_ error: NSError?) -> Void) {
         let requestData = [
             "name": name
         ]
@@ -146,7 +146,7 @@ class UserNetworkService: Service {
         }
     }
     
-    func updatePushNew(pushNew: Bool, completion:(error: NSError?) -> Void) {
+    func updatePushNew(_ pushNew: Bool, completion:@escaping (_ error: NSError?) -> Void) {
         let requestData = [
             "push_new": pushNew
         ]
@@ -162,7 +162,7 @@ class UserNetworkService: Service {
         }
     }
     
-    func updatePushDeciphered(pushDeciphered: Bool, completion:(error: NSError?) -> Void) {
+    func updatePushDeciphered(_ pushDeciphered: Bool, completion:@escaping (_ error: NSError?) -> Void) {
         let requestData = [
             "push_deciphered": pushDeciphered
         ]
@@ -178,7 +178,7 @@ class UserNetworkService: Service {
         }
     }
     
-    func addFreeAdHint(completion:(userInfo: User?, error: NSError?) -> Void) {
+    func addFreeAdHint(_ completion:@escaping (_ userInfo: User?, _ error: NSError?) -> Void) {
         let url = "user/add_hint"
         
         networkService.post(nil, relativeUrl: url) { (json, error) -> Void in

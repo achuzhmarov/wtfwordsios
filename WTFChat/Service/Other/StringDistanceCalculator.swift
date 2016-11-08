@@ -2,8 +2,8 @@ import Foundation
 
 class Tools {
     
-    private class func min(numbers: Int...) -> Int {
-        return numbers.reduce(numbers[0], combine: {$0 < $1 ? $0 : $1})
+    fileprivate class func min(_ numbers: Int...) -> Int {
+        return numbers.reduce(numbers[0], {$0 < $1 ? $0 : $1})
     }
     
     class Array2D {
@@ -14,7 +14,7 @@ class Tools {
         init(cols:Int, rows:Int) {
             self.cols = cols
             self.rows = rows
-            matrix = Array(count:cols*rows, repeatedValue:0)
+            matrix = Array(repeating: 0, count: cols*rows)
         }
         
         subscript(col:Int, row:Int) -> Int {
@@ -35,11 +35,11 @@ class Tools {
         }
     }
     
-    class func calcStringDistance(aStr: String, bStr: String) -> Int {
+    class func calcStringDistance(_ aStr: String, bStr: String) -> Int {
         return levenshtein(aStr, bStr: bStr)
     }
     
-    private class func levenshtein(aStr: String, bStr: String) -> Int {
+    fileprivate class func levenshtein(_ aStr: String, bStr: String) -> Int {
         if (aStr.characters.count == 0 || bStr.characters.count == 0) {
             return 0
         }

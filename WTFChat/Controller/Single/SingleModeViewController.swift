@@ -2,9 +2,9 @@ import Foundation
 import Localize_Swift
 
 class SingleModeViewController: BaseUIViewController {
-    private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
-    private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
-    private let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService)
+    fileprivate let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService)
+    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
+    fileprivate let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService)
 
     @IBOutlet weak var menuBorder: UIView!
     @IBOutlet weak var menuBackground: UIView!
@@ -13,24 +13,24 @@ class SingleModeViewController: BaseUIViewController {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var exitGesture: UIGestureRecognizer!
 
-    private let FINISHED_TITLE = "Congratulations!".localized()
-    private let FINISHED_TEXT = "You have finished the".localized()
-    private let FINISHED_HARD_TEXT = "on hard difficulty.".localized()
-    private let FINISHED_NORMAL_TEXT = "Hard difficulty unlocked.".localized()
-    private let FINISHED_EASY_TEXT = "Complete all levels on Normal difficulty to unlock Hard.".localized()
-    private let NEXT_CHAPTER_TEXT = "Next Chapter".localized()
-    private let STAY_HERE_TEXT = "Stay here".localized()
-    private let MENU_TEXT = "menu".localized()
+    fileprivate let FINISHED_TITLE = "Congratulations!".localized()
+    fileprivate let FINISHED_TEXT = "You have finished the".localized()
+    fileprivate let FINISHED_HARD_TEXT = "on hard difficulty.".localized()
+    fileprivate let FINISHED_NORMAL_TEXT = "Hard difficulty unlocked.".localized()
+    fileprivate let FINISHED_EASY_TEXT = "Complete all levels on Normal difficulty to unlock Hard.".localized()
+    fileprivate let NEXT_CHAPTER_TEXT = "Next Chapter".localized()
+    fileprivate let STAY_HERE_TEXT = "Stay here".localized()
+    fileprivate let MENU_TEXT = "menu".localized()
 
-    private let PageControlAdditionalPadding: CGFloat = 8
+    fileprivate let PageControlAdditionalPadding: CGFloat = 8
 
-    var handleOffstagePanComputer: ((pan: UIPanGestureRecognizer) -> Void)?
+    var handleOffstagePanComputer: ((_ pan: UIPanGestureRecognizer) -> Void)?
 
-    private var cipherPageViewController: CipherPageViewController!
+    fileprivate var cipherPageViewController: CipherPageViewController!
 
-    private var currentCipherView: CipherViewController?
+    fileprivate var currentCipherView: CipherViewController?
 
-    private let cipherTypes = CipherType.getAll()
+    fileprivate let cipherTypes = CipherType.getAll()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,43 +41,43 @@ class SingleModeViewController: BaseUIViewController {
 
         menuBorder.backgroundColor = Color.BackgroundDark
         menuBackground.addLinearGradient(Gradient.BackgroundMenu)
-        menuButton.setTitle(MENU_TEXT, forState: .Normal)
+        menuButton.setTitle(MENU_TEXT, for: UIControlState())
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         dailyHintsService.computeDailyHints()
     }
 
-    func cipherViewUpdated(newController: CipherViewController) {
+    func cipherViewUpdated(_ newController: CipherViewController) {
         currentCipherView = newController
         configurePageControl()
     }
 
-    private func configurePageControl() {
+    fileprivate func configurePageControl() {
         pageControl.numberOfPages = cipherTypes.count
         pageControl.currentPage = currentCipherView?.activeCipherIndex ?? guiDataService.getLastSelectedCategoryType().rawValue
-        pageControl.pageIndicatorTintColor = UIColor.blackColor()
+        pageControl.pageIndicatorTintColor = UIColor.black
         pageControl.currentPageIndicatorTintColor = Color.CipheredDark
     }
 
-    @IBAction func pageChanged(sender: AnyObject) {
+    @IBAction func pageChanged(_ sender: AnyObject) {
         cipherPageViewController.showPage(pageControl.currentPage)
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let cipherPageViewController = segue.destinationViewController as? CipherPageViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let cipherPageViewController = segue.destination as? CipherPageViewController {
             self.cipherPageViewController = cipherPageViewController
         }
     }
 
     func unwindSegue() {
-        self.performSegueWithIdentifier("backToMenu", sender: self)
+        self.performSegue(withIdentifier: "backToMenu", sender: self)
     }
 
-    func handleOffstagePan(pan: UIPanGestureRecognizer) {
-        handleOffstagePanComputer?(pan: pan)
+    func handleOffstagePan(_ pan: UIPanGestureRecognizer) {
+        handleOffstagePanComputer?(pan)
     }
 
     func reloadData() {

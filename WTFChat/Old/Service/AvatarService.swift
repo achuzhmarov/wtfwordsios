@@ -1,13 +1,13 @@
 import Foundation
 
 class AvatarService: Service {
-    private var avatarImageCache = [String: [UInt: UIImage]]()
+    fileprivate var avatarImageCache = [String: [UInt: UIImage]]()
 
-    func getSingleModeImage(diameter: UInt) -> UIImage {
+    func getSingleModeImage(_ diameter: UInt) -> UIImage {
         return getImage(Emoji.SMILE_FACE, diameter: diameter)
     }
 
-    func getImage(name: String, diameter: UInt) -> UIImage {
+    func getImage(_ name: String, diameter: UInt) -> UIImage {
         if let userAvatars = avatarImageCache[name] {
             if let image = userAvatars[diameter] {
                 return image
@@ -25,20 +25,20 @@ class AvatarService: Service {
         var initials : String
         
         if (nameLength != 0) {
-            initials = name[0...min(2, nameLength - 1)].capitalizedString
+            initials = name[0...min(2, nameLength - 1)].capitalized
         } else {
             initials = Emoji.SMILE_FACE
         }
         
-        let jsqImage = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(initials, backgroundColor: color, textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(CGFloat(13)), diameter: diameter)
+        let jsqImage = JSQMessagesAvatarImageFactory.avatarImage(withUserInitials: initials, backgroundColor: color, textColor: UIColor.black, font: UIFont.systemFont(ofSize: CGFloat(13)), diameter: diameter)
         
         if avatarImageCache[name] != nil {
-            avatarImageCache[name]![diameter] = jsqImage.avatarImage
+            avatarImageCache[name]![diameter] = jsqImage?.avatarImage
         } else {
             avatarImageCache[name] = [UInt: UIImage]()
-            avatarImageCache[name]![diameter] = jsqImage.avatarImage
+            avatarImageCache[name]![diameter] = jsqImage?.avatarImage
         }
         
-        return jsqImage.avatarImage
+        return jsqImage!.avatarImage
     }
 }

@@ -2,8 +2,8 @@ import Foundation
 import Localize_Swift
 
 extension DecipherInProgressVC: HintComputer {
-    func hintTapped(word: Word) {
-        if (word.type == WordType.New) {
+    func hintTapped(_ word: Word) {
+        if (word.type == WordType.new) {
             if (word.wasCloseTry) {
                 showCloseTryHintConfirm(word)
             } else if (hints > 0) {
@@ -22,34 +22,34 @@ extension DecipherInProgressVC: HintComputer {
                 firstButtonTitle: "Get more".localized()) { () -> Void in
 
             self.isPaused = true
-            self.performSegueWithIdentifier("getMoreHints", sender: self)
+            self.performSegue(withIdentifier: "getMoreHints", sender: self)
         }
     }
 
-    private func showHintConfirm(word: Word) {
+    fileprivate func showHintConfirm(_ word: Word) {
         WTFTwoButtonsAlert.show("Hints remained:".localized() + " " + String(hints),
                 message: "",
                 firstButtonTitle: "Use a Hint".localized()) { () -> Void in
 
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.useHint(word)
             })
         }
     }
 
-    private func showCloseTryHintConfirm(word: Word) {
+    fileprivate func showCloseTryHintConfirm(_ word: Word) {
         WTFTwoButtonsAlert.show("Open this word?".localized(),
                 message: "",
                 firstButtonTitle: "Open".localized()) { () -> Void in
 
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.useHint(word)
             })
         }
     }
 
-    func useHint(word: Word) {
-        if (message.getMessageStatus() != .Ciphered) {
+    func useHint(_ word: Word) {
+        if (message.getMessageStatus() != .ciphered) {
             return
         }
 

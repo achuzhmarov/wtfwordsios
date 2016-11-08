@@ -1,17 +1,17 @@
 import Foundation
 
 class CipherPageViewController: UIPageViewController, CipherViewAppearedNotifier {
-    private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
+    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService)
 
-    private let cipherTypes = CipherType.getAll()
-    private var viewControllersCache = [Int: CipherViewController]()
+    fileprivate let cipherTypes = CipherType.getAll()
+    fileprivate var viewControllersCache = [Int: CipherViewController]()
 
-    private var currentCipherViewController: CipherViewController?
+    fileprivate var currentCipherViewController: CipherViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor.clearColor()
+        self.view.backgroundColor = UIColor.clear
 
         dataSource = self
 
@@ -20,23 +20,23 @@ class CipherPageViewController: UIPageViewController, CipherViewAppearedNotifier
         showPage(guiDataService.getLastSelectedCategoryType().rawValue)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        let parent = self.parentViewController as! SingleModeViewController
+        let parent = self.parent as! SingleModeViewController
         parent.cipherViewUpdated(currentCipherViewController!)
     }
 
-    private func initViewControllers() {
+    fileprivate func initViewControllers() {
         for i in 0..<cipherTypes.count {
             singleModeViewController(i)
         }
     }
 
-    private func singleModeViewController(index: Int) -> CipherViewController? {
+    fileprivate func singleModeViewController(_ index: Int) -> CipherViewController? {
         if let cachedController = viewControllersCache[index] {
             return cachedController
-        } else if let storyboard = storyboard, page = storyboard.instantiateViewControllerWithIdentifier("CipherViewController") as? CipherViewController {
+        } else if let storyboard = storyboard, let page = storyboard.instantiateViewController(withIdentifier: "CipherViewController") as? CipherViewController {
             page.activeCipherIndex = index
             page.cipherViewAppearedNotifier = self
             viewControllersCache[index] = page
@@ -46,15 +46,15 @@ class CipherPageViewController: UIPageViewController, CipherViewAppearedNotifier
         return nil
     }
 
-    func cipherViewAppeared(viewController: CipherViewController) {
+    func cipherViewAppeared(_ viewController: CipherViewController) {
         currentCipherViewController = viewController
 
-        if let parent = self.parentViewController as? SingleModeViewController {
+        if let parent = self.parent as? SingleModeViewController {
             parent.cipherViewUpdated(viewController)
         }
     }
 
-    func showPage(index: Int){
+    func showPage(_ index: Int){
         var direction: UIPageViewControllerNavigationDirection!
         var animated: Bool!
 
@@ -62,13 +62,13 @@ class CipherPageViewController: UIPageViewController, CipherViewAppearedNotifier
             animated = true
 
             if currentIndex > index {
-                direction = .Reverse
+                direction = .reverse
             } else {
-                direction = .Forward
+                direction = .forward
             }
         } else {
             animated = false
-            direction = .Forward
+            direction = .forward
         }
 
         if let viewController = singleModeViewController(index) {
@@ -84,8 +84,8 @@ class CipherPageViewController: UIPageViewController, CipherViewAppearedNotifier
 
 //MARK: implementation of UIPageViewControllerDataSource
 extension CipherPageViewController: UIPageViewControllerDataSource {
-    func pageViewController(pageViewController: UIPageViewController,
-                            viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerBefore viewController: UIViewController) -> UIViewController? {
 
         if let viewController = viewController as? CipherViewController {
             var index = viewController.activeCipherIndex
@@ -96,8 +96,8 @@ extension CipherPageViewController: UIPageViewControllerDataSource {
         return nil
     }
 
-    func pageViewController(pageViewController: UIPageViewController,
-                            viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerAfter viewController: UIViewController) -> UIViewController? {
 
         if let viewController = viewController as? CipherViewController {
             var index = viewController.activeCipherIndex

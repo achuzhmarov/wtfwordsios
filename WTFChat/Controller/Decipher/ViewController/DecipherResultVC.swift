@@ -11,24 +11,24 @@ class DecipherResultVC: UIViewController, HintComputer {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var wordsViewHorizontalConstraint: NSLayoutConstraint!
 
-    private let SUCCESS_TEXT = "Success".localized()
-    private let FAILED_TEXT = "Failed".localized()
-    private let CONTINUE_TEXT = "Continue".localized()
-    private let RETRY_TEXT = "Retry".localized()
-    private let BACK_TEXT = "Back".localized()
+    fileprivate let SUCCESS_TEXT = "Success".localized()
+    fileprivate let FAILED_TEXT = "Failed".localized()
+    fileprivate let CONTINUE_TEXT = "Continue".localized()
+    fileprivate let RETRY_TEXT = "Retry".localized()
+    fileprivate let BACK_TEXT = "Back".localized()
 
-    private var message: Message!
+    fileprivate var message: Message!
 
     var expGainView = ExpGainView()
 
     var parent: DecipherViewController {
-        return parentViewController as! DecipherViewController
+        return parent 
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.clearColor()
+        view.backgroundColor = UIColor.clear
 
         let wordsTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherResultVC.viewTapped))
         wordsTableView.addGestureRecognizer(wordsTap)
@@ -36,29 +36,29 @@ class DecipherResultVC: UIViewController, HintComputer {
         wordsTableView.hintComputer = self
         wordsTableView.delegate = wordsTableView
         wordsTableView.dataSource = wordsTableView
-        wordsTableView.backgroundColor = UIColor.clearColor()
+        wordsTableView.backgroundColor = UIColor.clear
 
         resultLabel.layer.cornerRadius = 12
         resultLabel.textColor = Color.Text
 
-        backButton.setTitle(BACK_TEXT, forState: .Normal)
+        backButton.setTitle(BACK_TEXT, for: UIControlState())
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self);
+        NotificationCenter.default.removeObserver(self);
     }
 
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
 
-        if (parent.resultContainer.hidden) {
+        if (parent.resultContainer.isHidden) {
             return
         }
 
         redrawWordsView(size)
 
         wordsTableView.alpha = 0
-        UIView.animateWithDuration(0.6, delay: 0,
+        UIView.animate(withDuration: 0.6, delay: 0,
                 options: [], animations: {
             self.wordsTableView.alpha = 1
         }, completion: nil)
@@ -68,11 +68,11 @@ class DecipherResultVC: UIViewController, HintComputer {
         changeCipherStateForViewOnly()
     }
 
-    @IBAction func backTapped(sender: AnyObject) {
+    @IBAction func backTapped(_ sender: AnyObject) {
         parent.backTapped()
     }
 
-    @IBAction func continuePressed(sender: AnyObject) {
+    @IBAction func continuePressed(_ sender: AnyObject) {
         parent.continuePressed()
     }
 
@@ -81,20 +81,20 @@ class DecipherResultVC: UIViewController, HintComputer {
         wordsTableView.setNewMessage(message, useCipherText: parent.useCipherText, selfAuthor: parent.selfAuthor)
 
         wordsTableView.alpha = 0
-        UIView.animateWithDuration(0.3, delay: 0,
+        UIView.animate(withDuration: 0.3, delay: 0,
                 options: [], animations: {
             self.wordsTableView.alpha = 1
         }, completion: nil)
     }
 
-    private func redrawWordsView(size: CGSize? = nil) {
+    fileprivate func redrawWordsView(_ size: CGSize? = nil) {
         let size = size ?? view.frame.size
 
         wordsTableView.updateMaxWidth(size.width - wordsViewHorizontalConstraint.constant * 2)
         wordsTableView.setNewMessage(message, useCipherText: parent.useCipherText, selfAuthor: parent.selfAuthor)
     }
 
-    func initView(resultMessage: Message) {
+    func initView(_ resultMessage: Message) {
         message = resultMessage
 
         redrawWordsView()
@@ -104,21 +104,21 @@ class DecipherResultVC: UIViewController, HintComputer {
         expGainView.initView(levelView)
     }
 
-    func hintTapped(word: Word) {
+    func hintTapped(_ word: Word) {
         changeCipherStateForViewOnly()
     }
 
     func showResult() {
-        if (message.getMessageStatus() == .Success) {
+        if (message.getMessageStatus() == .success) {
             resultLabel.text = SUCCESS_TEXT
             resultLabel.addGradientToLabel(Gradient.Success)
-            continueButton.setTitle(CONTINUE_TEXT, forState: .Normal)
+            continueButton.setTitle(CONTINUE_TEXT, for: UIControlState())
 
             audioService.playSound("win")
         } else {
             resultLabel.text = FAILED_TEXT
             resultLabel.addGradientToLabel(Gradient.Failed)
-            continueButton.setTitle(RETRY_TEXT, forState: .Normal)
+            continueButton.setTitle(RETRY_TEXT, for: UIControlState())
 
             audioService.playSound("lose")
         }

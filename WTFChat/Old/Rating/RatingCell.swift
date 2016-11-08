@@ -9,8 +9,8 @@
 import UIKit
 
 class RatingCell: UITableViewCell {
-    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
-    private let avatarService: AvatarService = serviceLocator.get(AvatarService)
+    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService)
+    fileprivate let avatarService: AvatarService = serviceLocator.get(AvatarService)
 
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userLogin: UILabel!
@@ -19,8 +19,8 @@ class RatingCell: UITableViewCell {
     @IBOutlet weak var userNum: UILabel!
     @IBOutlet weak var userGlobalNum: UILabel!
     
-    private func initStyle() {
-        userImage.layer.borderColor = UIColor.whiteColor().CGColor
+    fileprivate func initStyle() {
+        userImage.layer.borderColor = UIColor.white.cgColor
         userImage.layer.cornerRadius = userImage.bounds.width/2
         userImage.clipsToBounds = true
         
@@ -31,11 +31,11 @@ class RatingCell: UITableViewCell {
         userGlobalNum?.adjustsFontSizeToFitWidth = true
     }
     
-    func updateUser(user: FriendInfo, num: Int) {
+    func updateUser(_ user: FriendInfo, num: Int) {
         initStyle()
 
-        userLogin.text = user.login.capitalizedString
-        userName.text = user.name.capitalizedString
+        userLogin.text = user.login.capitalized
+        userName.text = user.name.capitalized
         userLvl.text = "lvl \(String(user.lvl))"
         
         if (user.exp == 0) {
@@ -53,7 +53,7 @@ class RatingCell: UITableViewCell {
         if (currentUserService.getUserLogin() == user.login) {
             self.backgroundColor = UIColor(netHex: 0xEEEEEE)
         } else {
-            self.backgroundColor = UIColor.whiteColor()
+            self.backgroundColor = UIColor.white
         }
     }
 }
