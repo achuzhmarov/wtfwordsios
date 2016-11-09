@@ -1,13 +1,13 @@
-/*import Foundation
+import Foundation
 
 class CharBoostAdProvider: NSObject, AdProvider, ChartboostDelegate {
-    private let APP_ID = NSBundle.mainBundle().objectForInfoDictionaryKey("CHARTBOOST_APP_ID") as! String
-    private let APP_SIGNATURE = NSBundle.mainBundle().objectForInfoDictionaryKey("CHARTBOOST_APP_SIGNATURE") as! String
+    private let APP_ID = Bundle.main.object(forInfoDictionaryKey: "CHARTBOOST_APP_ID") as! String
+    private let APP_SIGNATURE = Bundle.main.object(forInfoDictionaryKey: "CHARTBOOST_APP_SIGNATURE") as! String
 
     var delegateFunc: (() -> Void)?
 
     func initProvider() {
-        Chartboost.startWithAppId(APP_ID, appSignature: APP_SIGNATURE, delegate: self)
+        Chartboost.start(withAppId: APP_ID, appSignature: APP_SIGNATURE, delegate: self)
         Chartboost.cacheRewardedVideo(CBLocationMainMenu)
     }
 
@@ -21,13 +21,13 @@ class CharBoostAdProvider: NSObject, AdProvider, ChartboostDelegate {
         }
     }
     
-    func showAd(delegateFunc: (() -> Void)) {
+    func showAd(_ delegateFunc: @escaping (() -> Void)) {
         self.delegateFunc = delegateFunc
         print("Chartboost show ad")
         Chartboost.showRewardedVideo(CBLocationMainMenu)
     }
 
-    func didCompleteRewardedVideo(location: String!, withReward reward: Int32) {
+    func didCompleteRewardedVideo(_ location: String!, withReward reward: Int32) {
         delegateFunc?()
     }
-}*/
+}

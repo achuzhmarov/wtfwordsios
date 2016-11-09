@@ -2,17 +2,17 @@ import Foundation
 import Localize_Swift
 
 class MainViewController: BaseUIViewController {
-    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
-    fileprivate let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService.self)
+    private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
+    private let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService.self)
 
-    fileprivate var TUTORIAL_TITLE: String!
-    fileprivate var SINGLE_MODE_TITLE: String!
-    fileprivate var SHOP_TITLE: String!
+    private let TUTORIAL_TITLE = "Tutorial"
+    private let SINGLE_MODE_TITLE = "Single mode"
+    private let SHOP_TITLE = "Shop"
 
-    fileprivate var TUTORIAL_MESSAGE: String!
-    fileprivate var TUTORIAL_REPEAT_MESSAGE: String!
-    fileprivate var START_TUTORIAL_TEXT: String!
-    fileprivate var SKIP_TUTORIAL_TEXT: String!
+    private let TUTORIAL_MESSAGE = "Hi! It is your first time, would you like to start a tutorial?"
+    private let TUTORIAL_REPEAT_MESSAGE = "You have finished tutorial already, do you want to start it again?"
+    private let START_TUTORIAL_TEXT = "Start"
+    private let SKIP_TUTORIAL_TEXT = "Skip"
 
     @IBOutlet weak var tutorialButton: UIButton!
     @IBOutlet weak var singleModeButton: UIButton!
@@ -30,26 +30,13 @@ class MainViewController: BaseUIViewController {
         initTitles()
     }
 
-    fileprivate func initTitles() {
-        initLanguageStrings()
-
-        tutorialButton.setTitle(TUTORIAL_TITLE, for: UIControlState())
-        singleModeButton.setTitle(SINGLE_MODE_TITLE, for: UIControlState())
-        shopButton.setTitle(SHOP_TITLE, for: UIControlState())
+    private func initTitles() {
+        tutorialButton.setTitle(TUTORIAL_TITLE.localized(), for: UIControlState())
+        singleModeButton.setTitle(SINGLE_MODE_TITLE.localized(), for: UIControlState())
+        shopButton.setTitle(SHOP_TITLE.localized(), for: UIControlState())
 
         let currentLanguage = TextLanguage.getCurrentLanguage()
         languageButton.setTitle(currentLanguage.buttonTitle, for: UIControlState())
-    }
-
-    fileprivate func initLanguageStrings() {
-        TUTORIAL_TITLE = "Tutorial".localized()
-        SINGLE_MODE_TITLE = "Single mode".localized()
-        SHOP_TITLE = "Shop".localized()
-
-        TUTORIAL_MESSAGE = "Hi! It is your first time, would you like to start a tutorial?".localized()
-        TUTORIAL_REPEAT_MESSAGE = "You have finished tutorial already, do you want to start it again?".localized()
-        START_TUTORIAL_TEXT = "Start".localized()
-        SKIP_TUTORIAL_TEXT = "Skip".localized()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -74,10 +61,10 @@ class MainViewController: BaseUIViewController {
         }
     }
 
-    fileprivate func showTutorialConfirmDialog() {
-        WTFTwoButtonsAlert.show(TUTORIAL_TITLE,
-                message: TUTORIAL_REPEAT_MESSAGE,
-                firstButtonTitle: START_TUTORIAL_TEXT,
+    private func showTutorialConfirmDialog() {
+        WTFTwoButtonsAlert.show(TUTORIAL_TITLE.localized(),
+                message: TUTORIAL_REPEAT_MESSAGE.localized(),
+                firstButtonTitle: START_TUTORIAL_TEXT.localized(),
                 alertButtonAction: { () -> Void in
                     self.performSegue(withIdentifier: "startTutorial", sender: self)
                 })
@@ -91,11 +78,11 @@ class MainViewController: BaseUIViewController {
         }
     }
 
-    fileprivate func showTutorialDialog() {
-        WTFTwoButtonsAlert.show(TUTORIAL_TITLE,
-                message: TUTORIAL_MESSAGE,
-                firstButtonTitle: START_TUTORIAL_TEXT,
-                secondButtonTitle: SKIP_TUTORIAL_TEXT,
+    private func showTutorialDialog() {
+        WTFTwoButtonsAlert.show(TUTORIAL_TITLE.localized(),
+                message: TUTORIAL_MESSAGE.localized(),
+                firstButtonTitle: START_TUTORIAL_TEXT.localized(),
+                secondButtonTitle: SKIP_TUTORIAL_TEXT.localized(),
                 alertButtonAction: { () -> Void in
                     self.performSegue(withIdentifier: "startTutorial", sender: self)
                 },

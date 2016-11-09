@@ -15,13 +15,14 @@ class WTFBaseAlert: NSObject, UIAlertViewDelegate  {
 
 class WTFOneButtonAlert: WTFBaseAlert  {
     static let CON_ERR = "%conError%"
+    static let OK_TEXT = "Ok"
 
     static func show(_ title: String, message: String?, alertButtonAction:(() -> Void)? = nil) {
-        show(title, message: message, firstButtonTitle: "Ok".localized(), viewPresenter: nil, alertButtonAction: alertButtonAction)
+        show(title, message: message, firstButtonTitle: OK_TEXT.localized(), viewPresenter: nil, alertButtonAction: alertButtonAction)
     }
 
     static func show(_ title: String, message: String?, viewPresenter: UIViewController?, alertButtonAction:(() -> Void)? = nil) {
-        show(title, message: message, firstButtonTitle: "Ok".localized(), viewPresenter: viewPresenter, alertButtonAction: alertButtonAction)
+        show(title, message: message, firstButtonTitle: OK_TEXT.localized(), viewPresenter: viewPresenter, alertButtonAction: alertButtonAction)
     }
 
     static func show(_ title: String, message: String?, firstButtonTitle: String, alertButtonAction:(() -> Void)? = nil) {
@@ -56,12 +57,14 @@ class WTFOneButtonAlert: WTFBaseAlert  {
 }
 
 class WTFTwoButtonsAlert: WTFBaseAlert {
+    static let CANCEL_TEXT = "Cancel"
+
     static func show(_ title: String, message: String?, firstButtonTitle: String, alertButtonAction:(() -> Void)?) {
-        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: "Cancel".localized(), alertButtonAction: alertButtonAction, cancelButtonAction: nil)
+        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: CANCEL_TEXT.localized(), alertButtonAction: alertButtonAction, cancelButtonAction: nil)
     }
 
     static func show(_ title: String, message: String?, firstButtonTitle: String, alertButtonAction:(() -> Void)?, cancelButtonAction:(() -> Void)?) {
-        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: "Cancel".localized(), alertButtonAction: alertButtonAction, cancelButtonAction: cancelButtonAction)
+        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: CANCEL_TEXT.localized(), alertButtonAction: alertButtonAction, cancelButtonAction: cancelButtonAction)
     }
 
     static func show(_ title: String, message: String?, firstButtonTitle: String, secondButtonTitle: String, alertButtonAction:(() -> Void)?) {

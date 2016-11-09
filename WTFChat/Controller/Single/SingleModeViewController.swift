@@ -2,9 +2,9 @@ import Foundation
 import Localize_Swift
 
 class SingleModeViewController: BaseUIViewController {
-    fileprivate let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService.self)
-    fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
-    fileprivate let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService.self)
+    private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService.self)
+    private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
+    private let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService.self)
 
     @IBOutlet weak var menuBorder: UIView!
     @IBOutlet weak var menuBackground: UIView!
@@ -13,24 +13,24 @@ class SingleModeViewController: BaseUIViewController {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var exitGesture: UIGestureRecognizer!
 
-    fileprivate let FINISHED_TITLE = "Congratulations!".localized()
-    fileprivate let FINISHED_TEXT = "You have finished the".localized()
-    fileprivate let FINISHED_HARD_TEXT = "on hard difficulty.".localized()
-    fileprivate let FINISHED_NORMAL_TEXT = "Hard difficulty unlocked.".localized()
-    fileprivate let FINISHED_EASY_TEXT = "Complete all levels on Normal difficulty to unlock Hard.".localized()
-    fileprivate let NEXT_CHAPTER_TEXT = "Next Chapter".localized()
-    fileprivate let STAY_HERE_TEXT = "Stay here".localized()
-    fileprivate let MENU_TEXT = "menu".localized()
+    private let FINISHED_TITLE = "Congratulations!".localized()
+    private let FINISHED_TEXT = "You have finished the".localized()
+    private let FINISHED_HARD_TEXT = "on hard difficulty.".localized()
+    private let FINISHED_NORMAL_TEXT = "Hard difficulty unlocked.".localized()
+    private let FINISHED_EASY_TEXT = "Complete all levels on Normal difficulty to unlock Hard.".localized()
+    private let NEXT_CHAPTER_TEXT = "Next Chapter".localized()
+    private let STAY_HERE_TEXT = "Stay here".localized()
+    private let MENU_TEXT = "menu".localized()
 
-    fileprivate let PageControlAdditionalPadding: CGFloat = 8
+    private let PageControlAdditionalPadding: CGFloat = 8
 
     var handleOffstagePanComputer: ((_ pan: UIPanGestureRecognizer) -> Void)?
 
-    fileprivate var cipherPageViewController: CipherPageViewController!
+    private var cipherPageViewController: CipherPageViewController!
 
-    fileprivate var currentCipherView: CipherViewController?
+    private var currentCipherView: CipherViewController?
 
-    fileprivate let cipherTypes = CipherType.getAll()
+    private let cipherTypes = CipherType.getAll()
 
     override func viewDidLoad() {
         super.viewDidLoad()
