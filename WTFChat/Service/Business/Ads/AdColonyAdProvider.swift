@@ -1,6 +1,6 @@
 import Foundation
 
-class AdColonyAdProvider: NSObject, AdProvider {
+/*class AdColonyAdProvider: NSObject, AdProvider {
     fileprivate let APP_ID = Bundle.main.object(forInfoDictionaryKey: "AD_COLONY_APP_ID") as! String
     fileprivate let ZONE_REWARDED_ID = Bundle.main.object(forInfoDictionaryKey: "AD_COLONY_REWARD_ZONE") as! String
 
@@ -94,4 +94,4 @@ class AdColonyAdProvider: NSObject, AdProvider {
             self.requestInterstitial()
         }
     }
-}
+}*/

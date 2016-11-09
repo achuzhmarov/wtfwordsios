@@ -184,10 +184,9 @@
 		3E37CFFBFDAAC4913EC3B77E /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C1426B7D1EBA185A77E4 /* RatingCell.swift */; };
 		3E37CFFCEA088FF37D8F591E /* InAppNetworkServiceOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C89724177FD827960FEB /* InAppNetworkServiceOld.swift */; };
 		481BDD991C58FE5D00ABD558 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 481BDD981C58FE5D00ABD558 /* LaunchScreen.storyboard */; };
-		484E3B051DD319B90071A68C /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4864B7F61DD3075F00B777D4 /* AdColony.framework */; };
 		484E3B061DD324930071A68C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486E42661D89D3080012E299 /* Foundation.framework */; };
 		484E3B071DD324A50071A68C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486E42681D89D3180012E299 /* UIKit.framework */; };
-		484E3B091DD3250A0071A68C /* Chartboost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484E3B081DD3250A0071A68C /* Chartboost.framework */; };
+		484E3B0B1DD34B8F0071A68C /* Chartboost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484E3B0A1DD34B8F0071A68C /* Chartboost.framework */; };
 		484EC3511C2E714900C65F94 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3501C2E714900C65F94 /* libz.1.2.5.tbd */; };
 		484EC3531C2E715000C65F94 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3521C2E715000C65F94 /* AudioToolbox.framework */; };
 		484EC3551C2E715B00C65F94 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EC3541C2E715B00C65F94 /* AVFoundation.framework */; };
@@ -408,7 +407,7 @@
 		3E37CFEEAC9762C3361A9C50 /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		481BDD981C58FE5D00ABD558 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		483676481C2048200092C703 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		484E3B081DD3250A0071A68C /* Chartboost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Chartboost.framework; sourceTree = "<group>"; };
+		484E3B0A1DD34B8F0071A68C /* Chartboost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Chartboost.framework; sourceTree = "<group>"; };
 		484EC3501C2E714900C65F94 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		484EC3521C2E715000C65F94 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		484EC3541C2E715B00C65F94 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -424,7 +423,6 @@
 		484EC3681C2E719D00C65F94 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		484EC36A1C2E71A400C65F94 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		484EC36C1C2E71FA00C65F94 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		4864B7F61DD3075F00B777D4 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdColony.framework; sourceTree = "<group>"; };
 		486E42661D89D3080012E299 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		486E42681D89D3180012E299 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		489666921B9B640400F769D1 /* WTFWords.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WTFWords.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -466,8 +464,7 @@
 				484EC3671C2E719500C65F94 /* Social.framework in Frameworks */,
 				484EC3691C2E719D00C65F94 /* SystemConfiguration.framework in Frameworks */,
 				484EC36B1C2E71A400C65F94 /* WebKit.framework in Frameworks */,
-				484E3B051DD319B90071A68C /* AdColony.framework in Frameworks */,
-				484E3B091DD3250A0071A68C /* Chartboost.framework in Frameworks */,
+				484E3B0B1DD34B8F0071A68C /* Chartboost.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1110,8 +1107,7 @@
 		49D7C70BCF12E2F6E166B7B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				484E3B081DD3250A0071A68C /* Chartboost.framework */,
-				4864B7F61DD3075F00B777D4 /* AdColony.framework */,
+				484E3B0A1DD34B8F0071A68C /* Chartboost.framework */,
 				486E42681D89D3180012E299 /* UIKit.framework */,
 				486E42661D89D3080012E299 /* Foundation.framework */,
 				48CAFF7D1D86EFE6000BFFA1 /* Localize_Swift.framework */,

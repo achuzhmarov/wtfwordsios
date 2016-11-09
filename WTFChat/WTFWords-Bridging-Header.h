@@ -4,7 +4,7 @@
 #import "KeychainWrapper.h"
 
 //addcolony
-#import <AdColony/AdColony.h>
+//#import <AdColony/AdColony.h>
 
 //chartboost
 #import <UIKit/UIKit.h>

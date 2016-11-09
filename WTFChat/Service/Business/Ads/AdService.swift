@@ -7,7 +7,9 @@ protocol AdProvider {
 }
 
 class AdService: Service {
-    private let adProviders: [AdProvider] = [CharBoostAdProvider(), AdColonyAdProvider()]
+    //private let adProviders: [AdProvider] = [AdColonyAdProvider()]
+    private let adProviders: [AdProvider] = [CharBoostAdProvider()]
+    //private let adProviders: [AdProvider] = [CharBoostAdProvider(), AdColonyAdProvider()]
     
     override func initServiceOnMain() {
         for adProvider in adProviders {
