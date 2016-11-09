@@ -49,10 +49,10 @@ class SingleModeCategoryService: Service {
         //TODO - test code for screenshots
         /*if (id == 1 || id == 2 || id == 4 || id == 7 || id == 8 || id == 10 || id == 11 || id == 12) {
             level.cleared = true
-            level.clearedDifficulty = .Normal
+            level.clearedDifficulty = .normal
         } else if (id == 5 || id == 6 || id == 3 || id == 9 || id == 13) {
             level.cleared = true
-            level.clearedDifficulty = .Easy
+            level.clearedDifficulty = .easy
         }*/
 
         coreLevelService.createLevelInCategory(category, level: level)
