@@ -23,7 +23,7 @@ class TalkService: Service {
     //TODO - JUST AWFUL
     var messageService: MessageService!
 
-    var updateTimer: Foundation.Timer?
+    var updateTimer: Timer?
     
     var talks = [FriendTalk]()
     
@@ -76,7 +76,7 @@ class TalkService: Service {
         DispatchQueue.main.async(execute: {
             self.updateTimer?.invalidate()
 
-            self.updateTimer = Foundation.Timer.scheduledTimer(timeInterval: self.TALKS_UPDATE_TIMER_INTERVAL, target: self, selector: #selector(TalkService.getNewUnreadTalks), userInfo: nil, repeats: true)
+            self.updateTimer = Timer.scheduledTimer(timeInterval: self.TALKS_UPDATE_TIMER_INTERVAL, target: self, selector: #selector(TalkService.getNewUnreadTalks), userInfo: nil, repeats: true)
         })
 
         messageService.startUpdateTimer()

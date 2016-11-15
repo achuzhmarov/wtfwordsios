@@ -1,6 +1,6 @@
 import Foundation
 
-class Timer {
+class WTFTimer {
     var seconds = 0
     
     init() {}

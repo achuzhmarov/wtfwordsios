@@ -9,7 +9,7 @@ class ExpGainView: NSObject {
     var progressView: UIProgressView?
     var expLabel: UILabel?
     var lvlLabel: UILabel?
-    var progressBarTimer: Foundation.Timer?
+    var progressBarTimer: Timer?
     var userExp: Int = 0
     var nextLvlExp: Int = 0
     var userLvl: Int = 0
@@ -103,7 +103,7 @@ class ExpGainView: NSObject {
         DispatchQueue.main.async(execute: {
             self.progressBarTimer?.invalidate()
             
-            self.progressBarTimer = Foundation.Timer.scheduledTimer(timeInterval: self.progressUpdateInterval, target: self,
+            self.progressBarTimer = Timer.scheduledTimer(timeInterval: self.progressUpdateInterval, target: self,
                 selector: #selector(ExpGainView.updateProgress), userInfo: nil, repeats: true)
         })
 

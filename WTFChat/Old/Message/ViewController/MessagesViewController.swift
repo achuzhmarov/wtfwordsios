@@ -14,7 +14,7 @@ class MessagesViewController: BaseMessageViewController, MessageListener {
     
     var refreshControl:UIRefreshControl!
     
-    var timer: Foundation.Timer?
+    var timer: Timer?
     var cipherType = CipherType.rightCutter
     var cipherDifficulty = CipherDifficulty.normal
     var lastSendedMessage: Message?

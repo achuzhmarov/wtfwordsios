@@ -6,9 +6,11 @@ class DecipherViewController: BaseUIViewController {
     var message: Message!
 
     @IBOutlet weak var inProgressContainer: UIView!
+    @IBOutlet weak var inProgressByLettersContainer: UIView!
     @IBOutlet weak var resultContainer: UIView!
 
     var inProgressVC: DecipherInProgressVC!
+    var inProgressByLettersVC: DecipherInProgressByLettersVC!
     var resultVC: DecipherResultVC!
 
     //for viewOnly mode
@@ -22,8 +24,11 @@ class DecipherViewController: BaseUIViewController {
         view.layoutIfNeeded()
 
         resultContainer.isHidden = true
+        inProgressContainer.isHidden = true
+        inProgressByLettersContainer.isHidden = true
 
-        inProgressVC.initView(message)
+        //inProgressVC.initView(message)
+        inProgressByLettersVC.initView(message)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -31,11 +36,14 @@ class DecipherViewController: BaseUIViewController {
             inProgressVC = vc
         } else if let vc = segue.destination as? DecipherResultVC {
             resultVC = vc
+        } else if let vc = segue.destination as? DecipherInProgressByLettersVC {
+            inProgressByLettersVC = vc
         }
     }
 
-    func start() {
+    func startHardcore() {
         inProgressContainer.isHidden = false
+
         resultContainer.isHidden = true
         view.bringSubview(toFront: inProgressContainer)
 
@@ -52,12 +60,34 @@ class DecipherViewController: BaseUIViewController {
         }, completion: nil)
     }
 
+    func start() {
+        inProgressByLettersContainer.isHidden = false
+
+        resultContainer.isHidden = true
+        view.bringSubview(toFront: inProgressByLettersContainer)
+
+        inProgressByLettersVC.initView(message)
+        inProgressByLettersVC.start()
+
+        UIView.setAnimationsEnabled(true)
+
+        inProgressByLettersContainer.alpha = 0
+
+        UIView.animate(withDuration: 0.5, delay: 0,
+                options: [], animations: {
+            self.inProgressByLettersContainer.alpha = 1
+        }, completion: nil)
+    }
+
     func gameOver() {
         inProgressContainer.isHidden = true
+        inProgressByLettersContainer.isHidden = true
         resultContainer.isHidden = false
         view.bringSubview(toFront: resultContainer)
 
-        message = inProgressVC.message
+        //message = inProgressVC.message
+        message = inProgressByLettersVC.message
+
         messageCipherService.failed(message)
 
         resultVC.initView(message)
@@ -76,6 +106,7 @@ class DecipherViewController: BaseUIViewController {
 
     func hintsBought() {
         inProgressVC.hintsBought()
+        inProgressByLettersVC.hintsBought()
     }
 
     func sendMessageDecipher() {

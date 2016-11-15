@@ -32,7 +32,7 @@ class MessageService: Service {
     var listeners = [String: WeakListener]()
     var talksToUpdate = Set<String>()
     
-    var updateTimer: Foundation.Timer?
+    var updateTimer: Timer?
 
     init(messageNetworkService: MessageNetworkService, talkService: TalkService, coreMessageService: CoreMessageService) {
         self.messageNetworkService = messageNetworkService
@@ -44,7 +44,7 @@ class MessageService: Service {
         DispatchQueue.main.async(execute: {
             self.updateTimer?.invalidate()
             
-            self.updateTimer = Foundation.Timer.scheduledTimer(timeInterval: self.MESSAGES_UPDATE_TIMER_INTERVAL, target: self,
+            self.updateTimer = Timer.scheduledTimer(timeInterval: self.MESSAGES_UPDATE_TIMER_INTERVAL, target: self,
                 selector: #selector(MessageService.updateMessages as (MessageService) -> () -> ()), userInfo: nil, repeats: true)
         })
     }

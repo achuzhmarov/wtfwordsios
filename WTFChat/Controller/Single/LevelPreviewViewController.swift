@@ -90,7 +90,7 @@ class LevelPreviewViewController: BaseModalVC {
     }
 
     fileprivate func updateTime() {
-        let timer = Timer(seconds: messageCipherService.getTimerSeconds(message))
+        let timer = WTFTimer(seconds: messageCipherService.getTimerSeconds(message))
         startTimerLabel.text = timer.getTimeString()
     }
 

@@ -9,7 +9,7 @@ class UserService: Service {
     fileprivate let currentUserService: CurrentUserService
     fileprivate let windowService: WindowService
 
-    fileprivate var updateTimer: Foundation.Timer?
+    fileprivate var updateTimer: Timer?
     
     fileprivate var freeAdHintsNotAdded = 0
 

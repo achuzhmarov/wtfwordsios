@@ -22,7 +22,8 @@ class SingleDecipherViewController: DecipherViewController {
         singleMessage = message as! SingleMessage
         messageCategory = singleMessageService.getTextCategoryForLevel(singleMessage.level)
 
-        inProgressVC.topCategoryLabel.text = messageCategory.title
+        //inProgressVC.topCategoryLabel.text = messageCategory.title
+        inProgressByLettersVC.topCategoryLabel.text = messageCategory.title
 
         start()
     }
@@ -104,7 +105,8 @@ class SingleDecipherViewController: DecipherViewController {
         )
         message = singleMessage
 
-        inProgressVC.topCategoryLabel.text = messageCategory.title
+        //inProgressVC.topCategoryLabel.text = messageCategory.title
+        inProgressByLettersVC.topCategoryLabel.text = messageCategory.title
 
         start()
     }

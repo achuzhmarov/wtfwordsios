@@ -1,7 +1,7 @@
 import Foundation
 import Localize_Swift
 
-class DecipherInProgressVC: UIViewController {
+class DecipherInProgressByLettersVC: UIViewController {
     let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
     let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService.self)
     let audioService: AudioService = serviceLocator.get(AudioService.self)
@@ -13,18 +13,11 @@ class DecipherInProgressVC: UIViewController {
 
     @IBOutlet weak var wordsTableView: WordsViewController!
 
-    @IBOutlet weak var guessTextField: UITextField!
-
-    @IBOutlet weak var tryButton: UIButton!
-
-    @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var topPaddingConstraint: NSLayoutConstraint!
     @IBOutlet weak var wordsViewHorizontalConstraint: NSLayoutConstraint!
 
     fileprivate let GIVE_UP_TITLE_TEXT = "Stop deciphering?".localized()
     fileprivate let GIVE_UP_BUTTON_TEXT = "Give Up".localized()
-    fileprivate let TRY_TEXT = "Try".localized()
-    fileprivate let GUESS_PLACEHOLDER_TEXT = "Enter your guess here".localized()
 
     var message: Message!
 
@@ -59,15 +52,7 @@ class DecipherInProgressVC: UIViewController {
         wordsTableView.dataSource = wordsTableView
         wordsTableView.backgroundColor = UIColor.clear
 
-        guessTextField.delegate = self
-        guessTextField.autocorrectionType = .no
-
         layoutTopView()
-
-        tryButton.setTitle(TRY_TEXT, for: UIControlState())
-
-        let placeholder = NSAttributedString(string: GUESS_PLACEHOLDER_TEXT, attributes: [NSForegroundColorAttributeName : UIColor.lightGray])
-        guessTextField.attributedPlaceholder = placeholder
     }
 
     deinit {
@@ -153,8 +138,6 @@ class DecipherInProgressVC: UIViewController {
                 selector: #selector(DecipherInProgressVC.tick), userInfo: nil, repeats: false)
 
         wordsTableView.setNewMessage(message)
-        guessTextField.text = ""
-        guessTextField.becomeFirstResponder()
         layoutTopView()
     }
 
@@ -201,13 +184,11 @@ class DecipherInProgressVC: UIViewController {
         topTimerLabel.alpha = 1
         topTimerLabel.textColor = UIColor.black
 
-        dismissKeyboard()
         parentVC.gameOver()
     }
 
     func hintsBought() {
         updateHintsCount()
         isPaused = false
-        guessTextField.becomeFirstResponder()
     }
 }
