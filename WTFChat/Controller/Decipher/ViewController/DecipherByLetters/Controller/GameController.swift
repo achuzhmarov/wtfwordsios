@@ -11,25 +11,25 @@ import UIKit
 
 class GameController {
   var gameView: UIView!
-  var level: AnagramLevel!
+  var message: Message!
   
-  fileprivate var tiles = [TileView]()
+  private var tiles = [TileView]()
   fileprivate var targets = [TargetView]()
-  
-  var hud:HUDView! {
+
+  /*var hud:HUDView! {
     didSet {
       //connect the Hint button
       hud.hintButton.addTarget(self, action: #selector(GameController.actionHint), for:.touchUpInside)
       hud.hintButton.isEnabled = false
     }
-  }
+  }*/
   
   //stopwatch variables
-  fileprivate var secondsLeft: Int = 0
-  fileprivate var timer: Timer?
-  
-  fileprivate var data = GameData()
-  
+  private var secondsLeft: Int = 0
+  private var timer: Timer?
+
+  private var data = GameData()
+
   fileprivate var audioController: AudioController
   
   var onAnagramSolved:( () -> ())!
@@ -40,31 +40,17 @@ class GameController {
   }
   
   func dealRandomAnagram () {
-    //1
-    assert(level.anagrams.count > 0, "no level loaded")
-    
-    //2
-    let randomIndex = randomNumber(minX:0, maxX:UInt32(level.anagrams.count-1))
-    let anagramPair = level.anagrams[randomIndex]
-    
-    //3
-    let anagram1 = anagramPair[0] as! String
-    let anagram2 = anagramPair[1] as! String
-    
-    //4
-    let anagram1length = anagram1.characters.count
-    let anagram2length = anagram2.characters.count
+    let wordText = message.words[0].text
+    let wordlength = CGFloat(wordText.characters.count)
+    print("word[\(wordlength)]: \(wordText)")
 
-    
-    //5
-    print("phrase1[\(anagram1length)]: \(anagram1)")
-    print("phrase2[\(anagram2length)]: \(anagram2)")
-    
+    let screenWidth = gameView.bounds.size.width
+
     //calculate the tile size
-    let tileSide = ceil(ScreenWidth * 0.9 / CGFloat(max(anagram1length, anagram2length))) - TileMargin
-    
+    let tileSide = min(ceil(screenWidth * 0.9 / wordlength) - TileMargin, TileMaxSide)
+
     //get the left margin for first tile
-    var xOffset = (ScreenWidth - CGFloat(max(anagram1length, anagram2length)) * (tileSide + TileMargin)) / 2.0
+    var xOffset = (screenWidth - wordlength * (tileSide + TileMargin)) / 2.0
     
     //adjust for tile center (instead of the tile's origin)
     xOffset += tileSide / 2.0
@@ -74,16 +60,13 @@ class GameController {
     
     //create targets
     var index = 0
-    for letter in anagram2.characters {
-        if letter != " " {
-            let target = TargetView(letter: letter, sideLength: tileSide)
-            
-            target.center = CGPoint(x: xOffset + CGFloat(index)*(tileSide + TileMargin),
-                                    y: ScreenHeight/4)
-        
-            gameView.addSubview(target)
-            targets.append(target)
-        }
+    for letter in wordText.characters {
+        let target = TargetView(letter: letter, sideLength: tileSide)
+
+        target.center = CGPoint(x: xOffset + CGFloat(index)*(tileSide + TileMargin), y: tileSide / 2 + 8)
+
+        gameView.addSubview(target)
+        targets.append(target)
         
         index += 1
     }
@@ -93,29 +76,23 @@ class GameController {
     
     //2 create tiles
     index = 0
-    for letter in anagram1.characters {
+    for letter in wordText.characters {
         //3
-        if letter != " " {
-            let tile = TileView(letter: letter, sideLength: tileSide)
-            tile.center = CGPoint(x: xOffset + CGFloat(index)*(tileSide + TileMargin),
-                                  y: ScreenHeight/4*3)
-        
-            tile.randomize()
-            tile.dragDelegate = self
-        
-            //4
-            gameView.addSubview(tile)
-            tiles.append(tile)
-        }
+        let tile = TileView(letter: letter, sideLength: tileSide)
+        tile.center = CGPoint(x: xOffset + CGFloat(index)*(tileSide + TileMargin),
+                              y: tileSide * 2)
+
+        tile.randomize()
+        tile.dragDelegate = self
+
+        //4
+        gameView.addSubview(tile)
+        tiles.append(tile)
         
         index += 1
     }
-    
-    //start the timer
-    self.startStopwatch()
-    
-    hud.hintButton.isEnabled = true
-    
+
+    //hud.hintButton.isEnabled = true
   }
   
   func placeTile(_ tileView: TileView, targetView: TargetView) {
@@ -157,18 +134,16 @@ class GameController {
     }
     print("Game Over!")
     
-    hud.hintButton.isEnabled = false
-    
-    //stop the stopwatch
-    self.stopStopwatch()
-    
+    //hud.hintButton.isEnabled = false
+
     //the anagram is completed!
     audioController.playEffect(SoundWin)
     
     // win animation
     let firstTarget = targets[0]
     let startX:CGFloat = 0
-    let endX:CGFloat = ScreenWidth + 300
+
+    let endX:CGFloat = gameView.bounds.size.width + 300
     let startY = firstTarget.center.y
     
     let stars = StardustView(frame: CGRect(x: startX, y: startY, width: 10, height: 10))
@@ -189,37 +164,15 @@ class GameController {
         self.onAnagramSolved()
     })
   }
-
-  func startStopwatch() {
-    //initialize the timer HUD
-    secondsLeft = level.timeToSolve
-    hud.stopwatch.setSeconds(secondsLeft)
-    
-    //schedule a new timer
-    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(GameController.tick(_:)), userInfo: nil, repeats: true)
-  }
-  
-  func stopStopwatch() {
-    timer?.invalidate()
-    timer = nil
-  }
-  
-  @objc func tick(_ timer: Timer) {
-    secondsLeft -= 1
-    hud.stopwatch.setSeconds(secondsLeft)
-    if secondsLeft == 0 {
-      self.stopStopwatch()
-    }
-  }
   
   //the user pressed the hint button
   @objc func actionHint() {
     //1
-    hud.hintButton.isEnabled = false
+    //hud.hintButton.isEnabled = false
     
     //2
-    data.points -= level.pointsPerTile / 2
-    hud.gamePoints.setValue(data.points, duration: 1.5)
+    //data.points -= level.pointsPerTile / 2
+    //hud.gamePoints.setValue(data.points, duration: 1.5)
     
     //3 find the first unmatched target and matching tile
     var foundTarget:TargetView? = nil
@@ -258,7 +211,7 @@ class GameController {
           self.placeTile(tile, targetView: target)
           
           //8 re-enable the button
-          self.hud.hintButton.isEnabled = true
+          //self.hud.hintButton.isEnabled = true
           
           //9 check for finished game
           self.checkForSuccess()
@@ -304,8 +257,8 @@ extension GameController:TileDragDelegateProtocol {
         audioController.playEffect(SoundDing)
         
         //give points
-        data.points += level.pointsPerTile
-        hud.gamePoints.setValue(data.points, duration: 0.5)
+        //data.points += level.pointsPerTile
+        //hud.gamePoints.setValue(data.points, duration: 0.5)
         
         //check for finished game
         self.checkForSuccess()
@@ -331,8 +284,8 @@ extension GameController:TileDragDelegateProtocol {
         audioController.playEffect(SoundWrong)
         
         //take out points
-        data.points -= level.pointsPerTile/2
-        hud.gamePoints.setValue(data.points, duration: 0.25)
+        //data.points -= level.pointsPerTile/2
+        //hud.gamePoints.setValue(data.points, duration: 0.25)
       }
     }
     

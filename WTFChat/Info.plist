@@ -69,6 +69,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Comic_Andy.ttf</string>
+	</array>
 	<key>WEB_SERVICE_URL</key>
 	<string>${WEB_SERVICE_URL}</string>
 </dict>

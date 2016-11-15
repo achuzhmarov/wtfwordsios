@@ -245,7 +245,7 @@ static const UInt8 kKeychainItemIdentifier[]    = "com.apple.dts.KeychainUI\0";
         OSStatus errorcode = SecItemAdd(
                                         (__bridge CFDictionaryRef)[self dictionaryToSecItemFormat:_keychainData],
                                         NULL);
-        NSAssert(errorcode == noErr, @"Couldn't add the Keychain Item." );
+        //NSAssert(errorcode == noErr, @"Couldn't add the Keychain Item." );
         if (attributes) CFRelease(attributes);
     }
     

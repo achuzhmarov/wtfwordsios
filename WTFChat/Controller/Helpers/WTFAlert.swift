@@ -4,11 +4,16 @@ import Localize_Swift
 class WTFBaseAlert: NSObject, UIAlertViewDelegate  {
     @nonobjc static func presentAlert(_ alert: UIAlertController) {
         let rootViewController: UIViewController = UIApplication.shared.windows.last!.rootViewController!
+        let currentViewController = getCurrentPresentingController(rootViewController)
 
+        currentViewController.present(alert, animated: true, completion: nil)
+    }
+
+    static func getCurrentPresentingController(_ rootViewController: UIViewController) -> UIViewController {
         if let childController = rootViewController.presentedViewController {
-            childController.present(alert, animated: true, completion: nil)
+            return getCurrentPresentingController(childController)
         } else {
-            rootViewController.present(alert, animated: true, completion: nil)
+            return rootViewController
         }
     }
 }

@@ -12,12 +12,16 @@ class DecipherInProgressByLettersVC: UIViewController {
     @IBOutlet weak var topGiveUpView: UIView!
 
     @IBOutlet weak var wordsTableView: WordsViewController!
+    @IBOutlet weak var decipherView: UIView!
 
     @IBOutlet weak var topPaddingConstraint: NSLayoutConstraint!
     @IBOutlet weak var wordsViewHorizontalConstraint: NSLayoutConstraint!
 
-    fileprivate let GIVE_UP_TITLE_TEXT = "Stop deciphering?".localized()
-    fileprivate let GIVE_UP_BUTTON_TEXT = "Give Up".localized()
+    //TODO - in progress
+    private let controller = GameController()
+
+    private let GIVE_UP_TITLE_TEXT = "Stop deciphering?".localized()
+    private let GIVE_UP_BUTTON_TEXT = "Give Up".localized()
 
     var message: Message!
 
@@ -53,10 +57,22 @@ class DecipherInProgressByLettersVC: UIViewController {
         wordsTableView.backgroundColor = UIColor.clear
 
         layoutTopView()
+
+
+        //add one layer for all game elements
+        controller.gameView = decipherView
+
+        controller.onAnagramSolved = self.showLevel
     }
 
     deinit {
         NotificationCenter.default.removeObserver(self);
+    }
+
+    //show the game menu on app start
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.showLevel()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -190,5 +206,11 @@ class DecipherInProgressByLettersVC: UIViewController {
     func hintsBought() {
         updateHintsCount()
         isPaused = false
+    }
+
+    //TODO - temp
+    func showLevel() {
+        controller.message = message
+        controller.dealRandomAnagram()
     }
 }
