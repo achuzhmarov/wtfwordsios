@@ -11,7 +11,8 @@ import UIKit
 
 class TargetView: UIImageView {
   var letter: Character
-  var isMatched:Bool = false
+  var isMatched: Bool = false
+  var isOccupied: Bool = false
   
   //this should never be called
   required init(coder aDecoder:NSCoder) {

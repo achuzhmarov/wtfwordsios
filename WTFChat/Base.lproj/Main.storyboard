@@ -1213,7 +1213,7 @@
                         <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tj2-4Y-tI4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Tj2-4Y-tI4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1234,7 +1234,7 @@
                         <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7xz-Ad-75z">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="7xz-Ad-75z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1255,7 +1255,7 @@
                         <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="D7J-pu-PDZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="D7J-pu-PDZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3234,6 +3234,6 @@
         <image name="settings filled" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="paO-SZ-mUg"/>
+        <segue reference="5fm-V2-gKc"/>
     </inferredMetricsTieBreakers>
 </document>

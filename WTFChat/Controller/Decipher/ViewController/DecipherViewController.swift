@@ -29,6 +29,7 @@ class DecipherViewController: BaseUIViewController {
 
         //inProgressVC.initView(message)
         inProgressByLettersVC.initView(message)
+        inProgressVC.initView(message)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,6 +68,7 @@ class DecipherViewController: BaseUIViewController {
         view.bringSubview(toFront: inProgressByLettersContainer)
 
         inProgressByLettersVC.initView(message)
+        inProgressVC.initView(message)
         inProgressByLettersVC.start()
 
         UIView.setAnimationsEnabled(true)

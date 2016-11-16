@@ -62,17 +62,11 @@ class DecipherInProgressByLettersVC: UIViewController {
         //add one layer for all game elements
         controller.gameView = decipherView
 
-        controller.onAnagramSolved = self.showLevel
+        controller.onWordSolved = self.wordSolved
     }
 
     deinit {
         NotificationCenter.default.removeObserver(self);
-    }
-
-    //show the game menu on app start
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.showLevel()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -155,6 +149,7 @@ class DecipherInProgressByLettersVC: UIViewController {
 
         wordsTableView.setNewMessage(message)
         layoutTopView()
+        showNextWord()
     }
 
     func tick() {
@@ -208,9 +203,33 @@ class DecipherInProgressByLettersVC: UIViewController {
         isPaused = false
     }
 
-    //TODO - temp
-    func showLevel() {
-        controller.message = message
-        controller.dealRandomAnagram()
+    func wordSolved(solvedWord: Word) {
+        if (message.getMessageStatus() != .ciphered) {
+            return
+        }
+
+        audioService.playSound("success")
+
+        messageCipherService.decipher(message, hintedWord: solvedWord)
+        wordsTableView.updateMessage(message)
+
+        if (message.deciphered) {
+            gameOver()
+        } else {
+            updateMessage()
+        }
+
+        showNextWord()
+    }
+
+    func showNextWord() {
+        for word: Word in message.words {
+            if (word.type == .new) || (word.type == .closeTry) {
+                controller.word = word
+                break
+            }
+        }
+
+        controller.start()
     }
 }
