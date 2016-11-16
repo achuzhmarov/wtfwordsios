@@ -6,7 +6,7 @@ class CoreWord: NSManagedObject {
         self.text = word.text
         self.additional = word.additional
         self.wordType = word.type.rawValue as NSNumber?
-        self.cipheredText = word.cipheredText
+        self.cipheredText = word.fullCipheredText
         self.wasCloseTry = word.wasCloseTry as NSNumber?
     }
     
@@ -17,7 +17,7 @@ class CoreWord: NSManagedObject {
             text: self.text!,
             additional: self.additional!,
             type: enumWordType!,
-            cipheredText: self.cipheredText!,
+            fullCipheredText: self.cipheredText!,
             wasCloseTry: Bool(self.wasCloseTry!)
         )
     }

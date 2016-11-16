@@ -6,7 +6,7 @@ class JsonWordParser {
         let json: JSON =  [
                 "text": word.text,
                 "additional": word.additional,
-                "ciphered_text": word.cipheredText,
+                "ciphered_text": word.fullCipheredText,
                 "word_type": word.type.rawValue
         ]
 
@@ -16,7 +16,7 @@ class JsonWordParser {
     class func fromJson(_ json: JSON) throws -> Word {
         var text: String
         var additional: String
-        var cipheredText: String
+        var fullCipheredText: String
         var wordType: WordType
 
         if let value = json["text"].string {
@@ -32,7 +32,7 @@ class JsonWordParser {
         }
 
         if let value = json["ciphered_text"].string {
-            cipheredText = value
+            fullCipheredText = value
         } else {
             throw json["ciphered_text"].error!
         }
@@ -47,7 +47,7 @@ class JsonWordParser {
             text: text,
             additional: additional,
             type: wordType,
-            cipheredText: cipheredText
+            fullCipheredText: fullCipheredText
         )
     }
 }

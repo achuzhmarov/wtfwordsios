@@ -5,7 +5,7 @@ class LeftCutterEasyCipher: Cipher {
         let wordLength = word.getCharCount() - 1
         let letterCount = word.getCharCount() / 5 + 1
         
-        return "...\(word.getLowerCase()[letterCount...wordLength])\(word.additional)"
+        return  CipherHelper.getNDots(word.getCharCount() - letterCount) + word.getLowerCase()[letterCount...wordLength]
     }
 }
 
@@ -19,7 +19,7 @@ class LeftCutterNormalCipher: Cipher {
             letterCount = wordLength - 3
         }
         
-        return "...\(word.getLowerCase()[letterCount...wordLength])\(word.additional)"
+        return CipherHelper.getNDots(word.getCharCount() - letterCount) + word.getLowerCase()[letterCount...wordLength]
     }
 }
 
@@ -37,6 +37,6 @@ class LeftCutterHardCipher: Cipher {
             letterCount = wordLength - 1
         }
         
-        return "...\(word.getLowerCase()[letterCount...wordLength])\(word.additional)"
+        return CipherHelper.getNDots(word.getCharCount() - letterCount) + word.getLowerCase()[letterCount...wordLength]
     }
 }

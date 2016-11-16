@@ -3,9 +3,8 @@ import Foundation
 class RandomCutterEasyCipher: Cipher {
     func getTextForDecipher(_ word: Word) -> String {
         let charsLeft = word.getCharCount() / 2 + word.getCharCount() % 2
-        
-        let ciphered = RandomCutterHelper.CutRandomLetters(word.text, charsLeft: charsLeft)
-        return "\(ciphered)\(word.additional)"
+
+        return RandomCutterHelper.CutRandomLetters(word.text, charsLeft: charsLeft)
     }
 }
 
@@ -16,9 +15,8 @@ class RandomCutterNormalCipher: Cipher {
         if (word.getCharCount() > 5) {
             charsLeft = 3
         }
-        
-        let ciphered = RandomCutterHelper.CutRandomLetters(word.text, charsLeft: charsLeft)
-        return "\(ciphered)\(word.additional)"
+
+        return RandomCutterHelper.CutRandomLetters(word.text, charsLeft: charsLeft)
     }
 }
 
@@ -29,9 +27,8 @@ class RandomCutterHardCipher: Cipher {
         if (word.getCharCount() > 5) {
             charsLeft = 2
         }
-        
-        let ciphered = RandomCutterHelper.CutRandomLetters(word.text, charsLeft: charsLeft)
-        return "\(ciphered)\(word.additional)"
+
+        return RandomCutterHelper.CutRandomLetters(word.text, charsLeft: charsLeft)
     }
 }
 
@@ -58,28 +55,6 @@ private class RandomCutterHelper {
         }
     }
     
-    class func parseResultWord(_ word: String) -> String {
-        var newWord = ""
-        var isLastCharDot = false
-        
-        for i in 0..<word.characters.count {
-            if (word[i] == ".") {
-                if (isLastCharDot) {
-                    //skip
-                } else {
-                    newWord = "\(newWord)..."
-                }
-                
-                isLastCharDot = true
-            } else {
-                isLastCharDot = false
-                newWord = "\(newWord)\(word[i])"
-            }
-        }
-        
-        return newWord
-    }
-    
     class func CutRandomLetters(_ word: String, charsLeft: Int) -> String {
         var result = word
         
@@ -89,6 +64,6 @@ private class RandomCutterHelper {
             result = CutRandomLetter(result)
         }
         
-        return parseResultWord(result)
+        return result
     }
 }

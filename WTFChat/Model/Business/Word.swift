@@ -12,14 +12,15 @@ class Word: NSObject {
     var text: String
     var type = WordType.new
     var additional = ""
-    var cipheredText = ""
+    var fullCipheredText = ""
+
     var wasCloseTry = false
 
     init (word: Word) {
         self.text = word.text
         self.additional = word.additional
         self.type = word.type
-        self.cipheredText = word.cipheredText
+        self.fullCipheredText = word.fullCipheredText
         self.wasCloseTry = word.wasCloseTry
     }
 
@@ -34,19 +35,41 @@ class Word: NSObject {
         self.type = type
     }
 
-    init(text: String, additional: String, type: WordType, cipheredText: String) {
+    init(text: String, additional: String, type: WordType, fullCipheredText: String) {
         self.text = text
         self.additional = additional
         self.type = type
-        self.cipheredText = cipheredText
+        self.fullCipheredText = fullCipheredText
     }
 
-    init(text: String, additional: String, type: WordType, cipheredText: String, wasCloseTry: Bool) {
+    init(text: String, additional: String, type: WordType, fullCipheredText: String, wasCloseTry: Bool) {
         self.text = text
         self.additional = additional
         self.type = type
-        self.cipheredText = cipheredText
+        self.fullCipheredText = fullCipheredText
         self.wasCloseTry = wasCloseTry
+    }
+
+    var cipheredText: String {
+        var newWord = ""
+        var isLastCharDot = false
+
+        for i in 0 ..< fullCipheredText.characters.count {
+            if (fullCipheredText[i] == ".") {
+                if (isLastCharDot) {
+                    //skip
+                } else {
+                    newWord = "\(newWord)..."
+                }
+
+                isLastCharDot = true
+            } else {
+                isLastCharDot = false
+                newWord = "\(newWord)\(fullCipheredText[i])"
+            }
+        }
+
+        return newWord + additional
     }
 
     func getClearText() -> String {

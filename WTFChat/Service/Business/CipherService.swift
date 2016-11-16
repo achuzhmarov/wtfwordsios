@@ -26,7 +26,7 @@ class CipherService: Service {
     func cipherMessage(_ message: Message) {
         for word in message.words! {
             if (word.type == WordType.new) {
-                word.cipheredText = cipherText(message.cipherType, difficulty: message.cipherDifficulty, word: word)
+                word.fullCipheredText = cipherText(message.cipherType, difficulty: message.cipherDifficulty, word: word)
             }
         }
     }

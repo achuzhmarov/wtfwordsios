@@ -7,13 +7,13 @@ class ShuffleEasyCipher: Cipher {
         let firstLetter: String = word.getLowerCase()[0]
         let shuffled = word.getUpperCase()[1...wordLength].shuffle
         
-        return "\(firstLetter)\(shuffled)\(word.additional)"
+        return "\(firstLetter)\(shuffled)"
     }
 }
 
 class ShuffleNormalCipher: Cipher {
     func getTextForDecipher(_ word: Word) -> String {
-        return "\(word.getUpperCase().shuffle)\(word.additional)"
+        return "\(word.getUpperCase().shuffle)"
     }
 }
 
@@ -23,10 +23,9 @@ class ShuffleHardCipher: Cipher {
 
         //cut last letter
         if (word.getCharCount() > 2) {
-            wordLength -= 1
+            return ".\(word.getUpperCase()[1...(wordLength - 1)].shuffle)."
         }
-        
-        let shuffled = "...\(word.getUpperCase()[1...wordLength].shuffle)..."
-        return shuffled + word.additional
+
+        return ".\(word.getUpperCase()[1...wordLength].shuffle)"
     }
 }
