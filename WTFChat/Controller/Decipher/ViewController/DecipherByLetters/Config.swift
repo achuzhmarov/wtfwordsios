@@ -15,9 +15,6 @@ func randomNumber(minX:UInt32, maxX:UInt32) -> Int {
   return Int(result)
 }
 
-let TileMargin: CGFloat = 2.0
-let TileMaxSide: CGFloat = 100.0
-
 let FontHUD = UIFont(name:"comic andy", size: 62.0)!
 let FontHUDBig = UIFont(name:"comic andy", size:120.0)!
 

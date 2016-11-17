@@ -86,8 +86,10 @@ class ServiceInitializer {
             coreLevelService
         )
 
+        let guiDataService = GuiDataService()
+
         let cipherService = CipherService()
-        let textCategoryService = TextCategoryService()
+        let textCategoryService = TextCategoryService(guiDataService: guiDataService)
         let messageCipherService = MessageCipherService(
             currentUserService: currentUserService,
             cipherService: cipherService
@@ -106,8 +108,6 @@ class ServiceInitializer {
             textGeneratorService: textCategoryService,
             messageCipherService: messageCipherService
         )
-
-        let guiDataService = GuiDataService()
 
         //core based
         serviceLocator.add(

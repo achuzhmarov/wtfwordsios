@@ -4,6 +4,7 @@ import Localize_Swift
 class MainViewController: BaseUIViewController {
     private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
     private let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService.self)
+    private let textCategoryService: TextCategoryService = serviceLocator.get(TextCategoryService.self)
 
     private let TUTORIAL_TITLE = "Tutorial"
     private let SINGLE_MODE_TITLE = "Single mode"
@@ -96,6 +97,7 @@ class MainViewController: BaseUIViewController {
         let currentLanguage = TextLanguage.getNextLanguage()
         Localize.setCurrentLanguage(currentLanguage.description)
         guiDataService.updateUserLanguage(currentLanguage.description)
+        textCategoryService.loadTextsForLanguage(currentLanguage)
         initTitles()
     }
 

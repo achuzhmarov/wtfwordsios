@@ -29,12 +29,12 @@ extension String
     func replace(_ what: String, with: String) -> String {
         return self.replacingOccurrences(of: what, with: with, options: NSString.CompareOptions.literal, range: nil)
     }
-    
+
     subscript (i: Int) -> String {
         let char = self[self.characters.index(self.startIndex, offsetBy: i)]
         return String(char)
     }
-    
+
     subscript (r: Range<Int>) -> String {
         return substring(with: characters.index(startIndex, offsetBy: r.lowerBound)..<characters.index(startIndex, offsetBy: r.upperBound))
     }
@@ -49,5 +49,9 @@ extension String
             let endIndex = self.index(startIndex, offsetBy: r.upperBound - r.lowerBound)
             return self[startIndex...endIndex]
         }
+    }
+
+    func deleteSymbols(_ substring: String) -> String {
+        return components(separatedBy: substring).joined(separator: "")
     }
 }

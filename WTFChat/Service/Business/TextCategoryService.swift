@@ -83,6 +83,17 @@ enum TextLanguage : Int {
         }
     }
 
+    var letters : String {
+        get {
+            switch self {
+            case .en:
+                return "abcdefghijklmnopqrstuvwxyz"
+            case .ru:
+                return "абвгдежзиклмнопрстуфхцчшщъыьэюя"
+            }
+        }
+    }
+
     static func getCurrentLanguage() -> TextLanguage {
         return getLanguageByString(Localize.currentLanguage())
     }
@@ -102,7 +113,14 @@ enum TextLanguage : Int {
         return TextLanguage.getAll()[0]
     }
 
-    fileprivate static func getLanguageByString(_ langString: String) -> TextLanguage {
+    static func getRandomLetter() -> String {
+        let currentLanguage = getCurrentLanguage()
+        let letters = currentLanguage.letters
+        let randomIndex = Int(arc4random_uniform(UInt32(letters.characters.count)))
+        return letters[randomIndex]
+    }
+
+    static func getLanguageByString(_ langString: String) -> TextLanguage {
         if (langString == "ru") {
             return .ru
         } else {
@@ -164,6 +182,8 @@ class TextCategory {
 }
 
 class TextCategoryService: Service {
+    let guiDataService: GuiDataService
+
     fileprivate let WIKI_TITLE_INDEX = 0
     fileprivate let TITLE_INDEX = 1
 
@@ -171,13 +191,30 @@ class TextCategoryService: Service {
 
     fileprivate let textLengths = TextLength.getAll()
 
-    override func initService() {
-        for language in TextLanguage.getAll() {
-            loadTextsForLanguage(language)
-        }
+    var isReadyForLanguage = [TextLanguage: Bool]()
+    var isLoadingLanguage = [TextLanguage: Bool]()
+
+    init(guiDataService: GuiDataService) {
+        self.guiDataService = guiDataService
     }
 
-    fileprivate func loadTextsForLanguage(_ language: TextLanguage) {
+    override func initService() {
+        for language in TextLanguage.getAll() {
+            isReadyForLanguage[language] = false
+            isLoadingLanguage[language] = false
+        }
+
+        let currentLanguage = TextLanguage.getLanguageByString(guiDataService.getUserLanguage())
+        loadTextsForLanguage(currentLanguage)
+    }
+
+    func loadTextsForLanguage(_ language: TextLanguage) {
+        if (isLoadingLanguage[language]! || isReadyForLanguage[language]!) {
+            return
+        }
+
+        isLoadingLanguage[language] = true
+
         textsMap[language] = [TextDifficulty: [TextLength: [TextCategory]]]()
 
         if let difficultyFolders = getFilesList(language.textPath) {
@@ -185,6 +222,8 @@ class TextCategoryService: Service {
                 loadDifficultyTexts(language.textPath, difficultyFolder: difficultyFolder, language: language)
             }
         }
+
+        isReadyForLanguage[language] = true
     }
 
     fileprivate func getFilesList(_ folderName: String) -> [String]? {
@@ -296,6 +335,10 @@ class TextCategoryService: Service {
 
     func getTextCategoryForLevel(_ level: Level) -> TextCategory? {
         let currentLanguage = TextLanguage.getCurrentLanguage()
+
+        while !(isReadyForLanguage[currentLanguage]!) {
+            sleep(1)
+        }
 
         let textDifficulty = getTextDifficultyForLevel(level)
         let textLength = getTextLengthForLevel(level, textDifficulty: textDifficulty)

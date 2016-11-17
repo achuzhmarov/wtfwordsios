@@ -19,7 +19,7 @@ class ShuffleNormalCipher: Cipher {
 
 class ShuffleHardCipher: Cipher {
     func getTextForDecipher(_ word: Word) -> String {
-        var wordLength = word.getCharCount() - 1
+        let wordLength = word.getCharCount() - 1
 
         //cut last letter
         if (word.getCharCount() > 2) {

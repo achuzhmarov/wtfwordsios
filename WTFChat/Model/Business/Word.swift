@@ -25,29 +25,33 @@ class Word: NSObject {
     }
 
     init(text: String, type: WordType) {
-        self.text = text
+        self.text = Word.removeRussianYo(text)
         self.type = type
     }
 
     init(text: String, additional: String, type: WordType) {
-        self.text = text
+        self.text = Word.removeRussianYo(text)
         self.additional = additional
         self.type = type
     }
 
     init(text: String, additional: String, type: WordType, fullCipheredText: String) {
-        self.text = text
+        self.text = Word.removeRussianYo(text)
         self.additional = additional
         self.type = type
-        self.fullCipheredText = fullCipheredText
+        self.fullCipheredText = Word.removeRussianYo(fullCipheredText)
     }
 
     init(text: String, additional: String, type: WordType, fullCipheredText: String, wasCloseTry: Bool) {
-        self.text = text
+        self.text = Word.removeRussianYo(text)
         self.additional = additional
         self.type = type
-        self.fullCipheredText = fullCipheredText
+        self.fullCipheredText = Word.removeRussianYo(fullCipheredText)
         self.wasCloseTry = wasCloseTry
+    }
+
+    static private func removeRussianYo(_ text: String) -> String {
+        return text.replace("Ё", with: "Е").replace("ё", with: "е")
     }
 
     var cipheredText: String {
@@ -70,6 +74,18 @@ class Word: NSObject {
         }
 
         return newWord + additional
+    }
+
+    var hidedLetters: String {
+        var result = ""
+
+        for position in 0..<text.characters.count {
+            if (fullCipheredText[position] == ".") {
+                result += text[position]
+            }
+        }
+
+        return result
     }
 
     func getClearText() -> String {
@@ -127,10 +143,6 @@ class Word: NSObject {
 
     func hasCipheredText() -> Bool {
         return hasText() && type != .ignore
-    }
-
-    func getCipheredText() -> String {
-        return cipheredText
     }
 
     func getTextForDecipher() -> String {

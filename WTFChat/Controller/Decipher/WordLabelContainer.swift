@@ -72,7 +72,7 @@ class WordLabelContainer {
 
         if (useCipherText) {
             if (word.type != WordType.ignore) {
-                return word.getCipheredText()
+                return word.cipheredText
             } else {
                 return word.getTextForDecipher()
             }

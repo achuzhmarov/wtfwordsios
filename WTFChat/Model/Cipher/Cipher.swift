@@ -6,7 +6,7 @@ class CipherHelper {
     class func getNDots(_ n: Int) -> String {
         var result = ""
 
-        for i in 0..<n {
+        for _ in 0..<n {
             result = result + "."
         }
 
