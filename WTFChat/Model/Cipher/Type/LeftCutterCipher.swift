@@ -14,9 +14,9 @@ class LeftCutterNormalCipher: Cipher {
         let wordLength = word.getCharCount() - 1
         var letterCount = word.getCharCount() / 2 + word.getCharCount() % 2
         
-        //4 letters max
-        if (wordLength - letterCount > 3) {
-            letterCount = wordLength - 3
+        //5 letters max
+        if (wordLength - letterCount > 4) {
+            letterCount = wordLength - 4
         }
         
         return CipherHelper.getNDots(letterCount) + word.getLowerCase()[letterCount...wordLength]

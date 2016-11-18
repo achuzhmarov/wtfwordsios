@@ -88,6 +88,20 @@ class Message: NSObject {
         return countWordsByStatus(WordType.new)
     }
 
+    func countLettersInCipheredWords() -> Int {
+        var result = 0
+
+        for word in words {
+            if (word.type != .new) {
+                continue
+            }
+
+            result += word.text.characters.count
+        }
+
+        return result
+    }
+
     func getMessageStatus() -> MessageStatus {
         if (deciphered) {
             if (countWordsByStatus(WordType.failed) == 0) {

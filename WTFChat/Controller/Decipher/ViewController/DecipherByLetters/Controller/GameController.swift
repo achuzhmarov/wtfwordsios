@@ -218,7 +218,7 @@ class GameController {
     }
 
     func placeTile(_ tile: TileView, target: TargetView) {
-        if target.letter == tile.letter {
+        if String(target.letter).uppercased() == String(tile.letter).uppercased() {
             target.isMatched = true
             tile.isMatched = true
         }

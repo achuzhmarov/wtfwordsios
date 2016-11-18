@@ -320,14 +320,54 @@ class MessageCipherService: Service {
         return result
     }
 
-    fileprivate let SECONDS_PER_WORD = 20
-    fileprivate let HARD_SECONDS_PER_WORD = 30
+    private let EASY_MODIFIER = 1.2
+    private let HARD_MODIFIER = 1.5
+
+    private let SECONDS_PER_WORD = 10.0
+    private let WORD_COUNT_STEP = 5
+    private let WORD_COUNT_MODIFIERS = [1, 0.8, 0.6, 0.4, 0.2]
+
+    private let SECONDS_PER_LETTER = 2.0
+    private let LETTER_COUNT_STEP = 30
+    private let LETTER_COUNT_MODIFIERS = [1, 0.8, 0.6, 0.4, 0.2]
 
     func getTimerSeconds(_ message: Message) -> Int {
-        if (message.cipherDifficulty == .hard) {
-            return message.countNew() * HARD_SECONDS_PER_WORD
-        } else {
-            return message.countNew() * SECONDS_PER_WORD
+        var result = countWordSecs(message) + countLettersSecs(message)
+
+        if (message.cipherDifficulty == .easy) {
+            result *= EASY_MODIFIER
+        } else if (message.cipherDifficulty == .hard) {
+            result *= HARD_MODIFIER
         }
+
+        print(message)
+        print(countWordSecs(message))
+        print(countLettersSecs(message))
+        print(result)
+        print(Int(result))
+
+        return Int(result)
+    }
+
+    private func countWordSecs(_ message: Message) -> Double {
+        var result = 0.0
+
+        for i in 0 ..< message.countNew() {
+            let modifierIndex = min(i / WORD_COUNT_STEP, WORD_COUNT_MODIFIERS.count - 1)
+            result += SECONDS_PER_WORD * WORD_COUNT_MODIFIERS[modifierIndex]
+        }
+
+        return result
+    }
+
+    private func countLettersSecs(_ message: Message) -> Double {
+        var result = 0.0
+
+        for i in 0 ..< message.countLettersInCipheredWords() {
+            let modifierIndex = min(i / LETTER_COUNT_STEP, LETTER_COUNT_MODIFIERS.count - 1)
+            result += SECONDS_PER_LETTER * LETTER_COUNT_MODIFIERS[modifierIndex]
+        }
+
+        return result
     }
 }
