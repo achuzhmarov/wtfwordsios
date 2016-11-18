@@ -126,4 +126,10 @@ class DecipherViewController: BaseUIViewController {
     func continuePressed() {
         fatalError("This method must be overridden")
     }
+
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            inProgressByLettersVC.wasShaked()
+        }
+    }
 }

@@ -10,23 +10,26 @@ class GameController {
     private var fixedTiles = [TileView]()
     fileprivate var targets = [TargetView]()
 
-    /*var hud:HUDView! {
+    var hudView:HUDView! {
       didSet {
         //connect the Hint button
-        hud.hintButton.addTarget(self, action: #selector(GameController.actionHint), for:.touchUpInside)
-        hud.hintButton.isEnabled = false
+        hudView.hintButton.addTarget(self, action: #selector(GameController.actionHint), for:.touchUpInside)
+        hudView.hintButton.isEnabled = false
       }
-    }*/
+    }
 
-    //stopwatch variables
-    private var secondsLeft: Int = 0
-    private var timer: Timer?
-
-    private var data = GameData()
+    private var generatedLettersCache = [Word: String]()
 
     fileprivate var audioController: AudioController
 
     var onWordSolved: ((_ : Word) -> ())!
+
+    private let lettersOnBoard = 21
+
+    private let maxLettersPerRow = 7
+    private let maxTargetsPerRow = 10
+    private let targetMargin: CGFloat = 2.0
+    private let tileMargin: CGFloat = 6.0
 
     init() {
         self.audioController = AudioController()
@@ -37,11 +40,6 @@ class GameController {
         self.clearBoard()
 
         var wordText = word.text
-
-        let maxLettersPerRow = 7
-        let maxTargetsPerRow = 10
-        let targetMargin: CGFloat = 2.0
-        let tileMargin: CGFloat = 6.0
 
         let wordlength = wordText.characters.count
 
@@ -115,8 +113,6 @@ class GameController {
             tile.center = CGPoint(x: xLetterOffset + columnIndex * (tileSide + tileMargin),
                     y: targetOffset + (tileSide / 2) + (tileSide + 8) * rowIndex)
 
-            //tile.dragDelegate = self
-            //tile.randomize()
             tile.originalCenter = tile.center
 
             tiles.append(tile)
@@ -130,17 +126,21 @@ class GameController {
     }
 
     private func generateLetters() -> String {
+        if let letters = generatedLettersCache[word] {
+            return letters
+        }
+
         var result = word.hidedLetters
-
-        let maxLetters = 21
-
-        let needLetters = maxLetters - result.characters.count
+        let needLetters = lettersOnBoard - result.characters.count
 
         for _ in 0..<needLetters {
             result += TextLanguage.getRandomLetter()
         }
 
-        return result.shuffle
+        result = result.shuffle
+        generatedLettersCache[word] = result
+
+        return result
     }
 
     @objc func tileTapped(_ sender: UITapGestureRecognizer) {
@@ -205,13 +205,11 @@ class GameController {
 
         gameView.bringSubview(toFront: tile)
 
-        //6 show the animation to the user
         UIView.animate(withDuration: 0.3,
                 delay: 0.0,
                 options: UIViewAnimationOptions.curveEaseOut,
                 animations: {
                     tile.center = tile.originalCenter
-                    //tile.randomize()
                 }, completion: {
             (value: Bool) in
         })
@@ -223,18 +221,11 @@ class GameController {
             tile.isMatched = true
         }
 
-        //tileView.isUserInteractionEnabled = false
-
         UIView.animate(withDuration: 0.3,
                 delay: 0.00,
                 options: UIViewAnimationOptions.curveEaseOut,
                 animations: {
                     tile.center = target.center
-                    //tile.transform = CGAffineTransform.identity
-                },
-                completion: {
-                    (value: Bool) in
-                    //targetView.isHidden = true
                 })
 
         /*if (!tile.isFixed) {
@@ -247,7 +238,6 @@ class GameController {
 
     func checkForSuccess() {
         for targetView in targets {
-            //no success, bail out
             if !targetView.isMatched {
                 return
             }
@@ -289,12 +279,7 @@ class GameController {
 
     //the user pressed the hint button
     @objc func actionHint() {
-        //1
         //hud.hintButton.isEnabled = false
-
-        //2
-        //data.points -= level.pointsPerTile / 2
-        //hud.gamePoints.setValue(data.points, duration: 1.5)
 
         //3 find the first unmatched target and matching tile
         var foundTarget: TargetView? = nil
@@ -341,7 +326,6 @@ class GameController {
         }
     }
 
-    //clear the tiles and targets
     func clearBoard() {
         fixedTiles.removeAll(keepingCapacity: false)
         tiles.removeAll(keepingCapacity: false)
@@ -352,66 +336,13 @@ class GameController {
         }
     }
 
-}
-
-extension GameController: TileDragDelegateProtocol {
-    //a tile was dragged, check if matches a target
-    func tileView(_ tileView: TileView, didDragToPoint point: CGPoint) {
-        var targetView: TargetView?
-        for tv in targets {
-            if tv.frame.contains(point) && !tv.isMatched {
-                targetView = tv
-                break
-            }
+    func clearPlacedTiles() {
+        for tile in tiles {
+            removeTileFromTarget(tile)
         }
-
-        //1 check if target was found
-        if let targetView = targetView {
-
-            //2 check if letter matches
-            if targetView.letter == tileView.letter {
-
-                //3
-                self.placeTile(tileView, target: targetView)
-
-                //more stuff to do on success here
-
-                audioController.playEffect(SoundDing)
-
-                //give points
-                //data.points += level.pointsPerTile
-                //hud.gamePoints.setValue(data.points, duration: 0.5)
-
-                //check for finished game
-                self.checkForSuccess()
-
-            } else {
-
-                //4
-                //1
-                //tileView.randomize()
-
-                //2
-                UIView.animate(withDuration: 0.35,
-                        delay: 0.00,
-                        options: UIViewAnimationOptions.curveEaseOut,
-                        animations: {
-                            tileView.center = CGPoint(x: tileView.center.x + CGFloat(randomNumber(minX: 0, maxX: 40) - 20),
-                                    y: tileView.center.y + CGFloat(randomNumber(minX: 20, maxX: 30)))
-                        },
-                        completion: nil)
-
-                //more stuff to do on failure here
-
-                audioController.playEffect(SoundWrong)
-
-                //take out points
-                //data.points -= level.pointsPerTile/2
-                //hud.gamePoints.setValue(data.points, duration: 0.25)
-            }
-        }
-
     }
 
-
+    func clearCache() {
+        generatedLettersCache = [:]
+    }
 }

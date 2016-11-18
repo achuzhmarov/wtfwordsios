@@ -18,7 +18,7 @@ class DecipherInProgressByLettersVC: UIViewController {
     @IBOutlet weak var wordsViewHorizontalConstraint: NSLayoutConstraint!
 
     //TODO - in progress
-    private let controller = GameController()
+    fileprivate let controller = GameController()
 
     private let GIVE_UP_TITLE_TEXT = "Stop deciphering?".localized()
     private let GIVE_UP_BUTTON_TEXT = "Give Up".localized()
@@ -51,7 +51,7 @@ class DecipherInProgressByLettersVC: UIViewController {
         topStopImage.addGestureRecognizer(giveUpTap)
         topGiveUpView.addGestureRecognizer(giveUpTap)
 
-        wordsTableView.hintComputer = self
+        wordsTableView.wordTappedComputer = self
         wordsTableView.delegate = wordsTableView
         wordsTableView.dataSource = wordsTableView
         wordsTableView.backgroundColor = UIColor.clear
@@ -61,6 +61,10 @@ class DecipherInProgressByLettersVC: UIViewController {
 
         //add one layer for all game elements
         controller.gameView = decipherView
+
+        let hudView = HUDView(frame: decipherView.frame)
+        decipherView.addSubview(hudView)
+        controller.hudView = hudView
 
         controller.onWordSolved = self.wordSolved
     }
@@ -149,6 +153,7 @@ class DecipherInProgressByLettersVC: UIViewController {
 
         wordsTableView.setNewMessage(message)
         layoutTopView()
+        controller.clearCache()
         showNextWord()
     }
 
@@ -217,12 +222,29 @@ class DecipherInProgressByLettersVC: UIViewController {
             gameOver()
         } else {
             updateMessage()
+            showNextWord(solvedWord)
+        }
+    }
+
+    private func showNextWord(_ solvedWord: Word) {
+        var wasFind = false
+
+        for word: Word in message.words {
+            if (wasFind) && ((word.type == .new) || (word.type == .closeTry)) {
+                controller.word = word
+                controller.start()
+                return
+            }
+
+            if (word == solvedWord) {
+                wasFind = true
+            }
         }
 
         showNextWord()
     }
 
-    func showNextWord() {
+    private func showNextWord() {
         for word: Word in message.words {
             if (word.type == .new) || (word.type == .closeTry) {
                 controller.word = word
@@ -231,5 +253,24 @@ class DecipherInProgressByLettersVC: UIViewController {
         }
 
         controller.start()
+    }
+
+    func wasShaked() {
+        controller.clearPlacedTiles()
+    }
+}
+
+extension DecipherInProgressByLettersVC: WordTappedComputer {
+    func wordTapped(_ word: Word) {
+        if (word.type == .new) || (word.type == .closeTry) {
+            controller.word = word
+            controller.start()
+        } else {
+            //ignore tap
+        }
+    }
+
+    func updateHintsCount() {
+        hints = currentUserService.getUserHints() // - message.hintsUsed
     }
 }

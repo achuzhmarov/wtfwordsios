@@ -1,7 +1,7 @@
 import UIKit
 
-protocol HintComputer: class {
-    func hintTapped(_ word: Word)
+protocol WordTappedComputer: class {
+    func wordTapped(_ word: Word)
 }
 
 class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelegate {
@@ -19,7 +19,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     var fontSize: CGFloat = 17
     var isHidedText = false
     
-    weak var hintComputer: HintComputer?
+    weak var wordTappedComputer: WordTappedComputer?
     
     @objc func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -233,7 +233,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         let label = sender.view as! RoundedLabel
         let wordContainer = label.tagObject as! WordLabelContainer
         
-        self.hintComputer?.hintTapped(wordContainer.originalWord)
+        self.wordTappedComputer?.wordTapped(wordContainer.originalWord)
     }
     
     func getRowWidth(_ row: [WordLabelContainer]) -> CGFloat {

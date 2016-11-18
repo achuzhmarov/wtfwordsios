@@ -1,7 +1,7 @@
 import Foundation
 import Localize_Swift
 
-class DecipherResultVC: UIViewController, HintComputer {
+class DecipherResultVC: UIViewController, WordTappedComputer {
     let audioService: AudioService = serviceLocator.get(AudioService.self)
 
     @IBOutlet weak var resultLabel: RoundedLabel!
@@ -33,7 +33,7 @@ class DecipherResultVC: UIViewController, HintComputer {
         let wordsTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherResultVC.viewTapped))
         wordsTableView.addGestureRecognizer(wordsTap)
 
-        wordsTableView.hintComputer = self
+        wordsTableView.wordTappedComputer = self
         wordsTableView.delegate = wordsTableView
         wordsTableView.dataSource = wordsTableView
         wordsTableView.backgroundColor = UIColor.clear
@@ -104,7 +104,7 @@ class DecipherResultVC: UIViewController, HintComputer {
         expGainView.initView(levelView)
     }
 
-    func hintTapped(_ word: Word) {
+    func wordTapped(_ word: Word) {
         changeCipherStateForViewOnly()
     }
 

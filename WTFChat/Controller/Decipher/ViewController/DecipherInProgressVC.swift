@@ -54,7 +54,7 @@ class DecipherInProgressVC: UIViewController {
         topStopImage.addGestureRecognizer(giveUpTap)
         topGiveUpView.addGestureRecognizer(giveUpTap)
 
-        wordsTableView.hintComputer = self
+        wordsTableView.wordTappedComputer = self
         wordsTableView.delegate = wordsTableView
         wordsTableView.dataSource = wordsTableView
         wordsTableView.backgroundColor = UIColor.clear

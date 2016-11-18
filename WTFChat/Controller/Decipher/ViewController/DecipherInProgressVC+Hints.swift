@@ -1,8 +1,8 @@
 import Foundation
 import Localize_Swift
 
-extension DecipherInProgressVC: HintComputer {
-    func hintTapped(_ word: Word) {
+extension DecipherInProgressVC: WordTappedComputer {
+    func wordTapped(_ word: Word) {
         if (word.type == WordType.new) {
             if (word.wasCloseTry) {
                 showCloseTryHintConfirm(word)

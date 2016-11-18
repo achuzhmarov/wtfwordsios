@@ -1,67 +1,65 @@
-
-
 import UIKit
 
 class HUDView: UIView {
-  
-  //var stopwatch: StopwatchView
-  //var gamePoints: CounterLabelView
-  
-  var hintButton: UIButton!
-  
-  //this should never be called
-  required init(coder aDecoder:NSCoder) {
-    fatalError("use init(frame:")
-  }
-  
-  override init(frame:CGRect) {
-    //self.stopwatch = StopwatchView(frame:CGRect(x: ScreenWidth/2-150, y: 0, width: 300, height: 100))
-    //self.stopwatch.setSeconds(0)
-    
-    //the dynamic points label
-    //self.gamePoints = CounterLabelView(font: FontHUD, frame: CGRect(x: ScreenWidth-200, y: 30, width: 200, height: 70))
-    //gamePoints.textColor = UIColor(red: 0.38, green: 0.098, blue: 0.035, alpha: 1)
-    //gamePoints.value = 0
-    
-    super.init(frame:frame)
-    
-    //self.addSubview(gamePoints)
-    
-    //"points" label
-    //let pointsLabel = UILabel(frame: CGRect(x: ScreenWidth-340, y: 30, width: 140, height: 70))
-    //pointsLabel.backgroundColor = UIColor.clear
-    //pointsLabel.font = FontHUD
-    //pointsLabel.text = " Points:"
-    //self.addSubview(pointsLabel)
-    
-    //self.addSubview(self.stopwatch)
-    
-    self.isUserInteractionEnabled = true
-    
-    //load the button image
-    let hintButtonImage = UIImage(named: "btn")!
-    
-    //the help button
-    self.hintButton = UIButton(type:.custom)
-    hintButton.setTitle("Hint!", for:UIControlState())
-    hintButton.titleLabel?.font = FontHUD
-    hintButton.setBackgroundImage(hintButtonImage, for: UIControlState())
-    hintButton.frame = CGRect(x: 50, y: 30, width: hintButtonImage.size.width, height: hintButtonImage.size.height)
-    hintButton.alpha = 0.8
-    self.addSubview(hintButton)
-  }
-  
-  override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-    //1 let touches through and only catch the ones on buttons
-    let hitView = super.hitTest(point, with: event)
-    
-    //2
-    if hitView is UIButton {
-      return hitView
+
+    var hintButton: UIButton!
+    var checkButton: UIButton!
+    var solveButton: UIButton!
+
+    //this should never be called
+    required init(coder aDecoder: NSCoder) {
+        fatalError("use init(frame:")
     }
-    
-    //3
-    return nil
-  }
-  
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        self.isUserInteractionEnabled = true
+
+        //load the button image
+        let buttonImage = UIImage(named: "btn")!
+
+        let screenWidth = self.bounds.size.width
+        let yPosition = CGFloat(20)
+        let xPadding = (screenWidth - 3 * buttonImage.size.width) / 2
+        let xOffset = buttonImage.size.width + xPadding
+
+        self.hintButton = UIButton(type: .custom)
+        hintButton.setTitle("hint", for: UIControlState())
+        hintButton.titleLabel?.font = FontHUD
+        hintButton.setBackgroundImage(buttonImage, for: UIControlState())
+        hintButton.frame = CGRect(x: 0, y: yPosition, width: buttonImage.size.width, height: buttonImage.size.height)
+        hintButton.alpha = 0.8
+        self.addSubview(hintButton)
+
+        self.checkButton = UIButton(type: .custom)
+        checkButton.setTitle("check", for: UIControlState())
+        checkButton.titleLabel?.font = FontHUD
+        checkButton.setBackgroundImage(buttonImage, for: UIControlState())
+        checkButton.frame = CGRect(x: xOffset, y: yPosition, width: buttonImage.size.width, height: buttonImage.size.height)
+        checkButton.alpha = 0.8
+        self.addSubview(checkButton)
+
+        self.solveButton = UIButton(type: .custom)
+        solveButton.setTitle("solve", for: UIControlState())
+        solveButton.titleLabel?.font = FontHUD
+        solveButton.setBackgroundImage(buttonImage, for: UIControlState())
+        solveButton.frame = CGRect(x: xOffset * 2, y: yPosition, width: buttonImage.size.width, height: buttonImage.size.height)
+        solveButton.alpha = 0.8
+        self.addSubview(solveButton)
+    }
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        //1 let touches through and only catch the ones on buttons
+        let hitView = super.hitTest(point, with: event)
+
+        //2
+        if hitView is UIButton {
+            return hitView
+        }
+
+        //3
+        return nil
+    }
+
 }

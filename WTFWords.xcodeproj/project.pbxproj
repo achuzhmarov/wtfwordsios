@@ -111,7 +111,6 @@
 		3E37C985E70C18F74FE04646 /* SingleMessageTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CB6455219F883E0ADAB2 /* SingleMessageTableView.swift */; };
 		3E37C99781A2993A04E3B57A /* CipherPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C54585012E42DA6DAF14 /* CipherPickerViewController.swift */; };
 		3E37C99932B963E82129A66D /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C53DCD55B39A905F6D14 /* Emoji.swift */; };
-		3E37C9B2FFE6BEE6234D079E /* DecipherInProgressByLettersVC+Hints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C73AEE5BE92010D25467 /* DecipherInProgressByLettersVC+Hints.swift */; };
 		3E37C9BA13555D14D25651BE /* InAppNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CD49D043FD1DAE73F194 /* InAppNetworkService.swift */; };
 		3E37C9DFD34CBE7A92508B6A /* SingleModeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C1AF38A5FBA2397A56AE /* SingleModeCategory.swift */; };
 		3E37C9F852381E6F00542A00 /* WTFAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C68FC994889C5F99557F /* WTFAlert.swift */; };
@@ -191,7 +190,6 @@
 		3E37CFFCEA088FF37D8F591E /* InAppNetworkServiceOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C89724177FD827960FEB /* InAppNetworkServiceOld.swift */; };
 		481BDD991C58FE5D00ABD558 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 481BDD981C58FE5D00ABD558 /* LaunchScreen.storyboard */; };
 		48424E111DDB4DE6004D94A0 /* AnagramLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E101DDB4DE6004D94A0 /* AnagramLevel.swift */; };
-		48424E131DDB4E05004D94A0 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E121DDB4E05004D94A0 /* GameData.swift */; };
 		48424E1B1DDB4E0E004D94A0 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E141DDB4E0E004D94A0 /* TileView.swift */; };
 		48424E1C1DDB4E0E004D94A0 /* TargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E151DDB4E0E004D94A0 /* TargetView.swift */; };
 		48424E1D1DDB4E0E004D94A0 /* StopwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E161DDB4E0E004D94A0 /* StopwatchView.swift */; };
@@ -327,7 +325,6 @@
 		3E37C6E654A52598D1504630 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		3E37C6F0C53E7E597FEF05C5 /* UserNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNetworkService.swift; sourceTree = "<group>"; };
 		3E37C70593D65C37D59A0F8C /* StringDistanceCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringDistanceCalculator.swift; sourceTree = "<group>"; };
-		3E37C73AEE5BE92010D25467 /* DecipherInProgressByLettersVC+Hints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DecipherInProgressByLettersVC+Hints.swift"; sourceTree = "<group>"; };
 		3E37C740EA3FC73CD995E1D3 /* CoreSingleModeCategory+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreSingleModeCategory+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3E37C74155F978515511E166 /* CoreMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreMessage.swift; sourceTree = "<group>"; };
 		3E37C7669C3130760DBC69CD /* SingleDecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleDecipherViewController.swift; sourceTree = "<group>"; };
@@ -435,7 +432,6 @@
 		481BDD981C58FE5D00ABD558 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		483676481C2048200092C703 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		48424E101DDB4DE6004D94A0 /* AnagramLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnagramLevel.swift; sourceTree = "<group>"; };
-		48424E121DDB4E05004D94A0 /* GameData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		48424E141DDB4E0E004D94A0 /* TileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		48424E151DDB4E0E004D94A0 /* TargetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetView.swift; sourceTree = "<group>"; };
 		48424E161DDB4E0E004D94A0 /* StopwatchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopwatchView.swift; sourceTree = "<group>"; };
@@ -833,7 +829,6 @@
 		3E37C7DDE78B8EA2378E4F02 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				48424E121DDB4E05004D94A0 /* GameData.swift */,
 				48424E101DDB4DE6004D94A0 /* AnagramLevel.swift */,
 			);
 			path = Model;
@@ -937,7 +932,6 @@
 				3E37CCBDD6E14B311F74F918 /* DecipherInProgressVC.swift */,
 				3E37C309D678937A0BD83AB6 /* DecipherResultVC.swift */,
 				3E37C0C9B3D0247A1ECBA5A8 /* DecipherInProgressByLettersVC.swift */,
-				3E37C73AEE5BE92010D25467 /* DecipherInProgressByLettersVC+Hints.swift */,
 				3E37C5F4A63FDE68ED3A94D9 /* DecipherByLetters */,
 			);
 			path = ViewController;
@@ -1520,7 +1514,6 @@
 				3E37CD9A0F03B8D2327EEF66 /* BaseTransitionManager.swift in Sources */,
 				3E37CCC601BAF12B31AA3FA4 /* NavigationControllerDelegate.swift in Sources */,
 				3E37CCCEEE0EB4792716BB5D /* TopDownTransitionManager.swift in Sources */,
-				48424E131DDB4E05004D94A0 /* GameData.swift in Sources */,
 				3E37C514BB2B04E4B824DF8A /* StopImage.swift in Sources */,
 				3E37CB9C08788D889AEDDDC4 /* DecipherInProgressVC+Hints.swift in Sources */,
 				3E37CC00150D41768814968F /* DecipherInProgressVC+Guess.swift in Sources */,
@@ -1581,7 +1574,6 @@
 				3E37CB5FE34D23C573995D0A /* RatingService.swift in Sources */,
 				3E37CC2C3D94F899C8EF19AD /* DecipherInProgressByLettersVC.swift in Sources */,
 				48424E241DDB4E17004D94A0 /* GameController.swift in Sources */,
-				3E37C9B2FFE6BEE6234D079E /* DecipherInProgressByLettersVC+Hints.swift in Sources */,
 				48424E1D1DDB4E0E004D94A0 /* StopwatchView.swift in Sources */,
 				3E37C08403ACC45DA98B7209 /* Config.swift in Sources */,
 			);
