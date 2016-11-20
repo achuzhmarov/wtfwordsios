@@ -138,6 +138,7 @@
 		3E37CBA27D584A8614D5D3F4 /* SingleModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE3CB1F5474963443512 /* SingleModeViewController.swift */; };
 		3E37CBB9C4FEEE672EA59198 /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CCF50294A21336CBD706 /* NSDate+Extension.swift */; };
 		3E37CBBA99E46C822DA5700F /* TalkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C01698FC89E87643BD30 /* TalkService.swift */; };
+		3E37CBBAF077675618F194C7 /* GameButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF4FA148D487E920CF03 /* GameButton.swift */; };
 		3E37CBC60DE707962301900A /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C934002C4597510821FC /* FriendCell.swift */; };
 		3E37CBD9A56CD92464A4D2C1 /* CoreSingleModeCategory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C740EA3FC73CD995E1D3 /* CoreSingleModeCategory+CoreDataProperties.swift */; };
 		3E37CBF1CDB9F5937B9F151A /* Texts in Resources */ = {isa = PBXBuildFile; fileRef = 3E37CB8CFE8EF0DFBCAE83EA /* Texts */; };
@@ -423,6 +424,7 @@
 		3E37CF41BA4821A442D3FC81 /* NSUserDefaults+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		3E37CF45362C75741955A6F2 /* SingleMessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleMessageService.swift; sourceTree = "<group>"; };
 		3E37CF47929B32484447BAE2 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		3E37CF4FA148D487E920CF03 /* GameButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameButton.swift; sourceTree = "<group>"; };
 		3E37CF57D011111B34C76B77 /* GuiDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuiDataService.swift; sourceTree = "<group>"; };
 		3E37CF6868AF68C06FC669E6 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		3E37CFB3FA1CCEB8BAEA4388 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
@@ -1108,6 +1110,7 @@
 				3E37C1B261A338164240EE80 /* BaseUIViewController.swift */,
 				3E37CB2FC358D2A3081CF9EE /* MenuButton.swift */,
 				3E37C0AE948C28DF4830B588 /* BaseModalVC.swift */,
+				3E37CF4FA148D487E920CF03 /* GameButton.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1576,6 +1579,7 @@
 				48424E241DDB4E17004D94A0 /* GameController.swift in Sources */,
 				48424E1D1DDB4E0E004D94A0 /* StopwatchView.swift in Sources */,
 				3E37C08403ACC45DA98B7209 /* Config.swift in Sources */,
+				3E37CBBAF077675618F194C7 /* GameButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

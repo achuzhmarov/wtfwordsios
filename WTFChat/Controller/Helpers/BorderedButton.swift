@@ -8,7 +8,15 @@ class BorderedButton: UIButton {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        initialize()
+    }
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initialize()
+    }
+
+    private func initialize() {
         layer.borderWidth = BORDER_WIDTH
         layer.borderColor = Color.CipheredDark.cgColor
         layer.cornerRadius = CORNER_RADIUS

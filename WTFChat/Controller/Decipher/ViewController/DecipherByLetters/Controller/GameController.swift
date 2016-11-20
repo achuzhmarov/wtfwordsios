@@ -10,26 +10,19 @@ class GameController {
     private var fixedTiles = [TileView]()
     fileprivate var targets = [TargetView]()
 
-    var hudView:HUDView! {
-      didSet {
-        //connect the Hint button
-        hudView.hintButton.addTarget(self, action: #selector(GameController.actionHint), for:.touchUpInside)
-        hudView.hintButton.isEnabled = false
-      }
+    var hudView: HUDView! {
+        didSet {
+            //connect the Hint button
+            hudView.hintButton.addTarget(self, action: #selector(GameController.actionHint), for: .touchUpInside)
+            hudView.solveButton.addTarget(self, action: #selector(GameController.actionSolve), for: .touchUpInside)
+        }
     }
 
     private var generatedLettersCache = [Word: String]()
 
     fileprivate var audioController: AudioController
 
-    var onWordSolved: ((_ : Word) -> ())!
-
-    private let lettersOnBoard = 21
-
-    private let maxLettersPerRow = 7
-    private let maxTargetsPerRow = 10
-    private let targetMargin: CGFloat = 2.0
-    private let tileMargin: CGFloat = 6.0
+    var onWordSolved: ((_: Word) -> ())!
 
     init() {
         self.audioController = AudioController()
@@ -45,31 +38,31 @@ class GameController {
 
         let screenWidth = gameView.bounds.size.width
 
-        let targetSide = ceil(screenWidth / CGFloat(maxTargetsPerRow)) - targetMargin
-        let tileSide = ceil(screenWidth / CGFloat(maxLettersPerRow)) - tileMargin
+        let targetSide = ceil(screenWidth / CGFloat(MaxTargetsPerRow)) - TargetMargin
+        let tileSide = ceil(screenWidth / CGFloat(MaxLettersPerRow)) - TileMargin
 
         targets = []
 
         //create targets
-        for position in 0..<wordText.characters.count {
+        for position in 0 ..< wordText.characters.count {
             let target = TargetView(letter: Character(wordText[position]), sideLength: targetSide)
 
-            if (wordlength <= maxTargetsPerRow) {
-                let xTargetOffset = (screenWidth - CGFloat(wordlength) * (targetSide + targetMargin)) / 2.0 + targetSide / 2.0
-                target.center = CGPoint(x: xTargetOffset + CGFloat(position) * (targetSide + targetMargin), y: targetSide / 2 + 8)
+            if (wordlength <= MaxTargetsPerRow) {
+                let xTargetOffset = (screenWidth - CGFloat(wordlength) * (targetSide + TargetMargin)) / 2.0 + targetSide / 2.0
+                target.center = CGPoint(x: xTargetOffset + CGFloat(position) * (targetSide + TargetMargin), y: targetSide / 2 + VerticalPadding)
             } else {
                 let lettersInFirstRow = wordlength / 2 + (wordlength % 2)
                 let lettersInSecondRow = wordlength / 2
 
-                let xTargetIndexOffset = CGFloat(position % lettersInFirstRow) * (targetSide + targetMargin)
+                let xTargetIndexOffset = CGFloat(position % lettersInFirstRow) * (targetSide + TargetMargin)
 
                 if (position < lettersInFirstRow) {
-                    let xTargetOffset = (screenWidth - CGFloat(lettersInFirstRow) * (targetSide + targetMargin)) / 2.0 + targetSide / 2.0
-                    let yTargetOffset = targetSide / 2 + 8
+                    let xTargetOffset = (screenWidth - CGFloat(lettersInFirstRow) * (targetSide + TargetMargin)) / 2.0 + targetSide / 2.0
+                    let yTargetOffset = targetSide / 2 + VerticalPadding
                     target.center = CGPoint(x: xTargetOffset + xTargetIndexOffset, y: yTargetOffset)
                 } else {
-                    let xTargetOffset = (screenWidth - CGFloat(lettersInSecondRow) * (targetSide + targetMargin)) / 2.0 + targetSide / 2.0
-                    let yTargetOffset = targetSide / 2 + 8 + (targetSide + 8)
+                    let xTargetOffset = (screenWidth - CGFloat(lettersInSecondRow) * (targetSide + TargetMargin)) / 2.0 + targetSide / 2.0
+                    let yTargetOffset = targetSide / 2 + VerticalPadding + (targetSide + VerticalPadding)
                     target.center = CGPoint(x: xTargetOffset + xTargetIndexOffset, y: yTargetOffset)
                 }
             }
@@ -79,7 +72,7 @@ class GameController {
         }
 
         fixedTiles = []
-        for position in 0..<wordText.characters.count {
+        for position in 0 ..< wordText.characters.count {
             if (word.fullCipheredText[position] == ".") {
                 continue
             }
@@ -94,24 +87,24 @@ class GameController {
         tiles = []
         let letters = generateLetters()
 
-        for tileIndex in 0..<letters.characters.count {
+        for tileIndex in 0 ..< letters.characters.count {
             let tile = TileView(letter: Character(letters[tileIndex]), sideLength: tileSide)
 
             var targetOffset: CGFloat
 
-            if (wordlength <= maxTargetsPerRow) {
-                targetOffset = (targetSide + 8) + 16
+            if (wordlength <= MaxTargetsPerRow) {
+                targetOffset = (targetSide + VerticalPadding) + VerticalPadding * 2
             } else {
-                targetOffset = (targetSide + 8) * 2 + 16
+                targetOffset = (targetSide + VerticalPadding) * 2 + VerticalPadding * 2
             }
 
-            let xLetterOffset = (screenWidth - CGFloat(maxLettersPerRow) * (tileSide + tileMargin)) / 2.0 + tileSide / 2.0
+            let xLetterOffset = (screenWidth - CGFloat(MaxLettersPerRow) * (tileSide + TileMargin)) / 2.0 + tileSide / 2.0
 
-            let rowIndex = CGFloat(tileIndex / maxLettersPerRow)
-            let columnIndex = CGFloat(tileIndex % maxLettersPerRow)
+            let rowIndex = CGFloat(tileIndex / MaxLettersPerRow)
+            let columnIndex = CGFloat(tileIndex % MaxLettersPerRow)
 
-            tile.center = CGPoint(x: xLetterOffset + columnIndex * (tileSide + tileMargin),
-                    y: targetOffset + (tileSide / 2) + (tileSide + 8) * rowIndex)
+            tile.center = CGPoint(x: xLetterOffset + columnIndex * (tileSide + TileMargin),
+                    y: targetOffset + (tileSide / 2) + (tileSide + VerticalPadding) * rowIndex)
 
             tile.originalCenter = tile.center
 
@@ -121,8 +114,6 @@ class GameController {
             let tap = UITapGestureRecognizer(target: self, action: #selector(self.tileTapped(_:)))
             tile.addGestureRecognizer(tap)
         }
-
-        //hud.hintButton.isEnabled = true
     }
 
     private func generateLetters() -> String {
@@ -131,9 +122,9 @@ class GameController {
         }
 
         var result = word.hidedLetters
-        let needLetters = lettersOnBoard - result.characters.count
+        let needLetters = LettersOnBoard - result.characters.count
 
-        for _ in 0..<needLetters {
+        for _ in 0 ..< needLetters {
             result += TextLanguage.getRandomLetter()
         }
 
@@ -167,14 +158,15 @@ class GameController {
         }
     }
 
-    func moveTileToTarget(_ tile: TileView, _ target: TargetView) {
+    func moveTileToTarget(_ tile: TileView, _ target: TargetView, _ isForSolve: Bool = false) {
         target.isOccupied = true
         tile.isPlaced = true
         tile.placedOnTarget = target
 
         gameView.bringSubview(toFront: tile)
+        let duration = isForSolve ? 0.6 : 0.3
 
-        UIView.animate(withDuration: 0.3,
+        UIView.animate(withDuration: duration,
                 delay: 0.0,
                 options: UIViewAnimationOptions.curveEaseOut,
                 animations: {
@@ -184,16 +176,26 @@ class GameController {
 
             self.placeTile(tile, target: target)
 
-            self.checkForSuccess()
+            self.checkForSuccess(isForSolve)
         })
     }
 
     func fixTileOnTarget(_ tile: TileView, _ target: TargetView) {
         tile.isFixed = true
         target.isOccupied = true
+        target.isFixed = true
         tile.isPlaced = true
         tile.placedOnTarget = target
         placeTile(tile, target: target)
+    }
+
+    func clearTarget(_ target: TargetView) {
+        for tile in tiles {
+            if (tile.placedOnTarget == target) {
+                removeTileFromTarget(tile)
+                return
+            }
+        }
     }
 
     func removeTileFromTarget(_ tile: TileView) {
@@ -221,12 +223,12 @@ class GameController {
             tile.isMatched = true
         }
 
-        UIView.animate(withDuration: 0.3,
+        /*UIView.animate(withDuration: 0.3,
                 delay: 0.00,
                 options: UIViewAnimationOptions.curveEaseOut,
                 animations: {
                     tile.center = target.center
-                })
+                })*/
 
         /*if (!tile.isFixed) {
             let explode = ExplodeView(frame: CGRect(x: tile.center.x, y: tile.center.y, width: 10, height: 10))
@@ -236,7 +238,7 @@ class GameController {
     }
 
 
-    func checkForSuccess() {
+    func checkForSuccess(_ isForSolve: Bool = false) {
         for targetView in targets {
             if !targetView.isMatched {
                 return
@@ -246,7 +248,7 @@ class GameController {
         //hud.hintButton.isEnabled = false
 
         //the anagram is completed!
-        audioController.playEffect(SoundWin)
+        //audioController.playEffect(SoundWin)
 
         // win animation
         /*let firstTarget = targets[0]
@@ -274,56 +276,60 @@ class GameController {
             self.onWordSolved(self.word)
         })*/
 
+        if (isForSolve) {
+            usleep(1000 * 100)
+        }
+
         self.onWordSolved(self.word)
     }
 
     //the user pressed the hint button
     @objc func actionHint() {
-        //hud.hintButton.isEnabled = false
-
-        //3 find the first unmatched target and matching tile
-        var foundTarget: TargetView? = nil
         for target in targets {
-            if !target.isMatched {
-                foundTarget = target
+            if !target.isFixed {
+                useHintForTarget(target)
                 break
             }
         }
+    }
 
-        //4 find the first tile matching the target
+    //the user pressed the hint button
+    @objc func actionSolve() {
+        for target in targets {
+            if !target.isFixed {
+                useHintForTarget(target, isForSolve: true)
+            }
+        }
+    }
+
+    @objc func useHintForTarget(_ foundTarget: TargetView, isForSolve: Bool = false) {
         var foundTile: TileView? = nil
         for tile in tiles {
-            if !tile.isMatched && tile.letter == foundTarget?.letter {
+            if !tile.isFixed && tile.letter == foundTarget.letter {
                 foundTile = tile
                 break
             }
         }
 
-        //ensure there is a matching tile and target
-        if let target = foundTarget, let tile = foundTile {
-
-            //5 don't want the tile sliding under other tiles
-            gameView.bringSubview(toFront: tile)
-
-            //6 show the animation to the user
-            UIView.animate(withDuration: 1.5,
-                    delay: 0.0,
-                    options: UIViewAnimationOptions.curveEaseOut,
-                    animations: {
-                        tile.center = target.center
-                    }, completion: {
-                (value: Bool) in
-
-                //7 adjust view on spot
-                self.placeTile(tile, target: target)
-
-                //8 re-enable the button
-                //self.hud.hintButton.isEnabled = true
-
-                //9 check for finished game
-                self.checkForSuccess()
-            })
+        if (foundTile == nil) {
+            return
         }
+
+        if (foundTile!.placedOnTarget == foundTarget) {
+            fixTileOnTarget(foundTile!, foundTarget)
+            return
+        }
+
+        if (foundTarget.isOccupied) {
+            clearTarget(foundTarget)
+        }
+
+        if (foundTile!.isPlaced) {
+            removeTileFromTarget(foundTile!)
+        }
+
+        moveTileToTarget(foundTile!, foundTarget, isForSolve)
+        fixTileOnTarget(foundTile!, foundTarget)
     }
 
     func clearBoard() {

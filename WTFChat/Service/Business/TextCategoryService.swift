@@ -337,7 +337,7 @@ class TextCategoryService: Service {
         let currentLanguage = TextLanguage.getCurrentLanguage()
 
         while !(isReadyForLanguage[currentLanguage]!) {
-            sleep(1)
+            usleep(1000)
         }
 
         let textDifficulty = getTextDifficultyForLevel(level)

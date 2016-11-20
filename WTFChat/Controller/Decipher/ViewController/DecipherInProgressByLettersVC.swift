@@ -58,11 +58,18 @@ class DecipherInProgressByLettersVC: UIViewController {
 
         layoutTopView()
 
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
+
+        let decipherWidth = decipherView.bounds.size.width
+        let decipherHeight = decipherView.bounds.size.height
 
         //add one layer for all game elements
-        controller.gameView = decipherView
+        let gameView = UIView(frame: CGRect(x: 0, y: 0, width: decipherWidth, height: decipherHeight))
+        decipherView.addSubview(gameView)
+        controller.gameView = gameView
 
-        let hudView = HUDView(frame: decipherView.frame)
+        let hudView = HUDView(frame: CGRect(x: 0, y: 0, width: decipherWidth, height: decipherHeight))
         decipherView.addSubview(hudView)
         controller.hudView = hudView
 
