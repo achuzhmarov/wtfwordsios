@@ -42,6 +42,9 @@ class Color {
     static let IgnoreLight = UIColor(red: 140/255, green: 144/255, blue: 158/255, alpha: 1.0)
     static let IgnoreDark = UIColor(red: 105/255, green: 107/255, blue: 112/255, alpha: 1.0)
 
+    static let TileLight = UIColor(red: 45/255, green: 41/255, blue: 42/255, alpha: 1.0)
+    static let TileDark = UIColor(red: 30/255, green: 27/255, blue: 27/255, alpha: 1.0)
+
     static func getBorderColorByDifficulty(_ difficulty: CipherDifficulty) -> UIColor {
         switch difficulty {
             case .easy:

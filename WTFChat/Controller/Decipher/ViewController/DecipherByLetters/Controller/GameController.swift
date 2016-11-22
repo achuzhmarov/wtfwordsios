@@ -10,6 +10,8 @@ class GameController {
     private var fixedTiles = [TileView]()
     fileprivate var targets = [TargetView]()
 
+    private var isFinished = false
+
     var hudView: HUDView! {
         didSet {
             //connect the Hint button
@@ -82,6 +84,7 @@ class GameController {
             fixedTiles.append(tile)
             gameView.addSubview(tile)
             fixTileOnTarget(tile, targets[position])
+            tile.updateBackground()
         }
 
         tiles = []
@@ -170,6 +173,7 @@ class GameController {
                 delay: 0.0,
                 options: UIViewAnimationOptions.curveEaseOut,
                 animations: {
+                    tile.updateBackground()
                     tile.center = target.center
                 }, completion: {
             (value: Bool) in
@@ -186,7 +190,7 @@ class GameController {
         target.isFixed = true
         tile.isPlaced = true
         tile.placedOnTarget = target
-        placeTile(tile, target: target)
+        self.placeTile(tile, target: target)
     }
 
     func clearTarget(_ target: TargetView) {
@@ -238,11 +242,46 @@ class GameController {
     }
 
 
+
     func checkForSuccess(_ isForSolve: Bool = false) {
-        for targetView in targets {
-            if !targetView.isMatched {
+        if (isFinished) {
+            return
+        }
+
+        for target in targets {
+            if !target.isMatched {
                 return
             }
+        }
+
+        isFinished = true
+
+        var hasNotFixed = false
+        for tile in self.tiles {
+            if (tile.isMatched && !tile.isFixed) {
+                hasNotFixed = true
+            }
+        }
+
+        if (hasNotFixed) {
+            UIView.animate(withDuration: 0.3,
+                    delay: 0.0,
+                    options: UIViewAnimationOptions.curveEaseOut,
+                    animations: {
+                        for tile in self.tiles {
+                            if (tile.isMatched && !tile.isFixed) {
+                                tile.isFixed = true
+                                tile.updateBackground()
+                            }
+                        }
+                    },
+                    completion: { (value: Bool) in
+                        usleep(1000 * 100)
+                        self.onWordSolved(self.word)
+                    })
+        } else {
+            usleep(1000 * 100)
+            self.onWordSolved(self.word)
         }
 
         //hud.hintButton.isEnabled = false
@@ -276,11 +315,9 @@ class GameController {
             self.onWordSolved(self.word)
         })*/
 
-        if (isForSolve) {
+        /*if (isForSolve) {
             usleep(1000 * 100)
-        }
-
-        self.onWordSolved(self.word)
+        }*/
     }
 
     //the user pressed the hint button
@@ -317,6 +354,13 @@ class GameController {
 
         if (foundTile!.placedOnTarget == foundTarget) {
             fixTileOnTarget(foundTile!, foundTarget)
+
+            UIView.animate(withDuration: 0.3,
+                    delay: 0.0,
+                    options: UIViewAnimationOptions.curveEaseOut,
+                    animations: {
+                        foundTile!.updateBackground()
+                    })
             return
         }
 
@@ -328,11 +372,12 @@ class GameController {
             removeTileFromTarget(foundTile!)
         }
 
-        moveTileToTarget(foundTile!, foundTarget, isForSolve)
         fixTileOnTarget(foundTile!, foundTarget)
+        moveTileToTarget(foundTile!, foundTarget, isForSolve)
     }
 
     func clearBoard() {
+        isFinished = false
         fixedTiles.removeAll(keepingCapacity: false)
         tiles.removeAll(keepingCapacity: false)
         targets.removeAll(keepingCapacity: false)

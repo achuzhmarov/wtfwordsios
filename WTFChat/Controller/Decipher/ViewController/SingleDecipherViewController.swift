@@ -83,11 +83,10 @@ class SingleDecipherViewController: DecipherViewController {
     }
 
     func restartCurrentLevel() {
-        let selectedDifficulty = guiDataService.getLastSelectedDifficulty()
         let messageText = messageCategory.getMessage()
 
         singleMessage = singleMessageService.getMessageForLevel(
-            singleMessage.level, difficulty: selectedDifficulty, text: messageText
+            singleMessage.level, difficulty: singleMessage.cipherDifficulty, text: messageText
         )
         message = singleMessage
 
@@ -95,13 +94,11 @@ class SingleDecipherViewController: DecipherViewController {
     }
 
     func startNextLevel(_ level: Level) {
-        let selectedDifficulty = guiDataService.getLastSelectedDifficulty()
-
         messageCategory = singleMessageService.getTextCategoryForLevel(level)
         let messageText = messageCategory.getMessage()
 
         singleMessage = singleMessageService.getMessageForLevel(
-            level, difficulty: selectedDifficulty, text: messageText
+            level, difficulty: singleMessage.cipherDifficulty, text: messageText
         )
         message = singleMessage
 

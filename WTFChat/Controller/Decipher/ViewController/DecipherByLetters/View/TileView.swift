@@ -5,7 +5,8 @@ protocol TileDragDelegateProtocol {
     func tileView(_ tileView: TileView, didDragToPoint: CGPoint)
 }
 
-class TileView: UIImageView {
+class TileView: BorderedButton {
+//class TileView: UIImageView {
     var letter: Character
 
     var isMatched: Bool = false
@@ -33,14 +34,18 @@ class TileView: UIImageView {
 
         //the tile background
         let image = UIImage(named: "tile")!
+        //let image2 = UIImage(named: "tileNoise")!
 
         //superclass initializer
         //references to superview's "self" must take place after super.init
-        super.init(image: image)
+        //super.init(image: image)
+        //super.init(image: image2)
+        super.init(frame: CGRect(x: 0, y: 0, width: sideLength, height: sideLength))
+
+        self.frame = CGRect(x: 0, y: 0, width: sideLength, height: sideLength)
 
         //6 resize the tile
         let scale = sideLength / image.size.width
-        self.frame = CGRect(x: 0, y: 0, width: image.size.width * scale, height: image.size.height * scale)
 
         //add a letter on top
         let letterLabel = UILabel(frame: self.bounds)
@@ -62,19 +67,8 @@ class TileView: UIImageView {
 
         let path = UIBezierPath(rect: self.bounds)
         self.layer.shadowPath = path.cgPath
-    }
 
-    func randomize() {
-        //set random rotation of the tile
-        //anywhere between -0.2 and 0.3 radians
-        //let rotation = CGFloat(randomNumber(minX: 0, maxX: 50)) / 100.0 - 0.2
-        let rotation = CGFloat(randomNumber(minX: 0, maxX: 10)) / 100.0 - 0.05
-        self.transform = CGAffineTransform(rotationAngle: rotation)
-        tempTransform = self.transform
-
-        //move randomly upwards
-        let yOffset = CGFloat(randomNumber(minX: 0, maxX: 2) - 2)
-        self.center = CGPoint(x: self.center.x, y: self.center.y + yOffset)
+        updateBackground()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -82,45 +76,24 @@ class TileView: UIImageView {
             return
         }
 
-        /*if let touch = touches.first {
-            let point = touch.location(in: self.superview)
-            xOffset = point.x - self.center.x
-            yOffset = point.y - self.center.y
-        }*/
-
-        //show the drop shadow
         self.layer.shadowOpacity = 0.8
-
-        //save the current transform
         tempTransform = self.transform
-        //enlarge the tile
         self.transform = self.transform.scaledBy(x: 1.2, y: 1.2)
 
         self.superview?.bringSubview(toFront: self)
     }
-
-    /*override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            let point = touch.location(in: self.superview)
-            self.center = CGPoint(x: point.x - xOffset, y: point.y - yOffset)
-        }
-    }*/
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if (isFixed) {
             return
         }
 
-        //self.touchesMoved(touches, with: event)
-
-        //restore the original transform
         self.transform = tempTransform
 
         dragDelegate?.tileView(self, didDragToPoint: self.center)
         self.layer.shadowOpacity = 0.0
     }
 
-    //reset the view transform in case drag is cancelled
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent!) {
         if (isFixed) {
             return
@@ -128,5 +101,13 @@ class TileView: UIImageView {
 
         self.transform = tempTransform
         self.layer.shadowOpacity = 0.0
+    }
+
+    func updateBackground() {
+        if (self.isFixed) {
+            self.updateGradient(Gradient.Success)
+        } else {
+            self.updateGradient(Gradient.Tile)
+        }
     }
 }

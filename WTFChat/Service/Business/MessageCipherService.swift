@@ -10,6 +10,8 @@ class MessageCipherService: Service {
 
     fileprivate let ROMAN_LETTERS = ["X","V","I"]
 
+    private let WORDS_TO_IGNORE = ["the", "an"]
+
     fileprivate let currentUserService: CurrentUserService
     fileprivate let cipherService: CipherService
 
@@ -268,9 +270,21 @@ class MessageCipherService: Service {
             return WordType.ignore
         } else if isRomanDate(newWordText) {
             return WordType.ignore
+        } else if isWordToIgnore(newWordText) {
+            return WordType.ignore
         } else {
             return WordType.new
         }
+    }
+
+    private func isWordToIgnore(_ newWordText: String) -> Bool {
+        for word in WORDS_TO_IGNORE {
+            if (newWordText.uppercased() == word.uppercased()) {
+                return true
+            }
+        }
+
+        return false
     }
 
     fileprivate func isRomanDate(_ text: String) -> Bool {
