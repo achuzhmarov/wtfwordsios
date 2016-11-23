@@ -5,8 +5,8 @@ protocol TileDragDelegateProtocol {
     func tileView(_ tileView: TileView, didDragToPoint: CGPoint)
 }
 
-class TileView: BorderedButton {
-//class TileView: UIImageView {
+//class TileView: BorderedButton {
+class TileView: UIImageView {
     var letter: Character
 
     var isMatched: Bool = false
@@ -23,6 +23,10 @@ class TileView: BorderedButton {
 
     var originalCenter: CGPoint!
 
+    let imageTile = UIImage(named: "tile")!
+    let imageNormal = UIImage(named: "wood")!
+    let imageSuccess = UIImage(named: "woodSuccess")!
+
     //4 this should never be called
     required init(coder aDecoder: NSCoder) {
         fatalError("use init(letter:, sideLength:")
@@ -32,20 +36,12 @@ class TileView: BorderedButton {
     init(letter: Character, sideLength: CGFloat) {
         self.letter = letter
 
-        //the tile background
-        let image = UIImage(named: "tile")!
-        //let image2 = UIImage(named: "tileNoise")!
-
-        //superclass initializer
-        //references to superview's "self" must take place after super.init
-        //super.init(image: image)
-        //super.init(image: image2)
-        super.init(frame: CGRect(x: 0, y: 0, width: sideLength, height: sideLength))
+        super.init(image: imageNormal)
+        //super.init(frame: CGRect(x: 0, y: 0, width: sideLength, height: sideLength))
 
         self.frame = CGRect(x: 0, y: 0, width: sideLength, height: sideLength)
 
-        //6 resize the tile
-        let scale = sideLength / image.size.width
+        let scale = sideLength / imageTile.size.width
 
         //add a letter on top
         let letterLabel = UILabel(frame: self.bounds)
@@ -105,9 +101,11 @@ class TileView: BorderedButton {
 
     func updateBackground() {
         if (self.isFixed) {
-            self.updateGradient(Gradient.Success)
+            //self.updateGradient(Gradient.Success)
+            self.image = imageSuccess
         } else {
-            self.updateGradient(Gradient.Tile)
+            //self.updateGradient(Gradient.Tile)
+            self.image = imageNormal
         }
     }
 }
