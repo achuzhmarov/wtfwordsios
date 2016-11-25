@@ -13,6 +13,7 @@ class TileView: UIImageView {
     var isPlaced: Bool = false
     var placedOnTarget: TargetView?
     var isFixed: Bool = false
+    var isPartOfWord: Bool = false
 
     fileprivate var xOffset: CGFloat = 0.0
     fileprivate var yOffset: CGFloat = 0.0
@@ -23,9 +24,10 @@ class TileView: UIImageView {
 
     var originalCenter: CGPoint!
 
-    let imageTile = UIImage(named: "tile")!
-    let imageNormal = UIImage(named: "wood")!
-    let imageSuccess = UIImage(named: "woodSuccess")!
+    static private let imageTile = UIImage(named: "tile")!
+    static private let imageNormal = UIImage(named: "wood")!
+    static private let imageFixed = UIImage(named: "woodSuccess")!
+    static private let imageWordPart = UIImage(named: "woodWordPart")!
 
     //4 this should never be called
     required init(coder aDecoder: NSCoder) {
@@ -36,12 +38,12 @@ class TileView: UIImageView {
     init(letter: Character, sideLength: CGFloat) {
         self.letter = letter
 
-        super.init(image: imageNormal)
+        super.init(image: TileView.imageNormal)
         //super.init(frame: CGRect(x: 0, y: 0, width: sideLength, height: sideLength))
 
         self.frame = CGRect(x: 0, y: 0, width: sideLength, height: sideLength)
 
-        let scale = sideLength / imageTile.size.width
+        let scale = sideLength / TileView.imageTile.size.width
 
         //add a letter on top
         let letterLabel = UILabel(frame: self.bounds)
@@ -100,12 +102,14 @@ class TileView: UIImageView {
     }
 
     func updateBackground() {
-        if (self.isFixed) {
+        if isFixed {
             //self.updateGradient(Gradient.Success)
-            self.image = imageSuccess
+            self.image = TileView.imageFixed
+        } else if isPartOfWord {
+            self.image = TileView.imageWordPart
         } else {
             //self.updateGradient(Gradient.Tile)
-            self.image = imageNormal
+            self.image = TileView.imageNormal
         }
     }
 }

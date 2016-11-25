@@ -1,7 +1,9 @@
 import Foundation
 
 class BaseUIViewController: UIViewController {
-    fileprivate var gradientLayer: CAGradientLayer?
+    private var gradientLayer: CAGradientLayer?
+
+    //private static let backgroundImage = UIImage(named: "background")!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,8 @@ class BaseUIViewController: UIViewController {
     }
 
     func updateBackgroundGradient(_ size: CGSize? = nil) {
+        //self.view.backgroundColor = UIColor(patternImage: BaseUIViewController.backgroundImage)
+
         gradientLayer?.removeFromSuperlayer()
         gradientLayer = self.view.addDiagonalGradient(Gradient.Background, size: size)
     }

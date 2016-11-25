@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "board.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "board@2x.jpg",
+      "filename" : "woodPartOfWord100.png",
       "scale" : "2x"
     },
     {

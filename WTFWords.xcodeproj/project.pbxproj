@@ -190,7 +190,6 @@
 		3E37CFFBFDAAC4913EC3B77E /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C1426B7D1EBA185A77E4 /* RatingCell.swift */; };
 		3E37CFFCEA088FF37D8F591E /* InAppNetworkServiceOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C89724177FD827960FEB /* InAppNetworkServiceOld.swift */; };
 		481BDD991C58FE5D00ABD558 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 481BDD981C58FE5D00ABD558 /* LaunchScreen.storyboard */; };
-		48424E111DDB4DE6004D94A0 /* AnagramLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E101DDB4DE6004D94A0 /* AnagramLevel.swift */; };
 		48424E1B1DDB4E0E004D94A0 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E141DDB4E0E004D94A0 /* TileView.swift */; };
 		48424E1C1DDB4E0E004D94A0 /* TargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E151DDB4E0E004D94A0 /* TargetView.swift */; };
 		48424E1D1DDB4E0E004D94A0 /* StopwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E161DDB4E0E004D94A0 /* StopwatchView.swift */; };
@@ -433,7 +432,6 @@
 		3E37CFEEAC9762C3361A9C50 /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		481BDD981C58FE5D00ABD558 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		483676481C2048200092C703 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		48424E101DDB4DE6004D94A0 /* AnagramLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnagramLevel.swift; sourceTree = "<group>"; };
 		48424E141DDB4E0E004D94A0 /* TileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		48424E151DDB4E0E004D94A0 /* TargetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetView.swift; sourceTree = "<group>"; };
 		48424E161DDB4E0E004D94A0 /* StopwatchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopwatchView.swift; sourceTree = "<group>"; };
@@ -759,7 +757,6 @@
 		3E37C5F4A63FDE68ED3A94D9 /* DecipherByLetters */ = {
 			isa = PBXGroup;
 			children = (
-				3E37C7DDE78B8EA2378E4F02 /* Model */,
 				3E37C252931F307C6CFC93B6 /* Controller */,
 				3E37CC2D9B4EC8B3F3DDBEDD /* View */,
 				3E37C1F38496F5DDFE02AE0D /* Config.swift */,
@@ -826,14 +823,6 @@
 				3E37C53DCD55B39A905F6D14 /* Emoji.swift */,
 			);
 			path = Other;
-			sourceTree = "<group>";
-		};
-		3E37C7DDE78B8EA2378E4F02 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				48424E101DDB4DE6004D94A0 /* AnagramLevel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		3E37C7F4457439FA4E8A69A3 /* Talk */ = {
@@ -1469,7 +1458,6 @@
 				3E37CBD9A56CD92464A4D2C1 /* CoreSingleModeCategory+CoreDataProperties.swift in Sources */,
 				3E37C0E07128D97EC630D2BC /* CoreSingleTalkService.swift in Sources */,
 				3E37CC3BBB16BF9A5FC0F3CD /* CoreSingleMessageService.swift in Sources */,
-				48424E111DDB4DE6004D94A0 /* AnagramLevel.swift in Sources */,
 				3E37CD11D54EDDB6421DD6E4 /* Service.swift in Sources */,
 				3E37C9583AAE1C00A03A3C1F /* FriendTalk.swift in Sources */,
 				3E37CA94305072F75B1FCCBD /* Message.swift in Sources */,

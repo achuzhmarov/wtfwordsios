@@ -17,6 +17,7 @@ class GameController {
             //connect the Hint button
             hudView.hintButton.addTarget(self, action: #selector(GameController.actionHint), for: .touchUpInside)
             hudView.solveButton.addTarget(self, action: #selector(GameController.actionSolve), for: .touchUpInside)
+            hudView.lettersButton.addTarget(self, action: #selector(GameController.actionLetters), for: .touchUpInside)
         }
     }
 
@@ -173,15 +174,21 @@ class GameController {
                 delay: 0.0,
                 options: UIViewAnimationOptions.curveEaseOut,
                 animations: {
-                    tile.updateBackground()
                     tile.center = target.center
-                }, completion: {
-            (value: Bool) in
-
-            self.placeTile(tile, target: target)
-
-            self.checkForSuccess(isForSolve)
-        })
+                }, completion: { (value: Bool) in
+                    if (tile.isFixed) {
+                        UIView.transition(with: tile, duration: 0.3, options: .transitionCrossDissolve,
+                                animations: {
+                                    tile.updateBackground()
+                                }, completion: { (value: Bool) in
+                            self.placeTile(tile, target: target)
+                            self.checkForSuccess(isForSolve)
+                        })
+                    } else {
+                        self.placeTile(tile, target: target)
+                        self.checkForSuccess(isForSolve)
+                    }
+                })
     }
 
     func fixTileOnTarget(_ tile: TileView, _ target: TargetView) {
@@ -264,9 +271,7 @@ class GameController {
         }
 
         if (hasNotFixed) {
-            UIView.animate(withDuration: 0.3,
-                    delay: 0.0,
-                    options: UIViewAnimationOptions.curveEaseOut,
+            UIView.transition(with: gameView, duration: 0.2, options: .transitionCrossDissolve,
                     animations: {
                         for tile in self.tiles {
                             if (tile.isMatched && !tile.isFixed) {
@@ -274,13 +279,10 @@ class GameController {
                                 tile.updateBackground()
                             }
                         }
-                    },
-                    completion: { (value: Bool) in
-                        usleep(1000 * 100)
+                    }, completion: { (value: Bool) in
                         self.onWordSolved(self.word)
-                    })
+            })
         } else {
-            usleep(1000 * 100)
             self.onWordSolved(self.word)
         }
 
@@ -320,7 +322,6 @@ class GameController {
         }*/
     }
 
-    //the user pressed the hint button
     @objc func actionHint() {
         for target in targets {
             if !target.isFixed {
@@ -330,12 +331,43 @@ class GameController {
         }
     }
 
-    //the user pressed the hint button
     @objc func actionSolve() {
         for target in targets {
             if !target.isFixed {
                 useHintForTarget(target, isForSolve: true)
             }
+        }
+    }
+
+    @objc func actionLetters() {
+        for target in targets {
+            if !target.isFixed {
+                showLetterForTarget(target)
+            }
+        }
+
+        hudView.lettersButton.isEnabled = false
+        hudView.lettersButton.alpha = 0.6
+    }
+
+    private func showLetterForTarget(_ foundTarget: TargetView) {
+        var foundTile: TileView? = nil
+        for tile in tiles {
+            if !tile.isFixed && !tile.isPartOfWord && tile.letter == foundTarget.letter {
+                foundTile = tile
+                break
+            }
+        }
+
+        if let tile = foundTile {
+            tile.isPartOfWord = true
+
+            UIView.animate(withDuration: 0.3,
+                    delay: 0.0,
+                    options: UIViewAnimationOptions.transitionCrossDissolve,
+                    animations: {
+                        tile.updateBackground()
+                    })
         }
     }
 
@@ -385,6 +417,9 @@ class GameController {
         for view in gameView.subviews {
             view.removeFromSuperview()
         }
+
+        hudView.lettersButton.isEnabled = true
+        hudView.lettersButton.alpha = 1
     }
 
     func clearPlacedTiles() {
