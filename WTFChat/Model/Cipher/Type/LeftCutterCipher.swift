@@ -32,9 +32,9 @@ class LeftCutterHardCipher: Cipher {
             letterCount += 1
         }
         
-        //2 letters max
-        if (wordLength - letterCount > 1) {
-            letterCount = wordLength - 1
+        //3 letters max
+        if (wordLength - letterCount > 2) {
+            letterCount = wordLength - 2
         }
         
         return CipherHelper.getNDots(letterCount) + word.getLowerCase()[letterCount...wordLength]

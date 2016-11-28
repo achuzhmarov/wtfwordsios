@@ -13,7 +13,7 @@ class RandomCutterNormalCipher: Cipher {
         var charsLeft = word.getCharCount() / 2
 
         //set max letters
-        charsLeft = min(charsLeft, 5)
+        charsLeft = min(charsLeft, 4)
 
         return RandomCutterHelper.CutRandomLetters(word.text, charsLeft: charsLeft)
     }
