@@ -161,6 +161,8 @@ class DecipherInProgressByLettersVC: UIViewController {
         wordsTableView.setNewMessage(message)
         layoutTopView()
         controller.clearCache()
+        controller.cipherType = message.cipherType
+        controller.cipherDifficulty = message.cipherDifficulty
         showNextWord()
     }
 

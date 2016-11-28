@@ -337,11 +337,11 @@ class MessageCipherService: Service {
     private let EASY_MODIFIER = 1.2
     private let HARD_MODIFIER = 1.5
 
-    private let SECONDS_PER_WORD = 12.0
+    private let SECONDS_PER_WORD = 15.0
     private let WORD_COUNT_STEP = 5
     private let WORD_COUNT_MODIFIERS = [1, 0.8, 0.6, 0.4, 0.2]
 
-    private let SECONDS_PER_LETTER = 1.0
+    private let SECONDS_PER_LETTER = 1.5
     private let LETTER_COUNT_STEP = 30
     private let LETTER_COUNT_MODIFIERS = [1, 0.8, 0.6, 0.4, 0.2]
 

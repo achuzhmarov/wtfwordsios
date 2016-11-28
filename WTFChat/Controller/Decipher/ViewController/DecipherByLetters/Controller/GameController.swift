@@ -5,12 +5,16 @@ import Localize_Swift
 class GameController {
     var gameView: UIView!
     var word: Word!
+    var cipherType: CipherType!
+    var cipherDifficulty: CipherDifficulty!
 
     private var tiles = [TileView]()
     private var fixedTiles = [TileView]()
     fileprivate var targets = [TargetView]()
 
     private var isFinished = false
+    private var tileSide: CGFloat!
+    private var targetSide: CGFloat!
 
     var hudView: HUDView! {
         didSet {
@@ -35,14 +39,14 @@ class GameController {
     func start() {
         self.clearBoard()
 
-        var wordText = word.text
+        let wordText = word.text
 
         let wordlength = wordText.characters.count
 
         let screenWidth = gameView.bounds.size.width
 
-        let targetSide = ceil(screenWidth / CGFloat(MaxTargetsPerRow)) - TargetMargin
-        let tileSide = ceil(screenWidth / CGFloat(MaxLettersPerRow)) - TileMargin
+        targetSide = ceil(screenWidth / CGFloat(MaxTargetsPerRow)) - TargetMargin
+        tileSide = ceil(screenWidth / CGFloat(MaxLettersPerRow)) - TileMargin
 
         targets = []
 
@@ -74,18 +78,10 @@ class GameController {
             targets.append(target)
         }
 
-        fixedTiles = []
-        for position in 0 ..< wordText.characters.count {
-            if (word.fullCipheredText[position] == ".") {
-                continue
-            }
-
-            let tile = TileView(letter: Character(wordText[position]), sideLength: tileSide)
-            tile.center = targets[position].center
-            fixedTiles.append(tile)
-            gameView.addSubview(tile)
-            fixTileOnTarget(tile, targets[position])
-            tile.updateBackground()
+        if (cipherType == .shuffle) {
+            generateShuffleFixedTiles()
+        } else {
+            generateGeneralFixedTiles()
         }
 
         tiles = []
@@ -118,6 +114,40 @@ class GameController {
             let tap = UITapGestureRecognizer(target: self, action: #selector(self.tileTapped(_:)))
             tile.addGestureRecognizer(tap)
         }
+
+        if (cipherType == .shuffle) {
+            highlightWordLettersForShuffle()
+        }
+    }
+
+    private func generateShuffleFixedTiles() {
+        fixedTiles = []
+
+        //create first letter for easy difficulty
+        if (cipherDifficulty == .easy) {
+            generateFixedTile(position: 0)
+        }
+    }
+
+    private func generateFixedTile(position: Int) {
+        let tile = TileView(letter: Character(word.text[position]), sideLength: tileSide)
+        tile.center = targets[position].center
+        fixedTiles.append(tile)
+        gameView.addSubview(tile)
+        fixTileOnTarget(tile, targets[position])
+        tile.updateBackground()
+    }
+
+    private func generateGeneralFixedTiles() {
+        fixedTiles = []
+
+        for position in 0 ..< word.text.characters.count {
+            if (word.fullCipheredText[position] == ".") {
+                continue
+            }
+
+            generateFixedTile(position: position)
+        }
     }
 
     private func generateLetters() -> String {
@@ -125,7 +155,7 @@ class GameController {
             return letters
         }
 
-        var result = word.hidedLetters
+        var result = getHidedLetters()
         let needLetters = LettersOnBoard - result.characters.count
 
         for _ in 0 ..< needLetters {
@@ -136,6 +166,36 @@ class GameController {
         generatedLettersCache[word] = result
 
         return result
+    }
+
+    private func getHidedLetters() -> String {
+        if (cipherType == .shuffle) {
+            let wordLength = word.getCharCount() - 1
+
+            if (cipherDifficulty == .easy) {
+                return word.text[1...wordLength]
+            } else {
+                return word.text
+            }
+        } else {
+            return word.hidedLetters
+        }
+    }
+
+    private func highlightWordLettersForShuffle() {
+        if cipherDifficulty == .hard {
+            for position in 0 ..< targets.count {
+                if (word.fullCipheredText[position] == ".") {
+                    continue
+                }
+
+                if !targets[position].isFixed {
+                    showLetterForTarget(targets[position])
+                }
+            }
+        } else {
+            showLetters()
+        }
     }
 
     @objc func tileTapped(_ sender: UITapGestureRecognizer) {
@@ -340,6 +400,10 @@ class GameController {
     }
 
     @objc func actionLetters() {
+        showLetters()
+    }
+
+    private func showLetters() {
         for target in targets {
             if !target.isFixed {
                 showLetterForTarget(target)
