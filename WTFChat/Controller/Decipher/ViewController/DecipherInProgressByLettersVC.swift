@@ -225,7 +225,7 @@ class DecipherInProgressByLettersVC: UIViewController {
         audioService.playSound("success")
 
         messageCipherService.decipher(message, hintedWord: solvedWord)
-        wordsTableView.updateMessage(message)
+        wordsTableView.updateMessage(message, hideError: true)
 
         if (message.deciphered) {
             gameOver()
@@ -240,7 +240,7 @@ class DecipherInProgressByLettersVC: UIViewController {
 
         for word: Word in message.words {
             if (wasFind) && ((word.type == .new) || (word.type == .closeTry)) {
-                controller.word = word
+                controller.setNewWord(word)
                 controller.start()
                 return
             }
@@ -256,7 +256,7 @@ class DecipherInProgressByLettersVC: UIViewController {
     private func showNextWord() {
         for word: Word in message.words {
             if (word.type == .new) || (word.type == .closeTry) {
-                controller.word = word
+                controller.setNewWord(word)
                 break
             }
         }
@@ -272,7 +272,7 @@ class DecipherInProgressByLettersVC: UIViewController {
 extension DecipherInProgressByLettersVC: WordTappedComputer {
     func wordTapped(_ word: Word) {
         if (word.type == .new) || (word.type == .closeTry) {
-            controller.word = word
+            controller.setNewWord(word)
             controller.start()
         } else {
             //ignore tap

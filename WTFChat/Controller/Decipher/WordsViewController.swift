@@ -77,12 +77,12 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         self.selfAuthor = selfAuthor
         createView()
     }
-    
-    func updateMessage(_ message: Message) {
-        updateMessage(message, tries: nil)
+
+    func updateMessage(_ message: Message, hideError: Bool = false) {
+        updateMessage(message, tries: nil, hideError: hideError)
     }
     
-    func updateMessage(_ message: Message, tries: [String]?) {
+    func updateMessage(_ message: Message, tries: [String]?, hideError: Bool = false) {
         if (self.message != nil) {
             self.message = message
             
@@ -90,7 +90,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
                 updateView()
                 audioService.playSound("success")
                 animateWarning(tries)
-            } else {
+            } else if (!hideError) {
                 animateError(tries)
             }
             return

@@ -29,12 +29,10 @@ class TileView: UIImageView {
     static private let imageFixed = UIImage(named: "woodSuccess")!
     static private let imageWordPart = UIImage(named: "woodWordPart")!
 
-    //4 this should never be called
     required init(coder aDecoder: NSCoder) {
         fatalError("use init(letter:, sideLength:")
     }
 
-    //5 create a new tile for a given letter
     init(letter: Character, sideLength: CGFloat) {
         self.letter = letter
 
