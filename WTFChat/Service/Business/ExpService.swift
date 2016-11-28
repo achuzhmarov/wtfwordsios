@@ -30,7 +30,7 @@ class ExpService: Service {
 
         var currentExp = exp
 
-        while currentExp >= 0 {
+        while currentExp >= ((1 + lvlStage) * BASE_LVL_EXP) {
             currentExp -= (1 + lvlStage) * BASE_LVL_EXP
 
             lvlStep += 1
