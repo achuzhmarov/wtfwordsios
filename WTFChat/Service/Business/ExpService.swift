@@ -30,7 +30,7 @@ class ExpService: Service {
 
         var currentExp = exp
 
-        while currentExp >= ((1 + lvlStage) * BASE_LVL_EXP) {
+        while currentExp >= 0 {
             currentExp -= (1 + lvlStage) * BASE_LVL_EXP
 
             lvlStep += 1
@@ -46,10 +46,20 @@ class ExpService: Service {
 
     fileprivate func getExpByLvl(_ lvl: Int) -> Int {
         let expLvl = lvl - 1
+        let lvlStage = expLvl / LVL_EXP_STEP
+        let stepsOnLvl = expLvl % LVL_EXP_STEP
+        let expPerLvlStep = (lvlStage + 1) * BASE_LVL_EXP
 
-        let leftMultiplier = intPow(2, power: expLvl / LVL_EXP_STEP) - 1
-        let rightMultiplier = intPow(2, power: expLvl / LVL_EXP_STEP + 1)
-        return leftMultiplier * 10 * BASE_LVL_EXP / 2 + rightMultiplier * (expLvl % LVL_EXP_STEP) * BASE_LVL_EXP / 2
+        let stepsExp = expPerLvlStep * stepsOnLvl
+
+        let levelStageMultiplier = ((1 + lvlStage) * lvlStage) / 2
+        let lvlStageExp = levelStageMultiplier * LVL_EXP_STEP * BASE_LVL_EXP
+
+        return lvlStageExp + stepsExp
+
+        //let leftMultiplier = intPow(2, power: expLvl / LVL_EXP_STEP) - 1
+        //let rightMultiplier = intPow(2, power: expLvl / LVL_EXP_STEP + 1)
+        //return leftMultiplier * 10 * BASE_LVL_EXP / 2 + rightMultiplier * (expLvl % LVL_EXP_STEP) * BASE_LVL_EXP / 2
     }
 
     fileprivate func intPow(_ radix: Int, power: Int) -> Int {

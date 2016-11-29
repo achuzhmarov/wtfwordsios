@@ -193,9 +193,7 @@
 		481BDD991C58FE5D00ABD558 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 481BDD981C58FE5D00ABD558 /* LaunchScreen.storyboard */; };
 		48424E1B1DDB4E0E004D94A0 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E141DDB4E0E004D94A0 /* TileView.swift */; };
 		48424E1C1DDB4E0E004D94A0 /* TargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E151DDB4E0E004D94A0 /* TargetView.swift */; };
-		48424E1D1DDB4E0E004D94A0 /* StopwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E161DDB4E0E004D94A0 /* StopwatchView.swift */; };
 		48424E1E1DDB4E0E004D94A0 /* HUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E171DDB4E0E004D94A0 /* HUDView.swift */; };
-		48424E1F1DDB4E0E004D94A0 /* CounterLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E181DDB4E0E004D94A0 /* CounterLabelView.swift */; };
 		48424E201DDB4E0E004D94A0 /* ExplodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E191DDB4E0E004D94A0 /* ExplodeView.swift */; };
 		48424E211DDB4E0E004D94A0 /* StardustView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E1A1DDB4E0E004D94A0 /* StardustView.swift */; };
 		48424E241DDB4E17004D94A0 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E221DDB4E17004D94A0 /* GameController.swift */; };
@@ -436,9 +434,7 @@
 		483676481C2048200092C703 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		48424E141DDB4E0E004D94A0 /* TileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		48424E151DDB4E0E004D94A0 /* TargetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetView.swift; sourceTree = "<group>"; };
-		48424E161DDB4E0E004D94A0 /* StopwatchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopwatchView.swift; sourceTree = "<group>"; };
 		48424E171DDB4E0E004D94A0 /* HUDView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUDView.swift; sourceTree = "<group>"; };
-		48424E181DDB4E0E004D94A0 /* CounterLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterLabelView.swift; sourceTree = "<group>"; };
 		48424E191DDB4E0E004D94A0 /* ExplodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplodeView.swift; sourceTree = "<group>"; };
 		48424E1A1DDB4E0E004D94A0 /* StardustView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StardustView.swift; sourceTree = "<group>"; };
 		48424E221DDB4E17004D94A0 /* GameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
@@ -975,9 +971,7 @@
 			children = (
 				48424E141DDB4E0E004D94A0 /* TileView.swift */,
 				48424E151DDB4E0E004D94A0 /* TargetView.swift */,
-				48424E161DDB4E0E004D94A0 /* StopwatchView.swift */,
 				48424E171DDB4E0E004D94A0 /* HUDView.swift */,
-				48424E181DDB4E0E004D94A0 /* CounterLabelView.swift */,
 				48424E191DDB4E0E004D94A0 /* ExplodeView.swift */,
 				48424E1A1DDB4E0E004D94A0 /* StardustView.swift */,
 				3E37C76BBC51E2FEB71B3E19 /* FixedTileView.swift */,
@@ -1498,7 +1492,6 @@
 				3E37C94D62B614FB6314994E /* BaseUIViewController.swift in Sources */,
 				3E37CA0CCAF06B05167F4F6C /* StarImage.swift in Sources */,
 				3E37C15134610CE8CA184D79 /* ArrowImage.swift in Sources */,
-				48424E1F1DDB4E0E004D94A0 /* CounterLabelView.swift in Sources */,
 				3E37C388DE6ECAC8E68F51D2 /* UIBezierPath+Extension.swift in Sources */,
 				3E37C342824B452903005630 /* MenuButton.swift in Sources */,
 				3E37C31002E00B23871ED52B /* LevelPreviewViewController.swift in Sources */,
@@ -1568,7 +1561,6 @@
 				3E37CB5FE34D23C573995D0A /* RatingService.swift in Sources */,
 				3E37CC2C3D94F899C8EF19AD /* DecipherInProgressByLettersVC.swift in Sources */,
 				48424E241DDB4E17004D94A0 /* GameController.swift in Sources */,
-				48424E1D1DDB4E0E004D94A0 /* StopwatchView.swift in Sources */,
 				3E37C08403ACC45DA98B7209 /* Config.swift in Sources */,
 				3E37CBBAF077675618F194C7 /* GameButton.swift in Sources */,
 				3E37CE34F26802F8FE3257DE /* FixedTileView.swift in Sources */,

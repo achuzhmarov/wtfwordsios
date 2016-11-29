@@ -5,82 +5,50 @@ class DoubleCutterEasyCipher: Cipher {
         if (word.getCharCount() == 2) {
             return DoubleCutterHelper.replaceFirstNonDot(word.getLowerCase())
         }
-        
-        let odd = ((word.getCharCount() % 2) == 1)
-        return DoubleCutterHelper.cutWord(word.getLowerCase(), odd: odd)
+
+        let maxChars = word.getCharCount() / 2 + word.getCharCount() % 2
+
+        return DoubleCutterHelper.cutIfTooManyLetters(word.text, maxChars: maxChars)
     }
 }
 
 class DoubleCutterNormalCipher: Cipher {
     func getTextForDecipher(_ word: Word) -> String {
         if (word.getCharCount() == 2) {
-            return DoubleCutterHelper.replaceFirstNonDot(word.getLowerCase())
-        }
-        
-        let odd = ((word.getCharCount() % 2) == 1)
-        let ciphered = DoubleCutterHelper.cutWord(word.getLowerCase(), odd: odd)
-
-        var maxChars: Int
-        
-        if (word.getCharCount() < 4) {
-            maxChars = 1
-        } else if (word.getCharCount() < 7) {
-            maxChars = 3
-        } else {
-            maxChars = 4
+            return DoubleCutterHelper.replaceFirstNonDot(word.text)
         }
 
-        return DoubleCutterHelper.cutIfTooManyLetters(ciphered, odd: odd, maxChars: maxChars)
+        //no more than 5 letters
+        let maxChars = min(word.getCharCount() / 2, 5)
+
+        return DoubleCutterHelper.cutIfTooManyLetters(word.text, maxChars: maxChars)
     }
 }
 
 class DoubleCutterHardCipher: Cipher {
     func getTextForDecipher(_ word: Word) -> String {
         if (word.getCharCount() == 2) {
-            return DoubleCutterHelper.replaceFirstNonDot(word.getLowerCase())
+            return DoubleCutterHelper.replaceFirstNonDot(word.text)
         }
-        
-        let odd = ((word.getCharCount() % 2) == 1)
-        let easyCiphered = DoubleCutterHelper.cutWord(word.getLowerCase(), odd: odd)
-        let hardCiphered = DoubleCutterHelper.cutWord(easyCiphered, odd: odd)
 
-        return DoubleCutterHelper.cutIfTooManyLetters(hardCiphered, odd: odd, maxChars: 2)
+        //no more than 3 letters
+        let maxChars = min(word.getCharCount() / 2, 3)
+
+        return DoubleCutterHelper.cutIfTooManyLetters(word.text, maxChars: maxChars)
     }
 }
 
 private class DoubleCutterHelper {
-    class func cutIfTooManyLetters(_ word: String, odd: Bool, maxChars: Int) -> String {
+    class func cutIfTooManyLetters(_ word: String, maxChars: Int) -> String {
         let nonDotLength = DoubleCutterHelper.getNonDotLength(word)
 
         if (nonDotLength <= maxChars) {
             return word
         } else if (nonDotLength - maxChars == 1) {
-            if (odd) {
-                return DoubleCutterHelper.replaceLastNonDot(word)
-            } else {
-                return DoubleCutterHelper.replaceFirstNonDot(word)
-            }
-        } else {
-            let cuttedWord = DoubleCutterHelper.cutWord(word, odd: odd)
-            return cutIfTooManyLetters(cuttedWord, odd: odd, maxChars: maxChars)
-        }
-    }
-    
-    class func cutWord(_ word: String, odd: Bool) -> String {
-        let nonDotLength = DoubleCutterHelper.getNonDotLength(word)
-
-        if (nonDotLength == 1) {
-            return word
-        } else if (nonDotLength == 2) {
-            if (odd) {
-                return DoubleCutterHelper.replaceLastNonDot(word)
-            } else {
-                return word
-            }
-        } else if (nonDotLength == 3) {
             return DoubleCutterHelper.replaceFirstNonDot(word)
         } else {
-            return DoubleCutterHelper.replaceBothNonDot(word)
+            let cuttedWord = DoubleCutterHelper.replaceBothNonDot(word)
+            return cutIfTooManyLetters(cuttedWord, maxChars: maxChars)
         }
     }
 
@@ -95,7 +63,7 @@ private class DoubleCutterHelper {
     }
 
     class func getLastNonDotIndex(_ word: String) -> Int {
-        for i in (word.characters.count - 1)...0 {
+        for i in (0...(word.characters.count - 1)).reversed() {
             if (word[i] != ".") {
                 return i
             }
@@ -105,7 +73,7 @@ private class DoubleCutterHelper {
     }
 
     class func getNonDotLength(_ word: String) -> Int {
-        return DoubleCutterHelper.getLastNonDotIndex(word) - DoubleCutterHelper.getFirstNonDotIndex(word)
+        return DoubleCutterHelper.getLastNonDotIndex(word) - DoubleCutterHelper.getFirstNonDotIndex(word) + 1
     }
 
     class func replaceFirstNonDot(_ word: String) -> String {

@@ -79,7 +79,10 @@ class GameController {
         tiles = boardCacheForWord.tiles
         fixedTiles = boardCacheForWord.fixedTiles
         targets = boardCacheForWord.targets
-        hudView.lettersButton.isEnabled = boardCacheForWord.isLettersHintDisabled
+
+        if (boardCacheForWord.isLettersHintDisabled) {
+            disableLettersHintButton()
+        }
 
         //create targets
         for position in 0 ..< targets.count {
@@ -193,7 +196,7 @@ class GameController {
                 tiles: tiles,
                 fixedTiles: fixedTiles,
                 targets: targets,
-                isLettersHintDisabled: hudView.lettersButton.isEnabled
+                isLettersHintDisabled: !hudView.lettersButton.isEnabled
                 )
     }
 
@@ -498,8 +501,17 @@ class GameController {
             }
         }
 
+        disableLettersHintButton()
+    }
+
+    private func disableLettersHintButton() {
         hudView.lettersButton.isEnabled = false
         hudView.lettersButton.alpha = 0.6
+    }
+
+    private func enableLettersHintButton() {
+        hudView.lettersButton.isEnabled = true
+        hudView.lettersButton.alpha = 1
     }
 
     private func showLetterForTarget(_ foundTarget: TargetView) {
@@ -570,8 +582,7 @@ class GameController {
             view.removeFromSuperview()
         }
 
-        hudView.lettersButton.isEnabled = true
-        hudView.lettersButton.alpha = 1
+        enableLettersHintButton()
     }
 
     public func clearPlacedTiles() {

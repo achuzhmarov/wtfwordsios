@@ -23,7 +23,8 @@ class RandomCutterHardCipher: Cipher {
     func getTextForDecipher(_ word: Word) -> String {
         var charsLeft = word.getCharCount() / 2
 
-        charsLeft = min(charsLeft, 3)
+        //set max letters
+        charsLeft = min(charsLeft, 2)
 
         return RandomCutterHelper.CutRandomLetters(word.text, charsLeft: charsLeft)
     }

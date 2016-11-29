@@ -13,7 +13,7 @@ class LeftCutterNormalCipher: Cipher {
     func getTextForDecipher(_ word: Word) -> String {
         let wordLength = word.getCharCount() - 1
         var letterCount = word.getCharCount() / 2 + word.getCharCount() % 2
-        
+
         //5 letters max
         if (wordLength - letterCount > 4) {
             letterCount = wordLength - 4
@@ -31,7 +31,7 @@ class LeftCutterHardCipher: Cipher {
         if (wordLength > letterCount) {
             letterCount += 1
         }
-        
+
         //3 letters max
         if (wordLength - letterCount > 2) {
             letterCount = wordLength - 2
