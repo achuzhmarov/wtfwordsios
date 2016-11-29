@@ -107,17 +107,20 @@ class SingleModeViewController: BaseUIViewController {
             return
         }
 
-        if (nextCategory != nil) {
-            WTFTwoButtonsAlert.show(FINISHED_TITLE,
-                    message: message,
-                    firstButtonTitle: NEXT_CHAPTER_TEXT,
-                    secondButtonTitle: STAY_HERE_TEXT) { () -> Void in
+        DispatchQueue.main.async {
+            if (nextCategory != nil) {
+                WTFTwoButtonsAlert.show(self.FINISHED_TITLE,
+                        message: message,
+                        firstButtonTitle: self.NEXT_CHAPTER_TEXT,
+                        secondButtonTitle: self.STAY_HERE_TEXT,
+                        viewPresenter: self) { () -> Void in
 
-                self.pageControl.currentPage = self.pageControl.currentPage + 1
-                self.cipherPageViewController.showPage(self.pageControl.currentPage)
+                    self.pageControl.currentPage = self.pageControl.currentPage + 1
+                    self.cipherPageViewController.showPage(self.pageControl.currentPage)
+                }
+            } else {
+                WTFOneButtonAlert.show(self.FINISHED_TITLE, message: message, viewPresenter: self)
             }
-        } else {
-            WTFOneButtonAlert.show(FINISHED_TITLE, message: message)
         }
     }
 }

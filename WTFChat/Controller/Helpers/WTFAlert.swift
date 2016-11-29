@@ -65,18 +65,26 @@ class WTFTwoButtonsAlert: WTFBaseAlert {
     static let CANCEL_TEXT = "Cancel"
 
     static func show(_ title: String, message: String?, firstButtonTitle: String, alertButtonAction:(() -> Void)?) {
-        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: CANCEL_TEXT.localized(), alertButtonAction: alertButtonAction, cancelButtonAction: nil)
+        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: CANCEL_TEXT.localized(), viewPresenter: nil, alertButtonAction: alertButtonAction, cancelButtonAction: nil)
     }
 
     static func show(_ title: String, message: String?, firstButtonTitle: String, alertButtonAction:(() -> Void)?, cancelButtonAction:(() -> Void)?) {
-        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: CANCEL_TEXT.localized(), alertButtonAction: alertButtonAction, cancelButtonAction: cancelButtonAction)
+        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: CANCEL_TEXT.localized(), viewPresenter: nil, alertButtonAction: alertButtonAction, cancelButtonAction: cancelButtonAction)
     }
 
     static func show(_ title: String, message: String?, firstButtonTitle: String, secondButtonTitle: String, alertButtonAction:(() -> Void)?) {
-        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: secondButtonTitle, alertButtonAction: alertButtonAction, cancelButtonAction: nil)
+        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: secondButtonTitle, viewPresenter: nil, alertButtonAction: alertButtonAction, cancelButtonAction: nil)
+    }
+
+    static func show(_ title: String, message: String?, firstButtonTitle: String, secondButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:(() -> Void)?) {
+        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: secondButtonTitle, viewPresenter: viewPresenter, alertButtonAction: alertButtonAction, cancelButtonAction: nil)
     }
 
     static func show(_ title: String, message: String?, firstButtonTitle: String, secondButtonTitle: String, alertButtonAction:(() -> Void)?, cancelButtonAction:(() -> Void)?) {
+        return WTFTwoButtonsAlert.show(title, message: message, firstButtonTitle: firstButtonTitle, secondButtonTitle: secondButtonTitle, viewPresenter: nil, alertButtonAction: alertButtonAction, cancelButtonAction: cancelButtonAction)
+    }
+
+    static func show(_ title: String, message: String?, firstButtonTitle: String, secondButtonTitle: String, viewPresenter: UIViewController?, alertButtonAction:(() -> Void)?, cancelButtonAction:(() -> Void)?) {
         //if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title,
                 message: message,
@@ -90,7 +98,13 @@ class WTFTwoButtonsAlert: WTFBaseAlert {
                 alertButtonAction?()
             }))
 
-            presentAlert(alert)
+            if let presenter = viewPresenter {
+                presenter.present(alert, animated: true, completion: nil)
+            } else {
+                presentAlert(alert)
+            }
+
+            //presentAlert(alert)
 
         /*} else {
             let alert = AlertWithDelegate()
