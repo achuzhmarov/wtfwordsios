@@ -155,15 +155,24 @@ class DecipherInProgressByLettersVC: UIViewController {
     }
 
     func start() {
-        Timer.scheduledTimer(timeInterval: 1.0, target: self,
-                selector: #selector(DecipherInProgressVC.tick), userInfo: nil, repeats: false)
-
         wordsTableView.setNewMessage(message)
         layoutTopView()
         controller.clearCache()
         controller.cipherType = message.cipherType
         controller.cipherDifficulty = message.cipherDifficulty
         showNextWord()
+
+        initTimerForOneSecond()
+    }
+
+    private func initTimerForOneSecond() {
+        let secondTimer = Timer.scheduledTimer(timeInterval: 1.0,
+                target: self,
+                selector: #selector(DecipherInProgressVC.tick),
+                userInfo: nil,
+                repeats: false)
+
+        RunLoop.main.add(secondTimer, forMode: RunLoopMode.commonModes)
     }
 
     func tick() {
@@ -172,8 +181,7 @@ class DecipherInProgressByLettersVC: UIViewController {
         }
 
         if (isPaused) {
-            Timer.scheduledTimer(timeInterval: 1.0, target: self,
-                    selector: #selector(DecipherInProgressVC.tick), userInfo: nil, repeats: false)
+            initTimerForOneSecond()
 
             return
         }
@@ -187,8 +195,7 @@ class DecipherInProgressByLettersVC: UIViewController {
                 self.gameOver()
             })
         } else {
-            Timer.scheduledTimer(timeInterval: 1.0, target: self,
-                    selector: #selector(DecipherInProgressVC.tick), userInfo: nil, repeats: false)
+            initTimerForOneSecond()
 
             if (timer.isRunningOfTime()) {
                 topTimerLabel.textColor = UIColor.red
