@@ -241,6 +241,7 @@ class DecipherInProgressByLettersVC: UIViewController {
         for word: Word in message.words {
             if (wasFind) && ((word.type == .new) || (word.type == .closeTry)) {
                 controller.setNewWord(word)
+                wordsTableView.highlightWord(word)
                 controller.start()
                 return
             }
@@ -257,11 +258,11 @@ class DecipherInProgressByLettersVC: UIViewController {
         for word: Word in message.words {
             if (word.type == .new) || (word.type == .closeTry) {
                 controller.setNewWord(word)
-                break
+                wordsTableView.highlightWord(word)
+                controller.start()
+                return
             }
         }
-
-        controller.start()
     }
 
     func wasShaked() {

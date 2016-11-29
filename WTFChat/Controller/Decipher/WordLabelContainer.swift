@@ -4,6 +4,7 @@ class WordLabelContainer {
     var label = RoundedLabel()
     var fontSize: CGFloat
     var isHidedText: Bool
+    var isSelected: Bool = false
 
     var originalWord: Word
 
@@ -39,7 +40,7 @@ class WordLabelContainer {
 
         switch word.type {
         case .new:
-            if (word.wasCloseTry) {
+            if (word.wasCloseTry || isSelected) {
                 label.addGradientToLabel(Gradient.Try)
             } else {
                 label.addGradientToLabel(Gradient.Ciphered)
@@ -161,5 +162,19 @@ class WordLabelContainer {
     
     func getFullRowHorizontalConstraint(_ parentView: UIView) -> NSLayoutConstraint {
         return NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: parentView, attribute: NSLayoutAttribute.trailing, multiplier: 1, constant: 0)
+    }
+
+    func highlight() {
+        if (!isSelected) {
+            isSelected = true
+            updateLabel()
+        }
+    }
+
+    func clearHighlight() {
+        if (isSelected) {
+            isSelected = false
+            updateLabel()
+        }
     }
 }

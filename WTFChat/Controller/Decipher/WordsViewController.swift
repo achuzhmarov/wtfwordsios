@@ -156,7 +156,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         rows = WordsField()
         updateViewHelper(rows)
         showContainers(false)
-        
+
         self.reloadData()
     }
     
@@ -223,16 +223,17 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     func createLabelForWord(_ word: Word) -> WordLabelContainer {
         let wordContainer = WordLabelContainer(word: word, useCipherText: useCipherText, selfAuthor: selfAuthor, isHidedText: isHidedText, fontSize: fontSize)
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WordsViewController.useSuggestion(_:)))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WordsViewController.wordTapped(_:)))
         wordContainer.label.addGestureRecognizer(tap)
         
         return wordContainer
     }
     
-    func useSuggestion(_ sender: UITapGestureRecognizer) {
+    func wordTapped(_ sender: UITapGestureRecognizer) {
         let label = sender.view as! RoundedLabel
         let wordContainer = label.tagObject as! WordLabelContainer
-        
+        highlightWord(wordContainer.word)
+
         self.wordTappedComputer?.wordTapped(wordContainer.originalWord)
     }
     
@@ -258,5 +259,17 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     
     func updateMaxWidth(_ width: CGFloat? = nil) {
         maxWidth = width ?? self.bounds.width
+    }
+
+    func highlightWord(_ word: Word) {
+        rows.clearHighlight()
+
+        //highlight first word
+        for wordContainer in rows.getAllWordContainers() {
+            if (wordContainer.originalWord == word || wordContainer.word == word) {
+                wordContainer.highlight()
+                break
+            }
+        }
     }
 }

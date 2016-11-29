@@ -86,4 +86,12 @@ class WordsField {
     func getRow(_ i: Int) -> [WordLabelContainer] {
         return rows[i]
     }
+
+    func clearHighlight() {
+        for row in rows {
+            for wordContainer in row {
+                wordContainer.clearHighlight()
+            }
+        }
+    }
 }
