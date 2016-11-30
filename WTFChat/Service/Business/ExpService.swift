@@ -4,11 +4,11 @@ class ExpService: Service {
     fileprivate let BASE_LVL_EXP = 1000
     fileprivate let LVL_EXP_STEP = 5
 
-    fileprivate let LVL_HINTS_STEP = 5
-    fileprivate let HINTS_PER_STEP = 5
+    fileprivate let LVL_WTFS_STEP = 5
+    fileprivate let WTFS_PER_STEP = 10
 
-    func getHintsForLvl(_ lvl: Int) -> Int {
-        return ((lvl / LVL_HINTS_STEP) + 1) * HINTS_PER_STEP
+    func getWtfsForLvl(_ lvl: Int) -> Int {
+        return ((lvl / LVL_WTFS_STEP) + 1) * WTFS_PER_STEP
     }
 
     func getCurrentLvlExp(_ exp: Int) -> Int {

@@ -106,9 +106,9 @@ class DecipherViewController: BaseUIViewController {
         sendMessageDecipher()
     }
 
-    func hintsBought() {
-        inProgressVC.hintsBought()
-        inProgressByLettersVC.hintsBought()
+    func wtfsBought() {
+        inProgressVC.wtfsBought()
+        inProgressByLettersVC.wtfsBought()
     }
 
     func sendMessageDecipher() {

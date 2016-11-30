@@ -19,14 +19,14 @@
 "Next Chapter" = "Следующая глава";
 "Stay here" = "Остаться здесь";
 
-//Hints
-"Hints remained:" = "Осталось подсказок:";
-"Hints remained: 0" = "Осталось подсказок: 0";
-"Hints:" = "Подсказки:";
+//WTFs
+"WTFs remained:" = "Осталось WTF:";
+"WTFs remained: 0" = "Осталось WTF: 0";
+"WTFs:" = "WTF:";
 "Get more" = "Получить еще";
-"Use a Hint" = "Использовать подсказку";
-"You have used all hints." = "Вы использовали все подсказки.";
-"You have used all hints. Want to get more?" = "Вы использовали все подсказки. Нужно больше?";
+"Use a WTF" = "Использовать WTF";
+"You have used all WTFs." = "Вы использовали все WTF.";
+"You have used all WTFs. Want to get more?" = "Вы использовали все WTF. Хотите еще?";
 
 //Deciphering
 "Try" = "Ввод";
@@ -42,7 +42,7 @@
 "LEVEL" = "УРОВЕНЬ";
 "Level" = "Уровень";
 "You got" = "Вы получили";
-"free hints" = "подсказок";
+"free WTFs" = "WTF";
 "Continue" = "Дальше";
 "Retry" = "Еще раз";
 
@@ -56,10 +56,10 @@
 "Paid" = "Куплено";
 "Restore" = "Восстановить";
 "View Ad" = "Реклама";
-"Buy Hints" = "Купить подсказки";
+"Buy WTFs" = "Купить WTF";
 "Can't buy" = "Не получилось купить";
-"Get Free Hint" = "Получить подсказку";
-"X2 Daily Hints" = "X2 ежедневно";
+"Get Free WTF" = "Получить WTF";
+"X2 Daily WTFs" = "X2 ежедневных WTF";
 "No more ads" = "Вы просмотрели всю доступную рекламу";
 "Try again later" = "Попробуйте еще раз позже";
 "Restore purchased content?" = "Восстановить приобритенные ранее покупки?";
@@ -68,18 +68,18 @@
 "Please, check if you have a stable internet connection. Then use 'Restore' button. If you still don't get your purchase, please, restart the app." = "Пожалуйста, проверьте наличие стабильного соединения с интернетом. Затем нажмите кнопку 'Восстановить'. Есои ошибка не пропала, перезапустите приложение.";
 "can't be restored" = "не удалось восстановить";
 
-//Shop products
-"X2 free daily hints" = "Удвоение ежедневных бесплатных подсказок";
-"Double free daily hints forever!" = "Удвоить ежедневные бесплатные подсказки навсегда";
-"10 Hints" = "10 подсказок";
-"30 Hints" = "30 подсказок";
-"90 Hints" = "90 подсказок";
-"200 Hints" = "200 подсказок";
-"400 Hints" = "400 подсказок";
-"1000 Hints" = "1000 подсказок";
+//Shop products WTF
+"X2 free daily WTFs" = "Вдвое больше ежедневных бесплатных WTF";
+"Double free daily WTFs forever!" = "Получать в два раза больше ежедневных бесплатных WTF!";
+"30 WTFs" = "30 WTF";
+"90 WTFs" = "90 WTF";
+"270 WTFs" = "270 WTF";
+"600 WTFs" = "600 WTF";
+"1200 WTFs" = "1200 WTF";
+"3000 WTFs" = "3000 WTF";
 
-//Daily Hints
-"Daily free hints!\nToday you got" = "Ежедневные подсказки!\nСегодня вы получили";
+//Daily WTFs
+"Daily free WTFs!\nToday you got" = "Ежедневные WTF!\nСегодня вы получили";
 
 //Difficulties
 "Easy" = "Легко";

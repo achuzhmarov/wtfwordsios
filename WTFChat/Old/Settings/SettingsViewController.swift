@@ -51,7 +51,7 @@ class SettingsViewController: UITableViewController {
         lvlText.text = String(currentUserService.getUserLvl())
         lvlProgress.progress = Float(currentUserService.getCurrentLvlExp()) / Float(currentUserService.getNextLvlExp())
         
-        hintsText.text = String(currentUserService.getUserHints())
+        hintsText.text = String(currentUserService.getUserWtfs())
         
         nameText.text = currentUserService.getUserName()
         

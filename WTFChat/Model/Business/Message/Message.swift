@@ -14,7 +14,7 @@ class Message: NSObject {
     var deciphered: Bool = false
     var exp: Int = 0
     var timerSecs: Int = 0
-    var hintsUsed: Int = 0
+    var wtfUsed: Int = 0
 
     var words: [Word]!
     var tries = [String]()
@@ -47,7 +47,7 @@ class Message: NSObject {
         self.lastUpdate = lastUpdate
         self.exp = exp
         self.timerSecs = timerSecs
-        self.hintsUsed = hintsUsed
+        self.wtfUsed = hintsUsed
     }
 
     func getWordsWithoutSpaces() -> [Word] {

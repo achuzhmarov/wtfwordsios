@@ -2,14 +2,13 @@ import Foundation
 
 class User: NSObject {
     var login: String
-    var hints: Int = 10
+    var hints: Int = 0 // TODO - deprecated
     var talks = [FriendTalk]()
 
     var lastUpdate: Date = Date.defaultPast()
     var lastLogin: Date = Date()
     var exp: Int = 0
     var singleExp: Int = 0
-    var newHints: Int = 0
     var friends = [FriendInfo]()
 
     var name: String = ""
@@ -18,28 +17,29 @@ class User: NSObject {
 
     var rating: Int = 0
 
-    var adHintsGained: Int = 0
+    var adWtfsGained: Int = 0
+
+    var wtfs: Int = 30
 
     init(login: String) {
         self.login = login
     }
 
-    init(login: String, hints: Int) {
+    init(login: String, wtfs: Int) {
         self.login = login
-        self.hints = hints
+        self.wtfs = wtfs
     }
 
-    init(login: String, hints: Int, talks: [FriendTalk], lastUpdate: Date,
-         exp: Int, singleExp: Int, newHints: Int, friends: [FriendInfo],
-         name: String, pushNew: Bool, pushDeciphered: Bool, rating: Int, freeHintsGained: Int)
+    init(login: String, wtfs: Int, talks: [FriendTalk], lastUpdate: Date,
+         exp: Int, singleExp: Int, friends: [FriendInfo],
+         name: String, pushNew: Bool, pushDeciphered: Bool, rating: Int, adWtfsGained: Int)
     {
         self.login = login
-        self.hints = hints
+        self.wtfs = wtfs
         self.talks = talks
         self.lastUpdate = lastUpdate
         self.exp = exp
         self.singleExp = singleExp
-        self.newHints = newHints
         self.friends = friends
 
         self.name = name
@@ -48,13 +48,12 @@ class User: NSObject {
 
         self.rating = rating
 
-        self.adHintsGained = freeHintsGained
+        self.adWtfsGained = adWtfsGained
     }
 
     func updateInfo(_ user: User) {
         self.lastUpdate = user.lastUpdate
         self.hints = user.hints
-        self.newHints = user.newHints
         self.exp = user.exp
         self.singleExp = user.singleExp
 
@@ -63,7 +62,7 @@ class User: NSObject {
         self.pushDeciphered = user.pushDeciphered
         self.rating = user.rating
 
-        self.adHintsGained = user.adHintsGained
+        self.adWtfsGained = user.adWtfsGained
 
         for friendLvl in user.friends {
             updateFriendLvlInArray(friendLvl)

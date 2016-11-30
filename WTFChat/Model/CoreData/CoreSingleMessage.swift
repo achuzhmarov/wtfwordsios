@@ -12,7 +12,7 @@ class CoreSingleMessage: NSManagedObject {
         self.exp = message.exp as NSNumber?
         self.extId = message.extId
         self.timerSecs = message.timerSecs as NSNumber?
-        self.hintsUsed = message.hintsUsed as NSNumber?
+        self.hintsUsed = message.wtfUsed as NSNumber?
     }
 
     func getSingleMessage() -> SingleMessage? {

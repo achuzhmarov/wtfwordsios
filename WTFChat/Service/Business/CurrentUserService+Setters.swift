@@ -6,11 +6,6 @@ extension CurrentUserService {
         saveUserInLocalStorage()
     }
 
-    func clearUserNewSuggestions() {
-        user.newHints = 0
-        saveUserInLocalStorage()
-    }
-
     func updateInfo(_ newUserInfo: User) {
         user.updateInfo(newUserInfo)
         saveUserInLocalStorage()
@@ -35,30 +30,30 @@ extension CurrentUserService {
         saveUserInLocalStorage()
     }
 
-    func useHints(_ hintsUsed: Int) {
-        user.hints -= hintsUsed
+    func useWtfs(_ wtfsUsed: Int) {
+        user.wtfs -= wtfsUsed
         saveUserInLocalStorage()
     }
 
-    func addFreeHint() {
-        if canAddFreeAdHint() {
-            user.hints += 1
-            user.adHintsGained += 1
+    func addFreeWtfs(_ wtfs: Int) {
+        if canAddFreeAdWTFs() {
+            user.wtfs += wtfs
+            user.adWtfsGained += wtfs
             saveUserInLocalStorage()
         }
     }
 
-    func addHints(_ hints: Int) {
-        user.hints += hints
+    func addWtfs(_ wtfs: Int) {
+        user.wtfs += wtfs
         saveUserInLocalStorage()
     }
 
-    func addHintsForLvlUp() -> Int {
-        let hintsForLvl = expService.getHintsForLvl(getUserLvl())
-        user.hints += hintsForLvl
+    func addWtfsForLvlUp() -> Int {
+        let wtfsForLvl = expService.getWtfsForLvl(getUserLvl())
+        user.wtfs += wtfsForLvl
         saveUserInLocalStorage()
 
-        return hintsForLvl
+        return wtfsForLvl
     }
 
     func updateLastLogin(_ lastLogin: Date) {
@@ -66,8 +61,8 @@ extension CurrentUserService {
         saveUserInLocalStorage()
     }
 
-    func clearAdHintsLimit() {
-        user.adHintsGained = 0
+    func clearAdWtfsLimit() {
+        user.adWtfsGained = 0
         saveUserInLocalStorage()
     }
 }

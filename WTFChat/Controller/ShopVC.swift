@@ -2,13 +2,12 @@ import Foundation
 import Localize_Swift
 
 class ShopVC: BaseModalVC {
-    fileprivate let inAppService: InAppService = serviceLocator.get(InAppService.self)
-    fileprivate let adService: AdService = serviceLocator.get(AdService.self)
-    fileprivate let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
+    private let inAppService: InAppService = serviceLocator.get(InAppService.self)
+    private let adService: AdService = serviceLocator.get(AdService.self)
+    private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
 
     @IBOutlet weak var backButton: BorderedButton!
 
-    @IBOutlet weak var userHintsCount: UILabel!
     @IBOutlet weak var hintsTitle: UILabel!
     @IBOutlet weak var buyHintsTitle: UILabel!
 
@@ -32,29 +31,30 @@ class ShopVC: BaseModalVC {
     @IBOutlet weak var hints6Title: UILabel!
     @IBOutlet weak var hints6BuyButton: BorderedButton!
 
-    fileprivate let CONNECTION_ERROR_TEXT = "Please, check if you have a stable internet connection. Then use 'Restore' button. If you still don't get your purchase, please, restart the app.".localized()
-    fileprivate let RESTORE_TITLE = "Restore purchased content?".localized()
-    fileprivate let RESTORE_BUTTON_TITLE = "Restore".localized()
-    fileprivate let PAID_TITLE = "Paid".localized()
-    fileprivate let NO_ADS_TITLE = "No more ads".localized()
-    fileprivate let NO_ADS_MESSAGE = "Try again later".localized()
-    fileprivate let ERROR_TITLE = "Error".localized()
-    fileprivate let SUCCESS_TTITLE = "Success".localized()
-    fileprivate let UNKNOWN_ERROR_TEXT = "Unknown error occured.".localized()
-    fileprivate let BUY_ERROR_TEXT = "Can't buy".localized()
-    fileprivate let RESTORED_SUCCESSFULLY_TEXT = "Restored successfully".localized()
-    fileprivate let RESTORED_ERROR_TEXT = "can't be restored".localized()
-    fileprivate let VIEW_AD_TITLE = "View Ad".localized()
-    fileprivate let BACK_TEXT = "Back".localized()
-    fileprivate let HINTS_TEXT = "Hints:".localized()
-    fileprivate let BUY_HINTS_TEXT = "Buy Hints".localized()
-    fileprivate let FREE_HINTS_TEXT = "Get Free Hint".localized()
-    fileprivate let DAILY_HINTS_TEXT = "X2 Daily Hints".localized()
+    private let CONNECTION_ERROR_TEXT = "Please, check if you have a stable internet connection. Then use 'Restore' button. If you still don't get your purchase, please, restart the app.".localized()
+    private let RESTORE_TITLE = "Restore purchased content?".localized()
+    private let RESTORE_BUTTON_TITLE = "Restore".localized()
+    private let PAID_TITLE = "Paid".localized()
+    private let NO_ADS_TITLE = "No more ads".localized()
+    private let NO_ADS_MESSAGE = "Try again later".localized()
+    private let ERROR_TITLE = "Error".localized()
+    private let SUCCESS_TTITLE = "Success".localized()
+    private let UNKNOWN_ERROR_TEXT = "Unknown error occured.".localized()
+    private let BUY_ERROR_TEXT = "Can't buy".localized()
+    private let RESTORED_SUCCESSFULLY_TEXT = "Restored successfully".localized()
+    private let RESTORED_ERROR_TEXT = "can't be restored".localized()
+    private let VIEW_AD_TITLE = "View Ad".localized()
+    private let BACK_TEXT = "Back".localized()
+    private let HINTS_TEXT = "WTFs:".localized()
+    private let BUY_HINTS_TEXT = "Buy WTFs".localized()
+    private let FREE_HINTS_TEXT = "Get Free WTF".localized()
+    private let DAILY_HINTS_TEXT = "X2 Daily WTFs".localized()
 
-    fileprivate var productTitles = [ProductIdentifier: UILabel]()
-    fileprivate var productButtons = [ProductIdentifier: BorderedButton]()
+    private var productTitles = [ProductIdentifier: UILabel]()
+    private var productButtons = [ProductIdentifier: BorderedButton]()
 
-    fileprivate var isRestoreInProgress: Bool = false
+    private var isRestoreInProgress: Bool = false
+    private var lastWtfsCount: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +88,13 @@ class ShopVC: BaseModalVC {
         buyHintsTitle.text = BUY_HINTS_TEXT
         freeHintsTitle.text = FREE_HINTS_TEXT
         dailyHintsTitle.text = DAILY_HINTS_TEXT
+
+        //resize font to get all text visible
+        dailyHintsTitle.numberOfLines = 1
+        dailyHintsTitle.adjustsFontSizeToFitWidth = true
+        dailyHintsTitle.lineBreakMode = .byClipping
+
+        lastWtfsCount = currentUserService.getUserWtfs()
 
         reloadData()
     }
@@ -148,7 +155,16 @@ class ShopVC: BaseModalVC {
     }
 
     func reloadData() {
-        userHintsCount.text = String(currentUserService.getUserHints())
+        let newWtfsCount = currentUserService.getUserWtfs()
+        var hintsTitleText = HINTS_TEXT + " " + String(newWtfsCount)
+
+        if (lastWtfsCount < newWtfsCount) {
+            let difference = newWtfsCount - lastWtfsCount
+            lastWtfsCount = newWtfsCount
+            hintsTitleText += "(+" + String(difference) + ")"
+        }
+
+        hintsTitle.text = hintsTitleText
 
         updateProductTitles()
         updateProductButtons()
@@ -157,7 +173,7 @@ class ShopVC: BaseModalVC {
 
     fileprivate func updateProductTitles() {
         for (productId, productTitle) in productTitles {
-            productTitle.text = inAppService.getHintsProductTitle(productId)
+            productTitle.text = inAppService.getWtfsProductTitle(productId)
         }
     }
 
@@ -188,9 +204,11 @@ class ShopVC: BaseModalVC {
     }
 
     func showAdAlert(_ sender: BorderedButton) {
-        if currentUserService.canAddFreeAdHint() && adService.hasAd() {
+        if currentUserService.canAddFreeAdWTFs() && adService.hasAd() {
             adService.showAd({ () -> Void in
-                self.currentUserService.addFreeHint()
+                //get random amount of wtfs
+                let wtfs = Int(arc4random_uniform(UInt32(3))) + 1
+                self.currentUserService.addFreeWtfs(wtfs)
                 self.reloadData()
             })
         } else {
@@ -252,7 +270,7 @@ class ShopVC: BaseModalVC {
 
     override func modalClosed() {
         if let decipherVC = presentingVC as? DecipherViewController {
-            decipherVC.hintsBought()
+            decipherVC.wtfsBought()
         }
     }
 }

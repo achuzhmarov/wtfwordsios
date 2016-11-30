@@ -28,7 +28,7 @@ class DecipherInProgressByLettersVC: UIViewController {
     var isPaused = false
     var timer = WTFTimer()
 
-    var hints = 0
+    var wtfs = 0
 
     var initialTopPaddingConstraintConstant: CGFloat = 0
 
@@ -108,7 +108,7 @@ class DecipherInProgressByLettersVC: UIViewController {
     func initView(_ messageToDecipher: Message) {
         message = messageToDecipher
 
-        updateHintsCount()
+        updateWtfsCount()
         setTimer()
     }
 
@@ -219,8 +219,8 @@ class DecipherInProgressByLettersVC: UIViewController {
         parentVC.gameOver()
     }
 
-    func hintsBought() {
-        updateHintsCount()
+    func wtfsBought() {
+        updateWtfsCount()
         isPaused = false
     }
 
@@ -287,7 +287,7 @@ extension DecipherInProgressByLettersVC: WordTappedComputer {
         }
     }
 
-    func updateHintsCount() {
-        hints = currentUserService.getUserHints() // - message.hintsUsed
+    func updateWtfsCount() {
+        wtfs = currentUserService.getUserWtfs()
     }
 }

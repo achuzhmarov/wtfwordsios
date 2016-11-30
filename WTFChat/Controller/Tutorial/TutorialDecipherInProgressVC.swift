@@ -1,7 +1,7 @@
 import Foundation
 import Localize_Swift
 
-class TutorialDecipherInProgressVC: DecipherInProgressVC {
+class TutorialDecipherInProgressVC: DecipherInProgressByLettersVC {
     fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
 
     fileprivate let GUESS_MESSAGE = "Let's start! Try to type 'to' and press either 'Try' or 'return' button.".localized()
@@ -18,8 +18,8 @@ class TutorialDecipherInProgressVC: DecipherInProgressVC {
     fileprivate let GUESS_TEXT = "TO".localized()
     fileprivate let CLOSE_TRY_TEXT = "HER".localized()
 
-    fileprivate let ZERO_HINTS_TITLE = "Hints remained: 0".localized()
-    fileprivate let ZERO_HINTS_MESSAGE = "You have used all hints.".localized()
+    fileprivate let ZERO_HINTS_TITLE = "WTFs remained: 0".localized()
+    fileprivate let ZERO_HINTS_MESSAGE = "You have used all WTFs.".localized()
 
     fileprivate let TUTORIAL_HINTS = 3
 
@@ -29,19 +29,19 @@ class TutorialDecipherInProgressVC: DecipherInProgressVC {
         showMessageAlert(GUESS_MESSAGE, tutorialStage: .decipherGuess)
     }
 
-    override func showNoHintsDialog() {
+    /*override func showNoHintsDialog() {
         WTFOneButtonAlert.show(ZERO_HINTS_TITLE, message: ZERO_HINTS_MESSAGE)
     }
 
-    override func updateHintsUsed() {
-        hints -= 1
+    override func updateWtfsUsed() {
+        wtfs -= 1
     }
 
     override func updateHintsCount() {
-        hints = TUTORIAL_HINTS
-    }
+        wtfs = TUTORIAL_HINTS
+    }*/
 
-    override func tryButtonPressed(_ sender: AnyObject) {
+    /*override func tryButtonPressed(_ sender: AnyObject) {
         switch (guiDataService.getTutorialStage()) {
         case .decipherGuess:
             if (guessTextField.text!.uppercased() == GUESS_TEXT) {
@@ -64,9 +64,9 @@ class TutorialDecipherInProgressVC: DecipherInProgressVC {
         default:
             super.tryButtonPressed(sender)
         }
-    }
+    }*/
 
-    override func useHint(_ word: Word) {
+    /*override func useHint(_ word: Word) {
         switch (guiDataService.getTutorialStage()) {
         case .decipherGuess:
             showWrongActionAlert()
@@ -85,7 +85,7 @@ class TutorialDecipherInProgressVC: DecipherInProgressVC {
         default:
             super.useHint(word)
         }
-    }
+    }*/
 
     fileprivate func showWrongActionAlert() {
         switch (guiDataService.getTutorialStage()) {

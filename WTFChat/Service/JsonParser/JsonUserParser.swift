@@ -18,12 +18,11 @@ class JsonUserParser {
 
     class func fromJson(_ json: JSON) throws -> User {
         var login: String
-        var hints: Int = 0
+        var wtfs: Int = 0
         var talks = [FriendTalk]()
         var lastUpdate: Date = Date.defaultPast()
         var exp: Int = 0
         var singleExp: Int = 0
-        var newHints: Int = 0
         var friends = [FriendInfo]()
 
         var name: String
@@ -32,7 +31,7 @@ class JsonUserParser {
 
         var rating: Int = 0
 
-        var freeHintsGained: Int = 0
+        var adWtfsGained: Int = 0
 
         if let value = json["login"].string {
             login = value
@@ -40,9 +39,9 @@ class JsonUserParser {
             throw json["login"].error!
         }
 
-        if let value = json["suggestions"].int {
-            hints = value
-        } else if let error = json["suggestions"].error {
+        if let value = json["wtfs"].int {
+            wtfs = value
+        } else if let error = json["wtfs"].error {
             throw error
         }
 
@@ -75,12 +74,6 @@ class JsonUserParser {
         if let value = json["single_exp"].int {
             singleExp = value
         } else if let error = json["single_exp"].error {
-            throw error
-        }
-
-        if let value = json["new_suggestions"].int {
-            newHints = value
-        } else if let error = json["new_suggestions"].error {
             throw error
         }
 
@@ -118,26 +111,25 @@ class JsonUserParser {
             throw error
         }
 
-        if let value = json["free_hints_gained"].int {
-            freeHintsGained = value
-        } else if let error = json["free_hints_gained"].error {
+        if let value = json["ad_wtfs_gained"].int {
+            adWtfsGained = value
+        } else if let error = json["ad_wtfs_gained"].error {
             throw error
         }
 
         return User(
             login: login,
-            hints: hints,
+            wtfs: wtfs,
             talks: talks,
             lastUpdate: lastUpdate,
             exp: exp,
             singleExp: singleExp,
-            newHints: newHints,
             friends: friends,
             name: name,
             pushNew: pushNew,
             pushDeciphered: pushDeciphered,
             rating: rating,
-            freeHintsGained: freeHintsGained
+            adWtfsGained: adWtfsGained
         )
     }
 }

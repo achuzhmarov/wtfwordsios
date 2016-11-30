@@ -43,7 +43,7 @@ class MainViewController: BaseUIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        dailyHintsService.computeDailyHints()
+        dailyHintsService.computeDailyWtfs()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

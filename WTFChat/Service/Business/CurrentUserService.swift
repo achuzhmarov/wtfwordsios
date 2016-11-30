@@ -4,7 +4,7 @@ class CurrentUserService: Service {
     let iosService: IosService
     let expService: ExpService
 
-    let DAILY_MAX_AD_HINTS = 10
+    let DAILY_MAX_AD_WTFS = 30
 
     fileprivate struct KEY {
         static let LOGIN = "USER_LOGIN"
@@ -18,6 +18,7 @@ class CurrentUserService: Service {
         static let RATING = "USER_RATING"
         static let AD_HINTS_GAINED = "USER_AD_HINTS_GAINED"
         static let LAST_LOGIN = "USER_LAST_LOGIN"
+        static let WTFS = "USER_WTFS"
     }
 
     var user: User!
@@ -40,8 +41,15 @@ class CurrentUserService: Service {
     fileprivate func updateUserFromLocalStorage() {
         user = User(
             login: storage.getStringField(KEY.LOGIN),
-            hints: storage.getIntField(KEY.HINTS)
+            wtfs: storage.getIntField(KEY.WTFS)
         )
+
+        //if user has any hints, convert it to wtfs
+        if (storage.getIntField(KEY.HINTS) != 0) {
+            user.wtfs += storage.getIntField(KEY.HINTS) * 3
+            //clear hints from storage
+            storage.saveField(KEY.HINTS, value: 0 as AnyObject)
+        }
 
         user.lastUpdate = storage.getDateField(KEY.LAST_UPDATE)
         user.exp = storage.getIntField(KEY.EXP)
@@ -50,7 +58,7 @@ class CurrentUserService: Service {
         user.pushNew = storage.getBoolField(KEY.PUSH_NEW)
         user.pushDeciphered = storage.getBoolField(KEY.PUSH_DECIPHERED)
         user.rating = storage.getIntField(KEY.RATING)
-        user.adHintsGained = storage.getIntField(KEY.AD_HINTS_GAINED)
+        user.adWtfsGained = storage.getIntField(KEY.AD_HINTS_GAINED)
         user.lastLogin = storage.getDateField(KEY.LAST_LOGIN)
     }
 
@@ -75,7 +83,8 @@ class CurrentUserService: Service {
         storage.saveField(KEY.PUSH_NEW, value: user.pushNew as AnyObject)
         storage.saveField(KEY.PUSH_DECIPHERED, value: user.pushDeciphered as AnyObject)
         storage.saveField(KEY.RATING, value: user.rating as AnyObject)
-        storage.saveField(KEY.AD_HINTS_GAINED, value: user.adHintsGained as AnyObject)
+        storage.saveField(KEY.AD_HINTS_GAINED, value: user.adWtfsGained as AnyObject)
         storage.saveField(KEY.LAST_LOGIN, value: user.lastLogin as AnyObject)
+        storage.saveField(KEY.WTFS, value: user.wtfs as AnyObject)
     }
 }

@@ -6,7 +6,7 @@ extension DecipherInProgressVC: WordTappedComputer {
         if (word.type == WordType.new) {
             if (word.wasCloseTry) {
                 showCloseTryHintConfirm(word)
-            } else if (hints > 0) {
+            } else if (wtfs > 0) {
                 showHintConfirm(word)
             } else {
                 showNoHintsDialog()
@@ -17,8 +17,8 @@ extension DecipherInProgressVC: WordTappedComputer {
     }
 
     func showNoHintsDialog() {
-        WTFTwoButtonsAlert.show("Hints remained: 0".localized(),
-                message: "You have used all hints. Want to get more?".localized(),
+        WTFTwoButtonsAlert.show("WTFs remained: 0".localized(),
+                message: "You have used all WTFs. Want to get more?".localized(),
                 firstButtonTitle: "Get more".localized()) { () -> Void in
 
             self.isPaused = true
@@ -27,9 +27,9 @@ extension DecipherInProgressVC: WordTappedComputer {
     }
 
     fileprivate func showHintConfirm(_ word: Word) {
-        WTFTwoButtonsAlert.show("Hints remained:".localized() + " " + String(hints),
+        WTFTwoButtonsAlert.show("WTFs remained:".localized() + " " + String(wtfs),
                 message: "",
-                firstButtonTitle: "Use a Hint".localized()) { () -> Void in
+                firstButtonTitle: "Use a WTF".localized()) { () -> Void in
 
             DispatchQueue.main.async(execute: {
                 self.useHint(word)
@@ -59,7 +59,7 @@ extension DecipherInProgressVC: WordTappedComputer {
             messageCipherService.decipher(message, hintedWord: word, closeTry: true)
         } else {
             messageCipherService.decipher(message, hintedWord: word)
-            updateHintsUsed()
+            updateWtfsUsed(HintType.solve.costInWtfs)
         }
 
         wordsTableView.updateMessage(message)
@@ -71,13 +71,13 @@ extension DecipherInProgressVC: WordTappedComputer {
         }
     }
 
-    func updateHintsUsed() {
-        message.hintsUsed += 1
-        currentUserService.useHints(1)
+    func updateWtfsUsed(_ wtfs: Int) {
+        message.wtfUsed += wtfs
+        currentUserService.useWtfs(wtfs)
         updateHintsCount()
     }
 
     func updateHintsCount() {
-        hints = currentUserService.getUserHints() // - message.hintsUsed
+        wtfs = currentUserService.getUserWtfs() //
     }
 }

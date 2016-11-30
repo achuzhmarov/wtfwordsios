@@ -38,7 +38,7 @@ class JsonRemoteMessageParser {
         var json: JSON = [
             "id": message.id,
             "timer_secs": message.timerSecs,
-            "hints_used": message.hintsUsed
+            "hints_used": message.wtfUsed
         ]
 
         json["words"].arrayObject = JsonRemoteMessageParser.wordsFromMessage(message)

@@ -11,7 +11,7 @@ class SingleDecipherViewController: DecipherViewController {
 
     fileprivate let LEVEL_TEXT = "Level".localized()
     fileprivate let GOT_HINTS_BEGIN_TEXT = "You got".localized()
-    fileprivate let GOT_HINTS_END_TEXT = "free hints".localized()
+    fileprivate let GOT_HINTS_END_TEXT = "free WTFs".localized()
 
     fileprivate var singleMessage: SingleMessage!
     fileprivate var messageCategory: TextCategory!
@@ -42,7 +42,7 @@ class SingleDecipherViewController: DecipherViewController {
         let currentUserLvl = currentUserService.getUserLvl()
 
         if (currentUserLvl > previousUserLvl) {
-            let hintsForLvl = currentUserService.addHintsForLvlUp()
+            let hintsForLvl = currentUserService.addWtfsForLvlUp()
 
             let title = LEVEL_TEXT + " " + String(currentUserLvl) + "!"
             let message = GOT_HINTS_BEGIN_TEXT + " " + String(hintsForLvl) + " " + GOT_HINTS_END_TEXT

@@ -16,7 +16,7 @@ class CoreMessage: NSManagedObject {
         self.isLocal = message.isLocal as NSNumber?
         self.extId = message.extId
         self.timerSecs = message.timerSecs as NSNumber?
-        self.hintsUsed = message.hintsUsed as NSNumber?
+        self.hintsUsed = message.wtfUsed as NSNumber?
     }
     
     func getMessage() -> RemoteMessage? {

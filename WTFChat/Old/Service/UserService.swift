@@ -36,14 +36,14 @@ class UserService: Service {
     
     func updateInfo() {
         //send free hints gain in case of errors
-        if (freeAdHintsNotAdded != 0) {
+        /*if (freeAdHintsNotAdded != 0) {
             let freeAdHintsToAdd = freeAdHintsNotAdded
             freeAdHintsNotAdded = 0
             
             for _ in 0..<freeAdHintsToAdd {
                 addFreeAdHintRequest()
             }
-        }
+        }*/
         
         //get new user info
         userNetworkService.getNewInfo(currentUserService.getLastUpdate()) {userInfo, error in
@@ -113,10 +113,10 @@ class UserService: Service {
             completion(error)
         }
     }
-    
-    func addFreeAdHint() {
+
+    /*func addFreeAdHint() {
         currentUserService.addFreeHint()
-        
+
         addFreeAdHintRequest()
     }
     
@@ -132,5 +132,5 @@ class UserService: Service {
                 }
             }
         }
-    }
+    }*/
 }
