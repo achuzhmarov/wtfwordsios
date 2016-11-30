@@ -2349,7 +2349,7 @@
                         <outlet property="tryButton" destination="asD-ZR-q5d" id="QCs-tK-zA9"/>
                         <outlet property="wordsTableView" destination="tuq-h9-gT4" id="IZg-Sj-rBP"/>
                         <outlet property="wordsViewHorizontalConstraint" destination="A4l-D1-IA5" id="ojg-IE-mwZ"/>
-                        <segue destination="12F-tA-1Q8" kind="presentation" identifier="getMoreHints" modalPresentationStyle="overFullScreen" id="RRm-LN-v38"/>
+                        <segue destination="12F-tA-1Q8" kind="presentation" identifier="getMoreWtfs" modalPresentationStyle="overFullScreen" id="RRm-LN-v38"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2of-sz-XmD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3209,7 +3209,7 @@
                         <outlet property="topTimerLabel" destination="M5a-7Z-syP" id="cec-xN-yeo"/>
                         <outlet property="wordsTableView" destination="HEU-JZ-CAU" id="HcE-vY-gOZ"/>
                         <outlet property="wordsViewHorizontalConstraint" destination="dgy-O8-v27" id="41O-Z0-bcr"/>
-                        <segue destination="12F-tA-1Q8" kind="presentation" identifier="getMoreHints" modalPresentationStyle="overFullScreen" id="paO-SZ-mUg"/>
+                        <segue destination="12F-tA-1Q8" kind="presentation" identifier="getMoreWtfs" modalPresentationStyle="overFullScreen" id="paO-SZ-mUg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BVD-7S-Ndp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3226,6 +3226,6 @@
         <image name="settings filled" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="paO-SZ-mUg"/>
+        <segue reference="RRm-LN-v38"/>
     </inferredMetricsTieBreakers>
 </document>

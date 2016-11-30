@@ -2,7 +2,6 @@ import Foundation
 import Localize_Swift
 
 class DecipherInProgressByLettersVC: UIViewController {
-    let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
     let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService.self)
     let audioService: AudioService = serviceLocator.get(AudioService.self)
 
@@ -27,8 +26,6 @@ class DecipherInProgressByLettersVC: UIViewController {
 
     var isPaused = false
     var timer = WTFTimer()
-
-    var wtfs = 0
 
     var initialTopPaddingConstraintConstant: CGFloat = 0
 
@@ -74,6 +71,7 @@ class DecipherInProgressByLettersVC: UIViewController {
         controller.hudView = hudView
 
         controller.onWordSolved = self.wordSolved
+        controller.getMoreWtfs = self.getMoreWtfs
     }
 
     deinit {
@@ -108,7 +106,6 @@ class DecipherInProgressByLettersVC: UIViewController {
     func initView(_ messageToDecipher: Message) {
         message = messageToDecipher
 
-        updateWtfsCount()
         setTimer()
     }
 
@@ -220,7 +217,6 @@ class DecipherInProgressByLettersVC: UIViewController {
     }
 
     func wtfsBought() {
-        updateWtfsCount()
         isPaused = false
     }
 
@@ -275,6 +271,11 @@ class DecipherInProgressByLettersVC: UIViewController {
     func wasShaked() {
         controller.clearPlacedTiles()
     }
+
+    func getMoreWtfs() {
+        self.isPaused = true
+        self.performSegue(withIdentifier: "getMoreWtfs", sender: self)
+    }
 }
 
 extension DecipherInProgressByLettersVC: WordTappedComputer {
@@ -285,9 +286,5 @@ extension DecipherInProgressByLettersVC: WordTappedComputer {
         } else {
             //ignore tap
         }
-    }
-
-    func updateWtfsCount() {
-        wtfs = currentUserService.getUserWtfs()
     }
 }

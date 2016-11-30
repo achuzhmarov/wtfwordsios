@@ -17,20 +17,22 @@ class BoardCache {
 }
 
 class GameController {
+    let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
+
     var gameView: UIView!
-    private var word: Word!
+    var word: Word!
     var cipherType: CipherType!
     var cipherDifficulty: CipherDifficulty!
 
-    private var tiles = [TileView]()
-    private var fixedTiles = [FixedTileView]()
-    fileprivate var targets = [TargetView]()
+    var tiles = [TileView]()
+    var fixedTiles = [FixedTileView]()
+    var targets = [TargetView]()
 
-    private var isFinished = false
-    private var tileSide: CGFloat!
-    private var targetSide: CGFloat!
+    var isFinished = false
+    var tileSide: CGFloat!
+    var targetSide: CGFloat!
 
-    private var boardCache = [Word: BoardCache]()
+    var boardCache = [Word: BoardCache]()
 
     var hudView: HUDView! {
         didSet {
@@ -41,19 +43,20 @@ class GameController {
         }
     }
 
-    fileprivate var audioController: AudioController
+    private var audioController: AudioController
 
     var onWordSolved: ((_: Word) -> ())!
+    var getMoreWtfs: (() -> ())!
 
-    private var wordLength: Int {
+    var wordLength: Int {
         return word.text.characters.count
     }
 
-    private var wordText: String {
+    var wordText: String {
         return word.text
     }
 
-    private var screenWidth: CGFloat {
+    var screenWidth: CGFloat {
         return gameView.bounds.size.width
     }
 
@@ -72,208 +75,6 @@ class GameController {
             loadBoardFromCache(boardCacheForWord)
         } else {
             generateNewBoard()
-        }
-    }
-
-    private func loadBoardFromCache(_ boardCacheForWord: BoardCache) {
-        tiles = boardCacheForWord.tiles
-        fixedTiles = boardCacheForWord.fixedTiles
-        targets = boardCacheForWord.targets
-
-        if (boardCacheForWord.isLettersHintDisabled) {
-            disableLettersHintButton()
-        }
-
-        //create targets
-        for position in 0 ..< targets.count {
-            addTargetToView(targets[position], position: position)
-        }
-
-        //create fixed tiles
-        for fixedTile in fixedTiles {
-            putFixedTileToBoard(fixedTile)
-        }
-
-        //create tiles
-        for tileIndex in 0 ..< tiles.count {
-            let tile: TileView = tiles[tileIndex]
-            tile.updateBackground()
-            addTileToView(tile, tileIndex: tileIndex)
-
-            if (tile.isPlaced) {
-                tile.center = tile.placedOnTarget!.center
-            }
-        }
-    }
-
-    private func addTargetToView(_ target: TargetView, position: Int) {
-        if (wordLength <= MaxTargetsPerRow) {
-            let xTargetOffset = (screenWidth - CGFloat(wordLength) * (targetSide + TargetMargin)) / 2.0 + targetSide / 2.0
-            target.center = CGPoint(x: xTargetOffset + CGFloat(position) * (targetSide + TargetMargin), y: targetSide / 2 + VerticalPadding)
-        } else {
-            let lettersInFirstRow = wordLength / 2 + (wordLength % 2)
-            let lettersInSecondRow = wordLength / 2
-
-            let xTargetIndexOffset = CGFloat(position % lettersInFirstRow) * (targetSide + TargetMargin)
-
-            if (position < lettersInFirstRow) {
-                let xTargetOffset = (screenWidth - CGFloat(lettersInFirstRow) * (targetSide + TargetMargin)) / 2.0 + targetSide / 2.0
-                let yTargetOffset = targetSide / 2 + VerticalPadding
-                target.center = CGPoint(x: xTargetOffset + xTargetIndexOffset, y: yTargetOffset)
-            } else {
-                let xTargetOffset = (screenWidth - CGFloat(lettersInSecondRow) * (targetSide + TargetMargin)) / 2.0 + targetSide / 2.0
-                let yTargetOffset = targetSide / 2 + VerticalPadding + (targetSide + VerticalPadding)
-                target.center = CGPoint(x: xTargetOffset + xTargetIndexOffset, y: yTargetOffset)
-            }
-        }
-
-        gameView.addSubview(target)
-    }
-
-    private func generateNewBoard() {
-        targets = []
-
-        //create targets
-        for position in 0 ..< wordText.characters.count {
-            let target = TargetView(letter: Character(wordText[position]), sideLength: targetSide)
-            addTargetToView(target, position: position)
-            targets.append(target)
-        }
-
-        if (cipherType == .shuffle) {
-            generateShuffleFixedTiles()
-        } else {
-            generateGeneralFixedTiles()
-        }
-
-        generateTiles()
-
-        if (cipherType == .shuffle) {
-            highlightWordLettersForShuffle()
-        }
-
-        saveBoardToCache()
-    }
-
-    private func generateTiles() {
-        tiles = []
-        let letters = generateLetters()
-
-        for tileIndex in 0 ..< letters.characters.count {
-            let tile = TileView(letter: Character(letters[tileIndex]), sideLength: tileSide)
-            tiles.append(tile)
-            addTileToView(tile, tileIndex: tileIndex)
-        }
-    }
-
-    private func addTileToView(_ tile: TileView, tileIndex: Int) {
-        var targetOffset: CGFloat
-
-        if (wordLength <= MaxTargetsPerRow) {
-            targetOffset = (targetSide + VerticalPadding) + VerticalPadding * 2
-        } else {
-            targetOffset = (targetSide + VerticalPadding) * 2 + VerticalPadding * 2
-        }
-
-        let xLetterOffset = (screenWidth - CGFloat(MaxLettersPerRow) * (tileSide + TileMargin)) / 2.0 + tileSide / 2.0
-
-        let rowIndex = CGFloat(tileIndex / MaxLettersPerRow)
-        let columnIndex = CGFloat(tileIndex % MaxLettersPerRow)
-
-        tile.center = CGPoint(x: xLetterOffset + columnIndex * (tileSide + TileMargin),
-                y: targetOffset + (tileSide / 2) + (tileSide + VerticalPadding) * rowIndex)
-
-        tile.originalCenter = tile.center
-
-        gameView.addSubview(tile)
-
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tileTapped(_:)))
-        tile.addGestureRecognizer(tap)
-    }
-
-    private func saveBoardToCache() {
-        boardCache[word] = BoardCache(
-                tiles: tiles,
-                fixedTiles: fixedTiles,
-                targets: targets,
-                isLettersHintDisabled: !hudView.lettersButton.isEnabled
-                )
-    }
-
-    private func generateShuffleFixedTiles() {
-        fixedTiles = []
-
-        //create first letter for easy difficulty
-        if (cipherDifficulty == .easy) {
-            generateFixedTile(position: 0)
-        }
-    }
-
-    private func generateFixedTile(position: Int) {
-        let fixedTile = FixedTileView(letter: Character(word.text[position]), sideLength: tileSide, position: position)
-        fixedTiles.append(fixedTile)
-        putFixedTileToBoard(fixedTile)
-    }
-
-    private func putFixedTileToBoard(_ fixedTile: FixedTileView) {
-        fixedTile.center = targets[fixedTile.position].center
-        gameView.addSubview(fixedTile)
-        fixTileOnTarget(fixedTile, targets[fixedTile.position])
-        fixedTile.updateBackground()
-    }
-
-    private func generateGeneralFixedTiles() {
-        fixedTiles = []
-
-        for position in 0 ..< word.text.characters.count {
-            if (word.fullCipheredText[position] == ".") {
-                continue
-            }
-
-            generateFixedTile(position: position)
-        }
-    }
-
-    private func generateLetters() -> String {
-        var result = getHidedLetters()
-        let needLetters = LettersOnBoard - result.characters.count
-
-        for _ in 0 ..< needLetters {
-            result += TextLanguage.getRandomLetter()
-        }
-
-        result = result.shuffle
-
-        return result
-    }
-
-    private func getHidedLetters() -> String {
-        if (cipherType == .shuffle) {
-            let wordLength = word.getCharCount() - 1
-
-            if (cipherDifficulty == .easy) {
-                return word.text[1...wordLength]
-            } else {
-                return word.text
-            }
-        } else {
-            return word.hidedLetters
-        }
-    }
-
-    private func highlightWordLettersForShuffle() {
-        if cipherDifficulty == .hard {
-            for position in 0 ..< targets.count {
-                if (word.fullCipheredText[position] == ".") {
-                    continue
-                }
-
-                if !targets[position].isFixed {
-                    showLetterForTarget(targets[position])
-                }
-            }
-        } else {
-            showLetters()
         }
     }
 
@@ -387,8 +188,6 @@ class GameController {
         }*/
     }
 
-
-
     func checkForSuccess(_ isForSolve: Bool = false) {
         if (isFinished) {
             return
@@ -461,60 +260,7 @@ class GameController {
         }*/
     }
 
-    @objc func actionHint() {
-        for target in targets {
-            if !target.isFixed {
-                useHintForTarget(target)
-                break
-            }
-        }
-
-        saveBoardToCache()
-    }
-
-    @objc func actionSolve() {
-        for target in targets {
-            if !target.isFixed {
-                useHintForTarget(target, isForSolve: true)
-            }
-        }
-    }
-
-    @objc func actionLetters() {
-        showLetters()
-        saveBoardToCache()
-    }
-
-    private func showLetters() {
-        if ((cipherType == .shuffle) && (cipherDifficulty == .hard)) {
-            //highlight first and last letter
-            showLetterForTarget(targets.first!)
-
-            if (word.getCharCount() > 2) {
-                showLetterForTarget(targets.last!)
-            }
-        } else {
-            for target in targets {
-                if !target.isFixed {
-                    showLetterForTarget(target)
-                }
-            }
-        }
-
-        disableLettersHintButton()
-    }
-
-    private func disableLettersHintButton() {
-        hudView.lettersButton.isEnabled = false
-        hudView.lettersButton.alpha = 0.6
-    }
-
-    private func enableLettersHintButton() {
-        hudView.lettersButton.isEnabled = true
-        hudView.lettersButton.alpha = 1
-    }
-
-    private func showLetterForTarget(_ foundTarget: TargetView) {
+    func showLetterForTarget(_ foundTarget: TargetView) {
         var foundTile: TileView? = nil
         for tile in tiles {
             if !tile.isFixed && !tile.isPartOfWord && tile.letter == foundTarget.letter {
@@ -533,56 +279,6 @@ class GameController {
                         tile.updateBackground()
                     })
         }
-    }
-
-    @objc func useHintForTarget(_ foundTarget: TargetView, isForSolve: Bool = false) {
-        var foundTile: TileView? = nil
-        for tile in tiles {
-            if !tile.isFixed && tile.letter == foundTarget.letter {
-                foundTile = tile
-                break
-            }
-        }
-
-        if (foundTile == nil) {
-            return
-        }
-
-        if (foundTile!.placedOnTarget == foundTarget) {
-            fixTileOnTarget(foundTile!, foundTarget)
-
-            UIView.animate(withDuration: 0.3,
-                    delay: 0.0,
-                    options: UIViewAnimationOptions.curveEaseOut,
-                    animations: {
-                        foundTile!.updateBackground()
-                    })
-            return
-        }
-
-        if (foundTarget.isOccupied) {
-            clearTarget(foundTarget)
-        }
-
-        if (foundTile!.isPlaced) {
-            removeTileFromTarget(foundTile!)
-        }
-
-        fixTileOnTarget(foundTile!, foundTarget)
-        moveTileToTarget(foundTile!, foundTarget, isForSolve)
-    }
-
-    private func clearBoard() {
-        isFinished = false
-        fixedTiles.removeAll(keepingCapacity: false)
-        tiles.removeAll(keepingCapacity: false)
-        targets.removeAll(keepingCapacity: false)
-
-        for view in gameView.subviews {
-            view.removeFromSuperview()
-        }
-
-        enableLettersHintButton()
     }
 
     public func clearPlacedTiles() {

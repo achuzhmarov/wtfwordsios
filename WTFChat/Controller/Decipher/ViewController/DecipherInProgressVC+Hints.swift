@@ -22,7 +22,7 @@ extension DecipherInProgressVC: WordTappedComputer {
                 firstButtonTitle: "Get more".localized()) { () -> Void in
 
             self.isPaused = true
-            self.performSegue(withIdentifier: "getMoreHints", sender: self)
+            self.performSegue(withIdentifier: "getMoreWtfs", sender: self)
         }
     }
 
