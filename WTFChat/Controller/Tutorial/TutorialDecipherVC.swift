@@ -18,7 +18,7 @@ class TutorialDecipherVC: DecipherViewController {
 
         super.viewDidLoad()
 
-        //inProgressVC.topCategoryLabel.text = TUTORIAL_TITLE
+        inProgressByLettersVC.topCategoryLabel.text = TUTORIAL_TITLE
 
         start()
 

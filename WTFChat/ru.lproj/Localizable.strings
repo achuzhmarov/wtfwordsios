@@ -96,7 +96,7 @@
 "Random Cutter" = "Случайные буквы";
 "Double Cutter" = "Режем дважды";
 
-//Tutorial
+//Old tutorial
 "Hi! It is your first time, would you like to start a tutorial?" = "Привет! Рекомендую пройти простое обучение перед игрой.";
 "Skip" = "Пропустить";
 "Start" = "Начать";
@@ -116,6 +116,25 @@
 "You have finished tutorial! Also you can tap the message area to see its ciphered form." = "Обучение завершено! Кстати, если нажать на область сообщения, то можно увидеть его зашифрованный вид.";
 "Finish" = "Завершить";
 "You have finished tutorial already, do you want to start it again?" = "Вы уже прошли обучение, повторить?";
+
+//Tutorial
+"Hello, in this game you have to decipher texts with the power of your brain!" = "";
+"To begin with, let me give you a hint. The first word is 'Welcome'. Try to enter it with your improvised keyboard." = "";
+"It isn't necessary to solve this text sequentially. Feel free to select any word you like from the top part of the screen with a touch." = "";
+"Oh, you have run out of time! But nevermind, it's just a tutorial!" = "";
+
+//First hint
+"You have failed, but nevermind. You can always try again...... with your new power!!! Check it out." = "";
+"Let me introduce you the real power of WTF! You can do almost everything with it. For example, open the next letter!" = "";
+"Just use the button 'hint' at the bottom of your screen." = "";
+
+//Second hint
+"Congratulations! You have done well so far. How about some new powers? Here it is!" = "";
+"You can now see the correct letters for the word. Just use the button 'letters'" = "";
+
+//Third hint
+"Wow, you are still playing! Very good! Let me give you one more power than!" = "";
+"You can now solve the word with just a touch. But be carefull, it will cost you a little more." = "";
 
 //App review
 "Enjoying WTFWords" = "Нравится WTFWords";
