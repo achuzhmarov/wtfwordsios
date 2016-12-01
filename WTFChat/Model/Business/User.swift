@@ -17,25 +17,25 @@ class User: NSObject {
 
     var rating: Int = 0
 
-    var adWtfsGained: Int = 0
+    var adWtfGained: Int = 0
 
-    var wtfs: Int = 30
+    var wtf: Int = 30
 
     init(login: String) {
         self.login = login
     }
 
-    init(login: String, wtfs: Int) {
+    init(login: String, wtf: Int) {
         self.login = login
-        self.wtfs = wtfs
+        self.wtf = wtf
     }
 
-    init(login: String, wtfs: Int, talks: [FriendTalk], lastUpdate: Date,
+    init(login: String, wtf: Int, talks: [FriendTalk], lastUpdate: Date,
          exp: Int, singleExp: Int, friends: [FriendInfo],
-         name: String, pushNew: Bool, pushDeciphered: Bool, rating: Int, adWtfsGained: Int)
+         name: String, pushNew: Bool, pushDeciphered: Bool, rating: Int, adWtfGained: Int)
     {
         self.login = login
-        self.wtfs = wtfs
+        self.wtf = wtf
         self.talks = talks
         self.lastUpdate = lastUpdate
         self.exp = exp
@@ -48,7 +48,7 @@ class User: NSObject {
 
         self.rating = rating
 
-        self.adWtfsGained = adWtfsGained
+        self.adWtfGained = adWtfGained
     }
 
     func updateInfo(_ user: User) {
@@ -62,7 +62,7 @@ class User: NSObject {
         self.pushDeciphered = user.pushDeciphered
         self.rating = user.rating
 
-        self.adWtfsGained = user.adWtfsGained
+        self.adWtfGained = user.adWtfGained
 
         for friendLvl in user.friends {
             updateFriendLvlInArray(friendLvl)

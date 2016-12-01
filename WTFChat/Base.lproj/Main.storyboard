@@ -2046,12 +2046,6 @@
                                     <segue destination="ryS-pj-BlL" kind="embed" id="Muk-CN-exW"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nf4-de-Ay8" userLabel="DecipherInProgress">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <connections>
-                                    <segue destination="xNb-Jc-w6b" kind="embed" id="0cc-zR-Ax2"/>
-                                </connections>
-                            </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7pV-zx-RMs" userLabel="DecipherInProgressByLetters">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <connections>
@@ -2061,10 +2055,6 @@
                         </subviews>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="nf4-de-Ay8" secondAttribute="trailing" id="0Qg-Ey-H9f"/>
-                            <constraint firstItem="nf4-de-Ay8" firstAttribute="leading" secondItem="cDD-d7-e3a" secondAttribute="leading" id="2yX-OX-5yC"/>
-                            <constraint firstItem="etg-fe-8eE" firstAttribute="top" secondItem="nf4-de-Ay8" secondAttribute="bottom" id="6CC-jG-hbU"/>
-                            <constraint firstItem="nf4-de-Ay8" firstAttribute="top" secondItem="cDD-d7-e3a" secondAttribute="top" id="CSk-jh-foj"/>
                             <constraint firstItem="7pV-zx-RMs" firstAttribute="leading" secondItem="cDD-d7-e3a" secondAttribute="leading" id="NpN-2W-TZY"/>
                             <constraint firstItem="etg-fe-8eE" firstAttribute="top" secondItem="7pV-zx-RMs" secondAttribute="bottom" id="ZPp-uN-1Vd"/>
                             <constraint firstItem="7pV-zx-RMs" firstAttribute="top" secondItem="cDD-d7-e3a" secondAttribute="top" id="ZjU-xl-7gI"/>
@@ -2078,7 +2068,6 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="inProgressByLettersContainer" destination="7pV-zx-RMs" id="Gbk-lE-cRx"/>
-                        <outlet property="inProgressContainer" destination="nf4-de-Ay8" id="abF-Ry-kZ0"/>
                         <outlet property="resultContainer" destination="c9y-1L-emA" id="agU-A7-0bH"/>
                     </connections>
                 </viewController>
@@ -2349,7 +2338,7 @@
                         <outlet property="tryButton" destination="asD-ZR-q5d" id="QCs-tK-zA9"/>
                         <outlet property="wordsTableView" destination="tuq-h9-gT4" id="IZg-Sj-rBP"/>
                         <outlet property="wordsViewHorizontalConstraint" destination="A4l-D1-IA5" id="ojg-IE-mwZ"/>
-                        <segue destination="12F-tA-1Q8" kind="presentation" identifier="getMoreWtfs" modalPresentationStyle="overFullScreen" id="RRm-LN-v38"/>
+                        <segue destination="12F-tA-1Q8" kind="presentation" identifier="getMoreWtf" modalPresentationStyle="overFullScreen" id="RRm-LN-v38"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2of-sz-XmD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2652,8 +2641,8 @@
                                             <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WTFs: 255 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqn-Zv-mmi">
-                                        <rect key="frame" x="106" y="8" width="108" height="26"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WTF: 255 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqn-Zv-mmi">
+                                        <rect key="frame" x="111" y="8" width="98" height="26"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -3209,7 +3198,7 @@
                         <outlet property="topTimerLabel" destination="M5a-7Z-syP" id="cec-xN-yeo"/>
                         <outlet property="wordsTableView" destination="HEU-JZ-CAU" id="HcE-vY-gOZ"/>
                         <outlet property="wordsViewHorizontalConstraint" destination="dgy-O8-v27" id="41O-Z0-bcr"/>
-                        <segue destination="12F-tA-1Q8" kind="presentation" identifier="getMoreWtfs" modalPresentationStyle="overFullScreen" id="paO-SZ-mUg"/>
+                        <segue destination="12F-tA-1Q8" kind="presentation" identifier="getMoreWtf" modalPresentationStyle="overFullScreen" id="paO-SZ-mUg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BVD-7S-Ndp" userLabel="First Responder" sceneMemberID="firstResponder"/>

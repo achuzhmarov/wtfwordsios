@@ -47,7 +47,7 @@ class SingleModeViewController: BaseUIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        dailyHintsService.computeDailyWtfs()
+        dailyHintsService.computeDailyWtf()
     }
 
     func cipherViewUpdated(_ newController: CipherViewController) {

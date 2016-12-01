@@ -2,13 +2,13 @@ import Foundation
 
 extension GameController {
     @objc func actionHint() {
-        showHintConfirmAlert(HintType.letters) {
+        showHintConfirmAlert(HintType.hint) {
             self.useHint()
         }
     }
 
     @objc func actionSolve() {
-        showHintConfirmAlert(HintType.letters) {
+        showHintConfirmAlert(HintType.solve) {
             self.useSolve()
         }
     }
@@ -20,31 +20,31 @@ extension GameController {
     }
 
     private func showHintConfirmAlert(_ hintType: HintType, completion: @escaping () -> ()) {
-        let wtfs = currentUserService.getUserWtfs()
+        let wtf = currentUserService.getUserWtf()
 
-        if (wtfs < hintType.costInWtfs) {
-            showNoWtfsDialog(wtfs: wtfs)
+        if (wtf < hintType.costInWtf) {
+            showNoWtfDialog(wtf: wtf)
             return
         } else {
-            showHintConfirm(wtfs: wtfs, hintType: hintType, completion: completion)
+            showHintConfirm(wtf: wtf, hintType: hintType, completion: completion)
         }
     }
 
-    private func showNoWtfsDialog(wtfs: Int) {
-        WTFTwoButtonsAlert.show("WTFs remained:".localized() + " " + String(wtfs),
-                message: "You don't have enough WTFs to use a hint. Want to get more?".localized(),
+    private func showNoWtfDialog(wtf: Int) {
+        WTFTwoButtonsAlert.show("WTF remained:".localized() + " " + String(wtf),
+                message: "You don't have enough WTF. Want to get more?".localized(),
                 firstButtonTitle: "Get more".localized()) { () -> Void in
-            self.getMoreWtfs()
+            self.getMoreWtf()
         }
     }
 
-    private func showHintConfirm(wtfs: Int, hintType: HintType, completion: @escaping () -> () ) {
-        WTFTwoButtonsAlert.show("WTFs remained:".localized() + " " + String(wtfs),
-                message: "",
-                firstButtonTitle: "Use a WTF".localized()) { () -> Void in
+    private func showHintConfirm(wtf: Int, hintType: HintType, completion: @escaping () -> () ) {
+        WTFTwoButtonsAlert.show("WTF remained:".localized() + " " + String(wtf),
+                message: hintType.details.localized(),
+                firstButtonTitle: "Use".localized() + " " + String(hintType.costInWtf) + " " + "WTF".localized()) { () -> Void in
 
             DispatchQueue.main.async(execute: {
-                self.currentUserService.useWtfs(hintType.costInWtfs)
+                self.currentUserService.useWtf(hintType.costInWtf)
                 completion()
             })
         }

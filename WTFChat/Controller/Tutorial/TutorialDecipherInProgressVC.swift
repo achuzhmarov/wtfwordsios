@@ -18,8 +18,8 @@ class TutorialDecipherInProgressVC: DecipherInProgressByLettersVC {
     fileprivate let GUESS_TEXT = "TO".localized()
     fileprivate let CLOSE_TRY_TEXT = "HER".localized()
 
-    fileprivate let ZERO_HINTS_TITLE = "WTFs remained: 0".localized()
-    fileprivate let ZERO_HINTS_MESSAGE = "You have used all WTFs.".localized()
+    fileprivate let ZERO_HINTS_TITLE = "WTF remained: 0".localized()
+    fileprivate let ZERO_HINTS_MESSAGE = "You have used all WTF.".localized()
 
     fileprivate let TUTORIAL_HINTS = 3
 
@@ -28,18 +28,6 @@ class TutorialDecipherInProgressVC: DecipherInProgressByLettersVC {
 
         showMessageAlert(GUESS_MESSAGE, tutorialStage: .decipherGuess)
     }
-
-    /*override func showNoHintsDialog() {
-        WTFOneButtonAlert.show(ZERO_HINTS_TITLE, message: ZERO_HINTS_MESSAGE)
-    }
-
-    override func updateWtfsUsed() {
-        wtfs -= 1
-    }
-
-    override func updateHintsCount() {
-        wtfs = TUTORIAL_HINTS
-    }*/
 
     /*override func tryButtonPressed(_ sender: AnyObject) {
         switch (guiDataService.getTutorialStage()) {

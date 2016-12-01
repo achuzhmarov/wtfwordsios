@@ -19,14 +19,17 @@
 "Next Chapter" = "Следующая глава";
 "Stay here" = "Остаться здесь";
 
-//WTFs
-"WTFs remained:" = "Осталось WTF:";
-"WTFs remained: 0" = "Осталось WTF: 0";
-"WTFs:" = "WTF:";
+//Hints
+"WTF remained:" = "Осталось WTF:";
+"WTF remained: 0" = "Осталось WTF: 0";
+"WTF:" = "WTF:";
 "Get more" = "Получить еще";
-"Use a WTF" = "Использовать WTF";
-"You have used all WTFs." = "Вы использовали все WTF.";
-"You have used all WTFs. Want to get more?" = "Вы использовали все WTF. Хотите еще?";
+"Use" = "Использовать";
+"WTF" = "WTF";
+"You don't have enough WTF. Want to get more?" = "Недостаточно WTF. Хотите получить еще?";
+"Open the next letter" = "Открыть следующую букву";
+"Highlight correct letters" = "Подсветить правильные буквы";
+"Solve the word" = "Открыть все слово";
 
 //Deciphering
 "Try" = "Ввод";
@@ -42,7 +45,7 @@
 "LEVEL" = "УРОВЕНЬ";
 "Level" = "Уровень";
 "You got" = "Вы получили";
-"free WTFs" = "WTF";
+"free WTF" = "WTF";
 "Continue" = "Дальше";
 "Retry" = "Еще раз";
 
@@ -56,10 +59,10 @@
 "Paid" = "Куплено";
 "Restore" = "Восстановить";
 "View Ad" = "Реклама";
-"Buy WTFs" = "Купить WTF";
+"Buy WTF" = "Купить WTF";
 "Can't buy" = "Не получилось купить";
 "Get Free WTF" = "Получить WTF";
-"X2 Daily WTFs" = "X2 ежедневных WTF";
+"X2 Daily WTF" = "X2 ежедневных WTF";
 "No more ads" = "Вы просмотрели всю доступную рекламу";
 "Try again later" = "Попробуйте еще раз позже";
 "Restore purchased content?" = "Восстановить приобритенные ранее покупки?";
@@ -69,17 +72,17 @@
 "can't be restored" = "не удалось восстановить";
 
 //Shop products WTF
-"X2 free daily WTFs" = "Вдвое больше ежедневных бесплатных WTF";
-"Double free daily WTFs forever!" = "Получать в два раза больше ежедневных бесплатных WTF!";
-"30 WTFs" = "30 WTF";
-"90 WTFs" = "90 WTF";
-"270 WTFs" = "270 WTF";
-"600 WTFs" = "600 WTF";
-"1200 WTFs" = "1200 WTF";
-"3000 WTFs" = "3000 WTF";
+"X2 free daily WTF" = "Вдвое больше ежедневных бесплатных WTF";
+"Double free daily WTF forever!" = "Получать в два раза больше ежедневных бесплатных WTF!";
+"30 WTF" = "30 WTF";
+"90 WTF" = "90 WTF";
+"270 WTF" = "270 WTF";
+"600 WTF" = "600 WTF";
+"1200 WTF" = "1200 WTF";
+"3000 WTF" = "3000 WTF";
 
-//Daily WTFs
-"Daily free WTFs!\nToday you got" = "Ежедневные WTF!\nСегодня вы получили";
+//Daily WTF
+"Free Daily WTF!\nToday you have got:" = "Ежедневные WTF!\nСегодня вы получили:";
 
 //Difficulties
 "Easy" = "Легко";

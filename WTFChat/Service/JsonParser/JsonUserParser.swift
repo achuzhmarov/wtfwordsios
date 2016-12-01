@@ -18,7 +18,7 @@ class JsonUserParser {
 
     class func fromJson(_ json: JSON) throws -> User {
         var login: String
-        var wtfs: Int = 0
+        var wtf: Int = 0
         var talks = [FriendTalk]()
         var lastUpdate: Date = Date.defaultPast()
         var exp: Int = 0
@@ -31,7 +31,7 @@ class JsonUserParser {
 
         var rating: Int = 0
 
-        var adWtfsGained: Int = 0
+        var adWtfGained: Int = 0
 
         if let value = json["login"].string {
             login = value
@@ -39,9 +39,9 @@ class JsonUserParser {
             throw json["login"].error!
         }
 
-        if let value = json["wtfs"].int {
-            wtfs = value
-        } else if let error = json["wtfs"].error {
+        if let value = json["wtf"].int {
+            wtf = value
+        } else if let error = json["wtf"].error {
             throw error
         }
 
@@ -111,15 +111,15 @@ class JsonUserParser {
             throw error
         }
 
-        if let value = json["ad_wtfs_gained"].int {
-            adWtfsGained = value
-        } else if let error = json["ad_wtfs_gained"].error {
+        if let value = json["ad_wtf_gained"].int {
+            adWtfGained = value
+        } else if let error = json["ad_wtf_gained"].error {
             throw error
         }
 
         return User(
             login: login,
-            wtfs: wtfs,
+            wtf: wtf,
             talks: talks,
             lastUpdate: lastUpdate,
             exp: exp,
@@ -129,7 +129,7 @@ class JsonUserParser {
             pushNew: pushNew,
             pushDeciphered: pushDeciphered,
             rating: rating,
-            adWtfsGained: adWtfsGained
+            adWtfGained: adWtfGained
         )
     }
 }

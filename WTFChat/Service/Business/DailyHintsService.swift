@@ -5,20 +5,20 @@ class DailyHintsService: Service {
     let inAppService: InAppService
     let currentUserService: CurrentUserService
 
-    fileprivate let DAILY_WTFS_TEXT = "Daily free WTFs!\nToday you got".localized()
+    fileprivate let DAILY_WTF_TEXT = "Free Daily WTF!\nToday you have got:".localized()
 
     init(inAppService: InAppService, currentUserService: CurrentUserService) {
         self.inAppService = inAppService
         self.currentUserService = currentUserService
     }
 
-    func computeDailyWtfs() {
+    func computeDailyWtf() {
         let now = Date()
         let lastLogin = currentUserService.getLastLogin()
 
         if (checkDailyHints(now, lastLogin: lastLogin as Date)) {
-            addDailyWtfs()
-            currentUserService.clearAdWtfsLimit()
+            addDailyWtf()
+            currentUserService.clearAdWtfLimit()
         }
 
         currentUserService.updateLastLogin(now)
@@ -35,16 +35,16 @@ class DailyHintsService: Service {
         return false
     }
 
-    fileprivate func addDailyWtfs() {
+    fileprivate func addDailyWtf() {
         let userLvl = currentUserService.getUserLvl()
-        let wtfs = getRandomDailyWtfs(userLvl)
+        let wtf = getRandomDailyWtf(userLvl)
 
-        currentUserService.addWtfs(wtfs)
+        currentUserService.addWtf(wtf)
 
-        WTFOneButtonAlert.show(DAILY_WTFS_TEXT + " " + String(wtfs), message: nil)
+        WTFOneButtonAlert.show(DAILY_WTF_TEXT + " " + String(wtf), message: nil)
     }
 
-    func getRandomDailyWtfs(_ userLvl: Int) -> Int {
+    func getRandomDailyWtf(_ userLvl: Int) -> Int {
         var twoBorder: Int
         var threeBorder: Int
 
@@ -53,24 +53,24 @@ class DailyHintsService: Service {
         threeBorder = 100 - userLvl / 4
 
         let randomNumber = Int(arc4random_uniform(UInt32(100)))
-        var wtfs = 0
+        var wtf = 0
 
         if randomNumber < twoBorder {
-            wtfs = 1
+            wtf = 1
         } else if randomNumber < threeBorder {
-            wtfs = 4
+            wtf = 4
         } else {
-            wtfs = 7
+            wtf = 7
         }
 
         let secondRandom = Int(arc4random_uniform(UInt32(3)))
-        wtfs += secondRandom
+        wtf += secondRandom
 
 
         if inAppService.isPurchased(IAPProducts.HINTS_X2) {
-            wtfs = wtfs * 2
+            wtf = wtf * 2
         }
 
-        return wtfs
+        return wtf
     }
 }

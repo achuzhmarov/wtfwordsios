@@ -31,8 +31,6 @@ class DecipherInProgressVC: UIViewController {
     var isPaused = false
     var timer = WTFTimer()
 
-    var wtfs = 0
-
     var initialTopPaddingConstraintConstant: CGFloat = 0
 
     var parentVC: DecipherViewController {
@@ -102,7 +100,6 @@ class DecipherInProgressVC: UIViewController {
     func initView(_ messageToDecipher: Message) {
         message = messageToDecipher
 
-        updateHintsCount()
         setTimer()
     }
 
@@ -205,8 +202,7 @@ class DecipherInProgressVC: UIViewController {
         parentVC.gameOver()
     }
 
-    func wtfsBought() {
-        updateHintsCount()
+    func wtfBought() {
         isPaused = false
         guessTextField.becomeFirstResponder()
     }

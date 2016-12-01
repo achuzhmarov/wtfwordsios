@@ -30,30 +30,30 @@ extension CurrentUserService {
         saveUserInLocalStorage()
     }
 
-    func useWtfs(_ wtfsUsed: Int) {
-        user.wtfs -= wtfsUsed
+    func useWtf(_ wtfUsed: Int) {
+        user.wtf -= wtfUsed
         saveUserInLocalStorage()
     }
 
-    func addFreeWtfs(_ wtfs: Int) {
-        if canAddFreeAdWTFs() {
-            user.wtfs += wtfs
-            user.adWtfsGained += wtfs
+    func addFreeWtf(_ wtf: Int) {
+        if canAddFreeAdWtf() {
+            user.wtf += wtf
+            user.adWtfGained += wtf
             saveUserInLocalStorage()
         }
     }
 
-    func addWtfs(_ wtfs: Int) {
-        user.wtfs += wtfs
+    func addWtf(_ wtf: Int) {
+        user.wtf += wtf
         saveUserInLocalStorage()
     }
 
-    func addWtfsForLvlUp() -> Int {
-        let wtfsForLvl = expService.getWtfsForLvl(getUserLvl())
-        user.wtfs += wtfsForLvl
+    func addWtfForLvlUp() -> Int {
+        let wtfForLvl = expService.getWtfForLvl(getUserLvl())
+        user.wtf += wtfForLvl
         saveUserInLocalStorage()
 
-        return wtfsForLvl
+        return wtfForLvl
     }
 
     func updateLastLogin(_ lastLogin: Date) {
@@ -61,8 +61,8 @@ extension CurrentUserService {
         saveUserInLocalStorage()
     }
 
-    func clearAdWtfsLimit() {
-        user.adWtfsGained = 0
+    func clearAdWtfLimit() {
+        user.adWtfGained = 0
         saveUserInLocalStorage()
     }
 }

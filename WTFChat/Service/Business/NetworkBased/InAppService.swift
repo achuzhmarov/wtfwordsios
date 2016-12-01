@@ -37,16 +37,16 @@ class InAppService: Service {
         }
     }
 
-    func getWtfsProductTitle(_ productId: ProductIdentifier) -> String {
-        return String(inAppHelper.getWtfsCount(productId))
+    func getWtfProductTitle(_ productId: ProductIdentifier) -> String {
+        return String(inAppHelper.getWtfCount(productId))
     }
 
     func getProductTitle(_ productId: ProductIdentifier) -> String? {
         if let product = inAppHelper.getProduct(productId) {
             //TODO - for backward compatibility
-            var productName = product.localizedTitle.replace("hints", with: "WTFs")
+            var productName = product.localizedTitle.replace("hints", with: "WTF")
             if (IAPProducts.isConsumable(productId)) {
-                productName = String(inAppHelper.getWtfsCount(productId)) + " WTFs"
+                productName = String(inAppHelper.getWtfCount(productId)) + " WTF"
             }
 
             return productName.localized()
@@ -61,7 +61,7 @@ class InAppService: Service {
         }
 
         if let product = inAppHelper.getProduct(productId) {
-            return product.localizedDescription.replace("hints", with: "WTFs").localized()
+            return product.localizedDescription.replace("hints", with: "WTF").localized()
         }
         
         return nil

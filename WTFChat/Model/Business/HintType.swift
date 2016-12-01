@@ -5,7 +5,7 @@ enum HintType: Int {
     case letters
     case solve
 
-    var costInWtfs: Int {
+    var costInWtf: Int {
         get {
             switch self {
             case .hint:
@@ -14,6 +14,19 @@ enum HintType: Int {
                 return 1
             case .solve:
                 return 3
+            }
+        }
+    }
+
+    var details: String {
+        get {
+            switch self {
+            case .hint:
+                return "Open the next letter"
+            case .letters:
+                return "Highlight correct letters"
+            case .solve:
+                return "Solve the word"
             }
         }
     }

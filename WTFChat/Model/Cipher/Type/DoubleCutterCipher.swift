@@ -31,8 +31,8 @@ class DoubleCutterHardCipher: Cipher {
             return DoubleCutterHelper.replaceFirstNonDot(word.text)
         }
 
-        //no more than 3 letters
-        let maxChars = min(word.getCharCount() / 2, 3)
+        //no more than 2 letters
+        let maxChars = min(word.getCharCount() / 2, 2)
 
         return DoubleCutterHelper.cutIfTooManyLetters(word.text, maxChars: maxChars)
     }

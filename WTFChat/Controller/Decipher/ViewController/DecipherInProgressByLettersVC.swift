@@ -40,10 +40,7 @@ class DecipherInProgressByLettersVC: UIViewController {
 
         initialTopPaddingConstraintConstant = topPaddingConstraint.constant
 
-        NotificationCenter.default.addObserver(self, selector: #selector(DecipherInProgressVC.keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
-        NotificationCenter.default.addObserver(self, selector: #selector(DecipherInProgressVC.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
-
-        let giveUpTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DecipherInProgressVC.giveUpPressed))
+        let giveUpTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.giveUpPressed))
         topTimerLabel.addGestureRecognizer(giveUpTap)
         topStopImage.addGestureRecognizer(giveUpTap)
         topGiveUpView.addGestureRecognizer(giveUpTap)
@@ -71,7 +68,7 @@ class DecipherInProgressByLettersVC: UIViewController {
         controller.hudView = hudView
 
         controller.onWordSolved = self.wordSolved
-        controller.getMoreWtfs = self.getMoreWtfs
+        controller.getMoreWtf = self.getMoreWtf
     }
 
     deinit {
@@ -165,7 +162,7 @@ class DecipherInProgressByLettersVC: UIViewController {
     private func initTimerForOneSecond() {
         let secondTimer = Timer.scheduledTimer(timeInterval: 1.0,
                 target: self,
-                selector: #selector(DecipherInProgressVC.tick),
+                selector: #selector(self.tick),
                 userInfo: nil,
                 repeats: false)
 
@@ -216,7 +213,7 @@ class DecipherInProgressByLettersVC: UIViewController {
         parentVC.gameOver()
     }
 
-    func wtfsBought() {
+    func wtfBought() {
         isPaused = false
     }
 
@@ -272,9 +269,9 @@ class DecipherInProgressByLettersVC: UIViewController {
         controller.clearPlacedTiles()
     }
 
-    func getMoreWtfs() {
+    func getMoreWtf() {
         self.isPaused = true
-        self.performSegue(withIdentifier: "getMoreWtfs", sender: self)
+        self.performSegue(withIdentifier: "getMoreWtf", sender: self)
     }
 }
 

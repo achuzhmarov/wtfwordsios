@@ -3,11 +3,13 @@ import Localize_Swift
 
 extension DecipherInProgressVC: WordTappedComputer {
     func wordTapped(_ word: Word) {
+        let wtf = currentUserService.getUserWtf()
+
         if (word.type == WordType.new) {
             if (word.wasCloseTry) {
                 showCloseTryHintConfirm(word)
-            } else if (wtfs > 0) {
-                showHintConfirm(word)
+            } else if (wtf > 0) {
+                showHintConfirm(word, wtf: wtf)
             } else {
                 showNoHintsDialog()
             }
@@ -17,17 +19,17 @@ extension DecipherInProgressVC: WordTappedComputer {
     }
 
     func showNoHintsDialog() {
-        WTFTwoButtonsAlert.show("WTFs remained: 0".localized(),
-                message: "You have used all WTFs. Want to get more?".localized(),
+        WTFTwoButtonsAlert.show("WTF remained: 0".localized(),
+                message: "You have used all WTF. Want to get more?".localized(),
                 firstButtonTitle: "Get more".localized()) { () -> Void in
 
             self.isPaused = true
-            self.performSegue(withIdentifier: "getMoreWtfs", sender: self)
+            self.performSegue(withIdentifier: "getMoreWtf", sender: self)
         }
     }
 
-    fileprivate func showHintConfirm(_ word: Word) {
-        WTFTwoButtonsAlert.show("WTFs remained:".localized() + " " + String(wtfs),
+    fileprivate func showHintConfirm(_ word: Word, wtf: Int) {
+        WTFTwoButtonsAlert.show("WTF remained:".localized() + " " + String(wtf),
                 message: "",
                 firstButtonTitle: "Use a WTF".localized()) { () -> Void in
 
@@ -59,7 +61,7 @@ extension DecipherInProgressVC: WordTappedComputer {
             messageCipherService.decipher(message, hintedWord: word, closeTry: true)
         } else {
             messageCipherService.decipher(message, hintedWord: word)
-            updateWtfsUsed(HintType.solve.costInWtfs)
+            updateWtfUsed(HintType.solve.costInWtf)
         }
 
         wordsTableView.updateMessage(message)
@@ -71,13 +73,8 @@ extension DecipherInProgressVC: WordTappedComputer {
         }
     }
 
-    func updateWtfsUsed(_ wtfs: Int) {
-        message.wtfUsed += wtfs
-        currentUserService.useWtfs(wtfs)
-        updateHintsCount()
-    }
-
-    func updateHintsCount() {
-        wtfs = currentUserService.getUserWtfs() //
+    func updateWtfUsed(_ wtf: Int) {
+        message.wtfUsed += wtf
+        currentUserService.useWtf(wtf)
     }
 }

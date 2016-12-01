@@ -4,7 +4,7 @@ class CurrentUserService: Service {
     let iosService: IosService
     let expService: ExpService
 
-    let DAILY_MAX_AD_WTFS = 30
+    let DAILY_MAX_AD_WTF = 20
 
     fileprivate struct KEY {
         static let LOGIN = "USER_LOGIN"
@@ -18,7 +18,7 @@ class CurrentUserService: Service {
         static let RATING = "USER_RATING"
         static let AD_HINTS_GAINED = "USER_AD_HINTS_GAINED"
         static let LAST_LOGIN = "USER_LAST_LOGIN"
-        static let WTFS = "USER_WTFS"
+        static let WTF = "USER_WTF"
     }
 
     var user: User!
@@ -31,6 +31,9 @@ class CurrentUserService: Service {
     }
 
     override func initService() {
+        storage.saveField(KEY.HINTS, value: 10 as AnyObject)
+        storage.saveField(KEY.WTF, value: 0 as AnyObject)
+
         if (storage.isFieldExists(KEY.LOGIN)) {
             updateUserFromLocalStorage()
         } else {
@@ -41,12 +44,12 @@ class CurrentUserService: Service {
     fileprivate func updateUserFromLocalStorage() {
         user = User(
             login: storage.getStringField(KEY.LOGIN),
-            wtfs: storage.getIntField(KEY.WTFS)
+            wtf: storage.getIntField(KEY.WTF)
         )
 
-        //if user has any hints, convert it to wtfs
+        //if user has any hints, convert it to wtf
         if (storage.getIntField(KEY.HINTS) != 0) {
-            user.wtfs += storage.getIntField(KEY.HINTS) * 3
+            user.wtf += storage.getIntField(KEY.HINTS) * 3
             //clear hints from storage
             storage.saveField(KEY.HINTS, value: 0 as AnyObject)
         }
@@ -58,7 +61,7 @@ class CurrentUserService: Service {
         user.pushNew = storage.getBoolField(KEY.PUSH_NEW)
         user.pushDeciphered = storage.getBoolField(KEY.PUSH_DECIPHERED)
         user.rating = storage.getIntField(KEY.RATING)
-        user.adWtfsGained = storage.getIntField(KEY.AD_HINTS_GAINED)
+        user.adWtfGained = storage.getIntField(KEY.AD_HINTS_GAINED)
         user.lastLogin = storage.getDateField(KEY.LAST_LOGIN)
     }
 
@@ -83,8 +86,8 @@ class CurrentUserService: Service {
         storage.saveField(KEY.PUSH_NEW, value: user.pushNew as AnyObject)
         storage.saveField(KEY.PUSH_DECIPHERED, value: user.pushDeciphered as AnyObject)
         storage.saveField(KEY.RATING, value: user.rating as AnyObject)
-        storage.saveField(KEY.AD_HINTS_GAINED, value: user.adWtfsGained as AnyObject)
+        storage.saveField(KEY.AD_HINTS_GAINED, value: user.adWtfGained as AnyObject)
         storage.saveField(KEY.LAST_LOGIN, value: user.lastLogin as AnyObject)
-        storage.saveField(KEY.WTFS, value: user.wtfs as AnyObject)
+        storage.saveField(KEY.WTF, value: user.wtf as AnyObject)
     }
 }

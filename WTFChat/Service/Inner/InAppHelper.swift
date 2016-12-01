@@ -186,10 +186,10 @@ extension InAppHelper: SKPaymentTransactionObserver {
     // Helper: Saves the fact that the product has been purchased and posts a notification.
     fileprivate func provideContentForProduct(_ productId: String, isRestore: Bool) {
         if (IAPProducts.isConsumable(productId)) {
-            let wtfsBought = getWtfsCount(productId)
+            let wtfBought = getWtfCount(productId)
 
-            if (wtfsBought > 0) {
-                currentUserService.addWtfs(wtfsBought)
+            if (wtfBought > 0) {
+                currentUserService.addWtf(wtfBought)
             }
         } else if (IAPProducts.isNonConsumbale(productId)) {
             purchasedProductIdentifiers.insert(productId)
@@ -204,7 +204,7 @@ extension InAppHelper: SKPaymentTransactionObserver {
         }
     }
 
-    func getWtfsCount(_ productId: ProductIdentifier) -> Int {
+    func getWtfCount(_ productId: ProductIdentifier) -> Int {
         if let product = getProduct(productId) {
             let titleParts = product.localizedTitle.components(separatedBy: " ")
             let count = Int(titleParts[0])!

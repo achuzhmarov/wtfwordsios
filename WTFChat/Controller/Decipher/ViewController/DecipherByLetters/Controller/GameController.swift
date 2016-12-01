@@ -46,7 +46,7 @@ class GameController {
     private var audioController: AudioController
 
     var onWordSolved: ((_: Word) -> ())!
-    var getMoreWtfs: (() -> ())!
+    var getMoreWtf: (() -> ())!
 
     var wordLength: Int {
         return word.text.characters.count

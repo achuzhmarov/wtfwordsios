@@ -21,8 +21,8 @@ extension CurrentUserService {
         return user.pushDeciphered
     }
 
-    func getUserWtfs() -> Int {
-        return user.wtfs
+    func getUserWtf() -> Int {
+        return user.wtf
     }
 
     func getUserLogin() -> String {
@@ -63,8 +63,8 @@ extension CurrentUserService {
         return user.friends
     }
 
-    func canAddFreeAdWTFs() -> Bool {
-        if (user.adWtfsGained < DAILY_MAX_AD_WTFS) {
+    func canAddFreeAdWtf() -> Bool {
+        if (user.adWtfGained < DAILY_MAX_AD_WTF) {
             return true
         } else {
             return false

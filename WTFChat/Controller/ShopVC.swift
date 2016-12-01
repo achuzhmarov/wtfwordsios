@@ -45,16 +45,16 @@ class ShopVC: BaseModalVC {
     private let RESTORED_ERROR_TEXT = "can't be restored".localized()
     private let VIEW_AD_TITLE = "View Ad".localized()
     private let BACK_TEXT = "Back".localized()
-    private let HINTS_TEXT = "WTFs:".localized()
-    private let BUY_HINTS_TEXT = "Buy WTFs".localized()
+    private let HINTS_TEXT = "WTF:".localized()
+    private let BUY_HINTS_TEXT = "Buy WTF".localized()
     private let FREE_HINTS_TEXT = "Get Free WTF".localized()
-    private let DAILY_HINTS_TEXT = "X2 Daily WTFs".localized()
+    private let DAILY_HINTS_TEXT = "X2 Daily WTF".localized()
 
     private var productTitles = [ProductIdentifier: UILabel]()
     private var productButtons = [ProductIdentifier: BorderedButton]()
 
     private var isRestoreInProgress: Bool = false
-    private var lastWtfsCount: Int = 0
+    private var lastWtfCount: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,7 +94,7 @@ class ShopVC: BaseModalVC {
         dailyHintsTitle.adjustsFontSizeToFitWidth = true
         dailyHintsTitle.lineBreakMode = .byClipping
 
-        lastWtfsCount = currentUserService.getUserWtfs()
+        lastWtfCount = currentUserService.getUserWtf()
 
         reloadData()
     }
@@ -155,12 +155,12 @@ class ShopVC: BaseModalVC {
     }
 
     func reloadData() {
-        let newWtfsCount = currentUserService.getUserWtfs()
-        var hintsTitleText = HINTS_TEXT + " " + String(newWtfsCount)
+        let newWtfCount = currentUserService.getUserWtf()
+        var hintsTitleText = HINTS_TEXT + " " + String(newWtfCount)
 
-        if (lastWtfsCount < newWtfsCount) {
-            let difference = newWtfsCount - lastWtfsCount
-            lastWtfsCount = newWtfsCount
+        if (lastWtfCount < newWtfCount) {
+            let difference = newWtfCount - lastWtfCount
+            lastWtfCount = newWtfCount
             hintsTitleText += "(+" + String(difference) + ")"
         }
 
@@ -173,7 +173,7 @@ class ShopVC: BaseModalVC {
 
     fileprivate func updateProductTitles() {
         for (productId, productTitle) in productTitles {
-            productTitle.text = inAppService.getWtfsProductTitle(productId)
+            productTitle.text = inAppService.getWtfProductTitle(productId)
         }
     }
 
@@ -204,11 +204,11 @@ class ShopVC: BaseModalVC {
     }
 
     func showAdAlert(_ sender: BorderedButton) {
-        if currentUserService.canAddFreeAdWTFs() && adService.hasAd() {
+        if currentUserService.canAddFreeAdWtf() && adService.hasAd() {
             adService.showAd({ () -> Void in
-                //get random amount of wtfs
-                let wtfs = Int(arc4random_uniform(UInt32(3))) + 1
-                self.currentUserService.addFreeWtfs(wtfs)
+                //get random amount of wtf
+                let wtf = Int(arc4random_uniform(UInt32(3))) + 1
+                self.currentUserService.addFreeWtf(wtf)
                 self.reloadData()
             })
         } else {
@@ -270,7 +270,7 @@ class ShopVC: BaseModalVC {
 
     override func modalClosed() {
         if let decipherVC = presentingVC as? DecipherViewController {
-            decipherVC.wtfsBought()
+            decipherVC.wtfBought()
         }
     }
 }
