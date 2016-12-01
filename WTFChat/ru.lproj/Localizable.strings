@@ -118,23 +118,31 @@
 "You have finished tutorial already, do you want to start it again?" = "Вы уже прошли обучение, повторить?";
 
 //Tutorial
-"Hello, in this game you have to decipher texts with the power of your brain!" = "";
-"To begin with, let me give you a hint. The first word is 'Welcome'. Try to enter it with your improvised keyboard." = "";
-"It isn't necessary to solve this text sequentially. Feel free to select any word you like from the top part of the screen with a touch." = "";
-"Oh, you have run out of time! But nevermind, it's just a tutorial!" = "";
+"Hello, in this game you have to decipher texts with the power of your brain!" = "Привет, в этой игре нужно разгадывать тексты с помощью силы мысли!";
+"To begin with, let me give you a hint. The first word is 'Welcome'. Try to enter it with your improvised keyboard." = "Для начала, вот вам подсказка. Первое слово 'Добро'. Попробуйте ввести его на этой импровизированной клавиатуре.";
+"It isn't necessary to solve this text sequentially. Feel free to select any word you like from the top part of the screen with a touch." = "Нет необходимости разгадывать текст последовательно. Вы можете выбрать любое слово в верхней части экрана. просто нажав на него";
+"Oh, you have run out of time! But nevermind, it's just a tutorial!" = "У вас закончилось время! Не беда, это же просто обучение!";
+"You can get wrong letters back to the board. Just tap on it." = "Вы можете вернуть ошибочные буквы обратно. Просто нажмите на них.";
 
 //First hint
-"You have failed, but nevermind. You can always try again...... with your new power!!! Check it out." = "";
-"Let me introduce you the real power of WTF! You can do almost everything with it. For example, open the next letter!" = "";
-"Just use the button 'hint' at the bottom of your screen." = "";
+"You have failed, but nevermind. You can always try again..... with your new power!!! Check it out." = "Вы проиграли. но нет повода для паники. Вы всегда можете попробовать еще..... с вашими новыми способностями!!!";
+"Let me introduce you the real power of WTF! You can do almost everything with it. For example, open the next letter!" = "Пришло время воспользоваться силой WTF! С ней возможно все. Например, открыть следующую букву!";
+"Just use the button 'hint' at the bottom of your screen." = "Просто нажмите кнопку 'подсказка' внизу экрана";
 
 //Second hint
-"Congratulations! You have done well so far. How about some new powers? Here it is!" = "";
-"You can now see the correct letters for the word. Just use the button 'letters'" = "";
+"Congratulations! You have done well so far. How about some new powers?" = "Поздравляю! У вас отлично получается. Как насчет новых способностей?";
+"Sure!" = "Конечно!";
+"You can now see the correct letters for the word. Just use the button 'letters'." = "Теперь вы можете узнать правильные буквы для разгадываемого слова. Просто нажмите кнопку 'буквы'.";
 
 //Third hint
-"Wow, you are still playing! Very good! Let me give you one more power than!" = "";
-"You can now solve the word with just a touch. But be carefull, it will cost you a little more." = "";
+"Wow, you are still playing! Very good! Let me give you one more power than!" = "Вы зашли так далеко? Отлично! Вот вам еще одна способность!";
+"You can now solve the word with just a touch. But be carefull, it will cost you a little more." = "Теперь вы можете открыть слово целиком с помощью легкого движения пальца! Однако, будть осторожны, эта сила потребует больше WTF.";
+
+//Fourth hint
+"Hey, here is one more cool thing. You can shake your device to clear entered letters! Use it wisely." = "Вот еще одна суперспособность. Потрясите устройство, чтобы убрать набранные буквы. Используйте ее мудро.";
+
+//Fifth hint
+"Hm, do you want something more? Sorry, I have run out of surprises... for now." = "Хм, хотите что-нибудь еще? Но у меня закончились сюрпризы... пока что.";
 
 //App review
 "Enjoying WTFWords" = "Нравится WTFWords";
