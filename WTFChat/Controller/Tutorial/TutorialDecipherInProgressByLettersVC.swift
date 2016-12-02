@@ -11,6 +11,9 @@ class TutorialDecipherInProgressByLettersVC: DecipherInProgressByLettersVC {
     private let FIRST_WORD_ERROR = "Please, enter the word 'welcome'.";
     private let SELECT_WORD_ERROR = "Please, select another word at the top part of the screen with a touch."
 
+    private let RUN_OUT_OF_TIME_MESSAGE = "Oh, you have run out of time! But nevermind, it's just a tutorial!";
+    private let WTF_POWER_MESSAGE = "Let me introduce you the real power of WTF! You can do almost everything with it. For example, open the next letter!";
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -49,5 +52,37 @@ class TutorialDecipherInProgressByLettersVC: DecipherInProgressByLettersVC {
 
     override func initGameController() {
         controller = TutorialGameController()
+    }
+
+    override func tick() {
+        if (timer.seconds < 1) {
+            stopTimer()
+        } else {
+            super.tick()
+        }
+    }
+
+    private func stopTimer() {
+        topTimerLabel.layer.removeAllAnimations()
+        topTimerLabel.alpha = 1
+        topTimerLabel.textColor = UIColor.black
+
+        timer.seconds = 0
+        topTimerLabel.text = timer.getTimeString()
+
+        showMessageAlert(RUN_OUT_OF_TIME_MESSAGE) {
+            self.showHint()
+        }
+    }
+
+    private func showHint() {
+        showMessageAlert(WTF_POWER_MESSAGE, tutorialStage: nil) {
+
+        }
+    }
+
+    override func setTimer() {
+        timer.seconds = 120
+        topTimerLabel.text = timer.getTimeString()
     }
 }

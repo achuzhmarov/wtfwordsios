@@ -58,11 +58,19 @@ extension GameController {
     }
 
     func saveBoardToCache() {
+        var isLettersHintUsed: Bool
+
+        if let isEnabled = hudView.lettersButton?.isEnabled {
+            isLettersHintUsed = !isEnabled
+        } else {
+            isLettersHintUsed = false
+        }
+
         boardCache[word] = BoardCache(
                 tiles: tiles,
                 fixedTiles: fixedTiles,
                 targets: targets,
-                isLettersHintDisabled: !hudView.lettersButton.isEnabled
+                isLettersHintUsed: isLettersHintUsed
                 )
     }
 

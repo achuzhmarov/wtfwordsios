@@ -37,7 +37,7 @@ class TutorialDecipherVC: DecipherViewController {
         finishTutorial()
     }
 
-    fileprivate func finishTutorial() {
+    private func finishTutorial() {
         let mainVC = self.presentingViewController as! MainViewController
         mainVC.dismiss(animated: true, completion: nil)
     }

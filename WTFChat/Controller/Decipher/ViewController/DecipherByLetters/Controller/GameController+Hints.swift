@@ -63,13 +63,13 @@ extension GameController {
     }
 
     func disableLettersHintButton() {
-        hudView.lettersButton.isEnabled = false
-        hudView.lettersButton.alpha = 0.6
+        hudView.lettersButton?.isEnabled = false
+        hudView.lettersButton?.alpha = 0.6
     }
 
     func enableLettersHintButton() {
-        hudView.lettersButton.isEnabled = true
-        hudView.lettersButton.alpha = 1
+        hudView.lettersButton?.isEnabled = true
+        hudView.lettersButton?.alpha = 1
     }
 
     private func useHintForTarget(_ foundTarget: TargetView, isForSolve: Bool = false) {

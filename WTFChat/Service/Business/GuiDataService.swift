@@ -118,8 +118,8 @@ class GuiDataService: Service {
         storage.saveField(KEY.USER_LANGUAGE, value: language as AnyObject)
     }
 
-    func getWtfStage() -> String {
-        return storage.getStringField(KEY.WTF_STAGE)
+    func getWtfStage() -> WtfStage {
+        return WtfStage(rawValue: storage.getIntField(KEY.WTF_STAGE))!
     }
 
     func updateWtfStage(_ wtfStage: WtfStage) {

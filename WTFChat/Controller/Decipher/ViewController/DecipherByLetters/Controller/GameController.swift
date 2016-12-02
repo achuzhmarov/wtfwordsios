@@ -8,11 +8,11 @@ class BoardCache {
     var targets = [TargetView]()
     var isLettersHintDisabled = false
 
-    init(tiles: [TileView], fixedTiles: [FixedTileView], targets: [TargetView], isLettersHintDisabled: Bool) {
+    init(tiles: [TileView], fixedTiles: [FixedTileView], targets: [TargetView], isLettersHintUsed: Bool) {
         self.tiles = tiles
         self.fixedTiles = fixedTiles
         self.targets = targets
-        self.isLettersHintDisabled = isLettersHintDisabled
+        self.isLettersHintDisabled = isLettersHintUsed
     }
 }
 
@@ -36,10 +36,7 @@ class GameController {
 
     var hudView: HUDView! {
         didSet {
-            //connect the Hint button
-            hudView.hintButton.addTarget(self, action: #selector(GameController.actionHint), for: .touchUpInside)
-            hudView.solveButton.addTarget(self, action: #selector(GameController.actionSolve), for: .touchUpInside)
-            hudView.lettersButton.addTarget(self, action: #selector(GameController.actionLetters), for: .touchUpInside)
+            connectHudButtons()
         }
     }
 
@@ -64,6 +61,18 @@ class GameController {
     init() {
         self.audioController = AudioController()
         self.audioController.preloadAudioEffects(effectFileNames: AudioEffectFiles)
+    }
+
+    private func connectHudButtons() {
+        //connect the Hint button
+        hudView.hintButton?.addTarget(self, action: #selector(self.actionHint), for: .touchUpInside)
+        hudView.solveButton?.addTarget(self, action: #selector(self.actionSolve), for: .touchUpInside)
+        hudView.lettersButton?.addTarget(self, action: #selector(self.actionLetters), for: .touchUpInside)
+    }
+
+    func updateHud() {
+        hudView.update()
+        connectHudButtons()
     }
 
     func start() {

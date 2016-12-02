@@ -286,6 +286,10 @@ class DecipherInProgressByLettersVC: UIViewController {
         message.wtfUsed += wtf
         currentUserService.useWtf(wtf)
     }
+
+    func updateHud() {
+        controller.updateHud()
+    }
 }
 
 extension DecipherInProgressByLettersVC: WordTappedComputer {
