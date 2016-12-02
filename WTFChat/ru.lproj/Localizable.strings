@@ -149,6 +149,8 @@
 "Would you mind giving us some feedback" = "Не могли бы вы написать, что вам не понравилось";
 "Ok, Sure" = "Да, конечно";
 "No, thanks" = "Нет, спасибо";
+"How about updating your rating for new version" = "Как насчет обновления отзыва в AppStore";
+"How about updating your feedback for new version" = "Не могли бы вы написать нам ваше мнение о нововведениях";
 
 //Errors
 "Internet connection problem" = "Потерена связь с интернетом";

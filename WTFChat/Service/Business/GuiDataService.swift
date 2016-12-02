@@ -14,7 +14,7 @@ enum WtfStage: Int {
 }
 
 enum AppRateStatus: Int {
-    case never = 0, enjoyed, rated, notEnjoyed, feedback
+    case never = 0, enjoyed, rated, skipRateUpdate, notEnjoyed, feedback, skipFeedbackUpdate
 }
 
 class GuiDataService: Service {
@@ -27,6 +27,7 @@ class GuiDataService: Service {
         static let USER_LANGUAGE = "USER_LANGUAGE"
         static let WTF_STAGE = "USER_WTF_STAGE"
         static let WRONG_LETTERS_HINT = "USER_WRONG_LETTERS_HINT"
+        static let LAST_VERSION = "LAST_VERSION"
     }
 
     fileprivate let storage = UserDefaults.standard
@@ -57,11 +58,15 @@ class GuiDataService: Service {
         }
 
         if (!storage.isFieldExists(KEY.WTF_STAGE)) {
-            updateUserLanguage(Localize.currentLanguage())
+            updateWtfStage(.beginning)
         }
 
-        if (!storage.isFieldExists(KEY.USER_LANGUAGE)) {
-            updateUserLanguage(Localize.currentLanguage())
+        if (!storage.isFieldExists(KEY.WRONG_LETTERS_HINT)) {
+            updateWrongLettersHint(false)
+        }
+
+        if (!storage.isFieldExists(KEY.LAST_VERSION)) {
+            storage.saveField(KEY.LAST_VERSION, value: "1.0" as AnyObject)
         }
     }
 
@@ -90,7 +95,7 @@ class GuiDataService: Service {
     }
 
     func getTutorialStage() -> TutorialStage {
-        return TutorialStageHardcore(rawValue: storage.getIntField(KEY.TUTORIAL_STAGE))!
+        return TutorialStage(rawValue: storage.getIntField(KEY.TUTORIAL_STAGE))!
     }
 
     func updateTutorialStage(_ tutorialStage: TutorialStage) {
@@ -111,5 +116,32 @@ class GuiDataService: Service {
 
     func updateUserLanguage(_ language: String) {
         storage.saveField(KEY.USER_LANGUAGE, value: language as AnyObject)
+    }
+
+    func getWtfStage() -> String {
+        return storage.getStringField(KEY.WTF_STAGE)
+    }
+
+    func updateWtfStage(_ wtfStage: WtfStage) {
+        storage.saveField(KEY.WTF_STAGE, value: wtfStage as AnyObject)
+    }
+
+    func getWrongLettersHint() -> Bool {
+        return storage.getBoolField(KEY.WRONG_LETTERS_HINT)
+    }
+
+    func updateWrongLettersHint(_ wrongLettersHint: Bool) {
+        storage.saveField(KEY.WRONG_LETTERS_HINT, value: wrongLettersHint as AnyObject)
+    }
+
+    func isVersionChanged() -> Bool {
+        let lastVersion = storage.getStringField(KEY.LAST_VERSION)
+        let currentVersion = Bundle.main.releaseVersionNumber
+        return (lastVersion != currentVersion)
+    }
+
+    func updateLastVersion() {
+        let currentVersion = Bundle.main.releaseVersionNumber
+        storage.saveField(KEY.LAST_VERSION, value: currentVersion as AnyObject)
     }
 }

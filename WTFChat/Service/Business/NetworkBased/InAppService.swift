@@ -100,7 +100,7 @@ class InAppService: Service {
             return
         }
         
-        var productName = getProductTitle(productId)!
+        let productName = getProductTitle(productId)!
         let productPrice = getProductPrice(productId)
         let productDescription = getProductDescription(productId)!
         

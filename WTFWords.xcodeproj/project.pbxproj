@@ -54,6 +54,7 @@
 		3E37C37691C04504C860F0B6 /* CoreLevelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CB4749B48AEBB357C098 /* CoreLevelService.swift */; };
 		3E37C388DE6ECAC8E68F51D2 /* UIBezierPath+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C7907201437918DB3E8A /* UIBezierPath+Extension.swift */; };
 		3E37C3D1D971F9EC61677C96 /* DailyHintsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C10850734F59F4702593 /* DailyHintsService.swift */; };
+		3E37C3E2ECE9D65FAF17C535 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE77DB30EF0A1057CAD4 /* Bundle+Extension.swift */; };
 		3E37C3F3B18D7602DAD76115 /* JsonTalkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C9C5431B2975F0CF0EDA /* JsonTalkParser.swift */; };
 		3E37C4096C8A103472FF6D31 /* CoreSingleMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C000FF65106B6402CCD1 /* CoreSingleMessage.swift */; };
 		3E37C45745918E00B792E32C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C148137D8E7C0B83F226 /* SettingsViewController.swift */; };
@@ -417,6 +418,7 @@
 		3E37CE6082F2F1A3F3447039 /* MessageCipherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCipherService.swift; sourceTree = "<group>"; };
 		3E37CE63F3AB49391E2AB456 /* CurrentUserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
 		3E37CE6D4476B6C48D36ABD1 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		3E37CE77DB30EF0A1057CAD4 /* Bundle+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		3E37CE7F2302746304A4DB4D /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		3E37CE9A78EF150C079BB89A /* MessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
 		3E37CEC9575B52D804AFFD17 /* WordsField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsField.swift; sourceTree = "<group>"; };
@@ -999,6 +1001,7 @@
 				3E37CE7F2302746304A4DB4D /* UIView+Extension.swift */,
 				3E37C7907201437918DB3E8A /* UIBezierPath+Extension.swift */,
 				3E37CF41BA4821A442D3FC81 /* NSUserDefaults+Extension.swift */,
+				3E37CE77DB30EF0A1057CAD4 /* Bundle+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1576,6 +1579,7 @@
 				3E37C23A6A703077F1223FB5 /* GameController+Hints.swift in Sources */,
 				3E37CD0A4BE4FE42C2083EB1 /* GameController+Board.swift in Sources */,
 				3E37CBFEC87955BF76564349 /* TutorialDecipherInProgressByLettersVC.swift in Sources */,
+				3E37C3E2ECE9D65FAF17C535 /* Bundle+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
