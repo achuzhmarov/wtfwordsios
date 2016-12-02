@@ -54,7 +54,7 @@ class HUDView: UIView {
         self.isUserInteractionEnabled = true
 
         switch guiDataService.getWtfStage() {
-            case .beginning:
+            case .beginning, .firstFailure:
                  //do nothing
                  return
             case .gotHint:

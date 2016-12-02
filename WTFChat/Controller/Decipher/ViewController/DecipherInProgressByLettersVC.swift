@@ -3,8 +3,12 @@ import Localize_Swift
 
 class DecipherInProgressByLettersVC: UIViewController, WordTappedComputer {
     let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
+    let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
     let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService.self)
     let audioService: AudioService = serviceLocator.get(AudioService.self)
+    private let eventService: EventService = serviceLocator.get(EventService.self)
+
+    private let REMOVE_LETTER_HINT = "You can get wrong letters back to the board. Just tap on it.";
 
     @IBOutlet weak var topTimerLabel: UILabel!
     @IBOutlet weak var topCategoryLabel: UILabel!
@@ -70,6 +74,7 @@ class DecipherInProgressByLettersVC: UIViewController, WordTappedComputer {
         controller.onWordSolved = self.wordSolved
         controller.getMoreWtf = self.getMoreWtf
         controller.useWtf = self.useWtf
+        controller.showRemoveLettersHint = self.showRemoveLettersHint
     }
 
     deinit {
@@ -169,6 +174,11 @@ class DecipherInProgressByLettersVC: UIViewController, WordTappedComputer {
         showNextWord()
 
         initTimerForOneSecond()
+
+        if let event = eventService.eventAwaiting() {
+            eventService.showEvent(event)
+            updateHud()
+        }
     }
 
     private func initTimerForOneSecond() {
@@ -301,6 +311,15 @@ class DecipherInProgressByLettersVC: UIViewController, WordTappedComputer {
             controller.start()
         } else {
             //ignore tap
+        }
+    }
+
+    func showRemoveLettersHint() {
+        isPaused = true
+
+        WTFOneButtonAlert.show(REMOVE_LETTER_HINT.localized(), message: "") { () -> Void in
+            self.isPaused = false
+            self.guiDataService.gotWrongLettersHint()
         }
     }
 }

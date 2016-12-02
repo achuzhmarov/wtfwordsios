@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3E37C00B4E813DB3E3DDAC35 /* MessageTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C67744D146A5686E6FE5 /* MessageTableView.swift */; };
 		3E37C01A1D83343DB2B9F192 /* LeftCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C0D41AF12BC7DDE9977F /* LeftCutterCipher.swift */; };
+		3E37C031EA776CF1BB0EF1C0 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF3AE80FD9756E1873F4 /* EventService.swift */; };
 		3E37C04ABE0F9411C96F2EDB /* DecipherInProgressVC+Guess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C592D3AAD7E222DFE9B0 /* DecipherInProgressVC+Guess.swift */; };
 		3E37C08403ACC45DA98B7209 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C1F38496F5DDFE02AE0D /* Config.swift */; };
 		3E37C08F0E72B51E34C34C0C /* MessageCipherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE6082F2F1A3F3447039 /* MessageCipherService.swift */; };
@@ -428,6 +429,7 @@
 		3E37CEE51055E5CCFF2F152E /* Talk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Talk.swift; sourceTree = "<group>"; };
 		3E37CF10AC9EE8106E4852AB /* AdService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdService.swift; sourceTree = "<group>"; };
 		3E37CF3314E96D21D06E89D2 /* CoreSingleTalkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreSingleTalkService.swift; sourceTree = "<group>"; };
+		3E37CF3AE80FD9756E1873F4 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		3E37CF3DB0A554D2E8147AE6 /* JSQMessagesAvatarImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesAvatarImage.h; sourceTree = "<group>"; };
 		3E37CF3E05D6CC07532749A2 /* WordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsViewController.swift; sourceTree = "<group>"; };
 		3E37CF41BA4821A442D3FC81 /* NSUserDefaults+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults+Extension.swift"; sourceTree = "<group>"; };
@@ -542,6 +544,7 @@
 				3E37C10850734F59F4702593 /* DailyHintsService.swift */,
 				3E37CDF410BD9805DEDD1089 /* Ads */,
 				3E37C5EB90C6010D863BF458 /* RatingService.swift */,
+				3E37CF3AE80FD9756E1873F4 /* EventService.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -1600,6 +1603,7 @@
 				3E37C247805DC76D91C0DA33 /* DecipherInProgressVC.swift in Sources */,
 				3E37C04ABE0F9411C96F2EDB /* DecipherInProgressVC+Guess.swift in Sources */,
 				3E37C29EC13A1DD45981E191 /* DecipherInProgressVC+Hints.swift in Sources */,
+				3E37C031EA776CF1BB0EF1C0 /* EventService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

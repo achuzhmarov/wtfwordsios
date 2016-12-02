@@ -18,6 +18,7 @@ class BoardCache {
 
 class GameController {
     let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
+    private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
 
     var gameView: UIView!
     var word: Word!
@@ -43,6 +44,7 @@ class GameController {
     var onWordSolved: ((_: Word) -> ())!
     var getMoreWtf: (() -> ())!
     var useWtf: ((_: Int) -> ())!
+    var showRemoveLettersHint: (() -> ())!
 
     var wordLength: Int {
         return word.text.characters.count
@@ -69,7 +71,7 @@ class GameController {
     }
 
     func start() {
-        self.clearBoard()
+        clearBoard()
 
         targetSide = ceil(screenWidth / CGFloat(MaxTargetsPerRow)) - TargetMargin
         tileSide = ceil(screenWidth / CGFloat(MaxLettersPerRow)) - TileMargin
@@ -198,6 +200,7 @@ class GameController {
 
         for target in targets {
             if !target.isMatched {
+                checkForRemoveLettersHint()
                 return
             }
         }
@@ -263,6 +266,20 @@ class GameController {
         }*/
     }
 
+    private func checkForRemoveLettersHint() {
+        if (guiDataService.hasWrongLettersHint()) {
+            return
+        }
+
+        for target in targets {
+            if !target.isOccupied {
+                return
+            }
+        }
+
+        showRemoveLettersHint()
+    }
+
     func showLetterForTarget(_ foundTarget: TargetView) {
         var foundTile: TileView? = nil
         for tile in tiles {
@@ -301,7 +318,6 @@ class GameController {
 
         self.word = newWord
     }
-
 
     //TODO - Not in +Hints extension because of the tutorial
     func showHintConfirmAlert(_ hintType: HintType, completion: @escaping () -> ()) {

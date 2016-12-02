@@ -147,7 +147,8 @@ class ServiceInitializer {
             DailyHintsService(
                 inAppService: inAppService,
                 currentUserService: currentUserService
-            )
+            ),
+            EventService(guiDataService: guiDataService)
         )
     }
 }

@@ -10,7 +10,7 @@ enum TutorialStage: Int {
 }
 
 enum WtfStage: Int {
-    case beginning = 0, gotHint, gotLetters, gotSolve, gotShake
+    case beginning = 0, firstFailure, gotHint, gotLetters, gotSolve, gotShake
 }
 
 enum AppRateStatus: Int {
@@ -62,7 +62,7 @@ class GuiDataService: Service {
         }
 
         if (!storage.isFieldExists(KEY.WRONG_LETTERS_HINT)) {
-            updateWrongLettersHint(false)
+            gotWrongLettersHint(false)
         }
 
         if (!storage.isFieldExists(KEY.LAST_VERSION)) {
@@ -126,12 +126,12 @@ class GuiDataService: Service {
         storage.saveField(KEY.WTF_STAGE, value: wtfStage.rawValue as AnyObject)
     }
 
-    func getWrongLettersHint() -> Bool {
+    func hasWrongLettersHint() -> Bool {
         return storage.getBoolField(KEY.WRONG_LETTERS_HINT)
     }
 
-    func updateWrongLettersHint(_ wrongLettersHint: Bool) {
-        storage.saveField(KEY.WRONG_LETTERS_HINT, value: wrongLettersHint as AnyObject)
+    func gotWrongLettersHint() {
+        storage.saveField(KEY.WRONG_LETTERS_HINT, value:true as AnyObject)
     }
 
     func isVersionChanged() -> Bool {
