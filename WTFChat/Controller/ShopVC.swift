@@ -207,7 +207,7 @@ class ShopVC: BaseModalVC {
         if currentUserService.canAddFreeAdWtf() && adService.hasAd() {
             adService.showAd({ () -> Void in
                 //get random amount of wtf
-                let wtf = Int(arc4random_uniform(UInt32(3))) + 1
+                let wtf = Int(arc4random_uniform(UInt32(2))) + 1
                 self.currentUserService.addFreeWtf(wtf)
                 self.reloadData()
             })

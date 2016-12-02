@@ -212,7 +212,7 @@ extension InAppHelper: SKPaymentTransactionObserver {
             //TODO - for backward compatibility with old inApps
             let lowercaseTitle = product.localizedTitle.lowercased()
             if (lowercaseTitle.contains("hints") || lowercaseTitle.contains("подсказок")) {
-                return count * 3
+                return count * 2
             }
 
             return count

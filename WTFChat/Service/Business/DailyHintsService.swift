@@ -58,12 +58,12 @@ class DailyHintsService: Service {
         if randomNumber < twoBorder {
             wtf = 1
         } else if randomNumber < threeBorder {
-            wtf = 4
+            wtf = 3
         } else {
-            wtf = 7
+            wtf = 5
         }
 
-        let secondRandom = Int(arc4random_uniform(UInt32(3)))
+        let secondRandom = Int(arc4random_uniform(UInt32(2)))
         wtf += secondRandom
 
 

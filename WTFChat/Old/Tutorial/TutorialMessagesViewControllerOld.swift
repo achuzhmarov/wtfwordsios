@@ -4,7 +4,7 @@ enum TutorialStageOld: Int {
     case never = 0, started, decipherGuess, decipherCloseTry, decipherCloseTryHint, decipherHint, decipherRest, deciphered, sendMessage, selectCipher, messageSended, responseAquired, detailsViewed, skipped, finished
 }
 
-var currentTutorialStage: TutorialStageOld = .never
+var currentTutorialStage: TutorialStageHardcore = .never
 
 class TutorialMessagesViewControllerOld: MessagesViewController {
     fileprivate let talkService: TalkService = serviceLocator.get(TalkService.self)
@@ -28,7 +28,7 @@ class TutorialMessagesViewControllerOld: MessagesViewController {
         //if it is first init, look for saved stage value
         if (currentTutorialStage == .never) {
             let savedTutorialStage = nsUserDefaults.integer(forKey: TUTORIAL_STAGE_PROPERTY_KEY)
-            currentTutorialStage = TutorialStageOld(rawValue: savedTutorialStage)!
+            currentTutorialStage = TutorialStageHardcore(rawValue: savedTutorialStage)!
         }
         
         switch currentTutorialStage {

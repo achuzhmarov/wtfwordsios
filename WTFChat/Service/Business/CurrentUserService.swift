@@ -4,7 +4,7 @@ class CurrentUserService: Service {
     let iosService: IosService
     let expService: ExpService
 
-    let DAILY_MAX_AD_WTF = 20
+    let DAILY_MAX_AD_WTF = 10
 
     fileprivate struct KEY {
         static let LOGIN = "USER_LOGIN"
@@ -46,7 +46,7 @@ class CurrentUserService: Service {
 
         //if user has any hints, convert it to wtf
         if (storage.getIntField(KEY.HINTS) != 0) {
-            user.wtf += storage.getIntField(KEY.HINTS) * 3
+            user.wtf += storage.getIntField(KEY.HINTS) * 2
             //clear hints from storage
             storage.saveField(KEY.HINTS, value: 0 as AnyObject)
         }

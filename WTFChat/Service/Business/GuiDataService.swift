@@ -1,8 +1,16 @@
 import Foundation
 import Localize_Swift
 
-enum TutorialStage: Int {
+enum TutorialStageHardcore: Int {
     case never = 0, decipherGuess, decipherCloseTry, decipherCloseTryHint, decipherHint, decipherRest, finished, skipped
+}
+
+enum TutorialStage: Int {
+    case never = 0, decipherFirstWord, finished, skipped
+}
+
+enum WtfStage: Int {
+    case beginning = 0, gotHint, gotLetters, gotSolve, gotShake
 }
 
 enum AppRateStatus: Int {
@@ -13,9 +21,12 @@ class GuiDataService: Service {
     fileprivate struct KEY {
         static let LAST_SELECTED_DIFFICULTY = "USER_LAST_SELECTED_DIFFICULTY"
         static let LAST_SELECTED_CATEGORY = "USER_LAST_SELECTED_CATEGORY"
-        static let TUTORIAL_STAGE = "USER_TUTORIAL_STAGE"
+        static let TUTORIAL_STAGE_HARDCORE = "USER_TUTORIAL_STAGE" //TODO - deprecated
+        static let TUTORIAL_STAGE = "USER_TUTORIAL_STAGE_NORMAL"
         static let APPRATE_STATUS = "USER_APPRATE_STATUS"
         static let USER_LANGUAGE = "USER_LANGUAGE"
+        static let WTF_STAGE = "USER_WTF_STAGE"
+        static let WRONG_LETTERS_HINT = "USER_WRONG_LETTERS_HINT"
     }
 
     fileprivate let storage = UserDefaults.standard
@@ -29,12 +40,24 @@ class GuiDataService: Service {
             updateLastSelectedCategoryType(.rightCutter)
         }
 
+        if (!storage.isFieldExists(KEY.TUTORIAL_STAGE_HARDCORE)) {
+            updateTutorialStageHardcore(.never)
+        }
+
         if (!storage.isFieldExists(KEY.TUTORIAL_STAGE)) {
             updateTutorialStage(.never)
         }
 
         if (!storage.isFieldExists(KEY.APPRATE_STATUS)) {
             updateAppRateStatus(.never)
+        }
+
+        if (!storage.isFieldExists(KEY.USER_LANGUAGE)) {
+            updateUserLanguage(Localize.currentLanguage())
+        }
+
+        if (!storage.isFieldExists(KEY.WTF_STAGE)) {
+            updateUserLanguage(Localize.currentLanguage())
         }
 
         if (!storage.isFieldExists(KEY.USER_LANGUAGE)) {
@@ -58,8 +81,16 @@ class GuiDataService: Service {
         storage.saveField(KEY.LAST_SELECTED_CATEGORY, value: cipherType.rawValue as AnyObject)
     }
 
+    func getTutorialStageHardcore() -> TutorialStageHardcore {
+        return TutorialStageHardcore(rawValue: storage.getIntField(KEY.TUTORIAL_STAGE_HARDCORE))!
+    }
+
+    func updateTutorialStageHardcore(_ tutorialStage: TutorialStageHardcore) {
+        storage.saveField(KEY.TUTORIAL_STAGE_HARDCORE, value: tutorialStage.rawValue as AnyObject)
+    }
+
     func getTutorialStage() -> TutorialStage {
-        return TutorialStage(rawValue: storage.getIntField(KEY.TUTORIAL_STAGE))!
+        return TutorialStageHardcore(rawValue: storage.getIntField(KEY.TUTORIAL_STAGE))!
     }
 
     func updateTutorialStage(_ tutorialStage: TutorialStage) {
