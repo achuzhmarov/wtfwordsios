@@ -2,7 +2,10 @@ import Foundation
 import Localize_Swift
 
 class DecipherResultVC: UIViewController, WordTappedComputer {
+    let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
     let audioService: AudioService = serviceLocator.get(AudioService.self)
+
+    private let FAILURE_MESSAGE = "You have failed, but nevermind. You can always try again..... with your new power!!! Check it out.";
 
     @IBOutlet weak var resultLabel: RoundedLabel!
     @IBOutlet weak var levelView: UIView!
@@ -121,6 +124,16 @@ class DecipherResultVC: UIViewController, WordTappedComputer {
             continueButton.setTitle(RETRY_TEXT, for: UIControlState())
 
             audioService.playSound("lose")
+
+            checkForFirstFailure()
+        }
+    }
+
+    private func checkForFirstFailure() {
+        if (guiDataService.getWtfStage() == .beginning) {
+            WTFOneButtonAlert.show(FAILURE_MESSAGE.localized(), message: "") { () -> Void in
+                self.guiDataService.updateWtfStage(.firstFailure)
+            }
         }
     }
 }

@@ -176,8 +176,12 @@ class DecipherInProgressByLettersVC: UIViewController, WordTappedComputer {
         initTimerForOneSecond()
 
         if let event = eventService.eventAwaiting() {
-            eventService.showEvent(event)
-            updateHud()
+            isPaused = true
+
+            eventService.showEvent(event) {
+                self.updateHud()
+                self.isPaused = false
+            }
         }
     }
 

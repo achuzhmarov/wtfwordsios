@@ -148,7 +148,11 @@ class ServiceInitializer {
                 inAppService: inAppService,
                 currentUserService: currentUserService
             ),
-            EventService(guiDataService: guiDataService)
+            EventService(
+                    guiDataService: guiDataService,
+                    categoryService: singleModeCategoryService,
+                    currentUserService: currentUserService
+            )
         )
     }
 }

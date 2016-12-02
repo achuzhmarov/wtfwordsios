@@ -3,6 +3,7 @@ import Localize_Swift
 
 class TutorialDecipherInProgressByLettersVC: DecipherInProgressByLettersVC {
     private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
+    private let eventService: EventService = serviceLocator.get(EventService.self)
 
     private let GREETING_MESSAGE = "Hello, in this game you have to decipher texts with the power of your brain!"
     private let FIRST_WORD_MESSAGE = "To begin with, let me give you a hint. The first word is 'Welcome'. Try to enter it with your improvised keyboard."
@@ -11,7 +12,6 @@ class TutorialDecipherInProgressByLettersVC: DecipherInProgressByLettersVC {
     private let FIRST_WORD_ERROR = "Please, enter the word 'welcome'.";
 
     private let RUN_OUT_OF_TIME_MESSAGE = "Oh, you have run out of time! But nevermind, it's just a tutorial!";
-    private let WTF_POWER_MESSAGE = "Let me introduce you the real power of WTF! You can do almost everything with it. For example, open the next letter!";
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -65,14 +65,9 @@ class TutorialDecipherInProgressByLettersVC: DecipherInProgressByLettersVC {
         topTimerLabel.text = timer.getTimeString()
 
         showMessageAlert(RUN_OUT_OF_TIME_MESSAGE) {
-            self.showHint()
-        }
-    }
-
-    private func showHint() {
-        showMessageAlert(WTF_POWER_MESSAGE, tutorialStage: nil) {
-            self.guiDataService.updateWtfStage(.gotHint)
-            self.updateHud()
+            self.eventService.showEvent(.hint) {
+                self.updateHud()
+            }
         }
     }
 
