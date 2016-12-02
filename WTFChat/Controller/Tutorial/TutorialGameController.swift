@@ -1,7 +1,13 @@
 import Foundation
 
 class TutorialGameController: GameController {
-    var wtf = 99
+    private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
+
+    private let SELECT_WORD_ERROR = "Please, select another word at the top part of the screen with a touch."
+
+    private var wtf = 99
+
+    var showErrorMessageAlert: ((_: String) -> ())!
 
     override func showHintConfirmAlert(_ hintType: HintType, completion: @escaping () -> ()) {
         showHintConfirm(wtf: wtf, hintType: hintType, completion: completion)
@@ -16,6 +22,15 @@ class TutorialGameController: GameController {
                 self.wtf -= hintType.costInWtf
                 completion()
             })
+        }
+    }
+
+    @objc override func tileTapped(_ sender: UITapGestureRecognizer) {
+        switch (guiDataService.getTutorialStage()) {
+        case .selectAnotherWord:
+            showErrorMessageAlert(SELECT_WORD_ERROR)
+        default:
+            super.tileTapped(sender)
         }
     }
 }

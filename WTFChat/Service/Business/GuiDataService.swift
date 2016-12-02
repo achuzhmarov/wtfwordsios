@@ -123,7 +123,7 @@ class GuiDataService: Service {
     }
 
     func updateWtfStage(_ wtfStage: WtfStage) {
-        storage.saveField(KEY.WTF_STAGE, value: wtfStage as AnyObject)
+        storage.saveField(KEY.WTF_STAGE, value: wtfStage.rawValue as AnyObject)
     }
 
     func getWrongLettersHint() -> Bool {

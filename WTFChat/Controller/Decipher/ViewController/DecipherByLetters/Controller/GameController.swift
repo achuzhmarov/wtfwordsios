@@ -40,8 +40,6 @@ class GameController {
         }
     }
 
-    private var audioController: AudioController
-
     var onWordSolved: ((_: Word) -> ())!
     var getMoreWtf: (() -> ())!
     var useWtf: ((_: Int) -> ())!
@@ -56,11 +54,6 @@ class GameController {
 
     var screenWidth: CGFloat {
         return gameView.bounds.size.width
-    }
-
-    init() {
-        self.audioController = AudioController()
-        self.audioController.preloadAudioEffects(effectFileNames: AudioEffectFiles)
     }
 
     private func connectHudButtons() {

@@ -1,7 +1,7 @@
 import Foundation
 import Localize_Swift
 
-class DecipherInProgressByLettersVC: UIViewController {
+class DecipherInProgressByLettersVC: UIViewController, WordTappedComputer {
     let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
     let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService.self)
     let audioService: AudioService = serviceLocator.get(AudioService.self)
@@ -40,10 +40,7 @@ class DecipherInProgressByLettersVC: UIViewController {
 
         initialTopPaddingConstraintConstant = topPaddingConstraint.constant
 
-        let giveUpTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.giveUpPressed))
-        topTimerLabel.addGestureRecognizer(giveUpTap)
-        topStopImage.addGestureRecognizer(giveUpTap)
-        topGiveUpView.addGestureRecognizer(giveUpTap)
+        addGiveUpRecogniser()
 
         wordsTableView.wordTappedComputer = self
         wordsTableView.delegate = wordsTableView
@@ -102,6 +99,13 @@ class DecipherInProgressByLettersVC: UIViewController {
                 options: [], animations: {
             self.wordsTableView.alpha = 1
         }, completion: nil)
+    }
+
+    func addGiveUpRecogniser() {
+        let giveUpTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.giveUpPressed))
+        topTimerLabel.addGestureRecognizer(giveUpTap)
+        topStopImage.addGestureRecognizer(giveUpTap)
+        topGiveUpView.addGestureRecognizer(giveUpTap)
     }
 
     func initGameController() {
@@ -290,9 +294,7 @@ class DecipherInProgressByLettersVC: UIViewController {
     func updateHud() {
         controller.updateHud()
     }
-}
 
-extension DecipherInProgressByLettersVC: WordTappedComputer {
     func wordTapped(_ word: Word) {
         if (word.type == .new) || (word.type == .closeTry) {
             controller.setNewWord(word)

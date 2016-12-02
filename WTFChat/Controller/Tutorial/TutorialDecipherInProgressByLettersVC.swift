@@ -9,7 +9,6 @@ class TutorialDecipherInProgressByLettersVC: DecipherInProgressByLettersVC {
     private let SELECT_WORD_MESSAGE = "It isn't necessary to solve this text sequentially. Select any word you like from the top part of the screen with a touch."
 
     private let FIRST_WORD_ERROR = "Please, enter the word 'welcome'.";
-    private let SELECT_WORD_ERROR = "Please, select another word at the top part of the screen with a touch."
 
     private let RUN_OUT_OF_TIME_MESSAGE = "Oh, you have run out of time! But nevermind, it's just a tutorial!";
     private let WTF_POWER_MESSAGE = "Let me introduce you the real power of WTF! You can do almost everything with it. For example, open the next letter!";
@@ -22,14 +21,8 @@ class TutorialDecipherInProgressByLettersVC: DecipherInProgressByLettersVC {
         }
     }
 
-    private func showWrongActionAlert() {
-        switch (guiDataService.getTutorialStage()) {
-        case .decipherFirstWord:
-            showMessageAlert(FIRST_WORD_ERROR)
-        case .selectAnotherWord:
-            showMessageAlert(SELECT_WORD_ERROR)
-        default: return
-        }
+    private func showErrorMessageAlert(_ message: String) {
+        showMessageAlert(message)
     }
 
     private func showMessageAlert(_ message: String, tutorialStage: TutorialStage? = nil, completion: (() -> ())? = nil) {
@@ -52,6 +45,7 @@ class TutorialDecipherInProgressByLettersVC: DecipherInProgressByLettersVC {
 
     override func initGameController() {
         controller = TutorialGameController()
+        (controller as! TutorialGameController).showErrorMessageAlert = showErrorMessageAlert
     }
 
     override func tick() {
@@ -77,12 +71,26 @@ class TutorialDecipherInProgressByLettersVC: DecipherInProgressByLettersVC {
 
     private func showHint() {
         showMessageAlert(WTF_POWER_MESSAGE, tutorialStage: nil) {
-
+            self.guiDataService.updateWtfStage(.gotHint)
+            self.updateHud()
         }
     }
 
     override func setTimer() {
         timer.seconds = 120
         topTimerLabel.text = timer.getTimeString()
+    }
+
+    override func addGiveUpRecogniser() {
+        topStopImage.isHidden = true
+    }
+
+    override func wordTapped(_ word: Word) {
+        switch (guiDataService.getTutorialStage()) {
+        case .decipherFirstWord:
+            showErrorMessageAlert(FIRST_WORD_ERROR)
+        default:
+            super.wordTapped(word)
+        }
     }
 }
