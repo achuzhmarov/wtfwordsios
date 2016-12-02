@@ -28,6 +28,7 @@
 		3E37C1B3B0E7DAF850D03DA8 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C663308F491467F1D46D /* UserService.swift */; };
 		3E37C1BCF1C940EFC4E4397C /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE63F3AB49391E2AB456 /* CurrentUserService.swift */; };
 		3E37C1BDE9DCC42FC8A25448 /* NSUserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF41BA4821A442D3FC81 /* NSUserDefaults+Extension.swift */; };
+		3E37C1C333082308FD7D9BE2 /* TutorialDecipherInProgressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CAFE3BAECD2699E6EF78 /* TutorialDecipherInProgressVC.swift */; };
 		3E37C1D6F1E272F79B23753A /* ExpGainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C4B0E41355EE8EB15D15 /* ExpGainView.swift */; };
 		3E37C1E8AB87E77D756C490E /* warning.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E37CFDFD39EB65F6E0470F0 /* warning.wav */; };
 		3E37C1FB4438650E6343E7DC /* LvlCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C5BD84BCC0DFF33BB6A1 /* LvlCollectionView.swift */; };
@@ -90,7 +91,6 @@
 		3E37C6FEA7CB2F120AC828AA /* IosService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C13BB77B4C55ECFAACA0 /* IosService.swift */; };
 		3E37C72D86D7EC6EC42A82AF /* NSError+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C27838218C4F22B21722 /* NSError+Extension.swift */; };
 		3E37C74894BCD5FD517803CD /* CipherSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C85E134520E621A5BE3A /* CipherSettings.swift */; };
-		3E37C7514546A1A4264F9B86 /* TutorialDecipherInProgressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C00192F443D6AB5B019D /* TutorialDecipherInProgressVC.swift */; };
 		3E37C76EEC3589E090E15149 /* JsonFriendInfoParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CA1F2A6928198011598E /* JsonFriendInfoParser.swift */; };
 		3E37C7904E15A41C440D1D33 /* lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E37C9A3614141DC5B51F768 /* lose.wav */; };
 		3E37C7934A4558AABF22A433 /* build_prod.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3E37C84CAD62F3EC95EBFF16 /* build_prod.sh */; };
@@ -127,6 +127,7 @@
 		3E37CAD97E41E445A3F3BBD0 /* JSQMessagesTimestampFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CDBCEF2D8B93E65D48F4 /* JSQMessagesTimestampFormatter.m */; };
 		3E37CAE111B6ACDC2340E014 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C98636554709D1F080F3 /* KeychainWrapper.m */; };
 		3E37CB01D0F35992E0EE911B /* BaseModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C0AE948C28DF4830B588 /* BaseModalVC.swift */; };
+		3E37CB04F33D8402CC3A32C0 /* TutorialGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CCE7BE6AFDDD84337C74 /* TutorialGameController.swift */; };
 		3E37CB08F1313ABAB04754F0 /* AdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CF10AC9EE8106E4852AB /* AdService.swift */; };
 		3E37CB125F0FB440E82DFA23 /* SingleDecipherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C7669C3130760DBC69CD /* SingleDecipherViewController.swift */; };
 		3E37CB1FF29DA0858EA53A11 /* TalkNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C35183B090258C83DB42 /* TalkNetworkService.swift */; };
@@ -246,7 +247,6 @@
 
 /* Begin PBXFileReference section */
 		3E37C000FF65106B6402CCD1 /* CoreSingleMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreSingleMessage.swift; sourceTree = "<group>"; };
-		3E37C00192F443D6AB5B019D /* TutorialDecipherInProgressVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialDecipherInProgressVC.swift; sourceTree = "<group>"; };
 		3E37C01698FC89E87643BD30 /* TalkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkService.swift; sourceTree = "<group>"; };
 		3E37C022DD561335965BFC72 /* DecipherInProgressVC+Guess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DecipherInProgressVC+Guess.swift"; sourceTree = "<group>"; };
 		3E37C055C2030CF9CB938BF4 /* FadeTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeTransitionManager.swift; sourceTree = "<group>"; };
@@ -384,6 +384,7 @@
 		3E37CAA7061C3C502A20EF3E /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		3E37CAB95ED6D56707DF290E /* CoreSingleMessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreSingleMessageService.swift; sourceTree = "<group>"; };
 		3E37CAC67CD3944E4BBD3AAC /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		3E37CAFE3BAECD2699E6EF78 /* TutorialDecipherInProgressVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialDecipherInProgressVC.swift; sourceTree = "<group>"; };
 		3E37CB0AE1184F5CF01048A9 /* TutorialSendMessageViewControllerOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialSendMessageViewControllerOld.swift; sourceTree = "<group>"; };
 		3E37CB1281714E8436B0F5B2 /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
 		3E37CB1A5354E843DB737CEF /* BaseMessageTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMessageTableView.swift; sourceTree = "<group>"; };
@@ -405,6 +406,7 @@
 		3E37CC4C79716282A0A2E135 /* options_appStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = options_appStore.plist; sourceTree = "<group>"; };
 		3E37CCBDD6E14B311F74F918 /* DecipherInProgressVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecipherInProgressVC.swift; sourceTree = "<group>"; };
 		3E37CCD6F85F4F5BE22C99A1 /* WindowService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowService.swift; sourceTree = "<group>"; };
+		3E37CCE7BE6AFDDD84337C74 /* TutorialGameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialGameController.swift; sourceTree = "<group>"; };
 		3E37CCF50294A21336CBD706 /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
 		3E37CD1E42E35246D2DF7D19 /* PassAndPlayDecipherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassAndPlayDecipherViewController.swift; sourceTree = "<group>"; };
 		3E37CD49D043FD1DAE73F194 /* InAppNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppNetworkService.swift; sourceTree = "<group>"; };
@@ -891,6 +893,14 @@
 			path = Tutorial;
 			sourceTree = "<group>";
 		};
+		3E37CA311DFFD2D48D9E2482 /* Old */ = {
+			isa = PBXGroup;
+			children = (
+				3E37CAFE3BAECD2699E6EF78 /* TutorialDecipherInProgressVC.swift */,
+			);
+			path = Old;
+			sourceTree = "<group>";
+		};
 		3E37CA5231218FE6B8CE8929 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
@@ -1060,8 +1070,9 @@
 			children = (
 				3E37CFD5B403316B24F52226 /* TutorialDecipherVC.swift */,
 				3E37C8826F6A30EDA4A04CB2 /* TutorialDecipherResultVC.swift */,
-				3E37C00192F443D6AB5B019D /* TutorialDecipherInProgressVC.swift */,
 				3E37C05B3046CE098B9421E5 /* TutorialDecipherInProgressByLettersVC.swift */,
+				3E37CA311DFFD2D48D9E2482 /* Old */,
+				3E37CCE7BE6AFDDD84337C74 /* TutorialGameController.swift */,
 			);
 			path = Tutorial;
 			sourceTree = "<group>";
@@ -1536,7 +1547,6 @@
 				3E37C9274A6F42DD86FB1963 /* ShopVC.swift in Sources */,
 				3E37CDF3F7409B633AB20CE6 /* TutorialDecipherVC.swift in Sources */,
 				3E37CE8E9D7A12EF66BEFBE8 /* TutorialDecipherResultVC.swift in Sources */,
-				3E37C7514546A1A4264F9B86 /* TutorialDecipherInProgressVC.swift in Sources */,
 				3E37CF9FE226CB1D5E3A2AD3 /* TutorialMessagesViewControllerOld.swift in Sources */,
 				3E37CE0DBAFCA07AF9187A1D /* TutorialSendMessageViewControllerOld.swift in Sources */,
 				3E37C5660C59FD972FCEF4E3 /* NameEditViewController.swift in Sources */,
@@ -1580,6 +1590,8 @@
 				3E37CD0A4BE4FE42C2083EB1 /* GameController+Board.swift in Sources */,
 				3E37CBFEC87955BF76564349 /* TutorialDecipherInProgressByLettersVC.swift in Sources */,
 				3E37C3E2ECE9D65FAF17C535 /* Bundle+Extension.swift in Sources */,
+				3E37C1C333082308FD7D9BE2 /* TutorialDecipherInProgressVC.swift in Sources */,
+				3E37CB04F33D8402CC3A32C0 /* TutorialGameController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

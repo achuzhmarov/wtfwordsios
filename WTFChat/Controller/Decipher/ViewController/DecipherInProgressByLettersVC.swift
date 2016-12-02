@@ -2,6 +2,7 @@ import Foundation
 import Localize_Swift
 
 class DecipherInProgressByLettersVC: UIViewController {
+    let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
     let messageCipherService: MessageCipherService = serviceLocator.get(MessageCipherService.self)
     let audioService: AudioService = serviceLocator.get(AudioService.self)
 
@@ -16,8 +17,7 @@ class DecipherInProgressByLettersVC: UIViewController {
     @IBOutlet weak var topPaddingConstraint: NSLayoutConstraint!
     @IBOutlet weak var wordsViewHorizontalConstraint: NSLayoutConstraint!
 
-    //TODO - in progress
-    fileprivate let controller = GameController()
+    var controller: GameController!
 
     private let GIVE_UP_TITLE_TEXT = "Stop deciphering?".localized()
     private let GIVE_UP_BUTTON_TEXT = "Give Up".localized()
@@ -55,6 +55,8 @@ class DecipherInProgressByLettersVC: UIViewController {
         view.setNeedsLayout()
         view.layoutIfNeeded()
 
+        initGameController()
+
         let decipherWidth = decipherView.bounds.size.width
         let decipherHeight = decipherView.bounds.size.height
 
@@ -67,8 +69,10 @@ class DecipherInProgressByLettersVC: UIViewController {
         decipherView.addSubview(hudView)
         controller.hudView = hudView
 
+        //set parent functions to use
         controller.onWordSolved = self.wordSolved
         controller.getMoreWtf = self.getMoreWtf
+        controller.useWtf = self.useWtf
     }
 
     deinit {
@@ -98,6 +102,10 @@ class DecipherInProgressByLettersVC: UIViewController {
                 options: [], animations: {
             self.wordsTableView.alpha = 1
         }, completion: nil)
+    }
+
+    func initGameController() {
+        controller = GameController()
     }
 
     func initView(_ messageToDecipher: Message) {
@@ -272,6 +280,11 @@ class DecipherInProgressByLettersVC: UIViewController {
     func getMoreWtf() {
         self.isPaused = true
         self.performSegue(withIdentifier: "getMoreWtf", sender: self)
+    }
+
+    func useWtf(_ wtf: Int) {
+        message.wtfUsed += wtf
+        currentUserService.useWtf(wtf)
     }
 }
 

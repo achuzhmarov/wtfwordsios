@@ -55,7 +55,7 @@ class MainViewController: BaseUIViewController {
     }
 
     @IBAction func tutorialPressed(_ sender: AnyObject) {
-        if (guiDataService.getTutorialStageHardcore() == .never || guiDataService.getTutorialStageHardcore() == .skipped) {
+        if (guiDataService.getTutorialStage() == .never || guiDataService.getTutorialStage() == .skipped) {
             self.performSegue(withIdentifier: "startTutorial", sender: self)
         } else {
             showTutorialConfirmDialog()
@@ -72,7 +72,7 @@ class MainViewController: BaseUIViewController {
     }
 
     @IBAction func singleModePressed(_ sender: AnyObject) {
-        if (guiDataService.getTutorialStageHardcore() == .never) {
+        if (guiDataService.getTutorialStage() == .never) {
             showTutorialDialog()
         } else {
             self.performSegue(withIdentifier: "startSingleMode", sender: self)
@@ -88,7 +88,7 @@ class MainViewController: BaseUIViewController {
                     self.performSegue(withIdentifier: "startTutorial", sender: self)
                 },
                 cancelButtonAction: { () -> Void in
-                    self.guiDataService.updateTutorialStageHardcore(.skipped)
+                    self.guiDataService.updateTutorialStage(.skipped)
                     self.performSegue(withIdentifier: "startSingleMode", sender: self)
                 })
     }

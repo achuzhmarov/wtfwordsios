@@ -6,7 +6,7 @@ enum TutorialStageHardcore: Int {
 }
 
 enum TutorialStage: Int {
-    case never = 0, decipherFirstWord, finished, skipped
+    case never = 0, decipherFirstWord, selectAnotherWord, finished, skipped
 }
 
 enum WtfStage: Int {

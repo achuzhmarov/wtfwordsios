@@ -15,7 +15,7 @@ class TutorialDecipherResultVC: DecipherResultVC {
         WTFOneButtonAlert.show(FINISH_MESSAGE,
                 message: "",
                 viewPresenter: self) { () -> Void in
-            self.guiDataService.updateTutorialStageHardcore(.finished)
+            self.guiDataService.updateTutorialStage(.finished)
         }
     }
 }

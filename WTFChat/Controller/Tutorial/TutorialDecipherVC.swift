@@ -4,21 +4,21 @@ import Localize_Swift
 class TutorialDecipherVC: DecipherViewController {
     fileprivate let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
 
-    fileprivate let TUTORIAL_TITLE = "Welcome".localized()
-    fileprivate let TUTORIAL_MESSAGE = "Welcome! Glad to see you here. Have a good time!".localized()
+    fileprivate let TUTORIAL_TITLE = "Welcome"
+    fileprivate let TUTORIAL_MESSAGE = "Welcome! Glad to see you here. Have a good time!"
 
     let transitionManager = FadeTransitionManager()
 
     override func viewDidLoad() {
         message = messageCipherService.createMessage(
-                TUTORIAL_MESSAGE,
+                TUTORIAL_MESSAGE.localized(),
                 cipherType: .rightCutter,
                 cipherDifficulty: .normal
                 )
 
         super.viewDidLoad()
 
-        inProgressByLettersVC.topCategoryLabel.text = TUTORIAL_TITLE
+        inProgressByLettersVC.topCategoryLabel.text = TUTORIAL_TITLE.localized()
 
         start()
 

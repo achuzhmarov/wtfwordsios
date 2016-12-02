@@ -47,6 +47,7 @@ class GameController {
 
     var onWordSolved: ((_: Word) -> ())!
     var getMoreWtf: (() -> ())!
+    var useWtf: ((_: Int) -> ())!
 
     var wordLength: Int {
         return word.text.characters.count
@@ -297,5 +298,40 @@ class GameController {
         }
 
         self.word = newWord
+    }
+
+
+    //TODO - Not in +Hints extension because of the tutorial
+    func showHintConfirmAlert(_ hintType: HintType, completion: @escaping () -> ()) {
+        let wtf = currentUserService.getUserWtf()
+
+        if (wtf < hintType.costInWtf) {
+            showNoWtfDialog(wtf: wtf)
+            return
+        } else {
+            showHintConfirm(wtf: wtf, hintType: hintType, completion: completion)
+        }
+    }
+
+    //TODO  - Not in +Hints extension because of the tutorial
+    private func showNoWtfDialog(wtf: Int) {
+        WTFTwoButtonsAlert.show("WTF remained:".localized() + " " + String(wtf),
+                message: "You don't have enough WTF. Want to get more?".localized(),
+                firstButtonTitle: "Get more".localized()) { () -> Void in
+            self.getMoreWtf()
+        }
+    }
+
+    //TODO  - Not in +Hints extension because of the tutorial
+    func showHintConfirm(wtf: Int, hintType: HintType, completion: @escaping () -> () ) {
+        WTFTwoButtonsAlert.show("WTF remained:".localized() + " " + String(wtf),
+                message: hintType.details.localized(),
+                firstButtonTitle: "Use".localized() + " " + String(hintType.costInWtf) + " " + "WTF".localized()) { () -> Void in
+
+            DispatchQueue.main.async(execute: {
+                self.useWtf(hintType.costInWtf)
+                completion()
+            })
+        }
     }
 }

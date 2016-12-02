@@ -19,37 +19,6 @@ extension GameController {
         }
     }
 
-    private func showHintConfirmAlert(_ hintType: HintType, completion: @escaping () -> ()) {
-        let wtf = currentUserService.getUserWtf()
-
-        if (wtf < hintType.costInWtf) {
-            showNoWtfDialog(wtf: wtf)
-            return
-        } else {
-            showHintConfirm(wtf: wtf, hintType: hintType, completion: completion)
-        }
-    }
-
-    private func showNoWtfDialog(wtf: Int) {
-        WTFTwoButtonsAlert.show("WTF remained:".localized() + " " + String(wtf),
-                message: "You don't have enough WTF. Want to get more?".localized(),
-                firstButtonTitle: "Get more".localized()) { () -> Void in
-            self.getMoreWtf()
-        }
-    }
-
-    private func showHintConfirm(wtf: Int, hintType: HintType, completion: @escaping () -> () ) {
-        WTFTwoButtonsAlert.show("WTF remained:".localized() + " " + String(wtf),
-                message: hintType.details.localized(),
-                firstButtonTitle: "Use".localized() + " " + String(hintType.costInWtf) + " " + "WTF".localized()) { () -> Void in
-
-            DispatchQueue.main.async(execute: {
-                self.currentUserService.useWtf(hintType.costInWtf)
-                completion()
-            })
-        }
-    }
-
     private func useHint() {
         for target in targets {
             if !target.isFixed {
