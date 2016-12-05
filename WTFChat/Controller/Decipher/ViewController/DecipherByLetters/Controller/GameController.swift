@@ -35,11 +35,7 @@ class GameController {
 
     var boardCache = [Word: BoardCache]()
 
-    var hudView: HUDView! {
-        didSet {
-            connectHudButtons()
-        }
-    }
+    var hudView: HUDView!
 
     var animationInProgressCount = 0
 
@@ -56,8 +52,27 @@ class GameController {
         return word.text
     }
 
+    var screenHeight: CGFloat {
+        return gameView.bounds.size.height
+    }
+
     var screenWidth: CGFloat {
         return gameView.bounds.size.width
+    }
+
+    func updateHud() {
+        var isLettersHintDisabled = false
+        if let isEnabled = hudView.lettersButton?.isEnabled {
+            isLettersHintDisabled = !isEnabled
+        }
+
+        hudView.tileSide = tileSide
+        hudView.update()
+        connectHudButtons()
+
+        if (isLettersHintDisabled) {
+            disableLettersHintButton()
+        }
     }
 
     private func connectHudButtons() {
@@ -67,16 +82,16 @@ class GameController {
         hudView.lettersButton?.addTarget(self, action: #selector(self.actionLetters), for: .touchUpInside)
     }
 
-    func updateHud() {
-        hudView.update()
-        connectHudButtons()
-    }
-
     func start() {
         clearBoard()
 
-        targetSide = ceil(screenWidth / CGFloat(MaxTargetsPerRow)) - TargetMargin
-        tileSide = ceil(screenWidth / CGFloat(MaxLettersPerRow)) - TileMargin
+        let widthTileSide = ceil(screenWidth / CGFloat(MaxLettersPerRow))
+        let heightTileSide = ceil(screenHeight / MaxTilesVertical) - VerticalPadding
+
+        tileSide = min(widthTileSide, heightTileSide)
+        targetSide = min(ceil(screenWidth / CGFloat(MaxTargetsPerRow)) - TargetMargin, tileSide)
+
+        updateHud()
 
         if let boardCacheForWord = boardCache[word] {
             loadBoardFromCache(boardCacheForWord)

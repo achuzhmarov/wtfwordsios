@@ -35,8 +35,18 @@ class WordLabelContainer {
         
         label.textColor = UIColor.white
         label.font = UIFont.init(name: label.font.fontName, size: fontSize)
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.numberOfLines = 0
+        //label.hidden = true
+        
+        //to use taps for suggestions
+        label.isUserInteractionEnabled = true
+        
+        label.sizeToFit()
 
-        label.layer.cornerRadius = 8.0
+        label.layer.cornerRadius = label.bounds.height * CORNER_RADIUS_COEFF
 
         switch word.type {
         case .new:
@@ -52,16 +62,6 @@ class WordLabelContainer {
         default:
             label.addGradientToLabel(Gradient.Success)
         }
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        label.numberOfLines = 0
-        //label.hidden = true
-        
-        //to use taps for suggestions
-        label.isUserInteractionEnabled = true
-        
-        label.sizeToFit()
         
         label.tagObject = self
     }

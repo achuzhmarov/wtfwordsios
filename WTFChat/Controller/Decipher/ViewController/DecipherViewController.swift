@@ -5,11 +5,9 @@ class DecipherViewController: BaseUIViewController {
 
     var message: Message!
 
-    //@IBOutlet weak var inProgressContainer: UIView!
     @IBOutlet weak var inProgressByLettersContainer: UIView!
     @IBOutlet weak var resultContainer: UIView!
 
-    //var inProgressVC: DecipherInProgressVC!
     var inProgressByLettersVC: DecipherInProgressByLettersVC!
     var resultVC: DecipherResultVC!
 
@@ -24,44 +22,18 @@ class DecipherViewController: BaseUIViewController {
         view.layoutIfNeeded()
 
         resultContainer.isHidden = true
-        //inProgressContainer.isHidden = true
         inProgressByLettersContainer.isHidden = true
 
-        //inProgressVC.initView(message)
         inProgressByLettersVC.initView(message)
-        //inProgressVC.initView(message)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        /*if let vc = segue.destination as? DecipherInProgressVC {
-            inProgressVC = vc
-        } else */
-
         if let vc = segue.destination as? DecipherResultVC {
             resultVC = vc
         } else if let vc = segue.destination as? DecipherInProgressByLettersVC {
             inProgressByLettersVC = vc
         }
     }
-
-    /*func startHardcore() {
-        inProgressContainer.isHidden = false
-
-        resultContainer.isHidden = true
-        view.bringSubview(toFront: inProgressContainer)
-
-        inProgressVC.initView(message)
-        inProgressVC.start()
-
-        UIView.setAnimationsEnabled(true)
-
-        inProgressContainer.alpha = 0
-
-        UIView.animate(withDuration: 0.5, delay: 0,
-                options: [], animations: {
-            self.inProgressContainer.alpha = 1
-        }, completion: nil)
-    }*/
 
     func start() {
         inProgressByLettersContainer.isHidden = false
@@ -83,12 +55,12 @@ class DecipherViewController: BaseUIViewController {
     }
 
     func gameOver() {
-        //inProgressContainer.isHidden = true
         inProgressByLettersContainer.isHidden = true
         resultContainer.isHidden = false
+        //adjust row size for result to look the same as for inProgress
+        resultVC.wordsTableView.customRowHeight = inProgressByLettersVC.wordsTableView.rowHeight
         view.bringSubview(toFront: resultContainer)
 
-        //message = inProgressVC.message
         message = inProgressByLettersVC.message
 
         messageCipherService.failed(message)
@@ -108,7 +80,6 @@ class DecipherViewController: BaseUIViewController {
     }
 
     func wtfBought() {
-        //inProgressVC.wtfBought()
         inProgressByLettersVC.wtfBought()
     }
 

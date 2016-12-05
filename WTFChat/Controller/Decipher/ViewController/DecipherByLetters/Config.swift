@@ -24,3 +24,6 @@ let MaxTargetsPerRow = 10
 let TargetMargin: CGFloat = 2
 let TileMargin: CGFloat = 6
 let VerticalPadding: CGFloat = 8
+let MaxTilesVertical: CGFloat = 6.2
+
+let CORNER_RADIUS_COEFF: CGFloat = 0.25

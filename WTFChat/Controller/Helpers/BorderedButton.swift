@@ -2,7 +2,6 @@ import Foundation
 
 class BorderedButton: UIButton {
     fileprivate let BORDER_WIDTH: CGFloat = 2
-    fileprivate let CORNER_RADIUS: CGFloat = 8
 
     fileprivate var gradientLayer: CAGradientLayer?
 
@@ -19,7 +18,7 @@ class BorderedButton: UIButton {
     private func initialize() {
         layer.borderWidth = BORDER_WIDTH
         layer.borderColor = Color.CipheredDark.cgColor
-        layer.cornerRadius = CORNER_RADIUS
+        layer.cornerRadius = CORNER_RADIUS_COEFF * bounds.height
         clipsToBounds = true
 
         setTitleColor(Color.Text, for: UIControlState())

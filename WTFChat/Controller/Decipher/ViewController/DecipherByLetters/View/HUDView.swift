@@ -15,16 +15,14 @@ class HUDView: UIView {
     private let LETTERS_TITLE = "letters"
     private let SOLVE_TITLE = "solve"
 
+    var tileSide: CGFloat!
+
     private var screenWidth: CGFloat {
         return self.bounds.size.width
     }
 
     private var screenHeight: CGFloat {
         return self.bounds.size.height
-    }
-
-    private var tileSide: CGFloat {
-        return ceil(screenWidth / CGFloat(MaxLettersPerRow)) - TileMargin
     }
 
     private var buttonWidth: CGFloat {
@@ -46,8 +44,6 @@ class HUDView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
-        initialize()
     }
 
     private func initialize() {
@@ -69,40 +65,43 @@ class HUDView: UIView {
     private func initOneButton() {
         let xOffset = (screenWidth - buttonWidth) / 2.0
 
-        initHintButton(x: xOffset)
+        initHintButton(xOffset: xOffset)
     }
 
     private func initTwoButtons() {
         let xOffset = (screenWidth - buttonWidth * 2 - xPadding) / 2.0
 
-        initHintButton(x: xOffset)
-        initLettersButton(x: xOffset + xPadding + buttonWidth)
+        initHintButton(xOffset: xOffset)
+        initLettersButton(xOffset: xOffset + xPadding + buttonWidth)
     }
 
     private func initThreeButtons() {
         let xOffset = buttonWidth + xPadding
 
-        initHintButton(x: 0)
-        initLettersButton(x: xOffset)
-        initSolveButton(x: xOffset * 2)
+        initHintButton(xOffset: 0)
+        initLettersButton(xOffset: xOffset)
+        initSolveButton(xOffset: xOffset * 2)
     }
 
-    private func initHintButton(x: CGFloat) {
-        self.hintButton = GameButton(frame: CGRect(x: x, y: yPosition, width: buttonWidth, height: tileSide))
-        hintButton!.setTitle(HINT_TITLE.localized(), for: UIControlState())
-        self.addSubview(hintButton!)
+    private func initHintButton(xOffset: CGFloat) {
+        hintButton = createButton(title: HINT_TITLE, xOffset: xOffset)
     }
 
-    private func initLettersButton(x: CGFloat) {
-        self.lettersButton = GameButton(frame: CGRect(x: x, y: yPosition, width: buttonWidth, height: tileSide))
-        lettersButton!.setTitle(LETTERS_TITLE.localized(), for: UIControlState())
-        self.addSubview(lettersButton!)
+    private func initLettersButton(xOffset: CGFloat) {
+        lettersButton = createButton(title: LETTERS_TITLE, xOffset: xOffset)
     }
 
-    private func initSolveButton(x: CGFloat) {
-        self.solveButton = GameButton(frame: CGRect(x: x, y: yPosition, width: buttonWidth, height: tileSide))
-        solveButton!.setTitle(SOLVE_TITLE.localized(), for: UIControlState())
-        self.addSubview(solveButton!)
+    private func initSolveButton(xOffset: CGFloat) {
+        solveButton = createButton(title: SOLVE_TITLE, xOffset: xOffset)
+    }
+
+    private func createButton(title: String, xOffset: CGFloat) -> GameButton {
+        let button = GameButton(frame: CGRect(x: xOffset, y: yPosition, width: buttonWidth, height: tileSide))
+        button.setTitle(title.localized(), for: UIControlState())
+        button.titleLabel?.font = UIFont(name: button.titleLabel!.font.fontName, size: button.frame.height * 0.4)
+        addSubview(button)
+
+        return button
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {

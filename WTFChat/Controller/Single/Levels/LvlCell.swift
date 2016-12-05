@@ -9,8 +9,6 @@ class LvlCell: UICollectionViewCell {
 
     fileprivate var gradientLayer: CAGradientLayer?
 
-    fileprivate let CORNER_RADIUS_COEFF: CGFloat = 0.25
-
     fileprivate func initStyle() {
         titleLabel.textColor = Color.Text
 

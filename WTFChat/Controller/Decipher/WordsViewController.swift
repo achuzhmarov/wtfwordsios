@@ -18,7 +18,12 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
 
     var fontSize: CGFloat = 17
     var isHidedText = false
-    
+
+    var customRowHeight: CGFloat?
+
+    let MAX_ROWS_ON_SCREEN = 8
+    let MAX_ROW_HEIGHT: CGFloat = 70
+
     weak var wordTappedComputer: WordTappedComputer?
     
     @objc func numberOfSections(in tableView: UITableView) -> Int {
@@ -153,6 +158,8 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     }
     
     func createView() {
+        calculateRowHeight()
+
         rows = WordsField()
         updateViewHelper(rows)
         showContainers(false)
@@ -270,5 +277,23 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
                 break
             }
         }
+    }
+
+    private func calculateRowHeight() {
+        let screenHeight = bounds.height
+        let originalRowHeight = self.rowHeight
+
+        if let customRowHeight = customRowHeight {
+            self.rowHeight = customRowHeight
+        } else {
+            let rowsCount = Int(screenHeight / self.rowHeight)
+
+            if (rowsCount > MAX_ROWS_ON_SCREEN) {
+                self.rowHeight = min(screenHeight / CGFloat(MAX_ROWS_ON_SCREEN), MAX_ROW_HEIGHT)
+            }
+        }
+
+        let rowScale = self.rowHeight / originalRowHeight
+        self.fontSize *= rowScale
     }
 }
