@@ -117,13 +117,13 @@ class DecipherResultVC: UIViewController, WordTappedComputer {
             resultLabel.addGradientToLabel(Gradient.Success)
             continueButton.setTitle(CONTINUE_TEXT, for: UIControlState())
 
-            audioService.playSound("win")
+            audioService.playSound(.win)
         } else {
             resultLabel.text = FAILED_TEXT
             resultLabel.addGradientToLabel(Gradient.Failed)
             continueButton.setTitle(RETRY_TEXT, for: UIControlState())
 
-            audioService.playSound("lose")
+            audioService.playSound(.lose)
 
             checkForFirstFailure()
         }

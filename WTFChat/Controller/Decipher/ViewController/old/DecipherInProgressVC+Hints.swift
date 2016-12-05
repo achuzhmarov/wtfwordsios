@@ -55,7 +55,7 @@ extension DecipherInProgressVC: WordTappedComputer {
             return
         }
 
-        audioService.playSound("success")
+        audioService.playSound(.success)
 
         if (word.wasCloseTry) {
             messageCipherService.decipher(message, hintedWord: word, closeTry: true)

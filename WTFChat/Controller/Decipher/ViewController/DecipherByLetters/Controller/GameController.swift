@@ -41,6 +41,8 @@ class GameController {
         }
     }
 
+    var animationInProgressCount = 0
+
     var onWordSolved: ((_: Word) -> ())!
     var getMoreWtf: (() -> ())!
     var useWtf: ((_: Int) -> ())!
@@ -108,12 +110,12 @@ class GameController {
     }
 
     func moveTileToTarget(_ tile: TileView, _ target: TargetView, _ isForSolve: Bool = false) {
-        target.isOccupied = true
-        tile.isPlaced = true
-        tile.placedOnTarget = target
+        placeTile(tile, target: target)
 
         gameView.bringSubview(toFront: tile)
         let duration = isForSolve ? 0.6 : 0.3
+
+        animationInProgressCount += 1
 
         UIView.animate(withDuration: duration,
                 delay: 0.0,
@@ -126,23 +128,22 @@ class GameController {
                                 animations: {
                                     tile.updateBackground()
                                 }, completion: { (value: Bool) in
-                            self.placeTile(tile, target: target)
-                            self.checkForSuccess(isForSolve)
+                            //self.placeTile(tile, target: target)
+                            self.animationInProgressCount -= 1
+                            self.checkForSuccess()
                         })
                     } else {
-                        self.placeTile(tile, target: target)
-                        self.checkForSuccess(isForSolve)
+                        //self.placeTile(tile, target: target)
+                        self.animationInProgressCount -= 1
+                        self.checkForSuccess()
                     }
                 })
     }
 
     func fixTileOnTarget(_ tile: TileView, _ target: TargetView) {
         tile.isFixed = true
-        target.isOccupied = true
         target.isFixed = true
-        tile.isPlaced = true
-        tile.placedOnTarget = target
-        self.placeTile(tile, target: target)
+        placeTile(tile, target: target)
     }
 
     func clearTarget(_ target: TargetView) {
@@ -174,27 +175,18 @@ class GameController {
     }
 
     func placeTile(_ tile: TileView, target: TargetView) {
+        target.isOccupied = true
+        tile.isPlaced = true
+        tile.placedOnTarget = target
+
         if String(target.letter).uppercased() == String(tile.letter).uppercased() {
             target.isMatched = true
             tile.isMatched = true
         }
-
-        /*UIView.animate(withDuration: 0.3,
-                delay: 0.00,
-                options: UIViewAnimationOptions.curveEaseOut,
-                animations: {
-                    tile.center = target.center
-                })*/
-
-        /*if (!tile.isFixed) {
-            let explode = ExplodeView(frame: CGRect(x: tile.center.x, y: tile.center.y, width: 10, height: 10))
-            tile.superview?.addSubview(explode)
-            tile.superview?.sendSubview(toBack: explode)
-        }*/
     }
 
-    func checkForSuccess(_ isForSolve: Bool = false) {
-        if (isFinished) {
+    func checkForSuccess() {
+        if (isFinished || (animationInProgressCount > 0)) {
             return
         }
 
@@ -229,41 +221,6 @@ class GameController {
         } else {
             self.onWordSolved(self.word)
         }
-
-        //hud.hintButton.isEnabled = false
-
-        //the anagram is completed!
-        //audioController.playEffect(SoundWin)
-
-        // win animation
-        /*let firstTarget = targets[0]
-        let startX: CGFloat = 0
-
-        let endX: CGFloat = gameView.bounds.size.width + 300
-        let startY = firstTarget.center.y
-
-        let stars = StardustView(frame: CGRect(x: startX, y: startY, width: 10, height: 10))
-        gameView.addSubview(stars)
-        gameView.sendSubview(toBack: stars)
-
-        UIView.animate(withDuration: 3.0,
-                delay: 0.0,
-                options: UIViewAnimationOptions.curveEaseOut,
-                animations: {
-                    stars.center = CGPoint(x: endX, y: startY)
-                }, completion: {
-            (value: Bool) in
-            //game finished
-            stars.removeFromSuperview()
-
-            //when animation is finished, show menu
-            self.clearBoard()
-            self.onWordSolved(self.word)
-        })*/
-
-        /*if (isForSolve) {
-            usleep(1000 * 100)
-        }*/
     }
 
     private func checkForRemoveLettersHint() {
@@ -313,6 +270,7 @@ class GameController {
 
     public func setNewWord(_ newWord: Word) {
         if (self.word != nil && !isFinished) {
+            animationInProgressCount = 0
             checkForSuccess()
         }
 

@@ -19,7 +19,7 @@ class User: NSObject {
 
     var adWtfGained: Int = 0
 
-    var wtf: Int = 30
+    var wtf: Int = 10
 
     init(login: String) {
         self.login = login

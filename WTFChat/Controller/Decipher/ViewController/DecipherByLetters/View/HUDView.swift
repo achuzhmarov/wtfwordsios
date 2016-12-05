@@ -84,7 +84,7 @@ class HUDView: UIView {
 
         initHintButton(x: 0)
         initLettersButton(x: xOffset)
-        initLettersButton(x: xOffset * 2)
+        initSolveButton(x: xOffset * 2)
     }
 
     private func initHintButton(x: CGFloat) {

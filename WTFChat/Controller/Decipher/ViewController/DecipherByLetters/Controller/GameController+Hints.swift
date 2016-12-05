@@ -90,7 +90,7 @@ extension GameController {
 
             UIView.animate(withDuration: 0.3,
                     delay: 0.0,
-                    options: UIViewAnimationOptions.curveEaseOut,
+                    options: UIViewAnimationOptions.transitionCrossDissolve,
                     animations: {
                         foundTile!.updateBackground()
                     })

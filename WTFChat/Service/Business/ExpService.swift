@@ -5,7 +5,7 @@ class ExpService: Service {
     fileprivate let LVL_EXP_STEP = 5
 
     fileprivate let LVL_WTF_STEP = 5
-    fileprivate let WTF_PER_STEP = 10
+    fileprivate let WTF_PER_STEP = 5
 
     func getWtfForLvl(_ lvl: Int) -> Int {
         return ((lvl / LVL_WTF_STEP) + 1) * WTF_PER_STEP

@@ -1213,7 +1213,7 @@
                         <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tj2-4Y-tI4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Tj2-4Y-tI4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1234,7 +1234,7 @@
                         <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7xz-Ad-75z">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="7xz-Ad-75z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1255,7 +1255,7 @@
                         <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="D7J-pu-PDZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="D7J-pu-PDZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3205,10 +3205,10 @@
             </objects>
             <point key="canvasLocation" x="3966.666666666667" y="-430.43478260869568"/>
         </scene>
-        <!--Decipher In Progress By LettersVC-->
+        <!--Tutorial Decipher In Progress By LettersVC-->
         <scene sceneID="b8p-g0-PdM">
             <objects>
-                <viewController id="HFB-OA-mXo" customClass="DecipherInProgressByLettersVC" customModule="WTFWords" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="HFB-OA-mXo" customClass="TutorialDecipherInProgressByLettersVC" customModule="WTFWords" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ELt-s0-8u5"/>
                         <viewControllerLayoutGuide type="bottom" id="X46-YK-DPS"/>

@@ -6,7 +6,7 @@ enum TutorialStageHardcore: Int {
 }
 
 enum TutorialStage: Int {
-    case never = 0, decipherFirstWord, selectAnotherWord, finished, skipped
+    case never = 0, decipherFirstWord, selectAnotherWord, decipherRest, finished, skipped
 }
 
 enum WtfStage: Int {
@@ -62,7 +62,7 @@ class GuiDataService: Service {
         }
 
         if (!storage.isFieldExists(KEY.WRONG_LETTERS_HINT)) {
-            gotWrongLettersHint(false)
+            storage.saveField(KEY.WRONG_LETTERS_HINT, value:false as AnyObject)
         }
 
         if (!storage.isFieldExists(KEY.LAST_VERSION)) {

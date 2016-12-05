@@ -175,11 +175,19 @@ class DecipherInProgressByLettersVC: UIViewController, WordTappedComputer {
 
         initTimerForOneSecond()
 
+        DispatchQueue.main.async {
+            self.checkForEvent()
+        }
+    }
+
+    func checkForEvent() {
         if let event = eventService.eventAwaiting() {
             isPaused = true
 
+            eventService.updateWtfStageForEvent(event)
+            updateHud()
+
             eventService.showEvent(event) {
-                self.updateHud()
                 self.isPaused = false
             }
         }
@@ -243,12 +251,12 @@ class DecipherInProgressByLettersVC: UIViewController, WordTappedComputer {
         isPaused = false
     }
 
-    func wordSolved(solvedWord: Word) {
+    func wordSolved(_ solvedWord: Word) {
         if (message.getMessageStatus() != .ciphered) {
             return
         }
 
-        audioService.playSound("success")
+        audioService.playSound(.success)
 
         messageCipherService.decipher(message, hintedWord: solvedWord)
         wordsTableView.updateMessage(message, hideError: true)
@@ -266,9 +274,7 @@ class DecipherInProgressByLettersVC: UIViewController, WordTappedComputer {
 
         for word: Word in message.words {
             if (wasFind) && ((word.type == .new) || (word.type == .closeTry)) {
-                controller.setNewWord(word)
-                wordsTableView.highlightWord(word)
-                controller.start()
+                selectNewWord(word)
                 return
             }
 
@@ -283,9 +289,7 @@ class DecipherInProgressByLettersVC: UIViewController, WordTappedComputer {
     private func showNextWord() {
         for word: Word in message.words {
             if (word.type == .new) || (word.type == .closeTry) {
-                controller.setNewWord(word)
-                wordsTableView.highlightWord(word)
-                controller.start()
+                selectNewWord(word)
                 return
             }
         }
@@ -311,19 +315,24 @@ class DecipherInProgressByLettersVC: UIViewController, WordTappedComputer {
 
     func wordTapped(_ word: Word) {
         if (word.type == .new) || (word.type == .closeTry) {
-            controller.setNewWord(word)
-            controller.start()
+            selectNewWord(word)
         } else {
             //ignore tap
         }
     }
 
     func showRemoveLettersHint() {
+        guiDataService.gotWrongLettersHint()
         isPaused = true
 
         WTFOneButtonAlert.show(REMOVE_LETTER_HINT.localized(), message: "") { () -> Void in
             self.isPaused = false
-            self.guiDataService.gotWrongLettersHint()
         }
+    }
+
+    private func selectNewWord(_ word: Word) {
+        controller.setNewWord(word)
+        wordsTableView.highlightWord(word)
+        controller.start()
     }
 }

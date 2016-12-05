@@ -2,14 +2,14 @@ import Foundation
 import Localize_Swift
 
 class TutorialDecipherInProgressByLettersVC: DecipherInProgressByLettersVC {
-    private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
     private let eventService: EventService = serviceLocator.get(EventService.self)
 
     private let GREETING_MESSAGE = "Hello, in this game you have to decipher texts with the power of your brain!"
     private let FIRST_WORD_MESSAGE = "To begin with, let me give you a hint. The first word is 'Welcome'. Try to enter it with your improvised keyboard."
     private let SELECT_WORD_MESSAGE = "It isn't necessary to solve this text sequentially. Select any word you like from the top part of the screen with a touch."
+    private let DECIPHER_REST_MESSAGE = "Well done! Now you can decipher the rest of the message by yourself."
 
-    private let FIRST_WORD_ERROR = "Please, enter the word 'welcome'.";
+    private let FIRST_WORD_ERROR = "Please, enter the word 'Welcome'.";
 
     private let RUN_OUT_OF_TIME_MESSAGE = "Oh, you have run out of time! But nevermind, it's just a tutorial!";
 
@@ -77,6 +77,7 @@ class TutorialDecipherInProgressByLettersVC: DecipherInProgressByLettersVC {
     }
 
     override func addGiveUpRecogniser() {
+        //remove giveUp button
         topStopImage.isHidden = true
     }
 
@@ -84,8 +85,25 @@ class TutorialDecipherInProgressByLettersVC: DecipherInProgressByLettersVC {
         switch (guiDataService.getTutorialStage()) {
         case .decipherFirstWord:
             showErrorMessageAlert(FIRST_WORD_ERROR)
+        case .selectAnotherWord:
+            showMessageAlert(DECIPHER_REST_MESSAGE, tutorialStage: .decipherRest)
+            super.wordTapped(word)
         default:
             super.wordTapped(word)
+        }
+    }
+
+    override func checkForEvent() {
+        //do nothing
+    }
+
+    override func wordSolved(_ solvedWord: Word) {
+        switch (guiDataService.getTutorialStage()) {
+        case .decipherFirstWord:
+            super.wordSolved(solvedWord)
+            showMessageAlert(SELECT_WORD_MESSAGE, tutorialStage: .selectAnotherWord)
+        default:
+            super.wordSolved(solvedWord)
         }
     }
 }

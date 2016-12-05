@@ -6,6 +6,10 @@ class ServiceInitializer {
     fileprivate static let BASE_URL = Bundle.main.object(forInfoDictionaryKey: "WEB_SERVICE_URL") as! String
 
     static func initServices() {
+        //base
+        let guiDataService = GuiDataService()
+        serviceLocator.add(guiDataService)
+
         //network
         let networkService = NetworkService(baseUrl: BASE_URL)
         let authNetworkService = AuthNetworkService(networkService: networkService)
@@ -86,8 +90,6 @@ class ServiceInitializer {
             coreLevelService
         )
 
-        let guiDataService = GuiDataService()
-
         let cipherService = CipherService()
         let textCategoryService = TextCategoryService(guiDataService: guiDataService)
         let messageCipherService = MessageCipherService(
@@ -142,7 +144,6 @@ class ServiceInitializer {
             AudioService(),
             cipherService,
             textCategoryService,
-            guiDataService,
             RatingService(guiDataService: guiDataService),
             DailyHintsService(
                 inAppService: inAppService,

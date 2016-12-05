@@ -11,7 +11,7 @@ enum HintType: Int {
             case .hint:
                 return 1
             case .letters:
-                return 1
+                return 2
             case .solve:
                 return 3
             }

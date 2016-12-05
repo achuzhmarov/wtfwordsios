@@ -9,28 +9,50 @@
 import UIKit
 import AVFoundation
 
-class AudioService: Service {
-    
-    var audioPlayer:AVAudioPlayer!
-    let defaultExt = "wav"
-    
-    func playSound(_ fileName: String) {
-        playSound(fileName, ext: defaultExt)
+enum WtfSound: String {
+    case error = "error.wav"
+    case lose = "lose.wav"
+    case success = "success.wav"
+    case warning = "warning.wav"
+    case win = "win.wav"
+
+    var fileName: String {
+        return self.rawValue
     }
-    
-    func playSound(_ fileName: String, ext: String) {
-        
-        let audioFilePath = Bundle.main.path(forResource: fileName, ofType: ext)
-        
-        if audioFilePath != nil {
-            
-            let audioFileUrl = URL(fileURLWithPath: audioFilePath!)
-            
-            audioPlayer = try? AVAudioPlayer(contentsOf: audioFileUrl)
-            audioPlayer.play()
-            
-        } else {
-            print("audio file \(fileName).\(ext) is not found")
+
+    static var getAll: [WtfSound] {
+        return [.error, .lose, .success, .warning, .win]
+    }
+}
+
+class AudioService: Service {
+    private var audio = [WtfSound: AVAudioPlayer]()
+
+    override func initService() {
+        for wtfSound in WtfSound.getAll {
+            do {
+                var soundURL = URL.init(fileURLWithPath: Bundle.main.resourcePath!);
+                soundURL.appendPathComponent(wtfSound.fileName)
+
+                let player = try AVAudioPlayer(contentsOf: soundURL)
+
+                player.numberOfLoops = 0
+                player.prepareToPlay()
+
+                audio[wtfSound] = player
+            } catch {
+                assert(false, "Load sound failed")
+            }
+        }
+    }
+
+    func playSound(_ wtfSound: WtfSound) {
+        if let player = audio[wtfSound] {
+            if player.isPlaying {
+                player.currentTime = 0
+            } else {
+                player.play()
+            }
         }
     }
 }

@@ -119,17 +119,16 @@
 
 //Tutorial
 "Hello, in this game you have to decipher texts with the power of your brain!" = "Привет, в этой игре нужно разгадывать тексты с помощью силы мысли!";
-"To begin with, let me give you a hint. The first word is 'welcome'. Try to enter it with your improvised keyboard." = "Для начала, вот вам подсказка. Первое слово 'добро'. Попробуйте ввести его на этой импровизированной клавиатуре.";
+"To begin with, let me give you a hint. The first word is 'Welcome'. Try to enter it with your improvised keyboard." = "Для начала, вот вам подсказка. Первое слово 'Добро'. Попробуйте ввести его на этой импровизированной клавиатуре.";
 "It isn't necessary to solve this text sequentially. Select any word you like from the top part of the screen with a touch." = "Нет необходимости разгадывать текст последовательно. Выберите любое слово в верхней части экрана. просто нажав на него.";
 "Oh, you have run out of time! But nevermind, it's just a tutorial!" = "У вас закончилось время! Не беда, это же просто обучение!";
 "You can get wrong letters back to the board. Just tap on it." = "Вы можете вернуть ошибочные буквы обратно. Просто нажмите на них.";
-"Please, enter the word 'welcome'." = "Пожалуйста, введите слово 'добро'.";
+"Please, enter the word 'Welcome'." = "Пожалуйста, введите слово 'Добро'.";
 "Please, select another word at the top part of the screen with a touch." = "Пожалуйста, выберите другое слово в верхней части экрана, нажав на него.";
 
 //First hint
 "You have failed, but nevermind. You can always try again..... with your new power!!! Check it out." = "Вы проиграли. но нет повода для паники. Вы всегда можете попробовать еще..... с вашими новыми способностями!!!";
-"Let me introduce you the real power of WTF! You can do almost everything with it. For example, open the next letter!" = "Пришло время воспользоваться силой WTF! С ней возможно все. Например, открыть следующую букву!";
-"Just use the button 'hint' at the bottom of your screen." = "Просто нажмите кнопку 'подсказка' внизу экрана";
+"Let me introduce you the real power of WTF! You can do almost everything with it. For example, open the next letter! Just use the button 'hint' at the bottom of your screen." = "Пришло время воспользоваться силой WTF! С ней возможно все. Например, открыть следующую букву! Просто нажмите кнопку 'подсказка' внизу экрана";
 
 //Second hint
 "Congratulations! You have done well so far. How about some new powers?" = "Поздравляю! У вас отлично получается. Как насчет новых способностей?";

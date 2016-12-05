@@ -88,7 +88,7 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
             
             if (needUpdate()) {
                 updateView()
-                audioService.playSound("success")
+                audioService.playSound(.success)
                 animateWarning(tries)
             } else if (!hideError) {
                 animateError(tries)
@@ -146,9 +146,9 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
         }
         
         if (wasWarning) {
-            audioService.playSound("warning")
+            audioService.playSound(.warning)
         } else if (wasError) {
-            audioService.playSound("error")
+            audioService.playSound(.error)
         }
     }
     
@@ -232,7 +232,6 @@ class WordsViewController: UITableView, UITableViewDataSource, UITableViewDelega
     func wordTapped(_ sender: UITapGestureRecognizer) {
         let label = sender.view as! RoundedLabel
         let wordContainer = label.tagObject as! WordLabelContainer
-        highlightWord(wordContainer.word)
 
         self.wordTappedComputer?.wordTapped(wordContainer.originalWord)
     }

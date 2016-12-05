@@ -212,6 +212,7 @@ extension GameController {
     }
 
     func clearBoard() {
+        animationInProgressCount = 0
         isFinished = false
         fixedTiles.removeAll(keepingCapacity: false)
         tiles.removeAll(keepingCapacity: false)

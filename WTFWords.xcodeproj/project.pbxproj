@@ -203,7 +203,6 @@
 		48424E201DDB4E0E004D94A0 /* ExplodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E191DDB4E0E004D94A0 /* ExplodeView.swift */; };
 		48424E211DDB4E0E004D94A0 /* StardustView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E1A1DDB4E0E004D94A0 /* StardustView.swift */; };
 		48424E241DDB4E17004D94A0 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E221DDB4E17004D94A0 /* GameController.swift */; };
-		48424E251DDB4E17004D94A0 /* AudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48424E231DDB4E17004D94A0 /* AudioController.swift */; };
 		48424E311DDB667B004D94A0 /* Comic_Andy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48424E2E1DDB4ED1004D94A0 /* Comic_Andy.ttf */; };
 		48424E351DDB66FF004D94A0 /* level1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48424E321DDB66FF004D94A0 /* level1.plist */; };
 		48424E361DDB66FF004D94A0 /* level2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48424E331DDB66FF004D94A0 /* level2.plist */; };
@@ -450,7 +449,6 @@
 		48424E191DDB4E0E004D94A0 /* ExplodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplodeView.swift; sourceTree = "<group>"; };
 		48424E1A1DDB4E0E004D94A0 /* StardustView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StardustView.swift; sourceTree = "<group>"; };
 		48424E221DDB4E17004D94A0 /* GameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
-		48424E231DDB4E17004D94A0 /* AudioController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioController.swift; sourceTree = "<group>"; };
 		48424E2E1DDB4ED1004D94A0 /* Comic_Andy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Comic_Andy.ttf; sourceTree = "<group>"; };
 		48424E321DDB66FF004D94A0 /* level1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level1.plist; sourceTree = "<group>"; };
 		48424E331DDB66FF004D94A0 /* level2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level2.plist; sourceTree = "<group>"; };
@@ -637,7 +635,6 @@
 			isa = PBXGroup;
 			children = (
 				48424E221DDB4E17004D94A0 /* GameController.swift */,
-				48424E231DDB4E17004D94A0 /* AudioController.swift */,
 				3E37C773907CF3BD0F3ABFB2 /* GameController+Hints.swift */,
 				3E37C51046F6EE51C685440F /* GameController+Board.swift */,
 			);
@@ -1480,7 +1477,6 @@
 				3E37C2DD384D9EB62B028A71 /* JsonWordParser.swift in Sources */,
 				3E37C2A7EF6201A559B94DC8 /* DoubleCutterCipher.swift in Sources */,
 				3E37CB90CD7BE8932C6217C6 /* RandomCutterCipher.swift in Sources */,
-				48424E251DDB4E17004D94A0 /* AudioController.swift in Sources */,
 				3E37C2D5B146EED3BFE45678 /* RightCutterCipher.swift in Sources */,
 				3E37C01A1D83343DB2B9F192 /* LeftCutterCipher.swift in Sources */,
 				3E37CA4D8F5323CECC01A0D1 /* ShuffleCipher.swift in Sources */,
