@@ -1,8 +1,8 @@
 Galaxy
 Galaxy
+Starburst galaxies were more common during the early history of the Universe, and, at present, still contribute an estimated 15% to the total star production rate.
 Starburst galaxies are characterized by dusty concentrations of gas and the appearance of newly formed stars.
 A portion of the observable galaxies are classified as an active galaxy if the galaxy contains an active galactic nucleus.
-The standard model for an active galactic nucleus is based upon an accretion disc that forms around a supermassive black hole at the core region of the galaxy.
 The radiation from an active galactic nucleus results from the gravitational energy of matter as it falls toward the black hole from the disc.
 Quasars or quasi-stellar radio sources are the most energetic and distant members of a class of objects called active galactic nuclei.
 Quasars are extremely luminous and were first identified as being high redshift sources of electromagnetic energy, including radio waves and visible light.
@@ -27,6 +27,4 @@ The peak radiation of most stars lies in the visible spectrum, so the observatio
 The dust present in the interstellar medium is opaque to visual light.
 The first non-visual study of galaxies, particularly active galaxies, was made using radio frequencies.
 The existence of supermassive black holes at the cores of galaxies was confirmed through X-ray astronomy.
-In 1936 Hubble produced a classification of galactic morphology that is used to this day.
-Beginning in the 1990s, the Hubble Space Telescope yielded improved observations.
-Among other things, Hubble data helped establish that the missing dark matter in our galaxy cannot solely consist of inherently faint and small stars.
+Hubble data helped establish that the missing dark matter in our galaxy cannot solely consist of inherently faint and small stars.

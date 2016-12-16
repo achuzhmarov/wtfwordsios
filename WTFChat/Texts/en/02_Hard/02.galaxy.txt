@@ -29,4 +29,3 @@ Near misses between galaxies result in warping distortions due to tidal interact
 The stars of interacting galaxies will usually not collide, but the gas and dust within the two forms will interact, sometimes triggering star formation.
 Stars are created within galaxies from a reserve of cold gas that forms into giant molecular clouds.
 Some galaxies have been observed to form stars at an exceptional rate, which is known as a starburst.
-Starburst galaxies were more common during the early history of the Universe, and, at present, still contribute an estimated 15% to the total star production rate.
