@@ -30,6 +30,7 @@ class RatingService: Service {
         switch guiDataService.getAppRateStatus() {
             case .never:
                 showEnjoyWindow()
+                guiDataService.updateLastVersion()
             case .rated:
                 if (guiDataService.isVersionChanged()) {
                     showUpdateRatingWindow()
