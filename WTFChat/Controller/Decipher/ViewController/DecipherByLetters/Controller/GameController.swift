@@ -145,12 +145,12 @@ class GameController {
                                 }, completion: { (value: Bool) in
                             //self.placeTile(tile, target: target)
                             self.animationInProgressCount -= 1
-                            self.checkForSuccess()
+                            self.checkForSuccess(self.word)
                         })
                     } else {
                         //self.placeTile(tile, target: target)
                         self.animationInProgressCount -= 1
-                        self.checkForSuccess()
+                        self.checkForSuccess(self.word)
                     }
                 })
     }
@@ -200,7 +200,8 @@ class GameController {
         }
     }
 
-    func checkForSuccess() {
+    //word can be updated while checking - can't use class variable
+    func checkForSuccess(_ checkedWord: Word) {
         if (isFinished || (animationInProgressCount > 0)) {
             return
         }
@@ -231,10 +232,10 @@ class GameController {
                             }
                         }
                     }, completion: { (value: Bool) in
-                        self.onWordSolved(self.word)
+                        self.onWordSolved(checkedWord)
             })
         } else {
-            self.onWordSolved(self.word)
+            self.onWordSolved(checkedWord)
         }
     }
 
@@ -286,7 +287,7 @@ class GameController {
     public func setNewWord(_ newWord: Word) {
         if (self.word != nil && !isFinished) {
             animationInProgressCount = 0
-            checkForSuccess()
+            checkForSuccess(self.word)
         }
 
         self.word = newWord
