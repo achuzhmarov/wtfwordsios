@@ -1,4 +1,4 @@
-import Foundation
+/*import Foundation
 import Localize_Swift
 
 class DecipherInProgressVC: UIViewController {
@@ -121,6 +121,8 @@ class DecipherInProgressVC: UIViewController {
     }
 
     func setTimer() {
+        timer.tickComputer = self.tick
+
         if (message.guessIsNotStarted()) {
             timer.seconds = messageCipherService.getTimerSeconds(message)
         } else {
@@ -167,7 +169,7 @@ class DecipherInProgressVC: UIViewController {
             return
         }
 
-        _ = timer.tick()
+        _ = timer.secondPassed()
 
         topTimerLabel.text = timer.getTimeString()
 
@@ -207,3 +209,4 @@ class DecipherInProgressVC: UIViewController {
         guessTextField.becomeFirstResponder()
     }
 }
+*/

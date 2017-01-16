@@ -1,4 +1,4 @@
-import Foundation
+/*import Foundation
 import Localize_Swift
 
 extension DecipherInProgressVC: UITextFieldDelegate {
@@ -65,3 +65,4 @@ extension DecipherInProgressVC: UITextFieldDelegate {
         view.endEditing(true)
     }
 }
+*/
