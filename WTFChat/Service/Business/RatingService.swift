@@ -2,11 +2,9 @@ import Foundation
 
 class RatingService: Service {
     private let APP_STORE_ID = Bundle.main.object(forInfoDictionaryKey: "APP_STORE_ID") as! String
-    private let SUPPORT_EMAIL = Bundle.main.object(forInfoDictionaryKey: "SUPPORT_EMAIL") as! String
 
     private let APP_STORE_MAIN_URL = "itms-apps://itunes.apple.com/app/id"
     private let APP_STORE_RATING_URL = "itms-apps://itunes.apple.com/app/viewContentsUserReviews?id="
-    private let FEEDBACK_URL = "mailto:"
 
     private let ENJOY_TITLE = "Enjoying WTFWords".localized() + "?"
     private let ENJOY_YES_BUTTON_TEXT = "Yes".localized() + "!"
@@ -22,11 +20,15 @@ class RatingService: Service {
 
     private let guiDataService: GuiDataService
 
+    private var showFeedbackForm: (() -> ())!
+
     init(guiDataService: GuiDataService) {
         self.guiDataService = guiDataService
     }
 
-    func askUserForAppRate() {
+    func askUserForAppRate(showFeedbackForm: @escaping () -> ()) {
+        self.showFeedbackForm = showFeedbackForm
+
         switch guiDataService.getAppRateStatus() {
             case .never:
                 showEnjoyWindow()
@@ -92,7 +94,7 @@ class RatingService: Service {
                 secondButtonTitle: OTHER_NO_BUTTON_TEXT,
                 alertButtonAction: { () -> Void in
                     self.guiDataService.updateAppRateStatus(.feedback)
-                    self.sendFeedback()
+                    self.showFeedbackForm()
                 }, cancelButtonAction: { () -> Void in
                     self.guiDataService.updateAppRateStatus(.notEnjoyed)
                 })
@@ -105,7 +107,7 @@ class RatingService: Service {
                 secondButtonTitle: OTHER_NO_BUTTON_TEXT,
                 alertButtonAction: { () -> Void in
                     self.guiDataService.updateAppRateStatus(.feedback)
-                    self.sendFeedback()
+                    self.showFeedbackForm()
                 }, cancelButtonAction: { () -> Void in
             self.guiDataService.updateAppRateStatus(.skipFeedbackUpdate)
         })
@@ -113,11 +115,6 @@ class RatingService: Service {
 
     private func redirectToAppStore() {
         let ratingUrl = URL(string: APP_STORE_RATING_URL + APP_STORE_ID)
-        UIApplication.shared.openURL(ratingUrl!)
-    }
-
-    private func sendFeedback() {
-        let ratingUrl = URL(string: FEEDBACK_URL + SUPPORT_EMAIL)
         UIApplication.shared.openURL(ratingUrl!)
     }
 }

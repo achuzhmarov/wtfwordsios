@@ -39,6 +39,7 @@
 		3E37C259CAE06BD0793EE82B /* InAppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C1F9700AC20414BB119D /* InAppHelper.swift */; };
 		3E37C26DF1D21CF031912277 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C26F571173D1A34B84C0 /* UIHelper.swift */; };
 		3E37C2772DE28B94A5E838AB /* SingleTalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C21BBEC0C55C79B7473F /* SingleTalk.swift */; };
+		3E37C2827DFB52514C6E0090 /* FeedbackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CB2C058CAA47E787661F /* FeedbackVC.swift */; };
 		3E37C285C1CFAF974C9F1A2A /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C368983046E969358AC8 /* Gradient.swift */; };
 		3E37C28687CAB861016DF223 /* CurrentUserService+Setters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C2DAC9B9B5633D2C4302 /* CurrentUserService+Setters.swift */; };
 		3E37C2896D9872CC4F6D3135 /* BaseLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C24DE3323E553F227BA7 /* BaseLoginViewController.swift */; };
@@ -387,6 +388,7 @@
 		3E37CB1281714E8436B0F5B2 /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
 		3E37CB1A5354E843DB737CEF /* BaseMessageTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMessageTableView.swift; sourceTree = "<group>"; };
 		3E37CB2141F23363A1896FB5 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		3E37CB2C058CAA47E787661F /* FeedbackVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackVC.swift; sourceTree = "<group>"; };
 		3E37CB2FC358D2A3081CF9EE /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		3E37CB4749B48AEBB357C098 /* CoreLevelService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLevelService.swift; sourceTree = "<group>"; };
 		3E37CB627C8C45BBD8C82592 /* ServiceInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceInitializer.swift; sourceTree = "<group>"; };
@@ -617,6 +619,7 @@
 				3E37C99E3EADF9A5C305BCC0 /* Navigation */,
 				3E37C44E5DCEFC4774786B3B /* ShopVC.swift */,
 				3E37CE05CC47FDA76A0B8BB4 /* Tutorial */,
+				3E37CB2C058CAA47E787661F /* FeedbackVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1592,6 +1595,7 @@
 				3E37C3D041FEFFC4E12DCD2D /* DecipherInProgressVC.swift in Sources */,
 				3E37C617F46DD8E1280D43A8 /* DecipherInProgressVC+Hints.swift in Sources */,
 				3E37C1F72855EBB1D66F22F5 /* DecipherInProgressVC+Guess.swift in Sources */,
+				3E37C2827DFB52514C6E0090 /* FeedbackVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

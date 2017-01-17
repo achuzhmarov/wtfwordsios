@@ -9,6 +9,7 @@ class MainViewController: BaseUIViewController {
     private let TUTORIAL_TITLE = "Tutorial"
     private let SINGLE_MODE_TITLE = "Single mode"
     private let SHOP_TITLE = "Shop"
+    private let FEEDBACK_TITLE = "Give Feedback"
 
     private let TUTORIAL_MESSAGE = "Hi! It is your first time, would you like to start a tutorial?"
     private let TUTORIAL_REPEAT_MESSAGE = "You have finished tutorial already, do you want to start it again?"
@@ -19,6 +20,7 @@ class MainViewController: BaseUIViewController {
     @IBOutlet weak var singleModeButton: UIButton!
     @IBOutlet weak var shopButton: UIButton!
     @IBOutlet weak var languageButton: UIButton!
+    @IBOutlet weak var feedbackButton: UIButton!
 
     let singleModeTransitionManager = PanTransitionManager()
 
@@ -35,6 +37,7 @@ class MainViewController: BaseUIViewController {
         tutorialButton.setTitle(TUTORIAL_TITLE.localized(), for: UIControlState())
         singleModeButton.setTitle(SINGLE_MODE_TITLE.localized(), for: UIControlState())
         shopButton.setTitle(SHOP_TITLE.localized(), for: UIControlState())
+        feedbackButton.setTitle(FEEDBACK_TITLE.localized(), for: UIControlState())
 
         let currentLanguage = TextLanguage.getCurrentLanguage()
         languageButton.setTitle(currentLanguage.buttonTitle, for: UIControlState())

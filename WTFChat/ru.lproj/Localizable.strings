@@ -3,6 +3,7 @@
 "Cancel" = "Отмена";
 "Error" = "Ошибка";
 "Ok" = "Ок";
+"Email" = "Email";
 
 // Menu
 "Tutorial" = "Обучение";
@@ -151,6 +152,16 @@
 "No, thanks" = "Нет, спасибо";
 "How about updating your rating for new version" = "Как насчет обновления отзыва в AppStore";
 "How about updating your feedback for new version" = "Не могли бы вы написать нам ваше мнение о нововведениях";
+
+//Feedback
+"Give Feedback" = "Есть что сказать?";
+"You haven't send your review. Is it ok?" = "Вы действительно не хотите отправить этот отзыв?";
+"Don't send" = "Не отправлять";
+"Thank you for your feedback!" = "Спасибо за отзыв!";
+"There is a problem with internet connection. Please, try again later." = "Потерена связь с интернетом. Попробуйте позже";
+"Hello, my name is Artem. I have developed this app. Feel free to write me any kind of feedback you have - errors, shortcomings, new ideas and all other sort of things. I will really appreciate it. I want to make this app a lot better!" = "День добрый, меня зовут Артем и я автор этого приложения. Буду рад любой обратной связи - ошибки, недостатки, критика, ваши идеи - пишите все что пожелаете. Я хочу сделать это приложение намного лучше!";
+"Optional" = "Не обязательно";
+"Send" = "Отправить";
 
 //Errors
 "Internet connection problem" = "Потерена связь с интернетом";

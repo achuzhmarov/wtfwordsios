@@ -49,7 +49,7 @@ class SingleDecipherViewController: DecipherViewController {
 
             WTFOneButtonAlert.show(title, message: message, viewPresenter: self) {
                 if (self.singleMessage.getMessageStatus() == .success) {
-                    self.ratingService.askUserForAppRate()
+                    self.ratingService.askUserForAppRate(showFeedbackForm: self.showFeedbackForm)
                 }
             }
         }
@@ -110,5 +110,9 @@ class SingleDecipherViewController: DecipherViewController {
 
     func chapterFinished() {
         backTapped()
+    }
+
+    func showFeedbackForm() {
+        self.performSegue(withIdentifier: "showFeedbackForm", sender: self)
     }
 }

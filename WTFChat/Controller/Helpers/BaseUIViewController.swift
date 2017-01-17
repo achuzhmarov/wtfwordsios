@@ -37,4 +37,8 @@ class BaseUIViewController: UIViewController {
     override var prefersStatusBarHidden : Bool {
         return true
     }
+
+    func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
 }
