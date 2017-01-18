@@ -16,8 +16,9 @@ class ServiceInitializer {
         let messageNetworkService = MessageNetworkService(networkService: networkService)
         let userNetworkService = UserNetworkService(networkService: networkService)
         let talkNetworkService = TalkNetworkService(networkService: networkService)
-        let inAppNetworkService = InAppNetworkService(networkService: networkService)
         let iosNetworkService = IosNetworkService(networkService: networkService)
+        let inAppNetworkService = InAppNetworkService(networkService: networkService)
+        let feedbackNetworkService = FeedbackNetworkService(networkService: networkService)
 
         let iosService = IosService(iosNetworkService: iosNetworkService)
         let expService = ExpService()
@@ -38,11 +39,13 @@ class ServiceInitializer {
             currentUserService: currentUserService,
             coreMessageService: coreMessageService
         )
+
         let messageService = MessageService(
             messageNetworkService: messageNetworkService,
             talkService: talkService,
             coreMessageService: coreMessageService
         )
+
         talkService.messageService = messageService
 
         let windowService = WindowService(
@@ -68,8 +71,14 @@ class ServiceInitializer {
             inAppHelper: inAppHelper
         )
 
+        let feedbackService = FeedbackService(
+                feedbackNetworkService: feedbackNetworkService,
+                currentUserService: currentUserService
+        )
+
         //network
         serviceLocator.add(
+            feedbackService,
             inAppService,
             iosService,
             userService,

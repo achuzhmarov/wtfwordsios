@@ -32,6 +32,7 @@
 		3E37C1C333082308FD7D9BE2 /* TutorialDecipherInProgressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CAFE3BAECD2699E6EF78 /* TutorialDecipherInProgressVC.swift */; };
 		3E37C1D6F1E272F79B23753A /* ExpGainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C4B0E41355EE8EB15D15 /* ExpGainView.swift */; };
 		3E37C1E8AB87E77D756C490E /* warning.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E37CFDFD39EB65F6E0470F0 /* warning.wav */; };
+		3E37C1EE0A2D755E670EA34A /* FeedbackNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C895CC30DBCCDDC10D35 /* FeedbackNetworkService.swift */; };
 		3E37C1F72855EBB1D66F22F5 /* DecipherInProgressVC+Guess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CB9D44E0D21A9E7F0F3A /* DecipherInProgressVC+Guess.swift */; };
 		3E37C1FB4438650E6343E7DC /* LvlCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C5BD84BCC0DFF33BB6A1 /* LvlCollectionView.swift */; };
 		3E37C232A669DDBFD4D7BA81 /* WTFChat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CEF039C3B4D79D370CA8 /* WTFChat.xcdatamodeld */; };
@@ -175,6 +176,7 @@
 		3E37CDC66A4CA01F05B90265 /* RemoteMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C98DB01429284B1E0CCC /* RemoteMessage.swift */; };
 		3E37CDE72CBB2F9A78D0ED05 /* HintType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C480FB16762B3B4C359B /* HintType.swift */; };
 		3E37CDF3F7409B633AB20CE6 /* TutorialDecipherVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CFD5B403316B24F52226 /* TutorialDecipherVC.swift */; };
+		3E37CE0A16478861A437FDB4 /* FeedbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C4769B3A2C87BD1F60A8 /* FeedbackService.swift */; };
 		3E37CE0DBAFCA07AF9187A1D /* TutorialSendMessageViewControllerOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CB0AE1184F5CF01048A9 /* TutorialSendMessageViewControllerOld.swift */; };
 		3E37CE27933605FCA4EE51D5 /* SingleMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C30F315D3B8F4CCD804D /* SingleMessageCell.swift */; };
 		3E37CE34F26802F8FE3257DE /* FixedTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C76BBC51E2FEB71B3E19 /* FixedTileView.swift */; };
@@ -303,6 +305,7 @@
 		3E37C43AF8FAE39CECC48749 /* RandomCutterCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomCutterCipher.swift; sourceTree = "<group>"; };
 		3E37C44E5DCEFC4774786B3B /* ShopVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopVC.swift; sourceTree = "<group>"; };
 		3E37C45E28B9FC22DDA15406 /* ExpService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpService.swift; sourceTree = "<group>"; };
+		3E37C4769B3A2C87BD1F60A8 /* FeedbackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackService.swift; sourceTree = "<group>"; };
 		3E37C480FB16762B3B4C359B /* HintType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HintType.swift; sourceTree = "<group>"; };
 		3E37C48EB596F7289C6C456C /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		3E37C4974DA6892C78D7443B /* CoreLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLevel.swift; sourceTree = "<group>"; };
@@ -353,6 +356,7 @@
 		3E37C85E134520E621A5BE3A /* CipherSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherSettings.swift; sourceTree = "<group>"; };
 		3E37C8826F6A30EDA4A04CB2 /* TutorialDecipherResultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialDecipherResultVC.swift; sourceTree = "<group>"; };
 		3E37C890E5A751082A2A8251 /* JSQMessageAvatarImageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessageAvatarImageDataSource.h; sourceTree = "<group>"; };
+		3E37C895CC30DBCCDDC10D35 /* FeedbackNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackNetworkService.swift; sourceTree = "<group>"; };
 		3E37C89724177FD827960FEB /* InAppNetworkServiceOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppNetworkServiceOld.swift; sourceTree = "<group>"; };
 		3E37C8F59166B827856A746E /* IosNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IosNetworkService.swift; sourceTree = "<group>"; };
 		3E37C901829DA46415047CD7 /* NameEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameEditViewController.swift; sourceTree = "<group>"; };
@@ -570,6 +574,7 @@
 				3E37C3466EB339EDBB8AF309 /* Old */,
 				3E37CD49D043FD1DAE73F194 /* InAppNetworkService.swift */,
 				3E37CAA7061C3C502A20EF3E /* NetworkService.swift */,
+				3E37C895CC30DBCCDDC10D35 /* FeedbackNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1038,6 +1043,7 @@
 			isa = PBXGroup;
 			children = (
 				3E37C5E0D3BB7755C97ABFBA /* InAppService.swift */,
+				3E37C4769B3A2C87BD1F60A8 /* FeedbackService.swift */,
 			);
 			path = NetworkBased;
 			sourceTree = "<group>";
@@ -1600,6 +1606,8 @@
 				3E37C1F72855EBB1D66F22F5 /* DecipherInProgressVC+Guess.swift in Sources */,
 				3E37C2827DFB52514C6E0090 /* FeedbackVC.swift in Sources */,
 				3E37CAC53104F6670857AD3D /* UIButton+Extension.swift in Sources */,
+				3E37C1EE0A2D755E670EA34A /* FeedbackNetworkService.swift in Sources */,
+				3E37CE0A16478861A437FDB4 /* FeedbackService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

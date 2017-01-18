@@ -3,6 +3,7 @@ import Localize_Swift
 
 class FeedbackVC: BaseModalVC {
     private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
+    private let feedbackService: FeedbackService = serviceLocator.get(FeedbackService.self)
 
     private let UNSENDED_ALERT_TEXT = "You haven't send your review. Is it ok?"
     private let IGNORE_BUTTON_TITLE = "Don't send"
@@ -74,15 +75,20 @@ class FeedbackVC: BaseModalVC {
     }
 
     @IBAction func sendPressed(_ sender: AnyObject) {
-        if (sendFeedback()) {
-            feedbackInput.text = ""
+        feedbackService.sendFeedback(fromEmail: emailInput.text!, text: feedbackInput.text) {
+            success -> Void in
+                DispatchQueue.main.async {
+                    if (success) {
+                        self.feedbackInput.text = ""
 
-            WTFOneButtonAlert.show(SUCCESS_SEND_TEXT.localized(), message: "") { () -> Void in
-                super.closeWindow()
+                        WTFOneButtonAlert.show(self.SUCCESS_SEND_TEXT.localized(), message: "") { () -> Void in
+                            super.closeWindow()
+                        }
+                    } else {
+                        WTFOneButtonAlert.show(self.ERROR_SEND_TEXT.localized(), message: "")
+                    }
+                }
             }
-        } else {
-            WTFOneButtonAlert.show(ERROR_SEND_TEXT.localized(), message: "")
-        }
     }
 
     private func showUnsendedTextDialog() {
@@ -93,10 +99,6 @@ class FeedbackVC: BaseModalVC {
                     super.closeWindow()
                 }
         )
-    }
-
-    private func sendFeedback() -> Bool {
-        return true
     }
 
     private func loadFeedback() {
