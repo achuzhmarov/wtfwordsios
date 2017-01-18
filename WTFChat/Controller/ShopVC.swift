@@ -80,9 +80,9 @@ class ShopVC: BaseModalVC {
 
         addPressedHandlersForProducts()
 
-        freeHintsBuyButton.setTitle(VIEW_AD_TITLE, for: UIControlState())
-        dailyHintsRestoreButton.setTitle(RESTORE_BUTTON_TITLE, for: UIControlState())
-        backButton.setTitle(BACK_TEXT, for: UIControlState())
+        freeHintsBuyButton.setTitleWithoutAnimation(VIEW_AD_TITLE)
+        dailyHintsRestoreButton.setTitleWithoutAnimation(RESTORE_BUTTON_TITLE)
+        backButton.setTitleWithoutAnimation(BACK_TEXT)
 
         hintsTitle.text = HINTS_TEXT + " "
         buyHintsTitle.text = BUY_HINTS_TEXT
@@ -180,14 +180,14 @@ class ShopVC: BaseModalVC {
     fileprivate func updateProductButtons() {
         for (productId, productButton) in productButtons {
             if (inAppService.isPurchased(productId)) {
-                productButton.setTitle(PAID_TITLE, for: UIControlState())
+                productButton.setTitleWithoutAnimation(PAID_TITLE)
                 productButton.updateGradient(Gradient.Success)
             } else if inAppService.canPurchase(productId) {
                 let priceString = inAppService.getProductPrice(productId)
-                productButton.setTitle(priceString, for: UIControlState())
+                productButton.setTitleWithoutAnimation(priceString)
                 productButton.updateGradient(Gradient.Ciphered)
             } else {
-                productButton.setTitle("-", for: UIControlState())
+                productButton.setTitleWithoutAnimation("-")
                 productButton.updateGradient(Gradient.Ignored)
             }
         }

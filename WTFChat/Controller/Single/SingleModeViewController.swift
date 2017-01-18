@@ -41,7 +41,7 @@ class SingleModeViewController: BaseUIViewController {
 
         menuBorder.backgroundColor = Color.BackgroundDark
         _ = menuBackground.addLinearGradient(Gradient.BackgroundMenu)
-        menuButton.setTitle(MENU_TEXT, for: UIControlState())
+        menuButton.setTitleWithoutAnimation(MENU_TEXT)
     }
 
     override func viewDidAppear(_ animated: Bool) {

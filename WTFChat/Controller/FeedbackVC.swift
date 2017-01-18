@@ -10,7 +10,7 @@ class FeedbackVC: BaseModalVC {
     private let SUCCESS_SEND_TEXT = "Thank you for your feedback!"
     private let ERROR_SEND_TEXT = "There is a problem with internet connection. Please, try again later."
 
-    private let FOREWORD_TEXT = "Hello, my name is Artem. I have developed this app. Feel free to write me any kind of feedback you have - errors, shortcomings, new ideas and all other sort of things. I will really appreciate it. I want to make this app a lot better!"
+    private let FOREWORD_TEXT = "Hello, my name is Artem. I have developed this app. Feel free to write me any kind of feedback you have - errors, shortcomings, new ideas and all other sort of things. I will really appreciate it!"
     private let EMAIL_TITLE = "Email"
     private let EMAIL_PLACEHOLDER_TEXT = "Optional"
 
@@ -39,8 +39,8 @@ class FeedbackVC: BaseModalVC {
         emailLabel.text = EMAIL_TITLE.localized()
         emailInput.placeholder = EMAIL_PLACEHOLDER_TEXT.localized()
 
-        backButton.setTitle(BACK_BUTTON_TITLE.localized(), for: UIControlState())
-        sendButton.setTitle(SEND_BUTTON_TITLE.localized(), for: UIControlState())
+        backButton.setTitleWithoutAnimation(BACK_BUTTON_TITLE.localized())
+        sendButton.setTitleWithoutAnimation(SEND_BUTTON_TITLE.localized())
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
     }

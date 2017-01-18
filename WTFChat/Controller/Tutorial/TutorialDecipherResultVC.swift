@@ -8,7 +8,7 @@ class TutorialDecipherResultVC: DecipherResultVC {
     override func showResult() {
         super.showResult()
 
-        continueButton.setTitle(FINISH_BUTTON_TITLE.localized(), for: UIControlState())
+        continueButton.setTitleWithoutAnimation(FINISH_BUTTON_TITLE.localized())
 
         WTFOneButtonAlert.show(FINISH_MESSAGE.localized(),
                 message: "",

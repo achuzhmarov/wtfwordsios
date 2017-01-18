@@ -14,11 +14,11 @@ class DecipherResultVC: UIViewController, WordTappedComputer {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var wordsViewHorizontalConstraint: NSLayoutConstraint!
 
-    fileprivate let SUCCESS_TEXT = "Success".localized()
-    fileprivate let FAILED_TEXT = "Failed".localized()
-    fileprivate let CONTINUE_TEXT = "Continue".localized()
-    fileprivate let RETRY_TEXT = "Retry".localized()
-    fileprivate let BACK_TEXT = "Back".localized()
+    fileprivate let SUCCESS_TEXT = "Success"
+    fileprivate let FAILED_TEXT = "Failed"
+    fileprivate let CONTINUE_TEXT = "Continue"
+    fileprivate let RETRY_TEXT = "Retry"
+    fileprivate let BACK_TEXT = "Back"
 
     fileprivate var message: Message!
 
@@ -44,7 +44,7 @@ class DecipherResultVC: UIViewController, WordTappedComputer {
         resultLabel.layer.cornerRadius = 12
         resultLabel.textColor = Color.Text
 
-        backButton.setTitle(BACK_TEXT, for: UIControlState())
+        backButton.setTitleWithoutAnimation(BACK_TEXT.localized())
     }
 
     deinit {
@@ -113,15 +113,15 @@ class DecipherResultVC: UIViewController, WordTappedComputer {
 
     func showResult() {
         if (message.getMessageStatus() == .success) {
-            resultLabel.text = SUCCESS_TEXT
+            resultLabel.text = SUCCESS_TEXT.localized()
             resultLabel.addGradientToLabel(Gradient.Success)
-            continueButton.setTitle(CONTINUE_TEXT, for: UIControlState())
+            continueButton.setTitleWithoutAnimation(CONTINUE_TEXT.localized())
 
             audioService.playSound(.win)
         } else {
-            resultLabel.text = FAILED_TEXT
+            resultLabel.text = FAILED_TEXT.localized()
             resultLabel.addGradientToLabel(Gradient.Failed)
-            continueButton.setTitle(RETRY_TEXT, for: UIControlState())
+            continueButton.setTitleWithoutAnimation(RETRY_TEXT.localized())
 
             audioService.playSound(.lose)
 

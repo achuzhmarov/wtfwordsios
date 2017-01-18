@@ -128,6 +128,7 @@
 		3E37CAB6D7ECD63A50DCD40D /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE1FEB6473D153DA3909 /* Timer.swift */; };
 		3E37CABAD3A89DC73C0025E8 /* NetworkDecipherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C593A516E5A442D7C142 /* NetworkDecipherViewController.swift */; };
 		3E37CAC099A2F4C865A8A698 /* SingleMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CA002D08C6BD6690A3F3 /* SingleMessage.swift */; };
+		3E37CAC53104F6670857AD3D /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C929ED31DB77A0A40362 /* UIButton+Extension.swift */; };
 		3E37CAD76575F4FCF506839B /* CoreWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C9ED2D4796D1E2A18168 /* CoreWord.swift */; };
 		3E37CAD97E41E445A3F3BBD0 /* JSQMessagesTimestampFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CDBCEF2D8B93E65D48F4 /* JSQMessagesTimestampFormatter.m */; };
 		3E37CAE111B6ACDC2340E014 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C98636554709D1F080F3 /* KeychainWrapper.m */; };
@@ -357,6 +358,7 @@
 		3E37C901829DA46415047CD7 /* NameEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameEditViewController.swift; sourceTree = "<group>"; };
 		3E37C91189F2ABBD460E9BD9 /* options_prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = options_prod.plist; sourceTree = "<group>"; };
 		3E37C926E5C0E77FF7317639 /* BorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
+		3E37C929ED31DB77A0A40362 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		3E37C92A0A33E7071CBD987E /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		3E37C934002C4597510821FC /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		3E37C9345E8EF8761C913D7F /* AuthNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthNetworkService.swift; sourceTree = "<group>"; };
@@ -1015,6 +1017,7 @@
 				3E37C7907201437918DB3E8A /* UIBezierPath+Extension.swift */,
 				3E37CF41BA4821A442D3FC81 /* NSUserDefaults+Extension.swift */,
 				3E37CE77DB30EF0A1057CAD4 /* Bundle+Extension.swift */,
+				3E37C929ED31DB77A0A40362 /* UIButton+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1596,6 +1599,7 @@
 				3E37C617F46DD8E1280D43A8 /* DecipherInProgressVC+Hints.swift in Sources */,
 				3E37C1F72855EBB1D66F22F5 /* DecipherInProgressVC+Guess.swift in Sources */,
 				3E37C2827DFB52514C6E0090 /* FeedbackVC.swift in Sources */,
+				3E37CAC53104F6670857AD3D /* UIButton+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

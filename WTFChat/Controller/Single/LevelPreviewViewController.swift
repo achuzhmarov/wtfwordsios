@@ -58,8 +58,8 @@ class LevelPreviewViewController: BaseModalVC {
         difficultySelector.setTitle(CipherDifficulty.normal.description, forSegmentAt: CipherDifficulty.normal.rawValue)
         difficultySelector.setTitle(CipherDifficulty.hard.description, forSegmentAt: CipherDifficulty.hard.rawValue)
 
-        backButton.setTitle(BACK_BUTTON_TITLE, for: UIControlState())
-        startButton.setTitle(START_BUTTON_TITLE, for: UIControlState())
+        backButton.setTitleWithoutAnimation(BACK_BUTTON_TITLE)
+        startButton.setTitleWithoutAnimation(START_BUTTON_TITLE)
     }
 
     fileprivate func checkHardAvailability() {

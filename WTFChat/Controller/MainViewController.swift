@@ -34,13 +34,13 @@ class MainViewController: BaseUIViewController {
     }
 
     private func initTitles() {
-        tutorialButton.setTitle(TUTORIAL_TITLE.localized(), for: UIControlState())
-        singleModeButton.setTitle(SINGLE_MODE_TITLE.localized(), for: UIControlState())
-        shopButton.setTitle(SHOP_TITLE.localized(), for: UIControlState())
-        feedbackButton.setTitle(FEEDBACK_TITLE.localized(), for: UIControlState())
+        tutorialButton.setTitleWithoutAnimation(TUTORIAL_TITLE.localized())
+        singleModeButton.setTitleWithoutAnimation(SINGLE_MODE_TITLE.localized())
+        shopButton.setTitleWithoutAnimation(SHOP_TITLE.localized())
+        feedbackButton.setTitleWithoutAnimation(FEEDBACK_TITLE.localized())
 
         let currentLanguage = TextLanguage.getCurrentLanguage()
-        languageButton.setTitle(currentLanguage.buttonTitle, for: UIControlState())
+        languageButton.setTitleWithoutAnimation(currentLanguage.buttonTitle)
     }
 
     override func viewDidAppear(_ animated: Bool) {
