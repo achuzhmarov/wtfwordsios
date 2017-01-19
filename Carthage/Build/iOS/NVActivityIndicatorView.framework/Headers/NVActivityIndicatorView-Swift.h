@@ -115,14 +115,112 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # define SWIFT_UNAVAILABLE __attribute__((unavailable))
 #endif
 #if defined(__has_feature) && __has_feature(modules)
-@import Foundation;
+@import UIKit;
+@import CoreGraphics;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
+@class UIColor;
+@class UIFont;
+@class NSCoder;
 
-@interface NSNumber (SWIFT_EXTENSION(SwiftyJSON))
-@property (nonatomic, readonly) BOOL isBool;
+/**
+  Activity indicator view with nice animations
+*/
+SWIFT_CLASS("_TtC23NVActivityIndicatorView23NVActivityIndicatorView")
+@interface NVActivityIndicatorView : UIView
+/**
+  Default color. Default value is UIColor.whiteColor().
+*/
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) UIColor * _Nonnull DEFAULT_COLOR;)
++ (UIColor * _Nonnull)DEFAULT_COLOR;
++ (void)setDEFAULT_COLOR:(UIColor * _Nonnull)value;
+/**
+  Default padding. Default value is 0.
+*/
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) CGFloat DEFAULT_PADDING;)
++ (CGFloat)DEFAULT_PADDING;
++ (void)setDEFAULT_PADDING:(CGFloat)value;
+/**
+  Default size of activity indicator view in UI blocker. Default value is 60x60.
+*/
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) CGSize DEFAULT_BLOCKER_SIZE;)
++ (CGSize)DEFAULT_BLOCKER_SIZE;
++ (void)setDEFAULT_BLOCKER_SIZE:(CGSize)value;
+/**
+  Default display time threshold to actually display UI blocker. Default value is 0 ms.
+*/
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) NSInteger DEFAULT_BLOCKER_DISPLAY_TIME_THRESHOLD;)
++ (NSInteger)DEFAULT_BLOCKER_DISPLAY_TIME_THRESHOLD;
++ (void)setDEFAULT_BLOCKER_DISPLAY_TIME_THRESHOLD:(NSInteger)value;
+/**
+  Default minimum display time of UI blocker. Default value is 0 ms.
+*/
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) NSInteger DEFAULT_BLOCKER_MINIMUM_DISPLAY_TIME;)
++ (NSInteger)DEFAULT_BLOCKER_MINIMUM_DISPLAY_TIME;
++ (void)setDEFAULT_BLOCKER_MINIMUM_DISPLAY_TIME:(NSInteger)value;
+/**
+  Default message displayed in UI blocker. Default value is nil.
+*/
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) NSString * _Nullable DEFAULT_BLOCKER_MESSAGE;)
++ (NSString * _Nullable)DEFAULT_BLOCKER_MESSAGE;
++ (void)setDEFAULT_BLOCKER_MESSAGE:(NSString * _Nullable)value;
+/**
+  Default font of message displayed in UI blocker. Default value is bold system font, size 20.
+*/
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) UIFont * _Nonnull DEFAULT_BLOCKER_MESSAGE_FONT;)
++ (UIFont * _Nonnull)DEFAULT_BLOCKER_MESSAGE_FONT;
++ (void)setDEFAULT_BLOCKER_MESSAGE_FONT:(UIFont * _Nonnull)value;
+/**
+  Default background color of UI blocker. Default value is UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+*/
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) UIColor * _Nonnull DEFAULT_BLOCKER_BACKGROUND_COLOR;)
++ (UIColor * _Nonnull)DEFAULT_BLOCKER_BACKGROUND_COLOR;
++ (void)setDEFAULT_BLOCKER_BACKGROUND_COLOR:(UIColor * _Nonnull)value;
+/**
+  Color of activity indicator view.
+*/
+@property (nonatomic, strong) UIColor * _Nonnull color;
+/**
+  Padding of activity indicator view.
+*/
+@property (nonatomic) CGFloat padding;
+/**
+  Current status of animation, read-only.
+*/
+@property (nonatomic, readonly) BOOL animating;
+/**
+  Current status of animation, read-only.
+*/
+@property (nonatomic, readonly) BOOL isAnimating;
+/**
+  Returns an object initialized from data in a given unarchiver.
+  self, initialized using the data in decoder.
+  \param decoder an unarchiver object.
+
+
+  returns:
+  self, initialized using the data in decoder.
+*/
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+/**
+  Returns the natural size for the receiving view, considering only properties of the view itself.
+  A size indicating the natural size for the receiving view based on its intrinsic properties.
+
+  returns:
+  A size indicating the natural size for the receiving view based on its intrinsic properties.
+*/
+@property (nonatomic, readonly) CGSize intrinsicContentSize;
+/**
+  Start animating.
+*/
+- (void)startAnimating;
+/**
+  Stop animating.
+*/
+- (void)stopAnimating;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 
 #pragma clang diagnostic pop

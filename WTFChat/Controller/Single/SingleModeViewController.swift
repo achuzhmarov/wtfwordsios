@@ -1,7 +1,7 @@
 import Foundation
 import Localize_Swift
 
-class SingleModeViewController: BaseUIViewController {
+class SingleModeViewController: BaseFullVC {
     private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService.self)
     private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
     private let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService.self)

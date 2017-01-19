@@ -1,6 +1,6 @@
 import Foundation
 
-class BaseUIViewController: UIViewController {
+class BaseFullVC: BaseVC {
     private var gradientLayer: CAGradientLayer?
 
     //private static let backgroundImage = UIImage(named: "background")!
@@ -36,9 +36,5 @@ class BaseUIViewController: UIViewController {
 
     override var prefersStatusBarHidden : Bool {
         return true
-    }
-
-    func dismissKeyboard() {
-        self.view.endEditing(true)
     }
 }

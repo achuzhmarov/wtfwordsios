@@ -8,7 +8,7 @@
         <!--BaseUI View Controller-->
         <scene sceneID="Oqp-1J-twN">
             <objects>
-                <viewController id="9cR-Vn-SLL" customClass="BaseUIViewController" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9cR-Vn-SLL" customClass="BaseFullVC" customModule="WTFChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YCC-I7-chw"/>
                         <viewControllerLayoutGuide type="bottom" id="AfN-h6-JRe"/>

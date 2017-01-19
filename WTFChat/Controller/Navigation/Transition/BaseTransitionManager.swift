@@ -35,7 +35,7 @@ class BaseTransitionManager: UIPercentDrivenInteractiveTransition,
 
         // fix for bug in iOS 9 - if rotated after transition
         toView.frame.size = transitionContext.finalFrame(for: screens.to).size
-        (screens.to as? BaseUIViewController)?.updateBackgroundGradient(toView.frame.size)
+        (screens.to as? BaseFullVC)?.updateBackgroundGradient(toView.frame.size)
 
         addViewsToContainer()
 

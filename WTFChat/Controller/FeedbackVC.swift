@@ -1,5 +1,6 @@
 import Foundation
 import Localize_Swift
+import NVActivityIndicatorView
 
 class FeedbackVC: BaseModalVC {
     private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
@@ -17,6 +18,8 @@ class FeedbackVC: BaseModalVC {
 
     private let BACK_BUTTON_TITLE = "Back"
     private let SEND_BUTTON_TITLE = "Send"
+
+    private let LOADING_TEXT = "Sending..."
 
     @IBOutlet weak var backButton: BorderedButton!
     @IBOutlet weak var sendButton: BorderedButton!
@@ -75,9 +78,13 @@ class FeedbackVC: BaseModalVC {
     }
 
     @IBAction func sendPressed(_ sender: AnyObject) {
+        startLoader(LOADING_TEXT)
+
         feedbackService.sendFeedback(fromEmail: emailInput.text!, text: feedbackInput.text) {
             success -> Void in
                 DispatchQueue.main.async {
+                    self.stopLoader()
+
                     if (success) {
                         self.feedbackInput.text = ""
 

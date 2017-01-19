@@ -1,6 +1,7 @@
 import Foundation
+import NVActivityIndicatorView
 
-class BaseModalVC: UIViewController {
+class BaseModalVC: BaseVC {
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var backgroundViewWidthConstraint: NSLayoutConstraint?
 
@@ -57,10 +58,6 @@ class BaseModalVC: UIViewController {
     @IBAction func closeWindow(_ sender: AnyObject? = nil) {
         modalWillClose()
         presentingViewController?.dismiss(animated: true, completion: modalClosed)
-    }
-
-    func dismissKeyboard() {
-        self.view.endEditing(true)
     }
 
     func modalWillClose() {

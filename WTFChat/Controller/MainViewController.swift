@@ -1,7 +1,7 @@
 import Foundation
 import Localize_Swift
 
-class MainViewController: BaseUIViewController {
+class MainViewController: BaseFullVC {
     private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
     private let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService.self)
     private let textCategoryService: TextCategoryService = serviceLocator.get(TextCategoryService.self)

@@ -5,6 +5,11 @@
 "Ok" = "Ок";
 "Email" = "Email";
 
+//Loader
+"Loading" = "Загрузка";
+"Waiting" = "Ожидание";
+"Sending" = "Отправка";
+
 // Menu
 "Tutorial" = "Обучение";
 "Single mode" = "Одиночная игра";
