@@ -23,16 +23,14 @@ class FeedbackNetworkService: Service {
             if let requestError = error {
                 completion(false, requestError)
             } else {
-                if let responseJson = json {
-                    do {
-                        if let success = responseJson["success"].bool {
-                            completion(success, nil)
-                        } else {
-                            throw responseJson["success"].error!
-                        }
-                    } catch let error as NSError {
-                        completion(false, error)
+                do {
+                    if let success = json!["success"].bool {
+                        completion(success, nil)
+                    } else {
+                        throw json!["success"].error!
                     }
+                } catch let error as NSError {
+                    completion(false, error)
                 }
             }
         }

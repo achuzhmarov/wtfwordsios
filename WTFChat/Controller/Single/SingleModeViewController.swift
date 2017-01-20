@@ -5,6 +5,7 @@ class SingleModeViewController: BaseFullVC {
     private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService.self)
     private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
     private let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService.self)
+    private let personalRewardService: PersonalRewardService = serviceLocator.get(PersonalRewardService.self)
 
     @IBOutlet weak var menuBorder: UIView!
     @IBOutlet weak var menuBackground: UIView!
@@ -48,6 +49,7 @@ class SingleModeViewController: BaseFullVC {
         super.viewDidAppear(animated)
 
         dailyHintsService.computeDailyWtf()
+        personalRewardService.checkPersonalReward()
     }
 
     func cipherViewUpdated(_ newController: CipherViewController) {

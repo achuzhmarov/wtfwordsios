@@ -70,8 +70,10 @@ class NetworkService: Service, URLSessionDelegate {
             if error != nil && repeats > 0 {
                 //in case of a error, try again
                 self.sendPostRequestWithRepeats(request, repeats: repeats - 1, completion: completion)
+            } else if let responseJson = json {
+                completion(responseJson, error)
             } else {
-                completion(json, error)
+                completion(nil, NSError(code: 1, message: "Error while parsing json response"))
             }
         }
     }

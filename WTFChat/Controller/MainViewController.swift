@@ -4,6 +4,7 @@ import Localize_Swift
 class MainViewController: BaseFullVC {
     private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
     private let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService.self)
+    private let personalRewardService: PersonalRewardService = serviceLocator.get(PersonalRewardService.self)
     private let textCategoryService: TextCategoryService = serviceLocator.get(TextCategoryService.self)
 
     private let TUTORIAL_TITLE = "Tutorial"
@@ -47,6 +48,7 @@ class MainViewController: BaseFullVC {
         super.viewDidAppear(animated)
 
         dailyHintsService.computeDailyWtf()
+        personalRewardService.checkPersonalReward()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

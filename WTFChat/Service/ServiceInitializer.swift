@@ -19,6 +19,7 @@ class ServiceInitializer {
         let iosNetworkService = IosNetworkService(networkService: networkService)
         let inAppNetworkService = InAppNetworkService(networkService: networkService)
         let feedbackNetworkService = FeedbackNetworkService(networkService: networkService)
+        let personalRewardNetworkService = PersonalRewardNetworkService(networkService: networkService)
 
         let iosService = IosService(iosNetworkService: iosNetworkService)
         let expService = ExpService()
@@ -76,8 +77,14 @@ class ServiceInitializer {
                 currentUserService: currentUserService
         )
 
+        let personalRewardService = PersonalRewardService(
+                personalRewardNetworkService: personalRewardNetworkService,
+                currentUserService: currentUserService
+        )
+
         //network
         serviceLocator.add(
+            personalRewardService,
             feedbackService,
             inAppService,
             iosService,

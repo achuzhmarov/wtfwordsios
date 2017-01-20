@@ -21,16 +21,14 @@ class InAppNetworkService: Service {
             if let requestError = error {
                 completion(false, requestError)
             } else {
-                if let responseJson = json {
-                    do {
-                        if let valid = responseJson["valid"].bool {
-                            completion(valid, nil)
-                        } else {
-                            throw responseJson["valid"].error!
-                        }
-                    } catch let error as NSError {
-                        completion(false, error)
+                do {
+                    if let valid = json!["valid"].bool {
+                        completion(valid, nil)
+                    } else {
+                        throw json!["valid"].error!
                     }
+                } catch let error as NSError {
+                    completion(false, error)
                 }
             }
         }
