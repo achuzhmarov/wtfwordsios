@@ -13,7 +13,7 @@ class FeedbackService: Service {
     func sendFeedback(fromEmail: String, text: String,
             completion:@escaping (_ success: Bool) -> Void) {
 
-        let id = currentUserService.getUserName()
+        let id = currentUserService.getUserLogin()
 
         feedbackNetworkService.sendFeedback(fromEmail: fromEmail, text: text, id: id) {
             (success, error) -> Void in

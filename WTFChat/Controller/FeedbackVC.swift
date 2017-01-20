@@ -9,7 +9,7 @@ class FeedbackVC: BaseModalVC {
     private let UNSENDED_ALERT_TEXT = "You haven't send your review. Is it ok?"
     private let IGNORE_BUTTON_TITLE = "Don't send"
 
-    private let SUCCESS_SEND_TEXT = "Thank you for your feedback!"
+    private let SUCCESS_SEND_TEXT = "Thanks for your feedback!"
     private let ERROR_SEND_TEXT = "There is a problem with internet connection. Please, try again later."
 
     private let FOREWORD_TEXT = "Hello, my name is Artem. I have developed this app. Feel free to write me any kind of feedback you have - errors, shortcomings, new ideas and all other sort of things. I will really appreciate it!"
@@ -19,7 +19,9 @@ class FeedbackVC: BaseModalVC {
     private let BACK_BUTTON_TITLE = "Back"
     private let SEND_BUTTON_TITLE = "Send"
 
-    private let LOADING_TEXT = "Sending..."
+    private let EMPTY_FEEDBACK_TEXT = "Your feedback is empty!"
+
+    private let LOADING_TEXT = "Sending"
 
     @IBOutlet weak var backButton: BorderedButton!
     @IBOutlet weak var sendButton: BorderedButton!
@@ -78,6 +80,11 @@ class FeedbackVC: BaseModalVC {
     }
 
     @IBAction func sendPressed(_ sender: AnyObject) {
+        if (feedbackInput.text == "") {
+            WTFOneButtonAlert.show(EMPTY_FEEDBACK_TEXT.localized(), message: "")
+            return
+        }
+
         startLoader(LOADING_TEXT)
 
         feedbackService.sendFeedback(fromEmail: emailInput.text!, text: feedbackInput.text) {

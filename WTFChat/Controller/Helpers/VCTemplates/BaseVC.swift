@@ -3,7 +3,7 @@ import NVActivityIndicatorView
 import Localize_Swift
 
 class BaseVC: UIViewController, NVActivityIndicatorViewable {
-    private let LOADING_TEXT = "Loading..."
+    private let LOADING_TEXT = "Loading"
 
     func dismissKeyboard() {
         self.view.endEditing(true)
@@ -15,7 +15,7 @@ class BaseVC: UIViewController, NVActivityIndicatorViewable {
 
     func startLoader(_ message: String) {
         let size = CGSize(width: 30, height: 30)
-        startAnimating(size, message: message.localized(), type: NVActivityIndicatorType(rawValue: 6)!)
+        startAnimating(size, message: message.localized() + "...", type: NVActivityIndicatorType(rawValue: 6)!)
     }
 
     func stopLoader() {
