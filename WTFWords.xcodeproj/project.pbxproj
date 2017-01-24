@@ -2045,7 +2045,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "WTFChat/WTFWords-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
-				WEB_SERVICE_URL = "https://dev.wtfwords.com:41041/";
+				WEB_SERVICE_URL = "https://wtfwords.com:41041/";
 			};
 			name = Release;
 		};
