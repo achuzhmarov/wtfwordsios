@@ -25,7 +25,7 @@
 		3E37C1767BCB23EE740A1F12 /* InAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C5E0D3BB7755C97ABFBA /* InAppService.swift */; };
 		3E37C17ACC2F2ED06AED6521 /* ReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C1DA55FF29C403586C78 /* ReplaceSegue.swift */; };
 		3E37C17C96C893C10D7A2EA4 /* build_dev.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3E37CD9AF7E90662FCC9A538 /* build_dev.sh */; };
-		3E37C1835F05FB7DCFDA1FCE /* PersonalReward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C031CD0F4B856B098712 /* PersonalReward.swift */; };
+		3E37C1835F05FB7DCFDA1FCE /* Reward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C031CD0F4B856B098712 /* Reward.swift */; };
 		3E37C1A361A0148FD424D200 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C0AF917F7D75656F81D6 /* NotificationService.swift */; };
 		3E37C1B3B0E7DAF850D03DA8 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C663308F491467F1D46D /* UserService.swift */; };
 		3E37C1BCF1C940EFC4E4397C /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE63F3AB49391E2AB456 /* CurrentUserService.swift */; };
@@ -84,6 +84,7 @@
 		3E37C5A0D2FBA8E7270690AB /* FeedbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C920393D405CB4687CE7 /* FeedbackService.swift */; };
 		3E37C5A1A6E0ACFDD0F4F67A /* CoreLevel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CB9BD06B805CB468863F /* CoreLevel+CoreDataProperties.swift */; };
 		3E37C5C8FACADD34E92E907F /* DecipherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C63E89380D93121CA96F /* DecipherViewController.swift */; };
+		3E37C5DC28A8EB7DD6F215E6 /* RewardCodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C2EE68BF852FC1ABC26D /* RewardCodeService.swift */; };
 		3E37C5F49E34F55CF99CBF2A /* BaseMessageTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CB1A5354E843DB737CEF /* BaseMessageTableView.swift */; };
 		3E37C61073350DD3DDA483AC /* JsonRemoteMessageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CA98C78155A2DD7BF23D /* JsonRemoteMessageParser.swift */; };
 		3E37C610A7533AD52FB60E11 /* SingleModeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C98D2B9F4E893CD4D339 /* SingleModeService.swift */; };
@@ -110,7 +111,7 @@
 		3E37C7DF5B97C966D2012E03 /* Cipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C30F426379E0470AF162 /* Cipher.swift */; };
 		3E37C7F90BA4A38645273C2D /* CurrentUserService+Getters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C659BF770984773312E8 /* CurrentUserService+Getters.swift */; };
 		3E37C840254F6AB3FFF9E844 /* AudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CC18034686E90B6C6BC8 /* AudioService.swift */; };
-		3E37C841CB9438A9EDDD0D6F /* JsonPersonalRewardParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C2ECCD90C022A07FD870 /* JsonPersonalRewardParser.swift */; };
+		3E37C841CB9438A9EDDD0D6F /* JsonRewardParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C2ECCD90C022A07FD870 /* JsonRewardParser.swift */; };
 		3E37C85D3E39EADB0DBE3DB9 /* RoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C950EF592E3489F22F2A /* RoundedLabel.swift */; };
 		3E37C8CD3D27B734289EB6E4 /* IAPProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CA609C53E8BEDAF2131B /* IAPProducts.swift */; };
 		3E37C8E661BE5E44E14BD0C8 /* SingleMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C1FCD6FEBD8200D5CB07 /* SingleMessageViewController.swift */; };
@@ -146,6 +147,7 @@
 		3E37CB6A910BE40A55855DC2 /* DecipherResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C309D678937A0BD83AB6 /* DecipherResultVC.swift */; };
 		3E37CB72D2D8091C6A7C4D32 /* CoreMessage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C36B4FCFE7E98ECF47C9 /* CoreMessage+CoreDataProperties.swift */; };
 		3E37CB90CD7BE8932C6217C6 /* RandomCutterCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C43AF8FAE39CECC48749 /* RandomCutterCipher.swift */; };
+		3E37CB914C891E10593FBF55 /* RewardCodeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C8B09A300EBD7A2884BC /* RewardCodeNetworkService.swift */; };
 		3E37CBA27D584A8614D5D3F4 /* SingleModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CE3CB1F5474963443512 /* SingleModeViewController.swift */; };
 		3E37CBB9C4FEEE672EA59198 /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37CCF50294A21336CBD706 /* NSDate+Extension.swift */; };
 		3E37CBBA99E46C822DA5700F /* TalkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37C01698FC89E87643BD30 /* TalkService.swift */; };
@@ -258,7 +260,7 @@
 /* Begin PBXFileReference section */
 		3E37C000FF65106B6402CCD1 /* CoreSingleMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreSingleMessage.swift; sourceTree = "<group>"; };
 		3E37C01698FC89E87643BD30 /* TalkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkService.swift; sourceTree = "<group>"; };
-		3E37C031CD0F4B856B098712 /* PersonalReward.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalReward.swift; sourceTree = "<group>"; };
+		3E37C031CD0F4B856B098712 /* Reward.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reward.swift; sourceTree = "<group>"; };
 		3E37C055C2030CF9CB938BF4 /* FadeTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeTransitionManager.swift; sourceTree = "<group>"; };
 		3E37C05B3046CE098B9421E5 /* TutorialDecipherInProgressByLettersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialDecipherInProgressByLettersVC.swift; sourceTree = "<group>"; };
 		3E37C0AF917F7D75656F81D6 /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -295,7 +297,8 @@
 		3E37C2D1E0401C16DCF763EC /* StopImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopImage.swift; sourceTree = "<group>"; };
 		3E37C2DAC9B9B5633D2C4302 /* CurrentUserService+Setters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CurrentUserService+Setters.swift"; sourceTree = "<group>"; };
 		3E37C2E2E3C2F4A76412E732 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
-		3E37C2ECCD90C022A07FD870 /* JsonPersonalRewardParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonPersonalRewardParser.swift; sourceTree = "<group>"; };
+		3E37C2ECCD90C022A07FD870 /* JsonRewardParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonRewardParser.swift; sourceTree = "<group>"; };
+		3E37C2EE68BF852FC1ABC26D /* RewardCodeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardCodeService.swift; sourceTree = "<group>"; };
 		3E37C2F706C0F9122722CD66 /* SendMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMessageViewController.swift; sourceTree = "<group>"; };
 		3E37C309D678937A0BD83AB6 /* DecipherResultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecipherResultVC.swift; sourceTree = "<group>"; };
 		3E37C30F315D3B8F4CCD804D /* SingleMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleMessageCell.swift; sourceTree = "<group>"; };
@@ -366,6 +369,7 @@
 		3E37C890E5A751082A2A8251 /* JSQMessageAvatarImageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessageAvatarImageDataSource.h; sourceTree = "<group>"; };
 		3E37C895CC30DBCCDDC10D35 /* FeedbackNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackNetworkService.swift; sourceTree = "<group>"; };
 		3E37C89724177FD827960FEB /* InAppNetworkServiceOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppNetworkServiceOld.swift; sourceTree = "<group>"; };
+		3E37C8B09A300EBD7A2884BC /* RewardCodeNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardCodeNetworkService.swift; sourceTree = "<group>"; };
 		3E37C8F59166B827856A746E /* IosNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IosNetworkService.swift; sourceTree = "<group>"; };
 		3E37C901829DA46415047CD7 /* NameEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameEditViewController.swift; sourceTree = "<group>"; };
 		3E37C91189F2ABBD460E9BD9 /* options_prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = options_prod.plist; sourceTree = "<group>"; };
@@ -589,6 +593,7 @@
 				3E37CAA7061C3C502A20EF3E /* NetworkService.swift */,
 				3E37C895CC30DBCCDDC10D35 /* FeedbackNetworkService.swift */,
 				3E37CC501B393192ACB32F26 /* PersonalRewardNetworkService.swift */,
+				3E37C8B09A300EBD7A2884BC /* RewardCodeNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -760,7 +765,7 @@
 				3E37CAE07249D8C9B73719EE /* Message */,
 				3E37C93ABDD8DEAF3A0ED13C /* Single */,
 				3E37C480FB16762B3B4C359B /* HintType.swift */,
-				3E37C031CD0F4B856B098712 /* PersonalReward.swift */,
+				3E37C031CD0F4B856B098712 /* Reward.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -1060,7 +1065,7 @@
 				3E37C187B0E332A553524FF3 /* JsonUserParser.swift */,
 				3E37CA1F2A6928198011598E /* JsonFriendInfoParser.swift */,
 				3E37C85D94EF27664AF12B6F /* JsonWordParser.swift */,
-				3E37C2ECCD90C022A07FD870 /* JsonPersonalRewardParser.swift */,
+				3E37C2ECCD90C022A07FD870 /* JsonRewardParser.swift */,
 			);
 			path = JsonParser;
 			sourceTree = "<group>";
@@ -1071,6 +1076,7 @@
 				3E37C5E0D3BB7755C97ABFBA /* InAppService.swift */,
 				3E37C4769B3A2C87BD1F60A8 /* PersonalRewardService.swift */,
 				3E37C920393D405CB4687CE7 /* FeedbackService.swift */,
+				3E37C2EE68BF852FC1ABC26D /* RewardCodeService.swift */,
 			);
 			path = NetworkBased;
 			sourceTree = "<group>";
@@ -1638,9 +1644,11 @@
 				3E37C78C2D08F22BEDB6F68C /* BaseModalVC.swift in Sources */,
 				3E37C98C1D0F4E7215C707F0 /* BaseVC.swift in Sources */,
 				3E37CBEB1C7933640BA22F88 /* PersonalRewardNetworkService.swift in Sources */,
-				3E37C1835F05FB7DCFDA1FCE /* PersonalReward.swift in Sources */,
-				3E37C841CB9438A9EDDD0D6F /* JsonPersonalRewardParser.swift in Sources */,
+				3E37C1835F05FB7DCFDA1FCE /* Reward.swift in Sources */,
+				3E37C841CB9438A9EDDD0D6F /* JsonRewardParser.swift in Sources */,
 				3E37C5A0D2FBA8E7270690AB /* FeedbackService.swift in Sources */,
+				3E37CB914C891E10593FBF55 /* RewardCodeNetworkService.swift in Sources */,
+				3E37C5DC28A8EB7DD6F215E6 /* RewardCodeService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

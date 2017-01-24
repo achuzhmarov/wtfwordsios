@@ -1,10 +1,11 @@
 import Foundation
 import Localize_Swift
 
-class ShopVC: BaseModalVC {
+class ShopVC: BaseModalVC, UITextFieldDelegate {
     private let inAppService: InAppService = serviceLocator.get(InAppService.self)
     private let adService: AdService = serviceLocator.get(AdService.self)
     private let currentUserService: CurrentUserService = serviceLocator.get(CurrentUserService.self)
+    private let rewardCodeService: RewardCodeService = serviceLocator.get(RewardCodeService.self)
 
     @IBOutlet weak var backButton: BorderedButton!
 
@@ -17,6 +18,10 @@ class ShopVC: BaseModalVC {
     @IBOutlet weak var dailyHintsTitle: UILabel!
     @IBOutlet weak var dailyHintsBuyButton: BorderedButton!
     @IBOutlet weak var dailyHintsRestoreButton: BorderedButton!
+
+    @IBOutlet weak var rewardCodeTitle: UILabel!
+    @IBOutlet weak var rewardCodeInput: UITextField!
+    @IBOutlet weak var rewardCodeButton: BorderedButton!
 
     @IBOutlet weak var hints1Title: UILabel!
     @IBOutlet weak var hints1BuyButton: BorderedButton!
@@ -31,24 +36,39 @@ class ShopVC: BaseModalVC {
     @IBOutlet weak var hints6Title: UILabel!
     @IBOutlet weak var hints6BuyButton: BorderedButton!
 
-    private let CONNECTION_ERROR_TEXT = "Please, check if you have a stable internet connection. Then use 'Restore' button. If you still don't get your purchase, please, restart the app.".localized()
-    private let RESTORE_TITLE = "Restore purchased content?".localized()
-    private let RESTORE_BUTTON_TITLE = "Restore".localized()
-    private let PAID_TITLE = "Paid".localized()
-    private let NO_ADS_TITLE = "No more ads".localized()
-    private let NO_ADS_MESSAGE = "Try again later".localized()
-    private let ERROR_TITLE = "Error".localized()
-    private let SUCCESS_TTITLE = "Success".localized()
-    private let UNKNOWN_ERROR_TEXT = "Unknown error occured.".localized()
-    private let BUY_ERROR_TEXT = "Can't buy".localized()
-    private let RESTORED_SUCCESSFULLY_TEXT = "Restored successfully".localized()
-    private let RESTORED_ERROR_TEXT = "can't be restored".localized()
-    private let VIEW_AD_TITLE = "View Ad".localized()
-    private let BACK_TEXT = "Back".localized()
-    private let HINTS_TEXT = "WTF:".localized()
-    private let BUY_HINTS_TEXT = "Buy WTF".localized()
-    private let FREE_HINTS_TEXT = "Get Free WTF".localized()
-    private let DAILY_HINTS_TEXT = "X2 Daily WTF".localized()
+    @IBOutlet weak var modalWindowHeightConstaint: NSLayoutConstraint!
+    @IBOutlet weak var modalWindowTopPaddingConstraint: NSLayoutConstraint!
+
+    private let CONNECTION_ERROR_TEXT = "Please, check if you have a stable internet connection. Then use 'Restore' button. If you still don't get your purchase, please, restart the app."
+
+    private let RESTORE_TITLE = "Restore purchased content?"
+    private let RESTORE_BUTTON_TITLE = "Restore"
+    private let PAID_TITLE = "Paid"
+
+    private let NO_ADS_TITLE = "No more ads"
+    private let NO_ADS_MESSAGE = "Try again later"
+
+    private let ERROR_TITLE = "Error"
+    private let SUCCESS_TTITLE = "Success"
+    private let UNKNOWN_ERROR_TEXT = "Unknown error occured."
+    private let BUY_ERROR_TEXT = "Can't buy"
+
+    private let RESTORED_SUCCESSFULLY_TEXT = "Restored successfully"
+    private let RESTORED_ERROR_TEXT = "can't be restored"
+
+    private let VIEW_AD_TITLE = "View Ad"
+    private let BACK_TEXT = "Back"
+    private let HINTS_TEXT = "WTF:"
+
+    private let BUY_HINTS_TEXT = "Buy WTF"
+    private let FREE_HINTS_TEXT = "Get Free WTF"
+    private let DAILY_HINTS_TEXT = "X2 Daily WTF"
+
+    private let REWARD_CODE_TEXT = "Enter Code"
+    private let REWARD_CODE_BUTTON_TITLE = "Redeem"
+    private let EMPTY_REWARD_CODE_MESSAGE = "Please, enter your reward code!"
+
+    private let LOADING_TEXT = "Sending"
 
     private var productTitles = [ProductIdentifier: UILabel]()
     private var productButtons = [ProductIdentifier: BorderedButton]()
@@ -80,14 +100,16 @@ class ShopVC: BaseModalVC {
 
         addPressedHandlersForProducts()
 
-        freeHintsBuyButton.setTitleWithoutAnimation(VIEW_AD_TITLE)
-        dailyHintsRestoreButton.setTitleWithoutAnimation(RESTORE_BUTTON_TITLE)
-        backButton.setTitleWithoutAnimation(BACK_TEXT)
+        freeHintsBuyButton.setTitleWithoutAnimation(VIEW_AD_TITLE.localized())
+        dailyHintsRestoreButton.setTitleWithoutAnimation(RESTORE_BUTTON_TITLE.localized())
+        rewardCodeButton.setTitleWithoutAnimation(REWARD_CODE_BUTTON_TITLE.localized())
+        backButton.setTitleWithoutAnimation(BACK_TEXT.localized())
 
-        hintsTitle.text = HINTS_TEXT + " "
-        buyHintsTitle.text = BUY_HINTS_TEXT
-        freeHintsTitle.text = FREE_HINTS_TEXT
-        dailyHintsTitle.text = DAILY_HINTS_TEXT
+        hintsTitle.text = HINTS_TEXT.localized() + " "
+        buyHintsTitle.text = BUY_HINTS_TEXT.localized()
+        freeHintsTitle.text = FREE_HINTS_TEXT.localized()
+        dailyHintsTitle.text = DAILY_HINTS_TEXT.localized()
+        rewardCodeTitle.text = REWARD_CODE_TEXT.localized()
 
         //resize font to get all text visible
         dailyHintsTitle.numberOfLines = 1
@@ -95,6 +117,17 @@ class ShopVC: BaseModalVC {
         dailyHintsTitle.lineBreakMode = .byClipping
 
         lastWtfCount = currentUserService.getUserWtf()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+
+        rewardCodeInput.delegate = self
+
+        view.layoutIfNeeded()
+        setModalTopPadding()
 
         reloadData()
     }
@@ -119,15 +152,37 @@ class ShopVC: BaseModalVC {
         NotificationCenter.default.removeObserver(self);
     }
 
-    fileprivate func addPressedHandlersForProducts() {
+    override func modalWillClose() {
+        dismissKeyboard()
+    }
+
+    func keyboardWillShow(_ notification: Notification) {
+        var info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        setModalTopPadding(keyboardHeight: keyboardFrame.size.height)
+    }
+
+    func keyboardWillHide(_ notification: Notification) {
+        setModalTopPadding()
+    }
+
+    func setModalTopPadding(keyboardHeight: CGFloat = 0) {
+        let topPadding = (view.frame.size.height - keyboardHeight - modalWindowHeightConstaint.constant) / CGFloat(2)
+        modalWindowTopPaddingConstraint.constant = topPadding
+
+        view.layoutIfNeeded()
+    }
+
+    private func addPressedHandlersForProducts() {
         for (productId, productButton) in productButtons {
             if inAppService.canPurchase(productId) && !inAppService.isPurchased(productId) {
-                productButton.addTarget(self, action: #selector(ShopVC.buyButtonPressed(_:)), for: .touchUpInside)
+                productButton.addTarget(self, action: #selector(self.buyButtonPressed), for: .touchUpInside)
             }
         }
 
-        dailyHintsRestoreButton.addTarget(self, action: #selector(ShopVC.restoreButtonPressed(_:)), for: .touchUpInside)
-        freeHintsBuyButton.addTarget(self, action: #selector(ShopVC.showAdAlert(_:)), for: .touchUpInside)
+        dailyHintsRestoreButton.addTarget(self, action: #selector(self.restoreButtonPressed), for: .touchUpInside)
+        freeHintsBuyButton.addTarget(self, action: #selector(self.showAdAlert), for: .touchUpInside)
+        rewardCodeButton.addTarget(self, action: #selector(self.redeemCode), for: .touchUpInside)
     }
 
     func buyButtonPressed(_ sender: BorderedButton) {
@@ -136,9 +191,9 @@ class ShopVC: BaseModalVC {
     }
 
     func restoreButtonPressed(_ sender: BorderedButton) {
-        WTFTwoButtonsAlert.show(RESTORE_TITLE,
+        WTFTwoButtonsAlert.show(RESTORE_TITLE.localized(),
                 message: "",
-                firstButtonTitle: RESTORE_BUTTON_TITLE) { () -> Void in
+                firstButtonTitle: RESTORE_BUTTON_TITLE.localized()) { () -> Void in
             self.isRestoreInProgress = true
             self.inAppService.restorePurchased()
         }
@@ -156,7 +211,7 @@ class ShopVC: BaseModalVC {
 
     func reloadData() {
         let newWtfCount = currentUserService.getUserWtf()
-        var hintsTitleText = HINTS_TEXT + " " + String(newWtfCount)
+        var hintsTitleText = HINTS_TEXT.localized() + " " + String(newWtfCount)
 
         if (lastWtfCount < newWtfCount) {
             let difference = newWtfCount - lastWtfCount
@@ -180,7 +235,7 @@ class ShopVC: BaseModalVC {
     fileprivate func updateProductButtons() {
         for (productId, productButton) in productButtons {
             if (inAppService.isPurchased(productId)) {
-                productButton.setTitleWithoutAnimation(PAID_TITLE)
+                productButton.setTitleWithoutAnimation(PAID_TITLE.localized())
                 productButton.updateGradient(Gradient.Success)
             } else if inAppService.canPurchase(productId) {
                 let priceString = inAppService.getProductPrice(productId)
@@ -212,9 +267,41 @@ class ShopVC: BaseModalVC {
                 self.reloadData()
             })
         } else {
-            WTFOneButtonAlert.show(NO_ADS_TITLE, message: NO_ADS_MESSAGE) { () -> Void in
+            WTFOneButtonAlert.show(NO_ADS_TITLE.localized(), message: NO_ADS_MESSAGE.localized()) { () -> Void in
                 self.reloadData()
             }
+        }
+    }
+
+    //delegate method for "return" pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        redeemCode()
+        return false
+    }
+
+    func redeemCodePressed(_ sender: BorderedButton) {
+        redeemCode()
+    }
+
+    func redeemCode() {
+        if (rewardCodeInput.text != "") {
+            startLoader(LOADING_TEXT.localized())
+
+            rewardCodeService.getRewardForCode(code: rewardCodeInput.text!) {
+                success in
+                    DispatchQueue.main.async {
+                        self.stopLoader()
+
+                        if (success) {
+                            self.rewardCodeInput.text = ""
+                            self.dismissKeyboard()
+                            self.reloadData()
+                        }
+                    }
+            }
+
+        } else {
+            WTFOneButtonAlert.show(EMPTY_REWARD_CODE_MESSAGE.localized())
         }
     }
 
@@ -231,13 +318,13 @@ class ShopVC: BaseModalVC {
             if let productTitle = inAppService.getProductTitle(productIdentifier) {
                 DispatchQueue.main.async(execute: {
                     self.reloadData()
-                    WTFOneButtonAlert.show(self.ERROR_TITLE, message: self.BUY_ERROR_TEXT + " " + productTitle + ". " + self.CONNECTION_ERROR_TEXT)
+                    WTFOneButtonAlert.show(self.ERROR_TITLE.localized(), message: self.BUY_ERROR_TEXT.localized() + " " + productTitle + ". " + self.CONNECTION_ERROR_TEXT.localized())
                 })
             }
         } else {
             DispatchQueue.main.async(execute: {
                 self.reloadData()
-                WTFOneButtonAlert.show(self.ERROR_TITLE, message: self.UNKNOWN_ERROR_TEXT + " " + self.CONNECTION_ERROR_TEXT)
+                WTFOneButtonAlert.show(self.ERROR_TITLE.localized(), message: self.UNKNOWN_ERROR_TEXT.localized() + " " + self.CONNECTION_ERROR_TEXT.localized())
             })
         }
     }
@@ -248,7 +335,7 @@ class ShopVC: BaseModalVC {
 
             if (self.isRestoreInProgress) {
                 self.isRestoreInProgress = false
-                WTFOneButtonAlert.show(self.SUCCESS_TTITLE, message: self.RESTORED_SUCCESSFULLY_TEXT)
+                WTFOneButtonAlert.show(self.SUCCESS_TTITLE.localized(), message: self.RESTORED_SUCCESSFULLY_TEXT.localized())
             }
         })
     }
@@ -262,7 +349,7 @@ class ShopVC: BaseModalVC {
 
                 if (self.isRestoreInProgress) {
                     self.isRestoreInProgress = false
-                    WTFOneButtonAlert.show(self.ERROR_TITLE, message: productTitle + " " + self.RESTORED_ERROR_TEXT)
+                    WTFOneButtonAlert.show(self.ERROR_TITLE.localized(), message: productTitle + " " + self.RESTORED_ERROR_TEXT.localized())
                 }
             })
         }

@@ -26,9 +26,7 @@ class PersonalRewardService: Service {
         }
     }
 
-    private func computePersonalReward(_ personalReward: PersonalReward) {
-
-
+    private func computePersonalReward(_ personalReward: Reward) {
         if (personalReward.hasReward) {
             currentUserService.addWtf(personalReward.wtfs)
             let title = GOT_WTF_TEXT.localized() + " " + String(personalReward.wtfs) + " WTF!"

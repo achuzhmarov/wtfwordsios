@@ -4,7 +4,7 @@ class CurrentUserService: Service {
     let iosService: IosService
     let expService: ExpService
 
-    let DAILY_MAX_AD_WTF = 10
+    let DAILY_MAX_AD_WTF = 3
 
     fileprivate struct KEY {
         static let LOGIN = "USER_LOGIN"

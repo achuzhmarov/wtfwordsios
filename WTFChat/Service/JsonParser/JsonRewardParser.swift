@@ -1,11 +1,13 @@
 import Foundation
 import SwiftyJSON
 
-class JsonPersonalRewardParser {
-    class func fromJson(_ json: JSON) throws -> PersonalReward {
+class JsonRewardParser {
+    class func fromJson(_ json: JSON) throws -> Reward {
         var hasReward: Bool
         var message: String
         var wtfs: Int
+        var isExpired: Bool = false;
+        var isAlreadyClaimed: Bool = false;
 
         if let value = json["hasReward"].bool {
             hasReward = value
@@ -27,10 +29,24 @@ class JsonPersonalRewardParser {
             throw json["wtfs"].error!
         }
 
-        return PersonalReward(
+        if let value = json["expired"].bool {
+            isExpired = value
+        } else {
+            throw json["expired"].error!
+        }
+
+        if let value = json["alreadyClaimed"].bool {
+            isAlreadyClaimed = value
+        } else {
+            throw json["alreadyClaimed"].error!
+        }
+
+        return Reward(
                 hasReward: hasReward,
                 message: message,
-                wtfs: wtfs
+                wtfs: wtfs,
+                isExpired: isExpired,
+                isAlreadyClaimed: isAlreadyClaimed
         )
     }
 }

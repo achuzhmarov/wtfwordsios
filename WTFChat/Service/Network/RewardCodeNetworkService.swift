@@ -1,29 +1,30 @@
 import Foundation
 import SwiftyJSON
 
-class PersonalRewardNetworkService: Service {
+class RewardCodeNetworkService: Service {
     private let networkService: NetworkService
 
     init(networkService: NetworkService) {
         self.networkService = networkService
     }
 
-    func checkPersonalReward(id: String,
-            completion:@escaping (_ personalReward: Reward?, _ error: NSError?) -> Void) {
+    func getRewardByCode(id: String, code: String,
+            completion:@escaping (_ reward: Reward?, _ error: NSError?) -> Void) {
 
         let request: [String: NSString] = [
             "id": id as NSString,
+            "code": code as NSString
         ]
 
         let postJSON = JSON(request)
 
-        networkService.post(postJSON, relativeUrl: "personal_reward") {json, error -> Void in
+        networkService.post(postJSON, relativeUrl: "reward_code") {json, error -> Void in
             if let requestError = error {
                 completion(nil, requestError)
             } else {
                 do {
-                    let personalReward = try JsonRewardParser.fromJson(json!)
-                    completion(personalReward, nil)
+                    let reward = try JsonRewardParser.fromJson(json!)
+                    completion(reward, nil)
                 } catch let error as NSError {
                     completion(nil, error)
                 }
