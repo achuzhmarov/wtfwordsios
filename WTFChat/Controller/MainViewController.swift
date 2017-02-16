@@ -10,6 +10,9 @@ class MainViewController: BaseFullVC {
     private let TUTORIAL_TITLE = "Tutorial"
     private let SINGLE_MODE_TITLE = "Single mode"
     private let SHOP_TITLE = "Shop"
+    private let SOUND_TITLE = "Sound"
+    private let SOUND_OFF = "Off"
+    private let SOUND_ON = "On"
     private let FEEDBACK_TITLE = "Give Feedback"
 
     private let TUTORIAL_MESSAGE = "Hi! It is your first time, would you like to start a tutorial?"
@@ -21,6 +24,7 @@ class MainViewController: BaseFullVC {
     @IBOutlet weak var singleModeButton: UIButton!
     @IBOutlet weak var shopButton: UIButton!
     @IBOutlet weak var languageButton: UIButton!
+    @IBOutlet weak var soundButton: UIButton!
     @IBOutlet weak var feedbackButton: UIButton!
 
     let singleModeTransitionManager = PanTransitionManager()
@@ -38,10 +42,23 @@ class MainViewController: BaseFullVC {
         tutorialButton.setTitleWithoutAnimation(TUTORIAL_TITLE.localized())
         singleModeButton.setTitleWithoutAnimation(SINGLE_MODE_TITLE.localized())
         shopButton.setTitleWithoutAnimation(SHOP_TITLE.localized())
+        soundButton.setTitleWithoutAnimation(getSoundButtonTitle())
         feedbackButton.setTitleWithoutAnimation(FEEDBACK_TITLE.localized())
 
         let currentLanguage = TextLanguage.getCurrentLanguage()
         languageButton.setTitleWithoutAnimation(currentLanguage.buttonTitle)
+    }
+
+    private func getSoundButtonTitle() -> String {
+        var title = SOUND_TITLE.localized() + ": "
+
+        if (guiDataService.isSoundOn()) {
+            title += SOUND_ON.localized()
+        } else {
+            title += SOUND_OFF.localized()
+        }
+
+        return title
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -103,6 +120,12 @@ class MainViewController: BaseFullVC {
         Localize.setCurrentLanguage(currentLanguage.description)
         guiDataService.updateUserLanguage(currentLanguage.description)
         textCategoryService.loadTextsForLanguage(currentLanguage)
+        initTitles()
+    }
+
+    @IBAction func soundStateChanged(_ sender: AnyObject) {
+        let newSoundState = !guiDataService.isSoundOn()
+        guiDataService.updateSoundState(newSoundState)
         initTitles()
     }
 

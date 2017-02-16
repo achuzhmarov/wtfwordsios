@@ -1,11 +1,3 @@
-//
-//  AudioService.swift
-//  WTFChat
-//
-//  Created by Artem Chuzhmarov on 11/09/15.
-//  Copyright (c) 2015 Artem Chuzhmarov. All rights reserved.
-//
-
 import UIKit
 import AVFoundation
 
@@ -28,7 +20,15 @@ enum WtfSound: String {
 class AudioService: Service {
     private var audio = [WtfSound: AVAudioPlayer]()
 
+    private let guiDataService: GuiDataService
+
+    init(guiDataService: GuiDataService) {
+        self.guiDataService = guiDataService
+    }
+
     override func initService() {
+        coexistWithExternalSounds()
+
         for wtfSound in WtfSound.getAll {
             do {
                 var soundURL = URL.init(fileURLWithPath: Bundle.main.resourcePath!);
@@ -47,12 +47,24 @@ class AudioService: Service {
     }
 
     func playSound(_ wtfSound: WtfSound) {
-        if let player = audio[wtfSound] {
-            if player.isPlaying {
-                player.currentTime = 0
-            } else {
-                player.play()
+        if (guiDataService.isSoundOn()) {
+            if let player = audio[wtfSound] {
+                if player.isPlaying {
+                    player.currentTime = 0
+                } else {
+                    player.play()
+                }
             }
+        }
+    }
+
+    private func coexistWithExternalSounds() {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(AVAudioSessionCategoryAmbient, with: [])
+            try audioSession.setActive(true)
+        } catch {
+            print("Failed to configure audioSession");
         }
     }
 }

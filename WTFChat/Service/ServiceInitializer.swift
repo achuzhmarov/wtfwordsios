@@ -164,7 +164,7 @@ class ServiceInitializer {
             AdService(),
             AvatarService(),
             TimeService(),
-            AudioService(),
+            AudioService(guiDataService: guiDataService),
             cipherService,
             textCategoryService,
             RatingService(guiDataService: guiDataService),

@@ -2089,13 +2089,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WTFWords" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuN-dm-VSq">
-                                <rect key="frame" x="145" y="171" width="124" height="30"/>
+                                <rect key="frame" x="145" y="142" width="124" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xP2-Br-Wub">
-                                <rect key="frame" x="82" y="231" width="250" height="274"/>
+                                <rect key="frame" x="82" y="202" width="250" height="332"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ch5-KJ-n19" customClass="BorderedButton" customModule="WTFWords" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="250" height="42"/>
@@ -2154,7 +2154,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6aD-du-Rtr" userLabel="FeedBack Button" customClass="BorderedButton" customModule="WTFWords" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="232" width="250" height="42"/>
+                                        <rect key="frame" x="0.0" y="290" width="250" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="NDh-6h-BYx"/>
                                         </constraints>
@@ -2167,22 +2167,40 @@
                                             <segue destination="E3V-Iy-9KG" kind="presentation" modalPresentationStyle="overFullScreen" id="j23-Pd-ucj"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gqD-ZH-vuc" customClass="BorderedButton" customModule="WTFWords" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="232" width="250" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="42" id="MZW-rj-08c"/>
+                                            <constraint firstAttribute="height" constant="42" id="eGh-sN-0Dz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Sound: On">
+                                            <color key="titleColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="soundStateChanged:" destination="Wft-8G-zQQ" eventType="touchUpInside" id="k32-x4-xe4"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Ch5-KJ-n19" secondAttribute="trailing" id="0mG-5j-ocN"/>
                                     <constraint firstItem="sH4-kK-kNv" firstAttribute="top" secondItem="xP2-Br-Wub" secondAttribute="top" id="5A9-56-rZe"/>
                                     <constraint firstAttribute="bottom" secondItem="6aD-du-Rtr" secondAttribute="bottom" id="7pR-Im-akD"/>
+                                    <constraint firstAttribute="trailing" secondItem="gqD-ZH-vuc" secondAttribute="trailing" id="8an-H2-j8U"/>
                                     <constraint firstItem="Qpn-o7-exl" firstAttribute="leading" secondItem="xP2-Br-Wub" secondAttribute="leading" id="AHZ-kb-wqZ"/>
-                                    <constraint firstItem="6aD-du-Rtr" firstAttribute="top" secondItem="Qpn-o7-exl" secondAttribute="bottom" constant="16" id="EVu-Fv-xm5"/>
                                     <constraint firstAttribute="trailing" secondItem="Qpn-o7-exl" secondAttribute="trailing" id="I3s-hN-gfT"/>
                                     <constraint firstItem="0ZP-7H-hpk" firstAttribute="top" secondItem="sH4-kK-kNv" secondAttribute="bottom" constant="16" id="ORZ-ve-HxA"/>
                                     <constraint firstItem="Qpn-o7-exl" firstAttribute="top" secondItem="Ch5-KJ-n19" secondAttribute="bottom" constant="16" id="WTN-lB-NEB"/>
+                                    <constraint firstItem="gqD-ZH-vuc" firstAttribute="top" secondItem="Qpn-o7-exl" secondAttribute="bottom" constant="16" id="YZd-PZ-i6f"/>
                                     <constraint firstAttribute="trailing" secondItem="0ZP-7H-hpk" secondAttribute="trailing" id="ZHj-zP-Xtg"/>
                                     <constraint firstItem="Ch5-KJ-n19" firstAttribute="leading" secondItem="xP2-Br-Wub" secondAttribute="leading" id="dKg-fh-tJ1"/>
+                                    <constraint firstItem="gqD-ZH-vuc" firstAttribute="leading" secondItem="xP2-Br-Wub" secondAttribute="leading" id="dQk-xp-IO9"/>
                                     <constraint firstItem="Ch5-KJ-n19" firstAttribute="top" secondItem="0ZP-7H-hpk" secondAttribute="bottom" constant="16" id="fuc-yN-CFy"/>
                                     <constraint firstItem="0ZP-7H-hpk" firstAttribute="leading" secondItem="xP2-Br-Wub" secondAttribute="leading" id="fwl-G7-4Cq"/>
                                     <constraint firstAttribute="width" constant="250" id="g54-iG-p57"/>
-                                    <constraint firstAttribute="height" constant="274" id="q1S-Fo-tvK"/>
+                                    <constraint firstItem="6aD-du-Rtr" firstAttribute="top" secondItem="gqD-ZH-vuc" secondAttribute="bottom" constant="16" id="g6T-kF-bLP"/>
+                                    <constraint firstAttribute="height" constant="332" id="q1S-Fo-tvK"/>
                                     <constraint firstItem="sH4-kK-kNv" firstAttribute="leading" secondItem="xP2-Br-Wub" secondAttribute="leading" id="tcP-iC-hOf"/>
                                     <constraint firstItem="6aD-du-Rtr" firstAttribute="leading" secondItem="xP2-Br-Wub" secondAttribute="leading" id="vNz-4S-ass"/>
                                     <constraint firstAttribute="trailing" secondItem="sH4-kK-kNv" secondAttribute="trailing" id="xgl-mc-no7"/>
@@ -2205,6 +2223,7 @@
                         <outlet property="languageButton" destination="Qpn-o7-exl" id="s0W-wt-cUi"/>
                         <outlet property="shopButton" destination="Ch5-KJ-n19" id="Ioh-g5-BXe"/>
                         <outlet property="singleModeButton" destination="0ZP-7H-hpk" id="PDE-JO-p8G"/>
+                        <outlet property="soundButton" destination="gqD-ZH-vuc" id="VEy-oC-GA3"/>
                         <outlet property="tutorialButton" destination="sH4-kK-kNv" id="TRv-m0-TDG"/>
                         <segue destination="c9g-0d-Ip0" kind="presentation" identifier="startSingleMode" id="d12-yQ-WoZ"/>
                         <segue destination="pfk-i2-Eh6" kind="presentation" identifier="startTutorial" id="jmN-YH-ERg"/>
@@ -2505,7 +2524,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JRg-tN-G5k">
-                                <rect key="frame" x="47" y="195" width="320" height="346"/>
+                                <rect key="frame" x="47" y="215" width="320" height="346"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zr-z2-OiM">
                                         <rect key="frame" x="8" y="220" width="30" height="30"/>
@@ -3383,7 +3402,7 @@
         <image name="settings filled" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fgz-Mg-NMu"/>
-        <segue reference="paO-SZ-mUg"/>
+        <segue reference="j23-Pd-ucj"/>
+        <segue reference="5fm-V2-gKc"/>
     </inferredMetricsTieBreakers>
 </document>

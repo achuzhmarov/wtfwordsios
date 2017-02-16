@@ -2025,8 +2025,8 @@
 				CHARTBOOST_APP_ID = 57d99457f6cd452c71513a5a;
 				CHARTBOOST_APP_SIGNATURE = 4f7f3169e14e7225a98f5ef19d0036e5618f1d93;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Artem Chuzhmarov (9Z57ENU7SL)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Artem Chuzhmarov (9Z57ENU7SL)";
 				DEVELOPMENT_TEAM = 9Z57ENU7SL;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2039,7 +2039,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wtfwords.wtfwords;
 				PRODUCT_NAME = WTFWords;
-				PROVISIONING_PROFILE = "979b9163-4fb3-47fc-bcf6-1949a1bffe0e";
+				PROVISIONING_PROFILE = "79452ad9-56ab-407e-bd77-0b4f5a2c2a47";
 				PROVISIONING_PROFILE_SPECIFIER = wtfwords;
 				SUPPORT_EMAIL = "ios.wtfwords@gmail.com";
 				SWIFT_OBJC_BRIDGING_HEADER = "WTFChat/WTFWords-Bridging-Header.h";
