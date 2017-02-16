@@ -2524,28 +2524,28 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JRg-tN-G5k">
-                                <rect key="frame" x="47" y="215" width="320" height="346"/>
+                                <rect key="frame" x="47" y="215" width="320" height="354"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zr-z2-OiM">
-                                        <rect key="frame" x="8" y="220" width="30" height="30"/>
+                                        <rect key="frame" x="8" y="228" width="30" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="600" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mP7-Rd-QEC">
-                                        <rect key="frame" x="179" y="220" width="45" height="30"/>
+                                        <rect key="frame" x="179" y="228" width="45" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="270" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2p-hg-0Zd">
-                                        <rect key="frame" x="8" y="258" width="30" height="30"/>
+                                        <rect key="frame" x="8" y="266" width="30" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daE-zG-77V">
-                                        <rect key="frame" x="179" y="258" width="45" height="30"/>
+                                        <rect key="frame" x="179" y="266" width="45" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2557,7 +2557,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbf-rm-tqX">
-                                        <rect key="frame" x="179" y="182" width="45" height="30"/>
+                                        <rect key="frame" x="179" y="190" width="45" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="45" id="coY-uN-GLo"/>
                                         </constraints>
@@ -2566,7 +2566,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eag-A4-6va" customClass="BorderedButton" customModule="WTFWords" customModuleProvider="target">
-                                        <rect key="frame" x="46" y="183" width="80" height="28"/>
+                                        <rect key="frame" x="46" y="191" width="80" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="0.99$">
@@ -2574,7 +2574,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vdS-fr-OLm" customClass="BorderedButton" customModule="WTFWords" customModuleProvider="target">
-                                        <rect key="frame" x="232" y="183" width="80" height="28"/>
+                                        <rect key="frame" x="232" y="191" width="80" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="3.99$">
@@ -2582,7 +2582,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBa-9V-tiJ" customClass="BorderedButton" customModule="WTFWords" customModuleProvider="target">
-                                        <rect key="frame" x="46" y="221" width="80" height="28"/>
+                                        <rect key="frame" x="46" y="229" width="80" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="1.99$">
@@ -2590,7 +2590,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4WN-BV-Pk8" customClass="BorderedButton" customModule="WTFWords" customModuleProvider="target">
-                                        <rect key="frame" x="232" y="221" width="80" height="28"/>
+                                        <rect key="frame" x="232" y="229" width="80" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="4.99$">
@@ -2598,7 +2598,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHm-Rw-TDc" customClass="BorderedButton" customModule="WTFWords" customModuleProvider="target">
-                                        <rect key="frame" x="46" y="259" width="80" height="28"/>
+                                        <rect key="frame" x="46" y="267" width="80" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="2.99$">
@@ -2606,7 +2606,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXG-YJ-xdb" customClass="BorderedButton" customModule="WTFWords" customModuleProvider="target">
-                                        <rect key="frame" x="232" y="259" width="80" height="28"/>
+                                        <rect key="frame" x="232" y="267" width="80" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="tintColor" red="0.01176470588" green="0.1843137255" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="9.99$">
@@ -2622,7 +2622,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kZ-lT-Qws" customClass="BorderedButton" customModule="WTFWords" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="296" width="304" height="42"/>
+                                        <rect key="frame" x="8" y="304" width="304" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="aA7-M8-haO"/>
                                         </constraints>
@@ -2636,7 +2636,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elE-Vg-N0C">
-                                        <rect key="frame" x="8" y="182" width="30" height="30"/>
+                                        <rect key="frame" x="8" y="190" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="om7-tr-FJt"/>
                                         </constraints>
@@ -2671,7 +2671,7 @@
                                         </state>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buy Hints" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TfL-S7-WYM">
-                                        <rect key="frame" x="115" y="148" width="91" height="26"/>
+                                        <rect key="frame" x="115" y="156" width="91" height="26"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2763,12 +2763,12 @@
                                     <constraint firstItem="eag-A4-6va" firstAttribute="width" secondItem="VAy-Eg-p5z" secondAttribute="width" id="eUd-Az-ejF"/>
                                     <constraint firstItem="VAy-Eg-p5z" firstAttribute="centerY" secondItem="6Md-3z-TJO" secondAttribute="centerY" id="eUh-mq-3Pq"/>
                                     <constraint firstItem="iHm-Rw-TDc" firstAttribute="centerY" secondItem="h2p-hg-0Zd" secondAttribute="centerY" id="el6-G8-Yga"/>
+                                    <constraint firstItem="TfL-S7-WYM" firstAttribute="top" secondItem="OKE-pF-Jvc" secondAttribute="bottom" constant="8" id="eoo-hl-XJ8"/>
                                     <constraint firstItem="8T4-A9-BKY" firstAttribute="height" secondItem="VAy-Eg-p5z" secondAttribute="height" id="evi-pM-eE6"/>
                                     <constraint firstItem="bXG-YJ-xdb" firstAttribute="leading" secondItem="daE-zG-77V" secondAttribute="trailing" constant="8" id="f7X-xr-uNL"/>
                                     <constraint firstItem="iHm-Rw-TDc" firstAttribute="width" secondItem="VAy-Eg-p5z" secondAttribute="width" id="g3e-mK-CAv"/>
                                     <constraint firstItem="daE-zG-77V" firstAttribute="height" secondItem="6Md-3z-TJO" secondAttribute="height" id="hi0-qH-k6V"/>
                                     <constraint firstItem="kBQ-Yn-HRy" firstAttribute="height" secondItem="VAy-Eg-p5z" secondAttribute="height" id="hix-SG-vbS"/>
-                                    <constraint firstItem="TfL-S7-WYM" firstAttribute="top" secondItem="2fS-jF-f5s" secondAttribute="bottom" constant="38" id="i60-DP-4Yj"/>
                                     <constraint firstAttribute="trailing" secondItem="5kZ-lT-Qws" secondAttribute="trailing" constant="8" id="k0G-QO-dUC"/>
                                     <constraint firstItem="UTv-l3-QAT" firstAttribute="centerY" secondItem="RT0-BO-k4L" secondAttribute="centerY" id="llU-tn-PJ8"/>
                                     <constraint firstItem="kBQ-Yn-HRy" firstAttribute="centerY" secondItem="2fS-jF-f5s" secondAttribute="centerY" id="lrN-tM-VDV"/>
@@ -2776,7 +2776,7 @@
                                     <constraint firstItem="elE-Vg-N0C" firstAttribute="top" secondItem="TfL-S7-WYM" secondAttribute="bottom" constant="8" id="oZE-bJ-xpi"/>
                                     <constraint firstItem="iHm-Rw-TDc" firstAttribute="height" secondItem="VAy-Eg-p5z" secondAttribute="height" id="ow0-FL-be3"/>
                                     <constraint firstItem="eag-A4-6va" firstAttribute="centerY" secondItem="elE-Vg-N0C" secondAttribute="centerY" id="plD-26-V3P"/>
-                                    <constraint firstAttribute="height" constant="346" id="r8k-IS-aWm"/>
+                                    <constraint firstAttribute="height" constant="354" id="r8k-IS-aWm"/>
                                     <constraint firstItem="KBa-9V-tiJ" firstAttribute="width" secondItem="VAy-Eg-p5z" secondAttribute="width" id="sTC-nc-bQj"/>
                                     <constraint firstAttribute="width" priority="990" constant="320" id="tXt-yA-0vR"/>
                                     <constraint firstItem="bXG-YJ-xdb" firstAttribute="height" secondItem="VAy-Eg-p5z" secondAttribute="height" id="ttt-Dy-6hA"/>
@@ -3075,7 +3075,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="37" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HEU-JZ-CAU" customClass="WordsViewController" customModule="WTFWords" customModuleProvider="target">
-                                <rect key="frame" x="12" y="55" width="390" height="322.66666666666669"/>
+                                <rect key="frame" x="12" y="55" width="390" height="323"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WordsRowCell" id="emt-B3-znv">
@@ -3089,14 +3089,14 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X1R-96-aPx" userLabel="ScreenDivider">
-                                <rect key="frame" x="0.0" y="377.66666666666669" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="378" width="414" height="1"/>
                                 <color key="backgroundColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="3g6-OM-zvc"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdW-82-2Q3" userLabel="DecipherScreen">
-                                <rect key="frame" x="12" y="377.66666666666674" width="390" height="350.33333333333326"/>
+                                <rect key="frame" x="12" y="378" width="390" height="350"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

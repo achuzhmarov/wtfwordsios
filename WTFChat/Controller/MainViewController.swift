@@ -6,10 +6,12 @@ class MainViewController: BaseFullVC {
     private let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService.self)
     private let personalRewardService: PersonalRewardService = serviceLocator.get(PersonalRewardService.self)
     private let textCategoryService: TextCategoryService = serviceLocator.get(TextCategoryService.self)
+    private let inAppService: InAppService = serviceLocator.get(InAppService.self)
 
     private let TUTORIAL_TITLE = "Tutorial"
     private let SINGLE_MODE_TITLE = "Single mode"
     private let SHOP_TITLE = "Shop"
+    private let SALE_TITLE = "SALE"
     private let SOUND_TITLE = "Sound"
     private let SOUND_OFF = "Off"
     private let SOUND_ON = "On"
@@ -22,12 +24,14 @@ class MainViewController: BaseFullVC {
 
     @IBOutlet weak var tutorialButton: UIButton!
     @IBOutlet weak var singleModeButton: UIButton!
-    @IBOutlet weak var shopButton: UIButton!
+    @IBOutlet weak var shopButton: BorderedButton!
     @IBOutlet weak var languageButton: UIButton!
     @IBOutlet weak var soundButton: UIButton!
     @IBOutlet weak var feedbackButton: UIButton!
 
     let singleModeTransitionManager = PanTransitionManager()
+
+    private var timer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,15 +45,17 @@ class MainViewController: BaseFullVC {
     private func initTitles() {
         tutorialButton.setTitleWithoutAnimation(TUTORIAL_TITLE.localized())
         singleModeButton.setTitleWithoutAnimation(SINGLE_MODE_TITLE.localized())
-        shopButton.setTitleWithoutAnimation(SHOP_TITLE.localized())
-        soundButton.setTitleWithoutAnimation(getSoundButtonTitle())
+        setShopButtonTitle()
+        setSoundButtonTitle()
         feedbackButton.setTitleWithoutAnimation(FEEDBACK_TITLE.localized())
 
         let currentLanguage = TextLanguage.getCurrentLanguage()
         languageButton.setTitleWithoutAnimation(currentLanguage.buttonTitle)
+
+        setTitlesUpdateTimer()
     }
 
-    private func getSoundButtonTitle() -> String {
+    private func setSoundButtonTitle() {
         var title = SOUND_TITLE.localized() + ": "
 
         if (guiDataService.isSoundOn()) {
@@ -58,14 +64,34 @@ class MainViewController: BaseFullVC {
             title += SOUND_OFF.localized()
         }
 
-        return title
+        soundButton.setTitleWithoutAnimation(title)
+    }
+
+    private func setShopButtonTitle() {
+        var title = SHOP_TITLE.localized()
+
+        if (inAppService.isSaleOn()) {
+            title += ": " + inAppService.getSaleCoeff() + " " + SALE_TITLE.localized() + "!"
+            shopButton.setTitleWithoutAnimation(title)
+            shopButton.updateGradient(Gradient.Try)
+        } else {
+            shopButton.setTitleWithoutAnimation(title)
+            shopButton.updateGradient(Gradient.Ciphered)
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
+        initTitles()
         dailyHintsService.computeDailyWtf()
         personalRewardService.checkPersonalReward()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        stopTitlesUpdateTimer()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -131,5 +157,24 @@ class MainViewController: BaseFullVC {
 
     @IBAction func backToMenu(_ segue:UIStoryboardSegue) {
 
+    }
+
+    private func setTitlesUpdateTimer() {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 1.0,
+                target: self,
+                selector: #selector(self.updateTimerTick),
+                userInfo: nil,
+                repeats: true)
+    }
+
+    private func stopTitlesUpdateTimer() {
+        timer?.invalidate()
+    }
+
+    @objc func updateTimerTick() {
+        DispatchQueue.main.async(execute: {
+            self.initTitles()
+        })
     }
 }

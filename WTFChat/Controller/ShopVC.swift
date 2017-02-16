@@ -70,6 +70,11 @@ class ShopVC: BaseModalVC, UITextFieldDelegate {
 
     private let LOADING_TEXT = "Sending"
 
+    private let SALE_TITLE = "SALE"
+
+    private let SALE_COLOR = Color.FailedDark
+    private let NORMAL_COLOR = UIColor.black
+
     private var productTitles = [ProductIdentifier: UILabel]()
     private var productButtons = [ProductIdentifier: BorderedButton]()
 
@@ -106,7 +111,15 @@ class ShopVC: BaseModalVC, UITextFieldDelegate {
         backButton.setTitleWithoutAnimation(BACK_TEXT.localized())
 
         hintsTitle.text = HINTS_TEXT.localized() + " "
-        buyHintsTitle.text = BUY_HINTS_TEXT.localized()
+
+        if (inAppService.isSaleOn()) {
+            buyHintsTitle.text = BUY_HINTS_TEXT.localized() + ": " + inAppService.getSaleCoeff() + " " + SALE_TITLE.localized() + "!"
+            buyHintsTitle.textColor = SALE_COLOR
+        } else {
+            buyHintsTitle.text = BUY_HINTS_TEXT.localized()
+            buyHintsTitle.textColor = NORMAL_COLOR
+        }
+
         freeHintsTitle.text = FREE_HINTS_TEXT.localized()
         dailyHintsTitle.text = DAILY_HINTS_TEXT.localized()
         rewardCodeTitle.text = REWARD_CODE_TEXT.localized()
@@ -228,6 +241,12 @@ class ShopVC: BaseModalVC, UITextFieldDelegate {
 
     fileprivate func updateProductTitles() {
         for (productId, productTitle) in productTitles {
+            if (IAPProducts.isConsumable(productId) && inAppService.isSaleOn()) {
+                productTitle.textColor = SALE_COLOR
+            } else {
+                productTitle.textColor = NORMAL_COLOR
+            }
+
             productTitle.text = inAppService.getWtfProductTitle(productId)
         }
     }
@@ -359,5 +378,11 @@ class ShopVC: BaseModalVC, UITextFieldDelegate {
         if let decipherVC = presentingVC as? DecipherViewController {
             decipherVC.wtfBought()
         }
+    }
+
+    @objc func updateTimerTick() {
+        DispatchQueue.main.async(execute: {
+            self.reloadData()
+        })
     }
 }

@@ -43,8 +43,7 @@ class InAppService: Service {
 
     func getProductTitle(_ productId: ProductIdentifier) -> String? {
         if let product = inAppHelper.getProduct(productId) {
-            //TODO - for backward compatibility
-            var productName = product.localizedTitle.replace("hints", with: "WTF")
+            var productName = product.localizedTitle
             if (IAPProducts.isConsumable(productId)) {
                 productName = String(inAppHelper.getWtfCount(productId)) + " WTF"
             }
@@ -55,15 +54,19 @@ class InAppService: Service {
         return nil
     }
     
-    func getProductDescription(_ productId: ProductIdentifier) -> String? {
+    func getProductDescriptionForBuyAlert(_ productId: ProductIdentifier) -> String? {
         if (IAPProducts.CONSUMABLE.contains(productId)) {
             return ""
         }
 
+        return getProductDescription(productId)
+    }
+
+    func getProductDescription(_ productId: ProductIdentifier) -> String? {
         if let product = inAppHelper.getProduct(productId) {
-            return product.localizedDescription.replace("hints", with: "WTF").localized()
+            return product.localizedDescription.localized()
         }
-        
+
         return nil
     }
     
@@ -102,7 +105,7 @@ class InAppService: Service {
         
         let productName = getProductTitle(productId)!
         let productPrice = getProductPrice(productId)
-        let productDescription = getProductDescription(productId)!
+        let productDescription = getProductDescriptionForBuyAlert(productId)!
         
         WTFTwoButtonsAlert.show(BUY_TEXT.localized() + " " + productName + " " + FOR_TEXT.localized() + " " + productPrice!,
             message: productDescription,
@@ -112,6 +115,27 @@ class InAppService: Service {
             }, cancelButtonAction: { () -> Void in
                 cancelFunc?()
         })
+    }
+
+    func isSaleOn() -> Bool {
+        if let description = getProductDescription(IAPProducts.HINTS_1) {
+            if description.uppercased().contains("SALE") {
+                return true
+            }
+        }
+
+        return false
+    }
+
+    func getSaleCoeff() -> String {
+        if (!isSaleOn()) {
+            return ""
+        }
+
+        let description = getProductDescription(IAPProducts.HINTS_1)!
+        let descriptionParts = description.characters.split {$0 == " "}.map { String($0) }
+
+        return descriptionParts[0]
     }
     
     fileprivate func isProductExists(_ productId: ProductIdentifier) -> Bool {
