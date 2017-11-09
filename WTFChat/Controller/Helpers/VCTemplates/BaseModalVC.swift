@@ -1,8 +1,9 @@
 import Foundation
+import NVActivityIndicatorView
 
-class BaseModalVC: UIViewController {
+class BaseModalVC: BaseVC {
     @IBOutlet weak var backgroundView: UIView!
-    @IBOutlet weak var backgroundViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var backgroundViewWidthConstraint: NSLayoutConstraint?
 
     fileprivate var gradientLayer: CAGradientLayer?
 
@@ -39,15 +40,22 @@ class BaseModalVC: UIViewController {
     fileprivate func updateBackgroundGradient() {
         gradientLayer?.removeFromSuperlayer()
 
+        var width: CGFloat
+        if let widthConstraint = backgroundViewWidthConstraint {
+            width = widthConstraint.constant
+        } else {
+            width = backgroundView.bounds.size.width
+        }
+
         let size = CGSize(
-                width: backgroundViewWidthConstraint.constant,
+                width: width,
                 height: backgroundView.frame.size.height
                 )
 
         gradientLayer = backgroundView.addDiagonalGradient(Gradient.Background, size: size)
     }
 
-    @IBAction func closeWindow(_ sender: AnyObject) {
+    @IBAction func closeWindow(_ sender: AnyObject? = nil) {
         modalWillClose()
         presentingViewController?.dismiss(animated: true, completion: modalClosed)
     }

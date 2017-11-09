@@ -1,4 +1,4 @@
-import Foundation
+/*import Foundation
 import Localize_Swift
 
 extension DecipherInProgressVC: WordTappedComputer {
@@ -78,3 +78,4 @@ extension DecipherInProgressVC: WordTappedComputer {
         currentUserService.useWtf(wtf)
     }
 }
+*/

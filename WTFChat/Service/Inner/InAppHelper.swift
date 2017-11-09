@@ -207,15 +207,7 @@ extension InAppHelper: SKPaymentTransactionObserver {
     func getWtfCount(_ productId: ProductIdentifier) -> Int {
         if let product = getProduct(productId) {
             let titleParts = product.localizedTitle.components(separatedBy: " ")
-            let count = Int(titleParts[0])!
-
-            //TODO - for backward compatibility with old inApps
-            let lowercaseTitle = product.localizedTitle.lowercased()
-            if (lowercaseTitle.contains("hints") || lowercaseTitle.contains("подсказок")) {
-                return count * 2
-            }
-
-            return count
+            return Int(titleParts[0])!
         }
 
         return 0

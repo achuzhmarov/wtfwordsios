@@ -58,13 +58,21 @@ class DailyHintsService: Service {
         if randomNumber < twoBorder {
             wtf = 1
         } else if randomNumber < threeBorder {
+            wtf = 2
+        } else {
+            wtf = 3
+        }
+
+        /*if randomNumber < twoBorder {
+            wtf = 1
+        } else if randomNumber < threeBorder {
             wtf = 3
         } else {
             wtf = 5
         }
 
         let secondRandom = Int(arc4random_uniform(UInt32(2)))
-        wtf += secondRandom
+        wtf += secondRandom*/
 
 
         if inAppService.isPurchased(IAPProducts.HINTS_X2) {

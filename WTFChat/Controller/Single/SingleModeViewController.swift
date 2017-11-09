@@ -1,10 +1,11 @@
 import Foundation
 import Localize_Swift
 
-class SingleModeViewController: BaseUIViewController {
+class SingleModeViewController: BaseFullVC {
     private let singleModeCategoryService: SingleModeCategoryService = serviceLocator.get(SingleModeCategoryService.self)
     private let guiDataService: GuiDataService = serviceLocator.get(GuiDataService.self)
     private let dailyHintsService: DailyHintsService = serviceLocator.get(DailyHintsService.self)
+    private let personalRewardService: PersonalRewardService = serviceLocator.get(PersonalRewardService.self)
 
     @IBOutlet weak var menuBorder: UIView!
     @IBOutlet weak var menuBackground: UIView!
@@ -41,13 +42,14 @@ class SingleModeViewController: BaseUIViewController {
 
         menuBorder.backgroundColor = Color.BackgroundDark
         _ = menuBackground.addLinearGradient(Gradient.BackgroundMenu)
-        menuButton.setTitle(MENU_TEXT, for: UIControlState())
+        menuButton.setTitleWithoutAnimation(MENU_TEXT)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         dailyHintsService.computeDailyWtf()
+        personalRewardService.checkPersonalReward()
     }
 
     func cipherViewUpdated(_ newController: CipherViewController) {

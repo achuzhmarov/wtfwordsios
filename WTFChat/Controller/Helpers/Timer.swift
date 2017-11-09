@@ -1,15 +1,35 @@
 import Foundation
 
 class WTFTimer {
+    private var innerTimer: Timer?
     var seconds = 0
-    
+
+    var tickComputer: (() -> ())?
+
     init() {}
-    
-    init(seconds: Int) {
+
+    init(seconds: Int, tickComputer: (() -> ())? = nil) {
         self.seconds = seconds
+        self.tickComputer = tickComputer
+    }
+
+    func scheduleForOneSecond() {
+        innerTimer?.invalidate()
+        innerTimer = Timer.scheduledTimer(timeInterval: 1.0,
+                target: self,
+                selector: #selector(self.tick),
+                userInfo: nil,
+                repeats: false)
+
+        RunLoop.main.add(innerTimer!, forMode: RunLoopMode.commonModes)
+    }
+
+    @objc func tick() {
+        //call external method
+        tickComputer?()
     }
     
-    func tick() -> Bool {
+    func secondPassed() -> Bool {
         if (self.seconds >= 0) {
             self.seconds -= 1
         }

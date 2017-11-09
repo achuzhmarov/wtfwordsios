@@ -3,11 +3,20 @@
 "Cancel" = "Отмена";
 "Error" = "Ошибка";
 "Ok" = "Ок";
+"Email" = "Email";
+
+//Loader
+"Loading" = "Загрузка";
+"Waiting" = "Ожидание";
+"Sending" = "Отправка";
 
 // Menu
 "Tutorial" = "Обучение";
 "Single mode" = "Одиночная игра";
 "Shop" = "Магазин";
+"Sound" = "Звук";
+"Off" = "Выкл";
+"On" = "Вкл";
 "menu" = "меню";
 
 //Chapter finished
@@ -70,6 +79,12 @@
 "Unknown error occured." = "Произошла неожиданная ошибка.";
 "Please, check if you have a stable internet connection. Then use 'Restore' button. If you still don't get your purchase, please, restart the app." = "Пожалуйста, проверьте наличие стабильного соединения с интернетом. Затем нажмите кнопку 'Восстановить'. Есои ошибка не пропала, перезапустите приложение.";
 "can't be restored" = "не удалось восстановить";
+"Enter Code" = "Ввести код";
+"Redeem" = "Отправить";
+"Please, enter your reward code!" = "Сначала введите код!";
+"Sorry, this code is expired" = "Этот код больше не действует";
+"You have already claimed this code" = "Вы уже использовали этот код";
+"Sorry, this code is invalid" = "Неверный код";
 
 //Shop products WTF
 "X2 free daily WTF" = "Вдвое больше ежедневных бесплатных WTF";
@@ -151,6 +166,17 @@
 "No, thanks" = "Нет, спасибо";
 "How about updating your rating for new version" = "Как насчет обновления отзыва в AppStore";
 "How about updating your feedback for new version" = "Не могли бы вы написать нам ваше мнение о нововведениях";
+
+//Feedback
+"Give Feedback" = "Есть что сказать?";
+"You haven't send your review. Is it ok?" = "Вы действительно не хотите отправить этот отзыв?";
+"Don't send" = "Не отправлять";
+"Thanks for your feedback!" = "Спасибо за отзыв!";
+"There is a problem with internet connection. Please, try again later." = "Потерена связь с интернетом. Попробуйте позже";
+"Hello, my name is Artem. I have developed this app. Feel free to write me any kind of feedback you have - errors, shortcomings, new ideas and all other sort of things. I will really appreciate it!" = "День добрый, меня зовут Артем и я автор этого приложения. Буду рад любой обратной связи - ошибки, недостатки, критика, ваши идеи - пишите все что пожелаете!";
+"Optional" = "Не обязательно";
+"Send" = "Отправить";
+"Your feedback is empty!" = "Напишите хоть что-нибудь!";
 
 //Errors
 "Internet connection problem" = "Потерена связь с интернетом";

@@ -97,7 +97,7 @@ class HUDView: UIView {
 
     private func createButton(title: String, xOffset: CGFloat) -> GameButton {
         let button = GameButton(frame: CGRect(x: xOffset, y: yPosition, width: buttonWidth, height: tileSide))
-        button.setTitle(title.localized(), for: UIControlState())
+        button.setTitleWithoutAnimation(title.localized())
         button.titleLabel?.font = UIFont(name: button.titleLabel!.font.fontName, size: button.frame.height * 0.4)
         addSubview(button)
 

@@ -1,6 +1,6 @@
 import Foundation
 
-class BaseUIViewController: UIViewController {
+class BaseFullVC: BaseVC {
     private var gradientLayer: CAGradientLayer?
 
     //private static let backgroundImage = UIImage(named: "background")!

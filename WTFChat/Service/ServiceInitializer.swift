@@ -16,8 +16,11 @@ class ServiceInitializer {
         let messageNetworkService = MessageNetworkService(networkService: networkService)
         let userNetworkService = UserNetworkService(networkService: networkService)
         let talkNetworkService = TalkNetworkService(networkService: networkService)
-        let inAppNetworkService = InAppNetworkService(networkService: networkService)
         let iosNetworkService = IosNetworkService(networkService: networkService)
+        let inAppNetworkService = InAppNetworkService(networkService: networkService)
+        let feedbackNetworkService = FeedbackNetworkService(networkService: networkService)
+        let personalRewardNetworkService = PersonalRewardNetworkService(networkService: networkService)
+        let rewardCodeNetworkService = RewardCodeNetworkService(networkService: networkService)
 
         let iosService = IosService(iosNetworkService: iosNetworkService)
         let expService = ExpService()
@@ -38,11 +41,13 @@ class ServiceInitializer {
             currentUserService: currentUserService,
             coreMessageService: coreMessageService
         )
+
         let messageService = MessageService(
             messageNetworkService: messageNetworkService,
             talkService: talkService,
             coreMessageService: coreMessageService
         )
+
         talkService.messageService = messageService
 
         let windowService = WindowService(
@@ -68,6 +73,21 @@ class ServiceInitializer {
             inAppHelper: inAppHelper
         )
 
+        let feedbackService = FeedbackService(
+                feedbackNetworkService: feedbackNetworkService,
+                currentUserService: currentUserService
+        )
+
+        let personalRewardService = PersonalRewardService(
+                personalRewardNetworkService: personalRewardNetworkService,
+                currentUserService: currentUserService
+        )
+
+        let rewardCodeService = RewardCodeService(
+                rewardCodeNetworkService: rewardCodeNetworkService,
+                currentUserService: currentUserService
+        )
+
         //network
         serviceLocator.add(
             inAppService,
@@ -79,7 +99,10 @@ class ServiceInitializer {
                 authNetworkService: authNetworkService,
                 iosService: iosService,
                 userService: userService
-            )
+            ),
+            feedbackService,
+            personalRewardService,
+            rewardCodeService
         )
 
         //core data
@@ -141,7 +164,7 @@ class ServiceInitializer {
             AdService(),
             AvatarService(),
             TimeService(),
-            AudioService(),
+            AudioService(guiDataService: guiDataService),
             cipherService,
             textCategoryService,
             RatingService(guiDataService: guiDataService),

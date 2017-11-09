@@ -28,6 +28,9 @@ class GuiDataService: Service {
         static let WTF_STAGE = "USER_WTF_STAGE"
         static let WRONG_LETTERS_HINT = "USER_WRONG_LETTERS_HINT"
         static let LAST_VERSION = "LAST_VERSION"
+        static let FEEDBACK_EMAIL = "USER_FEEDBACK_EMAIL"
+        static let FEEDBACK_TEXT = "USER_FEEDBACK_TEXT"
+        static let SOUND_STATE = "USER_SOUND_STATE"
     }
 
     fileprivate let storage = UserDefaults.standard
@@ -62,11 +65,23 @@ class GuiDataService: Service {
         }
 
         if (!storage.isFieldExists(KEY.WRONG_LETTERS_HINT)) {
-            storage.saveField(KEY.WRONG_LETTERS_HINT, value:false as AnyObject)
+            storage.saveField(KEY.WRONG_LETTERS_HINT, value: false as AnyObject)
         }
 
         if (!storage.isFieldExists(KEY.LAST_VERSION)) {
             storage.saveField(KEY.LAST_VERSION, value: "1.0" as AnyObject)
+        }
+
+        if (!storage.isFieldExists(KEY.FEEDBACK_EMAIL)) {
+            storage.saveField(KEY.FEEDBACK_EMAIL, value:"" as AnyObject)
+        }
+
+        if (!storage.isFieldExists(KEY.FEEDBACK_TEXT)) {
+            storage.saveField(KEY.FEEDBACK_TEXT, value: "" as AnyObject)
+        }
+
+        if (!storage.isFieldExists(KEY.SOUND_STATE)) {
+            storage.saveField(KEY.SOUND_STATE, value: true as AnyObject)
         }
     }
 
@@ -143,5 +158,29 @@ class GuiDataService: Service {
     func updateLastVersion() {
         let currentVersion = Bundle.main.releaseVersionNumber
         storage.saveField(KEY.LAST_VERSION, value: currentVersion as AnyObject)
+    }
+
+    func getFeedbackEmail() -> String {
+        return storage.getStringField(KEY.FEEDBACK_EMAIL)
+    }
+
+    func updateFeedbackEmail(_ email: String) {
+        storage.saveField(KEY.FEEDBACK_EMAIL, value: email as AnyObject)
+    }
+
+    func getFeedbackText() -> String {
+        return storage.getStringField(KEY.FEEDBACK_TEXT)
+    }
+
+    func updateFeedbackText(_ text: String) {
+        storage.saveField(KEY.FEEDBACK_TEXT, value: text as AnyObject)
+    }
+
+    func isSoundOn() -> Bool {
+        return storage.getBoolField(KEY.SOUND_STATE)
+    }
+
+    func updateSoundState(_ state: Bool) {
+        storage.saveField(KEY.SOUND_STATE, value: state as AnyObject)
     }
 }

@@ -6,7 +6,9 @@ class WTFBaseAlert: NSObject, UIAlertViewDelegate  {
         let rootViewController: UIViewController = UIApplication.shared.windows.last!.rootViewController!
         let currentViewController = getCurrentPresentingController(rootViewController)
 
-        currentViewController.present(alert, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            currentViewController.present(alert, animated: true, completion: nil)
+        }
     }
 
     static func getCurrentPresentingController(_ rootViewController: UIViewController) -> UIViewController {
@@ -22,7 +24,7 @@ class WTFOneButtonAlert: WTFBaseAlert  {
     static let CON_ERR = "%conError%"
     static let OK_TEXT = "Ok"
 
-    static func show(_ title: String, message: String?, alertButtonAction:(() -> Void)? = nil) {
+    static func show(_ title: String, message: String? = nil, alertButtonAction:(() -> Void)? = nil) {
         show(title, message: message, firstButtonTitle: OK_TEXT.localized(), viewPresenter: nil, alertButtonAction: alertButtonAction)
     }
 

@@ -141,6 +141,8 @@ class DecipherInProgressByLettersVC: UIViewController, WordTappedComputer {
     }
 
     func setTimer() {
+        timer.tickComputer = self.tick
+
         if (message.guessIsNotStarted()) {
             timer.seconds = messageCipherService.getTimerSeconds(message)
         } else {
@@ -173,7 +175,7 @@ class DecipherInProgressByLettersVC: UIViewController, WordTappedComputer {
         controller.cipherDifficulty = message.cipherDifficulty
         showNextWord()
 
-        initTimerForOneSecond()
+        timer.scheduleForOneSecond()
 
         DispatchQueue.main.async {
             self.checkForEvent()
@@ -193,28 +195,18 @@ class DecipherInProgressByLettersVC: UIViewController, WordTappedComputer {
         }
     }
 
-    private func initTimerForOneSecond() {
-        let secondTimer = Timer.scheduledTimer(timeInterval: 1.0,
-                target: self,
-                selector: #selector(self.tick),
-                userInfo: nil,
-                repeats: false)
-
-        RunLoop.main.add(secondTimer, forMode: RunLoopMode.commonModes)
-    }
-
     func tick() {
         if (message.getMessageStatus() != .ciphered) {
             return
         }
 
         if (isPaused) {
-            initTimerForOneSecond()
+            timer.scheduleForOneSecond()
 
             return
         }
 
-        _ = timer.tick()
+        _ = timer.secondPassed()
 
         topTimerLabel.text = timer.getTimeString()
 
@@ -223,7 +215,7 @@ class DecipherInProgressByLettersVC: UIViewController, WordTappedComputer {
                 self.gameOver()
             })
         } else {
-            initTimerForOneSecond()
+            timer.scheduleForOneSecond()
 
             if (timer.isRunningOfTime()) {
                 topTimerLabel.textColor = UIColor.red
